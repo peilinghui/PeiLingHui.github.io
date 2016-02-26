@@ -4,19 +4,21 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>git学习笔记 | 向着阳光奔跑</title>
+  <title>创建博客 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="学习git也有一段时间了，准备系统整理一下参考请到此处廖雪峰的官网。">
+  <meta name="description" content="偶然发现大家（周围厉害的同学）还有网上的各种大牛都有属于自己的博客，记录自己的学习历程，然后自己也开始探索搭建博客的历程.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git学习笔记">
-<meta property="og:url" content="http://yoursite.com/2016/02/25/git学习/index.html">
+<meta property="og:title" content="创建博客">
+<meta property="og:url" content="http://yoursite.com/2016/02/25/创建博客/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="学习git也有一段时间了，准备系统整理一下参考请到此处廖雪峰的官网。">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/git.jpg">
-<meta property="og:updated_time" content="2016-02-26T06:11:41.000Z">
+<meta property="og:description" content="偶然发现大家（周围厉害的同学）还有网上的各种大牛都有属于自己的博客，记录自己的学习历程，然后自己也开始探索搭建博客的历程.">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/octopress%E6%9C%80%E5%88%9D.png">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/slash%E4%B8%BB%E9%A2%98.png">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/ghost%E5%88%9D%E5%A7%8B%E5%8D%9A%E5%AE%A2.png">
+<meta property="og:updated_time" content="2016-02-26T06:07:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git学习笔记">
-<meta name="twitter:description" content="学习git也有一段时间了，准备系统整理一下参考请到此处廖雪峰的官网。">
+<meta name="twitter:title" content="创建博客">
+<meta name="twitter:description" content="偶然发现大家（周围厉害的同学）还有网上的各种大牛都有属于自己的博客，记录自己的学习历程，然后自己也开始探索搭建博客的历程.">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -206,11 +208,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-git学习" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-创建博客" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/02/25/git学习/" class="article-date">
-  	<time datetime="2016-02-25T04:21:14.000Z" itemprop="datePublished">2016-02-25</time>
+      <a href="/2016/02/25/创建博客/" class="article-date">
+  	<time datetime="2016-02-25T07:21:14.000Z" itemprop="datePublished">2016-02-25</time>
 </a>
     </div>
   
@@ -223,7 +225,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      git学习笔记
+      创建博客
     </h1>
   
 
@@ -239,84 +241,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>学习git也有一段时间了，准备系统整理一下<br>参考请到此处<a href="http://www.liaoxuefeng.com/wiki/929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的官网</a>。<br><a id="more"></a> </p>
-<h1 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h1><h2 id="git的配置，邮箱地址和用户名"><a href="#git的配置，邮箱地址和用户名" class="headerlink" title="git的配置，邮箱地址和用户名"></a>git的配置，邮箱地址和用户名</h2><ol>
-<li><p><strong>配置邮箱</strong><br>$ git config –global user.email “799745776@qq.com”  </p>
-</li>
-<li><p><strong>配置用户名</strong><br>$ git config –global user.name “plh”</p>
-</li>
-<li><p><strong>查看当前的配置</strong><br>$ cat .git/config</p>
-</li>
-</ol>
-<h2 id="git命令"><a href="#git命令" class="headerlink" title="git命令"></a>git命令</h2><h3 id="初始化一个Git仓库使用"><a href="#初始化一个Git仓库使用" class="headerlink" title="初始化一个Git仓库使用"></a>初始化一个Git仓库使用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
-<h3 id="添加文件到Git仓库"><a href="#添加文件到Git仓库" class="headerlink" title="添加文件到Git仓库"></a>添加文件到Git仓库</h3><ol>
-<li><p><strong>放在暂缓区的命令</strong><br>$ git add .</p>
-</li>
-<li><p><strong>本地提交仓库</strong><br>$ git commit -m “提交代码”</p>
-</li>
-<li><p>$ git push origin master</p>
-</li>
-<li><p><strong>查看状态</strong><br>$ git staus</p>
-</li>
-<li><p><strong>更新本地代码</strong><br>$ git pull</p>
-</li>
-</ol>
-<h4 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h4><ol>
-<li><p><strong>显示当前分支的版本历史</strong><br>$ git log</p>
-</li>
-<li><p><strong>恢复前一个版本</strong><br>git reset –hard HEAD^  </p>
-</li>
-<li><p><strong>恢复前两个版本</strong><br>$ git reset –hard HEAD^^ </p>
-</li>
-<li><p><strong>恢复前 N 版本</strong><br>$ git reset –hard HEAD~N  </p>
-<!--N 是数字--> 
-</li>
-<li><p><strong>恢复指定版本</strong><br>$ (git lg) git reset –hard 版本号 </p>
-</li>
-<li><p><strong>查看指令使用历史，确定要回到未来的哪个版本</strong><br>$ git reflog</p>
-</li>
-</ol>
-<h4 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h4><ol>
-<li><p><strong>查看所有本地分支</strong><br>$ git branch  </p>
-</li>
-<li><p><strong>列出所有远程分支</strong><br>$ git branch -r</p>
-</li>
-<li><p><strong>创建分支</strong><br>$ git branch name</p>
-</li>
-<li><p><strong>切换分支</strong><br>$ git checkout name</p>
-</li>
-<li><p><strong>合并分支</strong><br>$  git merge name </p>
-</li>
-<li><p><strong>删除分支</strong><br>$ git branch -d name</p>
-</li>
-<li><p><strong>删除远程分支</strong><br>$ git push origin –delete name</p>
-</li>
-</ol>
-<p>$ git branch -dr [remote/branch]</p>
-<h4 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rm 文件名</span><br></pre></td></tr></table></figure>
-<h2 id="远程"><a href="#远程" class="headerlink" title="远程"></a>远程</h2><h3 id="创建SSH-Key"><a href="#创建SSH-Key" class="headerlink" title="创建SSH Key"></a>创建SSH Key</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></span><br></pre></td></tr></table></figure>
-<h3 id="从远程库克隆"><a href="#从远程库克隆" class="headerlink" title="从远程库克隆"></a>从远程库克隆</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git@github.com:.......</span><br></pre></td></tr></table></figure>
-<h3 id="远程同步"><a href="#远程同步" class="headerlink" title="远程同步"></a>远程同步</h3><ol>
-<li><p><strong>下载远程仓库的所有变动</strong><br>$ git fetch [remote] </p>
-</li>
-<li><p><strong>显示所有远程仓库</strong><br>$ git remote -v</p>
-</li>
-<li><p><strong>显示某个远程仓库的信息</strong><br>$ git remote show [remote]  </p>
-</li>
-<li><p><strong>增加一个新的远程仓库，并命名</strong><br>$ git remote add [shortname] [url]  </p>
-</li>
-<li><p><strong>取回远程仓库的变化，并与本地分支合并</strong><br>$ git pull [remote] [branch] </p>
-</li>
-<li><p><strong>上传本地指定分支到远程仓库</strong><br>$  git push [remote] [branch]</p>
-</li>
-<li><p><strong>强行推送当前分支到远程仓库，即使有冲突</strong><br>$ git push [remote] –force</p>
-</li>
-<li><p><strong>推送所有分支到远程仓库</strong><br>$ git push [remote] –all </p>
-</li>
-</ol>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="显示本地git库："><a href="#显示本地git库：" class="headerlink" title="显示本地git库："></a>显示本地git库：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ defaults  write  com.apple.finder AppleShowAllFiles -bool <span class="literal">true</span></span><br><span class="line">$ KillAll Finder</span><br></pre></td></tr></table></figure>
-<h3 id="隐藏本地git库"><a href="#隐藏本地git库" class="headerlink" title="隐藏本地git库"></a>隐藏本地git库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ defaults  write  com.apple.finder AppleShowAllFiles -bool <span class="literal">false</span></span><br><span class="line">$ KillAll Finder</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/git.jpg" alt=""></p>
+        <p>偶然发现大家（周围厉害的同学）还有网上的各种大牛都有属于自己的博客，记录自己的学习历程，然后自己也开始探索搭建博客的历程.  </p>
+<a id="more"></a>
+<p>最初搭建了一个Octopress+Github Page的博客，开始就使用的最初的主题，就如图所示：<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/octopress%E6%9C%80%E5%88%9D.png" alt=""> </p>
+<p>然后就开始逛其他人的博客，发现大家博客的主题都好好看，瞬间觉得自己该换个主题了，然后发现了octopress的<a href="https://github.com/tommy351/Octopress-Theme-Slash" target="_blank" rel="external">slash主题</a>然后弄完的样子就是下面如图：</p>
+<p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/slash%E4%B8%BB%E9%A2%98.png" alt=""></p>
+<p>看起来比系统自带的主题好看多了，是吧！  </p>
+<p>当然，在网上逛别人的博客的时候，看到很多博客的主题都是作者自己写的，还有一个自学前端的97年的男生自己搭建了一个网站，还看到看到一个96年的搭建的博客简直炫酷，瞬间计算机这个东西完全靠兴趣啊！然后开始模仿<a href="http://kittenyang.com/myfirstblog/" target="_blank" rel="external">kitten</a>的这篇文章开始了ghost博客之旅，他是在阿里云服务器ECS和Ubuntu系统上安装Ghost博客，开始我想mac和Ubuntu差不多就开始在mac下搞，然后我就去Godaddy（狗爹）上买了二级域名，租了个阿里云服务器，mac上可以显示如图：<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/ghost%E5%88%9D%E5%A7%8B%E5%8D%9A%E5%AE%A2.png" alt=""><br>然后发现其实mac和Ubuntu还是差别挺大的，比如mac上就没有apt-get这个命令，瞬间那个心情。。。自己挖的坑还的要自己填啊！然后就在我那台win10系统上又装了Ubuntu系统，本来是弄得双系统，估计在装的时候选错了，然后就发现win10不见了，555~，然后在Ubuntu下还是没有配置成功。。。真是辛酸泪啊！租的服务器也不会用额。。。。</p>
+<p>然后发现更多的人使用的是Hexo+Github Page,而且网上有关hexo的学习资料还是很多的，于是我就决定转向hexo了。而且hexo写博文很方便也支持markdown,而且主题很多，也很炫酷，就开始了hexo的博客之旅。<br>对于搭建博客，然后在知乎的一篇文章上看到了<a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">hexo的主题</a>：</p>
+<p><a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">(iissnan/hexo-theme-next · GitHub,  470)</a>  这个是next主题，我同学好几个都是用这个主题的。 </p>
+<p><a href="https://link.zhihu.com/?target=https%3A//github.com/litten/hexo-theme-yilia" target="_blank" rel="external">(litten/hexo-theme-yilia, 265)</a>  然后就是我现在用的这个主题。  </p>
+<p><a href="http://yangjian.me/pacman/" target="_blank" rel="external">(A-limon/pacman, 243)</a>这个主题也挺经典的。（吃豆子）</p>
+<p><a href="https://github.com/xiangming/landscape-plus" target="_blank" rel="external">(xiangming/landscape-plus, 147)</a>优化hexo官方主题landscape。<br>还有很多主题呢！有时间再去尝试一下吧！    </p>
+<pre><code>参考： 
+</code></pre><p>Octopress：<br><a href="http://cnbin.github.io/blog/2015/05/18/octopressbo-ke-da-jian/" target="_blank" rel="external">http://cnbin.github.io/blog/2015/05/18/octopressbo-ke-da-jian/</a><br><a href="http://www.jianshu.com/p/e208ade30f08" target="_blank" rel="external">http://www.jianshu.com/p/e208ade30f08</a><br><a href="https://github.com/imathis/octopress/wiki/Octopress-Sites" target="_blank" rel="external">https://github.com/imathis/octopress/wiki/Octopress-Sites</a><br>ghost:<br><a href="http://jas0n.me/2014/12/05/ghost_blog/" target="_blank" rel="external">http://jas0n.me/2014/12/05/ghost_blog/</a><br><a href="https://www.zhihu.com/question/22755373" target="_blank" rel="external">https://www.zhihu.com/question/22755373</a><br><a href="http://kittenyang.com/myfirstblog/" target="_blank" rel="external">http://kittenyang.com/myfirstblog/</a><br><a href="https://www.zhihu.com/question/22755373" target="_blank" rel="external">https://www.zhihu.com/question/22755373</a><br><a href="https://snowz.me/how-to-install-ghost/" target="_blank" rel="external">https://snowz.me/how-to-install-ghost/</a><br>hexo:<br><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">http://ibruce.info/2013/11/22/hexo-your-blog/</a><br><a href="http://iread.io/archives/page/2/" target="_blank" rel="external">http://iread.io/archives/page/2/</a><br><a href="http://blog.shijinrong.cn/2016/01/03/2016-01-03-how-to-build-blog/" target="_blank" rel="external">http://blog.shijinrong.cn/2016/01/03/2016-01-03-how-to-build-blog/</a><br><a href="https://dearb.me/archive/2015-05-10/use-hexo-build-your-own-blog/" target="_blank" rel="external">https://dearb.me/archive/2015-05-10/use-hexo-build-your-own-blog/</a><br><a href="http://zipperary.com/categories/hexo/" target="_blank" rel="external">http://zipperary.com/categories/hexo/</a><br><a href="http://lucifr.com/2013/01/02/from-octopress-to-hexo/" target="_blank" rel="external">http://lucifr.com/2013/01/02/from-octopress-to-hexo/</a></p>
+<pre><code>最后来几个我同学的博客地址：
+</code></pre><p> <a href="http://blog.xuanzhangjiong.xyz/" target="_blank" rel="external">囧囧囧-网易大神</a><br> <a href="http://blog.csdn.net/CHENYUFENG1991/article/category/5655903/4" target="_blank" rel="external">ios大神-人生大赢家-网易</a><br> <a href="http://sunus.me/?from=inf&amp;wvr=5&amp;loc=infblog" target="_blank" rel="external">阿里学长</a><br> <a href="http://www.changhuiyuan.com/" target="_blank" rel="external">惠源</a><br> <a href="http://www.hxdavid.com/" target="_blank" rel="external">PAT大神</a><br> <a href="http://longliqiang88.github.io/" target="_blank" rel="external">龙哥-云计算</a><br> <a href="https://pangjiuzala.github.io/" target="_blank" rel="external">北大兴爷-大数据</a><br> <a href="imhuchao.com">胡超-凤凰网</a></p>
 
       
     </div>
@@ -326,15 +266,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/02/25/创建博客/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          创建博客
-        
-      </div>
-    </a>
   
+    <a href="/2016/02/25/git学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">git学习笔记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
   
 </nav>
 
@@ -367,7 +303,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="git学习" data-title="git学习笔记" data-url="http://yoursite.com/2016/02/25/git学习/"></div>
+	<div class="ds-thread" data-thread-key="创建博客" data-title="创建博客" data-url="http://yoursite.com/2016/02/25/创建博客/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

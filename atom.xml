@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-02-25T15:05:45.000Z</updated>
+  <updated>2016-02-26T06:07:04.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,13 +16,47 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>创建博客</title>
+    <link href="http://yoursite.com/2016/02/25/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://yoursite.com/2016/02/25/创建博客/</id>
+    <published>2016-02-25T07:21:14.000Z</published>
+    <updated>2016-02-26T06:07:04.000Z</updated>
+    
+    <content type="html">&lt;p&gt;偶然发现大家（周围厉害的同学）还有网上的各种大牛都有属于自己的博客，记录自己的学习历程，然后自己也开始探索搭建博客的历程.  &lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;最初搭建了一个Octopress+Github Page的博客，开始就使用的最初的主题，就如图所示：&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/octopress%E6%9C%80%E5%88%9D.png&quot; alt=&quot;&quot;&gt; &lt;/p&gt;
+&lt;p&gt;然后就开始逛其他人的博客，发现大家博客的主题都好好看，瞬间觉得自己该换个主题了，然后发现了octopress的&lt;a href=&quot;https://github.com/tommy351/Octopress-Theme-Slash&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;slash主题&lt;/a&gt;然后弄完的样子就是下面如图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/slash%E4%B8%BB%E9%A2%98.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;看起来比系统自带的主题好看多了，是吧！  &lt;/p&gt;
+&lt;p&gt;当然，在网上逛别人的博客的时候，看到很多博客的主题都是作者自己写的，还有一个自学前端的97年的男生自己搭建了一个网站，还看到看到一个96年的搭建的博客简直炫酷，瞬间计算机这个东西完全靠兴趣啊！然后开始模仿&lt;a href=&quot;http://kittenyang.com/myfirstblog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;kitten&lt;/a&gt;的这篇文章开始了ghost博客之旅，他是在阿里云服务器ECS和Ubuntu系统上安装Ghost博客，开始我想mac和Ubuntu差不多就开始在mac下搞，然后我就去Godaddy（狗爹）上买了二级域名，租了个阿里云服务器，mac上可以显示如图：&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/ghost%E5%88%9D%E5%A7%8B%E5%8D%9A%E5%AE%A2.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;然后发现其实mac和Ubuntu还是差别挺大的，比如mac上就没有apt-get这个命令，瞬间那个心情。。。自己挖的坑还的要自己填啊！然后就在我那台win10系统上又装了Ubuntu系统，本来是弄得双系统，估计在装的时候选错了，然后就发现win10不见了，555~，然后在Ubuntu下还是没有配置成功。。。真是辛酸泪啊！租的服务器也不会用额。。。。&lt;/p&gt;
+&lt;p&gt;然后发现更多的人使用的是Hexo+Github Page,而且网上有关hexo的学习资料还是很多的，于是我就决定转向hexo了。而且hexo写博文很方便也支持markdown,而且主题很多，也很炫酷，就开始了hexo的博客之旅。&lt;br&gt;对于搭建博客，然后在知乎的一篇文章上看到了&lt;a href=&quot;https://www.zhihu.com/question/24422335&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;hexo的主题&lt;/a&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/iissnan/hexo-theme-next&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;(iissnan/hexo-theme-next · GitHub,  470)&lt;/a&gt;  这个是next主题，我同学好几个都是用这个主题的。 &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://link.zhihu.com/?target=https%3A//github.com/litten/hexo-theme-yilia&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;(litten/hexo-theme-yilia, 265)&lt;/a&gt;  然后就是我现在用的这个主题。  &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://yangjian.me/pacman/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;(A-limon/pacman, 243)&lt;/a&gt;这个主题也挺经典的。（吃豆子）&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/xiangming/landscape-plus&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;(xiangming/landscape-plus, 147)&lt;/a&gt;优化hexo官方主题landscape。&lt;br&gt;还有很多主题呢！有时间再去尝试一下吧！    &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;参考： 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Octopress：&lt;br&gt;&lt;a href=&quot;http://cnbin.github.io/blog/2015/05/18/octopressbo-ke-da-jian/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://cnbin.github.io/blog/2015/05/18/octopressbo-ke-da-jian/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/e208ade30f08&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/e208ade30f08&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/imathis/octopress/wiki/Octopress-Sites&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/imathis/octopress/wiki/Octopress-Sites&lt;/a&gt;&lt;br&gt;ghost:&lt;br&gt;&lt;a href=&quot;http://jas0n.me/2014/12/05/ghost_blog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://jas0n.me/2014/12/05/ghost_blog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.zhihu.com/question/22755373&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.zhihu.com/question/22755373&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://kittenyang.com/myfirstblog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://kittenyang.com/myfirstblog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.zhihu.com/question/22755373&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.zhihu.com/question/22755373&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://snowz.me/how-to-install-ghost/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://snowz.me/how-to-install-ghost/&lt;/a&gt;&lt;br&gt;hexo:&lt;br&gt;&lt;a href=&quot;http://ibruce.info/2013/11/22/hexo-your-blog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ibruce.info/2013/11/22/hexo-your-blog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://iread.io/archives/page/2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://iread.io/archives/page/2/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://blog.shijinrong.cn/2016/01/03/2016-01-03-how-to-build-blog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.shijinrong.cn/2016/01/03/2016-01-03-how-to-build-blog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://dearb.me/archive/2015-05-10/use-hexo-build-your-own-blog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://dearb.me/archive/2015-05-10/use-hexo-build-your-own-blog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://zipperary.com/categories/hexo/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://zipperary.com/categories/hexo/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://lucifr.com/2013/01/02/from-octopress-to-hexo/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://lucifr.com/2013/01/02/from-octopress-to-hexo/&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;最后来几个我同学的博客地址：
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; &lt;a href=&quot;http://blog.xuanzhangjiong.xyz/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;囧囧囧-网易大神&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://blog.csdn.net/CHENYUFENG1991/article/category/5655903/4&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ios大神-人生大赢家-网易&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://sunus.me/?from=inf&amp;amp;wvr=5&amp;amp;loc=infblog&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;阿里学长&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://www.changhuiyuan.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;惠源&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://www.hxdavid.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;PAT大神&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://longliqiang88.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;龙哥-云计算&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;https://pangjiuzala.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;北大兴爷-大数据&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;imhuchao.com&quot;&gt;胡超-凤凰网&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;偶然发现大家（周围厉害的同学）还有网上的各种大牛都有属于自己的博客，记录自己的学习历程，然后自己也开始探索搭建博客的历程.  &lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>git学习笔记</title>
     <link href="http://yoursite.com/2016/02/25/git%E5%AD%A6%E4%B9%A0/"/>
     <id>http://yoursite.com/2016/02/25/git学习/</id>
-    <published>2016-02-25T15:05:45.000Z</published>
-    <updated>2016-02-25T15:05:45.000Z</updated>
+    <published>2016-02-25T04:21:14.000Z</published>
+    <updated>2016-02-26T06:11:41.000Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;title-git学习&quot;&gt;&lt;a href=&quot;#title-git学习&quot; class=&quot;headerlink&quot; title=&quot;title: git学习&quot;&gt;&lt;/a&gt;title: git学习&lt;/h1&gt;&lt;p&gt;学习git也有一段时间了，准备系统整理一下&lt;br&gt;参考请到此处&lt;a href=&quot;http://www.liaoxuefeng.com/wiki/929606dd18361248578c67b8067c8c017b000&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;廖雪峰的官网&lt;/a&gt;。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt; &lt;/p&gt;
+    <content type="html">&lt;p&gt;学习git也有一段时间了，准备系统整理一下&lt;br&gt;参考请到此处&lt;a href=&quot;http://www.liaoxuefeng.com/wiki/929606dd18361248578c67b8067c8c017b000&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;廖雪峰的官网&lt;/a&gt;。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt; &lt;/p&gt;
 &lt;h1 id=&quot;本地&quot;&gt;&lt;a href=&quot;#本地&quot; class=&quot;headerlink&quot; title=&quot;本地&quot;&gt;&lt;/a&gt;本地&lt;/h1&gt;&lt;h2 id=&quot;git的配置，邮箱地址和用户名&quot;&gt;&lt;a href=&quot;#git的配置，邮箱地址和用户名&quot; class=&quot;headerlink&quot; title=&quot;git的配置，邮箱地址和用户名&quot;&gt;&lt;/a&gt;git的配置，邮箱地址和用户名&lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;配置邮箱&lt;/strong&gt;&lt;br&gt;$ git config –global user.email “799745776@qq.com”  &lt;/p&gt;
 &lt;/li&gt;
@@ -104,7 +138,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;title-git学习&quot;&gt;&lt;a href=&quot;#title-git学习&quot; class=&quot;headerlink&quot; title=&quot;title: git学习&quot;&gt;&lt;/a&gt;title: git学习&lt;/h1&gt;&lt;p&gt;学习git也有一段时间了，准备系统整理一下&lt;br&gt;参考请到此处&lt;a href=&quot;http://www.liaoxuefeng.com/wiki/929606dd18361248578c67b8067c8c017b000&quot;&gt;廖雪峰的官网&lt;/a&gt;。&lt;br&gt;
+      &lt;p&gt;学习git也有一段时间了，准备系统整理一下&lt;br&gt;参考请到此处&lt;a href=&quot;http://www.liaoxuefeng.com/wiki/929606dd18361248578c67b8067c8c017b000&quot;&gt;廖雪峰的官网&lt;/a&gt;。&lt;br&gt;
     
     </summary>
     
