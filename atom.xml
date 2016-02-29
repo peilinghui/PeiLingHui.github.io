@@ -4,9 +4,9 @@
   <subtitle>没有到不了的远方</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
-  <updated>2016-02-26T06:07:04.000Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://peilinghui.com/"/>
+  <updated>2016-02-29T05:38:45.000Z</updated>
+  <id>http://peilinghui.com/</id>
   
   <author>
     <name>向阳</name>
@@ -16,11 +16,67 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>关于iOS中的autolayout</title>
+    <link href="http://peilinghui.com/2016/02/28/%E5%85%B3%E4%BA%8EiOS%E4%B8%AD%E7%9A%84autolayout/"/>
+    <id>http://peilinghui.com/2016/02/28/关于iOS中的autolayout/</id>
+    <published>2016-02-28T14:04:07.000Z</published>
+    <updated>2016-02-29T05:38:45.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Autolayout是一种“自动布局”技术，专门用来布局UI界面的。苹果官方也推荐开发者尽量使用Autolayout来布局UI界面。Autolayout能很轻松地解决屏幕适配的问题。&lt;br&gt; Autolayout的2个核心概念：1.参照 2.约束&lt;br&gt; 花了俩天的时间学习了一下iOS中的autolayout, 总结一下。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;autolayout在Storyboard中的使用&quot;&gt;&lt;a href=&quot;#autolayout在Storyboard中的使用&quot; class=&quot;headerlink&quot; title=&quot;autolayout在Storyboard中的使用&quot;&gt;&lt;/a&gt;autolayout在Storyboard中的使用&lt;/h2&gt;&lt;h2 id=&quot;三个练习：&quot;&gt;&lt;a href=&quot;#三个练习：&quot; class=&quot;headerlink&quot; title=&quot;三个练习：&quot;&gt;&lt;/a&gt;三个练习：&lt;/h2&gt;&lt;h3 id=&quot;1-练习1&quot;&gt;&lt;a href=&quot;#1-练习1&quot; class=&quot;headerlink&quot; title=&quot;1.练习1&quot;&gt;&lt;/a&gt;1.练习1&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;在控制器view底部添加2个view，1个蓝色，1个红色
+2个view宽度、高度永远相等
+距离父控件左边、右边、下边间距和2个view之间的间距相等  
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; &lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A01%E9%A2%98%E7%9B%AE.png&quot; alt=&quot;&quot;&gt;&lt;br&gt; &lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A01%E7%AD%94%E6%A1%88.gif&quot; alt=&quot;&quot;&gt;&lt;br&gt;就是设置蓝色View的左边和下边和右边(相对于红色view)，设置红色view的右边和下边，选中俩个，再设置equal width和height，或者是设置顶部对齐和底部对齐。     &lt;/p&gt;
+&lt;h3 id=&quot;练习2&quot;&gt;&lt;a href=&quot;#练习2&quot; class=&quot;headerlink&quot; title=&quot;练习2&quot;&gt;&lt;/a&gt;练习2&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;在控制器view顶部添加2个view，1个蓝色，1个红色
+2个view高度永远相等,等于50
+红色view和蓝色view右边对齐
+蓝色view距离父控件左边、右边、上边间距相等,等于30
+蓝色view距离红色view间距固定,等于30
+红色view的左边和父控件的中点对齐
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A02%E9%A2%98%E7%9B%AE.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E7%AD%94%E6%A1%882.gif&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A02%E7%AD%94%E6%A1%88.png&quot; alt=&quot;&quot;&gt; &lt;/p&gt;
+&lt;h3 id=&quot;练习3&quot;&gt;&lt;a href=&quot;#练习3&quot; class=&quot;headerlink&quot; title=&quot;练习3&quot;&gt;&lt;/a&gt;练习3&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A03.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A03%E7%9A%84.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A02%E7%AD%94%E6%A1%88.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;理解垂直居中和水平居中，还有左对齐，右对齐，底部顶部对齐，利用公式：Superview.center Y = Button center Y * 1 -constant &lt;/p&gt;
+&lt;h1 id=&quot;代码实现Autolayout&quot;&gt;&lt;a href=&quot;#代码实现Autolayout&quot; class=&quot;headerlink&quot; title=&quot;代码实现Autolayout&quot;&gt;&lt;/a&gt;代码实现Autolayout&lt;/h1&gt;&lt;h3 id=&quot;1-代码实现Autolayout的步骤&quot;&gt;&lt;a href=&quot;#1-代码实现Autolayout的步骤&quot; class=&quot;headerlink&quot; title=&quot;1.代码实现Autolayout的步骤&quot;&gt;&lt;/a&gt;1.代码实现Autolayout的步骤&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;利用NSLayoutConstraint类创建具体的约束对象&lt;br&gt;一个NSLayoutConstraint对象就代表一个约束&lt;br&gt;创建约束对象的常用方法&lt;br&gt;&lt;code&gt;+(id)constraintWithItem:(id)view1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toItem:(id)view2 attribute:(NSLayoutAttribute)attr2 multiplier:(CGFloat)multiplier constant:(CGFloat)c;&lt;/code&gt;&lt;br&gt; view1 ：要约束的控件&lt;br&gt; attr1 ：约束的类型（做怎样的约束）&lt;br&gt; relation ：与参照控件之间的关系&lt;br&gt; view2 ：参照的控件&lt;br&gt; attr2 ：约束的类型（做怎样的约束）&lt;br&gt; multiplier ：乘数&lt;br&gt; c ：常量&lt;br&gt; 自动布局有个核心公式&lt;br&gt;obj1.property1 =（obj2.property2 * multiplier）+ constant value&lt;/li&gt;
+&lt;li&gt;添加约束对象到相应的view上&lt;br&gt;&lt;code&gt;- (void)addConstraint:(NSLayoutConstraint *)constraint;&lt;/code&gt;&lt;br&gt;&lt;code&gt;- (void)addConstraints:(NSArray *)constraints;&lt;/code&gt;  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;VFL语言实现layout&quot;&gt;&lt;a href=&quot;#VFL语言实现layout&quot; class=&quot;headerlink&quot; title=&quot;VFL语言实现layout&quot;&gt;&lt;/a&gt;VFL语言实现layout&lt;/h1&gt;&lt;p&gt;1.VFL全称是Visual Format Language，翻译过来是“可视化格式语言”&lt;br&gt;VFL是苹果公司为了简化Autolayout的编码而推出的抽象语言。&lt;/p&gt;
+&lt;p&gt;2.使用VFL来创建约束数组&lt;br&gt;&lt;code&gt;+ (NSArray *)constraintsWithVisualFormat:(NSString *)format options:(NSLayoutFormatOptions)opts metrics:(NSDictionary *)metrics views:(NSDictionary *)views;&lt;/code&gt;&lt;br&gt;format ：VFL语句&lt;br&gt;opts ：约束类型&lt;br&gt;metrics ：VFL语句中用到的具体数值&lt;br&gt;views ：VFL语句中用到的控件&lt;br&gt;VFL示例：&lt;br&gt;H:[cancelButton(72)]-12-[acceptButton(50)]&lt;br&gt;canelButton宽72，acceptButton宽50，它们之间间距12 &lt;/p&gt;
+&lt;p&gt;3.创建一个字典（内部包含VFL语句中用到的控件）的快捷宏定义&lt;br&gt;NSDictionaryOfVariableBindings(…)  &lt;/p&gt;
+&lt;h1 id=&quot;Masonry&quot;&gt;&lt;a href=&quot;#Masonry&quot; class=&quot;headerlink&quot; title=&quot;Masonry&quot;&gt;&lt;/a&gt;Masonry&lt;/h1&gt;&lt;h2 id=&quot;1-概念&quot;&gt;&lt;a href=&quot;#1-概念&quot; class=&quot;headerlink&quot; title=&quot;1.概念&quot;&gt;&lt;/a&gt;1.概念&lt;/h2&gt;&lt;p&gt; Masonry是一个轻量级的布局框架 拥有自己的描述语法 采用更优雅的链式语法封装自动布局 简洁明了 并具有高可读性 而且同时支持 iOS 和 Max OS X。  &lt;/p&gt;
+&lt;h2 id=&quot;2-框架下载地址：&quot;&gt;&lt;a href=&quot;#2-框架下载地址：&quot; class=&quot;headerlink&quot; title=&quot;2.框架下载地址：&quot;&gt;&lt;/a&gt;2.框架下载地址：&lt;/h2&gt;&lt;p&gt;   &lt;a href=&quot;https://github.com/Masonry/Masonry&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/Masonry/Masonry&lt;/a&gt;  &lt;/p&gt;
+&lt;h2 id=&quot;3-Masonry介绍与使用实践-快速上手Autolayout&quot;&gt;&lt;a href=&quot;#3-Masonry介绍与使用实践-快速上手Autolayout&quot; class=&quot;headerlink&quot; title=&quot;3.Masonry介绍与使用实践(快速上手Autolayout)&quot;&gt;&lt;/a&gt;3.Masonry介绍与使用实践(快速上手Autolayout)&lt;/h2&gt;&lt;p&gt;  &lt;a href=&quot;http://adad184.com/2014/09/28/use-masonry-to-quick-solve-autolayout/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://adad184.com/2014/09/28/use-masonry-to-quick-solve-autolayout/&lt;/a&gt;   &lt;/p&gt;
+&lt;h2 id=&quot;4-案例讲解：&quot;&gt;&lt;a href=&quot;#4-案例讲解：&quot; class=&quot;headerlink&quot; title=&quot;4.案例讲解：&quot;&gt;&lt;/a&gt;4.案例讲解：&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://www.brighttj.com/ios/ios-masonry-demo.html#comment-353&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.brighttj.com/ios/ios-masonry-demo.html#comment-353&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;5-使用方法：&quot;&gt;&lt;a href=&quot;#5-使用方法：&quot; class=&quot;headerlink&quot; title=&quot;5.使用方法：&quot;&gt;&lt;/a&gt;5.使用方法：&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://www.ios122.com/2015/09/masonry/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.ios122.com/2015/09/masonry/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;常用方法：&quot;&gt;&lt;a href=&quot;#常用方法：&quot; class=&quot;headerlink&quot; title=&quot;常用方法：&quot;&gt;&lt;/a&gt;常用方法：&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;1.三个添加约束方法区别
+mas_makeConstraints 只负责新增约束 Autolayout不能同时存在两条针对于同一对象的约束 否则会报错
+mas_updateConstraints 针对上面的情况 会更新在block中出现的约束 不会导致出现两个相同约束的情况
+mas_remakeConstraints 则会清除之前的所有约束 仅保留最新的约束
+三种函数善加利用 就可以应对各种情况了
+
+2、两个赋值方法区别（equalTo 和 mas_equalTo）
+#define equalTo(...)  mas_equalTo(__VA_ARGS__)
+#define mas_equalTo(...) equalTo(MASBoxValue((__VA_ARGS__))) 
+mas_equalTo对其参数进行了一个自动装箱操作， 除了支持NSNumber数值类型之外还支持CGPoint CGSize UIEdgeInsets
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;基于Autolayout的动画&quot;&gt;&lt;a href=&quot;#基于Autolayout的动画&quot; class=&quot;headerlink&quot; title=&quot;基于Autolayout的动画&quot;&gt;&lt;/a&gt;基于Autolayout的动画&lt;/h1&gt;&lt;p&gt;在修改了约束之后，只要执行下面代码，就能做动画效果&lt;br&gt;&lt;code&gt;[UIView animateWithDuration:1.0 animations:^{
+    [添加了约束的view layoutIfNeeded];
+}];&lt;/code&gt;&lt;br&gt;参考学习：&lt;a href=&quot;http://blog.cnbluebox.com/blog/2014/12/13/autolayout1/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.cnbluebox.com/blog/2014/12/13/autolayout1/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Autolayout是一种“自动布局”技术，专门用来布局UI界面的。苹果官方也推荐开发者尽量使用Autolayout来布局UI界面。Autolayout能很轻松地解决屏幕适配的问题。&lt;br&gt; Autolayout的2个核心概念：1.参照 2.约束&lt;br&gt; 花了俩天的时间学习了一下iOS中的autolayout, 总结一下。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>创建博客</title>
-    <link href="http://yoursite.com/2016/02/25/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
-    <id>http://yoursite.com/2016/02/25/创建博客/</id>
+    <link href="http://peilinghui.com/2016/02/25/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://peilinghui.com/2016/02/25/创建博客/</id>
     <published>2016-02-25T07:21:14.000Z</published>
-    <updated>2016-02-26T06:07:04.000Z</updated>
+    <updated>2016-02-26T06:15:04.000Z</updated>
     
     <content type="html">&lt;p&gt;偶然发现大家（周围厉害的同学）还有网上的各种大牛都有属于自己的博客，记录自己的学习历程，然后自己也开始探索搭建博客的历程.  &lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -37,7 +93,7 @@
 &lt;pre&gt;&lt;code&gt;参考： 
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Octopress：&lt;br&gt;&lt;a href=&quot;http://cnbin.github.io/blog/2015/05/18/octopressbo-ke-da-jian/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://cnbin.github.io/blog/2015/05/18/octopressbo-ke-da-jian/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/e208ade30f08&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/e208ade30f08&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/imathis/octopress/wiki/Octopress-Sites&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/imathis/octopress/wiki/Octopress-Sites&lt;/a&gt;&lt;br&gt;ghost:&lt;br&gt;&lt;a href=&quot;http://jas0n.me/2014/12/05/ghost_blog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://jas0n.me/2014/12/05/ghost_blog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.zhihu.com/question/22755373&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.zhihu.com/question/22755373&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://kittenyang.com/myfirstblog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://kittenyang.com/myfirstblog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.zhihu.com/question/22755373&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.zhihu.com/question/22755373&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://snowz.me/how-to-install-ghost/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://snowz.me/how-to-install-ghost/&lt;/a&gt;&lt;br&gt;hexo:&lt;br&gt;&lt;a href=&quot;http://ibruce.info/2013/11/22/hexo-your-blog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ibruce.info/2013/11/22/hexo-your-blog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://iread.io/archives/page/2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://iread.io/archives/page/2/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://blog.shijinrong.cn/2016/01/03/2016-01-03-how-to-build-blog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.shijinrong.cn/2016/01/03/2016-01-03-how-to-build-blog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://dearb.me/archive/2015-05-10/use-hexo-build-your-own-blog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://dearb.me/archive/2015-05-10/use-hexo-build-your-own-blog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://zipperary.com/categories/hexo/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://zipperary.com/categories/hexo/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://lucifr.com/2013/01/02/from-octopress-to-hexo/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://lucifr.com/2013/01/02/from-octopress-to-hexo/&lt;/a&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;最后来几个我同学的博客地址：
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; &lt;a href=&quot;http://blog.xuanzhangjiong.xyz/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;囧囧囧-网易大神&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://blog.csdn.net/CHENYUFENG1991/article/category/5655903/4&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ios大神-人生大赢家-网易&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://sunus.me/?from=inf&amp;amp;wvr=5&amp;amp;loc=infblog&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;阿里学长&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://www.changhuiyuan.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;惠源&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://www.hxdavid.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;PAT大神&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://longliqiang88.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;龙哥-云计算&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;https://pangjiuzala.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;北大兴爷-大数据&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;imhuchao.com&quot;&gt;胡超-凤凰网&lt;/a&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; &lt;a href=&quot;http://blog.xuanzhangjiong.xyz/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;囧囧囧-网易大神&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://blog.csdn.net/CHENYUFENG1991/article/category/5655903/4&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ios大神-人生大赢家-网易&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://sunus.me/?from=inf&amp;amp;wvr=5&amp;amp;loc=infblog&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;阿里学长&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://www.changhuiyuan.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;惠源&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://www.hxdavid.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;PAT大神&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://longliqiang88.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;龙哥-云计算&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;https://pangjiuzala.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;北大兴爷-大数据&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;imhuchao.com&quot;&gt;胡超-凤凰网&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;lysongzi.com&quot;&gt;小松子&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -51,8 +107,8 @@
   
   <entry>
     <title>git学习笔记</title>
-    <link href="http://yoursite.com/2016/02/25/git%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://yoursite.com/2016/02/25/git学习/</id>
+    <link href="http://peilinghui.com/2016/02/25/git%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://peilinghui.com/2016/02/25/git学习/</id>
     <published>2016-02-25T04:21:14.000Z</published>
     <updated>2016-02-26T06:11:41.000Z</updated>
     
