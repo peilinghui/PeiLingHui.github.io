@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://peilinghui.com/"/>
-  <updated>2016-02-29T06:25:29.000Z</updated>
+  <updated>2016-03-04T09:06:03.000Z</updated>
   <id>http://peilinghui.com/</id>
   
   <author>
@@ -16,11 +16,104 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>CocosPods</title>
+    <link href="http://peilinghui.com/2016/03/04/CocosPods/"/>
+    <id>http://peilinghui.com/2016/03/04/CocosPods/</id>
+    <published>2016-03-04T08:54:28.000Z</published>
+    <updated>2016-03-04T09:06:03.000Z</updated>
+    
+    <content type="html">&lt;p&gt;也在项目中用过一些第三方框架，第三方库，然后就知道了CocoaPods.&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;CocoaPods是什么？&quot;&gt;&lt;a href=&quot;#CocoaPods是什么？&quot; class=&quot;headerlink&quot; title=&quot;CocoaPods是什么？&quot;&gt;&lt;/a&gt;CocoaPods是什么？&lt;/h1&gt;&lt;p&gt;CocoaPods应该是iOS最常用最有名的类库管理工具.开发 iOS 项目不可避免地要使用第三方开源库，CocoaPods 的出现使得我们可以节省设置和更新第三方开源库的时间。&lt;a href=&quot;https://blog.cocoapods.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CocoaPod&lt;/a&gt;  &lt;/p&gt;
+&lt;h1 id=&quot;Cocoapods原理&quot;&gt;&lt;a href=&quot;#Cocoapods原理&quot; class=&quot;headerlink&quot; title=&quot;Cocoapods原理&quot;&gt;&lt;/a&gt;Cocoapods原理&lt;/h1&gt;&lt;p&gt;Pods项目最终会编译成一个名为 libPods.a 的文件，主项目只需要依赖这个 .a 文件即可。&lt;br&gt;对于资源文件，CocoaPods 提供了一个名为 Pods-resources.sh的 bash脚本，该脚本在每次项目编译的时候都会执行，将第三方库的各种资源文件复制到目标目录中。&lt;br&gt;CocoaPods 通过一个名为 Pods.xcconfig 的文件来在编译时设置所有的依赖和参数。&lt;/p&gt;
+&lt;h1 id=&quot;安装CocoaPods&quot;&gt;&lt;a href=&quot;#安装CocoaPods&quot; class=&quot;headerlink&quot; title=&quot;安装CocoaPods&quot;&gt;&lt;/a&gt;安装CocoaPods&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;要先确保电脑本地是否有 Ruby环境，因为CocoaPods运行于 Ruby之上，默认情况下，Mac 是自带了 Ruby 环境的，可以通过命令行 ruby -v查看当前Ruby的版本。&lt;br&gt;执行命令：&lt;br&gt; &lt;code&gt;$ ruby -v&lt;/code&gt;&lt;br&gt;已经安装了Ruby开发环境，那么在终端（Terminal）中使用以下命令即可直接安装：&lt;br&gt; &lt;code&gt;$ sudo gem install cocoapods&lt;/code&gt;&lt;br&gt; &lt;code&gt;$ pod setup&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装过程中可能遇到的问题&lt;br&gt;①执行完install命令半天没反应&lt;br&gt;这有可能是因为Ruby的默认源使用的是cocoapods.org，国内访问这个网址有时候会有问题，网上的一种解决方案是将远替换成淘宝的，替换方式如下：&lt;br&gt; &lt;code&gt;$ gem sources --remove https://rubygems.org/&lt;/code&gt;&lt;br&gt;//等有反应之后再敲入以下命令&lt;br&gt; &lt;code&gt;$ gem sources -a http://ruby.taobao.org/&lt;/code&gt;&lt;br&gt;要想验证是否替换成功了，可以执行：&lt;br&gt; &lt;code&gt;$ gem sources -l&lt;/code&gt;&lt;br&gt;正常的输出是：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%9B%BE1%EF%BC%88%E9%95%9C%E5%83%8F%EF%BC%89.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;②gem版本过老&lt;br&gt;gem是管理Ruby库和程序的标准包，如果它的版本过低也可能导致安装失败，解决方案自然是升级gem，执行下述命令即可：&lt;br&gt;    &lt;code&gt;$ sudo gem update --system&lt;/code&gt;&lt;br&gt;③安装完成后，执行pod setup命令时报错：&lt;br&gt;这就是路径设置的问题，可以通过执行：&lt;br&gt;    &lt;code&gt;$ rvm use ruby-1.9.3-p448&lt;/code&gt;  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;升级CocoaPods&lt;br&gt;升级很简单，再次执行安装命令即可：&lt;br&gt; &lt;code&gt;$ sudo gem install cocoapods&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看pod版本输入命令：&lt;br&gt; &lt;code&gt;$ pod --version&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;使用CocoaPods&quot;&gt;&lt;a href=&quot;#使用CocoaPods&quot; class=&quot;headerlink&quot; title=&quot;使用CocoaPods&quot;&gt;&lt;/a&gt;使用CocoaPods&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;创建一个项目，比如swift或者oc项目，然后在终端下打开文件夹：&lt;br&gt;输入命令：&lt;br&gt; &lt;code&gt;$ touch Podfile&lt;/code&gt;&lt;br&gt; &lt;code&gt;$ vi Podfile&lt;/code&gt;   &lt;/li&gt;
+&lt;li&gt;可以输入命令&lt;br&gt; &lt;code&gt;$ pod search ...&lt;/code&gt;来找到所需要的版本  &lt;/li&gt;
+&lt;li&gt;在Podfile中输入&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/podfile.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;注意：ios小写。一般设置为‘8.0’，这样就可以适配多个版本。&lt;/li&gt;
+&lt;li&gt;然后仍旧是在项目根目录下执行如下命令&lt;br&gt; &lt;code&gt;$ pod install&lt;/code&gt;&lt;br&gt;现在，你的所有第三方库都已经下载完成并且设置好了编译参数和依赖，你只需要记住如下 2 点即可：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 CocoaPods 生成的 .xcworkspace 文件来打开工程，而不是以前的 .xcodeproj 文件。&lt;/li&gt;
+&lt;li&gt;每次更改了 Podfile 文件，你需要重新执行一次pod update命令。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;参考&lt;/strong&gt;：&lt;a href=&quot;http://cnbin.github.io/blog/2015/05/25/cocoapods-an-zhuang-he-shi-yong/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://cnbin.github.io/blog/2015/05/25/cocoapods-an-zhuang-he-shi-yong/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://blog.devtang.com/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.devtang.com/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/index.html&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://objccn.io/issue-6-4/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://objccn.io/issue-6-4/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;也在项目中用过一些第三方框架，第三方库，然后就知道了CocoaPods.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="iOS面试" scheme="http://peilinghui.com/categories/iOS%E9%9D%A2%E8%AF%95/"/>
+    
+    
+      <category term="CocoaPods" scheme="http://peilinghui.com/tags/CocoaPods/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS面试题总结</title>
+    <link href="http://peilinghui.com/2016/03/01/iOS%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>http://peilinghui.com/2016/03/01/iOS面试题总结/</id>
+    <published>2016-03-01T08:57:25.000Z</published>
+    <updated>2016-03-04T09:07:47.000Z</updated>
+    
+    <content type="html">&lt;p&gt;快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;单例设计模式-Singleton&quot;&gt;&lt;a href=&quot;#单例设计模式-Singleton&quot; class=&quot;headerlink&quot; title=&quot;单例设计模式(Singleton)&quot;&gt;&lt;/a&gt;单例设计模式(Singleton)&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;它可以保证某个类创建出来的对象永远只有1个&lt;/li&gt;
+&lt;li&gt;作用：节省内存开销&lt;br&gt;如果有一些数据, 整个程序中都用得上, 只需要使用同一份资源即可&lt;br&gt;一般来说, 工具类(音频Sound)设计为单例模式比较合适  &lt;/li&gt;
+&lt;li&gt;实现：MRC和ARC&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;内存管理（MRC和ARC）&quot;&gt;&lt;a href=&quot;#内存管理（MRC和ARC）&quot; class=&quot;headerlink&quot; title=&quot;内存管理（MRC和ARC）&quot;&gt;&lt;/a&gt;内存管理（MRC和ARC）&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;讲解：&lt;a href=&quot;http://www.jianshu.com/p/3129ce12e020&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/3129ce12e020&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;KVC和KVO&quot;&gt;&lt;a href=&quot;#KVC和KVO&quot; class=&quot;headerlink&quot; title=&quot;KVC和KVO&quot;&gt;&lt;/a&gt;KVC和KVO&lt;/h1&gt;&lt;p&gt;字典中key必须和模型的属性名称一模一样&lt;br&gt;    &lt;code&gt;self.answer = dic[@&amp;quot;answer&amp;quot;];&lt;/code&gt;等价于：&lt;br&gt;    &lt;code&gt;[self setValue:dict[@&amp;quot;answer&amp;quot;] forKeyPath:@&amp;quot;answer&amp;quot;];&lt;/code&gt;&lt;br&gt;一句话：&lt;br&gt;    &lt;code&gt;[self setValuesForKeysWithDictionary:dict];&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;键值编码（key-value coding）是一种间接更改对象状态的方式。通过传入的字符串（key）查找要更改的对象的状态。查找的规则是，先查找以字符串（key）命名的getter和setter方法。如果没有找到对应的方法，再查找key和_key的实例变量。KVC 是字典转模型，模型转字典的神器  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;KVC中基本调用的两个方法：&lt;br&gt;valueForKey:&lt;br&gt; &lt;code&gt;NSString *name = [self.studentModel valueForKey:@&amp;quot;name&amp;quot;];&lt;/code&gt;&lt;br&gt;setValue:forKey:&lt;br&gt; &lt;code&gt;[self.studentModel setValue:@&amp;quot;李四&amp;quot; forKey:@&amp;quot;name&amp;quot;];&lt;/code&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;对于标量值，会自动进行装箱和拆箱。&lt;br&gt;使用键路径：&lt;br&gt;valueForKeyPath:&lt;br&gt; &lt;code&gt;NSString *phone = [self.schoolModel valueForKeyPath:@&amp;quot;classModel.name&amp;quot;];&lt;/code&gt;&lt;br&gt;setValue:forKeyPath:&lt;br&gt; &lt;code&gt;[self.schoolModel setValue:@&amp;quot;初三五班&amp;quot; forKeyPath:@&amp;quot;classModel.name&amp;quot;];&lt;/code&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;讲解&lt;/strong&gt;：&lt;a href=&quot;http://www.jianshu.com/p/0492b841b500&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/0492b841b500&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/8f83f592a354#&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/8f83f592a354#&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="iOS面试" scheme="http://peilinghui.com/categories/iOS%E9%9D%A2%E8%AF%95/"/>
+    
+    
+      <category term="OC" scheme="http://peilinghui.com/tags/OC/"/>
+    
+      <category term="iOS面试" scheme="http://peilinghui.com/tags/iOS%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>关于iOS中的autolayout</title>
     <link href="http://peilinghui.com/2016/02/28/%E5%85%B3%E4%BA%8EiOS%E4%B8%AD%E7%9A%84autolayout/"/>
     <id>http://peilinghui.com/2016/02/28/关于iOS中的autolayout/</id>
     <published>2016-02-28T14:04:07.000Z</published>
-    <updated>2016-02-29T06:25:29.000Z</updated>
+    <updated>2016-03-04T09:11:25.000Z</updated>
     
     <content type="html">&lt;p&gt;Autolayout是一种“自动布局”技术，专门用来布局UI界面的。苹果官方也推荐开发者尽量使用Autolayout来布局UI界面。Autolayout能很轻松地解决屏幕适配的问题。&lt;br&gt; Autolayout的2个核心概念：1.参照 2.约束&lt;br&gt; 花了俩天的时间学习了一下iOS中的autolayout, 总结一下。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;autolayout在Storyboard中的使用&quot;&gt;&lt;a href=&quot;#autolayout在Storyboard中的使用&quot; class=&quot;headerlink&quot; title=&quot;autolayout在Storyboard中的使用&quot;&gt;&lt;/a&gt;autolayout在Storyboard中的使用&lt;/h2&gt;&lt;h2 id=&quot;三个练习：&quot;&gt;&lt;a href=&quot;#三个练习：&quot; class=&quot;headerlink&quot; title=&quot;三个练习：&quot;&gt;&lt;/a&gt;三个练习：&lt;/h2&gt;&lt;h3 id=&quot;1-练习1&quot;&gt;&lt;a href=&quot;#1-练习1&quot; class=&quot;headerlink&quot; title=&quot;1.练习1&quot;&gt;&lt;/a&gt;1.练习1&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;在控制器view底部添加2个view，1个蓝色，1个红色
@@ -58,7 +151,7 @@ mas_remakeConstraints 则会清除之前的所有约束 仅保留最新的约束
 #define mas_equalTo(...) equalTo(MASBoxValue((__VA_ARGS__))) 
 mas_equalTo对其参数进行了一个自动装箱操作， 除了支持NSNumber数值类型之外还支持CGPoint CGSize UIEdgeInsets
 &lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;基于Autolayout的动画&quot;&gt;&lt;a href=&quot;#基于Autolayout的动画&quot; class=&quot;headerlink&quot; title=&quot;基于Autolayout的动画&quot;&gt;&lt;/a&gt;基于Autolayout的动画&lt;/h1&gt;&lt;p&gt;在修改了约束之后，只要执行下面代码，就能做动画效果&lt;br&gt;&lt;code&gt;[UIView animateWithDuration:1.0 animations:^{
-    [添加了约束的view layoutIfNeeded];
+    添加了约束的view layoutIfNeeded];
 }];&lt;/code&gt;&lt;br&gt;参考学习：&lt;a href=&quot;http://blog.cnbluebox.com/blog/2014/12/13/autolayout1/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.cnbluebox.com/blog/2014/12/13/autolayout1/&lt;/a&gt;&lt;/p&gt;
 </content>
     
