@@ -14,7 +14,7 @@
 <meta property="og:description" content="不论是什么开发，多线程网络始终是学习的重点。">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%87%AA%E5%AE%9A%E4%B9%89NSOperation%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87.png">
-<meta property="og:updated_time" content="2016-03-06T07:05:59.000Z">
+<meta property="og:updated_time" content="2016-03-07T09:04:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS中的多线程网络">
 <meta name="twitter:description" content="不论是什么开发，多线程网络始终是学习的重点。">
@@ -252,8 +252,10 @@
 <li>NSOperation（基于GCD，比GCD多了一些简单实用的功能，<strong>OC</strong>）自动管理，经常使用.</li>
 </ul>
 </li>
-<li>线程间通讯的方法<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF.png" alt=""></li>
-<li>网络图片处理问题中怎么解决一个相同的网络地址重复请求的问题？<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%87%AA%E5%AE%9A%E4%B9%89NSOperation%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87.png" alt=""><br>利用字典（图片地址为key，下载操作为value）</li>
+<li>线程间通讯的方法<br>控制器在子线程发送请求给服务器<br>服务器在主线程刷新UI界面到控制器<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF.png" alt=""><br>还可以使用GCD，主线程和子线程的通信。<br> <code>dispath_async(dispatch_get_main_queue(),^{
+ });</code> </li>
+<li><p>网络图片处理问题中怎么解决一个相同的网络地址重复请求的问题？<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%87%AA%E5%AE%9A%E4%B9%89NSOperation%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87.png" alt=""><br>利用字典（图片地址为key，下载操作为value）</p>
+</li>
 <li><p>多线程安全的几种解决办法及多线程安全怎么控制？<br>线程安全的概念: 就是在多个线程同时执行的时候，能够保证资源信息的准确性.</p>
 <ul>
 <li>苹果约定，<strong>所有程序的更新UI都在主线程进行</strong>，也就不会出现多个线程同时改变一个资源。在主线程更新UI，有什么好处？只在主线程更新UI，就不会出现多个线程同时改变同一个UI控件;主线程的优先级最高。也就意味UI的更新优先级高。 会让用户感觉很流畅    .</li>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://peilinghui.com/"/>
-  <updated>2016-03-05T15:00:01.000Z</updated>
+  <updated>2016-03-07T07:57:48.000Z</updated>
   <id>http://peilinghui.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://peilinghui.com/2016/03/05/iOS%E4%B8%AD%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A1%86%E6%9E%B6/"/>
     <id>http://peilinghui.com/2016/03/05/iOS中的第三方框架/</id>
     <published>2016-03-05T06:08:53.000Z</published>
-    <updated>2016-03-05T15:00:01.000Z</updated>
+    <updated>2016-03-07T07:57:48.000Z</updated>
     
     <content type="html">&lt;p&gt;通过不断的学习也接触了不少的第三方框架，就总结一下。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;FMDB&quot;&gt;&lt;a href=&quot;#FMDB&quot; class=&quot;headerlink&quot; title=&quot;FMDB&quot;&gt;&lt;/a&gt;FMDB&lt;/h1&gt;&lt;ol&gt;
@@ -33,7 +33,7 @@
 &lt;/li&gt;
 &lt;li&gt;FMDB的github地址:  &lt;a href=&quot;https://github.com/ccgus/fmdb&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/ccgus/fmdb&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-</content>
+&lt;h1 id=&quot;AFNetworking&quot;&gt;&lt;a href=&quot;#AFNetworking&quot; class=&quot;headerlink&quot; title=&quot;AFNetworking&quot;&gt;&lt;/a&gt;AFNetworking&lt;/h1&gt;&lt;h1 id=&quot;SDWebImage&quot;&gt;&lt;a href=&quot;#SDWebImage&quot; class=&quot;headerlink&quot; title=&quot;SDWebImage&quot;&gt;&lt;/a&gt;SDWebImage&lt;/h1&gt;&lt;h1 id=&quot;MBProgressHUD&quot;&gt;&lt;a href=&quot;#MBProgressHUD&quot; class=&quot;headerlink&quot; title=&quot;MBProgressHUD&quot;&gt;&lt;/a&gt;MBProgressHUD&lt;/h1&gt;&lt;h1 id=&quot;JSONKit&quot;&gt;&lt;a href=&quot;#JSONKit&quot; class=&quot;headerlink&quot; title=&quot;JSONKit&quot;&gt;&lt;/a&gt;JSONKit&lt;/h1&gt;</content>
     
     <summary type="html">
     
@@ -81,7 +81,7 @@
     <link href="http://peilinghui.com/2016/03/04/iOS%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C/"/>
     <id>http://peilinghui.com/2016/03/04/iOS中的多线程网络/</id>
     <published>2016-03-04T13:31:31.000Z</published>
-    <updated>2016-03-06T07:05:59.000Z</updated>
+    <updated>2016-03-07T09:04:10.000Z</updated>
     
     <content type="html">&lt;p&gt;不论是什么开发，多线程网络始终是学习的重点。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
@@ -93,8 +93,10 @@
 &lt;li&gt;NSOperation（基于GCD，比GCD多了一些简单实用的功能，&lt;strong&gt;OC&lt;/strong&gt;）自动管理，经常使用.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;线程间通讯的方法&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
-&lt;li&gt;网络图片处理问题中怎么解决一个相同的网络地址重复请求的问题？&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E8%87%AA%E5%AE%9A%E4%B9%89NSOperation%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;利用字典（图片地址为key，下载操作为value）&lt;/li&gt;
+&lt;li&gt;线程间通讯的方法&lt;br&gt;控制器在子线程发送请求给服务器&lt;br&gt;服务器在主线程刷新UI界面到控制器&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;还可以使用GCD，主线程和子线程的通信。&lt;br&gt; &lt;code&gt;dispath_async(dispatch_get_main_queue(),^{
+ });&lt;/code&gt; &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;网络图片处理问题中怎么解决一个相同的网络地址重复请求的问题？&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E8%87%AA%E5%AE%9A%E4%B9%89NSOperation%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;利用字典（图片地址为key，下载操作为value）&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;多线程安全的几种解决办法及多线程安全怎么控制？&lt;br&gt;线程安全的概念: 就是在多个线程同时执行的时候，能够保证资源信息的准确性.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;苹果约定，&lt;strong&gt;所有程序的更新UI都在主线程进行&lt;/strong&gt;，也就不会出现多个线程同时改变一个资源。在主线程更新UI，有什么好处？只在主线程更新UI，就不会出现多个线程同时改变同一个UI控件;主线程的优先级最高。也就意味UI的更新优先级高。 会让用户感觉很流畅    .&lt;/li&gt;
@@ -188,23 +190,10 @@
     <link href="http://peilinghui.com/2016/03/01/iOS%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     <id>http://peilinghui.com/2016/03/01/iOS面试题总结/</id>
     <published>2016-03-01T08:57:25.000Z</published>
-    <updated>2016-03-06T14:49:32.000Z</updated>
+    <updated>2016-03-07T14:32:07.000Z</updated>
     
     <content type="html">&lt;p&gt;快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;单例设计模式-Singleton&quot;&gt;&lt;a href=&quot;#单例设计模式-Singleton&quot; class=&quot;headerlink&quot; title=&quot;单例设计模式(Singleton)&quot;&gt;&lt;/a&gt;单例设计模式(Singleton)&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;它可以保证某个类创建出来的对象永远只有1个&lt;/li&gt;
-&lt;li&gt;作用：节省内存资源，一个应用就一个对象  例如：工具类(音频Sound)&lt;/li&gt;
-&lt;li&gt;实现：MRC和ARC&lt;/li&gt;
-&lt;li&gt;单例模式实现代码：&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%20%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%BB%A3%E7%A0%81.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;创建单例设计模式的基本步骤：&lt;ul&gt;
-&lt;li&gt;声明一个单件对象的静态实例,并初始化为nil。 &lt;/li&gt;
-&lt;li&gt;创建一个类的类工厂方法,当且仅当这个类的实例为nil时生成一个该类的实例&lt;/li&gt;
-&lt;li&gt;实现NScopying协议, 覆盖allocWithZone:方法,确保用户在直接分配和初始化对象时,不会产 生另一个对象。 &lt;/li&gt;
-&lt;li&gt;覆盖release、autorelease、retain、retainCount方法, 以此确保单例的状态。 &lt;/li&gt;
-&lt;li&gt;在多线程的环境中,注意使用@synchronized关键字或GCD,确保静态实例被正确的创建和初始化。 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
 &lt;h1 id=&quot;内存管理（MRC和ARC）&quot;&gt;&lt;a href=&quot;#内存管理（MRC和ARC）&quot; class=&quot;headerlink&quot; title=&quot;内存管理（MRC和ARC）&quot;&gt;&lt;/a&gt;内存管理（MRC和ARC）&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;讲解：&lt;a href=&quot;http://www.jianshu.com/p/3129ce12e020&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/3129ce12e020&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;对于类方法（静态方法）默认是autorelease的。所有类方法都会这样吗？&lt;br&gt;系统自带的绝大数类方法返回的对象,都是经过autorelease的&lt;/li&gt;
@@ -213,8 +202,24 @@
 &lt;li&gt;如果有copy操作，block升级放在堆内存（强引用）。&lt;br&gt;2&amp;gt;防止循环引用&lt;br&gt; 解决：非ARC（MRC）：&lt;strong&gt;__block&lt;/strong&gt;&lt;br&gt;ARC：&lt;strong&gt;__weak&lt;/strong&gt;或者&lt;strong&gt;__unsafe_unretained&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;自动释放池底层怎么实现&lt;br&gt;自动释放池以栈的形式实现:当你创建一个新的自动释放池时，它将被添加到栈顶。当一个对象收到发送autorelease消息时,它被添加到当前线程的处于栈顶的自动释放池中,当自动释放池被回收时,它们从栈中被删除, 并且会给池子里面所有的对象都会做一次release操作.&lt;h1 id=&quot;KVC&quot;&gt;&lt;a href=&quot;#KVC&quot; class=&quot;headerlink&quot; title=&quot;KVC&quot;&gt;&lt;/a&gt;KVC&lt;/h1&gt;作用：间接通过字符串类型的key取出对应的属性值&lt;br&gt;字典中key必须和模型的属性名称一模一样&lt;br&gt; &lt;code&gt;self.answer = dic[@&amp;quot;answer&amp;quot;];&lt;/code&gt;等价于：&lt;br&gt; &lt;code&gt;[self setValue:dict[@&amp;quot;answer&amp;quot;] forKeyPath:@&amp;quot;answer&amp;quot;];&lt;/code&gt;&lt;br&gt;一句话：&lt;br&gt; &lt;code&gt;[self setValuesForKeysWithDictionary:dict];&lt;/code&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/KVC.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;keyPath包含了key的功能&lt;br&gt;key：只能访问当前对象的属性&lt;br&gt;keyPath：能利用运算符一层一层往内部访问属性  &lt;/li&gt;
+&lt;li&gt;自动释放池底层怎么实现&lt;br&gt;自动释放池以栈的形式实现:当你创建一个新的自动释放池时，它将被添加到栈顶。当一个对象收到发送autorelease消息时,它被添加到当前线程的处于栈顶的自动释放池中,当自动释放池被回收时,它们从栈中被删除, 并且会给池子里面所有的对象都会做一次release操作.&lt;/li&gt;
+&lt;li&gt;怎么保证多人开发进行内存泄露的检查.&lt;br&gt;1&amp;gt;使用Product-&amp;gt;Analyze进行代码的静态分析&lt;br&gt;2&amp;gt;为避免不必要的麻烦, 多人开发时尽量使用ARC&lt;/li&gt;
+&lt;li&gt;什么情况下会发生内存泄漏和内存溢出？&lt;br&gt;当程序在申请内存后，无法释放已申请的内存空间(例如一个对象或者变量使用完成后没有释放,这个对象一直占用着内存)，一次内存泄露危害可以忽略，但内存泄露堆积后果很严重，无论多少内存,迟早会被占光。内存泄露会最终会导致内存溢出！&lt;br&gt;当程序在申请内存时，没有足够的内存空间供其使用，出现out of memory；比如申请了一个int,但给它存了long才能存下的数，那就是内存溢出。&lt;/li&gt;
 &lt;/ol&gt;
+&lt;h1 id=&quot;单例设计模式-Singleton&quot;&gt;&lt;a href=&quot;#单例设计模式-Singleton&quot; class=&quot;headerlink&quot; title=&quot;单例设计模式(Singleton)&quot;&gt;&lt;/a&gt;单例设计模式(Singleton)&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;定义：它可以保证某个类创建出来的对象永远只有1个。&lt;/li&gt;
+&lt;li&gt;作用：节省内存资源，一个应用就一个对象  例如：工具类(音频Sound)&lt;/li&gt;
+&lt;li&gt;实现：MRC和ARC&lt;/li&gt;
+&lt;li&gt;单例模式实现代码：（MRC）&lt;br&gt; &lt;code&gt;static MJSoundTool *_soundTool = nil;&lt;/code&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%8D%95%E4%BE%8B%E6%8A%BD%E5%87%BA%E5%AE%8F.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;若是ARC：&lt;br&gt;在build加标记-fobjc-arc&lt;br&gt;与MRC类似，只是没有了release，retain。&lt;br&gt;在宏中用&lt;code&gt;if__has_feature(objc_arc)&lt;/code&gt;判断&lt;br&gt;创建单例设计模式的基本步骤：&lt;ul&gt;
+&lt;li&gt;声明一个单件对象的静态实例,并初始化为nil。 &lt;/li&gt;
+&lt;li&gt;创建一个类的类工厂方法,当且仅当这个类的实例为nil时生成一个该类的实例&lt;/li&gt;
+&lt;li&gt;实现NScopying协议, 覆盖allocWithZone:方法,确保用户在直接分配和初始化对象时,不会产 生另一个对象。&lt;br&gt;&lt;code&gt;@interface MJSoundTool : NSObject&amp;lt;NSCopying&amp;gt;&lt;/code&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/2.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+&lt;li&gt;覆盖release、autorelease、retain、retainCount方法, 以此确保单例的状态。 &lt;/li&gt;
+&lt;li&gt;在多线程的环境中,注意使用@synchronized关键字或GCD,确保静态实例被正确的创建和初始化。 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;KVC&quot;&gt;&lt;a href=&quot;#KVC&quot; class=&quot;headerlink&quot; title=&quot;KVC&quot;&gt;&lt;/a&gt;KVC&lt;/h1&gt;&lt;p&gt;作用：间接通过字符串类型的key取出对应的属性值&lt;br&gt;字典中key必须和模型的属性名称一模一样&lt;br&gt;    &lt;code&gt;self.answer = dic[@&amp;quot;answer&amp;quot;];&lt;/code&gt;等价于：&lt;br&gt;    &lt;code&gt;[self setValue:dict[@&amp;quot;answer&amp;quot;] forKeyPath:@&amp;quot;answer&amp;quot;];&lt;/code&gt;&lt;br&gt;一句话：&lt;br&gt;    &lt;code&gt;[self setValuesForKeysWithDictionary:dict];&lt;/code&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/KVC.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;keyPath包含了key的功能&lt;br&gt;key：只能访问当前对象的属性&lt;br&gt;keyPath：能利用运算符一层一层往内部访问属性  &lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;键值编码（key-value coding）是一种间接更改对象状态的方式。通过传入的字符串（key）查找要更改的对象的状态。查找的规则是，先查找以字符串（key）命名的getter和setter方法。如果没有找到对应的方法，再查找key和_key的实例变量。KVC 是字典转模型，模型转字典的神器  &lt;/p&gt;
 &lt;/blockquote&gt;
@@ -238,26 +243,36 @@
 &lt;li&gt;数据类型之间的转换&lt;br&gt;ARC:&lt;strong&gt;__bridge_retained&lt;/strong&gt;,&lt;strong&gt;__bridge_transfer&lt;/strong&gt;&lt;br&gt;非ARC:&lt;strong&gt;__bridge&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;是否使用Core Text或者Core Image等？如果使用过，请谈谈你使用Core Text或者Core Image的体验。&lt;br&gt;CoreText：随意修改文本的样式，图文混排(纯C语言)国外:Niumb&lt;br&gt;Core Image(滤镜处理)： 能调节图片的各种属性(对比度, 色温, 色差等)&lt;/li&gt;
-&lt;li&gt;controllers间怎么进行通信。&lt;br&gt;在IOS应用不断的出现三种模式来实现这种通信：&lt;ul&gt;
-&lt;li&gt;委托delegation；（一个controller定义了一个协议（即一系列的方法定义））&lt;/li&gt;
-&lt;li&gt;通知中心Notification Center；(通知比较灵活(1个通知能被多个对象接收, 1个对象能接收多个通知)&lt;/li&gt;
-&lt;li&gt;键值观察key value observing，KVO(KVO性能不好(底层会动态产生新的类)，只能监听某个对象属性的改变, 不推荐使用(1个对象的属性能被多个对象监听,  1个对象能监听多个对象的其他属性)&lt;br&gt;参考：&lt;a href=&quot;http://blog.csdn.net/dqjyong/article/details/7685933&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/dqjyong/article/details/7685933&lt;/a&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;不用中间变量,用两种方法交换A和B的值&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B7%A7%E4%BA%A4%E6%8D%A2.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;或者使用&lt;strong&gt;位运算符&lt;/strong&gt;异或&lt;br&gt;A = A^B;&lt;br&gt;B = A^B;&lt;br&gt;A = A^B;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;是否使用Core Text（核心文本（富文本））或者Core Image等？如果使用过，请谈谈你使用Core Text或者Core Image的体验。&lt;br&gt;Core Text：随意修改文本的样式，图文混排(纯C语言)第三方框架:Niumb（国外）&lt;br&gt;Core Image(滤镜处理框架)： 能调节图片的各种属性(对比度, 色温, 色差等)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;controllers间怎么进行通信。&lt;br&gt;在IOS应用不断的出现三种模式来实现这种通信：（可以做到监听）&lt;ul&gt;
+&lt;li&gt;委托delegation代理；（一个controller定义了一个协议（一对一）监听scroll的滚动，使用安全，比较规范，但是代码多，先用协议-&amp;gt;代理属性-&amp;gt;设置代理-&amp;gt;实现代理方法）&lt;/li&gt;
+&lt;li&gt;通知中心Notification Center；(通知比较灵活(1个通知能被多个对象接收, 1个对象能接收多个通知(多对多)，监听键盘弹出)&lt;/li&gt;
+&lt;li&gt;键值观察key value observing，KVO(KVO性能不好(底层会动态产生新的类)，只能监听某个对象属性的改变, 不推荐使用(1个对象的属性能被多个对象监听(一对多)监听对象属性的改变)&lt;br&gt;参考：&lt;a href=&quot;http://blog.csdn.net/dqjyong/article/details/7685933&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/dqjyong/article/details/7685933&lt;/a&gt;  &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1 id=&quot;runtime&quot;&gt;&lt;a href=&quot;#runtime&quot; class=&quot;headerlink&quot; title=&quot;runtime&quot;&gt;&lt;/a&gt;runtime&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;什么是runtime？&lt;br&gt;1&amp;gt; runtime是一套比较底层的纯C语言API, 属于1个C语言库（包含很多强大实用的C语言数据类型、C语言函数）&lt;br&gt;2&amp;gt; 平时编写的OC代码, 在程序运行过程中, 其实最终都是转成了runtime的C语言代码, runtime算是OC的幕后工作者&lt;br&gt;3&amp;gt; 举例:&lt;br&gt;OC：&lt;code&gt;[[Person alloc] init]&lt;/code&gt;&lt;br&gt;runtime: &lt;code&gt;objc_msgSend(objc_msgSend(&amp;quot;Person&amp;quot; , &amp;quot;alloc&amp;quot;), &amp;quot;init&amp;quot;)&lt;/code&gt;&lt;/p&gt;
+&lt;li&gt;什么是runtime？&lt;br&gt;1&amp;gt; runtime是一套比较底层的纯C语言API, 属于1个C语言库&lt;br&gt;2&amp;gt; 平时编写的OC代码, 在程序运行过程中, 其实最终都是转成了runtime的C语言代码, runtime算是OC的幕后工作者&lt;br&gt;3&amp;gt; 举例:&lt;br&gt;OC：&lt;code&gt;[[Person alloc] init]&lt;/code&gt;&lt;br&gt;runtime: &lt;code&gt;objc_msgSend(objc_msgSend(&amp;quot;Person&amp;quot; , &amp;quot;alloc&amp;quot;), &amp;quot;init&amp;quot;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;有什么用？&lt;br&gt;runtime是属于OC的底层, 可以进行一些非常底层的操作。&lt;br&gt;1&amp;gt; 在程序运行过程中，动态创建一个类（比如KVO的底层实现）&lt;br&gt;2&amp;gt; 在程序运行过程中，动态的为某个类添加属性\方法，修改属性\方法.&lt;br&gt;3&amp;gt; 遍历一个类的所有的成员变量(属性)\方法  &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;常见的头文件：&lt;br&gt; &lt;code&gt;#import &amp;lt;objc/runtime.h&amp;gt; : 成员变量、类、方法&lt;/code&gt;&lt;br&gt; &lt;code&gt;#import &amp;lt;objc/message.h&amp;gt;: 消息机制&lt;/code&gt;&lt;br&gt; 常见的方法：&lt;br&gt; &lt;code&gt;Ivar class_copyIvarList : 获得某个类内部的所有成员变量&lt;/code&gt;（Ivar是成员变量）&lt;br&gt; &lt;code&gt;Method * class_copyMethodList : 获得某个类内部的所有方法&lt;/code&gt; （Method是成员方法）&lt;br&gt; &lt;code&gt;Method class_getInstanceMethod: 获得某个实例方法（对象方法，减号-开头）&lt;/code&gt;&lt;br&gt; &lt;code&gt;Method class_getClassMethod : 获得某个类方法（加号+开头）&lt;/code&gt;&lt;br&gt; &lt;code&gt;method_exchangeImplementations : 交换2个方法的具体实现&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt; &lt;code&gt;objc_msgSend(....)：给对象发送消息&lt;/code&gt;&lt;br&gt;相关应用:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;NSCoding(利用runtime遍历模型对象的所有属性来归档和解档）&lt;/li&gt;
+&lt;li&gt;字典–&amp;gt;模型（利用runtime遍历模型对象的所有属性，根据属性名从字典中取出对应的值，设置到模型的属性上）&lt;/li&gt;
+&lt;li&gt;KVO（利用runtime动态产生一个类）&lt;ul&gt;
+&lt;li&gt;用于封装框架（想怎么改就怎么改）&lt;br&gt;示例第一种应用：&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/runtime.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/rumtime%E5%BD%92%E6%A1%A3.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/runtime%E8%A7%A3%E6%A1%A3.png&quot; alt=&quot;&quot;&gt;    &lt;h1 id=&quot;UI&quot;&gt;&lt;a href=&quot;#UI&quot; class=&quot;headerlink&quot; title=&quot;UI&quot;&gt;&lt;/a&gt;UI&lt;/h1&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;有什么用？&lt;br&gt;runtime是属于OC的底层, 可以进行一些非常底层的操作。&lt;br&gt;1&amp;gt; 能动态产生一个类、一个成员变量、一个方法&lt;br&gt;2&amp;gt; 能动态修改一个类、一个成员变量、一个方法&lt;br&gt;3&amp;gt; 能动态删除一个类、一个成员变量、一个方法  &lt;/p&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;常见的函数、头文件&lt;br&gt; &lt;code&gt;#import &amp;lt;objc/runtime.h&amp;gt; : 成员变量、类、方法&lt;/code&gt;&lt;br&gt; &lt;code&gt;Ivar * class_copyIvarList : 获得某个类内部的所有成员变量&lt;/code&gt;&lt;br&gt; &lt;code&gt;Method * class_copyMethodList : 获得某个类内部的所有方法&lt;/code&gt;&lt;br&gt; &lt;code&gt;Method class_getInstanceMethod: 获得某个实例方法（对象方法，减号-开头）&lt;/code&gt;&lt;br&gt; &lt;code&gt;Method class_getClassMethod : 获得某个类方法（加号+开头）&lt;/code&gt;&lt;br&gt; &lt;code&gt;method_exchangeImplementations : 交换2个方法的具体实现&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt; &lt;code&gt;#import &amp;lt;objc/message.h&amp;gt;: 消息机制&lt;/code&gt;&lt;br&gt; &lt;code&gt;objc_msgSend(....)&lt;/code&gt;&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;介绍一下isa指针,怎么用？&lt;br&gt;每一个对象内部都有一个ISA指针，对象的ISA指针就指向它的真实类型它所属的类。&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&quot;UI&quot;&gt;&lt;a href=&quot;#UI&quot; class=&quot;headerlink&quot; title=&quot;UI&quot;&gt;&lt;/a&gt;UI&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;介绍一下isa指针,怎么用？&lt;br&gt;每一个对象内部都有一个ISA指针，对象的ISA指针就指向它的真实类型它所属的类。&lt;/li&gt;
 &lt;li&gt;控制器的生命周期&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95%E5%89%AF%E6%9C%AC.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+&lt;li&gt;怎么解决缓存池满的问题(cell)&lt;br&gt;ios中不存在缓存池满的情况，因为通常我们ios中开发，对象都是在需要的时候才会创建，有种常用的说话叫做懒加载，还有在UITableView中一般只会创建刚开始出现在屏幕中的cell，之后都是从缓存池里取，不会再创建新对象。缓存池里最多也就一两个对象（缓存池满的这种情况一般在开发java中比较常见，java中一般把最近最少使用的对象先释放）&lt;/li&gt;
+&lt;li&gt;如何渲染自定义格式字符串的UILabel?&lt;br&gt;通过NSAttributedString类&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/UILabel.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;显示效果如下：&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/label%E6%98%BE%E7%A4%BA.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1 id=&quot;应用程序&quot;&gt;&lt;a href=&quot;#应用程序&quot; class=&quot;headerlink&quot; title=&quot;应用程序&quot;&gt;&lt;/a&gt;应用程序&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;IOS7之前,后台执行内容有几种形式,都是什么？&lt;br&gt;一般的应用在进入后台的时候可以获取一定时间来运行相关任务，也就是说可以在后台运行一小段时间(10S左右)。&lt;ul&gt;
@@ -278,7 +293,17 @@
 &lt;/li&gt;
 &lt;li&gt;把程序自己关掉和程序进入后台,远程推送的区别&lt;br&gt;1&amp;gt;关掉后不执行任何代码, 不能处理事件&lt;br&gt;2&amp;gt;应用程序进入&lt;strong&gt;后台状态&lt;/strong&gt;不久后转入&lt;strong&gt;挂起状态&lt;/strong&gt;。在这种状态下，应用程序不执行任何代码，并有可能在任意时候从内存中删除。只有当用户再次运行此应用，应用才会从挂起状态唤醒，代码得以继续执行&lt;br&gt;3&amp;gt;或者进入后台时开启多任务状态，保留在内存中，这样就可以&lt;br&gt;执行系统允许的动作&lt;br&gt;4&amp;gt;远程推送是由远程服务器上的程序发送到APNS,再由APNS把消息推送至设备上的程序,当应用程序收到推送的消息会自动调用特定的方法执行事先写好的代码&lt;/li&gt;
 &lt;li&gt;本地通知和远程推送通知对基本概念和用法？&lt;br&gt;本地通知和远程推送通知的基本目的都是让应用程序能够通知用户某些事情, 而且不需要应用程序在前台运行.&lt;br&gt;本地通知由本应用负责调用,只能从当前设备上的iOS发出&lt;br&gt;远程通知由远程服务器上的程序发送到APNS,再由APNS把消息推送至设备上的程序&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5%E8%B0%83%E7%94%A8.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E8%BF%9C%E7%A8%8B%E9%80%9A%E7%9F%A5.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+&lt;li&gt;NSRunLoop的实现机制,及在多线程中如何使用&lt;br&gt;NSRunLoop是IOS消息机制的处理模式.&lt;blockquote&gt;
+&lt;p&gt;1.NSRunLoop的主要作用：控制NSRunLoop里面线程的执行和休眠，在有事情做的时候使当前NSRunLoop控制的线程工作，没有事情做让当前NSRunLoop的控制的线程休眠。&lt;br&gt;2.NSRunLoop 就是一直在循环检测，从线程start到线程end，检测inputsource(如点击，双击等操作)异步事件，检测timesource同步事件，检测到输入源会执行处理函数，首先会产生通知，corefunction向线程添加runloop observers来监听事件，意在监听事件发生时来做处理。&lt;br&gt;3.runloopmode是一个集合，包括监听：事件源，定时器，以及需通知的runloop observers&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;只有在为你的程序创建次线程的时候，才需要运行run loop。对于程序的主线程而言，run loop是关键部分。Cocoa提供了运行主线程run loop的代码同时也会自动运行run loop。IOS程序UIApplication中的run方法在程序正常启动的时候就会启动run loop。如果你使用xcode提供的模板创建的程序，那你永远不需要自己去启动run loop&lt;/li&gt;
+&lt;li&gt;在多线程中，你需要判断是否需要run loop。如果需要run loop，那么你要负责配置run loop并启动。你不需要在任何情况下都去启动run loop。比如，你使用线程去处理一个预先定义好的耗时极长的任务时，你就可以毋需启动run loop。Run loop只在你要和线程有交互时才需要&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 </content>
     
     <summary type="html">
