@@ -4,18 +4,24 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>iOS中的第三方框架 | 向着阳光奔跑</title>
+  <title>iOS中的地图定位 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="通过不断的学习也接触了不少的第三方框架，就总结一下。">
+  <meta name="description" content="花一天时间学习一下iOS中的地图定位
+CoreLocation框架的使用先要导入框架，导入头文件    #import &amp;lt;CoreLocation/CoreLocation.h&amp;gt;CoreLocation框架中所有数据类型的前缀都是CL,CoreLocation中使用CLLocationManager对象来做用户定位.
+CLLocationManagerCLLocationManager">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS中的第三方框架">
-<meta property="og:url" content="http://peilinghui.com/2016/03/05/iOS中的第三方框架/index.html">
+<meta property="og:title" content="iOS中的地图定位">
+<meta property="og:url" content="http://peilinghui.com/2016/03/09/iOS中的地图定位/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="通过不断的学习也接触了不少的第三方框架，就总结一下。">
-<meta property="og:updated_time" content="2016-03-08T03:22:43.000Z">
+<meta property="og:description" content="花一天时间学习一下iOS中的地图定位
+CoreLocation框架的使用先要导入框架，导入头文件    #import &amp;lt;CoreLocation/CoreLocation.h&amp;gt;CoreLocation框架中所有数据类型的前缀都是CL,CoreLocation中使用CLLocationManager对象来做用户定位.
+CLLocationManagerCLLocationManager">
+<meta property="og:updated_time" content="2016-03-09T14:40:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中的第三方框架">
-<meta name="twitter:description" content="通过不断的学习也接触了不少的第三方框架，就总结一下。">
+<meta name="twitter:title" content="iOS中的地图定位">
+<meta name="twitter:description" content="花一天时间学习一下iOS中的地图定位
+CoreLocation框架的使用先要导入框架，导入头文件    #import &amp;lt;CoreLocation/CoreLocation.h&amp;gt;CoreLocation框架中所有数据类型的前缀都是CL,CoreLocation中使用CLLocationManager对象来做用户定位.
+CLLocationManagerCLLocationManager">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -199,11 +205,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-iOS中的第三方框架" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-iOS中的地图定位" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/03/05/iOS中的第三方框架/" class="article-date">
-  	<time datetime="2016-03-05T06:08:53.000Z" itemprop="datePublished">2016-03-05</time>
+      <a href="/2016/03/09/iOS中的地图定位/" class="article-date">
+  	<time datetime="2016-03-09T08:55:30.000Z" itemprop="datePublished">2016-03-09</time>
 </a>
     </div>
   
@@ -216,7 +222,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS中的第三方框架
+      iOS中的地图定位
     </h1>
   
 
@@ -232,23 +238,30 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>通过不断的学习也接触了不少的第三方框架，就总结一下。<br><a id="more"></a></p>
-<h1 id="FMDB"><a href="#FMDB" class="headerlink" title="FMDB"></a>FMDB</h1><ol>
-<li>什么是FMDB：<br>FMDB是iOS平台的SQLite数据库框架；<br>FMDB以OC的方式封装了SQLite的C语言API</li>
-<li>优点<ul>
-<li>使用起来更加面向对象，省去了很多麻烦、冗余的C语言代码</li>
-<li>对比苹果自带的Core Data框架，更加轻量级和灵活</li>
-<li>提供了多线程安全的数据库操作方法，有效地防止数据混乱</li>
-</ul>
-</li>
-<li>FMDB的github地址:  <a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">https://github.com/ccgus/fmdb</a></li>
-</ol>
-<h1 id="AFNetworking"><a href="#AFNetworking" class="headerlink" title="AFNetworking"></a>AFNetworking</h1><p>HTTP请求<br>提供了GET请求和Post请求</p>
+        <p>花一天时间学习一下iOS中的地图定位</p>
+<h1 id="CoreLocation框架的使用"><a href="#CoreLocation框架的使用" class="headerlink" title="CoreLocation框架的使用"></a>CoreLocation框架的使用</h1><p>先要导入框架，导入头文件<br>    <code>#import &lt;CoreLocation/CoreLocation.h&gt;</code><br>CoreLocation框架中所有数据类型的前缀都是CL,CoreLocation中使用CLLocationManager对象来做用户定位.</p>
+<h3 id="CLLocationManager"><a href="#CLLocationManager" class="headerlink" title="CLLocationManager"></a>CLLocationManager</h3><p>CLLocationManager的常用操作 </p>
 <ol>
-<li>AFN 与 ASI 有什么区别<br>AFN基于NSURL，ASI基于底层的CFNetwork框架，因此ASI的性能优于AFN<br>AFN采取block的方式处理请求，ASI最初采取delegate的方式处理请求，后面也增加了block的方式<br>AFN只封装了一些常用功能，满足基本需求，直接忽略了很多扩展功能，比如没有封装同步请求；ASI提供的功能较多，预留了各种接口和工具供开发者自行扩展<br>AFN直接解析服务器返回的JSON、XML等数据，而ASI比较原始，返回的是NSData二进制数据</li>
+<li>开始用户定位<br> <code>- (void)startUpdatingLocation;</code></li>
+<li>停止用户定位<br> <code>- (void) stopUpdatingLocation;</code></li>
 </ol>
-<h1 id="SDWebImage"><a href="#SDWebImage" class="headerlink" title="SDWebImage"></a>SDWebImage</h1><p>SDWebImage具体如何实现<br>利用NSOperationQueue和NSOperation下载图片, 还使用了GCD的一些函数(解码GIF图片)<br>利用URL作为key，NSOperation作为value<br>利用URL作为key，UIImage作为value</p>
-<h1 id="MBProgressHUD"><a href="#MBProgressHUD" class="headerlink" title="MBProgressHUD"></a>MBProgressHUD</h1><h1 id="JSONKit"><a href="#JSONKit" class="headerlink" title="JSONKit"></a>JSONKit</h1><h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><p>字典转模型</p>
+<p>当调用了startUpdatingLocation方法后，就开始不断地定位用户的位置，中途会频繁地调用代理的下面方法<br>    <code>- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;</code><br>locations参数里面装着CLLocation对象</p>
+<h3 id="CLLocation"><a href="#CLLocation" class="headerlink" title="CLLocation"></a>CLLocation</h3><p>CLLocation用来表示某个位置的地理信息，比如经纬度、海拔等等.<br>经纬度<br>     <code>@property(readonly, nonatomic) CLLocationCoordinate2D coordinate;</code><br> CLLocationCoordinate2D是一个用来表示经纬度的结构体，定义如下</p>
+<pre><code>`typedef struct {
+    CLLocationDegrees latitude; // 纬度
+    CLLocationDegrees longitude; // 经度
+} CLLocationCoordinate2D;`
+</code></pre><p>一般用CLLocationCoordinate2DMake函数来创建CLLocationCoordinate2D<br>补充：天朝的经纬度范围<br>纬度范围：N 3°51′ ~  N 53°33′<br>经度范围：E 73°33′ ~  E 135°05′<br>海拔<br>    <code>@property(readonly, nonatomic) CLLocationDistance altitude;</code><br>路线，航向（取值范围是0.0° ~ 359.9°，0.0°代表真北方向）    <code>@property(readonly, nonatomic) CLLocationDirection course;</code><br>行走速度（单位是m/s）<br>    <code>@property(readonly, nonatomic) CLLocationSpeed speed;</code><br>计算2个位置之间的距离方法<br>    <code>- (CLLocationDistance)distanceFromLocation:(const CLLocation *)location</code><br>*plist文件添加隐私描述  </p>
+<p>Privacy - Location Usage Description    </p>
+<h3 id="CLGeocoder"><a href="#CLGeocoder" class="headerlink" title="CLGeocoder"></a>CLGeocoder</h3><p>使用CLGeocoder可以完成“地理编码”和“反地理编码”<br>地理编码：根据给定的地名，获得具体的位置信息（比如经纬度、地址的全称等）<br>反地理编码：根据给定的经纬度，获得具体的位置信息  </p>
+<p>地理编码方法<br>    <code>- (void)geocodeAddressString:(NSString *)addressString completionHandler:(CLGeocodeCompletionHandler)completionHandler;</code></p>
+<p>反地理编码方法<br>    <code>- (void)reverseGeocodeLocation:(CLLocation *)location completionHandler:(CLGeocodeCompletionHandler)completionHandler;</code><br>当地理\反地理编码完成时，就会调用CLGeocodeCompletionHandler<br>    <code>typedef void (^CLGeocodeCompletionHandler)(NSArray *placemarks, NSError *error);</code><br>这个block传递2个参数<br>error ：当编码出错时（比如编码不出具体的信息）有值<br>placemarks ：里面装着CLPlacemark对象 </p>
+<h3 id="CLPlacemark"><a href="#CLPlacemark" class="headerlink" title="CLPlacemark"></a>CLPlacemark</h3><p>CLPlacemark的字面意思是地标，封装详细的地址位置信息.<br>地理位置<br>    <code>@property (nonatomic, readonly) CLLocation *location;</code>  </p>
+<p>区域<br>    <code>@property (nonatomic, readonly) CLRegion *region;</code></p>
+<p>详细的地址信息<br>    <code>@property (nonatomic, readonly) NSDictionary *addressDictionary;</code></p>
+<p>地址名称<br>    <code>@property (nonatomic, readonly) NSString *name;</code></p>
+<p>城市<br>    <code>@property (nonatomic, readonly) NSString *locality;</code></p>
+<h1 id="MapKit框架的使用"><a href="#MapKit框架的使用" class="headerlink" title="MapKit框架的使用"></a>MapKit框架的使用</h1><p>先要导入框架，导入头文件<br>    <code>#import &lt;MapKit/MapKit.h&gt;</code><br>MapKit框架中所有数据类型的前缀都是MK<br>MapKit有一个比较重要的UI控件 ：MKMapView，专门用于地图显示</p>
 
       
     </div>
@@ -258,18 +271,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/03/09/iOS中的地图定位/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          iOS中的地图定位
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/03/05/iOS中的数据存储/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">iOS中的数据存储</div>
+    <a href="/2016/03/05/iOS中的第三方框架/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS中的第三方框架</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -304,7 +308,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="iOS中的第三方框架" data-title="iOS中的第三方框架" data-url="http://peilinghui.com/2016/03/05/iOS中的第三方框架/"></div>
+	<div class="ds-thread" data-thread-key="iOS中的地图定位" data-title="iOS中的地图定位" data-url="http://peilinghui.com/2016/03/09/iOS中的地图定位/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

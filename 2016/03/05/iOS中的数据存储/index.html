@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://peilinghui.com/2016/03/05/iOS中的数据存储/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="iOS中的数据存储方式">
-<meta property="og:updated_time" content="2016-03-05T15:01:37.000Z">
+<meta property="og:updated_time" content="2016-03-08T13:44:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS中的数据存储">
 <meta name="twitter:description" content="iOS中的数据存储方式">
@@ -235,8 +235,9 @@
         <p>iOS中的数据存储方式<br><a id="more"></a></p>
 <h1 id="iOS中的数据存储方式"><a href="#iOS中的数据存储方式" class="headerlink" title="iOS中的数据存储方式"></a>iOS中的数据存储方式</h1><h2 id="Plist（NSArray-NSDictionary）"><a href="#Plist（NSArray-NSDictionary）" class="headerlink" title="Plist（NSArray\NSDictionary）"></a>Plist（NSArray\NSDictionary）</h2><p>只能存储数组，字典，但是数组和字典里面不能有自定义对象</p>
 <h2 id="Preference（偏好设置-NSUserDefaults）"><a href="#Preference（偏好设置-NSUserDefaults）" class="headerlink" title="Preference（偏好设置\NSUserDefaults）"></a>Preference（偏好设置\NSUserDefaults）</h2><h2 id="NSCoding（NSKeyedArchiver-NSkeyedUnarchiver归档"><a href="#NSCoding（NSKeyedArchiver-NSkeyedUnarchiver归档" class="headerlink" title="NSCoding（NSKeyedArchiver\NSkeyedUnarchiver归档"></a>NSCoding（NSKeyedArchiver\NSkeyedUnarchiver归档</h2><p>存储自定义对象，局限：一次性做读取的存储的操作</p>
-<h2 id="SQLite3"><a href="#SQLite3" class="headerlink" title="SQLite3"></a>SQLite3</h2><p>1.什么是SQLite<br>SQLite是一款轻型的嵌入式数据库;它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了;它的处理速度比Mysql、PostgreSQL这两款著名的数据库都还快</p>
-<h2 id="Core-Data"><a href="#Core-Data" class="headerlink" title="Core Data"></a>Core Data</h2><ol>
+<h2 id="SQLite3"><a href="#SQLite3" class="headerlink" title="SQLite3"></a>SQLite3</h2><ol>
+<li>什么是SQLite？<br>SQLite是一款轻型的嵌入式数据库;它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了;它的处理速度比Mysql、PostgreSQL这两款著名的数据库都还快  </li>
+<li>怎么解决sqlite锁定的问题？<br>设置数据库锁定的处理函数<br>int sqlite3_busy_handler(sqlite3<em>, int(</em>)(void<em>,int), void</em>);<br>设定锁定时的等待时间<br>int sqlite3_busy_timeout(sqlite3*, 60); ：<h2 id="Core-Data"><a href="#Core-Data" class="headerlink" title="Core Data"></a>Core Data</h2></li>
 <li>什么是Core Data？<br>Core Data是iOS5以后才出现的一个框架，它提供了对象-关系映射（ORM）关系，即能够将OC对象转化成数据，保存在SQLite数据库文件中，也能够将保存在数据库中的数据还原成OC对象，不用编写任何SQL语言（类似于Hibernate框架，没有那么强大）</li>
 <li>使用步骤<ul>
 <li>创建模型文件，<strong>相当于数据库</strong></li>
