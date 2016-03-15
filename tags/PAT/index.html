@@ -4,18 +4,17 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>iOS中的地图定位 | 向着阳光奔跑</title>
+  <title>Tag: PAT | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="花一天时间学习一下iOS中的地图定位.">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS中的地图定位">
-<meta property="og:url" content="http://peilinghui.com/2016/03/09/iOS中的地图定位/index.html">
+  <meta name="description" content="随心 随笔">
+<meta property="og:type" content="website">
+<meta property="og:title" content="向着阳光奔跑">
+<meta property="og:url" content="http://peilinghui.com/tags/PAT/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="花一天时间学习一下iOS中的地图定位.">
-<meta property="og:updated_time" content="2016-03-10T06:01:42.000Z">
+<meta property="og:description" content="随心 随笔">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中的地图定位">
-<meta name="twitter:description" content="花一天时间学习一下iOS中的地图定位.">
+<meta name="twitter:title" content="向着阳光奔跑">
+<meta name="twitter:description" content="随心 随笔">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -223,137 +222,57 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-iOS中的地图定位" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2016/03/09/iOS中的地图定位/" class="article-date">
-  	<time datetime="2016-03-09T08:55:30.000Z" itemprop="datePublished">2016-03-09</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/03/11/PAT练习/" class="archive-article-date">
+  	<time datetime="2016-03-11T13:33:08.000Z" itemprop="datePublished">Mar 11</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      iOS中的地图定位
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/03/11/PAT练习/">PAT练习</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-        
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>花一天时间学习一下iOS中的地图定位.<br><a id="more"></a></p>
-<h1 id="CoreLocation框架的使用"><a href="#CoreLocation框架的使用" class="headerlink" title="CoreLocation框架的使用"></a>CoreLocation框架的使用</h1><p>先要导入框架，导入头文件<br>    <code>#import &lt;CoreLocation/CoreLocation.h&gt;</code><br>CoreLocation框架中所有数据类型的前缀都是CL,CoreLocation中使用CLLocationManager对象来做用户定位.</p>
-<h3 id="CLLocationManager"><a href="#CLLocationManager" class="headerlink" title="CLLocationManager"></a>CLLocationManager</h3><p>CLLocationManager的常用操作 </p>
-<ol>
-<li>开始用户定位<br> <code>- (void)startUpdatingLocation;</code></li>
-<li>停止用户定位<br> <code>- (void) stopUpdatingLocation;</code></li>
-</ol>
-<p>当调用了startUpdatingLocation方法后，就开始不断地定位用户的位置，中途会频繁地调用代理的下面方法<br>    <code>- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;</code><br>locations参数里面装着CLLocation对象</p>
-<h3 id="CLLocation"><a href="#CLLocation" class="headerlink" title="CLLocation"></a>CLLocation</h3><p>CLLocation用来表示某个位置的地理信息，比如经纬度、海拔等等.<br>经纬度<br>     <code>@property(readonly, nonatomic) CLLocationCoordinate2D coordinate;</code><br> CLLocationCoordinate2D是一个用来表示经纬度的结构体，定义如下</p>
-<pre><code>typedef struct {
-    CLLocationDegrees latitude; // 纬度
-    CLLocationDegrees longitude; // 经度
-} CLLocationCoordinate2D;
-</code></pre><p>一般用CLLocationCoordinate2DMake函数来创建CLLocationCoordinate2D<br>补充：天朝的经纬度范围<br>纬度范围：N 3°51′ ~  N 53°33′<br>经度范围：E 73°33′ ~  E 135°05′<br>海拔<br>    <code>@property(readonly, nonatomic) CLLocationDistance altitude;</code><br>路线，航向（取值范围是0.0° ~ 359.9°，0.0°代表真北方向）      <code>@property(readonly, nonatomic) CLLocationDirection course;</code><br>行走速度（单位是m/s）<br>    <code>@property(readonly, nonatomic) CLLocationSpeed speed;</code><br>计算2个位置之间的距离方法<br>    <code>- (CLLocationDistance)distanceFromLocation:(const CLLocation *)location</code><br>*plist文件添加隐私描述  </p>
-<p>Privacy - Location Usage Description    </p>
-<h3 id="CLGeocoder"><a href="#CLGeocoder" class="headerlink" title="CLGeocoder"></a>CLGeocoder</h3><p>使用CLGeocoder可以完成“地理编码”和“反地理编码”<br>地理编码：根据给定的地名，获得具体的位置信息（比如经纬度、地址的全称等）<br>反地理编码：根据给定的经纬度，获得具体的位置信息  </p>
-<p>地理编码方法<br>    <code>- (void)geocodeAddressString:(NSString *)addressString completionHandler:(CLGeocodeCompletionHandler)completionHandler;</code></p>
-<p>反地理编码方法<br>    <code>- (void)reverseGeocodeLocation:(CLLocation *)location completionHandler:(CLGeocodeCompletionHandler)completionHandler;</code><br>当地理\反地理编码完成时，就会调用CLGeocodeCompletionHandler<br>    <code>typedef void (^CLGeocodeCompletionHandler)(NSArray *placemarks, NSError *error);</code><br>这个block传递2个参数<br>error ：当编码出错时（比如编码不出具体的信息）有值<br>placemarks ：里面装着CLPlacemark对象 </p>
-<h3 id="CLPlacemark"><a href="#CLPlacemark" class="headerlink" title="CLPlacemark"></a>CLPlacemark</h3><p>CLPlacemark的字面意思是地标，封装详细的地址位置信息.<br>地理位置<br>    <code>@property (nonatomic, readonly) CLLocation *location;</code>  </p>
-<p>区域<br>    <code>@property (nonatomic, readonly) CLRegion *region;</code></p>
-<p>详细的地址信息<br>    <code>@property (nonatomic, readonly) NSDictionary *addressDictionary;</code></p>
-<p>地址名称<br>    <code>@property (nonatomic, readonly) NSString *name;</code></p>
-<p>城市<br>    <code>@property (nonatomic, readonly) NSString *locality;</code></p>
-<h1 id="MapKit框架的使用"><a href="#MapKit框架的使用" class="headerlink" title="MapKit框架的使用"></a>MapKit框架的使用</h1><p>先要导入框架，导入头文件<br>    <code>#import &lt;MapKit/MapKit.h&gt;</code><br>MapKit框架中所有数据类型的前缀都是MK<br>MapKit有一个比较重要的UI控件 ：MKMapView，专门用于地图显示</p>
-
-      
-    </div>
-    
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/03/09/第一次面试总结/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          第一次面试总结
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/03/05/iOS中的第三方框架/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">iOS中的第三方框架</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-<div class="share_jia">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到: &nbsp; </span>
-		<a class="jiathis_button_facebook"></a> 
-    <a class="jiathis_button_twitter"></a>
-    <a class="jiathis_button_plus"></a> 
-    <a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT/">PAT</a></li></ul>
 	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
+
+          
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/算法编程/">算法编程</a>
+	</div>
 
 
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
 
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="iOS中的地图定位" data-title="iOS中的地图定位" data-url="http://peilinghui.com/2016/03/09/iOS中的地图定位/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
+    
 
 </div>
       <footer id="footer">
@@ -386,9 +305,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true
 	}

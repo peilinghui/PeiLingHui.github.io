@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>iOS中的地图定位 | 向着阳光奔跑</title>
+  <title>读书总结 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="花一天时间学习一下iOS中的地图定位.">
+  <meta name="description" content="最近读了几本书，总结一下内容，就当读书笔记了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS中的地图定位">
-<meta property="og:url" content="http://peilinghui.com/2016/03/09/iOS中的地图定位/index.html">
+<meta property="og:title" content="读书总结">
+<meta property="og:url" content="http://peilinghui.com/2016/03/14/读书总结/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="花一天时间学习一下iOS中的地图定位.">
-<meta property="og:updated_time" content="2016-03-10T06:01:42.000Z">
+<meta property="og:description" content="最近读了几本书，总结一下内容，就当读书笔记了。">
+<meta property="og:updated_time" content="2016-03-15T07:49:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中的地图定位">
-<meta name="twitter:description" content="花一天时间学习一下iOS中的地图定位.">
+<meta name="twitter:title" content="读书总结">
+<meta name="twitter:description" content="最近读了几本书，总结一下内容，就当读书笔记了。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -223,11 +223,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-iOS中的地图定位" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-读书总结" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/03/09/iOS中的地图定位/" class="article-date">
-  	<time datetime="2016-03-09T08:55:30.000Z" itemprop="datePublished">2016-03-09</time>
+      <a href="/2016/03/14/读书总结/" class="article-date">
+  	<time datetime="2016-03-14T14:10:13.000Z" itemprop="datePublished">2016-03-14</time>
 </a>
     </div>
   
@@ -240,7 +240,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS中的地图定位
+      读书总结
     </h1>
   
 
@@ -256,31 +256,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>花一天时间学习一下iOS中的地图定位.<br><a id="more"></a></p>
-<h1 id="CoreLocation框架的使用"><a href="#CoreLocation框架的使用" class="headerlink" title="CoreLocation框架的使用"></a>CoreLocation框架的使用</h1><p>先要导入框架，导入头文件<br>    <code>#import &lt;CoreLocation/CoreLocation.h&gt;</code><br>CoreLocation框架中所有数据类型的前缀都是CL,CoreLocation中使用CLLocationManager对象来做用户定位.</p>
-<h3 id="CLLocationManager"><a href="#CLLocationManager" class="headerlink" title="CLLocationManager"></a>CLLocationManager</h3><p>CLLocationManager的常用操作 </p>
-<ol>
-<li>开始用户定位<br> <code>- (void)startUpdatingLocation;</code></li>
-<li>停止用户定位<br> <code>- (void) stopUpdatingLocation;</code></li>
-</ol>
-<p>当调用了startUpdatingLocation方法后，就开始不断地定位用户的位置，中途会频繁地调用代理的下面方法<br>    <code>- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;</code><br>locations参数里面装着CLLocation对象</p>
-<h3 id="CLLocation"><a href="#CLLocation" class="headerlink" title="CLLocation"></a>CLLocation</h3><p>CLLocation用来表示某个位置的地理信息，比如经纬度、海拔等等.<br>经纬度<br>     <code>@property(readonly, nonatomic) CLLocationCoordinate2D coordinate;</code><br> CLLocationCoordinate2D是一个用来表示经纬度的结构体，定义如下</p>
-<pre><code>typedef struct {
-    CLLocationDegrees latitude; // 纬度
-    CLLocationDegrees longitude; // 经度
-} CLLocationCoordinate2D;
-</code></pre><p>一般用CLLocationCoordinate2DMake函数来创建CLLocationCoordinate2D<br>补充：天朝的经纬度范围<br>纬度范围：N 3°51′ ~  N 53°33′<br>经度范围：E 73°33′ ~  E 135°05′<br>海拔<br>    <code>@property(readonly, nonatomic) CLLocationDistance altitude;</code><br>路线，航向（取值范围是0.0° ~ 359.9°，0.0°代表真北方向）      <code>@property(readonly, nonatomic) CLLocationDirection course;</code><br>行走速度（单位是m/s）<br>    <code>@property(readonly, nonatomic) CLLocationSpeed speed;</code><br>计算2个位置之间的距离方法<br>    <code>- (CLLocationDistance)distanceFromLocation:(const CLLocation *)location</code><br>*plist文件添加隐私描述  </p>
-<p>Privacy - Location Usage Description    </p>
-<h3 id="CLGeocoder"><a href="#CLGeocoder" class="headerlink" title="CLGeocoder"></a>CLGeocoder</h3><p>使用CLGeocoder可以完成“地理编码”和“反地理编码”<br>地理编码：根据给定的地名，获得具体的位置信息（比如经纬度、地址的全称等）<br>反地理编码：根据给定的经纬度，获得具体的位置信息  </p>
-<p>地理编码方法<br>    <code>- (void)geocodeAddressString:(NSString *)addressString completionHandler:(CLGeocodeCompletionHandler)completionHandler;</code></p>
-<p>反地理编码方法<br>    <code>- (void)reverseGeocodeLocation:(CLLocation *)location completionHandler:(CLGeocodeCompletionHandler)completionHandler;</code><br>当地理\反地理编码完成时，就会调用CLGeocodeCompletionHandler<br>    <code>typedef void (^CLGeocodeCompletionHandler)(NSArray *placemarks, NSError *error);</code><br>这个block传递2个参数<br>error ：当编码出错时（比如编码不出具体的信息）有值<br>placemarks ：里面装着CLPlacemark对象 </p>
-<h3 id="CLPlacemark"><a href="#CLPlacemark" class="headerlink" title="CLPlacemark"></a>CLPlacemark</h3><p>CLPlacemark的字面意思是地标，封装详细的地址位置信息.<br>地理位置<br>    <code>@property (nonatomic, readonly) CLLocation *location;</code>  </p>
-<p>区域<br>    <code>@property (nonatomic, readonly) CLRegion *region;</code></p>
-<p>详细的地址信息<br>    <code>@property (nonatomic, readonly) NSDictionary *addressDictionary;</code></p>
-<p>地址名称<br>    <code>@property (nonatomic, readonly) NSString *name;</code></p>
-<p>城市<br>    <code>@property (nonatomic, readonly) NSString *locality;</code></p>
-<h1 id="MapKit框架的使用"><a href="#MapKit框架的使用" class="headerlink" title="MapKit框架的使用"></a>MapKit框架的使用</h1><p>先要导入框架，导入头文件<br>    <code>#import &lt;MapKit/MapKit.h&gt;</code><br>MapKit框架中所有数据类型的前缀都是MK<br>MapKit有一个比较重要的UI控件 ：MKMapView，专门用于地图显示</p>
-
+        <p>最近读了几本书，总结一下内容，就当读书笔记了。<br><a id="more"></a></p>
+<h1 id="第一本：天勤的计算机上机复试"><a href="#第一本：天勤的计算机上机复试" class="headerlink" title="第一本：天勤的计算机上机复试"></a>第一本：天勤的计算机上机复试</h1><p>int 32位（4个字节）；<br>long long 64位 ；<br>float 32位；<br>double 64位。<br>int scanf(“%d”,&amp;n); printf(“%d”,n);<br>long long scanf(“%lld”,&amp;n); printf(“%lld”,n);<br>float scanf(“%f”,&amp;fl); printf(“%f”,fl);<br>char scanf(“%c”,&amp;c); printf(“%c”,c);  能识别空格<br>字符串（char数组） <strong>scanf(“%s”,str);</strong>  printf(“%s”,str);  遇到空格结束<br>double <strong>scanf(“%lf”,&amp;db); printf(“%f”,db);</strong><br>getchar和putchar输入和输出单个字符，不赋值则会吸收掉。<br>gets输入一行字符串，并将其放于一维数组中，puts输出一行字符串，并换行。<br>字符数组末尾都有\0,表示字符串的结束，长度比实际多1.用getchar时要在字符串末尾加入’\0’.<br>strlen(字符数组)；数组中字符的个数。<br>strcmp(字符数组1,字符数组2);两个字符串大小比较。1&gt;2返回正数，1=2返回0，1&lt;2返回负数。<br>strcpy(字符数组1,字符数组2);把字符串2复制给字符串1。<br>strcat(字符数组1,字符数组2);把字符串2接到字符串1后面。</p>
+<h2 id="排序（内排）"><a href="#排序（内排）" class="headerlink" title="排序（内排）"></a>排序（内排）</h2><h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><h4 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h4><p>思想：表长L[1…..N],有序序列L[1..i-1],L(i),无序序列L[n+1……N],将L(i)插入有序L[1..i-1]。  </p>
+<pre><code>- 找出L(i)插入有序L[1..i-1]的位置k。  
+- 将L[k..i-1]中所有元素后移一位  
+- 将L(i)复制给L(k)。  
+</code></pre><p>空间效率：O（1）<br>时间效率：O（N2）<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertSort</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> temp=A[i];</span><br><span class="line">        <span class="keyword">for</span> (j=i-<span class="number">1</span>; temp&lt;A[j]; j--) &#123;<span class="comment">//从后往前查找待插入位置</span></span><br><span class="line">            A[j+<span class="number">1</span>]=A[j];<span class="comment">//向后移一位</span></span><br><span class="line">        &#125;</span><br><span class="line">        A[j+<span class="number">1</span>]=temp;<span class="comment">//复制到插入位置</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="折半插入排序"><a href="#折半插入排序" class="headerlink" title="折半插入排序"></a>折半插入排序</h4><h4 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h4><h3 id="交换排序"><a href="#交换排序" class="headerlink" title="交换排序"></a>交换排序</h3><h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><p>思想：表长n，从前往后或（从后往前）两两比较相邻元素的值，逆序则交换，这是第一趟，需要n-1趟。<br>空间效率：O（1）<br>时间效率：平均和最坏都是：O（N2）<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">10</span>]= &#123;<span class="number">3</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">2</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i&lt;<span class="number">4</span>; i++) &#123;<span class="comment">//进行n-1趟</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j&lt;<span class="number">5</span>-i; j++) &#123;<span class="comment">//第i趟时从a[0]到a[n-i]都与他们的下一个数比较</span></span><br><span class="line">            <span class="keyword">if</span>(a[j]&gt;a[j+<span class="number">1</span>])&#123;<span class="comment">//如果左边的数更大，则交换a[j]和a[j+1]</span></span><br><span class="line">                <span class="keyword">int</span> temp = a[j];</span><br><span class="line">                a[j] = a[j+<span class="number">1</span>];</span><br><span class="line">                a[j+<span class="number">1</span>] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>; i &lt; <span class="number">5</span>; i ++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><h4 id="简单选择排序"><a href="#简单选择排序" class="headerlink" title="简单选择排序"></a>简单选择排序</h4><p>思想：表长N[1…..N],第i趟排序则从[i……N]中选择关键字最小的元素与i交换，每一趟确定一个元素的最终位置，需要n-1趟。<br>空间效率：O(1)<br>时间效率：平均和最坏都是：O（N2）<br><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> selectSort()&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i &lt;n; i++) &#123;<span class="comment">//进行n-1趟</span></span><br><span class="line">        <span class="built_in">min</span> = i;<span class="comment">//记录最小元素的位置</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=i; j&lt;=n; j++) <span class="comment">//从i...n中选择最小元素</span></span><br><span class="line">            <span class="keyword">if</span> (A[j]&lt;A[<span class="built_in">min</span>]) <span class="built_in">min</span> = j;</span><br><span class="line">    <span class="keyword">int</span> temp = A[i];<span class="comment">//最小元素与A[i]交换</span></span><br><span class="line">    A[i] = A[<span class="built_in">min</span>];</span><br><span class="line">    A[<span class="built_in">min</span>] = A[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h4><h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><h3 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h3>
       
     </div>
     
@@ -289,18 +274,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/03/09/第一次面试总结/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/03/15/PAT练习-Advanced-Level/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          第一次面试总结
+          PAT练习(Advanced Level)
         
       </div>
     </a>
   
   
-    <a href="/2016/03/05/iOS中的第三方框架/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">iOS中的第三方框架</div>
+    <a href="/2016/03/14/ACM练习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ACM练习</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -335,7 +320,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="iOS中的地图定位" data-title="iOS中的地图定位" data-url="http://peilinghui.com/2016/03/09/iOS中的地图定位/"></div>
+	<div class="ds-thread" data-thread-key="读书总结" data-title="读书总结" data-url="http://peilinghui.com/2016/03/14/读书总结/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
