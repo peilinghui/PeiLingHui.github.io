@@ -3,18 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS中的数据存储 | 向着阳光奔跑</title>
+  <title>Linux系统的学习 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iOS中的数据存储方式">
+  <meta name="description" content="大学就接触过Linux系统，在Ubuntu下开发一个类似QQ的局域网通信，一个服务端，其他是客户端，当时候就是用GDK来写简单的界面，学习了socket通信机制，后来搁置了很久没碰过，很多知识都忘了。回忆总结一下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS中的数据存储">
-<meta property="og:url" content="http://peilinghui.com/2016/03/05/iOS中的数据存储/index.html">
+<meta property="og:title" content="Linux系统的学习">
+<meta property="og:url" content="http://peilinghui.com/2016/03/21/Linux系统的学习/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="iOS中的数据存储方式">
-<meta property="og:updated_time" content="2016-03-21T07:33:04.000Z">
+<meta property="og:description" content="大学就接触过Linux系统，在Ubuntu下开发一个类似QQ的局域网通信，一个服务端，其他是客户端，当时候就是用GDK来写简单的界面，学习了socket通信机制，后来搁置了很久没碰过，很多知识都忘了。回忆总结一下。">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/Linux%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png">
+<meta property="og:updated_time" content="2016-03-21T12:17:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中的数据存储">
-<meta name="twitter:description" content="iOS中的数据存储方式">
+<meta name="twitter:title" content="Linux系统的学习">
+<meta name="twitter:description" content="大学就接触过Linux系统，在Ubuntu下开发一个类似QQ的局域网通信，一个服务端，其他是客户端，当时候就是用GDK来写简单的界面，学习了socket通信机制，后来搁置了很久没碰过，很多知识都忘了。回忆总结一下。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -248,11 +249,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-iOS中的数据存储" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Linux系统的学习" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/03/05/iOS中的数据存储/" class="article-date">
-      <time datetime="2016-03-05T05:59:07.000Z" itemprop="datePublished">2016-03-05</time>
+      <a href="/2016/03/21/Linux系统的学习/" class="article-date">
+      <time datetime="2016-03-21T07:10:44.000Z" itemprop="datePublished">2016-03-21</time>
 </a>
     </div>
   
@@ -265,7 +266,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS中的数据存储
+      Linux系统的学习
     </h1>
   
 
@@ -274,7 +275,7 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
     </div>
 
 
@@ -286,21 +287,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>iOS中的数据存储方式<br><a id="more"></a></p>
-<h1 id="iOS中的数据存储方式"><a href="#iOS中的数据存储方式" class="headerlink" title="iOS中的数据存储方式"></a>iOS中的数据存储方式</h1><h2 id="Plist（NSArray-NSDictionary）"><a href="#Plist（NSArray-NSDictionary）" class="headerlink" title="Plist（NSArray\NSDictionary）"></a>Plist（NSArray\NSDictionary）</h2><p>只能存储数组，字典，但是数组和字典里面不能有自定义对象</p>
-<h2 id="Preference（偏好设置-NSUserDefaults）"><a href="#Preference（偏好设置-NSUserDefaults）" class="headerlink" title="Preference（偏好设置\NSUserDefaults）"></a>Preference（偏好设置\NSUserDefaults）</h2><h2 id="NSCoding（NSKeyedArchiver-NSkeyedUnarchiver归档"><a href="#NSCoding（NSKeyedArchiver-NSkeyedUnarchiver归档" class="headerlink" title="NSCoding（NSKeyedArchiver\NSkeyedUnarchiver归档"></a>NSCoding（NSKeyedArchiver\NSkeyedUnarchiver归档</h2><p>存储自定义对象，局限：一次性做读取的存储的操作</p>
-<h2 id="SQLite3"><a href="#SQLite3" class="headerlink" title="SQLite3"></a>SQLite3</h2><ol>
-<li>什么是SQLite？<br>SQLite是一款轻型的嵌入式数据库;它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了;它的处理速度比Mysql、PostgreSQL这两款著名的数据库都还快  </li>
-<li>怎么解决sqlite锁定的问题？<br>设置数据库锁定的处理函数<br>int sqlite3_busy_handler(sqlite3<em>, int(</em>)(void<em>,int), void</em>);<br>设定锁定时的等待时间<br>int sqlite3_busy_timeout(sqlite3*, 60); ：<h2 id="Core-Data"><a href="#Core-Data" class="headerlink" title="Core Data"></a>Core Data</h2></li>
-<li>什么是Core Data？<br>Core Data是iOS5以后才出现的一个框架，它提供了对象-关系映射（ORM）关系，即能够将OC对象转化成数据，保存在SQLite数据库文件中，也能够将保存在数据库中的数据还原成OC对象，不用编写任何SQL语言（类似于Hibernate框架，没有那么强大）</li>
-<li>使用步骤<ul>
-<li>创建模型文件，<strong>相当于数据库</strong></li>
-<li>添加实体，<strong>相对于表</strong></li>
-<li>创建实体类，<strong>相当于模型类</strong></li>
-<li>生成<strong>上下文</strong> 关联模型文件生成数据库</li>
-</ul>
-</li>
-</ol>
+        <p>大学就接触过Linux系统，在Ubuntu下开发一个类似QQ的局域网通信，一个服务端，其他是客户端，当时候就是用GDK来写简单的界面，学习了socket通信机制，后来搁置了很久没碰过，很多知识都忘了。回忆总结一下。<br><a id="more"></a></p>
+<h1 id="Linux目录"><a href="#Linux目录" class="headerlink" title="Linux目录"></a>Linux目录</h1><p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/Linux%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png" alt=""><br>  bin  存放二进制可执行文件(ls,cat,mkdir等)<br>  boot  存放用于系统引导时使用的各种文件<br>  dev 用于存放设备文件<br>  etc  存放系统配置文件<br>  home 存放所有用户文件的根目录<br>  lib  存放跟文件系统中的程序运行所需要的共享库及内核模块<br>  mnt  系统管理员安装临时文件系统的安装点<br>  opt  额外安装的可选应用程序包所放置的位置<br>  proc  虚拟文件系统，存放当前内存的映射<br>  root  超级用户目录<br>  sbin  存放二进制可执行文件，只有root才能访问<br>  tmp  用于存放各种临时文件<br>  usr  用于存放系统应用程序，比较重要的目录/usr/local 本地管理员软件安装目录<br>  var  用于存放运行时需要改变数据的文件  </p>
+<h1 id="文件目录操作命令"><a href="#文件目录操作命令" class="headerlink" title="文件目录操作命令"></a>文件目录操作命令</h1><p>ls 显示文件和目录列表             　<br>    -l 列出文件的详细信息<br>    -a 列出当前目录所有文件，包含隐藏文件<br>mkdir 创建目录       　<br>     -p 父目录不存在情况下先生成父目录<br>cd 切换目录<br>touch 生成一个空文件<br>echo 生成一个带内容文件<br>cat、tac显示文本文件内容<br>cp 复制文件或目录<br>rm 删除文件<br>    -r 同时删除该目录下的所有文件<br>    -f 强制删除文件或目录<br>mv 移动文件或目录、文件或mv  aaa bbb 将aaa改名为bbb<br>wc 统计文本文档的行数，字数，字符数<br>rmdir 删除空目录<br>pwd 显示当前工作目录<br>ln 建立链接文件<br>more、less 分页显示文本文件内容<br>tail  查看文件尾部<br>      -f  用于监视另一个进程正在写入的文件的增长。<br>      -n  num  从num变量表示的行位置开始读取指定文件<br>文件查找命令-find</p>
+<h1 id="网络相关指令"><a href="#网络相关指令" class="headerlink" title="网络相关指令"></a>网络相关指令</h1><p>ifconfig是linux中用于显示或配置网络设备（网络接口卡）的命令。<br>将第一块网卡的 IP 地址设置为192.168.1.144<br><code>$ ifconfig eth0 192.168.1.144</code><br>暂时关闭或启用网卡<br><code>$ ifconfig eth0 down      //关闭第一块网卡</code><br><code>$ ifconfig eth0 up        //启用第一块网卡</code><br>查看第一块网卡的状态<br><code>$ ifconfig eth0</code><br>将第一块网卡的子网掩码设置为 255.255.255.0<br><code>$ ifconfig eth0 netmask 255.255.255.0</code></p>
 
       
     </div>
@@ -309,13 +299,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></p>
+        <p><span>本文标题:</span><a href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年03月05日 - 13时59分</p>
-        <p><span>最后更新:</span>2016年03月21日 - 15时33分</p>
+        <p><span>发布时间:</span>2016年03月21日 - 15时10分</p>
+        <p><span>最后更新:</span>2016年03月21日 - 20时17分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/03/05/iOS中的数据存储/" title="iOS中的数据存储">http://peilinghui.com/2016/03/05/iOS中的数据存储/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/05/iOS中的数据存储/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/03/21/Linux系统的学习/" title="Linux系统的学习">http://peilinghui.com/2016/03/21/Linux系统的学习/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/21/Linux系统的学习/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -329,15 +319,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/03/05/iOS中的第三方框架/">
-                    iOS中的第三方框架
+                <a href="/2016/03/21/网易2016研发工程师编程题/">
+                    网易2016研发工程师编程题
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/03/04/iOS中的多线程网络/">
-                    iOS中的多线程网络
+                <a href="/2016/03/15/PAT练习-Advanced-Level/">
+                    PAT练习(Advanced Level)
                 </a>
             </div>
         
@@ -348,7 +338,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS中的数据存储方式"><span class="toc-number">1.</span> <span class="toc-text">iOS中的数据存储方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Plist（NSArray-NSDictionary）"><span class="toc-number">1.1.</span> <span class="toc-text">Plist（NSArray\NSDictionary）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Preference（偏好设置-NSUserDefaults）"><span class="toc-number">1.2.</span> <span class="toc-text">Preference（偏好设置\NSUserDefaults）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSCoding（NSKeyedArchiver-NSkeyedUnarchiver归档"><span class="toc-number">1.3.</span> <span class="toc-text">NSCoding（NSKeyedArchiver\NSkeyedUnarchiver归档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLite3"><span class="toc-number">1.4.</span> <span class="toc-text">SQLite3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Core-Data"><span class="toc-number">1.5.</span> <span class="toc-text">Core Data</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux目录"><span class="toc-number">1.</span> <span class="toc-text">Linux目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文件目录操作命令"><span class="toc-number">2.</span> <span class="toc-text">文件目录操作命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网络相关指令"><span class="toc-number">3.</span> <span class="toc-text">网络相关指令</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -410,7 +400,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/03/05/iOS中的数据存储/" data-title="iOS中的数据存储" data-url="http://peilinghui.com/2016/03/05/iOS中的数据存储/"></div>
+    <div class="ds-thread" data-thread-key="2016/03/21/Linux系统的学习/" data-title="Linux系统的学习" data-url="http://peilinghui.com/2016/03/21/Linux系统的学习/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -434,7 +424,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/03/05/iOS中的第三方框架/" title="上一篇: iOS中的第三方框架">
+            <a href="/2016/03/21/网易2016研发工程师编程题/" title="上一篇: 网易2016研发工程师编程题">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -442,7 +432,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/03/04/iOS中的多线程网络/" title="下一篇: iOS中的多线程网络">
+            <a href="/2016/03/15/PAT练习-Advanced-Level/" title="下一篇: PAT练习(Advanced Level)">
                 <i class="fa fa-angle-right"></i>
             </a>
         
