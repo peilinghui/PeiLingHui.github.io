@@ -3,18 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS中的第三方框架 | 向着阳光奔跑</title>
+  <title>Category: 生活感触 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="通过不断的学习也接触了不少的第三方框架，就总结一下。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS中的第三方框架">
-<meta property="og:url" content="http://peilinghui.com/2016/03/05/iOS中的第三方框架/index.html">
+  <meta name="description" content="随心 随笔">
+<meta property="og:type" content="website">
+<meta property="og:title" content="向着阳光奔跑">
+<meta property="og:url" content="http://peilinghui.com/categories/生活感触/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="通过不断的学习也接触了不少的第三方框架，就总结一下。">
-<meta property="og:updated_time" content="2016-03-21T07:32:35.000Z">
+<meta property="og:description" content="随心 随笔">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中的第三方框架">
-<meta name="twitter:description" content="通过不断的学习也接触了不少的第三方框架，就总结一下。">
+<meta name="twitter:title" content="向着阳光奔跑">
+<meta name="twitter:description" content="随心 随笔">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -39,10 +38,10 @@
           fancybox: true,
           animate: true,
           isHome: false,
-          isPost: true,
+          isPost: false,
           isArchive: false,
           isTag: false,
-          isCategory: false,
+          isCategory: true,
           open_in_new: false,
       }
   </script>
@@ -248,235 +247,54 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-iOS中的第三方框架" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2016/03/05/iOS中的第三方框架/" class="article-date">
-      <time datetime="2016-03-05T06:08:53.000Z" itemprop="datePublished">2016-03-05</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2016/03/20/参加思科女生日感想/" class="archive-article-date">
+      <time datetime="2016-03-20T03:41:51.000Z" itemprop="datePublished">03-20</time>
 </a>
-    </div>
+        </div>
+         
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      iOS中的第三方框架
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/03/20/参加思科女生日感想/">参加思科女生日感想</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-    </div>
-
-
-        
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="article-info info-on-archive">
           
-        <p>通过不断的学习也接触了不少的第三方框架，就总结一下。<br><a id="more"></a></p>
-<h1 id="FMDB"><a href="#FMDB" class="headerlink" title="FMDB"></a>FMDB</h1><ol>
-<li>什么是FMDB：<br>FMDB是iOS平台的SQLite数据库框架；<br>FMDB以OC的方式封装了SQLite的C语言API</li>
-<li>优点<ul>
-<li>使用起来更加面向对象，省去了很多麻烦、冗余的C语言代码</li>
-<li>对比苹果自带的Core Data框架，更加轻量级和灵活</li>
-<li>提供了多线程安全的数据库操作方法，有效地防止数据混乱</li>
-</ul>
-</li>
-<li>FMDB的github地址:  <a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">https://github.com/ccgus/fmdb</a></li>
-</ol>
-<h1 id="AFNetworking"><a href="#AFNetworking" class="headerlink" title="AFNetworking"></a>AFNetworking</h1><p>HTTP请求<br>提供了GET请求和Post请求</p>
-<ol>
-<li>AFN 与 ASI 有什么区别<br>AFN基于NSURL，ASI基于底层的CFNetwork框架，因此ASI的性能优于AFN<br>AFN采取block的方式处理请求，ASI最初采取delegate的方式处理请求，后面也增加了block的方式<br>AFN只封装了一些常用功能，满足基本需求，直接忽略了很多扩展功能，比如没有封装同步请求；ASI提供的功能较多，预留了各种接口和工具供开发者自行扩展<br>AFN直接解析服务器返回的JSON、XML等数据，而ASI比较原始，返回的是NSData二进制数据</li>
-</ol>
-<h1 id="SDWebImage"><a href="#SDWebImage" class="headerlink" title="SDWebImage"></a>SDWebImage</h1><p>SDWebImage具体如何实现<br>利用NSOperationQueue和NSOperation下载图片, 还使用了GCD的一些函数(解码GIF图片)<br>利用URL作为key，NSOperation作为value<br>利用URL作为key，UIImage作为value</p>
-<h1 id="MBProgressHUD"><a href="#MBProgressHUD" class="headerlink" title="MBProgressHUD"></a>MBProgressHUD</h1><h1 id="JSONKit"><a href="#JSONKit" class="headerlink" title="JSONKit"></a>JSONKit</h1><h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><p>字典转模型</p>
-
-      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/生活感触/">生活感触</a>
     </div>
-    
+
+
+          
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
-  
-    
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></p>
-        <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年03月05日 - 14时08分</p>
-        <p><span>最后更新:</span>2016年03月21日 - 15时32分</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/03/05/iOS中的第三方框架/" title="iOS中的第三方框架">http://peilinghui.com/2016/03/05/iOS中的第三方框架/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/05/iOS中的第三方框架/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script src="/js/clipboard.min.js"></script>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
-        </p>
-    </div>
-
-
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/03/09/iOS中的地图定位/">
-                    iOS中的地图定位
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/03/05/iOS中的数据存储/">
-                    iOS中的数据存储
-                </a>
-            </div>
-        
-    </nav>
-
-  
 </article>
-
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#FMDB"><span class="toc-number">1.</span> <span class="toc-text">FMDB</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AFNetworking"><span class="toc-number">2.</span> <span class="toc-text">AFNetworking</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SDWebImage"><span class="toc-number">3.</span> <span class="toc-text">SDWebImage</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MBProgressHUD"><span class="toc-number">4.</span> <span class="toc-text">MBProgressHUD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSONKit"><span class="toc-number">5.</span> <span class="toc-text">JSONKit</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Extension"><span class="toc-number">6.</span> <span class="toc-text">Extension</span></a></li></ol>
-</div>
-<style>
-    .left-col .switch-btn {
-        display: none;
-    }
-    .left-col .switch-area {
-        display: none;
-    }
-</style>
-
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-<script>
-    var valueHide = "隐藏目录";
-    var valueShow = "显示目录";
-
-    if ($(".left-col").is(":hidden")) {
-        $("#tocButton").attr("value", valueShow);
-    }
-
-    $("#tocButton").click(function() {
-        if ($("#toc").is(":hidden")) {
-            $("#tocButton").attr("value", valueHide);
-            $("#toc").slideDown(320);
-            $(".switch-btn, .switch-area").fadeOut(300);
-        }
-        else {
-            $("#tocButton").attr("value", valueShow);
-            $("#toc").slideUp(350);
-            $(".switch-btn, .switch-area").fadeIn(500);
-        }
-    })
-
-    if ($(".toc").length < 1) {
-        $("#toc, #tocButton").hide();
-        $(".switch-btn, .switch-area").show();
-    }
-</script>
-
-
-
-
-    <div class="share">
-    <div class="bdsharebuttonbox">
-    <a href="#" class="bds_more" data-cmd="more"></a>
-    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
-    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-    </div>
-    <script>
-        window._bd_share_config={
-            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-    </script>
-</div>
-
-
-
-    
-      <div class="duoshuo" id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/03/05/iOS中的第三方框架/" data-title="iOS中的第三方框架" data-url="http://peilinghui.com/2016/03/05/iOS中的第三方框架/"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:"peilinghui"};
-    (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0] 
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-    </script>
-    <!-- 多说公共JS代码 end -->
-</div>
+  
+  
+    </div></section>
+  
 
     
 
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2016/03/09/iOS中的地图定位/" title="上一篇: iOS中的地图定位">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2016/03/05/iOS中的数据存储/" title="下一篇: iOS中的数据存储">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/22/数学问题/">数学问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/网易2016研发工程师编程题/">网易2016研发工程师编程题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/参加思科女生日感想/">参加思科女生日感想</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/读书总结/">读书总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/iOS中的地图定位/">iOS中的地图定位</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
-    <script>
-        $(".post-list").addClass("toc-article");
-        $(".post-list-item a").attr("target","_blank");
-        $("#post-nav-button > a:nth-child(2)").click(function() {
-            $(".fa-bars, .fa-times").toggle();
-            $(".post-list").toggle(300);
-            if ($(".toc").length > 0) {
-                $("#toc, #tocButton").toggle(200, function() {
-                    if ($(".switch-area").is(":visible")) {
-                        $("#toc, .switch-btn, .switch-area").toggle();
-                        $("#tocButton").attr("value", valueHide);
-                        }
-                    })
-            }
-            else {
-                $(".switch-btn, .switch-area").fadeToggle(300);
-            }
-        })
-    </script>
-
-
-
-
-    <script>
-        
-    </script>
 </div>
       <footer id="footer">
     <div class="outer">
@@ -548,6 +366,15 @@
         };
     })
 </script>
+
+    <button class="hide-labels">TAG 开关</button>
+    <script>
+        $(document).ready(function() {
+            $("button").click(function() {
+                $(".article-info").toggle(200);
+            });
+        });
+    </script>
 
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
