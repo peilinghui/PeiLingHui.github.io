@@ -3,25 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于iOS中的autolayout | 向着阳光奔跑</title>
+  <title>iOS面试题 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Autolayout是一种“自动布局”技术，专门用来布局UI界面做屏幕适配的。相当于安卓中的相对布局。一个控件以另一个为参照进行布局，那么即使屏幕变化，布局也会随着进行微调，以达到良好的视觉效果并且保持了代码的可扩展性。 Autolayout的2个核心概念：1.参照 2.约束 花了俩天的时间学习了一下iOS中的autolayout, 总结一下。">
+  <meta name="description" content="周围一些同学也是学iOS的，汲取一些面试经验。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于iOS中的autolayout">
-<meta property="og:url" content="http://peilinghui.com/2016/02/28/关于iOS中的autolayout/index.html">
+<meta property="og:title" content="iOS面试题">
+<meta property="og:url" content="http://peilinghui.com/2016/03/27/iOS面试题/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="Autolayout是一种“自动布局”技术，专门用来布局UI界面做屏幕适配的。相当于安卓中的相对布局。一个控件以另一个为参照进行布局，那么即使屏幕变化，布局也会随着进行微调，以达到良好的视觉效果并且保持了代码的可扩展性。 Autolayout的2个核心概念：1.参照 2.约束 花了俩天的时间学习了一下iOS中的autolayout, 总结一下。">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A01%E9%A2%98%E7%9B%AE.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A01%E7%AD%94%E6%A1%88.gif">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A02%E9%A2%98%E7%9B%AE.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%AD%94%E6%A1%882.gif">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A02%E7%AD%94%E6%A1%88.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A03.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A03%E7%9A%84.png">
-<meta property="og:updated_time" content="2016-03-27T13:47:38.000Z">
+<meta property="og:description" content="周围一些同学也是学iOS的，汲取一些面试经验。">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%AF%94%E8%BE%83get%E5%92%8Cpost.png">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%85%B6%E4%BB%96%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F.png">
+<meta property="og:updated_time" content="2016-03-27T15:24:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于iOS中的autolayout">
-<meta name="twitter:description" content="Autolayout是一种“自动布局”技术，专门用来布局UI界面做屏幕适配的。相当于安卓中的相对布局。一个控件以另一个为参照进行布局，那么即使屏幕变化，布局也会随着进行微调，以达到良好的视觉效果并且保持了代码的可扩展性。 Autolayout的2个核心概念：1.参照 2.约束 花了俩天的时间学习了一下iOS中的autolayout, 总结一下。">
+<meta name="twitter:title" content="iOS面试题">
+<meta name="twitter:description" content="周围一些同学也是学iOS的，汲取一些面试经验。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -255,11 +250,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-关于iOS中的autolayout" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-iOS面试题" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/02/28/关于iOS中的autolayout/" class="article-date">
-      <time datetime="2016-02-28T14:04:07.000Z" itemprop="datePublished">2016-02-28</time>
+      <a href="/2016/03/27/iOS面试题/" class="article-date">
+      <time datetime="2016-03-27T06:37:29.000Z" itemprop="datePublished">2016-03-27</time>
 </a>
     </div>
   
@@ -272,7 +267,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于iOS中的autolayout
+      iOS面试题
     </h1>
   
 
@@ -281,15 +276,11 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    <a class="article-category-link" href="/categories/面试/">面试</a>
     </div>
 
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/autolayout/">autolayout</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-    </div>
-
         <div class="clearfix"></div>
       </div>
       
@@ -297,51 +288,68 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Autolayout是一种“自动布局”技术，专门用来布局UI界面做屏幕适配的。相当于安卓中的相对布局。一个控件以另一个为参照进行布局，那么即使屏幕变化，布局也会随着进行微调，以达到良好的视觉效果并且保持了代码的可扩展性。<br> Autolayout的2个核心概念：1.参照 2.约束<br> 花了俩天的时间学习了一下iOS中的autolayout, 总结一下。<br><a id="more"></a></p>
-<h2 id="autolayout在Storyboard中的使用"><a href="#autolayout在Storyboard中的使用" class="headerlink" title="autolayout在Storyboard中的使用"></a>autolayout在Storyboard中的使用</h2><h3 id="三个练习："><a href="#三个练习：" class="headerlink" title="三个练习："></a>三个练习：</h3><h4 id="1-练习1"><a href="#1-练习1" class="headerlink" title="1.练习1"></a>1.练习1</h4><pre><code>在控制器view底部添加2个view，1个蓝色，1个红色
-2个view宽度、高度永远相等
-距离父控件左边、右边、下边间距和2个view之间的间距相等  
-</code></pre><p> <img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A01%E9%A2%98%E7%9B%AE.png" alt=""><br> <img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A01%E7%AD%94%E6%A1%88.gif" alt=""><br>就是设置蓝色View的左边和下边和右边(相对于红色view)，设置红色view的右边和下边，选中俩个，再设置equal width和height，或者是设置顶部对齐和底部对齐。     </p>
-<h4 id="练习2"><a href="#练习2" class="headerlink" title="练习2"></a>练习2</h4><pre><code>在控制器view顶部添加2个view，1个蓝色，1个红色
-2个view高度永远相等,等于50
-红色view和蓝色view右边对齐
-蓝色view距离父控件左边、右边、上边间距相等,等于30
-蓝色view距离红色view间距固定,等于30
-红色view的左边和父控件的中点对齐
-</code></pre><p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A02%E9%A2%98%E7%9B%AE.png" alt=""><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%AD%94%E6%A1%882.gif" alt=""><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A02%E7%AD%94%E6%A1%88.png" alt=""> </p>
-<h4 id="练习3"><a href="#练习3" class="headerlink" title="练习3"></a>练习3</h4><p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A03.png" alt=""><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BB%83%E4%B9%A03%E7%9A%84.png" alt=""><br>理解垂直居中和水平居中，还有左对齐，右对齐，底部顶部对齐，利用公式：Superview.center Y = Button center Y * 1 -constant </p>
-<h2 id="代码实现Autolayout"><a href="#代码实现Autolayout" class="headerlink" title="代码实现Autolayout"></a>代码实现Autolayout</h2><h3 id="代码实现Autolayout的步骤"><a href="#代码实现Autolayout的步骤" class="headerlink" title="代码实现Autolayout的步骤"></a>代码实现Autolayout的步骤</h3><ol>
-<li>利用NSLayoutConstraint类创建具体的约束对象<br>一个NSLayoutConstraint对象就代表一个约束<br>创建约束对象的常用方法<br><code>+(id)constraintWithItem:(id)view1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toItem:(id)view2 attribute:(NSLayoutAttribute)attr2 multiplier:(CGFloat)multiplier constant:(CGFloat)c;</code><br> view1 ：要约束的控件<br> attr1 ：约束的类型（做怎样的约束）<br> relation ：与参照控件之间的关系<br> view2 ：参照的控件<br> attr2 ：约束的类型（做怎样的约束）<br> multiplier ：乘数<br> c ：常量<br> 自动布局有个核心公式<br>obj1.property1 =（obj2.property2 * multiplier）+ constant value</li>
-<li>添加约束对象到相应的view上<br><code>- (void)addConstraint:(NSLayoutConstraint *)constraint;</code><br><code>- (void)addConstraints:(NSArray *)constraints;</code>  </li>
+        <p>周围一些同学也是学iOS的，汲取一些面试经验。<br><a id="more"></a><br>一面（16min）+二面（52min）</p>
+<ol>
+<li>一组正整数数字，如何找出两个数加为100的组合；<br>（首先要排序）然后two pointers.</li>
+<li>assign和weak的区别；<br>assign是指针赋值，不对引用计数操作，使用之后如果没有置为nil，可能就会产生野指针；而weak一旦不进行使用后，永远不会使用了，就不会产生野指针！ 用weak避免循环引用.</li>
+<li>http和https的区别；抓包的时候有什么区别；<ul>
+<li>HTTP 的URL 以http:// 开头，而HTTPS 的URL 以https:// 开头     - HTTP 是不安全的，而 HTTPS 是安全的 </li>
+<li>HTTP 标准端口是80 ，而 HTTPS 的标准端口是443</li>
+<li>在OSI 网络模型中，HTTP工作于应用层，而HTTPS 工作在传输层 </li>
+<li>HTTP 无法加密，而HTTPS 对传输的数据进行加密 </li>
+<li>HTTP无需证书，而HTTPS需要CA机构wosign的颁发的SSL证书 </li>
+<li>HTTP无安全锁，HTTPS有安全锁</li>
+<li>HTTP不能防钓鱼网站，HTTPS可以预防钓鱼网站</li>
+<li>HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议,要比http协议安全</li>
+</ul>
+</li>
+<li>get和post的区别，其他还有哪些请求方式；<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%AF%94%E8%BE%83get%E5%92%8Cpost.png" alt=""><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%85%B6%E4%BB%96%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F.png" alt=""></li>
+<li>操作系统中的进程的存储结构；<br>Linux进程结构：可由三部分组成：代码段、数据段、堆栈段。也就是程序、数据、进程控制块PCB（Process Control Block）组成。进程控制块是进程存在的惟一标识，系统通过PCB的存在而感知进程的存在。<br>代码段存放程序的可执行代码。数据段存放程序的全局变量、常量、静态变量。堆栈段中的堆用于存放动态分配的内存变量，堆栈段中的栈用于函数调用，它存放着函数的参数、函数内部定义的局部变量。</li>
+<li>图文混合的新闻中，如何获取图片的位置；<br>1&gt;纯文字排版文字排版开发组件：CoreText。CoreText库中提供了很多的工具来对文本进行操作，例如CTFont、CTLine、CTFrame等。利用这些工具可以对文字字体每一行每一段落进行操作。<br>2&gt;UIwebview去实现的,内容拼接的好处就是数据显示比较同步<br>过网络请求获得相关的信息,再通过手机端进行拼HTML,然后在WebView进行展示，</li>
+<li>Tableview的优化，如果卡顿如何处理；<ul>
+<li>复用单元格</li>
+<li>使用不透明的视图，单元格中尽量少使用动画</li>
+<li>图片加载使用异步加载，并且设置图片加载的并发数</li>
+<li>滑动时不加载图片，停止滑动开始加载</li>
+<li>文字图片可以直接drawInRect绘制</li>
+<li>如非必要，减少reloadData全部cell，只reloadRowsAtIndexPaths</li>
+<li>如果cell是动态行高，计算出高度后缓存</li>
+<li>cell高度固定的话直接用cell.rowHeight设置高度<br><a href="http://www.mamicode.com/info-detail-1125512.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-1125512.html</a></li>
+</ul>
+</li>
+<li>autolayout中的优先级；<br><a href="http://blog.cnbluebox.com/blog/2014/12/13/autolayout1/" target="_blank" rel="external">http://blog.cnbluebox.com/blog/2014/12/13/autolayout1/</a><br>设置Constraint的过程其实就是做算术题的过程，这里提醒大家， xib中有Suggest Constraint的功能，但是大家不要用，特别是在学习Autolayout阶段，Suggest Constraint自动补全的Constraint一般不能直接用，除非你view很少。<br>如果设置Constraint来确定一个view的frame呢，你可以里面想到:  1&gt;frame法,像定义frame一样定义约束，就是设置view.left view.top view.width view.height. 但是实际中很少这样用。<br>2&gt;edge法， 设置 view.left view.top view.bottom view.right。<br>3&gt;居中法， 设置 centerX centerY width height等等方法，然而事实使用中你可能不是只有一个view，有可能有很多的view，相互直接会有很多的约束，约束一多就会容易发生逻辑冲突，这个时候就会发现Constraint优先级的作用了。<br>Constraint还有个属性叫priority， 即优先级，一般是0 ~ 1000之间的整数。 1000代表是必需的， 0则不会生效。理解和使用好优先级是熟练使用Autolayout所必备的。</li>
+<li>三个View并排放置，左右间距固定且相等，两两之间距离相等，如何使用Autolayout实现；<br><a href="https://lvwenhan.com/ios/431.html" target="_blank" rel="external">https://lvwenhan.com/ios/431.html</a></li>
+<li><p>View里面放置ScrollView，ScrollView里面再放置View，如何用Autolayout实现；<br><a href="http://small.qiang.blog.163.com/blog/static/978493072015292522113/" target="_blank" rel="external">http://small.qiang.blog.163.com/blog/static/978493072015292522113/</a></p>
+</li>
+<li><p>文件结构是用哪种数据结构实现的，树还是图，<br>答案是B+树；</p>
+</li>
+<li><p>页面之间的数据传递方式；<br>使用SharedApplication,定义一个变量来传递.<br>使用文件，或者NSUserdefault来传递<br>通过一个单例的class来传递<br>通过Delegate来传递。<br>1）采用代理模式 子viewcontroller设计 代理协议，定义协议接口，父viewcontroller 实现协议接口，实现子viewcontroller 退出时将相关数据更新到父视图。<br>2）采用ios的消息机制 父viewcontroller注册消息 子viewcontroller 发送消息，触发父viewcontroller的消息处理。<br>3）采用database做为数据中间的存储媒介，子viewcontroller将状态数据存入DB，父viewcontroller从DB获取数据更新view。<br>4）采用ios的NSDefault 存储<br>5）通过AppDelegate 中定义全局变量实现中间数据的存储。<br><a href="http://blog.csdn.net/lianbaixue/article/details/8670533" target="_blank" rel="external">http://blog.csdn.net/lianbaixue/article/details/8670533</a>  </p>
+</li>
+<li><p>页面的跳转的两种方式；<br>一种直接跳,一种通过导航.<br>第一种 直接跳转 思路大致就是new一个目的页面，然后设置下页面跳转动画 中间还可以做点目的页面的数据初始化:<br>第二种:利用UINavigationController，调用pushViewController，进行跳转；这种采用压栈和出栈的方式，进行Controller的管理。调用popViewControllerAnimated方法可以返回。<br><a href="http://blog.it985.com/13090.html" target="_blank" rel="external">http://blog.it985.com/13090.html</a>  </p>
+</li>
+<li>属性修饰符retain、assign、copy等等之间的区别；</li>
+<li>讲讲block；</li>
+<li>详解runtime，OC为什么是动态的语言，内部机制；</li>
+<li>Tableview要实现哪两个协议；</li>
+<li>category和extension的区别；<br>Category；<ul>
+<li>用于给class及其subclass添加新的方法</li>
+<li>有自己单独的 .h 和 .m 文件</li>
+<li>用于添加新方法，而不能添加新属性（property）<br>Extension</li>
+<li>Extension常被称为是匿名的Category</li>
+<li>用于给类添加新方法，但只作用于原始类，不作用于subclass</li>
+<li>只能对有implementation源代码的类写Extension，对于没有implementation源代码的类，比如framework class，是不可以的</li>
+<li><strong>Extension可以给原始类添加新方法，以及新属性</strong><br>category 与extension不同在于后者可以添加属性，后者添加的方法也必须是要实现的。extension是私有的category。</li>
+</ul>
+</li>
+<li>多线程有哪几种实现方式，GCD的具体使用；</li>
+<li>GCD中的数据不安全是怎么处理的；</li>
+<li>dispatch_main,同步和异步如何使用;</li>
+<li>讲讲最近你的项目；</li>
+<li>KVO如何实现，内部机制；</li>
+<li>Core Animation /Core Graphics </li>
 </ol>
-<h2 id="VFL语言实现layout"><a href="#VFL语言实现layout" class="headerlink" title="VFL语言实现layout"></a>VFL语言实现layout</h2><p>1.VFL全称是Visual Format Language，翻译过来是“可视化格式语言”<br>VFL是苹果公司为了简化Autolayout的编码而推出的抽象语言。</p>
-<p>2.使用VFL来创建约束数组<br><code>+ (NSArray *)constraintsWithVisualFormat:(NSString *)format options:(NSLayoutFormatOptions)opts metrics:(NSDictionary *)metrics views:(NSDictionary *)views;</code><br>format ：VFL语句<br>opts ：约束类型<br>metrics ：VFL语句中用到的具体数值<br>views ：VFL语句中用到的控件<br>VFL示例：<br>H:[cancelButton(72)]-12-[acceptButton(50)]<br>canelButton宽72，acceptButton宽50，它们之间间距12 </p>
-<p>3.创建一个字典（内部包含VFL语句中用到的控件）的快捷宏定义<br>NSDictionaryOfVariableBindings(…)  </p>
-<h2 id="Masonry"><a href="#Masonry" class="headerlink" title="Masonry"></a>Masonry</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p> Masonry是一个轻量级的布局框架 拥有自己的描述语法 采用更优雅的链式语法封装自动布局 简洁明了 并具有高可读性 而且同时支持 iOS 和 Max OS X。  </p>
-<h3 id="框架下载地址："><a href="#框架下载地址：" class="headerlink" title="框架下载地址："></a>框架下载地址：</h3><p>   <a href="https://github.com/Masonry/Masonry" target="_blank" rel="external">https://github.com/Masonry/Masonry</a>  </p>
-<h3 id="Masonry介绍与使用实践-快速上手Autolayout"><a href="#Masonry介绍与使用实践-快速上手Autolayout" class="headerlink" title="Masonry介绍与使用实践(快速上手Autolayout)"></a>Masonry介绍与使用实践(快速上手Autolayout)</h3><p>  <a href="http://adad184.com/2014/09/28/use-masonry-to-quick-solve-autolayout/" target="_blank" rel="external">http://adad184.com/2014/09/28/use-masonry-to-quick-solve-autolayout/</a>   </p>
-<h3 id="案例讲解："><a href="#案例讲解：" class="headerlink" title="案例讲解："></a>案例讲解：</h3><p><a href="http://www.brighttj.com/ios/ios-masonry-demo.html#comment-353" target="_blank" rel="external">http://www.brighttj.com/ios/ios-masonry-demo.html#comment-353</a></p>
-<h3 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h3><p><a href="http://www.ios122.com/2015/09/masonry/" target="_blank" rel="external">http://www.ios122.com/2015/09/masonry/</a></p>
-<h3 id="常用方法："><a href="#常用方法：" class="headerlink" title="常用方法："></a>常用方法：</h3><pre><code>1.三个添加约束方法区别
-mas_makeConstraints 只负责新增约束 Autolayout不能同时存在两条针对于同一对象的约束 否则会报错
-mas_updateConstraints 针对上面的情况 会更新在block中出现的约束 不会导致出现两个相同约束的情况
-mas_remakeConstraints 则会清除之前的所有约束 仅保留最新的约束
-三种函数善加利用 就可以应对各种情况了
-
-2、两个赋值方法区别（equalTo 和 mas_equalTo）
-#define equalTo(...)  mas_equalTo(__VA_ARGS__)
-#define mas_equalTo(...) equalTo(MASBoxValue((__VA_ARGS__))) 
-mas_equalTo对其参数进行了一个自动装箱操作， 除了支持NSNumber数值类型之外还支持CGPoint CGSize UIEdgeInsets
-</code></pre><h2 id="基于Autolayout的动画"><a href="#基于Autolayout的动画" class="headerlink" title="基于Autolayout的动画"></a>基于Autolayout的动画</h2><p>在修改了约束之后，只要执行下面代码，就能做动画效果<br><code>[UIView animateWithDuration:1.0 animations:^{
-    添加了约束的view layoutIfNeeded];
-}];</code><br>参考学习：<a href="http://blog.cnbluebox.com/blog/2014/12/13/autolayout1/" target="_blank" rel="external">http://blog.cnbluebox.com/blog/2014/12/13/autolayout1/</a></p>
-<h2 id="如何在scrollView中使用Autolayout"><a href="#如何在scrollView中使用Autolayout" class="headerlink" title="如何在scrollView中使用Autolayout"></a>如何在scrollView中使用Autolayout</h2><p>scrollView比较特殊，因为它有个contentSize的属性。那么在遇到scrollView时，怎么使用Autolayout呢。其实关键点就一点：</p>
-<pre><code>ScrollView的contentSize的大小是由其subview的constraints来决定的。
-</code></pre><p>知道这一点其实就够了，那么基于这个特性，在应用的时候要注意哪些呢？</p>
-<p>   完全依赖scrollView来计算subview的坐标的Constraints设法不行了，计算条件互相依赖的，常见的如left+right+top+bottom不行了。</p>
-<pre><code>要保证contentSize可以通过subview的constraints能够计算出来。
-</code></pre><p>举个栗子：<br>[childView mas_makeConstraints:^(MASConstraintMaker *make) {<br>    make.width.mas_equalTo(scrollView.mas_width);<br>  make.height.mas_equalTo(scrollView.mas_height);<br>  make.leading.mas_equalTo(scrollView.mas_leading);<br>  make.top.mas_equalTo(scrollView.mas_top);<br>  make.bottom.mas_equalTo(scrollView.mas_bottom);<br>  make.trailing.mas_equalTo(scrollView.mas_trailing).multipliedBy(1./4.);<br>}];</p>
-<p>例子中如果scrollView的size是(100x100), 那么contentSize即为(400x100)</p>
+<p>**一面电面：15min；<br>1.算法：数组中（无序的正整数数）如何找到第n大的数；<br>2.算法：数组中1—100的无序数字如何找到第n大的数；（遍历计数）<br>3.讲一讲OC中的运行时，动态性；<br>4.OC中是如何找到一个方法的，通过函数名key的方式找到的，每一个函数名肯定是不一样的；<br>5.OC中有没有函数重载（没有）；Swift中有没有函数重载（有的）；<br>6.内存管理，MRC，ARC的区别；<br>7.releasepool被释放了，里面的对象都会被释放吗？过程是怎样的。</p>
+<p>二面电面：30min;<br>1.C++和OC 的内存管理比较，以及实现方式；<br>2.两个数组，一个有100万的数据，另一个有1亿的数据，如何找出相同的数据，时间复杂度是什么？<br>3.OC的MRC，ARC；<br>4.C++和OC有哪些区别；<br>5.Swift与OC有哪些区别；<br>6.冒泡排序和快速排序的时间复杂度；<br>7.现在OC用的多还是Swift用的多，为什么？**</p>
 
       
     </div>
@@ -350,13 +358,13 @@ mas_equalTo对其参数进行了一个自动装箱操作， 除了支持NSNumber
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></p>
+        <p><span>本文标题:</span><a href="/2016/03/27/iOS面试题/">iOS面试题</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年02月28日 - 22时04分</p>
-        <p><span>最后更新:</span>2016年03月27日 - 21时47分</p>
+        <p><span>发布时间:</span>2016年03月27日 - 14时37分</p>
+        <p><span>最后更新:</span>2016年03月27日 - 23时24分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/02/28/关于iOS中的autolayout/" title="关于iOS中的autolayout">http://peilinghui.com/2016/02/28/关于iOS中的autolayout/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/02/28/关于iOS中的autolayout/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/03/27/iOS面试题/" title="iOS面试题">http://peilinghui.com/2016/03/27/iOS面试题/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/27/iOS面试题/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -369,16 +377,10 @@ mas_equalTo对其参数进行了一个自动装箱操作， 除了支持NSNumber
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/03/01/iOS面试题总结/">
-                    iOS面试题总结
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/02/25/创建博客/">
-                    创建博客
+                <a href="/2016/03/26/自己做过的一些iOS小项目/">
+                    自己做过的一些iOS小项目
                 </a>
             </div>
         
@@ -389,7 +391,7 @@ mas_equalTo对其参数进行了一个自动装箱操作， 除了支持NSNumber
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#autolayout在Storyboard中的使用"><span class="toc-number">1.</span> <span class="toc-text">autolayout在Storyboard中的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#三个练习："><span class="toc-number">1.1.</span> <span class="toc-text">三个练习：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-练习1"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.练习1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#练习2"><span class="toc-number">1.1.2.</span> <span class="toc-text">练习2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#练习3"><span class="toc-number">1.1.3.</span> <span class="toc-text">练习3</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现Autolayout"><span class="toc-number">2.</span> <span class="toc-text">代码实现Autolayout</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现Autolayout的步骤"><span class="toc-number">2.1.</span> <span class="toc-text">代码实现Autolayout的步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VFL语言实现layout"><span class="toc-number">3.</span> <span class="toc-text">VFL语言实现layout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Masonry"><span class="toc-number">4.</span> <span class="toc-text">Masonry</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-number">4.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#框架下载地址："><span class="toc-number">4.2.</span> <span class="toc-text">框架下载地址：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Masonry介绍与使用实践-快速上手Autolayout"><span class="toc-number">4.3.</span> <span class="toc-text">Masonry介绍与使用实践(快速上手Autolayout)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例讲解："><span class="toc-number">4.4.</span> <span class="toc-text">案例讲解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用方法："><span class="toc-number">4.5.</span> <span class="toc-text">使用方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法："><span class="toc-number">4.6.</span> <span class="toc-text">常用方法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于Autolayout的动画"><span class="toc-number">5.</span> <span class="toc-text">基于Autolayout的动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何在scrollView中使用Autolayout"><span class="toc-number">6.</span> <span class="toc-text">如何在scrollView中使用Autolayout</span></a></li></ol>
+    
 </div>
 <style>
     .left-col .switch-btn {
@@ -451,7 +453,7 @@ mas_equalTo对其参数进行了一个自动装箱操作， 除了支持NSNumber
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/02/28/关于iOS中的autolayout/" data-title="关于iOS中的autolayout" data-url="http://peilinghui.com/2016/02/28/关于iOS中的autolayout/"></div>
+    <div class="ds-thread" data-thread-key="2016/03/27/iOS面试题/" data-title="iOS面试题" data-url="http://peilinghui.com/2016/03/27/iOS面试题/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -475,15 +477,13 @@ mas_equalTo对其参数进行了一个自动装箱操作， 除了支持NSNumber
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/03/01/iOS面试题总结/" title="上一篇: iOS面试题总结">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/02/25/创建博客/" title="下一篇: 创建博客">
+            <a href="/2016/03/26/自己做过的一些iOS小项目/" title="下一篇: 自己做过的一些iOS小项目">
                 <i class="fa fa-angle-right"></i>
             </a>
         
