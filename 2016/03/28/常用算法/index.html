@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>常用算法 | 向着阳光奔跑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="常用的算法题总结一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用算法">
+<meta property="og:url" content="http://peilinghui.com/2016/03/28/常用算法/index.html">
+<meta property="og:site_name" content="向着阳光奔跑">
+<meta property="og:description" content="常用的算法题总结一下。">
+<meta property="og:updated_time" content="2016-03-28T14:32:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常用算法">
+<meta name="twitter:description" content="常用的算法题总结一下。">
+  
+    <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/images/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向阳</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">没有到不了的远方</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/peilinghuibest@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/575544059" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/peilinghui" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ACM/" style="font-size: 10px;">ACM</a> <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://lysongzi.com/">小松子</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/CHENYUFENG1991/article/category/5655903/4">iOS大神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://cspilgrimzww.github.io/">蔚蔚</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changhuiyuan.com/">惠源</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hxdavid.com/">PAT大神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wut0719.github.io/">桐神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pangjiuzala.github.io/">兴爷</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://han.pm/">交换生</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://frankhu.me">frank</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://judyzhangxin.com/">UI设计师</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://sunus.me/">阿里学长</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imhuchao.com/">胡超-凤凰网</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.xuanzhangjiong.xyz/">囧囧囧-网易安卓</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">没有到不了的远方，向往远方。。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向阳</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/images/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向阳</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">没有到不了的远方</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/peilinghuibest@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/575544059" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/peilinghui" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-常用算法" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/28/常用算法/" class="article-date">
+      <time datetime="2016-03-28T14:31:18.000Z" itemprop="datePublished">2016-03-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      常用算法
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>常用的算法题总结一下。<br><a id="more"></a></p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="排序题与sort函数的应用"><a href="#排序题与sort函数的应用" class="headerlink" title="排序题与sort函数的应用"></a>排序题与sort函数的应用</h3><p>用C++中的sort来实现排序，定义结构体struct存放学生信息；cmp函数的编写，提供cmp函数实现的排序规则；排名的实现：主要是分数相同的占用同一个排位。</p>
+<h4 id="A1025-PAT排序"><a href="#A1025-PAT排序" class="headerlink" title="A1025.PAT排序"></a>A1025.PAT排序</h4><p>题意：n个考场，每个考场有若干数量的考生，给出考生的准考证号和成绩然后按顺序输出所以考生的准考证号，排名、考场号、考场内排名。<br>Sample Input:<br>2<br>5<br>1234567890001 95<br>1234567890005 100<br>1234567890003 95<br>1234567890002 77<br>1234567890004 85<br>4<br>1234567890013 65<br>1234567890011 25<br>1234567890014 100<br>1234567890012 85</p>
+<p>Sample Output:<br>9<br>1234567890005 1 1 1<br>1234567890014 1 2 1<br>1234567890001 3 1 2<br>1234567890003 3 1 2<br>1234567890004 5 1 4<br>1234567890012 5 2 2<br>1234567890002 7 1 5<br>1234567890013 8 2 3<br>1234567890011 9 2 4<br>思路：1.按考场读入各个考生的信息，对当前考场所有考生进行排序，将排名写入结构体中。2.对所有考生进行排序。3.一边计算总排名，一边输出考生信息。<br>答案：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">struct</span> student&#123;</span><br><span class="line">    <span class="keyword">char</span> id[<span class="number">14</span>];<span class="comment">//准考证号</span></span><br><span class="line">    <span class="keyword">int</span> grade;<span class="comment">//分数</span></span><br><span class="line">    <span class="keyword">int</span> location;<span class="comment">//考场号</span></span><br><span class="line">    <span class="keyword">int</span> location_rank;<span class="comment">//考场内排名</span></span><br><span class="line">    <span class="keyword">int</span> rank;<span class="comment">//排名</span></span><br><span class="line">&#125;stu[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(student a,student b)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a.grade != b.grade)  <span class="comment">//分数从高到低排</span></span><br><span class="line">        <span class="keyword">return</span> a.grade &gt;b.grade;</span><br><span class="line">    <span class="keyword">else</span>                 <span class="comment">//分数相同按准考证号从小到大排</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">strcmp</span>(a.id,b.id) &lt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,k,m=<span class="number">0</span>;<span class="comment">//num为总考生数</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);<span class="comment">//考场数</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;k);<span class="comment">//考场内人数</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j&lt;k;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s %d"</span>,stu[m].id,&amp;stu[m].grade);</span><br><span class="line">            stu[m].location = i + <span class="number">1</span>;</span><br><span class="line">            m++;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(stu+m-k,stu+m,cmp);<span class="comment">//将该考场的考生排序</span></span><br><span class="line">        stu[m-k].location_rank = <span class="number">1</span>;<span class="comment">//该考场的第一名学生</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=m-k+<span class="number">1</span>;j&lt;m;j++)<span class="comment">//对该考生剩余的考生</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(stu[j].grade == stu[j-<span class="number">1</span>].grade)<span class="comment">//分数相同排名也相同</span></span><br><span class="line">                stu[j].location_rank = stu[j-<span class="number">1</span>].location_rank;</span><br><span class="line">            <span class="keyword">else</span><span class="comment">//分数不同，排名为该考生前的人数</span></span><br><span class="line">                stu[j].location_rank = j+<span class="number">1</span>-(m-k);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,m);</span><br><span class="line">    sort(stu,stu+m,cmp);</span><br><span class="line">    stu[<span class="number">0</span>].rank = <span class="number">1</span>;<span class="comment">//将所有考生排序</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i&lt;m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(stu[i].grade == stu[i-<span class="number">1</span>].grade)</span><br><span class="line">            stu[i].rank = stu[i-<span class="number">1</span>].rank;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            stu[i].rank = i+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s %d %d %d\n"</span>,stu[i].id,stu[i].rank,stu[i].location,stu[i].location_rank);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h3><ol>
+<li>应用：<ul>
+<li>对数据的某种性质进行统计</li>
+<li>使用hash函数H(key)=value将一个元素映射为一个整数，其中哈希函数的选取需要利用元素分布的特点使得值value比较唯一。<br>将较大数据范围的元素（数据个数不多）映射到较小的数据范围内，或者是吧非整数类型的元素映射为整数类型，使得增删改查变得高效。O(1)</li>
+</ul>
+</li>
+<li>利用hash进行统计<blockquote>
+<p>题目：给出N个正整数，再给出M个正整数，问这M个正整数中的每个数分别是否在N个正整数中出现过。</p>
+</blockquote>
+</li>
+</ol>
+<p>思路：遍历所有N个数，看是否有一个数与x相等，时间复杂度O(MN)太大。</p>
+<p>用hash：开一个bool型数组hashtable[N+1],其中hashtable[x]==true表示正整数x在N个正整数中出现过。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">100010</span>;</span><br><span class="line"><span class="keyword">bool</span> hashTable[maxn]=&#123;<span class="literal">false</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m,x;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;x);</span><br><span class="line">        hashTable[x]=<span class="literal">true</span>;<span class="comment">//数字x出现过</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;x);</span><br><span class="line">        <span class="keyword">if</span> (hashTable[x]==<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>哈希法的应用：对数据的某种性质进行统计。对图进行DFS遍历时就需要设置bool型数组VIS[maxn]来记录结点是否已经被访问。</p>
+<ol>
+<li>利用哈希进行区间映射<br>使用hash函数H(key)=value将一个元素映射为一个整数。<br>一个例子：如何将一个二维整点P坐标映射为一个整数，是整点P可以由该整数唯一的代表。P(x,y)x&gt;=0,y&lt;=range,可以设计hash函数H(p)=x*range+y,用H(p)来唯一的代表坐标。<br>一个例子：字符串hash是将一个字符串S映射为一个整数，使该整数可以唯一的代表字符串S。</li>
+</ol>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>分治：将原问题划分成k个规模较小而结构与原问题相似的子问题，然后分别解决这些子问题，最后合并子问题的解，即可得到原问题的解。<br>步骤：  复杂度O（nlogn）</p>
+<pre><code>- 分解  
+- 解决
+- 合并  
+</code></pre><p>解决的问题必须满足最优子结构.<br>递归来实现分治思想，（1）递归边界（2）递归式<br>例子1：使用递归求解n的阶乘</p>
+<p>例子2：求斐波那契数列的第N项</p>
+<h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><h4 id="月饼-PATB"><a href="#月饼-PATB" class="headerlink" title="月饼 (PATB)"></a>月饼 (PATB)</h4><p>月饼是中国人在中秋佳节时吃的一种传统食品，不同地区有许多不同风味的月饼。现给定所有种类月饼的库存量、总售价、以及市场的最大需求量，请你计算可以获得的最大收益是多少。<br>注意：销售时允许取出一部分库存。样例给出的情形是这样的：假如我们有3种月饼，其库存量分别为18、15、10万吨，总售价分别为75、72、45亿元。如果市场的最大需求量只有20万吨，那么我们最大收益策略应该是卖出全部15万吨第2种月饼、以及5万吨第3种月饼，获得 72 + 45/2 = 94.5（亿元）。</p>
+<p>输入格式：<br>每个输入包含1个测试用例。每个测试用例先给出一个不超过1000的正整数N表示月饼的种类数、以及不超过500（以万吨为单位）的正整数D表示市场最大需求量。随后一行给出N个正数表示每种月饼的库存量（以万吨为单位）；最后一行给出N个正数表示每种月饼的总售价（以亿元为单位）。数字间以空格分隔。</p>
+<p>输出格式：<br>对每组测试用例，在一行中输出最大收益，以亿元为单位并精确到小数点后2位。<br>输入样例：<br>3 20<br>18 15 10<br>75 72 45</p>
+<p>输出样例：<br>94.50<br>思路：此为贪心算法。如何获得最大收益，先根据库存量和总售价算出每种月饼的单价，然后从单价高的开始枚举，全部卖出足够需求量，则提供需求量就够了；如果不够需求量，则收益值增加需求量×单价，需求量-这种库存，再看单价第二高的月饼；<br>答案：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">struct</span> mooncake&#123;</span><br><span class="line">    <span class="keyword">double</span> store;<span class="comment">//库存量</span></span><br><span class="line">    <span class="keyword">double</span> sell;<span class="comment">//总售价</span></span><br><span class="line">    <span class="keyword">double</span> price;<span class="comment">//单价</span></span><br><span class="line">&#125;cake[<span class="number">1010</span>];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(mooncake a,mooncake b)</span></span>&#123;<span class="comment">//按单价从高到低排序</span></span><br><span class="line">    <span class="keyword">return</span> a.price&gt;b.price;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;<span class="comment">//月饼种类数</span></span><br><span class="line">    <span class="keyword">double</span> D;<span class="comment">//需求量同上用浮点数</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%lf"</span>,&amp;n,&amp;D);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;<span class="comment">//先输入每种月饼的库存量</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;cake[i].store);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;<span class="comment">//再输入每种月饼的总售价</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;cake[i].sell);</span><br><span class="line">        cake[i].price = cake[i].sell/cake[i].store;<span class="comment">//计算单价</span></span><br><span class="line">    &#125;</span><br><span class="line">    sort(cake, cake+n, cmp);<span class="comment">//单价从高到低排序</span></span><br><span class="line">    <span class="keyword">double</span> ans=<span class="number">0</span>;<span class="comment">//收益</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (cake[i].store&lt;=D) &#123;<span class="comment">//月饼库存量小于需求量</span></span><br><span class="line">            D-=cake[i].store;</span><br><span class="line">            ans+=cake[i].sell;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;<span class="comment">//月饼库存量大于需求量</span></span><br><span class="line">            ans+=cake[i].price*D;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.2f"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="组个最小数-PATB"><a href="#组个最小数-PATB" class="headerlink" title="组个最小数 (PATB)"></a>组个最小数 (PATB)</h4><p>给定数字0-9各若干个。你可以以任意顺序排列这些数字，但必须全部使用。目标是使得最后得到的数尽可能小（注意0不能做首位）。例如：给定两个0，两个1，三个5，一个8，我们得到的最小的数就是10015558。</p>
+<p>现给定数字，请编写程序输出能够组成的最小的数。</p>
+<p>输入格式：<br>每个输入包含1个测试用例。每个测试用例在一行中给出10个非负整数，<strong>顺序表示我们拥有数字0、数字1、……数字9的个数</strong>。整数间用一个空格分隔。10个数字的总个数不超过50，且至少拥有1个非0的数字。</p>
+<p>输出格式：<br>在一行中输出能够组成的最小的数。<br>输入样例：<br>2 2 0 0 0 3 0 0 1 0</p>
+<p>输出样例：<br>10015558<br>思路：此为贪心算法。就是从最高位开始输出，先从1到9中选择个数不为0的最小数输出，然后从0到9输出数字，每个数字输出次数为剩余个数。<br>答案：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count[<span class="number">10</span>];<span class="comment">//记录数字0-9的个数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;count[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;<span class="number">10</span>; i++) &#123;<span class="comment">//从1-9中选择Count不为0的最小数字</span></span><br><span class="line">        <span class="keyword">if</span> (count[i]&gt;<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>,i);</span><br><span class="line">            count[i]--;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;<span class="comment">//从0-9输出对应个数的数字</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;count[i]; j++) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>,i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>总结：贪心算法用来解决最优化问题，希望由局部最优策略来推得全局最优结果，贪心算法适用的问题一定满足最优子结构性质。（组成原问题最优解的子问题的解也是最优的）</p>
+<h3 id="二分"><a href="#二分" class="headerlink" title="二分"></a>二分</h3><h3 id="two-pointers"><a href="#two-pointers" class="headerlink" title="two pointers"></a>two pointers</h3><ol>
+<li><p>题目：给定一个<strong>递增</strong>的正整数序列和一个正整数M,求序列中的两个不同位置的数a和b,使他们的和恰好为M，输出所有满足条件的方案。<br>思路：令下标i的初值为0，下标j的初值为n-1，令i，j分别指向序列的第一个元素和最后一个元素，接下来根据a[i]+a[j]与M的大小来进行下面三种选择，i向右移动，j向左移动，直到i&gt;=j成立。<br>1&gt;如果a[i]+a[j]==M，令i=i+1，j=j-1;<br>2&gt;如果a[i]+a[j]&gt;M,j=j-1;<br>3&gt;如果a[i]+a[j]&lt;M,i=i+1;<br>代码：时间复杂度O(n)</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="literal">a</span>[i]+<span class="literal">a</span>[j]==M)&#123;</span><br><span class="line">            printf(<span class="string">"%d %d\n"</span>,i,j)<span class="comment">;</span></span><br><span class="line">            i++<span class="comment">;</span></span><br><span class="line">            j--<span class="comment">;</span></span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="literal">a</span>[i]+<span class="literal">a</span>[j]&lt;M)&#123;</span><br><span class="line">            i++<span class="comment">;</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            j--<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>题目：假设有两个递增序列A和B，要求将它们合并为一个递增序列C。<br>思路：两个下标i和j，初值均为0，表示分别指向序列A的第一个元素和序列B的第一个元素，然后根据A[i]和B[j]的大小来决定哪一个放入序列C。<br>1&gt;A[i]<b[j],a[i]加入到序列c，i加1. 2="">A[i]&gt;B[j],B[i]加入到序列C，j加1.<br>3&gt;A[i]==B[j],任选一个加入到序列C，下标加1.<br>代码：</b[j],a[i]加入到序列c，i加1.></p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> merge(<span class="keyword">int</span> A[],<span class="keyword">int</span> B[],<span class="keyword">int</span> n,<span class="keyword">int</span> m)&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">0</span>,<span class="keyword">index</span>=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i&lt;n &amp;&amp; j&lt;m) &#123;</span><br><span class="line">        <span class="keyword">if</span> (A[i]&lt;=B[j]) &#123;</span><br><span class="line">            C[<span class="keyword">index</span>++]=A[i++];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            C[<span class="keyword">index</span>++]=B[j++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//序列A或B的剩余元素加入序列C</span></span><br><span class="line">    <span class="keyword">while</span> (i&lt;n) C[<span class="keyword">index</span>++]=A[i++];</span><br><span class="line">    <span class="keyword">while</span> (j&lt;m) C[<span class="keyword">index</span>++]=B[j++];</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">index</span>;<span class="comment">//返回C的长度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/03/28/常用算法/">常用算法</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
+        <p><span>发布时间:</span>2016年03月28日 - 22时31分</p>
+        <p><span>最后更新:</span>2016年03月28日 - 22时32分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/03/28/常用算法/" title="常用算法">http://peilinghui.com/2016/03/28/常用算法/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/28/常用算法/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/03/27/iOS面试题/">
+                    iOS面试题
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#算法"><span class="toc-number">1.</span> <span class="toc-text">算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#排序题与sort函数的应用"><span class="toc-number">1.1.</span> <span class="toc-text">排序题与sort函数的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#A1025-PAT排序"><span class="toc-number">1.1.1.</span> <span class="toc-text">A1025.PAT排序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#哈希"><span class="toc-number">1.2.</span> <span class="toc-text">哈希</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#递归"><span class="toc-number">1.3.</span> <span class="toc-text">递归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#贪心"><span class="toc-number">1.4.</span> <span class="toc-text">贪心</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#月饼-PATB"><span class="toc-number">1.4.1.</span> <span class="toc-text">月饼 (PATB)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#组个最小数-PATB"><span class="toc-number">1.4.2.</span> <span class="toc-text">组个最小数 (PATB)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二分"><span class="toc-number">1.5.</span> <span class="toc-text">二分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#two-pointers"><span class="toc-number">1.6.</span> <span class="toc-text">two pointers</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/03/28/常用算法/" data-title="常用算法" data-url="http://peilinghui.com/2016/03/28/常用算法/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"peilinghui"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/03/27/iOS面试题/" title="下一篇: iOS面试题">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/22/数学问题/">数学问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/网易2016研发工程师编程题/">网易2016研发工程师编程题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/iOS中的地图定位/">iOS中的地图定位</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 向阳
+            </div>
+            <div class="footer-right">
+	     欢迎光临小站
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
