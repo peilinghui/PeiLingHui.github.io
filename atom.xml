@@ -169,15 +169,31 @@
     <link href="http://peilinghui.com/2016/03/26/iOS%E5%B0%8F%E9%A1%B9%E7%9B%AE/"/>
     <id>http://peilinghui.com/2016/03/26/iOS小项目/</id>
     <published>2016-03-26T12:44:02.000Z</published>
-    <updated>2016-03-28T01:58:08.000Z</updated>
+    <updated>2016-03-29T12:22:30.000Z</updated>
     
     <content type="html">&lt;p&gt;到了软院以后，选择了移动互联网和游戏开发方向，开设了iOS课程，在老师的引导下，开始自学了iOS。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;简单的音乐播放器&quot;&gt;&lt;a href=&quot;#简单的音乐播放器&quot; class=&quot;headerlink&quot; title=&quot;简单的音乐播放器&quot;&gt;&lt;/a&gt;简单的音乐播放器&lt;/h1&gt;&lt;p&gt;1.搭建界面&lt;br&gt;1&amp;gt;播放的工具条（PlayerToolBar）&lt;br&gt;2&amp;gt;表格歌曲数据显示&lt;br&gt;2.播放工具条数据显示&lt;br&gt;3.完成播放&lt;/p&gt;
+&lt;h1 id=&quot;简单的音乐播放器&quot;&gt;&lt;a href=&quot;#简单的音乐播放器&quot; class=&quot;headerlink&quot; title=&quot;简单的音乐播放器&quot;&gt;&lt;/a&gt;简单的音乐播放器&lt;/h1&gt;&lt;p&gt;1.搭建界面&lt;br&gt;①排版与歌曲列表显示&lt;br&gt;navigation controller&lt;br&gt;中间table，然后上面是Cell，&lt;br&gt;②在’播放工具条’显示第一首歌歌手图片、名称、歌手&lt;br&gt; •’播放工具条’的图片截取圆形，并添加边框&lt;br&gt;③暂停与继续按钮的判断&lt;br&gt;④播放当前歌曲、上一首、下一首歌曲&lt;br&gt; •通过代理通知控制器&lt;br&gt; •创建音乐工具类&lt;br&gt; •实现上一首、下一首的循环&lt;br&gt;⑤显示歌曲播放时间与总长度&lt;br&gt; •添加slider与两个label&lt;br&gt; •显示左边歌曲的总时间&lt;br&gt; •添加定时器，实现slider的自动拖动&lt;br&gt;⑥实现歌曲的’时间的拖动’改变’歌曲播放进度’&lt;br&gt;⑦播放完歌曲，自动进入下一首音乐&lt;br&gt;⑧歌手头像转动&lt;br&gt;⑨设置音乐后台播放&lt;br&gt; •要实现后台的音乐播放有三个步骤要设置&lt;br&gt; 1&amp;gt;在didFinishLaunching方法激活音频的会话类型即可，代码如下&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;AVAudioSession *session = [AVAudioSession sharedInstance];&amp;#10;[session setCategory:AVAudioSessionCategoryPlayback error:nil];&amp;#10;[session setActive:YES error:nil];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt; 2&amp;gt;在applicationDidEnterBackground方法开始后台任务，代码如下&lt;br&gt; &lt;code&gt;[application beginBackgroundTaskWithExpirationHandler:nil];&lt;/code&gt;&lt;br&gt; 3&amp;gt;在info.plist中添加’Required background modes’选向，然后再添加’App plays audio or streams audio/video using AirPlay’&lt;br&gt;⑩实现歌曲锁屏&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; - 设置锁屏的音乐信息要使用MediaPlayer框架的MPNowPlayingInfoCenter类来实现，
+ - 代码设置锁屏时的播放信息代码为[MPNowPlayingInfoCenter defaultCenter].nowPlayingInfo,nowPlayingInfo传入一个字典
+- 在didFinishLaunching添加接收远程事件代码,&amp;quot;一定要添加，不然无效果&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  [application beginReceivingRemoteControlEvents];&lt;br&gt;⑪实现锁屏按钮远程事件&lt;br&gt; •在appdelegate中实现remoteControlReceivedWithEvent，来接收远程事件&lt;/p&gt;
+&lt;p&gt;主要是有三部分：MVC&lt;br&gt;Model层实现的是存放歌曲名字，本地音乐文件名，歌手名字等。&lt;br&gt;View层实现的是MusicCell，显示cell的数据。&lt;br&gt;            PlayerToolBar，有分类category，设置了歌手图片，音乐名，歌手名，时间的拖动条，总时间，当前播放时间，定时器和是否拖拽。&lt;br&gt;           如果正在播放：更新进度条，更新时间，头像转动。设置当前播放的音乐，并显示数据，更改播放状态，更改拖拽状态。&lt;br&gt;controller层实现的是用第三方框架MJEXtension，实现了字典转模型，懒加载音乐数。tableview表格数据源，播放工具条的代理，播放器的代理。&lt;/p&gt;
 &lt;h1 id=&quot;微博&quot;&gt;&lt;a href=&quot;#微博&quot; class=&quot;headerlink&quot; title=&quot;微博&quot;&gt;&lt;/a&gt;微博&lt;/h1&gt;&lt;p&gt;获取微博数据&lt;br&gt;1&amp;gt; 怎么获取数据,向新浪服务器发送请求,查看新浪API文档&lt;br&gt;2&amp;gt; 利用AFN发送请求&lt;br&gt;3&amp;gt; 分析新浪接口文档,解析数据,根据数据自定义模型(Status,User)。&lt;br&gt;• total_number 近期接收到的所有微博数&lt;br&gt;4&amp;gt; 利用实例程序,把数据生成plist分析,需要几个模型,模型有哪些属 性,&lt;br&gt;• 自定义Photo模型,pic_urls里存放的是字典,需要把字典转化成模 型。&lt;br&gt;• thumbnail_pic是缩略图,新浪为了以后能扩展,搞了个字典,以后 可以添加中图,等等.&lt;br&gt;注意:不能直接拿到获取的原始微博数据直接写入文件,因为新浪服务 器会返回null,有null,就会写入失败。&lt;br&gt;5&amp;gt; 展示微博数据&lt;br&gt;6&amp;gt; 图片用SDWebImage下载&lt;br&gt;• 异步下载,不会卡死主线程&lt;br&gt;• 做了数据缓存,不会重复下载同样的图片,节省用户流量&lt;br&gt;• 解决循环利用的问题,不会让图片错乱。&lt;br&gt;• SDWebImage使用注意:&lt;br&gt;• 内存警告的时候,清空缓存和停止下载。&lt;br&gt;• SDWebImage有个专门管理下载和缓存的类&lt;br&gt; •&lt;br&gt;7.解决数据固定问题&lt;br&gt;•&lt;/p&gt;
 &lt;h1 id=&quot;网易新闻客户端&quot;&gt;&lt;a href=&quot;#网易新闻客户端&quot; class=&quot;headerlink&quot; title=&quot;网易新闻客户端&quot;&gt;&lt;/a&gt;网易新闻客户端&lt;/h1&gt;&lt;p&gt;图文混排是webview去实现的,内容拼接的好处就是数据显示比较同步&lt;br&gt;过网络请求获得相关的信息,再通过手机端进行拼HTML,然后在WebView进行展示，此处还对文章中的图片增加点击效果，可以保存到相册中；文章的样式已经存在项目中，直接去调用；&lt;br&gt;1.首先了解两个相关的实体对象，一个是新闻的主体内容，另外一个就是图片的相关信息实体；&lt;br&gt;2.网络请求，并转化成实体对象&lt;br&gt;3.拼接HTML源代码&lt;br&gt;&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;(&lt;span class=&quot;typename&quot;&gt;void&lt;/span&gt;)showInWebView&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;NSMutableString *html = [NSMutableString string];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendFormat:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;,[[NSBundle mainBundle] &lt;span class=&quot;string&quot;&gt;URLForResource:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;SXDetails.css&quot;&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;withExtension:&lt;/span&gt;nil]];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendString:&lt;/span&gt;[self touchBody]];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[self.webView &lt;span class=&quot;string&quot;&gt;loadHTMLString:&lt;/span&gt;html &lt;span class=&quot;string&quot;&gt;baseURL:&lt;/span&gt;nil];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;4.关于WebView与网页进行交互，并把图片保存到手机相册中&lt;br&gt;5.拼接后的HTML内容如下&lt;br&gt;6：效果图中另外一张有比较多的图片源文件如下：&lt;/p&gt;
 &lt;p&gt;参考：&lt;a href=&quot;http://www.knowsky.com/884384.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.knowsky.com/884384.html&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;驾考助手&quot;&gt;&lt;a href=&quot;#驾考助手&quot; class=&quot;headerlink&quot; title=&quot;驾考助手&quot;&gt;&lt;/a&gt;驾考助手&lt;/h1&gt;</content>
+&lt;h1 id=&quot;驾考助手&quot;&gt;&lt;a href=&quot;#驾考助手&quot; class=&quot;headerlink&quot; title=&quot;驾考助手&quot;&gt;&lt;/a&gt;驾考助手&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;主页面UI的搭建：&lt;br&gt;1&amp;gt;从storyBoard初始化启动应用程序&lt;br&gt;Navigation Controller与view。&lt;br&gt;2&amp;gt;学习autolayout进行页面布局&lt;br&gt;主要是布局。各个小图片的位置&lt;br&gt;3&amp;gt;在storyBoard中设置控件的layer层属性&lt;/li&gt;
+&lt;li&gt;答题页面&lt;br&gt;1&amp;gt;理解封装的概念&lt;br&gt;2&amp;gt;UIView渐变的动画效果&lt;br&gt;3&amp;gt;控件传值&lt;/li&gt;
+&lt;li&gt;章节选择&lt;br&gt;1&amp;gt;sqlite的简单查询操作（fmdb）&lt;br&gt;2&amp;gt;混编mrc和arc&lt;br&gt;3&amp;gt;mvc设计模式的应用&lt;/li&gt;
+&lt;li&gt;核心答题视图的搭建&lt;br&gt;1&amp;gt;scrollView的应用&lt;br&gt;2&amp;gt;tableView的应用&lt;br&gt;3&amp;gt;复用逻辑的养成&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;主要是有MVC层&lt;br&gt;Model层TestChoiceModel，AnswerModel，SubTestSelectModel。&lt;br&gt;数据库的管理用的是第三方库FMDB，调用Model层的接口，先检查数据库是否已存在，不存在则创建数据库sqlite,根据不同的场景选择对应的数据,章节,题目,专项.&lt;/p&gt;
+&lt;p&gt;view层有cell文件夹中包含了FirstTableViewCell，TestChoiceTableViewCell，AnswerTableViewCell。&lt;br&gt;然后是界面的实现：车型选择界面SelectVehicle,答题的时候可以实现滑动页面AnswerScrollView，SelectPatternView，题目列表QuestionSheetsView，实现了手势滑动和通知。&lt;/p&gt;
+&lt;p&gt;controller层包括了总的viewcontroller。&lt;br&gt;分层FirstViewController，把练习放入一个tableview中然后用switch，case。&lt;br&gt;TestChoiceViewController练习选择页面。&lt;br&gt;AnswerViewController。&lt;br&gt;MainTestViewController模拟仿真考试页面有xib。&lt;br&gt;QuestionCollectionManager错题收集页面，用到了KVO。&lt;br&gt;SubjectTwoViewController科二的视频显示页面。用到了 &lt;avkit avplayerviewcontroller.h=&quot;&quot;&gt;和&lt;avfoundation avfoundation.h=&quot;&quot;&gt;&lt;/avfoundation&gt;&lt;/avkit&gt;&lt;/p&gt;
+&lt;p&gt;报名须知和新手上路主要用了webViewcontroller.&lt;/p&gt;
+</content>
     
     <summary type="html">
     
@@ -383,6 +399,28 @@
   </entry>
   
   <entry>
+    <title>参加思科女生日感想</title>
+    <link href="http://peilinghui.com/2016/03/20/%E5%8F%82%E5%8A%A0%E6%80%9D%E7%A7%91%E5%A5%B3%E7%94%9F%E6%97%A5%E6%84%9F%E6%83%B3/"/>
+    <id>http://peilinghui.com/2016/03/20/参加思科女生日感想/</id>
+    <published>2016-03-20T03:41:51.000Z</published>
+    <updated>2016-03-26T03:43:38.000Z</updated>
+    
+    <content type="html">&lt;p&gt;实话说，一直很向往上海，曾经高考的时候就特别特别想考去上海，那个繁华的魔都，就早早的存在了我的脑海里，特别想考入上海的同济大学，然后心有余而力不足。。。终于能有个机会去上海，很是激动额。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;3.18日有幸参加了思科开展的“思科女生日”的活动。&lt;br&gt;早上从宁波出发到上海，一路都比较顺利，准时10点多到了思科中国在上海的公司楼，大概有近40个女生参加了这次活动吧。然后我们参观了思科公司的一些产品，一些技术，看了思科的产品，数据中心统一管理和部署软件；IP电话机，一些大型服务器，还有远程视频的设备。&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/Cisco.jpeg&quot; alt=&quot;&quot;&gt;&lt;br&gt;之后开始介绍思科公司，了解了思科的历史和福利还有思科的文化，最令人深刻的是思科对于女性的尊重，外企的福利真的很不错！比如：公费旅游，弹性工作时间，带薪假期，可以在家工作，生日假期，结婚礼物，baby礼物，室内免费班车线路，免费健身房，对于员工的免费英语外教，免费专业课，美国培训机会，公司内部的Mentor/Mentee项目，对于女性还开设各种课程：投资理财，服饰搭配，珠宝鉴定，家庭关系，油画教学，变废为宝等，还有各种家庭活动，真的是很具有人性化的公司额。然后就到了Q/A环节。&lt;br&gt;中午还为我们准备了快餐，使我们近距离和HR，还有销售的帅气manager沟通交流，他们说的英语都很流畅，都是一半中文一半英语和我们交流。&lt;br&gt;大概1点半的时候，我们去了一个比较大的会议室，这个会议室的一套设施都是思科的产品，我们实时的与新加坡总部的一个女神级的manager（明明可以靠颜值吃饭还有靠实力的身材超好的女神）对话，这个远程视频对话，影像输出人的体型和升高都是与实际一样的，还有美颜的加量灯光效果，大家好像仿佛身临其境，好像在同一个地区在开会。如果一个人说话超3秒，摄像头会自动集中一个人，还可以从小屏幕移动到大屏幕。还有一个浙大的本科生已经去新加坡那边去实习了。视频还交流了一下，思科对于应届生其实是很欢迎的。&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/Cisco2.jpeg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;后来就有talk show,就是可以和manager还有HR面对面交流，有一个女manager是上海交大毕业的（在贝尔实验室接待过C语言和UNIX的开发者，她当时候的感觉就是：虽然这么牛的人，在生活中也不是完美的。他们对于工作的那种热爱，常常好几个月都在工作，都没有领过工资条），然后就去美国思科工作了，交流收获很多，对于IT行业，是否真的男性和女性有差别，其实在研发岗位还有管理岗位也有很多的成功的女性，其实一个人不论是男性还是女性，不在于是不是在IT行业，而是自己的选择，follow your heart.你的兴趣在哪里？就去挖掘它。并且投入去热爱它，然后你就能做好它。&lt;br&gt;至于你如何可以找到自己的兴趣点？1.多参加社会活动，多参加一些实习，不论什么岗位，然后看到周围的岗位是在干嘛，也许我们没有那么多的精力去尝试每一种岗位，但是当我们进入公司，可以多和周围的人聊天交流，发现不同的岗位的特点。&lt;br&gt;2.也许你以前就很想做一个岗位，但是由于现实的环境 的变化，我们都没有实现那样的岗位，比如你一直都想做经济或者是销售或者是别的，也许你可以去尝试，也许你期望的职位，并不是如你想像的那么轻松和愉快，也许上天为你安排的现在的职位就是很适合你的呢。以前看到一句话：一个有热情的人，无论在什么岗位上都会有热情，都可以付出百分百的热情，并且把它做好。&lt;br&gt;talk show结束后，还有DIY蛋糕环节，大家分成不同小组一起来制作蛋糕，每一组有一个队名，然后有一个口号，最后还一起分享蛋糕。&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E8%9B%8B%E7%B3%95.jpeg&quot; alt=&quot;&quot;&gt;&lt;br&gt;最后，还每人赠送了我们一本《lean in》一本热销的书，还送了我们每人一束花，其实，真的很荣幸能参加这样的活动，让我明白了，其实尤其是在职业的选择过程中，我们该如何保持一个平常心，作为一个女性，我们也不要自卑，其实在很多时候我们可以比我们想象的做的更好。&lt;br&gt;其实，人生真的有很多条路可以走，不必因为一次的失意及一蹶不振，其实成功不光考智商，走入工作，走进社会，你就会发现，你在学校里所学的东西很多只是基础，一个人成功，不光考智商，更多的时候也要考情商。当然，努力是必不可少的，好运也总是会垂帘那些更为努力的人的！&lt;br&gt;所以，以后的路上还有继续加油！&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;实话说，一直很向往上海，曾经高考的时候就特别特别想考去上海，那个繁华的魔都，就早早的存在了我的脑海里，特别想考入上海的同济大学，然后心有余而力不足。。。终于能有个机会去上海，很是激动额。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="生活感触" scheme="http://peilinghui.com/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E8%A7%A6/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>PAT练习(Advanced Level)</title>
     <link href="http://peilinghui.com/2016/03/15/PAT%E7%BB%83%E4%B9%A0-Advanced-Level/"/>
     <id>http://peilinghui.com/2016/03/15/PAT练习-Advanced-Level/</id>
@@ -522,7 +560,7 @@ j++;
     <link href="http://peilinghui.com/2016/03/14/ACM%E7%BB%83%E4%B9%A0/"/>
     <id>http://peilinghui.com/2016/03/14/ACM练习/</id>
     <published>2016-03-14T07:59:15.000Z</published>
-    <updated>2016-03-28T14:21:46.000Z</updated>
+    <updated>2016-03-28T14:37:23.000Z</updated>
     
     <content type="html">&lt;p&gt;做一些简单的ACM题。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;1928-日期差值&quot;&gt;&lt;a href=&quot;#1928-日期差值&quot; class=&quot;headerlink&quot; title=&quot;1928. 日期差值&quot;&gt;&lt;/a&gt;1928. 日期差值&lt;/h3&gt;&lt;p&gt;有两个日期，求两个日期之间的天数，如果两个日期是连续的我们规定他们之间的天数为两天。&lt;br&gt;输入&lt;br&gt;有多组数据，每组数据有两行，分别表示两个日期，形式为YYYYMMDD&lt;/p&gt;
@@ -656,6 +694,62 @@ j++;
   </entry>
   
   <entry>
+    <title>面试总结</title>
+    <link href="http://peilinghui.com/2016/03/09/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/"/>
+    <id>http://peilinghui.com/2016/03/09/面试总结/</id>
+    <published>2016-03-09T13:53:35.000Z</published>
+    <updated>2016-03-29T12:52:37.000Z</updated>
+    
+    <content type="html">&lt;p&gt;3月以来经过好多次面试，也在面试，笔试中不断总结经验，总结只为更好的出发。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;阿里巴巴一面&quot;&gt;&lt;a href=&quot;#阿里巴巴一面&quot; class=&quot;headerlink&quot; title=&quot;阿里巴巴一面&quot;&gt;&lt;/a&gt;阿里巴巴一面&lt;/h1&gt;&lt;h2 id=&quot;数据结构&quot;&gt;&lt;a href=&quot;#数据结构&quot; class=&quot;headerlink&quot; title=&quot;数据结构&quot;&gt;&lt;/a&gt;数据结构&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;时间复杂度&lt;br&gt;时间复杂度是一个函数，算法中所有语句分频度之和记作 T(n),算法的时间复杂度记作T(n)=O(f(n))，算法的时间复杂度依赖于问题的规模和输入数据的性质。&lt;/li&gt;
+&lt;li&gt;各种排序的时间复杂度&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.jpg&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+&lt;li&gt;二叉树的概念和特点&lt;/li&gt;
+&lt;li&gt;图的遍历：深度优先搜索和广度优先搜索&lt;/li&gt;
+&lt;li&gt;平衡二叉树的生成&lt;/li&gt;
+&lt;li&gt;哈弗曼树&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;计算机网络&quot;&gt;&lt;a href=&quot;#计算机网络&quot; class=&quot;headerlink&quot; title=&quot;计算机网络&quot;&gt;&lt;/a&gt;计算机网络&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Socket的底层实现？是同步还是异步？如何实现底层通信？和TCP的三次握手是如何实现的。&lt;br&gt;TCP 开放握手也称为3次握手，这通常包括 3 条消息：一条从客户端到服务端的连接请求，一条从服务端到客户端的确认消息，以及另一条从客户端到服务端的确认消息。&lt;br&gt;（对客户端而言，一旦它收到了服务端发来的确认消息，就立即认为连接已经建立。通常这个过程发生的很快，但连接请求消息或服务端的回复消息都有可能在传输过程中丢失，因此 TCP 协议实现将以递增的时间间隔重复发送几次握手消息。如果 TCP 客户端在一段时间后还没有收到服务端的回复消息，则发生超时并放弃连接。如果服务端并没有接收连接，则服务端的 TCP 将发送一条拒绝消息而不是确认消息。）&lt;br&gt;（服务端首先创建一个 ServerSocket 实例，并将其与已知端口相关联（在此为 Q），套接字实现为新的 ServerSocket 实例创建一个底层数据结构，并就 Q 赋给本地端口，并将特定的通配符（&lt;em&gt;）赋给本地 IP 地址）&lt;br&gt;&lt;em&gt;*参考&lt;/em&gt;&lt;/em&gt;：&lt;a href=&quot;http://wiki.jikexueyuan.com/project/java-socket/socket-tcp-bean.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://wiki.jikexueyuan.com/project/java-socket/socket-tcp-bean.html&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://wiki.jikexueyuan.com/project/java-socket/socket-advanced.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://wiki.jikexueyuan.com/project/java-socket/socket-advanced.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;socket中的IO&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;操作系统&quot;&gt;&lt;a href=&quot;#操作系统&quot; class=&quot;headerlink&quot; title=&quot;操作系统&quot;&gt;&lt;/a&gt;操作系统&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;段与页的区别&lt;br&gt;页是信息的物理单位，分页是为实现离散分配方式，以消减内存的外零头，提高内存的利用率；或者说，分页仅仅是由于系统管理的需要，而不是用户的需要。段是信息的逻辑单位，它含有一组其意义相对完整的信息。分段的目的是为了能更好的满足用户的需要。&lt;/li&gt;
+&lt;li&gt;寄存器的分类&lt;br&gt;寄存器分为通用寄存器和专用寄存器&lt;br&gt;通用寄存器：存放关键变量和中间结果&lt;br&gt;专用寄存器：程序计数器（PC），栈指针寄存器，程序状态字&lt;/li&gt;
+&lt;li&gt;解释ESP，XP。和EDP&lt;/li&gt;
+&lt;li&gt;如何用C语言判断机器是32位还是64位？&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;preprocessor&quot;&gt;#&lt;span class=&quot;keyword&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;stdio.h&quot;&lt;/span&gt;   &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; argc,&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; * argv[])&lt;/span&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#123;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;* number =  &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;printf&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;%d\n&quot;&lt;/span&gt;,&lt;span class=&quot;keyword&quot;&gt;sizeof&lt;/span&gt;(&amp;amp;number));  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;输出8就是64位的，4就是32位的。根据逻辑地址判断。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;定义一个类class A，判断sizeof是？sizeof(a *)是？&lt;br&gt;空类大小：&lt;br&gt; &lt;code&gt;class A
+ {
+ };&lt;/code&gt;//sizeof(A)为1&lt;br&gt;非空类大小：&lt;br&gt; `class A&lt;br&gt; {&lt;pre&gt;&lt;code&gt;int a;
+char *p;
+&lt;/code&gt;&lt;/pre&gt; };&lt;code&gt;32位，sizeof（A）为8，int为4，char也为4字节；  
+补充：需要注意32位平台，sizeof(long)为4Byte，sizeof(long long)为8Byte；sizeof(void)为1，但是会报warning.&lt;/code&gt;sizeof(void *)= 4 ; //所有的指针都是4Byte宽度.`&lt;br&gt;&lt;a href=&quot;http://lambda.hk/c++/2015/03/30/C-Plus-Plus-Sizeof-Class/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://lambda.hk/c++/2015/03/30/C-Plus-Plus-Sizeof-Class/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;给一个数字转换成二进制以后，判断二进制里面有几个1？&lt;br&gt;&lt;a href=&quot;http://www.cnblogs.com/graphics/archive/2010/06/21/1752421.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/graphics/archive/2010/06/21/1752421.html&lt;/a&gt;&lt;br&gt;这原来是编程之美，或者是剑指offer中的一道题&lt;br&gt;&lt;a href=&quot;http://blog.csdn.net/sjf0115/article/details/8597157&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/sjf0115/article/details/8597157&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;结构体对齐？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;ARC底层实现机制&quot;&gt;&lt;a href=&quot;#ARC底层实现机制&quot; class=&quot;headerlink&quot; title=&quot;ARC底层实现机制&quot;&gt;&lt;/a&gt;ARC底层实现机制&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://onevcat.com/2012/06/arc-hand-by-hand/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://onevcat.com/2012/06/arc-hand-by-hand/&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;网易笔试&quot;&gt;&lt;a href=&quot;#网易笔试&quot; class=&quot;headerlink&quot; title=&quot;网易笔试&quot;&gt;&lt;/a&gt;网易笔试&lt;/h1&gt;&lt;h1 id=&quot;腾讯笔试&quot;&gt;&lt;a href=&quot;#腾讯笔试&quot; class=&quot;headerlink&quot; title=&quot;腾讯笔试&quot;&gt;&lt;/a&gt;腾讯笔试&lt;/h1&gt;&lt;p&gt;15个选择题，3个编程题，1个小时&lt;br&gt;选择题：&lt;br&gt;1.快排&lt;br&gt;2.建立索引&lt;br&gt;3.C++代码：&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;figcaption&gt;&lt;span&gt;&lt;iostream&gt;&lt;/iostream&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#include &amp;#60;cstdio&amp;#62;&amp;#10;using namespace std;&amp;#10;struct A&amp;#123;&amp;#10;    //vitual&amp;#26159;&amp;#22810;&amp;#24577;&amp;#65292;&amp;#20250;&amp;#25191;&amp;#34892;&amp;#10;    void foo()&amp;#123;printf(&amp;#34;foo&amp;#34;);&amp;#125;&amp;#10;    virtual void bar()&amp;#123;printf(&amp;#34;bar&amp;#34;);&amp;#125;&amp;#10;    A()&amp;#123;bar();&amp;#125;;&amp;#10;&amp;#125;;&amp;#10;struct B:A&amp;#123;&amp;#10;    void foo()&amp;#123;printf(&amp;#34;b_foo&amp;#34;);&amp;#125;&amp;#10;    void bar()&amp;#123;printf(&amp;#34;b_bar&amp;#34;);&amp;#125;;&amp;#10;&amp;#125;;&amp;#10;int main()&amp;#123;&amp;#10;    A *p=new B;&amp;#10;    p-&amp;#62;foo();&amp;#10;    p-&amp;#62;bar();&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;输出结果：&lt;br&gt;bar&lt;br&gt;foo&lt;br&gt;b_bar&lt;br&gt;解析：先调用A的构造函数bar,再调用B的构造函数（没有),因为有virtual所以是多态，调用&lt;/p&gt;
+&lt;h1 id=&quot;网新笔试&quot;&gt;&lt;a href=&quot;#网新笔试&quot; class=&quot;headerlink&quot; title=&quot;网新笔试&quot;&gt;&lt;/a&gt;网新笔试&lt;/h1&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;3月以来经过好多次面试，也在面试，笔试中不断总结经验，总结只为更好的出发。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="面试" scheme="http://peilinghui.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>iOS中的地图定位</title>
     <link href="http://peilinghui.com/2016/03/09/iOS%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9B%BE%E5%AE%9A%E4%BD%8D/"/>
     <id>http://peilinghui.com/2016/03/09/iOS中的地图定位/</id>
@@ -741,7 +835,7 @@ j++;
     <link href="http://peilinghui.com/2016/03/05/iOS%E4%B8%AD%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A1%86%E6%9E%B6/"/>
     <id>http://peilinghui.com/2016/03/05/iOS中的第三方框架/</id>
     <published>2016-03-05T06:08:53.000Z</published>
-    <updated>2016-03-28T02:59:16.000Z</updated>
+    <updated>2016-03-29T10:47:34.000Z</updated>
     
     <content type="html">&lt;p&gt;通过不断的学习也接触了不少的第三方框架，就总结一下。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;FMDB&quot;&gt;&lt;a href=&quot;#FMDB&quot; class=&quot;headerlink&quot; title=&quot;FMDB&quot;&gt;&lt;/a&gt;FMDB&lt;/h1&gt;&lt;ol&gt;
@@ -752,7 +846,8 @@ j++;
 &lt;li&gt;提供了多线程安全的数据库操作方法，有效地防止数据混乱&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;FMDB的github地址:  &lt;a href=&quot;https://github.com/ccgus/fmdb&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/ccgus/fmdb&lt;/a&gt;&lt;h1 id=&quot;AFNetworking&quot;&gt;&lt;a href=&quot;#AFNetworking&quot; class=&quot;headerlink&quot; title=&quot;AFNetworking&quot;&gt;&lt;/a&gt;AFNetworking&lt;/h1&gt;&lt;/li&gt;
+&lt;li&gt;FMDB的github地址:  &lt;a href=&quot;https://github.com/ccgus/fmdb&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/ccgus/fmdb&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;核心类&lt;br&gt;FMDB有三个主要的类&lt;br&gt;（1）FMDatabase&lt;br&gt;一个FMDatabase对象就代表一个单独的SQLite数据库&lt;br&gt;用来执行SQL语句&lt;br&gt;（2）FMResultSet&lt;br&gt;使用FMDatabase执行查询后的结果集&lt;br&gt;（3）FMDatabaseQueue&lt;br&gt;用于在多线程中执行多个查询或更新，它是线程安全的&lt;h1 id=&quot;AFNetworking&quot;&gt;&lt;a href=&quot;#AFNetworking&quot; class=&quot;headerlink&quot; title=&quot;AFNetworking&quot;&gt;&lt;/a&gt;AFNetworking&lt;/h1&gt;&lt;/li&gt;
 &lt;li&gt;AFN 与 ASI 有什么区别&lt;br&gt;AFN基于NSURL，ASI基于底层的CFNetwork框架，因此ASI的性能优于AFN&lt;br&gt;AFN采取block的方式处理请求，ASI最初采取delegate的方式处理请求，后面也增加了block的方式。&lt;br&gt;AFN只封装了一些常用功能，满足基本需求，直接忽略了很多扩展功能，比如没有封装同步请求；ASI提供的功能较多，预留了各种接口和工具供开发者自行扩展。AFN直接解析服务器返回的JSON、XML等数据，而ASI比较原始，返回的是NSData二进制数据。&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
 &lt;li&gt;讲解：&lt;br&gt;1&amp;gt;&lt;strong&gt;AFHTTPRequestOperation&lt;/strong&gt;&lt;br&gt;HTTP或HTTPS协议请求的AFURLConnectionOperation的子类。它封装的可接受状态码和内容的类型，判定一个请求结果是成功或失败。&lt;br&gt;实际上对系统的HTTP网络请求增加了几个HTTP需要用到的参数。&lt;br&gt;2&amp;gt;&lt;strong&gt;AFURLConnectionOperation&lt;/strong&gt;&lt;br&gt;可以说是AFN最基础的类。继承自NSOperation类，将网络请求依附到一个operation上。从而让我们能够有效的控制并观察一个网络请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态。&lt;br&gt;①：综述&lt;br&gt;AFURLConnectionOperation 将Operation和URLConnection结合到一起，利用operation可以监听到状态以及可以建立相互之间的依赖关系的特性，实现了对于 一个NSURLConnection对象的完美控制，并将请求的结果通过block友好的返回。&lt;br&gt;②：实现文件.m&lt;br&gt;我们总结下.m中这个类主要有哪些方法。&lt;br&gt;1： 首先我们可以看到它创建了一个单例线程。这个线程将会常驻内存，用来处理AFN发起的所有请求任务。当然，线程也跟随着一个runloop，AFN将这个 runloop的模式设置为NSDefaultRunLoopMode。NSDefaultRunLoopMode是无法检测到connection的状 态的。这说明了，AFN将不会在这该线程处理connection完成后的UI刷新等工作，而是会将数据抛给主线程，让主线程去完成UI的刷新。&lt;br&gt;2：我们可以看到该类通过接受请求的字符串，创建了URLRequest以及NSURLConnection对象。从而去进行请求。&lt;br&gt;3：实现文件多次使用到了锁，可以保证数据的安全。当然他也实现了几个数据的NSCoping协议。&lt;br&gt;4：请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态的控制。这里讲一下暂停和恢复。&lt;br&gt;暂 停实际上将网络请求取消掉了。但是由于实现了nscoping协议，已经下载到数据得以保存下来。下次进行相同请求的时候，我们会将已经下载到的数据的节 点一起发送给服务器，告诉服务器这些部门的数据我们不需要了，服务器根据我发送的返回节点给我返回相应的数据即可。从而实现了暂停和恢复功能，也就是断点 续传。&lt;br&gt;5：operation方法的重写。自行google，这里不赘述。&lt;br&gt;6：状态的各种控制方法的实现以及发送状态改变的通知  &lt;/li&gt;
 &lt;/ol&gt;
@@ -1212,144 +1307,6 @@ mas_equalTo对其参数进行了一个自动装箱操作， 除了支持NSNumber
     
     
       <category term="iOS" scheme="http://peilinghui.com/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>创建博客</title>
-    <link href="http://peilinghui.com/2016/02/25/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
-    <id>http://peilinghui.com/2016/02/25/创建博客/</id>
-    <published>2016-02-25T07:21:14.000Z</published>
-    <updated>2016-03-27T09:25:53.000Z</updated>
-    
-    <content type="html">&lt;p&gt;偶然发现大家（周围厉害的同学）还有网上的各种大牛都有属于自己的博客，记录自己的学习历程，然后自己也开始探索搭建博客的历程.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;最初搭建了一个Octopress+Github Page的博客，开始就使用的最初的主题，就如图所示：&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/octopress%E6%9C%80%E5%88%9D.png&quot; alt=&quot;&quot;&gt; &lt;/p&gt;
-&lt;p&gt;然后就开始逛其他人的博客，发现大家博客的主题都好好看，瞬间觉得自己该换个主题了，然后发现了octopress的&lt;a href=&quot;https://github.com/tommy351/Octopress-Theme-Slash&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;slash主题&lt;/a&gt;然后弄完的样子就是下面如图：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/slash%E4%B8%BB%E9%A2%98.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;看起来比系统自带的主题好看多了，是吧！  &lt;/p&gt;
-&lt;p&gt;当然，在网上逛别人的博客的时候，看到很多博客的主题都是作者自己写的，还有一个自学前端的97年的男生自己搭建了一个网站，还看到看到一个96年的搭建的博客简直炫酷，瞬间计算机这个东西完全靠兴趣啊！然后开始模仿&lt;a href=&quot;http://kittenyang.com/myfirstblog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;kitten&lt;/a&gt;的这篇文章开始了ghost博客之旅，他是在阿里云服务器ECS和Ubuntu系统上安装Ghost博客，开始我想mac和Ubuntu差不多就开始在mac下搞，然后我就去Godaddy（狗爹）上买了二级域名，租了个阿里云服务器，mac上可以显示如图：&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/ghost%E5%88%9D%E5%A7%8B%E5%8D%9A%E5%AE%A2.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;然后发现其实mac和Ubuntu还是差别挺大的，比如mac上就没有apt-get这个命令，瞬间那个心情。。。自己挖的坑还的要自己填啊！然后就在我那台win10系统上又装了Ubuntu系统，本来是弄得双系统，估计在装的时候选错了，然后就发现win10不见了，555~，然后在Ubuntu下还是没有配置成功。。。真是辛酸泪啊！租的服务器也不会用额。。。。&lt;/p&gt;
-&lt;p&gt;然后发现更多的人使用的是Hexo+Github Page,而且网上有关hexo的学习资料还是很多的，于是我就决定转向hexo了。而且hexo写博文很方便也支持markdown,而且主题很多，也很炫酷，就开始了hexo的博客之旅。&lt;br&gt;对于搭建博客，然后在知乎的一篇文章上看到了&lt;a href=&quot;https://www.zhihu.com/question/24422335&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;hexo的主题&lt;/a&gt;：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/iissnan/hexo-theme-next&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;(iissnan/hexo-theme-next · GitHub,  470)&lt;/a&gt;  这个是next主题，我同学好几个都是用这个主题的。 &lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://link.zhihu.com/?target=https%3A//github.com/litten/hexo-theme-yilia&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;(litten/hexo-theme-yilia, 265)&lt;/a&gt;  然后就是我现在用的这个主题。  &lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://yangjian.me/pacman/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;(A-limon/pacman, 243)&lt;/a&gt;这个主题也挺经典的。（吃豆子）&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/xiangming/landscape-plus&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;(xiangming/landscape-plus, 147)&lt;/a&gt;优化hexo官方主题landscape。&lt;br&gt;还有很多主题呢！有时间再去尝试一下吧！    &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;参考： 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Octopress：&lt;br&gt;&lt;a href=&quot;http://cnbin.github.io/blog/2015/05/18/octopressbo-ke-da-jian/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://cnbin.github.io/blog/2015/05/18/octopressbo-ke-da-jian/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/e208ade30f08&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/e208ade30f08&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/imathis/octopress/wiki/Octopress-Sites&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/imathis/octopress/wiki/Octopress-Sites&lt;/a&gt;&lt;br&gt;ghost:&lt;br&gt;&lt;a href=&quot;http://jas0n.me/2014/12/05/ghost_blog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://jas0n.me/2014/12/05/ghost_blog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.zhihu.com/question/22755373&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.zhihu.com/question/22755373&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://kittenyang.com/myfirstblog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://kittenyang.com/myfirstblog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.zhihu.com/question/22755373&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.zhihu.com/question/22755373&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://snowz.me/how-to-install-ghost/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://snowz.me/how-to-install-ghost/&lt;/a&gt;&lt;br&gt;hexo:&lt;br&gt;&lt;a href=&quot;http://ibruce.info/2013/11/22/hexo-your-blog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ibruce.info/2013/11/22/hexo-your-blog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://iread.io/archives/page/2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://iread.io/archives/page/2/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://blog.shijinrong.cn/2016/01/03/2016-01-03-how-to-build-blog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.shijinrong.cn/2016/01/03/2016-01-03-how-to-build-blog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://dearb.me/archive/2015-05-10/use-hexo-build-your-own-blog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://dearb.me/archive/2015-05-10/use-hexo-build-your-own-blog/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://zipperary.com/categories/hexo/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://zipperary.com/categories/hexo/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://lucifr.com/2013/01/02/from-octopress-to-hexo/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://lucifr.com/2013/01/02/from-octopress-to-hexo/&lt;/a&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;最后来几个我同学的博客地址：   
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; &lt;a href=&quot;http://blog.xuanzhangjiong.xyz/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;囧囧囧-网易安卓&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://blog.csdn.net/CHENYUFENG1991/article/category/5655903/4&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ios大神-人生大赢家-网易&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://lysongzi.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;小松子-iOS&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://cspilgrimzww.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;蔚蔚-PHP&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://www.changhuiyuan.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;惠源-安卓&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://www.hxdavid.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;PAT大神-网易&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://wut0719.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;前端-桐神&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt; &lt;a href=&quot;http://longliqiang88.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;龙哥-云计算&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;https://pangjiuzala.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;北大兴爷-大数据&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://han.pm/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;大数据的英国交换生&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://frankhu.me/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;大数据-广州人&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt; &lt;a href=&quot;http://judyzhangxin.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;UI设计师&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt; &lt;a href=&quot;http://sunus.me/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;阿里学长&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;http://imhuchao.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;胡超-凤凰网&lt;/a&gt;  &lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;偶然发现大家（周围厉害的同学）还有网上的各种大牛都有属于自己的博客，记录自己的学习历程，然后自己也开始探索搭建博客的历程.&lt;br&gt;
-    
-    </summary>
-    
-      <category term="创建博客" scheme="http://peilinghui.com/categories/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>git学习笔记</title>
-    <link href="http://peilinghui.com/2016/02/25/git%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://peilinghui.com/2016/02/25/git学习/</id>
-    <published>2016-02-25T04:21:14.000Z</published>
-    <updated>2016-02-29T06:27:21.000Z</updated>
-    
-    <content type="html">&lt;p&gt;学习git也有一段时间了，准备系统整理一下&lt;br&gt;参考请到此处&lt;a href=&quot;http://www.liaoxuefeng.com/wiki/929606dd18361248578c67b8067c8c017b000&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;廖雪峰的官网&lt;/a&gt;。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt; &lt;/p&gt;
-&lt;h1 id=&quot;本地&quot;&gt;&lt;a href=&quot;#本地&quot; class=&quot;headerlink&quot; title=&quot;本地&quot;&gt;&lt;/a&gt;本地&lt;/h1&gt;&lt;h2 id=&quot;git的配置，邮箱地址和用户名&quot;&gt;&lt;a href=&quot;#git的配置，邮箱地址和用户名&quot; class=&quot;headerlink&quot; title=&quot;git的配置，邮箱地址和用户名&quot;&gt;&lt;/a&gt;git的配置，邮箱地址和用户名&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;配置邮箱&lt;/strong&gt;&lt;br&gt;$ git config –global user.email “799745776@qq.com”  &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;配置用户名&lt;/strong&gt;&lt;br&gt;$ git config –global user.name “plh”&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;查看当前的配置&lt;/strong&gt;&lt;br&gt;$ cat .git/config&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;git命令&quot;&gt;&lt;a href=&quot;#git命令&quot; class=&quot;headerlink&quot; title=&quot;git命令&quot;&gt;&lt;/a&gt;git命令&lt;/h2&gt;&lt;h3 id=&quot;初始化一个Git仓库使用&quot;&gt;&lt;a href=&quot;#初始化一个Git仓库使用&quot; class=&quot;headerlink&quot; title=&quot;初始化一个Git仓库使用&quot;&gt;&lt;/a&gt;初始化一个Git仓库使用&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ git init&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;添加文件到Git仓库&quot;&gt;&lt;a href=&quot;#添加文件到Git仓库&quot; class=&quot;headerlink&quot; title=&quot;添加文件到Git仓库&quot;&gt;&lt;/a&gt;添加文件到Git仓库&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;放在暂缓区的命令&lt;/strong&gt;&lt;br&gt;$ git add .&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;本地提交仓库&lt;/strong&gt;&lt;br&gt;$ git commit -m “提交代码”&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;$ git push origin master&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;查看状态&lt;/strong&gt;&lt;br&gt;$ git staus&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;更新本地代码&lt;/strong&gt;&lt;br&gt;$ git pull&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&quot;版本回退&quot;&gt;&lt;a href=&quot;#版本回退&quot; class=&quot;headerlink&quot; title=&quot;版本回退&quot;&gt;&lt;/a&gt;版本回退&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;显示当前分支的版本历史&lt;/strong&gt;&lt;br&gt;$ git log&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;恢复前一个版本&lt;/strong&gt;&lt;br&gt;git reset –hard HEAD^  &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;恢复前两个版本&lt;/strong&gt;&lt;br&gt;$ git reset –hard HEAD^^ &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;恢复前 N 版本&lt;/strong&gt;&lt;br&gt;$ git reset –hard HEAD~N  &lt;/p&gt;
-&lt;!--N 是数字--&gt; 
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;恢复指定版本&lt;/strong&gt;&lt;br&gt;$ (git lg) git reset –hard 版本号 &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;查看指令使用历史，确定要回到未来的哪个版本&lt;/strong&gt;&lt;br&gt;$ git reflog&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&quot;分支管理&quot;&gt;&lt;a href=&quot;#分支管理&quot; class=&quot;headerlink&quot; title=&quot;分支管理&quot;&gt;&lt;/a&gt;分支管理&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;查看所有本地分支&lt;/strong&gt;&lt;br&gt;$ git branch  &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;列出所有远程分支&lt;/strong&gt;&lt;br&gt;$ git branch -r&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建分支&lt;/strong&gt;&lt;br&gt;$ git branch name&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;切换分支&lt;/strong&gt;&lt;br&gt;$ git checkout name&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;合并分支&lt;/strong&gt;&lt;br&gt;$  git merge name &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;删除分支&lt;/strong&gt;&lt;br&gt;$ git branch -d name&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;删除远程分支&lt;/strong&gt;&lt;br&gt;$ git push origin –delete name&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;$ git branch -dr [remote/branch]&lt;/p&gt;
-&lt;h4 id=&quot;删除文件&quot;&gt;&lt;a href=&quot;#删除文件&quot; class=&quot;headerlink&quot; title=&quot;删除文件&quot;&gt;&lt;/a&gt;删除文件&lt;/h4&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ git rm 文件名&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;远程&quot;&gt;&lt;a href=&quot;#远程&quot; class=&quot;headerlink&quot; title=&quot;远程&quot;&gt;&lt;/a&gt;远程&lt;/h2&gt;&lt;h3 id=&quot;创建SSH-Key&quot;&gt;&lt;a href=&quot;#创建SSH-Key&quot; class=&quot;headerlink&quot; title=&quot;创建SSH Key&quot;&gt;&lt;/a&gt;创建SSH Key&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ ssh-keygen -t rsa -C &lt;span class=&quot;string&quot;&gt;&quot;youremail@example.com&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;从远程库克隆&quot;&gt;&lt;a href=&quot;#从远程库克隆&quot; class=&quot;headerlink&quot; title=&quot;从远程库克隆&quot;&gt;&lt;/a&gt;从远程库克隆&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ git &lt;span class=&quot;built_in&quot;&gt;clone&lt;/span&gt; git@github.com:.......&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;远程同步&quot;&gt;&lt;a href=&quot;#远程同步&quot; class=&quot;headerlink&quot; title=&quot;远程同步&quot;&gt;&lt;/a&gt;远程同步&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;下载远程仓库的所有变动&lt;/strong&gt;&lt;br&gt;$ git fetch [remote] &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;显示所有远程仓库&lt;/strong&gt;&lt;br&gt;$ git remote -v&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;显示某个远程仓库的信息&lt;/strong&gt;&lt;br&gt;$ git remote show [remote]  &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;增加一个新的远程仓库，并命名&lt;/strong&gt;&lt;br&gt;$ git remote add [shortname] [url]  &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;取回远程仓库的变化，并与本地分支合并&lt;/strong&gt;&lt;br&gt;$ git pull [remote] [branch] &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;上传本地指定分支到远程仓库&lt;/strong&gt;&lt;br&gt;$  git push [remote] [branch]&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;强行推送当前分支到远程仓库，即使有冲突&lt;/strong&gt;&lt;br&gt;$ git push [remote] –force&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;推送所有分支到远程仓库&lt;/strong&gt;&lt;br&gt;$ git push [remote] –all &lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;补充&quot;&gt;&lt;a href=&quot;#补充&quot; class=&quot;headerlink&quot; title=&quot;补充&quot;&gt;&lt;/a&gt;补充&lt;/h2&gt;&lt;h3 id=&quot;显示本地git库：&quot;&gt;&lt;a href=&quot;#显示本地git库：&quot; class=&quot;headerlink&quot; title=&quot;显示本地git库：&quot;&gt;&lt;/a&gt;显示本地git库：&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ defaults  write  com.apple.finder AppleShowAllFiles -bool &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ KillAll Finder&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;隐藏本地git库&quot;&gt;&lt;a href=&quot;#隐藏本地git库&quot; class=&quot;headerlink&quot; title=&quot;隐藏本地git库&quot;&gt;&lt;/a&gt;隐藏本地git库&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ defaults  write  com.apple.finder AppleShowAllFiles -bool &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ KillAll Finder&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/git.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;学习git也有一段时间了，准备系统整理一下&lt;br&gt;参考请到此处&lt;a href=&quot;http://www.liaoxuefeng.com/wiki/929606dd18361248578c67b8067c8c017b000&quot;&gt;廖雪峰的官网&lt;/a&gt;。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Git" scheme="http://peilinghui.com/categories/Git/"/>
-    
-    
-      <category term="git" scheme="http://peilinghui.com/tags/git/"/>
     
   </entry>
   
