@@ -14,7 +14,7 @@
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%87%AA%E5%AE%9A%E4%B9%89NSOperation%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/runloop.png">
-<meta property="og:updated_time" content="2016-03-28T05:06:42.000Z">
+<meta property="og:updated_time" content="2016-04-06T08:47:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS中的多线程网络">
 <meta name="twitter:description" content="不论是什么开发，多线程网络始终是学习的重点。">
@@ -294,8 +294,125 @@
       
           
         <p>不论是什么开发，多线程网络始终是学习的重点。<br><a id="more"></a></p>
+<h1 id="多线程网络"><a href="#多线程网络" class="headerlink" title="多线程网络"></a>多线程网络</h1><h2 id="NSthread"><a href="#NSthread" class="headerlink" title="NSthread"></a>NSthread</h2><ol>
+<li>创建和启动线程</li>
+</ol>
+<p>//创建一个新线程对象，实例方法，返回一个NSThread对象必须调用start方法启动线程 （实例方法）<br><code>-(id)initWithTarget:(id)target selector:(SEL)selector object:(id)arg:</code><br>//创建并启动新线程，不会返回NSThread对象。会直接创建并启动线程(类方法)<br><code>+(void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(id)arg:</code></p>
+<p>target对象的selector方法的方法体代表了线程需要完成的任务，相当于把target对象的selector方法转换为线程执行体. </p>
+<pre><code>//创建多线程对象
+NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) object:nil];
+//启动多线程
+[thread start];
+
+//创建并启动多线程
+[NSThread detachNewThreadSelector:@selector(run) toTarget:self withObject:nil];
+</code></pre><ol>
+<li><p>线程的状态<br>线程的状态会在运行、就绪状态之间切换。<br>启用线程使用了start方法后，该线程进入就绪状态，系统会为其创建方法调用栈和程序计数器。<strong>当系统调度线程后，线程才会进入运行状态。</strong><br>注意：若想要子线程的start方法后子线程立即开始执行，可以调用[NSThread sleepForTimeInterval:0.01];<br>从而让子线程立即获得执行。</p>
+</li>
+<li><p>终止子线程<br>1&gt;线程执行体方法执行完成，线程正常结束。<br>2&gt;线程执行过程中出现了错误<br>3&gt;直接调用NSThread类的exit方法来中止当前正在执行的线程。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">if</span> ([NSThread currentThread].isCancelled) &#123;</span><br><span class="line">        <span class="comment">//中止当前正在执行的线程</span></span><br><span class="line">        <span class="attr_selector">[NSThread exit]</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 <ol>
-<li>什么是多线程<br>进程：是指在系统中正在运行的一个应用程序。1个进程要想执行任务，必须得有线程。（一个进程至少要有一个线程）<br>线程：是进程的基本执行单元，一个进程（程序）的所有任务都在线程中执行。<br>多线程：在一个进程中可以开启多个线程，每条线程可以并发（同时）执行不同的任务。</li>
+<li>线程睡眠<br>NSThread的两种类方法：<br>//让当前正在执行的线程暂停到aDate代表的时间，并进入阻塞状态<br><code>+ (void)sleepUntilDate:(NSDate *)aDate:</code><br>//让当前正在执行的线程暂停ti秒，并进入阻塞状态<br><code>+ (void)sleepForTimeInterval:(NSTimeInterval)ti:</code></li>
+</ol>
+<p>例子：<br>使用线程下载网络图片：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建多线程对象</span></span><br><span class="line">NSThread *thread = [[NSThread alloc]<span class="string">initWithTarget:</span>self <span class="string">selector:</span><span class="annotation">@selector</span>(<span class="string">downloadImageFromURL:</span>) <span class="string">object:</span>nil];</span><br><span class="line"><span class="comment">//启动多线程</span></span><br><span class="line">[thread start];</span><br><span class="line"><span class="string">downloadImageFromURL:</span>方法作为线程执行体，当线程启动调用该方法。</span><br><span class="line"><span class="comment">//在主线程中执行updateUI：方法 来更新iv控件显示的图片</span></span><br><span class="line">[self <span class="string">performSelectorOnMainThread:</span><span class="annotation">@selector</span>(<span class="string">updateUI:</span>) <span class="string">withObject:</span>image <span class="string">waitUntilDone:</span>YES];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>iOS规定只能在UI线程中修改UI控件的属性</strong></p>
+<ol>
+<li>改变优先级<br>NSThread中的实例方法和类方法：<br>+threadPriority<br>-threadPriority<br>+setThreadPriority：(double)priority:<br>-setThreadPriority：(double)priority:</li>
+</ol>
+<h3 id="线程同步与线程通信"><a href="#线程同步与线程通信" class="headerlink" title="线程同步与线程通信"></a>线程同步与线程通信</h3><ol>
+<li><p>在多线程中引入同步解决线程安全问题<br>使用方法： @synchronized (obj) {</p>
+<pre><code>//同步代码块
+</code></pre><p> }<br>obj是同步监视器<br>任何时刻只能有一个线程可以获得对同步监视器的锁定，当同步代码块执行完毕的后，该线程会释放对同步监视器的锁定。<br>可变类的线程安全是以降低程序的运行效率作为代价的，为了减少线程安全所带来的负面影响，程序可以采用：</p>
+<ul>
+<li>不要对线程安全类的所有方法都进行同步，只对那些会改变竞争资源的方法进行同步。</li>
+<li>如果可变类有两种运行环境：单线程和多线程环境，则应该为该可变类提供两种版本-单线程环境中使用线程不安全版本以保证性能，多线程环境中使用线程安全版本。</li>
+</ul>
+</li>
+<li><p>释放对同步监视器的锁定<br>任何线程在进入同步代码块之前，必须先获得对同步监视器的锁定，那么何时会释放对同步监视器的锁定呢？</p>
+<ul>
+<li>当前线程的同步代码块执行结束  </li>
+<li>当前代码块在同步代码块中遇到了goto.return终止了该代码块、该方法继续执行时，当前线程会释放同步监视器。</li>
+<li>当线程在同步代码块中出现了错误，导致该代码块异常结束时，将会释放同步监视器。</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p>同步锁（NSLock）<br>Foundation提供NSLock，通过显式定义同步锁对象来实现同步。<br>NSlock是控制多个线程对共享资源进行访问的工具，通常锁提供了对共享资源的独占访问。在实现线程安全的控制中，使用NSlock对象可以显示地加锁，释放锁。</p>
+</li>
+<li><p>使用NSCondition控制线程通信<br>NSCondition实现了NSLocking协议，因此也可以调用lock，unlock来实现线程同步。也可以让那些已经锁定NSCondition对象却无法继续执行的线程释放NSCondition对象，NSCondition对象也可以唤醒其他处于等待状态的线程。<br>方法：-wait，知道其他线程调用NSCondition的signal方法或broadcast方法来唤醒该线程。<br>-（BOOL）waitUntilDate：(NSDate *)limiteout,</p>
+</li>
+</ol>
+<p>参考：<a href="http://blog.csdn.net/totogo2010/article/details/8010231" target="_blank" rel="external">http://blog.csdn.net/totogo2010/article/details/8010231</a></p>
+<h1 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h1><ol>
+<li>Grand Central Dispatch “牛逼的中枢调度器”</li>
+</ol>
+<ul>
+<li>是苹果公司为多核的并行运算提出的解决方案</li>
+<li>GCD会自动利用更多CPU内核</li>
+<li>会自动管理线程的生命周期（创建线程，调度任务，销毁线程）</li>
+<li>程序员只需要告诉GCD该做什么，而不需要写代码</li>
+</ul>
+<ol>
+<li><p>使用2个步骤：</p>
+<ul>
+<li>定制任务（执行什么操作）</li>
+<li>将任务添加到队列中（GCD会自动将队列中的任务取出，放到对应的线程中执行）（先进先出，后进后出）</li>
+</ul>
+</li>
+<li><p>创建队列<br>队列：把任务放到队列里面，队列先进先出的原则，<br> 串行队列：顺序，一个一个执行(必须一个任务执行完了，才能从队列里面取出下一个任务)<br> 并发队列：同时执行很多个任务（可以同时取出很多个任务，只要有线程去执行）<br>1&gt;获取全局并发队列:<br><code>dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</code><br>2&gt;获取系统主线程关联的串行队列<br><code>dispatch_queue_t queue = dispatch_get_main_queue();</code><br>3&gt;创建串行队列<br><code>dispatch_queue_t queue = dispatch_queue_create(&quot;mmmm.queue&quot;, DISPATCH_QUEUE_SERIAL);</code><br>4&gt;创建并发队列<br><code>dispatch_queue_t queue = dispatch_queue_create(&quot;mmmm.queue&quot;, DISPATCH_QUEUE_CONCURRENT);</code></p>
+</li>
+<li><p>同步：dispatch_sync(dispatch_queue_t, dispatch_block_t block);<br>异步：dispatch_async(dispatch_queue_t, dispatch_block_t block);<br>同步和异步的区别：<br>同步：在当前线程中执行,不具备开启新线程的能力<br>异步：在另一条新线程中执行，具备开启新线程的能力</p>
+</li>
+<li><p>使用GCD下载图片</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,[<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">        <span class="comment">//耗时操作</span></span><br><span class="line">        <span class="comment">//1.url,确定一个网络上的资源文件路径</span></span><br><span class="line">        <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://p18.qhimg.com/t0144d6a0802f22be4f.jpg"</span>];</span><br><span class="line">        <span class="comment">//2.通过URL下载对应的网络资源，网络资源传输的都是二进制</span></span><br><span class="line">        <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithContentsOfFile:url];</span><br><span class="line">        <span class="comment">//3.把二进制转成图片</span></span><br><span class="line">        <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageWithData:data];</span><br><span class="line">        <span class="comment">//4.更新UI，在主线程-&gt;直接把主线程添加到主队列，就会在主队列执行</span></span><br><span class="line">        <span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">            <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.image</span> = image;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>多次执行的任务<br>控制的代码块执行了5次。<br>` dispatch_apply(5, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(size_t time){</p>
+<pre><code>NSLog(@&quot;==执行【%lu次】==%@&quot;,time,[NSThread currentThread]);
+</code></pre><p>}`</p>
+</li>
+<li><p>只执行一次的任务<br>`static dispatch_once_t oneceToken;<br> dispatch_once(&amp;oneceToken,^{</p>
+<pre><code>NSLog(@&quot;==执行代码块==&quot;);
+//线程暂停3秒
+[NSThread sleepForTimeInterval:3];
+</code></pre><p> });`<br>dispatch_once_t控制函数只执行一次</p>
+</li>
+</ol>
+<h1 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h1><p>进入后台，系统会自动回调系统程序委托的applicationDidEnterBackground：方法。所有应用需要做：  </p>
+<pre><code>- 释放所有可以释放的内存  
+- 保存用户数据或状态信息，所有没写入磁盘的文件或信息，在进入后台之前，都应该写入磁盘，因为程序可能在后台被杀死。
+</code></pre><ol>
+<li>进入后台时释放内存<br>如果应用没有启用ARC机制，程序需要在进入后台是，将那些需要释放的资源的引用计数变为0，从而让系统回收这些资源，当应用转入前台，系统需要重新恢复这些资源。<br>如果应用启用了ARC机制，程序只要在应用进入后台时，将应用那些需要释放的资源的变量赋值为nil即可。当应用转入前台是，系统需要重新恢复这些资源。</li>
+<li>进入后台时保存状态  <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用NSUserDefault读取系统已经保存的积分</span></span><br><span class="line">   NSNumber* scoreNumber;</span><br><span class="line">   <span class="keyword">if</span> ((scoreNumber = [[NSUserDefaults standardUserDefaults]<span class="string">setInteger:</span>score <span class="string">forKey:</span>@<span class="string">"score"</span>])) &#123;</span><br><span class="line">       score = scoreNumber.integerValue;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>请求更多后台时间<br>为了请求更多后台时间，应该使用如下步骤：<ul>
+<li>调用UIApplication对象的beginBackgroundTaskWithExpirationHandler:方法请求获取更多的后台执行时间。</li>
+<li>调用dispatch_async()方法将指定代码块提交给后台执行</li>
+<li>后台任务执行完成是，调用UIApplication对象的endBackgroundTask:方法结束后台任务。</li>
+</ul>
+</li>
+</ol>
+<h1 id="使用NSOperation与NSOperationQueue实现多线程"><a href="#使用NSOperation与NSOperationQueue实现多线程" class="headerlink" title="使用NSOperation与NSOperationQueue实现多线程"></a>使用NSOperation与NSOperationQueue实现多线程</h1><p>使用步骤：  </p>
+<pre><code>- 创建NSOperationQueue队列，并为该队列设置相关属性。  
+- 创建NSOperation子类的对象，并将该对象提交给NSOperationQueue队列，该队列将会按顺序启动每个NSOperation。   
+</code></pre><p>MaxConcurrentOperationCount    设置最大并发线程数。</p>
+<ol>
+<li>使用NSblockOperation下载图片<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建NSBlock</span></span><br><span class="line">    <span class="built_in">NSBlockOperation</span> *operation = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</span><br><span class="line">        <span class="comment">//从网络获取数据</span></span><br><span class="line">        <span class="built_in">NSData</span> *data = [[<span class="built_in">NSData</span> alloc]initWithContentsOfURL:[<span class="built_in">NSURL</span> URLWithString:url]];</span><br><span class="line">       <span class="comment">//将网络数据初始化为UIImage对象</span></span><br><span class="line">       <span class="built_in">UIImage</span> *image = [[<span class="built_in">UIImage</span> alloc]initWithData:data];</span><br><span class="line">         <span class="keyword">if</span>(image!= <span class="literal">nil</span>)&#123;</span><br><span class="line">            <span class="comment">//在主线程中updateUI：方法</span></span><br><span class="line">             [<span class="keyword">self</span> performSelectorOnMainThread:<span class="keyword">@selector</span>(updateUI:)withObject:image waitUntilDone:<span class="literal">YES</span>];</span><br><span class="line">         &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">NSLog</span>(<span class="string">@"下载图片出现错误"</span>);           </span><br><span class="line">        &#125;];</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>定义NSOperation子类<br>创建NSOperation的子类需要重写一个方法：-（void）main，该方法将作为NSOpQueue完成任务。</li>
+</ol>
+<h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><ol>
+<li>什么是多线程<br>进程：是指在系统中正在运行的一个应用程序。1个进程要想执行任务，必须得有线程。（一个进程至少要有一个线程）特征：独立性，动态性，并发性。<br>线程：是进程的基本执行单元，一个进程（程序）的所有任务都在线程中执行。当一个程序运行时，内部可能包含了多个顺序执行流，每个顺序执行流就是一个线程的。<br>多线程：在一个进程中可以开启多个线程，每条线程可以并发（同时）执行不同的任务。<br>多线程编程的优点：  <ul>
+<li>进程间不能共享内存，但线程之间共享内存非常容易</li>
+<li>系统创建进程需要为该进程重新分配系统资源，但创建线程则代价小得多，因此使用多线程来实现多任务并发比多进程的效率高。</li>
+<li>iOS提供了多种多线程实现方式，从而简化了iOS的多线程编程。</li>
+</ul>
+</li>
 <li>iOS中如何实现多线程<ul>
 <li>pthread（一套通用的多线程API，使用难度大 <strong>C语言（底层）</strong>）程序员管理，几乎不用<br><code>#include &lt;pthread.h&gt;</code></li>
 <li>NSThread（面向对象，简单易用，可直接操作多线程对象,<strong>OC</strong>），偶尔使用</li>
@@ -342,24 +459,6 @@
 <li>在多线程中，你需要判断是否需要run loop。如果需要run loop，那么你要负责配置run loop并启动。你不需要在任何情况下都去启动run loop。比如，你使用线程去处理一个预先定义好的耗时极长的任务时，你就可以毋需启动run loop。Run loop只在你要和线程有交互时才需要</li>
 </ol>
 </blockquote>
-<h2 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h2><ol>
-<li>Grand Central Dispatch “牛逼的中枢调度器”</li>
-</ol>
-<ul>
-<li>是苹果公司为多核的并行运算提出的解决方案</li>
-<li>GCD会自动利用更多CPU内核</li>
-<li>会自动管理线程的生命周期（创建线程，调度任务，销毁线程）</li>
-<li>程序员只需要告诉GCD该做什么，而不需要写代码</li>
-</ul>
-<ol>
-<li>使用2个步骤：<ul>
-<li>定制任务（执行什么操作）</li>
-<li>将任务添加到队列中（GCD会自动将队列中的任务取出，放到对应的线程中执行）（先进先出，后进后出）<br>队列：把任务放到队列里面，队列先进先出的原则，<br>串行队列：顺序，一个一个执行(必须一个任务执行完了，才能从队列里面取出下一个任务)<br>并发队列：同时执行很多个任务（可以同时取出很多个任务，只要有线程去执行）</li>
-</ul>
-</li>
-<li>同步：dispatch_sync(dispatch_queue_t, dispatch_block_t block);<br>异步：dispatch_async(dispatch_queue_t, dispatch_block_t block);<br>同步和异步的区别：<br>同步：在当前线程中执行,不具备开启新线程的能力<br>异步：在另一条新线程中执行，具备开启新线程的能力<br>dispatch : 调度，GCD里面函数，都是以dispatch开头的</li>
-<li>重要代码：<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,[<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">        <span class="comment">//耗时操作</span></span><br><span class="line">        <span class="comment">//1.url,确定一个网络上的资源文件路径</span></span><br><span class="line">        <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://p18.qhimg.com/t0144d6a0802f22be4f.jpg"</span>];</span><br><span class="line">        <span class="comment">//2.通过URL下载对应的网络资源，网络资源传输的都是二进制</span></span><br><span class="line">        <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithContentsOfFile:url];</span><br><span class="line">        <span class="comment">//3.把二进制转成图片</span></span><br><span class="line">        <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageWithData:data];</span><br><span class="line">        <span class="comment">//4.更新UI，在主线程-&gt;直接把主线程添加到主队列，就会在主队列执行</span></span><br><span class="line">        <span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">            <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.image</span> = image;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure></li>
-</ol>
 
       
     </div>
@@ -371,7 +470,7 @@
         <p><span>本文标题:</span><a href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月04日 - 21时31分</p>
-        <p><span>最后更新:</span>2016年03月28日 - 13时06分</p>
+        <p><span>最后更新:</span>2016年04月06日 - 16时47分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/04/iOS中的多线程网络/" title="iOS中的多线程网络">http://peilinghui.com/2016/03/04/iOS中的多线程网络/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/04/iOS中的多线程网络/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -407,7 +506,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GCD"><span class="toc-number">1.</span> <span class="toc-text">GCD</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#多线程网络"><span class="toc-number">1.</span> <span class="toc-text">多线程网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NSthread"><span class="toc-number">1.1.</span> <span class="toc-text">NSthread</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线程同步与线程通信"><span class="toc-number">1.1.1.</span> <span class="toc-text">线程同步与线程通信</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GCD"><span class="toc-number">2.</span> <span class="toc-text">GCD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#后台运行"><span class="toc-number">3.</span> <span class="toc-text">后台运行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用NSOperation与NSOperationQueue实现多线程"><span class="toc-number">4.</span> <span class="toc-text">使用NSOperation与NSOperationQueue实现多线程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#面试题"><span class="toc-number">5.</span> <span class="toc-text">面试题</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -507,7 +606,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/22/数学问题/">数学问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/网易2016研发工程师编程题/">网易2016研发工程师编程题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/参加思科女生日感想/">参加思科女生日感想</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/面试总结/">面试总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/iOS中的地图定位/">iOS中的地图定位</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/31/面试总结/">面试总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/22/数学问题/">数学问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/网易2016研发工程师编程题/">网易2016研发工程师编程题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/参加思科女生日感想/">参加思科女生日感想</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/iOS中的地图定位/">iOS中的地图定位</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");

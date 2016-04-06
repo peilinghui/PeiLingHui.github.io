@@ -5,16 +5,16 @@
   
   <title>数据结构 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近读了几本书，总结一下内容，就当读书笔记了。">
+  <meta name="description" content="最近读了那本天勤的书，总结一下内容，就当读书笔记了。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构">
 <meta property="og:url" content="http://peilinghui.com/2016/03/14/数据结构/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="最近读了几本书，总结一下内容，就当读书笔记了。">
-<meta property="og:updated_time" content="2016-03-28T14:33:16.000Z">
+<meta property="og:description" content="最近读了那本天勤的书，总结一下内容，就当读书笔记了。">
+<meta property="og:updated_time" content="2016-04-04T08:55:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构">
-<meta name="twitter:description" content="最近读了几本书，总结一下内容，就当读书笔记了。">
+<meta name="twitter:description" content="最近读了那本天勤的书，总结一下内容，就当读书笔记了。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -290,7 +290,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>最近读了几本书，总结一下内容，就当读书笔记了。<br><a id="more"></a></p>
+        <p>最近读了那本天勤的书，总结一下内容，就当读书笔记了。<br><a id="more"></a></p>
 <h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><p>int 32位（4个字节）；<br>long long 64位 ；<br>float 32位；<br>double 64位。<br>int scanf(“%d”,&amp;n); printf(“%d”,n);<br>long long scanf(“%lld”,&amp;n); printf(“%lld”,n);<br>float scanf(“%f”,&amp;fl); printf(“%f”,fl);<br>char scanf(“%c”,&amp;c); printf(“%c”,c);  能识别空格<br>字符串（char数组） <strong>scanf(“%s”,str);</strong>  printf(“%s”,str);  遇到空格结束<br>double <strong>scanf(“%lf”,&amp;db); printf(“%f”,db);</strong><br>getchar和putchar输入和输出单个字符，不赋值则会吸收掉。<br>gets输入一行字符串，并将其放于一维数组中，puts输出一行字符串，并换行。<br>字符数组末尾都有\0,表示字符串的结束，长度比实际多1.用getchar时要在字符串末尾加入’\0’.<br>strlen(字符数组)；数组中字符的个数。<br>strcmp(字符数组1,字符数组2);两个字符串大小比较。1&gt;2返回正数，1=2返回0，1<2返回负数。 1="" strcpy(字符数组1,字符数组2);把字符串2复制给字符串1。="" strcat(字符数组1,字符数组2);把字符串2接到字符串1后面。="" 黑盒测试：="">单点测试(PAT)<br>该组数据通过测试<br>2&gt;多点测试(ACM)<br>程序一次能运行所有数据，并要求输出的结果必须正确。<br>while(scanf(“%d %d”, &amp;n, &amp;a) != EOF){}EOF为end of file返回值为-1.</2返回负数。></p>
 <h2 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h2><h3 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h3><ol>
 <li>定义 ：<br>静态分配:<br>#define MaxSize 50<br>typedef  struct{//静态分配<br> ElemType data[MaxSize];//顺序表元素<br> int length;//当前长度<br>}SqList;<br>动态分配:<br>#define InitSize 100<br>typedef  struct{//动态分配<br> ElemType *data;//指示动态分配数组的指针<br> int MaxSize,length;//数组最大容量和当前个数<br>}SeqList;</li>
@@ -382,7 +382,7 @@ j++;
         <p><span>本文标题:</span><a href="/2016/03/14/数据结构/">数据结构</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月14日 - 22时10分</p>
-        <p><span>最后更新:</span>2016年03月28日 - 22时33分</p>
+        <p><span>最后更新:</span>2016年04月04日 - 16时55分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/14/数据结构/" title="数据结构">http://peilinghui.com/2016/03/14/数据结构/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/14/数据结构/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -518,7 +518,7 @@ j++;
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/22/数学问题/">数学问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/网易2016研发工程师编程题/">网易2016研发工程师编程题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/参加思科女生日感想/">参加思科女生日感想</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/面试总结/">面试总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/iOS中的地图定位/">iOS中的地图定位</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/31/面试总结/">面试总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/22/数学问题/">数学问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/网易2016研发工程师编程题/">网易2016研发工程师编程题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/参加思科女生日感想/">参加思科女生日感想</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/iOS中的地图定位/">iOS中的地图定位</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
