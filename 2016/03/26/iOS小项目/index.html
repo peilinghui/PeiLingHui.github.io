@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://peilinghui.com/2016/03/26/iOS小项目/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="到了软院以后，选择了移动互联网和游戏开发方向，开设了iOS课程，在老师的引导下，开始自学了iOS。">
-<meta property="og:updated_time" content="2016-03-29T12:22:30.000Z">
+<meta property="og:updated_time" content="2016-04-12T05:33:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS小项目">
 <meta name="twitter:description" content="到了软院以后，选择了移动互联网和游戏开发方向，开设了iOS课程，在老师的引导下，开始自学了iOS。">
@@ -150,7 +150,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/ACM/" style="font-size: 10px;">ACM</a> <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
+                        <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
                     </div>
                 </section>
                 
@@ -283,6 +283,7 @@
       
           
         <p>到了软院以后，选择了移动互联网和游戏开发方向，开设了iOS课程，在老师的引导下，开始自学了iOS。<br><a id="more"></a></p>
+<p>仿App第一步：</p>
 <h1 id="简单的音乐播放器"><a href="#简单的音乐播放器" class="headerlink" title="简单的音乐播放器"></a>简单的音乐播放器</h1><p>1.搭建界面<br>①排版与歌曲列表显示<br>navigation controller<br>中间table，然后上面是Cell，<br>②在’播放工具条’显示第一首歌歌手图片、名称、歌手<br> •’播放工具条’的图片截取圆形，并添加边框<br>③暂停与继续按钮的判断<br>④播放当前歌曲、上一首、下一首歌曲<br> •通过代理通知控制器<br> •创建音乐工具类<br> •实现上一首、下一首的循环<br>⑤显示歌曲播放时间与总长度<br> •添加slider与两个label<br> •显示左边歌曲的总时间<br> •添加定时器，实现slider的自动拖动<br>⑥实现歌曲的’时间的拖动’改变’歌曲播放进度’<br>⑦播放完歌曲，自动进入下一首音乐<br>⑧歌手头像转动<br>⑨设置音乐后台播放<br> •要实现后台的音乐播放有三个步骤要设置<br> 1&gt;在didFinishLaunching方法激活音频的会话类型即可，代码如下<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AVAudioSession *session = [AVAudioSession sharedInstance];&#10;[session setCategory:AVAudioSessionCategoryPlayback error:nil];&#10;[session setActive:YES error:nil];</span><br></pre></td></tr></table></figure></p>
 <p> 2&gt;在applicationDidEnterBackground方法开始后台任务，代码如下<br> <code>[application beginBackgroundTaskWithExpirationHandler:nil];</code><br> 3&gt;在info.plist中添加’Required background modes’选向，然后再添加’App plays audio or streams audio/video using AirPlay’<br>⑩实现歌曲锁屏</p>
 <pre><code> - 设置锁屏的音乐信息要使用MediaPlayer框架的MPNowPlayingInfoCenter类来实现，
@@ -294,6 +295,39 @@
 <h1 id="网易新闻客户端"><a href="#网易新闻客户端" class="headerlink" title="网易新闻客户端"></a>网易新闻客户端</h1><p>图文混排是webview去实现的,内容拼接的好处就是数据显示比较同步<br>过网络请求获得相关的信息,再通过手机端进行拼HTML,然后在WebView进行展示，此处还对文章中的图片增加点击效果，可以保存到相册中；文章的样式已经存在项目中，直接去调用；<br>1.首先了解两个相关的实体对象，一个是新闻的主体内容，另外一个就是图片的相关信息实体；<br>2.网络请求，并转化成实体对象<br>3.拼接HTML源代码<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">(<span class="typename">void</span>)showInWebView</span><br><span class="line">&#123;</span><br><span class="line">NSMutableString *html = [NSMutableString string];</span><br><span class="line">[html <span class="string">appendString:</span>@<span class="string">""</span>];</span><br><span class="line">[html <span class="string">appendString:</span>@<span class="string">""</span>];</span><br><span class="line">[html <span class="string">appendFormat:</span>@<span class="string">""</span>,[[NSBundle mainBundle] <span class="string">URLForResource:</span>@<span class="string">"SXDetails.css"</span> <span class="string">withExtension:</span>nil]];</span><br><span class="line">[html <span class="string">appendString:</span>@<span class="string">""</span>];</span><br><span class="line"></span><br><span class="line">[html <span class="string">appendString:</span>@<span class="string">""</span>];</span><br><span class="line">[html <span class="string">appendString:</span>[self touchBody]];</span><br><span class="line">[html <span class="string">appendString:</span>@<span class="string">""</span>];</span><br><span class="line"></span><br><span class="line">[html <span class="string">appendString:</span>@<span class="string">""</span>];</span><br><span class="line"></span><br><span class="line">[self.webView <span class="string">loadHTMLString:</span>html <span class="string">baseURL:</span>nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>4.关于WebView与网页进行交互，并把图片保存到手机相册中<br>5.拼接后的HTML内容如下<br>6：效果图中另外一张有比较多的图片源文件如下：</p>
 <p>参考：<a href="http://www.knowsky.com/884384.html" target="_blank" rel="external">http://www.knowsky.com/884384.html</a></p>
+<ol>
+<li>简介<br>1&gt;需求<ul>
+<li>展示不同栏目的新闻列表</li>
+<li>点击新闻列表可以查看详细内容</li>
+<li>支持新闻分享</li>
+<li>可推送重要新闻<br>2&gt;原型：类似网易新闻<br>3&gt;功能：</li>
+<li>显示当天广告</li>
+<li>定制导航栏</li>
+<li>定制底部导航栏</li>
+<li>栏目切换效果</li>
+<li>列表显示效果</li>
+<li>详情页展示</li>
+<li>离线缓存</li>
+<li>微信分享</li>
+<li>消息推送<br>4&gt;掌握  </li>
+<li>良好的习惯</li>
+<li>掌握MOVE模型</li>
+<li>掌握离线缓存策略</li>
+<li>掌握APNS机制</li>
+<li>掌握用户行为统计方法</li>
+</ul>
+</li>
+<li><p>框架<br>1&gt;JSON解析<br>SBJSON第三方框架：<a href="https://github.com/groopd/SBJSON-library" target="_blank" rel="external">https://github.com/groopd/SBJSON-library</a><br>2&gt;数据库操作<br>FMDB第三方框架：<a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">https://github.com/ccgus/fmdb</a><br>3&gt;小米推送:<br><a href="http://dev.xiaomi.com/doc/p=6421/index.html" target="_blank" rel="external">http://dev.xiaomi.com/doc/p=6421/index.html</a><br>4&gt;友盟/百度统计<br><a href="http://www.umeng.com/" target="_blank" rel="external">http://www.umeng.com/</a><br><a href="http://tongji.baidu.com/web/welcome/login" target="_blank" rel="external">http://tongji.baidu.com/web/welcome/login</a><br>5&gt;天气<br><a href="http://apistore.baidu.com/apiworks/servicedetail/112.html" target="_blank" rel="external">http://apistore.baidu.com/apiworks/servicedetail/112.html</a><br>6&gt;网易的18个开源框架<br><a href="http://www.cocoachina.com/ios/20150522/11884.html" target="_blank" rel="external">http://www.cocoachina.com/ios/20150522/11884.html</a><br>7&gt;收集App素材：<br><a href="http://www.jianshu.com/p/1b817affc305" target="_blank" rel="external">http://www.jianshu.com/p/1b817affc305</a></p>
+</li>
+<li><p>工具<br>1&gt;Charles(网络抓包工具)<br><a href="http://www.infoq.com/cn/articles/network-packet-analysis-tool-charles/" target="_blank" rel="external">http://www.infoq.com/cn/articles/network-packet-analysis-tool-charles/</a><br>2&gt;代码管理工具</p>
+<ul>
+<li>SVN和Git：SubVersion：开源版本控制系统，按文件存储。Git：开源分布式的版本控制，按元数据存储。</li>
+<li>GitHub和OSGit（代码托管和团队协作）<a href="https://github.com(私有收费)和http://git.oschina.net/（完全免费1000个项目）" target="_blank" rel="external">https://github.com(私有收费)和http://git.oschina.net/（完全免费1000个项目）</a></li>
+<li>使用Github:（需要翻墙）<a href="http://peilinghui.com/2016/02/25/git%E5%AD%A6%E4%B9%A0/">http://peilinghui.com/2016/02/25/git%E5%AD%A6%E4%B9%A0/</a></li>
+<li>使用OSGit：<a href="http://git.oschina.net/oschina/git-osc/wikis/%E5%B8%AE%E5%8A%A9" target="_blank" rel="external">http://git.oschina.net/oschina/git-osc/wikis/%E5%B8%AE%E5%8A%A9</a></li>
+</ul>
+</li>
+</ol>
 <h1 id="驾考助手"><a href="#驾考助手" class="headerlink" title="驾考助手"></a>驾考助手</h1><ol>
 <li>主页面UI的搭建：<br>1&gt;从storyBoard初始化启动应用程序<br>Navigation Controller与view。<br>2&gt;学习autolayout进行页面布局<br>主要是布局。各个小图片的位置<br>3&gt;在storyBoard中设置控件的layer层属性</li>
 <li>答题页面<br>1&gt;理解封装的概念<br>2&gt;UIView渐变的动画效果<br>3&gt;控件传值</li>
@@ -315,7 +349,7 @@
         <p><span>本文标题:</span><a href="/2016/03/26/iOS小项目/">iOS小项目</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月26日 - 20时44分</p>
-        <p><span>最后更新:</span>2016年03月29日 - 20时22分</p>
+        <p><span>最后更新:</span>2016年04月12日 - 13时33分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/26/iOS小项目/" title="iOS小项目">http://peilinghui.com/2016/03/26/iOS小项目/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/26/iOS小项目/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -339,8 +373,8 @@
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/03/25/剑指offer/">
-                    剑指offer
+                <a href="/2016/03/14/数据结构/">
+                    数据结构
                 </a>
             </div>
         
@@ -445,13 +479,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/03/25/剑指offer/" title="下一篇: 剑指offer">
+            <a href="/2016/03/14/数据结构/" title="下一篇: 数据结构">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/31/面试总结/">面试总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/22/数学问题/">数学问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/网易2016研发工程师编程题/">网易2016研发工程师编程题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/参加思科女生日感想/">参加思科女生日感想</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/iOS中的地图定位/">iOS中的地图定位</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");

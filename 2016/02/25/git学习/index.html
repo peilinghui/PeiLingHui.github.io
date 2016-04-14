@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="学习git也有一段时间了，准备系统整理一下参考请到此处廖雪峰的官网。">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/git.jpg">
-<meta property="og:updated_time" content="2016-02-29T06:27:21.000Z">
+<meta property="og:updated_time" content="2016-04-12T06:48:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git学习笔记">
 <meta name="twitter:description" content="学习git也有一段时间了，准备系统整理一下参考请到此处廖雪峰的官网。">
@@ -151,7 +151,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/ACM/" style="font-size: 10px;">ACM</a> <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
+                        <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
                     </div>
                 </section>
                 
@@ -291,7 +291,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>学习git也有一段时间了，准备系统整理一下<br>参考请到此处<a href="http://www.liaoxuefeng.com/wiki/929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的官网</a>。<br><a id="more"></a> </p>
+        <p>学习git也有一段时间了，准备系统整理一下<br>参考请到此处<a href="http://www.liaoxuefeng.com/wiki/929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的官网</a>。<br><a id="more"></a><br>mac自带git。</p>
 <h1 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h1><h2 id="git的配置，邮箱地址和用户名"><a href="#git的配置，邮箱地址和用户名" class="headerlink" title="git的配置，邮箱地址和用户名"></a>git的配置，邮箱地址和用户名</h2><ol>
 <li><p><strong>配置邮箱</strong><br>$ git config –global user.email “799745776@qq.com”  </p>
 </li>
@@ -300,18 +300,44 @@
 <li><p><strong>查看当前的配置</strong><br>$ cat .git/config</p>
 </li>
 </ol>
-<h2 id="git命令"><a href="#git命令" class="headerlink" title="git命令"></a>git命令</h2><h3 id="初始化一个Git仓库使用"><a href="#初始化一个Git仓库使用" class="headerlink" title="初始化一个Git仓库使用"></a>初始化一个Git仓库使用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
-<h3 id="添加文件到Git仓库"><a href="#添加文件到Git仓库" class="headerlink" title="添加文件到Git仓库"></a>添加文件到Git仓库</h3><ol>
-<li><p><strong>放在暂缓区的命令</strong><br>$ git add .</p>
+<h2 id="git命令"><a href="#git命令" class="headerlink" title="git命令"></a>git命令</h2><h3 id="下载代码"><a href="#下载代码" class="headerlink" title="下载代码"></a>下载代码</h3><p>$ git clone git@github.com:…….</p>
+<h3 id="添加文件到Git仓库"><a href="#添加文件到Git仓库" class="headerlink" title="添加文件到Git仓库"></a>添加文件到Git仓库</h3><p>先打开指定的文件夹。用cd.</p>
+<ol>
+<li><p><strong>放在暂缓区的命令</strong><br>$ git add Read.md<br>$ git add .</p>
 </li>
 <li><p><strong>本地提交仓库</strong><br>$ git commit -m “提交代码”</p>
 </li>
-<li><p>$ git push origin master</p>
+<li><p><strong>将提交推送到服务器</strong><br>$ git push origin master</p>
 </li>
 <li><p><strong>查看状态</strong><br>$ git staus</p>
 </li>
 <li><p><strong>更新本地代码</strong><br>$ git pull</p>
 </li>
+</ol>
+<h4 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h4><p>先在分支上进行操作，再合并到主干上。</p>
+<ol>
+<li><p>查看所有本地分支<br>$ git branch  </p>
+</li>
+<li><p>列出所有远程分支<br>$ git branch -r</p>
+</li>
+<li><p><strong>创建分支</strong><br>$ git branch V2</p>
+</li>
+<li><p><strong>将分支提交到服务器</strong><br>$ git push origin V2</p>
+</li>
+<li><p><strong>切换分支</strong><br>$ git checkout V2<br>修改V2分支上的文件，再提交本地修改，将提交推送到服务器上。分支内容修改，主干不变。</p>
+</li>
+<li><p><strong>合并分支到主干</strong><br>切换到主干上再合并<br>$ git checkout master<br>$ git merge V2<br>$ git push </p>
+</li>
+<li><p><strong>删除分支</strong><br>$ git branch -d name</p>
+</li>
+<li><p><strong>删除远程分支</strong><br>$ git push origin –delete name</p>
+</li>
+</ol>
+<p>$ git branch -dr [remote/branch]</p>
+<h4 id="版本还原"><a href="#版本还原" class="headerlink" title="版本还原"></a>版本还原</h4><p>$ git checkout V2</p>
+<ol>
+<li>将本地代码还原最近一次提交的修改<br>$ git revert HEAD<br>填写描述信息。保存退出。查看本地文件内容是否修改。<br>git push origin V2</li>
+<li>还原到指定版本<br>$ git revert fxxxx</li>
 </ol>
 <h4 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h4><ol>
 <li><p><strong>显示当前分支的版本历史</strong><br>$ git log</p>
@@ -328,26 +354,8 @@
 <li><p><strong>查看指令使用历史，确定要回到未来的哪个版本</strong><br>$ git reflog</p>
 </li>
 </ol>
-<h4 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h4><ol>
-<li><p><strong>查看所有本地分支</strong><br>$ git branch  </p>
-</li>
-<li><p><strong>列出所有远程分支</strong><br>$ git branch -r</p>
-</li>
-<li><p><strong>创建分支</strong><br>$ git branch name</p>
-</li>
-<li><p><strong>切换分支</strong><br>$ git checkout name</p>
-</li>
-<li><p><strong>合并分支</strong><br>$  git merge name </p>
-</li>
-<li><p><strong>删除分支</strong><br>$ git branch -d name</p>
-</li>
-<li><p><strong>删除远程分支</strong><br>$ git push origin –delete name</p>
-</li>
-</ol>
-<p>$ git branch -dr [remote/branch]</p>
 <h4 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rm 文件名</span><br></pre></td></tr></table></figure>
 <h2 id="远程"><a href="#远程" class="headerlink" title="远程"></a>远程</h2><h3 id="创建SSH-Key"><a href="#创建SSH-Key" class="headerlink" title="创建SSH Key"></a>创建SSH Key</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></span><br></pre></td></tr></table></figure>
-<h3 id="从远程库克隆"><a href="#从远程库克隆" class="headerlink" title="从远程库克隆"></a>从远程库克隆</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git@github.com:.......</span><br></pre></td></tr></table></figure>
 <h3 id="远程同步"><a href="#远程同步" class="headerlink" title="远程同步"></a>远程同步</h3><ol>
 <li><p><strong>下载远程仓库的所有变动</strong><br>$ git fetch [remote] </p>
 </li>
@@ -380,7 +388,7 @@
         <p><span>本文标题:</span><a href="/2016/02/25/git学习/">git学习笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年02月25日 - 12时21分</p>
-        <p><span>最后更新:</span>2016年02月29日 - 14时27分</p>
+        <p><span>最后更新:</span>2016年04月12日 - 14时48分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/02/25/git学习/" title="git学习笔记">http://peilinghui.com/2016/02/25/git学习/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/02/25/git学习/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -397,8 +405,8 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/02/25/创建博客/">
-                    创建博客
+                <a href="/2016/02/28/关于iOS中的autolayout/">
+                    关于iOS中的autolayout
                 </a>
             </div>
         
@@ -410,7 +418,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#本地"><span class="toc-number">1.</span> <span class="toc-text">本地</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#git的配置，邮箱地址和用户名"><span class="toc-number">1.1.</span> <span class="toc-text">git的配置，邮箱地址和用户名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git命令"><span class="toc-number">1.2.</span> <span class="toc-text">git命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化一个Git仓库使用"><span class="toc-number">1.2.1.</span> <span class="toc-text">初始化一个Git仓库使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加文件到Git仓库"><span class="toc-number">1.2.2.</span> <span class="toc-text">添加文件到Git仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#版本回退"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">版本回退</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分支管理"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除文件"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">删除文件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程"><span class="toc-number">1.3.</span> <span class="toc-text">远程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建SSH-Key"><span class="toc-number">1.3.1.</span> <span class="toc-text">创建SSH Key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从远程库克隆"><span class="toc-number">1.3.2.</span> <span class="toc-text">从远程库克隆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#远程同步"><span class="toc-number">1.3.3.</span> <span class="toc-text">远程同步</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-number">1.4.</span> <span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#显示本地git库："><span class="toc-number">1.4.1.</span> <span class="toc-text">显示本地git库：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#隐藏本地git库"><span class="toc-number">1.4.2.</span> <span class="toc-text">隐藏本地git库</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#本地"><span class="toc-number">1.</span> <span class="toc-text">本地</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#git的配置，邮箱地址和用户名"><span class="toc-number">1.1.</span> <span class="toc-text">git的配置，邮箱地址和用户名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git命令"><span class="toc-number">1.2.</span> <span class="toc-text">git命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载代码"><span class="toc-number">1.2.1.</span> <span class="toc-text">下载代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加文件到Git仓库"><span class="toc-number">1.2.2.</span> <span class="toc-text">添加文件到Git仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分支管理"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本还原"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">版本还原</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本回退"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">版本回退</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除文件"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">删除文件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程"><span class="toc-number">1.3.</span> <span class="toc-text">远程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建SSH-Key"><span class="toc-number">1.3.1.</span> <span class="toc-text">创建SSH Key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#远程同步"><span class="toc-number">1.3.2.</span> <span class="toc-text">远程同步</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-number">1.4.</span> <span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#显示本地git库："><span class="toc-number">1.4.1.</span> <span class="toc-text">显示本地git库：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#隐藏本地git库"><span class="toc-number">1.4.2.</span> <span class="toc-text">隐藏本地git库</span></a></li></ol></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -496,7 +504,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/02/25/创建博客/" title="上一篇: 创建博客">
+            <a href="/2016/02/28/关于iOS中的autolayout/" title="上一篇: 关于iOS中的autolayout">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -508,7 +516,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/31/面试总结/">面试总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/22/数学问题/">数学问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/网易2016研发工程师编程题/">网易2016研发工程师编程题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/参加思科女生日感想/">参加思科女生日感想</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/iOS中的地图定位/">iOS中的地图定位</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");

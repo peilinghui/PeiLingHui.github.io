@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5%E8%B0%83%E7%94%A8.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%BF%9C%E7%A8%8B%E9%80%9A%E7%9F%A5.png">
-<meta property="og:updated_time" content="2016-04-06T08:52:38.000Z">
+<meta property="og:updated_time" content="2016-04-13T11:51:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS面试题总结">
 <meta name="twitter:description" content="快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。">
@@ -166,7 +166,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/ACM/" style="font-size: 10px;">ACM</a> <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
+                        <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
                     </div>
                 </section>
                 
@@ -310,7 +310,6 @@
 <a id="more"></a>
 <h1 id="内存管理（MRC和ARC）"><a href="#内存管理（MRC和ARC）" class="headerlink" title="内存管理（MRC和ARC）"></a>内存管理（MRC和ARC）</h1><p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.png" alt=""><br>讲解：<a href="http://www.jianshu.com/p/3129ce12e020" target="_blank" rel="external">http://www.jianshu.com/p/3129ce12e020</a></p>
 <ol>
-<li>对于类方法（静态方法）默认是autorelease的。所有类方法都会这样吗？<br>系统自带的绝大数类方法返回的对象,都是经过autorelease的</li>
 <li>block在ARC中和传统的MRC中的行为和用法有没有什么区别，需要注意些什么？<br>注意：1&gt;block的内存管理 (block的实现是基于指针和函数指针) <ul>
 <li>如果没有copy操作，block代码默认放在栈内存（弱引用）。</li>
 <li>如果有copy操作，block升级放在堆内存（强引用）。<br>2&gt;防止循环引用<br> 解决：非ARC（MRC）：<strong>__block</strong><br>ARC：<strong>__weak</strong>或者<strong>__unsafe_unretained</strong><blockquote>
@@ -321,7 +320,7 @@
 </li>
 <li>自动释放池底层怎么实现<br>自动释放池以栈的形式实现:当你创建一个新的自动释放池时，它将被添加到栈顶。当一个对象收到发送autorelease消息时,它被添加到当前线程的处于栈顶的自动释放池中,当自动释放池被回收时,它们从栈中被删除, 并且会给池子里面所有的对象都会做一次release操作.</li>
 <li>怎么保证多人开发进行内存泄露的检查.<br>1&gt;使用Product-&gt;Analyze进行代码的静态分析<br>2&gt;为避免不必要的麻烦, 多人开发时尽量使用ARC</li>
-<li>什么情况下会发生内存泄漏和内存溢出？<br>当程序在申请内存后，无法释放已申请的内存空间(例如一个对象或者变量使用完成后没有释放,这个对象一直占用着内存)，一次内存泄露危害可以忽略，但内存泄露堆积后果很严重，无论多少内存,迟早会被占光。内存泄露会最终会导致内存溢出！<br>当程序在申请内存时，没有足够的内存空间供其使用，出现out of memory；比如申请了一个int,但给它存了long才能存下的数，那就是内存溢出。</li>
+<li>什么情况下会发生内存泄漏和内存溢出？<br>内存泄露：不再需要的对象没有释放，导致内存泄露，内存泄露会导致应用闪退。循环引用造成内存不可回收。<br>1&gt;block中使用strong self，如果不注意很容易造成内存泄露<br>2&gt;delegate如果设置为strong也很大可能造成内存泄露，不过具体还要看有没有循环引用.</li>
 </ol>
 <h3 id="引用计数："><a href="#引用计数：" class="headerlink" title="引用计数："></a><strong>引用计数</strong>：</h3><p>OC在内存管理上采用了引用计数（retain count），在对象内部保存一个数字，用来表示被引用的次数。init、new和copy都会让retain count加1。当销毁对象的时候，系统不会直接调用dealloc方法，而是先调用release，让retain count 减1，当retain count等于0的时候，系统才会调用dealloc方法来销毁对象。<br>在指针赋值的时候，retain count是不会自动增加的，为了避免上面所说的错误，我们需要在赋值的时候手动retain一次，让retain count增加1。<br>ClassA <em>a = [[ClassA alloc] init]; // retain count = 1<br>ClassA </em>b = a;<br>[b retain]; // retain count = 2<br>[a dealloc];<br>这样在执行到第四行的时候，对象的retain count只是减了1，并没有被销毁，指针b仍然有效。  </p>
 <p><strong>内存泄露</strong>：<br>就如上面列子所示，当生成ClassA对象时，指针a拥有对该对象的访问权。如果失去了对一个对象的访问权，而又没有将retain count减至0，就会造成内存泄露。也就是说，分配出去的内存无法回收。<br>ClassA *a = [[ClassA alloc] init];<br>a = nil; </p>
@@ -473,7 +472,7 @@
         <p><span>本文标题:</span><a href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月01日 - 16时57分</p>
-        <p><span>最后更新:</span>2016年04月06日 - 16时52分</p>
+        <p><span>最后更新:</span>2016年04月13日 - 19时51分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/01/iOS面试题总结/" title="iOS面试题总结">http://peilinghui.com/2016/03/01/iOS面试题总结/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/01/iOS面试题总结/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -609,7 +608,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/31/面试总结/">面试总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/22/数学问题/">数学问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/网易2016研发工程师编程题/">网易2016研发工程师编程题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/参加思科女生日感想/">参加思科女生日感想</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/iOS中的地图定位/">iOS中的地图定位</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
