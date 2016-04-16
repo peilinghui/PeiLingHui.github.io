@@ -11,7 +11,8 @@
 <meta property="og:url" content="http://peilinghui.com/2016/03/26/iOS小项目/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="到了软院以后，选择了移动互联网和游戏开发方向，开设了iOS课程，在老师的引导下，开始自学了iOS。">
-<meta property="og:updated_time" content="2016-04-12T05:33:10.000Z">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%AE%BE%E5%A4%87%E5%B0%BA%E5%AF%B8.png">
+<meta property="og:updated_time" content="2016-04-16T08:39:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS小项目">
 <meta name="twitter:description" content="到了软院以后，选择了移动互联网和游戏开发方向，开设了iOS课程，在老师的引导下，开始自学了iOS。">
@@ -150,7 +151,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+                        <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
                     </div>
                 </section>
                 
@@ -327,6 +328,42 @@
 <li>使用OSGit：<a href="http://git.oschina.net/oschina/git-osc/wikis/%E5%B8%AE%E5%8A%A9" target="_blank" rel="external">http://git.oschina.net/oschina/git-osc/wikis/%E5%B8%AE%E5%8A%A9</a></li>
 </ul>
 </li>
+<li><p>搭建系统框架<br>1&gt;建立工程：名称，标识，版本<br>2&gt;建立相应目录：Global，Controller(Page,Widget,Cell),Model,Network,DB,Utility,ThirdSDK,Define,Resource(Config,Image,Xib)<br>3&gt;日志输出宏<br>4&gt;设备类型宏<br>5&gt;发布版本设置（AdHoc,AppStore,Debug,Enterprise,Release）<br>形成自己的框架  </p>
+</li>
+<li><p>设置应用图标及启动<br>1&gt;添加预编译头文件（.pch并设置路径）<br>2&gt;整理相关目录<br>3&gt;添加APP图标；加入网易APP图标，设置图片<br>4&gt;点，渲染像素，物理像素，物理设备<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%AE%BE%E5%A4%87%E5%B0%BA%E5%AF%B8.png" alt=""><br>5&gt;检查设备尺寸<br>6&gt;添加启动图</p>
+</li>
+<li><p>MVC模型<br>Model-&gt;View：模型改变的时候通知View。<br>View-&gt;Model：向模型索要状态<br>View-&gt;Controller: controller要求View做出相应的改变，View要求controller改变Model。<br>Controller-&gt;Model：Controller调用Model行为。</p>
+</li>
+</ol>
+<p>MOVE模型：<br>Model，Operation（操作数：登录，注销，获取数据），View，Event（操作改变是发生的事件和通知）<br>1&gt;Model层<br>BaseInfo（基类）<br>AdvertInfo（广告）<br>ColumnInfo（栏目）：标题，id，名称<br>NewsInfo（新闻列表）：图标，标题，摘要</p>
+<p>2&gt;加入JSON库。把JSON库中不需要ARC的文件在Bulid Phase中设置成-fno-objc-arc<br>所需要的服务器主要是用本地的Apache服务器。<br>启动apache服务器<br>$ sudo apachectl start<br>$ sudo apachectl restart<br>停止apache服务器<br>$ sudo apachectl -k stop<br>模仿网易新闻，定义接口JSON文件，与实体相对应。用KVO把数据模型解析为实体。<br>像广告：有id，name，imageurl,linkurl<br>新闻：有id,name,desc,iconurl,contenturl<br>3&gt;Model排序<br>4&gt;Model比较</p>
+<ol>
+<li><p>MOVE模型的Operation<br>操作：获取广告，获取栏目，获取新闻列表<br>在URL定义中。宏：正式版和测试版地址，接口。在Build Setting的Apple LLVM 6.1-Preprocessor中定义 Preprocessor Macros的AdHoc,Appstore,Debug,Enterprise,Release的参数值</p>
+</li>
+<li><p>MOVE模型的View<br>基于nib建立的。公共部分在基类中实现。BaseController。<br>把页面分细，实现代码重用。<br>Page:BasePage，广告页，home主页（TabBarController）,新闻页，阅读页面，视听页面，发现页面，我的页面。<br>Wiget:栏目条，基类baseWiget，公共基类TableWidget,栏目条ColumnBarwidget，新闻NewsWidget<br>Cell:<br>用类图UML表示，聚合，关联，继承。</p>
+</li>
+</ol>
+<ol>
+<li>MOVE模型的Event<br>点击登录按钮，状态改变（WIFI变为3G）<br>登录界面展示：<br>M：UserInfo<br>O: FxLogin<br>V: LoginPage<br>E: LoginButton<br>把数据接口解析为实体。</li>
+</ol>
+<ol>
+<li><p>离线缓存-iOS沙盒机制<br>下次取得时候直接从本地取，不需要再去网上下载<br>1&gt;沙盒机制:iOS为每个app创建自己的存储空间，对APP执行各种操作的权限限制。为了安全考虑.<br>2&gt;关键目录：（Xcode：Window-Device）</p>
+<ul>
+<li>Document:永久保存目录，文档目录。要保存程序声称的数据，会自动备份到ICloud，iTunes，恢复。<br>/Inbox:文件交互目录，只能读、删；不能写，改。  </li>
+<li>Library：Caches：缓存；Preference：偏好设置(下面有plist)<br>iTunes，iCloud备份+恢复。/Caches:空间不足时会删除</li>
+<li>tmp:临时文件，系统会自动清理，程序重新启动就会清理。<br>设置不备份到iCloud和ITunes中。<br>3&gt;Document Types：从第三方文件拷贝到自己的沙盒中，都放在inbox下。其他程序的文件转存到这个程序。<br>4&gt;文件共享：可以在iTunes中查看inbox文件夹。然后把电脑文件放在程序下面。<br>5&gt;安全策略：越狱之后同样可以获取到文件，所以保证缓存到手机的数据安全，敏感信息必须考虑加密。RSA，AES加密算法。<blockquote>
+<p>面试问题：如何实现删除APP，app的数据还能保存在设备中：<br>可以用KeychainUtils（钥匙串），把敏感信息放在钥匙串中。可以起到加密作用。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>数据及图片的缓存<br>1&gt;建立统一的缓存目录：/Library/NewsReader<br>2&gt;元数据和图片分别存储在：<br>元数据：新闻列表。用动态库libsqlite3.dylib。FxDBManager中设置一些数据库的建表。<br>图片：图标文件。CacheImage</p>
+</li>
+<li><p>H5自动缓存技术<br>在服务器的Document中放入H5文件，里面有清单文件manifest，要缓存的文件有css,js,在HTML的文件中连接了css和JS文件。<br>safari监控：<br><a href="http://172.16.20.174.newsreder/h5/content.html" target="_blank" rel="external">http://172.16.20.174.newsreder/h5/content.html</a><br><a href="http://172.16.20.174.newsreder/h5/content2.html" target="_blank" rel="external">http://172.16.20.174.newsreder/h5/content2.html</a><br>H5应用指定了manifest 清单，则有应用程序缓存，就指定了缓存的文件，当没有网络时，还可以看到加载的页面。。。。。<br>2.如果不用H5离线缓存技术，就需要存储在数据库中。<br>xcode监控沙盒：<br>/Library/Cache/xxx/ApplicationCache.db<br>CacheResoursData<br>CacheResourses<br>3.内容更新<br>在CSS上有背景颜色的更新，只需要在本地manifest文件中修改Version号，然后告诉H5文件重新加载，本地缓存更新</p>
+</li>
+</ol>
+<ol>
+<li>功能扩展（还未实现）<br>下拉刷新<br>栏目定制<br>夜间模式:在css中设置<br>字体字号的设置：在css中设置样式，字号：在JS中字体样式替换<br>消息推送设置：<br>实现页面：阅读，试听，发现，我</li>
 </ol>
 <h1 id="驾考助手"><a href="#驾考助手" class="headerlink" title="驾考助手"></a>驾考助手</h1><ol>
 <li>主页面UI的搭建：<br>1&gt;从storyBoard初始化启动应用程序<br>Navigation Controller与view。<br>2&gt;学习autolayout进行页面布局<br>主要是布局。各个小图片的位置<br>3&gt;在storyBoard中设置控件的layer层属性</li>
@@ -349,7 +386,7 @@
         <p><span>本文标题:</span><a href="/2016/03/26/iOS小项目/">iOS小项目</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月26日 - 20时44分</p>
-        <p><span>最后更新:</span>2016年04月12日 - 13时33分</p>
+        <p><span>最后更新:</span>2016年04月16日 - 16时39分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/26/iOS小项目/" title="iOS小项目">http://peilinghui.com/2016/03/26/iOS小项目/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/26/iOS小项目/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -485,7 +522,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/我的iOS学习之路/">我的iOS学习之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");

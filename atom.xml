@@ -136,6 +136,107 @@
   </entry>
   
   <entry>
+    <title>我的iOS学习之路</title>
+    <link href="http://peilinghui.com/2016/04/01/%E6%88%91%E7%9A%84iOS%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/"/>
+    <id>http://peilinghui.com/2016/04/01/我的iOS学习之路/</id>
+    <published>2016-04-01T05:01:49.000Z</published>
+    <updated>2016-04-13T11:46:01.000Z</updated>
+    
+    <content type="html">&lt;p&gt;发现自己OC的一些底层还是不是很理解，iOS的很多概念还是没有搞清楚，决心好好读几本书来加强一下。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;effective-objective-c-2-0&quot;&gt;&lt;a href=&quot;#effective-objective-c-2-0&quot; class=&quot;headerlink&quot; title=&quot;effective objective-c 2.0&quot;&gt;&lt;/a&gt;effective objective-c 2.0&lt;/h1&gt;&lt;p&gt;作者网站：&lt;a href=&quot;http://www.galloway.me.uk/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.galloway.me.uk/&lt;/a&gt;&lt;br&gt;英文原版：&lt;a href=&quot;https://www.gitbook.com/book/xiaoxueying/effective-objective-c-2-0/details&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.gitbook.com/book/xiaoxueying/effective-objective-c-2-0/details&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Objective-C高级编程&quot;&gt;&lt;a href=&quot;#Objective-C高级编程&quot; class=&quot;headerlink&quot; title=&quot;Objective-C高级编程&quot;&gt;&lt;/a&gt;Objective-C高级编程&lt;/h1&gt;&lt;h2 id=&quot;ARC自动引用计数&quot;&gt;&lt;a href=&quot;#ARC自动引用计数&quot; class=&quot;headerlink&quot; title=&quot;ARC自动引用计数&quot;&gt;&lt;/a&gt;ARC自动引用计数&lt;/h2&gt;&lt;p&gt;  Automatic Reference Counting，降低了程序崩溃、内存泄露的风险，很大程度上减少了开发程序的工作量。&lt;br&gt; 使用条件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用Xcode4.2或以上版本&lt;/li&gt;
+&lt;li&gt;使用LLVM编译器3.0或以上版本&lt;/li&gt;
+&lt;li&gt;编译器选项中设置ARC为有效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;在LLVM编译器中设置ARC为有效状态，就无需再次键入retain或release代码&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;内存管理的思考方式&lt;br&gt;1&amp;gt; 自己生成的对象，自己持有&lt;br&gt;alloc,new,copy,mutablecopy(copy方法利用NSCopying方法约定，由各类实现copyWithZone：方法生成并持有不可变对象的副本)&lt;br&gt;2&amp;gt; 非自己生成的对象，自己持有&lt;br&gt;NSMutableArray类的array方法。使用retain方法可以持有&lt;br&gt;&lt;code&gt;id obj = [NSMutableArray array];
+ [obj retain];&lt;/code&gt;&lt;br&gt;3&amp;gt;不再需要自己持有的对象时释放&lt;br&gt;用alloc\new\copy\mutableCopy方法生成并持有的对象，或用retain方法持有的对象，一旦不再需要，务必要用release进行释放。  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;4&amp;gt;无法释放非自己持有的对象&lt;br&gt;&lt;strong&gt;程序崩溃情况&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- 再度释放已经释放了的对象
+- 访问已经释放的对象时。
+- 释放了非自己持有的对象
+&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;alloc/retain/release/dealloc在GUNstep中的实现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在objective-c的对象中存有引用计数这一整数值&lt;/li&gt;
+&lt;li&gt;调用alloc或是retain方法后，引用计数值加1.&lt;/li&gt;
+&lt;li&gt;调用release后，引用计数值减1.&lt;/li&gt;
+&lt;li&gt;引用计数值为0时，调用dealloc方法废弃对象。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;GNUstep将用内存块头部管理引用计数的好处：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;少量代码即可完成&lt;/li&gt;
+&lt;li&gt;能够统一管理引用计数用内存块与对象用内存块。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;苹果实现通过引用技术表来管理引用计数的好处：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对象用内存块的分配无需考虑内存块头部&lt;/li&gt;
+&lt;li&gt;引用计数表各记录中存有内存块地址，可以从各个记录追溯到各对象的内存块。（在调试的时候，只要内存技术表没有被破坏，就可以确认各内存块的位置；使用工具检测内存泄露时，引用计数表的各记录也有助于检测各对象的持有者是否存在）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;autorelease的具体使用方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;生成并持有NSAutoreleasePool对象。&lt;/li&gt;
+&lt;li&gt;调用已分配对象的autorelease实例方法。&lt;/li&gt;
+&lt;li&gt;废弃NSAutoreleasePool对象。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;autorelease简介&lt;br&gt;1&amp;gt;autorelease方法的基本作用&lt;br&gt;给对象发送一条autorelease消息, 会将对象放到一个自动释放池中&lt;br&gt;当自动释放池被销毁时，会对池子里面的所有对象做一次release操作&lt;br&gt;会返回对象本身&lt;br&gt;调用完autorelease方法后，对象的计数器不变&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;2&amp;gt;autorelease的好处&lt;br&gt;不用再关心对象释放的时间&lt;br&gt;不用再关心什么时候调用release&lt;/p&gt;
+&lt;p&gt;3&amp;gt;autorelease的使用注意&lt;br&gt;占用内存较大的对象不要随便使用autorelease&lt;br&gt;占用内存较小的对象使用autorelease，没有太大影响&lt;br&gt; &lt;strong&gt;release和autorelease区别&lt;/strong&gt;：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;release立即释放，autorelease不立即释放，先放到autoreleasepool中，当pool结束后自动调用release。&lt;/p&gt;
+&lt;p&gt;一般来说,除了alloc、new或copy之外的方法创建的对象都被声明了autorelease.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;autorelease的实现&lt;br&gt;autorelease实例方法的本质就是调用了NSAutoreleasePool对象的addObjective类方法。&lt;br&gt;可通过objc4库的runtime/objc-arr.mm来确认苹果中autorelease的实现。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;内存不足的产生的例子？如何解决？&lt;br&gt;在for循环中读入大量图片的同时，改变其尺寸。图像文件读入到NSData对象，并从中产生UIImage对象，改变该尺寸后生成新的UIImage对象，这种情况就会产生大量的autorelease的对象。不废弃NSAutoreleasePool对象，那么生成的对象就不能释放，就会产生内存不足。&lt;br&gt;解决：在适当的地方生成、持有或废弃NSAutoreleasePool对象；&lt;br&gt;返回NSMutableArray类的arrayWithCapcity方法。来返回autorelease对象。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;ARC的规则&quot;&gt;&lt;a href=&quot;#ARC的规则&quot; class=&quot;headerlink&quot; title=&quot;ARC的规则&quot;&gt;&lt;/a&gt;ARC的规则&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;设置ARC有效的编译方法：&lt;ul&gt;
+&lt;li&gt;使用clang（LLVM编译器）3.0或以上版本&lt;/li&gt;
+&lt;li&gt;指定编译器属性为“-fobjc-arc”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;所有权修饰符&lt;br&gt;变量类型定义为id类型和各种对象类型。&lt;br&gt;对象类型：指向NSobject这样的OC指针，如：“NSObject &lt;em&gt;”&lt;br&gt;id类型：用于隐藏对象类型的类名部分，相当于C语言的“void &lt;/em&gt;”&lt;br&gt;1&amp;gt;&lt;strong&gt;strong修饰符（默认的）强引用，适用于普通对象,相当于MRC中的retain&lt;br&gt;2&amp;gt;&lt;/strong&gt;weak修饰符，弱引用，解决循环引用(很容易发生内存泄露), 相当于MRC中的assign.&lt;br&gt;3&amp;gt;&lt;strong&gt;unsafe&lt;/strong&gt;retained修饰符，和&lt;strong&gt;weak一样，自己生成并持有的对象不能继续为自己所有，所以生成的对象会立即释放。&lt;br&gt;4&amp;gt;&lt;/strong&gt;autorelease修饰符。&lt;br&gt;在ARC有效时，用@autorelease块代替NSAutoreleasePool类，用附有__autorelease修饰符的变量代替autorelease方法。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;ARC规则&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不能使用retain/release/retainCount/autorelease&lt;/li&gt;
+&lt;li&gt;不能使用NSAllocateObject/NSDeallocateObject&lt;/li&gt;
+&lt;li&gt;需遵循内存管理的方法命名规则&lt;/li&gt;
+&lt;li&gt;不要显示调用dealloc(可以重写dealloc，但是不能调用[super dealloc])&lt;/li&gt;
+&lt;li&gt;使用@autoreleasepool块代替NSAutoreleasePool&lt;/li&gt;
+&lt;li&gt;不能使用区域（NSZone）&lt;/li&gt;
+&lt;li&gt;对象型变量不能作为C语言结构体(struct/union)的成员(可强制转换为void *或者是添加&lt;strong&gt;unsafe&lt;/strong&gt;retained修饰符)&lt;/li&gt;
+&lt;li&gt;显示转换id和“void &lt;em&gt;”（通过__bridge可以id和void &lt;/em&gt;相互转换，&lt;strong&gt;bridge&lt;/strong&gt;retain可使要转换赋值的变量也持有所赋值的对象相当于retain，&lt;strong&gt;bridge&lt;/strong&gt;transfer被转换的变量所持有的对象在该变量被赋值给转换目标变量后随之释放相当于release）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;Block&quot;&gt;&lt;a href=&quot;#Block&quot; class=&quot;headerlink&quot; title=&quot;Block&quot;&gt;&lt;/a&gt;Block&lt;/h2&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;发现自己OC的一些底层还是不是很理解，iOS的很多概念还是没有搞清楚，决心好好读几本书来加强一下。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="读书笔记" scheme="http://peilinghui.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>常用算法</title>
     <link href="http://peilinghui.com/2016/03/28/%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95/"/>
     <id>http://peilinghui.com/2016/03/28/常用算法/</id>
@@ -203,9 +304,10 @@
     <link href="http://peilinghui.com/2016/03/27/iOS%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     <id>http://peilinghui.com/2016/03/27/iOS面试题/</id>
     <published>2016-03-27T06:37:29.000Z</published>
-    <updated>2016-04-14T14:09:39.000Z</updated>
+    <updated>2016-04-14T14:12:37.000Z</updated>
     
-    <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+    <content type="html">&lt;p&gt;总结一下一些面试题。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;ol&gt;
 &lt;li&gt;一组正整数数字，如何找出两个数加为100的组合；&lt;br&gt;（首先要排序）然后two pointers.&lt;/li&gt;
 &lt;li&gt;assign和weak的区别；&lt;br&gt;assign是指针赋值，不对引用计数操作，使用之后如果没有置为nil，可能就会产生野指针；而weak一旦不进行使用后，永远不会使用了，就不会产生野指针！ 用weak避免循环引用.&lt;/li&gt;
@@ -346,10 +448,7 @@
     
     <summary type="html">
     
-      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;ol&gt;
-&lt;li&gt;一组正整数数字，如何找出两个数加为100的组合；&lt;br&gt;（首先要排序）然后two pointers.&lt;/li&gt;
-&lt;li&gt;assign和weak的区别；&lt;br&gt;assign是指针赋值，不对引用计数操作，使用之后如果没有置为nil
+      &lt;p&gt;总结一下一些面试题。&lt;/p&gt;
     
     </summary>
     
@@ -365,7 +464,7 @@
     <link href="http://peilinghui.com/2016/03/26/iOS%E5%B0%8F%E9%A1%B9%E7%9B%AE/"/>
     <id>http://peilinghui.com/2016/03/26/iOS小项目/</id>
     <published>2016-03-26T12:44:02.000Z</published>
-    <updated>2016-04-12T05:33:10.000Z</updated>
+    <updated>2016-04-16T08:39:33.000Z</updated>
     
     <content type="html">&lt;p&gt;到了软院以后，选择了移动互联网和游戏开发方向，开设了iOS课程，在老师的引导下，开始自学了iOS。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;仿App第一步：&lt;/p&gt;
@@ -412,6 +511,42 @@
 &lt;li&gt;使用OSGit：&lt;a href=&quot;http://git.oschina.net/oschina/git-osc/wikis/%E5%B8%AE%E5%8A%A9&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://git.oschina.net/oschina/git-osc/wikis/%E5%B8%AE%E5%8A%A9&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;搭建系统框架&lt;br&gt;1&amp;gt;建立工程：名称，标识，版本&lt;br&gt;2&amp;gt;建立相应目录：Global，Controller(Page,Widget,Cell),Model,Network,DB,Utility,ThirdSDK,Define,Resource(Config,Image,Xib)&lt;br&gt;3&amp;gt;日志输出宏&lt;br&gt;4&amp;gt;设备类型宏&lt;br&gt;5&amp;gt;发布版本设置（AdHoc,AppStore,Debug,Enterprise,Release）&lt;br&gt;形成自己的框架  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;设置应用图标及启动&lt;br&gt;1&amp;gt;添加预编译头文件（.pch并设置路径）&lt;br&gt;2&amp;gt;整理相关目录&lt;br&gt;3&amp;gt;添加APP图标；加入网易APP图标，设置图片&lt;br&gt;4&amp;gt;点，渲染像素，物理像素，物理设备&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E8%AE%BE%E5%A4%87%E5%B0%BA%E5%AF%B8.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;5&amp;gt;检查设备尺寸&lt;br&gt;6&amp;gt;添加启动图&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;MVC模型&lt;br&gt;Model-&amp;gt;View：模型改变的时候通知View。&lt;br&gt;View-&amp;gt;Model：向模型索要状态&lt;br&gt;View-&amp;gt;Controller: controller要求View做出相应的改变，View要求controller改变Model。&lt;br&gt;Controller-&amp;gt;Model：Controller调用Model行为。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;MOVE模型：&lt;br&gt;Model，Operation（操作数：登录，注销，获取数据），View，Event（操作改变是发生的事件和通知）&lt;br&gt;1&amp;gt;Model层&lt;br&gt;BaseInfo（基类）&lt;br&gt;AdvertInfo（广告）&lt;br&gt;ColumnInfo（栏目）：标题，id，名称&lt;br&gt;NewsInfo（新闻列表）：图标，标题，摘要&lt;/p&gt;
+&lt;p&gt;2&amp;gt;加入JSON库。把JSON库中不需要ARC的文件在Bulid Phase中设置成-fno-objc-arc&lt;br&gt;所需要的服务器主要是用本地的Apache服务器。&lt;br&gt;启动apache服务器&lt;br&gt;$ sudo apachectl start&lt;br&gt;$ sudo apachectl restart&lt;br&gt;停止apache服务器&lt;br&gt;$ sudo apachectl -k stop&lt;br&gt;模仿网易新闻，定义接口JSON文件，与实体相对应。用KVO把数据模型解析为实体。&lt;br&gt;像广告：有id，name，imageurl,linkurl&lt;br&gt;新闻：有id,name,desc,iconurl,contenturl&lt;br&gt;3&amp;gt;Model排序&lt;br&gt;4&amp;gt;Model比较&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;MOVE模型的Operation&lt;br&gt;操作：获取广告，获取栏目，获取新闻列表&lt;br&gt;在URL定义中。宏：正式版和测试版地址，接口。在Build Setting的Apple LLVM 6.1-Preprocessor中定义 Preprocessor Macros的AdHoc,Appstore,Debug,Enterprise,Release的参数值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;MOVE模型的View&lt;br&gt;基于nib建立的。公共部分在基类中实现。BaseController。&lt;br&gt;把页面分细，实现代码重用。&lt;br&gt;Page:BasePage，广告页，home主页（TabBarController）,新闻页，阅读页面，视听页面，发现页面，我的页面。&lt;br&gt;Wiget:栏目条，基类baseWiget，公共基类TableWidget,栏目条ColumnBarwidget，新闻NewsWidget&lt;br&gt;Cell:&lt;br&gt;用类图UML表示，聚合，关联，继承。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+&lt;li&gt;MOVE模型的Event&lt;br&gt;点击登录按钮，状态改变（WIFI变为3G）&lt;br&gt;登录界面展示：&lt;br&gt;M：UserInfo&lt;br&gt;O: FxLogin&lt;br&gt;V: LoginPage&lt;br&gt;E: LoginButton&lt;br&gt;把数据接口解析为实体。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;离线缓存-iOS沙盒机制&lt;br&gt;下次取得时候直接从本地取，不需要再去网上下载&lt;br&gt;1&amp;gt;沙盒机制:iOS为每个app创建自己的存储空间，对APP执行各种操作的权限限制。为了安全考虑.&lt;br&gt;2&amp;gt;关键目录：（Xcode：Window-Device）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Document:永久保存目录，文档目录。要保存程序声称的数据，会自动备份到ICloud，iTunes，恢复。&lt;br&gt;/Inbox:文件交互目录，只能读、删；不能写，改。  &lt;/li&gt;
+&lt;li&gt;Library：Caches：缓存；Preference：偏好设置(下面有plist)&lt;br&gt;iTunes，iCloud备份+恢复。/Caches:空间不足时会删除&lt;/li&gt;
+&lt;li&gt;tmp:临时文件，系统会自动清理，程序重新启动就会清理。&lt;br&gt;设置不备份到iCloud和ITunes中。&lt;br&gt;3&amp;gt;Document Types：从第三方文件拷贝到自己的沙盒中，都放在inbox下。其他程序的文件转存到这个程序。&lt;br&gt;4&amp;gt;文件共享：可以在iTunes中查看inbox文件夹。然后把电脑文件放在程序下面。&lt;br&gt;5&amp;gt;安全策略：越狱之后同样可以获取到文件，所以保证缓存到手机的数据安全，敏感信息必须考虑加密。RSA，AES加密算法。&lt;blockquote&gt;
+&lt;p&gt;面试问题：如何实现删除APP，app的数据还能保存在设备中：&lt;br&gt;可以用KeychainUtils（钥匙串），把敏感信息放在钥匙串中。可以起到加密作用。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;数据及图片的缓存&lt;br&gt;1&amp;gt;建立统一的缓存目录：/Library/NewsReader&lt;br&gt;2&amp;gt;元数据和图片分别存储在：&lt;br&gt;元数据：新闻列表。用动态库libsqlite3.dylib。FxDBManager中设置一些数据库的建表。&lt;br&gt;图片：图标文件。CacheImage&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;H5自动缓存技术&lt;br&gt;在服务器的Document中放入H5文件，里面有清单文件manifest，要缓存的文件有css,js,在HTML的文件中连接了css和JS文件。&lt;br&gt;safari监控：&lt;br&gt;&lt;a href=&quot;http://172.16.20.174.newsreder/h5/content.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://172.16.20.174.newsreder/h5/content.html&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://172.16.20.174.newsreder/h5/content2.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://172.16.20.174.newsreder/h5/content2.html&lt;/a&gt;&lt;br&gt;H5应用指定了manifest 清单，则有应用程序缓存，就指定了缓存的文件，当没有网络时，还可以看到加载的页面。。。。。&lt;br&gt;2.如果不用H5离线缓存技术，就需要存储在数据库中。&lt;br&gt;xcode监控沙盒：&lt;br&gt;/Library/Cache/xxx/ApplicationCache.db&lt;br&gt;CacheResoursData&lt;br&gt;CacheResourses&lt;br&gt;3.内容更新&lt;br&gt;在CSS上有背景颜色的更新，只需要在本地manifest文件中修改Version号，然后告诉H5文件重新加载，本地缓存更新&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+&lt;li&gt;功能扩展（还未实现）&lt;br&gt;下拉刷新&lt;br&gt;栏目定制&lt;br&gt;夜间模式:在css中设置&lt;br&gt;字体字号的设置：在css中设置样式，字号：在JS中字体样式替换&lt;br&gt;消息推送设置：&lt;br&gt;实现页面：阅读，试听，发现，我&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1 id=&quot;驾考助手&quot;&gt;&lt;a href=&quot;#驾考助手&quot; class=&quot;headerlink&quot; title=&quot;驾考助手&quot;&gt;&lt;/a&gt;驾考助手&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;主页面UI的搭建：&lt;br&gt;1&amp;gt;从storyBoard初始化启动应用程序&lt;br&gt;Navigation Controller与view。&lt;br&gt;2&amp;gt;学习autolayout进行页面布局&lt;br&gt;主要是布局。各个小图片的位置&lt;br&gt;3&amp;gt;在storyBoard中设置控件的layer层属性&lt;/li&gt;
@@ -602,7 +737,7 @@ j++;
     <link href="http://peilinghui.com/2016/03/05/iOS%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
     <id>http://peilinghui.com/2016/03/05/iOS中的数据存储/</id>
     <published>2016-03-05T05:59:07.000Z</published>
-    <updated>2016-03-21T07:33:04.000Z</updated>
+    <updated>2016-04-16T08:44:37.000Z</updated>
     
     <content type="html">&lt;p&gt;iOS中的数据存储方式&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;iOS中的数据存储方式&quot;&gt;&lt;a href=&quot;#iOS中的数据存储方式&quot; class=&quot;headerlink&quot; title=&quot;iOS中的数据存储方式&quot;&gt;&lt;/a&gt;iOS中的数据存储方式&lt;/h1&gt;&lt;h2 id=&quot;Plist（NSArray-NSDictionary）&quot;&gt;&lt;a href=&quot;#Plist（NSArray-NSDictionary）&quot; class=&quot;headerlink&quot; title=&quot;Plist（NSArray\NSDictionary）&quot;&gt;&lt;/a&gt;Plist（NSArray\NSDictionary）&lt;/h2&gt;&lt;p&gt;只能存储数组，字典，但是数组和字典里面不能有自定义对象&lt;/p&gt;
@@ -619,6 +754,24 @@ j++;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;四，DDL：数据定义语句&lt;/p&gt;
+&lt;p&gt;1、Create&lt;/p&gt;
+&lt;p&gt;create table 表名（字段名1，字段类型1，字段名2，字段类型2….）;&lt;/p&gt;
+&lt;p&gt;create table if not exists 表名（字段名1，字段类型1，字段名2，字段类型2….）;&lt;/p&gt;
+&lt;p&gt;2、Drop&lt;/p&gt;
+&lt;p&gt;drop table 表名；&lt;/p&gt;
+&lt;p&gt;drop table if not exists 表名；&lt;/p&gt;
+&lt;p&gt;五、DML ：数据操作语句&lt;/p&gt;
+&lt;p&gt;1、Insert&lt;/p&gt;
+&lt;p&gt;2、Update&lt;/p&gt;
+&lt;p&gt;3、Delete&lt;/p&gt;
+&lt;p&gt;六、DQL：数据查询语句&lt;/p&gt;
+&lt;p&gt;1、Where&lt;/p&gt;
+&lt;p&gt;2、Select&lt;/p&gt;
+&lt;p&gt;3、Group by having&lt;/p&gt;
+&lt;p&gt;1&amp;gt; select&lt;/p&gt;
+&lt;p&gt;2&amp;gt; 别名,可以不用as,&lt;br&gt;• 给数据库取别名的好处:用别名获取字段,有提示。&lt;/p&gt;
+&lt;p&gt;3&amp;gt; 计算查询数量count&lt;br&gt;4&amp;gt; 排序: 有条件语句,需要放在条件语句后。&lt;br&gt;5&amp;gt; limit : limit 0,5 跳过第0个,取5个数据,意味着取前5个数据。这个语 句必须放在查询语句最后面。&lt;/p&gt;
 </content>
     
     <summary type="html">
