@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5%E8%B0%83%E7%94%A8.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%BF%9C%E7%A8%8B%E9%80%9A%E7%9F%A5.png">
-<meta property="og:updated_time" content="2016-04-13T11:51:34.000Z">
+<meta property="og:updated_time" content="2016-04-19T02:23:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS面试题总结">
 <meta name="twitter:description" content="快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。">
@@ -341,6 +341,10 @@
 <blockquote>
 <p>copy其实是建立了一个相同的对象，而retain不是；<br>copy是内容拷贝，retain是指针拷贝；<br>copy是内容的拷贝 ,对于像NSString,的确是这样，如果拷贝的是NSArray这时只是copy了指向array中相对应元素的指针.这便是所谓的”浅复制”。</p>
 </blockquote>
+<p>assign和weak的区别；</p>
+<blockquote>
+<p>assign是指针赋值，不对引用计数操作，使用之后如果没有置为nil，可能就会产生野指针；而weak一旦不进行使用后，永远不会使用了，就不会产生野指针！ 用weak避免循环引用.</p>
+</blockquote>
 <h1 id="单例设计模式-Singleton"><a href="#单例设计模式-Singleton" class="headerlink" title="单例设计模式(Singleton)"></a>单例设计模式(Singleton)</h1><ol>
 <li>定义：它可以保证某个类创建出来的对象永远只有1个。</li>
 <li>作用：节省内存资源，一个应用就一个对象  例如：工具类(音频Sound)</li>
@@ -472,7 +476,7 @@
         <p><span>本文标题:</span><a href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月01日 - 16时57分</p>
-        <p><span>最后更新:</span>2016年04月13日 - 19时51分</p>
+        <p><span>最后更新:</span>2016年04月19日 - 10时23分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/01/iOS面试题总结/" title="iOS面试题总结">http://peilinghui.com/2016/03/01/iOS面试题总结/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/01/iOS面试题总结/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

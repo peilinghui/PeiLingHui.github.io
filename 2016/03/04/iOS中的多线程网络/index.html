@@ -14,7 +14,7 @@
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%87%AA%E5%AE%9A%E4%B9%89NSOperation%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/runloop.png">
-<meta property="og:updated_time" content="2016-04-06T08:47:54.000Z">
+<meta property="og:updated_time" content="2016-04-16T09:03:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS中的多线程网络">
 <meta name="twitter:description" content="不论是什么开发，多线程网络始终是学习的重点。">
@@ -410,7 +410,7 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
 <li>什么是多线程<br>进程：是指在系统中正在运行的一个应用程序。1个进程要想执行任务，必须得有线程。（一个进程至少要有一个线程）特征：独立性，动态性，并发性。<br>线程：是进程的基本执行单元，一个进程（程序）的所有任务都在线程中执行。当一个程序运行时，内部可能包含了多个顺序执行流，每个顺序执行流就是一个线程的。<br>多线程：在一个进程中可以开启多个线程，每条线程可以并发（同时）执行不同的任务。<br>多线程编程的优点：  <ul>
 <li>进程间不能共享内存，但线程之间共享内存非常容易</li>
 <li>系统创建进程需要为该进程重新分配系统资源，但创建线程则代价小得多，因此使用多线程来实现多任务并发比多进程的效率高。</li>
-<li>iOS提供了多种多线程实现方式，从而简化了iOS的多线程编程。</li>
+<li>iOS提供了多种多线程实现方式，从而简化了iOS的多线程编程。<br>参考：<a href="http://1108038.blog.51cto.com/1098038/420330" target="_blank" rel="external">http://1108038.blog.51cto.com/1098038/420330</a><br>进程间通信—&gt;管道(pipe)、信号(signal)、消息队列、共享内存、信号量、套接字；<br>线程间通信—&gt;信号量、消息、事件event</li>
 </ul>
 </li>
 <li>iOS中如何实现多线程<ul>
@@ -470,7 +470,7 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
         <p><span>本文标题:</span><a href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月04日 - 21时31分</p>
-        <p><span>最后更新:</span>2016年04月06日 - 16时47分</p>
+        <p><span>最后更新:</span>2016年04月16日 - 17时03分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/04/iOS中的多线程网络/" title="iOS中的多线程网络">http://peilinghui.com/2016/03/04/iOS中的多线程网络/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/04/iOS中的多线程网络/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

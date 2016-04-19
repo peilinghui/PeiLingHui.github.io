@@ -14,7 +14,7 @@
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%AF%94%E8%BE%83get%E5%92%8Cpost.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%85%B6%E4%BB%96%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/UILabel%E6%95%88%E6%9E%9C.png">
-<meta property="og:updated_time" content="2016-04-14T14:12:37.000Z">
+<meta property="og:updated_time" content="2016-04-19T05:09:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS面试题">
 <meta name="twitter:description" content="总结一下一些面试题。">
@@ -296,9 +296,10 @@
         <p>总结一下一些面试题。</p>
 <a id="more"></a>
 <ol>
-<li>一组正整数数字，如何找出两个数加为100的组合；<br>（首先要排序）然后two pointers.</li>
-<li>assign和weak的区别；<br>assign是指针赋值，不对引用计数操作，使用之后如果没有置为nil，可能就会产生野指针；而weak一旦不进行使用后，永远不会使用了，就不会产生野指针！ 用weak避免循环引用.</li>
-<li>http和https的区别；抓包的时候有什么区别；<ul>
+<li><p>一组正整数数字，如何找出两个数加为100的组合；<br>（首先要排序）然后two pointers.</p>
+</li>
+<li><p>http和https的区别；抓包的时候有什么区别；</p>
+<ul>
 <li>HTTP 的URL 以http:// 开头，而HTTPS 的URL 以https:// 开头     - HTTP 是不安全的，而 HTTPS 是安全的 </li>
 <li>HTTP 标准端口是80 ，而 HTTPS 的标准端口是443</li>
 <li>在OSI 网络模型中，HTTP工作于应用层，而HTTPS 工作在传输层 </li>
@@ -375,7 +376,7 @@
 <ol>
 <li>Swift与OC有哪些区别；<br>Swift没有地址/指针的概念<br>泛型<br>类型严谨 对比oc的动态绑定<br>参考：<a href="http://www.cnblogs.com/dsxniubility/p/4294658.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://www.cnblogs.com/dsxniubility/p/4294658.html?utm_source=tuicool&amp;utm_medium=referral</a><br><a href="http://www.jianshu.com/p/34718b0fc910" target="_blank" rel="external">http://www.jianshu.com/p/34718b0fc910</a></li>
 </ol>
-<p>一面：</p>
+<p>网易：</p>
 <ol>
 <li>介绍一下GCD</li>
 <li>如果没有GCD，你怎样实现多线程</li>
@@ -402,10 +403,10 @@
 <li>加密算法？<br>常见的加解密方式(rsa,aes,md5）<br>RSA：基于公钥和私钥的非对程加密算法。适用范围广。<br>AES：是一种对程加密的流行方式。加密涉及矩阵运算。<br>MD5:将任意长度的“字节串”变换成一个128bit的大整数，并且它是一个不可逆的字符串变换算法，</li>
 <li>ios应用的调试技巧<br>1&gt;如遇到crash，分析崩溃日志（symbolicatedrash工具的适用）保留崩溃版本的.dSYM文件<br>2&gt;在 XCode 中进入断点管理窗口；然后点击右下方的 +，增加新的 Exception Breakpoint。<br>3&gt;如遇到EXC_BAD_ACCESS，打开Scheme选项选择EditScheme。然后按图勾上Enable Zombie Objects和Malloc Stack那两项。<br>4&gt;有效的日志管理。NSLog和加入一些开源的日志管理框架。<br>5&gt;程序断点debug模式。</li>
 </ol>
-<p>网易二面：<br>学习oc对你有什么提升？<br>nsdictionary如何实现深拷贝？<br>如果有多层，怎样实现？<br>autolayout？<br>主线程可以执行下载任务吗？为什么？<br>主线程使用数据库，想在其他线程也访问数据库，怎么实现？<br>有没有写过category？里面能不能加属性？为什么？<br>谈一下你对mvc模式的理解？<br>ARC和MRC<br>ARC是依靠什么实现的？<br>release如何实现对象释放？autorelease如何实现？两者的区别与联系？release能做的事情autorelease都能做，那么release可不可以舍弃？为什么？<br>weak和assign的区别？<br>谈一下运行时？<br>kvo的底层实现？</p>
-<p>(我面试总结)<br>你几月份毕业啊？<br>1.UIview中的俩个label的自适应代码。<br>2.项目：音乐播放器，后台实现除了有音乐播放器，还有什么？<br>3.我回答的是通知，通知你用过吗？本地通知和远程通知，有什么区别，远程通知是从哪里获取的。<br>4.音乐播放的数据库是怎么实现的。<br>5.怎么学习iOS的。<br>6.学过JS，JS学的怎么样？JS和OC实现热点会吗？</p>
-<p>（其他人面试总结）<br>内存管理基础<br>多线程介绍<br>SDWebImage介绍<br>图片下载，缓存是同步还是异步<br>Objective的对象结构<br>ISA指针是指向什么<br>block在MRC下如何解决循环引用<br>NSCache的优点，使用字典可不可以，优缺点分析<br>JAVA和OC的区别，不同，在哪些上最明显<br>UItableView的优化，为什么这么优化<br>CEll如何计算<br>dealloc里做哪些操作<br>NOtification哪些使用场景，同步还是异步？主线程还是子线程<br>dealloc不remove通知会怎么样<br>KVO的实现原理<br>消息转发原理<br>何时用到串行队列</p>
-<p>越狱后APP的安全<br>动态更新<br>链式反应<br>UIbutton的多次点击</p>
+<p>网易二面：<br>学习oc对你有什么提升？<br>nsdictionary如何实现深拷贝？<br>如果有多层，怎样实现？<br>autolayout？<br>主线程可以执行下载任务吗？为什么？<br>主线程使用数据库，想在其他线程也访问数据库，怎么实现？<br>有没有写过category？里面能不能加属性？为什么？<br>谈一下你对mvc模式的理解？<br>ARC和MRC ：<br>ARC是依靠什么实现的？<br><a href="https://onevcat.com/2012/06/arc-hand-by-hand/" target="_blank" rel="external">https://onevcat.com/2012/06/arc-hand-by-hand/</a><br>release如何实现对象释放？autorelease如何实现？两者的区别与联系？release能做的事情autorelease都能做，那么release可不可以舍弃？为什么？<br>weak和assign的区别？<br>谈一下运行时？<br>kvo的底层实现？</p>
+<p>网易一面：<br>1.UIview中的俩个label的自适应代码。<br>2.项目：音乐播放器，后台实现除了有音乐播放器，还有什么？<br>3.我回答的是通知，通知你用过吗？本地通知和远程通知，有什么区别，远程通知是从哪里获取的。<br>4.音乐播放的数据库是怎么实现的。<br>5.怎么学习iOS的。<br>6.学过JS，JS学的怎么样？JS和OC实现热点会吗？</p>
+<p>网易其他面试题：<br>内存管理基础<br>多线程介绍<br>SDWebImage介绍<br>图片下载，缓存是同步还是异步<br>Objective的对象结构<br>ISA指针是指向什么<br>block在MRC下如何解决循环引用<br>NSCache的优点，使用字典可不可以，优缺点分析<br>JAVA和OC的区别，不同，在哪些上最明显<br>UItableView的优化，为什么这么优化<br>CEll如何计算<br>dealloc里做哪些操作<br>NOtification哪些使用场景，同步还是异步？主线程还是子线程<br>dealloc不remove通知会怎么样<br>KVO的实现原理<br>消息转发原理<br>何时用到串行队列</p>
+<p>越狱后APP的安全<br>动态更新<br>链式反应<br>UIbutton的多次点击<br>网易笔试：</p>
 <ol>
 <li>用户点击某按钮时下载一张图片，当用户再次点击此按钮是下载时取消，为了保证尽量节省用户流量，请尽快取消真实的下载请求。<br>请描述解决此问题的方法和思路。</li>
 </ol>
@@ -425,11 +426,96 @@
 </ol>
 <p>代码：用autolayout的masonry框架.<br><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad]<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    UILabel *label1 = [[UILabel alloc]init]<span class="comment">;</span></span><br><span class="line">    [label1 sizeToFit]<span class="comment">;</span></span><br><span class="line">    label1.backgroundColor = [UIColor grayColor]<span class="comment">;</span></span><br><span class="line">    UILabel *label2 = [[UILabel alloc]init]<span class="comment">;</span></span><br><span class="line">    [label2 sizeToFit]<span class="comment">;</span></span><br><span class="line">    label2.backgroundColor = [UIColor purpleColor]<span class="comment">;</span></span><br><span class="line">    [self.view addSubview:label1]<span class="comment">;</span></span><br><span class="line">    [self.view addSubview:label2]<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    label1.text = @"UIlayout的约束"<span class="comment">;</span></span><br><span class="line">    label2.text = @"文字过长的时候，优先保证Label2"<span class="comment">;</span></span><br><span class="line">        </span><br><span class="line">    [label1 mas_makeConstraints:^(MASConstraintMaker *make)&#123;</span><br><span class="line">        make.centerY.equalTo(self.view)<span class="comment">;</span></span><br><span class="line">        make.left.equalTo(self.view)<span class="comment">;</span></span><br><span class="line">    &#125;]<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    [label1 setContentCompressionResistancePriority:UILayoutPriorityDefaultLow    forAxis:UILayoutConstraintAxisVertical]<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    [label2 mas_makeConstraints:^(MASConstraintMaker *make)&#123;</span><br><span class="line">        make.centerY.equalTo(self.view)<span class="comment">;</span></span><br><span class="line">        make.left.equalTo(label1.mas_right).offset(5)<span class="comment">;</span></span><br><span class="line">        make.right.equalTo(self.view)<span class="comment">;</span></span><br><span class="line">    &#125;]<span class="comment">;</span></span><br><span class="line">    [label2 setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal]<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p> 效果：<br> <img src="http://7xr8q7.com1.z0.glb.clouddn.com/UILabel%E6%95%88%E6%9E%9C.png" alt=""></p>
+<p>其他公司面试题：</p>
+<ol>
+<li>UIView和CALayer的区别？</li>
+<li>UIView继承自哪个父类？</li>
+<li>自动释放池底层是如何实现的？</li>
+<li>runtime 的运行机制？</li>
+<li>宏定义和const关键字的区别？</li>
+<li>GCD和NSOperation的区别？NSOperation并发有顺序吗？</li>
+<li>沙盒的目录，NSUserDefault是存在什么目录下的？哪种形式？</li>
+<li>Runloop的机制？</li>
+<li>SDWebImage的源码研究过吗？</li>
+<li>Git和SVN的区别？</li>
+<li>静态库和动态库的区别？</li>
+<li>H5,JS和网页，Native与iOS开发结合用过吗？</li>
+</ol>
+<p>腾讯面试题：</p>
+<ol>
+<li>如何绘制一个三角形？<br>1.1 如何绘制大量三角形？<br>1.2 一定要重写drawRect吗？<br>1.3 如何刷新View界面？<br>1.4 Layer好在哪？</li>
+<li>assign和weak的区别</li>
+<li>线程和RunLoop的关系<br>3.1 一个autorealese对象在什么时刻释放？（比如在一个vc的viewDidLoad中创建）</li>
+<li>NSTimer有什么需注意的以及和RunLoop的关系？</li>
+<li>NSString copy 和 NSString mutableCopy 的区别</li>
+<li>线程加锁原理（信号量，临界区，自选锁）</li>
+<li>iOS7 - iOS9的区别</li>
+<li>GCD指向了野指针了怎么办</li>
+<li>用HTTP传数据，丢包严重怎么办</li>
+<li>iOS中广播的种类</li>
+<li>app slying</li>
+<li>runtime如何实现weak变量的自动置nil？</li>
+<li>AFNetworking的内部实现原理？</li>
+<li>block循环引用了如何解决？</li>
+<li>如何用GCD同步若干个异步调用？（如根据若干个url异步加载多张图片，然后在都下载完成后合成一张整图）</li>
+<li>UIKit的框架结构？<br>腾讯面试题：</li>
+<li><p>app上架流程</p>
+</li>
+<li><p>线程和进程区别 及之间通信<br><a href="http://1108038.blog.51cto.com/1098038/420330" target="_blank" rel="external">http://1108038.blog.51cto.com/1098038/420330</a><br>进程是表示资源分配的基本单位，又是调度运行的基本单位。<br>线程是进程中执行运算的最小单位，亦即执行处理机调度的基本单位。<br>进程间通信—&gt;管道(pipe)、信号(signal)、消息队列、共享内存、信号量、套接字；<br>线程间通信—&gt;信号量、消息、事件event</p>
+</li>
+<li><p>tableview cell 缓存机制<br>在UITableView内部有一个缓存池，初始化时使用initWithStyle:(UITableViewCellStyle) reuseIdentifier:(NSString *)方法指定一个可重用标识，就可以将这个cell放到缓存池。然后在使用时使用指定的标识去缓存池中取得对应的cell然后修改cell内容即可。</p>
+</li>
+<li><p>tableview cell高度优化：</p>
+</li>
+<li>深入理解runloop<br><a href="http://blog.ibireme.com/2015/05/18/runloop/" target="_blank" rel="external">http://blog.ibireme.com/2015/05/18/runloop/</a></li>
+<li>主线程runloop(mainRunloop)主要执行事件：<br>负责创建Autoreleasepool和释放autoreleasepool,  周期大概是event loop(事件循环)；<br>事件响应—&gt;当一个硬件事件(触摸/锁屏/摇晃等)发生后，首先由 IOKit.framework 生成一个 IOHIDEvent 事件并由 SpringBoard 接收。SpringBoard 只接收按键(锁屏/静音等)，触摸，加速，接近传感器等几种 Event，随后用 mach port 转发给需要的App进程。随后苹果注册的那个 Source1 就会触发回调，并调用 _UIApplicationHandleEventQueue() 进行应用内部的分发。_UIApplicationHandleEventQueue() 会把 IOHIDEvent 处理并包装成 UIEvent 进行处理或分发，其中包括识别 UIGesture/处理屏幕旋转/发送给 UIWindow 等。通常事件比如 UIButton 点击、touchesBegin/Move/End/Cancel 事件都是在这个回调中完成的。</li>
+</ol>
+<p>手势识别—&gt;当上面的 _UIApplicationHandleEventQueue() 识别了一个手势时，其首先会调用 Cancel 将当前的 touchesBegin/Move/End 系列回调打断。随后系统将对应的 UIGestureRecognizer 标记为待处理。</p>
+<p>界面更新—&gt;当在操作 UI 时，比如改变了 Frame、更新了 UIView/CALayer 的层次时，或者手动调用了 UIView/CALayer 的 setNeedsLayout/setNeedsDisplay方法后，这个 UIView/CALayer 就被标记为待处理，并被提交到一个全局的容器去。</p>
+<ol>
+<li><p>NSTimer事件</p>
+</li>
+<li><p>PerformSelecter—&gt;performSelector:onThread: 时，实际上其会创建一个 Timer 加到对应的线程去</p>
+</li>
+<li><p>autorelease 具体释放时机：<br>通常在下一次事件循环(event loop)时释放，如果是手动创建的自动释放池则在这个池的外层释放。</p>
+</li>
+<li><p>虚拟内存：<br>当应用程序占用内存很大或很多，则会导致内存消耗殆尽。为解决该问题，Windows中运用了虚拟内存技术，即匀出一部分硬盘空间来充当内存使用。当内存耗尽时，电脑就会自动调用硬盘来充当内存，以缓解内存的紧张。</p>
+</li>
+<li><p>红黑树</p>
+</li>
+<li>QQ小红点动画的实现原理</li>
+<li>设计一个网络图片缓存器(SDWebImage实现原理必需要了解)</li>
+<li>PNG和JPG的区别</li>
+<li>如何压缩JPG</li>
+<li>TCP/IP协议<br>自己面试题：</li>
+<li>GCD有何缺点？</li>
+<li>CocosPods?</li>
+<li>项目重构的一些规范和命名规范？</li>
+<li>如何push到某个特定的controller？</li>
+<li>SDWebImage框架是如何实现的？</li>
+</ol>
+<p>腾讯面试：</p>
+<ol>
+<li>看简历说一下你的项目经验，讲解一下你最拿手的项目？其中各个部分的功能是如何实现的？</li>
+<li>属性ARC下有什么？</li>
+<li>属性中weak和strong的区别？</li>
+<li>assign为何不能修饰对象？如果修饰了会怎么样？</li>
+<li>copy在哪里用？</li>
+<li>Block在栈中还是堆中？全局变量是在栈还是在堆中？成员变量呢？</li>
+<li>怎么定义一个类的属性？写代码。</li>
+<li>——#import与#include的区别？</li>
+<li>如果自己实现一个setter方法，该如何写代码？</li>
+<li>oc中有什么容器？</li>
+<li>写一个数组初始化的代码。</li>
+<li></li>
+</ol>
 <p>更多面试总结题：</p>
 <ol>
 <li><a href="http://www.jianshu.com/p/ab4e96bcf26a" target="_blank" rel="external">http://www.jianshu.com/p/ab4e96bcf26a</a></li>
 <li><a href="http://www.jianshu.com/p/e453b28c3222#" target="_blank" rel="external">http://www.jianshu.com/p/e453b28c3222#</a></li>
 <li><a href="http://www.jianshu.com/p/5d2163640e26#" target="_blank" rel="external">http://www.jianshu.com/p/5d2163640e26#</a></li>
+<li><a href="http://blog.csdn.net/xieyupeng520/article/details/50832701" target="_blank" rel="external">http://blog.csdn.net/xieyupeng520/article/details/50832701</a></li>
+<li>招聘一个靠谱的 iOS：<br>题目：<a href="http://blog.sunnyxx.com/2015/07/04/ios-interview/" target="_blank" rel="external">http://blog.sunnyxx.com/2015/07/04/ios-interview/</a><br>答案：<a href="http://www.cocoachina.com/ios/20150803/12872.html（上）" target="_blank" rel="external">http://www.cocoachina.com/ios/20150803/12872.html（上）</a><br><a href="http://www.cocoachina.com/ios/20150825/13195.html（下）" target="_blank" rel="external">http://www.cocoachina.com/ios/20150825/13195.html（下）</a></li>
 </ol>
 
       
@@ -442,7 +528,7 @@
         <p><span>本文标题:</span><a href="/2016/03/27/iOS面试题/">iOS面试题</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月27日 - 14时37分</p>
-        <p><span>最后更新:</span>2016年04月14日 - 22时12分</p>
+        <p><span>最后更新:</span>2016年04月19日 - 13时09分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/27/iOS面试题/" title="iOS面试题">http://peilinghui.com/2016/03/27/iOS面试题/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/27/iOS面试题/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

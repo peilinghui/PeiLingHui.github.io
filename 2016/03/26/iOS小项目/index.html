@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="到了软院以后，选择了移动互联网和游戏开发方向，开设了iOS课程，在老师的引导下，开始自学了iOS。">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%AE%BE%E5%A4%87%E5%B0%BA%E5%AF%B8.png">
-<meta property="og:updated_time" content="2016-04-16T08:39:33.000Z">
+<meta property="og:updated_time" content="2016-04-17T10:42:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS小项目">
 <meta name="twitter:description" content="到了软院以后，选择了移动互联网和游戏开发方向，开设了iOS课程，在老师的引导下，开始自学了iOS。">
@@ -292,11 +292,7 @@
 - 在didFinishLaunching添加接收远程事件代码,&quot;一定要添加，不然无效果&quot;
 </code></pre><p>  [application beginReceivingRemoteControlEvents];<br>⑪实现锁屏按钮远程事件<br> •在appdelegate中实现remoteControlReceivedWithEvent，来接收远程事件</p>
 <p>主要是有三部分：MVC<br>Model层实现的是存放歌曲名字，本地音乐文件名，歌手名字等。<br>View层实现的是MusicCell，显示cell的数据。<br>            PlayerToolBar，有分类category，设置了歌手图片，音乐名，歌手名，时间的拖动条，总时间，当前播放时间，定时器和是否拖拽。<br>           如果正在播放：更新进度条，更新时间，头像转动。设置当前播放的音乐，并显示数据，更改播放状态，更改拖拽状态。<br>controller层实现的是用第三方框架MJEXtension，实现了字典转模型，懒加载音乐数。tableview表格数据源，播放工具条的代理，播放器的代理。</p>
-<h1 id="微博"><a href="#微博" class="headerlink" title="微博"></a>微博</h1><p>获取微博数据<br>1&gt; 怎么获取数据,向新浪服务器发送请求,查看新浪API文档<br>2&gt; 利用AFN发送请求<br>3&gt; 分析新浪接口文档,解析数据,根据数据自定义模型(Status,User)。<br>• total_number 近期接收到的所有微博数<br>4&gt; 利用实例程序,把数据生成plist分析,需要几个模型,模型有哪些属 性,<br>• 自定义Photo模型,pic_urls里存放的是字典,需要把字典转化成模 型。<br>• thumbnail_pic是缩略图,新浪为了以后能扩展,搞了个字典,以后 可以添加中图,等等.<br>注意:不能直接拿到获取的原始微博数据直接写入文件,因为新浪服务 器会返回null,有null,就会写入失败。<br>5&gt; 展示微博数据<br>6&gt; 图片用SDWebImage下载<br>• 异步下载,不会卡死主线程<br>• 做了数据缓存,不会重复下载同样的图片,节省用户流量<br>• 解决循环利用的问题,不会让图片错乱。<br>• SDWebImage使用注意:<br>• 内存警告的时候,清空缓存和停止下载。<br>• SDWebImage有个专门管理下载和缓存的类<br> •<br>7.解决数据固定问题<br>•</p>
-<h1 id="网易新闻客户端"><a href="#网易新闻客户端" class="headerlink" title="网易新闻客户端"></a>网易新闻客户端</h1><p>图文混排是webview去实现的,内容拼接的好处就是数据显示比较同步<br>过网络请求获得相关的信息,再通过手机端进行拼HTML,然后在WebView进行展示，此处还对文章中的图片增加点击效果，可以保存到相册中；文章的样式已经存在项目中，直接去调用；<br>1.首先了解两个相关的实体对象，一个是新闻的主体内容，另外一个就是图片的相关信息实体；<br>2.网络请求，并转化成实体对象<br>3.拼接HTML源代码<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">(<span class="typename">void</span>)showInWebView</span><br><span class="line">&#123;</span><br><span class="line">NSMutableString *html = [NSMutableString string];</span><br><span class="line">[html <span class="string">appendString:</span>@<span class="string">""</span>];</span><br><span class="line">[html <span class="string">appendString:</span>@<span class="string">""</span>];</span><br><span class="line">[html <span class="string">appendFormat:</span>@<span class="string">""</span>,[[NSBundle mainBundle] <span class="string">URLForResource:</span>@<span class="string">"SXDetails.css"</span> <span class="string">withExtension:</span>nil]];</span><br><span class="line">[html <span class="string">appendString:</span>@<span class="string">""</span>];</span><br><span class="line"></span><br><span class="line">[html <span class="string">appendString:</span>@<span class="string">""</span>];</span><br><span class="line">[html <span class="string">appendString:</span>[self touchBody]];</span><br><span class="line">[html <span class="string">appendString:</span>@<span class="string">""</span>];</span><br><span class="line"></span><br><span class="line">[html <span class="string">appendString:</span>@<span class="string">""</span>];</span><br><span class="line"></span><br><span class="line">[self.webView <span class="string">loadHTMLString:</span>html <span class="string">baseURL:</span>nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>4.关于WebView与网页进行交互，并把图片保存到手机相册中<br>5.拼接后的HTML内容如下<br>6：效果图中另外一张有比较多的图片源文件如下：</p>
-<p>参考：<a href="http://www.knowsky.com/884384.html" target="_blank" rel="external">http://www.knowsky.com/884384.html</a></p>
-<ol>
+<h1 id="网易新闻客户端"><a href="#网易新闻客户端" class="headerlink" title="网易新闻客户端"></a>网易新闻客户端</h1><ol>
 <li>简介<br>1&gt;需求<ul>
 <li>展示不同栏目的新闻列表</li>
 <li>点击新闻列表可以查看详细内容</li>
@@ -347,6 +343,20 @@
 <li>MOVE模型的Event<br>点击登录按钮，状态改变（WIFI变为3G）<br>登录界面展示：<br>M：UserInfo<br>O: FxLogin<br>V: LoginPage<br>E: LoginButton<br>把数据接口解析为实体。</li>
 </ol>
 <ol>
+<li><p>显示当天广告<br>广告页需求：先显示默认图，广告下载完毕后显示广告图，显示3秒后消失。<br>1&gt;本地缓存：节省用户流量，本地是否存在，存在，取本地图片，没有存在，取URL中的广告。前后台切换也要显示广告页。<br>2&gt;策略：控制时间，判断是否要显示广告页：把上一次登录时间记录下来，然后在一小时内不再显示启动图。<br>3&gt;根据设备的尺寸获取响应尺寸的广告  </p>
+</li>
+<li><p>定制导航栏<br>1&gt;给登录页添加导航栏<br>2&gt;设置状态栏的样式：在Info的Custom  iOS Target Properties中的View controller-based status 设置一下<br>状态条初始化的时候是否隐藏：Status bar is initially hidden<br>3&gt;导航栏透明对nib的影响:尽量不要用透明图片。<br>4&gt;定制左右按钮</p>
+</li>
+<li><p>设置底部导航栏（UITabbarcontroller）<br>1&gt;设置HomePage:<br>2&gt;设置item的字体颜色<br>3&gt;定制图标<br>4&gt;配置文件实现(Plist)：方便维护和扩展。<br>配置plist文件，再定义解析的Model，实例化。<br>HomePage:self.viewControllers = [PageInfo pageControllers];<br>重复代码抽取到Model层：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (PageInfo *pageInfo <span class="keyword">in</span> pages) &#123;</span><br><span class="line">       <span class="keyword">if</span> (pageInfo.unLoad) &#123;</span><br><span class="line">           <span class="keyword">if</span> (pageInfo.unLoad) &#123;</span><br><span class="line">               <span class="keyword">continue</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">               </span><br><span class="line">       pageController = [[NSClassFromString(pageInfo.ID) alloc] init];</span><br><span class="line">       navPage = [[UINavigationController alloc] <span class="string">initWithRootViewController:</span>pageController];</span><br><span class="line">       </span><br><span class="line">       pageController.title = pageInfo.name;</span><br><span class="line">       pageController.tabBarItem.image = [UIImage <span class="string">imageNamed:</span>pageInfo.image];</span><br><span class="line">       </span><br><span class="line">       [controllers <span class="string">addObject:</span>navPage];</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>栏目切换效果<br>1&gt;需求分析：选中栏目字体红色，未选择的栏目字体是灰色，栏目条左右两边有阴影，点击的栏目居中显示。<br>2&gt;填空新闻页<br>设置导航栏图标，设置导航栏左右按钮，增加栏目条背景<br>3&gt;实现栏目条效果<br>设置栏目条两边的阴影效果图片，加上scrollView，把视图层次，把视图放后面就能显示阴影图片。<br>4&gt;点击的栏目居中显示</p>
+</li>
+</ol>
+<ol>
+<li>新闻列表展示</li>
+</ol>
+<ol>
 <li><p>离线缓存-iOS沙盒机制<br>下次取得时候直接从本地取，不需要再去网上下载<br>1&gt;沙盒机制:iOS为每个app创建自己的存储空间，对APP执行各种操作的权限限制。为了安全考虑.<br>2&gt;关键目录：（Xcode：Window-Device）</p>
 <ul>
 <li>Document:永久保存目录，文档目录。要保存程序声称的数据，会自动备份到ICloud，iTunes，恢复。<br>/Inbox:文件交互目录，只能读、删；不能写，改。  </li>
@@ -361,20 +371,40 @@
 </li>
 <li><p>H5自动缓存技术<br>在服务器的Document中放入H5文件，里面有清单文件manifest，要缓存的文件有css,js,在HTML的文件中连接了css和JS文件。<br>safari监控：<br><a href="http://172.16.20.174.newsreder/h5/content.html" target="_blank" rel="external">http://172.16.20.174.newsreder/h5/content.html</a><br><a href="http://172.16.20.174.newsreder/h5/content2.html" target="_blank" rel="external">http://172.16.20.174.newsreder/h5/content2.html</a><br>H5应用指定了manifest 清单，则有应用程序缓存，就指定了缓存的文件，当没有网络时，还可以看到加载的页面。。。。。<br>2.如果不用H5离线缓存技术，就需要存储在数据库中。<br>xcode监控沙盒：<br>/Library/Cache/xxx/ApplicationCache.db<br>CacheResoursData<br>CacheResourses<br>3.内容更新<br>在CSS上有背景颜色的更新，只需要在本地manifest文件中修改Version号，然后告诉H5文件重新加载，本地缓存更新</p>
 </li>
+<li><p>加入微信分享<br>1、申请AppKey<br>open.weixin.qq.com<br>微信开放平台上注册，然后创建应用，得到APP ID，可以获得接口，开发者需要在工程中链接上SystemConfiguration.framework,lib.dylib.libsqlite3.0.dylib<br>2、所以要在包中添加SystemConfiguration.framework,包<br>3、在build setting，在Search Paths 中添加libWeChatSDK.a,WXApi.h,WXAPiObject.h三个文件所在位置。<br>4、在Xcode中，选择你的工程设置项，选中TAGETS一栏，在info标签栏的URL type添加“URL scheme”为你所注册的应用程序id</p>
+</li>
 </ol>
+<p>] 在你需要使 用微信终端API的文件中import WXApi.h 头文件，并增加 WXApiDelegate 协议。</p>
+<p>4.在代码中使用开发工具包</p>
+<p>[1] 要使你的程序启动后微信终端能响应你的程序，必须在代码中向微信终端注册你的id。（如下图所示，在 AppDelegate 的 didFinishLaunchingWithOptions 函数中向微信注册id）。</p>
+<p>[2] 重写AppDelegate的handleOpenURL和openURL方法：</p>
+<p>[3] 现在，你的程序要实现和微信终端交互的具体请求与回应，因此需要实现WXApiDelegate协议的两个方法：</p>
+<p>-(void) onReq:(BaseReq*)reqonReq是微信终端向第三方程序发起请求，要求第三方程序响应。第三方程序响应完后必须调用sendRsp返回。在调用sendRsp返回时，会切回到微信终端程序界面。</p>
+<p>-(void) onResp:(BaseResp*)resp如果第三方程序向微信发送了sendReq的请求，那么onResp会被回调。sendReq请求调用后，会切到微信终端程序界面。</p>
+<ol>
+<li>显示当地天气</li>
+</ol>
+<p>天气接口：<a href="http://www.mpjacks.cn/post-35.html" target="_blank" rel="external">http://www.mpjacks.cn/post-35.html</a></p>
+<p>1.申请服务<br><a href="http://www.k780.com" target="_blank" rel="external">http://www.k780.com</a><br><a href="http://openweather.weather.com.cn" target="_blank" rel="external">http://openweather.weather.com.cn</a></p>
+<p>获得APP key<br>2.增加天气页面（MOVE模型）</p>
+<p>3.获取所在城市<br>CoreLocation.framework<br>反地理编码：根据纬度获得地名</p>
+<p>4.查询城市编码<br><a href="http://apistore.baidu/com/microservice/cityinfo?cityname=url编码" target="_blank" rel="external">http://apistore.baidu/com/microservice/cityinfo?cityname=url编码</a></p>
+<p>5.获取本地天气<br><a href="http://api.780.com:88" target="_blank" rel="external">http://api.780.com:88</a></p>
+<p>6.显示天气图标</p>
+<p>加入地理定位的库CoreLocation</p>
+<ol>
+<li>APNS消息推送<br>1、申请AppKey<br><a href="http://dev.xiaomi.com（小米开放平台）" target="_blank" rel="external">http://dev.xiaomi.com（小米开放平台）</a><br>极光：JiPush<br>APPID：<br>2、生成APNS证书<br><a href="http://developer.apple.com" target="_blank" rel="external">http://developer.apple.com</a></li>
+</ol>
+<p>3、加入SDK</p>
+<p>apple的push 是不需要其他功夫的 只要服务端下发就好了<br>你就要了解安卓的push机制<br>然后你就要知道 安卓的push进程 然后就要如何进程复活<br>一系列的你都要知道 只有这样你才能拿sp</p>
+<ol>
+<li>统计用户行为</li>
+</ol>
+<p>1、申请APPID<br>www.umeng.com<br>2.加入SDK<br>3.设计统计文件<br>FxStatic<br>4、定义统计宏<br>5、统计相关行为</p>
+<p>6、加入百度统计</p>
 <ol>
 <li>功能扩展（还未实现）<br>下拉刷新<br>栏目定制<br>夜间模式:在css中设置<br>字体字号的设置：在css中设置样式，字号：在JS中字体样式替换<br>消息推送设置：<br>实现页面：阅读，试听，发现，我</li>
 </ol>
-<h1 id="驾考助手"><a href="#驾考助手" class="headerlink" title="驾考助手"></a>驾考助手</h1><ol>
-<li>主页面UI的搭建：<br>1&gt;从storyBoard初始化启动应用程序<br>Navigation Controller与view。<br>2&gt;学习autolayout进行页面布局<br>主要是布局。各个小图片的位置<br>3&gt;在storyBoard中设置控件的layer层属性</li>
-<li>答题页面<br>1&gt;理解封装的概念<br>2&gt;UIView渐变的动画效果<br>3&gt;控件传值</li>
-<li>章节选择<br>1&gt;sqlite的简单查询操作（fmdb）<br>2&gt;混编mrc和arc<br>3&gt;mvc设计模式的应用</li>
-<li>核心答题视图的搭建<br>1&gt;scrollView的应用<br>2&gt;tableView的应用<br>3&gt;复用逻辑的养成</li>
-</ol>
-<p>主要是有MVC层<br>Model层TestChoiceModel，AnswerModel，SubTestSelectModel。<br>数据库的管理用的是第三方库FMDB，调用Model层的接口，先检查数据库是否已存在，不存在则创建数据库sqlite,根据不同的场景选择对应的数据,章节,题目,专项.</p>
-<p>view层有cell文件夹中包含了FirstTableViewCell，TestChoiceTableViewCell，AnswerTableViewCell。<br>然后是界面的实现：车型选择界面SelectVehicle,答题的时候可以实现滑动页面AnswerScrollView，SelectPatternView，题目列表QuestionSheetsView，实现了手势滑动和通知。</p>
-<p>controller层包括了总的viewcontroller。<br>分层FirstViewController，把练习放入一个tableview中然后用switch，case。<br>TestChoiceViewController练习选择页面。<br>AnswerViewController。<br>MainTestViewController模拟仿真考试页面有xib。<br>QuestionCollectionManager错题收集页面，用到了KVO。<br>SubjectTwoViewController科二的视频显示页面。用到了 <avkit avplayerviewcontroller.h="">和<avfoundation avfoundation.h=""></avfoundation></avkit></p>
-<p>报名须知和新手上路主要用了webViewcontroller.</p>
 
       
     </div>
@@ -386,7 +416,7 @@
         <p><span>本文标题:</span><a href="/2016/03/26/iOS小项目/">iOS小项目</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月26日 - 20时44分</p>
-        <p><span>最后更新:</span>2016年04月16日 - 16时39分</p>
+        <p><span>最后更新:</span>2016年04月17日 - 18时42分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/26/iOS小项目/" title="iOS小项目">http://peilinghui.com/2016/03/26/iOS小项目/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/26/iOS小项目/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -422,7 +452,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简单的音乐播放器"><span class="toc-number">1.</span> <span class="toc-text">简单的音乐播放器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微博"><span class="toc-number">2.</span> <span class="toc-text">微博</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网易新闻客户端"><span class="toc-number">3.</span> <span class="toc-text">网易新闻客户端</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#驾考助手"><span class="toc-number">4.</span> <span class="toc-text">驾考助手</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简单的音乐播放器"><span class="toc-number">1.</span> <span class="toc-text">简单的音乐播放器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网易新闻客户端"><span class="toc-number">2.</span> <span class="toc-text">网易新闻客户端</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {

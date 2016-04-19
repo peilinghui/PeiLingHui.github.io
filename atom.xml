@@ -304,14 +304,15 @@
     <link href="http://peilinghui.com/2016/03/27/iOS%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     <id>http://peilinghui.com/2016/03/27/iOS面试题/</id>
     <published>2016-03-27T06:37:29.000Z</published>
-    <updated>2016-04-14T14:12:37.000Z</updated>
+    <updated>2016-04-19T05:09:12.000Z</updated>
     
     <content type="html">&lt;p&gt;总结一下一些面试题。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;ol&gt;
-&lt;li&gt;一组正整数数字，如何找出两个数加为100的组合；&lt;br&gt;（首先要排序）然后two pointers.&lt;/li&gt;
-&lt;li&gt;assign和weak的区别；&lt;br&gt;assign是指针赋值，不对引用计数操作，使用之后如果没有置为nil，可能就会产生野指针；而weak一旦不进行使用后，永远不会使用了，就不会产生野指针！ 用weak避免循环引用.&lt;/li&gt;
-&lt;li&gt;http和https的区别；抓包的时候有什么区别；&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;一组正整数数字，如何找出两个数加为100的组合；&lt;br&gt;（首先要排序）然后two pointers.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;http和https的区别；抓包的时候有什么区别；&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;HTTP 的URL 以http:// 开头，而HTTPS 的URL 以https:// 开头     - HTTP 是不安全的，而 HTTPS 是安全的 &lt;/li&gt;
 &lt;li&gt;HTTP 标准端口是80 ，而 HTTPS 的标准端口是443&lt;/li&gt;
 &lt;li&gt;在OSI 网络模型中，HTTP工作于应用层，而HTTPS 工作在传输层 &lt;/li&gt;
@@ -388,7 +389,7 @@
 &lt;ol&gt;
 &lt;li&gt;Swift与OC有哪些区别；&lt;br&gt;Swift没有地址/指针的概念&lt;br&gt;泛型&lt;br&gt;类型严谨 对比oc的动态绑定&lt;br&gt;参考：&lt;a href=&quot;http://www.cnblogs.com/dsxniubility/p/4294658.html?utm_source=tuicool&amp;amp;utm_medium=referral&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/dsxniubility/p/4294658.html?utm_source=tuicool&amp;amp;utm_medium=referral&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/34718b0fc910&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/34718b0fc910&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;一面：&lt;/p&gt;
+&lt;p&gt;网易：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;介绍一下GCD&lt;/li&gt;
 &lt;li&gt;如果没有GCD，你怎样实现多线程&lt;/li&gt;
@@ -415,10 +416,10 @@
 &lt;li&gt;加密算法？&lt;br&gt;常见的加解密方式(rsa,aes,md5）&lt;br&gt;RSA：基于公钥和私钥的非对程加密算法。适用范围广。&lt;br&gt;AES：是一种对程加密的流行方式。加密涉及矩阵运算。&lt;br&gt;MD5:将任意长度的“字节串”变换成一个128bit的大整数，并且它是一个不可逆的字符串变换算法，&lt;/li&gt;
 &lt;li&gt;ios应用的调试技巧&lt;br&gt;1&amp;gt;如遇到crash，分析崩溃日志（symbolicatedrash工具的适用）保留崩溃版本的.dSYM文件&lt;br&gt;2&amp;gt;在 XCode 中进入断点管理窗口；然后点击右下方的 +，增加新的 Exception Breakpoint。&lt;br&gt;3&amp;gt;如遇到EXC_BAD_ACCESS，打开Scheme选项选择EditScheme。然后按图勾上Enable Zombie Objects和Malloc Stack那两项。&lt;br&gt;4&amp;gt;有效的日志管理。NSLog和加入一些开源的日志管理框架。&lt;br&gt;5&amp;gt;程序断点debug模式。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;网易二面：&lt;br&gt;学习oc对你有什么提升？&lt;br&gt;nsdictionary如何实现深拷贝？&lt;br&gt;如果有多层，怎样实现？&lt;br&gt;autolayout？&lt;br&gt;主线程可以执行下载任务吗？为什么？&lt;br&gt;主线程使用数据库，想在其他线程也访问数据库，怎么实现？&lt;br&gt;有没有写过category？里面能不能加属性？为什么？&lt;br&gt;谈一下你对mvc模式的理解？&lt;br&gt;ARC和MRC&lt;br&gt;ARC是依靠什么实现的？&lt;br&gt;release如何实现对象释放？autorelease如何实现？两者的区别与联系？release能做的事情autorelease都能做，那么release可不可以舍弃？为什么？&lt;br&gt;weak和assign的区别？&lt;br&gt;谈一下运行时？&lt;br&gt;kvo的底层实现？&lt;/p&gt;
-&lt;p&gt;(我面试总结)&lt;br&gt;你几月份毕业啊？&lt;br&gt;1.UIview中的俩个label的自适应代码。&lt;br&gt;2.项目：音乐播放器，后台实现除了有音乐播放器，还有什么？&lt;br&gt;3.我回答的是通知，通知你用过吗？本地通知和远程通知，有什么区别，远程通知是从哪里获取的。&lt;br&gt;4.音乐播放的数据库是怎么实现的。&lt;br&gt;5.怎么学习iOS的。&lt;br&gt;6.学过JS，JS学的怎么样？JS和OC实现热点会吗？&lt;/p&gt;
-&lt;p&gt;（其他人面试总结）&lt;br&gt;内存管理基础&lt;br&gt;多线程介绍&lt;br&gt;SDWebImage介绍&lt;br&gt;图片下载，缓存是同步还是异步&lt;br&gt;Objective的对象结构&lt;br&gt;ISA指针是指向什么&lt;br&gt;block在MRC下如何解决循环引用&lt;br&gt;NSCache的优点，使用字典可不可以，优缺点分析&lt;br&gt;JAVA和OC的区别，不同，在哪些上最明显&lt;br&gt;UItableView的优化，为什么这么优化&lt;br&gt;CEll如何计算&lt;br&gt;dealloc里做哪些操作&lt;br&gt;NOtification哪些使用场景，同步还是异步？主线程还是子线程&lt;br&gt;dealloc不remove通知会怎么样&lt;br&gt;KVO的实现原理&lt;br&gt;消息转发原理&lt;br&gt;何时用到串行队列&lt;/p&gt;
-&lt;p&gt;越狱后APP的安全&lt;br&gt;动态更新&lt;br&gt;链式反应&lt;br&gt;UIbutton的多次点击&lt;/p&gt;
+&lt;p&gt;网易二面：&lt;br&gt;学习oc对你有什么提升？&lt;br&gt;nsdictionary如何实现深拷贝？&lt;br&gt;如果有多层，怎样实现？&lt;br&gt;autolayout？&lt;br&gt;主线程可以执行下载任务吗？为什么？&lt;br&gt;主线程使用数据库，想在其他线程也访问数据库，怎么实现？&lt;br&gt;有没有写过category？里面能不能加属性？为什么？&lt;br&gt;谈一下你对mvc模式的理解？&lt;br&gt;ARC和MRC ：&lt;br&gt;ARC是依靠什么实现的？&lt;br&gt;&lt;a href=&quot;https://onevcat.com/2012/06/arc-hand-by-hand/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://onevcat.com/2012/06/arc-hand-by-hand/&lt;/a&gt;&lt;br&gt;release如何实现对象释放？autorelease如何实现？两者的区别与联系？release能做的事情autorelease都能做，那么release可不可以舍弃？为什么？&lt;br&gt;weak和assign的区别？&lt;br&gt;谈一下运行时？&lt;br&gt;kvo的底层实现？&lt;/p&gt;
+&lt;p&gt;网易一面：&lt;br&gt;1.UIview中的俩个label的自适应代码。&lt;br&gt;2.项目：音乐播放器，后台实现除了有音乐播放器，还有什么？&lt;br&gt;3.我回答的是通知，通知你用过吗？本地通知和远程通知，有什么区别，远程通知是从哪里获取的。&lt;br&gt;4.音乐播放的数据库是怎么实现的。&lt;br&gt;5.怎么学习iOS的。&lt;br&gt;6.学过JS，JS学的怎么样？JS和OC实现热点会吗？&lt;/p&gt;
+&lt;p&gt;网易其他面试题：&lt;br&gt;内存管理基础&lt;br&gt;多线程介绍&lt;br&gt;SDWebImage介绍&lt;br&gt;图片下载，缓存是同步还是异步&lt;br&gt;Objective的对象结构&lt;br&gt;ISA指针是指向什么&lt;br&gt;block在MRC下如何解决循环引用&lt;br&gt;NSCache的优点，使用字典可不可以，优缺点分析&lt;br&gt;JAVA和OC的区别，不同，在哪些上最明显&lt;br&gt;UItableView的优化，为什么这么优化&lt;br&gt;CEll如何计算&lt;br&gt;dealloc里做哪些操作&lt;br&gt;NOtification哪些使用场景，同步还是异步？主线程还是子线程&lt;br&gt;dealloc不remove通知会怎么样&lt;br&gt;KVO的实现原理&lt;br&gt;消息转发原理&lt;br&gt;何时用到串行队列&lt;/p&gt;
+&lt;p&gt;越狱后APP的安全&lt;br&gt;动态更新&lt;br&gt;链式反应&lt;br&gt;UIbutton的多次点击&lt;br&gt;网易笔试：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;用户点击某按钮时下载一张图片，当用户再次点击此按钮是下载时取消，为了保证尽量节省用户流量，请尽快取消真实的下载请求。&lt;br&gt;请描述解决此问题的方法和思路。&lt;/li&gt;
 &lt;/ol&gt;
@@ -438,11 +439,96 @@
 &lt;/ol&gt;
 &lt;p&gt;代码：用autolayout的masonry框架.&lt;br&gt;&lt;figure class=&quot;highlight dns&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;- (void)viewDidLoad &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [super viewDidLoad]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    UILabel *label1 = [[UILabel alloc]init]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [label1 sizeToFit]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    label1.backgroundColor = [UIColor grayColor]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    UILabel *label2 = [[UILabel alloc]init]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [label2 sizeToFit]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    label2.backgroundColor = [UIColor purpleColor]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [self.view addSubview:label1]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [self.view addSubview:label2]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    label1.text = @&quot;UIlayout的约束&quot;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    label2.text = @&quot;文字过长的时候，优先保证Label2&quot;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [label1 mas_makeConstraints:^(MASConstraintMaker *make)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        make.centerY.equalTo(self.view)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        make.left.equalTo(self.view)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [label1 setContentCompressionResistancePriority:UILayoutPriorityDefaultLow    forAxis:UILayoutConstraintAxisVertical]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [label2 mas_makeConstraints:^(MASConstraintMaker *make)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        make.centerY.equalTo(self.view)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        make.left.equalTo(label1.mas_right).offset(5)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        make.right.equalTo(self.view)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [label2 setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt; 效果：&lt;br&gt; &lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/UILabel%E6%95%88%E6%9E%9C.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;其他公司面试题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;UIView和CALayer的区别？&lt;/li&gt;
+&lt;li&gt;UIView继承自哪个父类？&lt;/li&gt;
+&lt;li&gt;自动释放池底层是如何实现的？&lt;/li&gt;
+&lt;li&gt;runtime 的运行机制？&lt;/li&gt;
+&lt;li&gt;宏定义和const关键字的区别？&lt;/li&gt;
+&lt;li&gt;GCD和NSOperation的区别？NSOperation并发有顺序吗？&lt;/li&gt;
+&lt;li&gt;沙盒的目录，NSUserDefault是存在什么目录下的？哪种形式？&lt;/li&gt;
+&lt;li&gt;Runloop的机制？&lt;/li&gt;
+&lt;li&gt;SDWebImage的源码研究过吗？&lt;/li&gt;
+&lt;li&gt;Git和SVN的区别？&lt;/li&gt;
+&lt;li&gt;静态库和动态库的区别？&lt;/li&gt;
+&lt;li&gt;H5,JS和网页，Native与iOS开发结合用过吗？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;腾讯面试题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;如何绘制一个三角形？&lt;br&gt;1.1 如何绘制大量三角形？&lt;br&gt;1.2 一定要重写drawRect吗？&lt;br&gt;1.3 如何刷新View界面？&lt;br&gt;1.4 Layer好在哪？&lt;/li&gt;
+&lt;li&gt;assign和weak的区别&lt;/li&gt;
+&lt;li&gt;线程和RunLoop的关系&lt;br&gt;3.1 一个autorealese对象在什么时刻释放？（比如在一个vc的viewDidLoad中创建）&lt;/li&gt;
+&lt;li&gt;NSTimer有什么需注意的以及和RunLoop的关系？&lt;/li&gt;
+&lt;li&gt;NSString copy 和 NSString mutableCopy 的区别&lt;/li&gt;
+&lt;li&gt;线程加锁原理（信号量，临界区，自选锁）&lt;/li&gt;
+&lt;li&gt;iOS7 - iOS9的区别&lt;/li&gt;
+&lt;li&gt;GCD指向了野指针了怎么办&lt;/li&gt;
+&lt;li&gt;用HTTP传数据，丢包严重怎么办&lt;/li&gt;
+&lt;li&gt;iOS中广播的种类&lt;/li&gt;
+&lt;li&gt;app slying&lt;/li&gt;
+&lt;li&gt;runtime如何实现weak变量的自动置nil？&lt;/li&gt;
+&lt;li&gt;AFNetworking的内部实现原理？&lt;/li&gt;
+&lt;li&gt;block循环引用了如何解决？&lt;/li&gt;
+&lt;li&gt;如何用GCD同步若干个异步调用？（如根据若干个url异步加载多张图片，然后在都下载完成后合成一张整图）&lt;/li&gt;
+&lt;li&gt;UIKit的框架结构？&lt;br&gt;腾讯面试题：&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;app上架流程&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;线程和进程区别 及之间通信&lt;br&gt;&lt;a href=&quot;http://1108038.blog.51cto.com/1098038/420330&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://1108038.blog.51cto.com/1098038/420330&lt;/a&gt;&lt;br&gt;进程是表示资源分配的基本单位，又是调度运行的基本单位。&lt;br&gt;线程是进程中执行运算的最小单位，亦即执行处理机调度的基本单位。&lt;br&gt;进程间通信—&amp;gt;管道(pipe)、信号(signal)、消息队列、共享内存、信号量、套接字；&lt;br&gt;线程间通信—&amp;gt;信号量、消息、事件event&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;tableview cell 缓存机制&lt;br&gt;在UITableView内部有一个缓存池，初始化时使用initWithStyle:(UITableViewCellStyle) reuseIdentifier:(NSString *)方法指定一个可重用标识，就可以将这个cell放到缓存池。然后在使用时使用指定的标识去缓存池中取得对应的cell然后修改cell内容即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;tableview cell高度优化：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;深入理解runloop&lt;br&gt;&lt;a href=&quot;http://blog.ibireme.com/2015/05/18/runloop/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.ibireme.com/2015/05/18/runloop/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;主线程runloop(mainRunloop)主要执行事件：&lt;br&gt;负责创建Autoreleasepool和释放autoreleasepool,  周期大概是event loop(事件循环)；&lt;br&gt;事件响应—&amp;gt;当一个硬件事件(触摸/锁屏/摇晃等)发生后，首先由 IOKit.framework 生成一个 IOHIDEvent 事件并由 SpringBoard 接收。SpringBoard 只接收按键(锁屏/静音等)，触摸，加速，接近传感器等几种 Event，随后用 mach port 转发给需要的App进程。随后苹果注册的那个 Source1 就会触发回调，并调用 _UIApplicationHandleEventQueue() 进行应用内部的分发。_UIApplicationHandleEventQueue() 会把 IOHIDEvent 处理并包装成 UIEvent 进行处理或分发，其中包括识别 UIGesture/处理屏幕旋转/发送给 UIWindow 等。通常事件比如 UIButton 点击、touchesBegin/Move/End/Cancel 事件都是在这个回调中完成的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;手势识别—&amp;gt;当上面的 _UIApplicationHandleEventQueue() 识别了一个手势时，其首先会调用 Cancel 将当前的 touchesBegin/Move/End 系列回调打断。随后系统将对应的 UIGestureRecognizer 标记为待处理。&lt;/p&gt;
+&lt;p&gt;界面更新—&amp;gt;当在操作 UI 时，比如改变了 Frame、更新了 UIView/CALayer 的层次时，或者手动调用了 UIView/CALayer 的 setNeedsLayout/setNeedsDisplay方法后，这个 UIView/CALayer 就被标记为待处理，并被提交到一个全局的容器去。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;NSTimer事件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;PerformSelecter—&amp;gt;performSelector:onThread: 时，实际上其会创建一个 Timer 加到对应的线程去&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;autorelease 具体释放时机：&lt;br&gt;通常在下一次事件循环(event loop)时释放，如果是手动创建的自动释放池则在这个池的外层释放。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;虚拟内存：&lt;br&gt;当应用程序占用内存很大或很多，则会导致内存消耗殆尽。为解决该问题，Windows中运用了虚拟内存技术，即匀出一部分硬盘空间来充当内存使用。当内存耗尽时，电脑就会自动调用硬盘来充当内存，以缓解内存的紧张。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;红黑树&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;QQ小红点动画的实现原理&lt;/li&gt;
+&lt;li&gt;设计一个网络图片缓存器(SDWebImage实现原理必需要了解)&lt;/li&gt;
+&lt;li&gt;PNG和JPG的区别&lt;/li&gt;
+&lt;li&gt;如何压缩JPG&lt;/li&gt;
+&lt;li&gt;TCP/IP协议&lt;br&gt;自己面试题：&lt;/li&gt;
+&lt;li&gt;GCD有何缺点？&lt;/li&gt;
+&lt;li&gt;CocosPods?&lt;/li&gt;
+&lt;li&gt;项目重构的一些规范和命名规范？&lt;/li&gt;
+&lt;li&gt;如何push到某个特定的controller？&lt;/li&gt;
+&lt;li&gt;SDWebImage框架是如何实现的？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;腾讯面试：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;看简历说一下你的项目经验，讲解一下你最拿手的项目？其中各个部分的功能是如何实现的？&lt;/li&gt;
+&lt;li&gt;属性ARC下有什么？&lt;/li&gt;
+&lt;li&gt;属性中weak和strong的区别？&lt;/li&gt;
+&lt;li&gt;assign为何不能修饰对象？如果修饰了会怎么样？&lt;/li&gt;
+&lt;li&gt;copy在哪里用？&lt;/li&gt;
+&lt;li&gt;Block在栈中还是堆中？全局变量是在栈还是在堆中？成员变量呢？&lt;/li&gt;
+&lt;li&gt;怎么定义一个类的属性？写代码。&lt;/li&gt;
+&lt;li&gt;——#import与#include的区别？&lt;/li&gt;
+&lt;li&gt;如果自己实现一个setter方法，该如何写代码？&lt;/li&gt;
+&lt;li&gt;oc中有什么容器？&lt;/li&gt;
+&lt;li&gt;写一个数组初始化的代码。&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;更多面试总结题：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/ab4e96bcf26a&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/ab4e96bcf26a&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/e453b28c3222#&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/e453b28c3222#&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/5d2163640e26#&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/5d2163640e26#&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/xieyupeng520/article/details/50832701&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/xieyupeng520/article/details/50832701&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;招聘一个靠谱的 iOS：&lt;br&gt;题目：&lt;a href=&quot;http://blog.sunnyxx.com/2015/07/04/ios-interview/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.sunnyxx.com/2015/07/04/ios-interview/&lt;/a&gt;&lt;br&gt;答案：&lt;a href=&quot;http://www.cocoachina.com/ios/20150803/12872.html（上）&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cocoachina.com/ios/20150803/12872.html（上）&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.cocoachina.com/ios/20150825/13195.html（下）&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cocoachina.com/ios/20150825/13195.html（下）&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </content>
     
@@ -464,7 +550,7 @@
     <link href="http://peilinghui.com/2016/03/26/iOS%E5%B0%8F%E9%A1%B9%E7%9B%AE/"/>
     <id>http://peilinghui.com/2016/03/26/iOS小项目/</id>
     <published>2016-03-26T12:44:02.000Z</published>
-    <updated>2016-04-16T08:39:33.000Z</updated>
+    <updated>2016-04-17T10:42:06.000Z</updated>
     
     <content type="html">&lt;p&gt;到了软院以后，选择了移动互联网和游戏开发方向，开设了iOS课程，在老师的引导下，开始自学了iOS。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;仿App第一步：&lt;/p&gt;
@@ -475,11 +561,7 @@
 - 在didFinishLaunching添加接收远程事件代码,&amp;quot;一定要添加，不然无效果&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;  [application beginReceivingRemoteControlEvents];&lt;br&gt;⑪实现锁屏按钮远程事件&lt;br&gt; •在appdelegate中实现remoteControlReceivedWithEvent，来接收远程事件&lt;/p&gt;
 &lt;p&gt;主要是有三部分：MVC&lt;br&gt;Model层实现的是存放歌曲名字，本地音乐文件名，歌手名字等。&lt;br&gt;View层实现的是MusicCell，显示cell的数据。&lt;br&gt;            PlayerToolBar，有分类category，设置了歌手图片，音乐名，歌手名，时间的拖动条，总时间，当前播放时间，定时器和是否拖拽。&lt;br&gt;           如果正在播放：更新进度条，更新时间，头像转动。设置当前播放的音乐，并显示数据，更改播放状态，更改拖拽状态。&lt;br&gt;controller层实现的是用第三方框架MJEXtension，实现了字典转模型，懒加载音乐数。tableview表格数据源，播放工具条的代理，播放器的代理。&lt;/p&gt;
-&lt;h1 id=&quot;微博&quot;&gt;&lt;a href=&quot;#微博&quot; class=&quot;headerlink&quot; title=&quot;微博&quot;&gt;&lt;/a&gt;微博&lt;/h1&gt;&lt;p&gt;获取微博数据&lt;br&gt;1&amp;gt; 怎么获取数据,向新浪服务器发送请求,查看新浪API文档&lt;br&gt;2&amp;gt; 利用AFN发送请求&lt;br&gt;3&amp;gt; 分析新浪接口文档,解析数据,根据数据自定义模型(Status,User)。&lt;br&gt;• total_number 近期接收到的所有微博数&lt;br&gt;4&amp;gt; 利用实例程序,把数据生成plist分析,需要几个模型,模型有哪些属 性,&lt;br&gt;• 自定义Photo模型,pic_urls里存放的是字典,需要把字典转化成模 型。&lt;br&gt;• thumbnail_pic是缩略图,新浪为了以后能扩展,搞了个字典,以后 可以添加中图,等等.&lt;br&gt;注意:不能直接拿到获取的原始微博数据直接写入文件,因为新浪服务 器会返回null,有null,就会写入失败。&lt;br&gt;5&amp;gt; 展示微博数据&lt;br&gt;6&amp;gt; 图片用SDWebImage下载&lt;br&gt;• 异步下载,不会卡死主线程&lt;br&gt;• 做了数据缓存,不会重复下载同样的图片,节省用户流量&lt;br&gt;• 解决循环利用的问题,不会让图片错乱。&lt;br&gt;• SDWebImage使用注意:&lt;br&gt;• 内存警告的时候,清空缓存和停止下载。&lt;br&gt;• SDWebImage有个专门管理下载和缓存的类&lt;br&gt; •&lt;br&gt;7.解决数据固定问题&lt;br&gt;•&lt;/p&gt;
-&lt;h1 id=&quot;网易新闻客户端&quot;&gt;&lt;a href=&quot;#网易新闻客户端&quot; class=&quot;headerlink&quot; title=&quot;网易新闻客户端&quot;&gt;&lt;/a&gt;网易新闻客户端&lt;/h1&gt;&lt;p&gt;图文混排是webview去实现的,内容拼接的好处就是数据显示比较同步&lt;br&gt;过网络请求获得相关的信息,再通过手机端进行拼HTML,然后在WebView进行展示，此处还对文章中的图片增加点击效果，可以保存到相册中；文章的样式已经存在项目中，直接去调用；&lt;br&gt;1.首先了解两个相关的实体对象，一个是新闻的主体内容，另外一个就是图片的相关信息实体；&lt;br&gt;2.网络请求，并转化成实体对象&lt;br&gt;3.拼接HTML源代码&lt;br&gt;&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;(&lt;span class=&quot;typename&quot;&gt;void&lt;/span&gt;)showInWebView&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;NSMutableString *html = [NSMutableString string];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendFormat:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;,[[NSBundle mainBundle] &lt;span class=&quot;string&quot;&gt;URLForResource:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;SXDetails.css&quot;&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;withExtension:&lt;/span&gt;nil]];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendString:&lt;/span&gt;[self touchBody]];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[html &lt;span class=&quot;string&quot;&gt;appendString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[self.webView &lt;span class=&quot;string&quot;&gt;loadHTMLString:&lt;/span&gt;html &lt;span class=&quot;string&quot;&gt;baseURL:&lt;/span&gt;nil];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;4.关于WebView与网页进行交互，并把图片保存到手机相册中&lt;br&gt;5.拼接后的HTML内容如下&lt;br&gt;6：效果图中另外一张有比较多的图片源文件如下：&lt;/p&gt;
-&lt;p&gt;参考：&lt;a href=&quot;http://www.knowsky.com/884384.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.knowsky.com/884384.html&lt;/a&gt;&lt;/p&gt;
-&lt;ol&gt;
+&lt;h1 id=&quot;网易新闻客户端&quot;&gt;&lt;a href=&quot;#网易新闻客户端&quot; class=&quot;headerlink&quot; title=&quot;网易新闻客户端&quot;&gt;&lt;/a&gt;网易新闻客户端&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;简介&lt;br&gt;1&amp;gt;需求&lt;ul&gt;
 &lt;li&gt;展示不同栏目的新闻列表&lt;/li&gt;
 &lt;li&gt;点击新闻列表可以查看详细内容&lt;/li&gt;
@@ -530,6 +612,20 @@
 &lt;li&gt;MOVE模型的Event&lt;br&gt;点击登录按钮，状态改变（WIFI变为3G）&lt;br&gt;登录界面展示：&lt;br&gt;M：UserInfo&lt;br&gt;O: FxLogin&lt;br&gt;V: LoginPage&lt;br&gt;E: LoginButton&lt;br&gt;把数据接口解析为实体。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;显示当天广告&lt;br&gt;广告页需求：先显示默认图，广告下载完毕后显示广告图，显示3秒后消失。&lt;br&gt;1&amp;gt;本地缓存：节省用户流量，本地是否存在，存在，取本地图片，没有存在，取URL中的广告。前后台切换也要显示广告页。&lt;br&gt;2&amp;gt;策略：控制时间，判断是否要显示广告页：把上一次登录时间记录下来，然后在一小时内不再显示启动图。&lt;br&gt;3&amp;gt;根据设备的尺寸获取响应尺寸的广告  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;定制导航栏&lt;br&gt;1&amp;gt;给登录页添加导航栏&lt;br&gt;2&amp;gt;设置状态栏的样式：在Info的Custom  iOS Target Properties中的View controller-based status 设置一下&lt;br&gt;状态条初始化的时候是否隐藏：Status bar is initially hidden&lt;br&gt;3&amp;gt;导航栏透明对nib的影响:尽量不要用透明图片。&lt;br&gt;4&amp;gt;定制左右按钮&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;设置底部导航栏（UITabbarcontroller）&lt;br&gt;1&amp;gt;设置HomePage:&lt;br&gt;2&amp;gt;设置item的字体颜色&lt;br&gt;3&amp;gt;定制图标&lt;br&gt;4&amp;gt;配置文件实现(Plist)：方便维护和扩展。&lt;br&gt;配置plist文件，再定义解析的Model，实例化。&lt;br&gt;HomePage:self.viewControllers = [PageInfo pageControllers];&lt;br&gt;重复代码抽取到Model层：&lt;/p&gt;
+&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (PageInfo *pageInfo &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; pages) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (pageInfo.unLoad) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (pageInfo.unLoad) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;               &lt;span class=&quot;keyword&quot;&gt;continue&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;               &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       pageController = [[NSClassFromString(pageInfo.ID) alloc] init];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       navPage = [[UINavigationController alloc] &lt;span class=&quot;string&quot;&gt;initWithRootViewController:&lt;/span&gt;pageController];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       pageController.title = pageInfo.name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       pageController.tabBarItem.image = [UIImage &lt;span class=&quot;string&quot;&gt;imageNamed:&lt;/span&gt;pageInfo.image];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       [controllers &lt;span class=&quot;string&quot;&gt;addObject:&lt;/span&gt;navPage];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;栏目切换效果&lt;br&gt;1&amp;gt;需求分析：选中栏目字体红色，未选择的栏目字体是灰色，栏目条左右两边有阴影，点击的栏目居中显示。&lt;br&gt;2&amp;gt;填空新闻页&lt;br&gt;设置导航栏图标，设置导航栏左右按钮，增加栏目条背景&lt;br&gt;3&amp;gt;实现栏目条效果&lt;br&gt;设置栏目条两边的阴影效果图片，加上scrollView，把视图层次，把视图放后面就能显示阴影图片。&lt;br&gt;4&amp;gt;点击的栏目居中显示&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+&lt;li&gt;新闻列表展示&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;离线缓存-iOS沙盒机制&lt;br&gt;下次取得时候直接从本地取，不需要再去网上下载&lt;br&gt;1&amp;gt;沙盒机制:iOS为每个app创建自己的存储空间，对APP执行各种操作的权限限制。为了安全考虑.&lt;br&gt;2&amp;gt;关键目录：（Xcode：Window-Device）&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Document:永久保存目录，文档目录。要保存程序声称的数据，会自动备份到ICloud，iTunes，恢复。&lt;br&gt;/Inbox:文件交互目录，只能读、删；不能写，改。  &lt;/li&gt;
@@ -544,20 +640,40 @@
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;H5自动缓存技术&lt;br&gt;在服务器的Document中放入H5文件，里面有清单文件manifest，要缓存的文件有css,js,在HTML的文件中连接了css和JS文件。&lt;br&gt;safari监控：&lt;br&gt;&lt;a href=&quot;http://172.16.20.174.newsreder/h5/content.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://172.16.20.174.newsreder/h5/content.html&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://172.16.20.174.newsreder/h5/content2.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://172.16.20.174.newsreder/h5/content2.html&lt;/a&gt;&lt;br&gt;H5应用指定了manifest 清单，则有应用程序缓存，就指定了缓存的文件，当没有网络时，还可以看到加载的页面。。。。。&lt;br&gt;2.如果不用H5离线缓存技术，就需要存储在数据库中。&lt;br&gt;xcode监控沙盒：&lt;br&gt;/Library/Cache/xxx/ApplicationCache.db&lt;br&gt;CacheResoursData&lt;br&gt;CacheResourses&lt;br&gt;3.内容更新&lt;br&gt;在CSS上有背景颜色的更新，只需要在本地manifest文件中修改Version号，然后告诉H5文件重新加载，本地缓存更新&lt;/p&gt;
 &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;加入微信分享&lt;br&gt;1、申请AppKey&lt;br&gt;open.weixin.qq.com&lt;br&gt;微信开放平台上注册，然后创建应用，得到APP ID，可以获得接口，开发者需要在工程中链接上SystemConfiguration.framework,lib.dylib.libsqlite3.0.dylib&lt;br&gt;2、所以要在包中添加SystemConfiguration.framework,包&lt;br&gt;3、在build setting，在Search Paths 中添加libWeChatSDK.a,WXApi.h,WXAPiObject.h三个文件所在位置。&lt;br&gt;4、在Xcode中，选择你的工程设置项，选中TAGETS一栏，在info标签栏的URL type添加“URL scheme”为你所注册的应用程序id&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;] 在你需要使 用微信终端API的文件中import WXApi.h 头文件，并增加 WXApiDelegate 协议。&lt;/p&gt;
+&lt;p&gt;4.在代码中使用开发工具包&lt;/p&gt;
+&lt;p&gt;[1] 要使你的程序启动后微信终端能响应你的程序，必须在代码中向微信终端注册你的id。（如下图所示，在 AppDelegate 的 didFinishLaunchingWithOptions 函数中向微信注册id）。&lt;/p&gt;
+&lt;p&gt;[2] 重写AppDelegate的handleOpenURL和openURL方法：&lt;/p&gt;
+&lt;p&gt;[3] 现在，你的程序要实现和微信终端交互的具体请求与回应，因此需要实现WXApiDelegate协议的两个方法：&lt;/p&gt;
+&lt;p&gt;-(void) onReq:(BaseReq*)reqonReq是微信终端向第三方程序发起请求，要求第三方程序响应。第三方程序响应完后必须调用sendRsp返回。在调用sendRsp返回时，会切回到微信终端程序界面。&lt;/p&gt;
+&lt;p&gt;-(void) onResp:(BaseResp*)resp如果第三方程序向微信发送了sendReq的请求，那么onResp会被回调。sendReq请求调用后，会切到微信终端程序界面。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;显示当地天气&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;天气接口：&lt;a href=&quot;http://www.mpjacks.cn/post-35.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.mpjacks.cn/post-35.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1.申请服务&lt;br&gt;&lt;a href=&quot;http://www.k780.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.k780.com&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://openweather.weather.com.cn&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://openweather.weather.com.cn&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;获得APP key&lt;br&gt;2.增加天气页面（MOVE模型）&lt;/p&gt;
+&lt;p&gt;3.获取所在城市&lt;br&gt;CoreLocation.framework&lt;br&gt;反地理编码：根据纬度获得地名&lt;/p&gt;
+&lt;p&gt;4.查询城市编码&lt;br&gt;&lt;a href=&quot;http://apistore.baidu/com/microservice/cityinfo?cityname=url编码&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://apistore.baidu/com/microservice/cityinfo?cityname=url编码&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;5.获取本地天气&lt;br&gt;&lt;a href=&quot;http://api.780.com:88&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://api.780.com:88&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;6.显示天气图标&lt;/p&gt;
+&lt;p&gt;加入地理定位的库CoreLocation&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;APNS消息推送&lt;br&gt;1、申请AppKey&lt;br&gt;&lt;a href=&quot;http://dev.xiaomi.com（小米开放平台）&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://dev.xiaomi.com（小米开放平台）&lt;/a&gt;&lt;br&gt;极光：JiPush&lt;br&gt;APPID：&lt;br&gt;2、生成APNS证书&lt;br&gt;&lt;a href=&quot;http://developer.apple.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://developer.apple.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;3、加入SDK&lt;/p&gt;
+&lt;p&gt;apple的push 是不需要其他功夫的 只要服务端下发就好了&lt;br&gt;你就要了解安卓的push机制&lt;br&gt;然后你就要知道 安卓的push进程 然后就要如何进程复活&lt;br&gt;一系列的你都要知道 只有这样你才能拿sp&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;统计用户行为&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;1、申请APPID&lt;br&gt;www.umeng.com&lt;br&gt;2.加入SDK&lt;br&gt;3.设计统计文件&lt;br&gt;FxStatic&lt;br&gt;4、定义统计宏&lt;br&gt;5、统计相关行为&lt;/p&gt;
+&lt;p&gt;6、加入百度统计&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;功能扩展（还未实现）&lt;br&gt;下拉刷新&lt;br&gt;栏目定制&lt;br&gt;夜间模式:在css中设置&lt;br&gt;字体字号的设置：在css中设置样式，字号：在JS中字体样式替换&lt;br&gt;消息推送设置：&lt;br&gt;实现页面：阅读，试听，发现，我&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1 id=&quot;驾考助手&quot;&gt;&lt;a href=&quot;#驾考助手&quot; class=&quot;headerlink&quot; title=&quot;驾考助手&quot;&gt;&lt;/a&gt;驾考助手&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;主页面UI的搭建：&lt;br&gt;1&amp;gt;从storyBoard初始化启动应用程序&lt;br&gt;Navigation Controller与view。&lt;br&gt;2&amp;gt;学习autolayout进行页面布局&lt;br&gt;主要是布局。各个小图片的位置&lt;br&gt;3&amp;gt;在storyBoard中设置控件的layer层属性&lt;/li&gt;
-&lt;li&gt;答题页面&lt;br&gt;1&amp;gt;理解封装的概念&lt;br&gt;2&amp;gt;UIView渐变的动画效果&lt;br&gt;3&amp;gt;控件传值&lt;/li&gt;
-&lt;li&gt;章节选择&lt;br&gt;1&amp;gt;sqlite的简单查询操作（fmdb）&lt;br&gt;2&amp;gt;混编mrc和arc&lt;br&gt;3&amp;gt;mvc设计模式的应用&lt;/li&gt;
-&lt;li&gt;核心答题视图的搭建&lt;br&gt;1&amp;gt;scrollView的应用&lt;br&gt;2&amp;gt;tableView的应用&lt;br&gt;3&amp;gt;复用逻辑的养成&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;主要是有MVC层&lt;br&gt;Model层TestChoiceModel，AnswerModel，SubTestSelectModel。&lt;br&gt;数据库的管理用的是第三方库FMDB，调用Model层的接口，先检查数据库是否已存在，不存在则创建数据库sqlite,根据不同的场景选择对应的数据,章节,题目,专项.&lt;/p&gt;
-&lt;p&gt;view层有cell文件夹中包含了FirstTableViewCell，TestChoiceTableViewCell，AnswerTableViewCell。&lt;br&gt;然后是界面的实现：车型选择界面SelectVehicle,答题的时候可以实现滑动页面AnswerScrollView，SelectPatternView，题目列表QuestionSheetsView，实现了手势滑动和通知。&lt;/p&gt;
-&lt;p&gt;controller层包括了总的viewcontroller。&lt;br&gt;分层FirstViewController，把练习放入一个tableview中然后用switch，case。&lt;br&gt;TestChoiceViewController练习选择页面。&lt;br&gt;AnswerViewController。&lt;br&gt;MainTestViewController模拟仿真考试页面有xib。&lt;br&gt;QuestionCollectionManager错题收集页面，用到了KVO。&lt;br&gt;SubjectTwoViewController科二的视频显示页面。用到了 &lt;avkit avplayerviewcontroller.h=&quot;&quot;&gt;和&lt;avfoundation avfoundation.h=&quot;&quot;&gt;&lt;/avfoundation&gt;&lt;/avkit&gt;&lt;/p&gt;
-&lt;p&gt;报名须知和新手上路主要用了webViewcontroller.&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -790,7 +906,7 @@ j++;
     <link href="http://peilinghui.com/2016/03/04/iOS%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C/"/>
     <id>http://peilinghui.com/2016/03/04/iOS中的多线程网络/</id>
     <published>2016-03-04T13:31:31.000Z</published>
-    <updated>2016-04-06T08:47:54.000Z</updated>
+    <updated>2016-04-16T09:03:52.000Z</updated>
     
     <content type="html">&lt;p&gt;不论是什么开发，多线程网络始终是学习的重点。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;多线程网络&quot;&gt;&lt;a href=&quot;#多线程网络&quot; class=&quot;headerlink&quot; title=&quot;多线程网络&quot;&gt;&lt;/a&gt;多线程网络&lt;/h1&gt;&lt;h2 id=&quot;NSthread&quot;&gt;&lt;a href=&quot;#NSthread&quot; class=&quot;headerlink&quot; title=&quot;NSthread&quot;&gt;&lt;/a&gt;NSthread&lt;/h2&gt;&lt;ol&gt;
@@ -909,7 +1025,7 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
 &lt;li&gt;什么是多线程&lt;br&gt;进程：是指在系统中正在运行的一个应用程序。1个进程要想执行任务，必须得有线程。（一个进程至少要有一个线程）特征：独立性，动态性，并发性。&lt;br&gt;线程：是进程的基本执行单元，一个进程（程序）的所有任务都在线程中执行。当一个程序运行时，内部可能包含了多个顺序执行流，每个顺序执行流就是一个线程的。&lt;br&gt;多线程：在一个进程中可以开启多个线程，每条线程可以并发（同时）执行不同的任务。&lt;br&gt;多线程编程的优点：  &lt;ul&gt;
 &lt;li&gt;进程间不能共享内存，但线程之间共享内存非常容易&lt;/li&gt;
 &lt;li&gt;系统创建进程需要为该进程重新分配系统资源，但创建线程则代价小得多，因此使用多线程来实现多任务并发比多进程的效率高。&lt;/li&gt;
-&lt;li&gt;iOS提供了多种多线程实现方式，从而简化了iOS的多线程编程。&lt;/li&gt;
+&lt;li&gt;iOS提供了多种多线程实现方式，从而简化了iOS的多线程编程。&lt;br&gt;参考：&lt;a href=&quot;http://1108038.blog.51cto.com/1098038/420330&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://1108038.blog.51cto.com/1098038/420330&lt;/a&gt;&lt;br&gt;进程间通信—&amp;gt;管道(pipe)、信号(signal)、消息队列、共享内存、信号量、套接字；&lt;br&gt;线程间通信—&amp;gt;信号量、消息、事件event&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;iOS中如何实现多线程&lt;ul&gt;
@@ -1028,7 +1144,7 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
     <link href="http://peilinghui.com/2016/03/01/iOS%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     <id>http://peilinghui.com/2016/03/01/iOS面试题总结/</id>
     <published>2016-03-01T08:57:25.000Z</published>
-    <updated>2016-04-13T11:51:34.000Z</updated>
+    <updated>2016-04-19T02:23:26.000Z</updated>
     
     <content type="html">&lt;p&gt;快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -1064,6 +1180,10 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
 &lt;p&gt;copy与retain的区别：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;copy其实是建立了一个相同的对象，而retain不是；&lt;br&gt;copy是内容拷贝，retain是指针拷贝；&lt;br&gt;copy是内容的拷贝 ,对于像NSString,的确是这样，如果拷贝的是NSArray这时只是copy了指向array中相对应元素的指针.这便是所谓的”浅复制”。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;assign和weak的区别；&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;assign是指针赋值，不对引用计数操作，使用之后如果没有置为nil，可能就会产生野指针；而weak一旦不进行使用后，永远不会使用了，就不会产生野指针！ 用weak避免循环引用.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1 id=&quot;单例设计模式-Singleton&quot;&gt;&lt;a href=&quot;#单例设计模式-Singleton&quot; class=&quot;headerlink&quot; title=&quot;单例设计模式(Singleton)&quot;&gt;&lt;/a&gt;单例设计模式(Singleton)&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;定义：它可以保证某个类创建出来的对象永远只有1个。&lt;/li&gt;
