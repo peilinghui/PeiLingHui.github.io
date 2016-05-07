@@ -13,7 +13,7 @@
 <meta property="og:description" content="也在项目中用过一些第三方框架，第三方库，然后就知道了CocoaPods.">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%9B%BE1%EF%BC%88%E9%95%9C%E5%83%8F%EF%BC%89.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/podfile.png">
-<meta property="og:updated_time" content="2016-03-28T07:52:56.000Z">
+<meta property="og:updated_time" content="2016-05-04T12:59:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocosPods">
 <meta name="twitter:description" content="也在项目中用过一些第三方框架，第三方库，然后就知道了CocoaPods.">
@@ -152,7 +152,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+                        <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/oc-视频学习/" style="font-size: 10px;">oc,视频学习</a> <a href="/tags/swift，视频学习/" style="font-size: 10px;">swift，视频学习</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
                     </div>
                 </section>
                 
@@ -299,7 +299,7 @@
 <h1 id="安装CocoaPods"><a href="#安装CocoaPods" class="headerlink" title="安装CocoaPods"></a>安装CocoaPods</h1><ol>
 <li><p>要先确保电脑本地是否有 Ruby环境，因为CocoaPods运行于 Ruby之上，默认情况下，Mac 是自带了 Ruby 环境的，可以通过命令行 ruby -v查看当前Ruby的版本。<br>执行命令：<br> <code>$ ruby -v</code><br>已经安装了Ruby开发环境，那么在终端（Terminal）中使用以下命令即可直接安装：<br> <code>$ sudo gem install cocoapods</code><br> <code>$ pod setup</code></p>
 </li>
-<li><p>安装过程中可能遇到的问题<br>①执行完install命令半天没反应<br>这有可能是因为Ruby的默认源使用的是cocoapods.org，国内访问这个网址有时候会有问题，网上的一种解决方案是将远替换成淘宝的，替换方式如下：<br> <code>$ gem sources --remove https://rubygems.org/</code><br>//等有反应之后再敲入以下命令<br> <code>$ gem sources -a http://ruby.taobao.org/</code><br>要想验证是否替换成功了，可以执行：<br> <code>$ gem sources -l</code><br>正常的输出是：</p>
+<li><p>安装过程中可能遇到的问题<br>①执行完install命令半天没反应<br>这有可能是因为Ruby的默认源使用的是cocoapods.org，国内访问这个网址有时候会有问题，网上的一种解决方案是将远替换成淘宝的，替换方式如下：<br> <code>$ gem sources --remove https://rubygems.org/</code><br>//等有反应之后再敲入以下命令<br> <code>$ gem sources -a https://ruby.taobao.org/</code><br>要想验证是否替换成功了，可以执行：<br> <code>$ gem sources -l</code><br>正常的输出是：</p>
 </li>
 </ol>
 <p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%9B%BE1%EF%BC%88%E9%95%9C%E5%83%8F%EF%BC%89.png" alt=""><br>②gem版本过老<br>gem是管理Ruby库和程序的标准包，如果它的版本过低也可能导致安装失败，解决方案自然是升级gem，执行下述命令即可：<br>    <code>$ sudo gem update --system</code><br>③安装完成后，执行pod setup命令时报错：<br>这就是路径设置的问题，可以通过执行：<br>    <code>$ rvm use ruby-1.9.3-p448</code>  </p>
@@ -331,7 +331,7 @@
         <p><span>本文标题:</span><a href="/2016/03/04/CocosPods/">CocosPods</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月04日 - 16时54分</p>
-        <p><span>最后更新:</span>2016年03月28日 - 15时52分</p>
+        <p><span>最后更新:</span>2016年05月04日 - 20时59分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/04/CocosPods/" title="CocosPods">http://peilinghui.com/2016/03/04/CocosPods/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/04/CocosPods/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -467,7 +467,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/我的iOS学习之路/">我的iOS学习之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/91夺宝项目/">91夺宝项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/仿iMessage聊天页面开发/">仿iMessage聊天页面开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/最近学习总结/">最近学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/01/斯坦福iPhone开发/">斯坦福iPhone开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/我的iOS学习之路/">我的iOS学习之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");

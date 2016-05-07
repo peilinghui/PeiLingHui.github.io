@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="通过不断的学习也接触了不少的第三方框架，就总结一下。">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png">
-<meta property="og:updated_time" content="2016-03-29T10:47:34.000Z">
+<meta property="og:updated_time" content="2016-05-04T13:17:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS中的第三方框架">
 <meta name="twitter:description" content="通过不断的学习也接触了不少的第三方框架，就总结一下。">
@@ -151,7 +151,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+                        <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/oc-视频学习/" style="font-size: 10px;">oc,视频学习</a> <a href="/tags/swift，视频学习/" style="font-size: 10px;">swift，视频学习</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
                     </div>
                 </section>
                 
@@ -287,7 +287,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>通过不断的学习也接触了不少的第三方框架，就总结一下。<br><a id="more"></a></p>
+        <p>通过不断的学习也接触了不少的第三方框架，就总结一下。<br><a id="more"></a><br>源代码分析：<a href="https://github.com/Draveness/iOS-Source-Code-Analyze" target="_blank" rel="external">https://github.com/Draveness/iOS-Source-Code-Analyze</a></p>
 <h1 id="FMDB"><a href="#FMDB" class="headerlink" title="FMDB"></a>FMDB</h1><ol>
 <li>什么是FMDB：<br>FMDB是iOS平台的SQLite数据库框架；<br>FMDB以OC的方式封装了SQLite的C语言API</li>
 <li>优点<ul>
@@ -297,7 +297,15 @@
 </ul>
 </li>
 <li>FMDB的github地址:  <a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">https://github.com/ccgus/fmdb</a></li>
-<li>核心类<br>FMDB有三个主要的类<br>（1）FMDatabase<br>一个FMDatabase对象就代表一个单独的SQLite数据库<br>用来执行SQL语句<br>（2）FMResultSet<br>使用FMDatabase执行查询后的结果集<br>（3）FMDatabaseQueue<br>用于在多线程中执行多个查询或更新，它是线程安全的<h1 id="AFNetworking"><a href="#AFNetworking" class="headerlink" title="AFNetworking"></a>AFNetworking</h1></li>
+<li>核心类<br>FMDB有三个主要的类<br>（1）FMDatabase<br>一个FMDatabase对象就代表一个单独的SQLite数据库<br>用来执行SQL语句<br>（2）FMResultSet<br>使用FMDatabase执行查询后的结果集<br>（3）FMDatabaseQueue<br>用于在多线程中执行多个查询或更新，它是线程安全的</li>
+</ol>
+<h1 id="Alamofire"><a href="#Alamofire" class="headerlink" title="Alamofire"></a>Alamofire</h1><ol>
+<li><a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="external">https://github.com/Alamofire/Alamofire</a></li>
+</ol>
+<h1 id="AlamofireObjectMapper"><a href="#AlamofireObjectMapper" class="headerlink" title="AlamofireObjectMapper"></a>AlamofireObjectMapper</h1><ol>
+<li><a href="https://github.com/tristanhimmelman/AlamofireObjectMapper" target="_blank" rel="external">https://github.com/tristanhimmelman/AlamofireObjectMapper</a></li>
+</ol>
+<h1 id="AFNetworking"><a href="#AFNetworking" class="headerlink" title="AFNetworking"></a>AFNetworking</h1><ol>
 <li>AFN 与 ASI 有什么区别<br>AFN基于NSURL，ASI基于底层的CFNetwork框架，因此ASI的性能优于AFN<br>AFN采取block的方式处理请求，ASI最初采取delegate的方式处理请求，后面也增加了block的方式。<br>AFN只封装了一些常用功能，满足基本需求，直接忽略了很多扩展功能，比如没有封装同步请求；ASI提供的功能较多，预留了各种接口和工具供开发者自行扩展。AFN直接解析服务器返回的JSON、XML等数据，而ASI比较原始，返回的是NSData二进制数据。<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png" alt=""></li>
 <li>讲解：<br>1&gt;<strong>AFHTTPRequestOperation</strong><br>HTTP或HTTPS协议请求的AFURLConnectionOperation的子类。它封装的可接受状态码和内容的类型，判定一个请求结果是成功或失败。<br>实际上对系统的HTTP网络请求增加了几个HTTP需要用到的参数。<br>2&gt;<strong>AFURLConnectionOperation</strong><br>可以说是AFN最基础的类。继承自NSOperation类，将网络请求依附到一个operation上。从而让我们能够有效的控制并观察一个网络请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态。<br>①：综述<br>AFURLConnectionOperation 将Operation和URLConnection结合到一起，利用operation可以监听到状态以及可以建立相互之间的依赖关系的特性，实现了对于 一个NSURLConnection对象的完美控制，并将请求的结果通过block友好的返回。<br>②：实现文件.m<br>我们总结下.m中这个类主要有哪些方法。<br>1： 首先我们可以看到它创建了一个单例线程。这个线程将会常驻内存，用来处理AFN发起的所有请求任务。当然，线程也跟随着一个runloop，AFN将这个 runloop的模式设置为NSDefaultRunLoopMode。NSDefaultRunLoopMode是无法检测到connection的状 态的。这说明了，AFN将不会在这该线程处理connection完成后的UI刷新等工作，而是会将数据抛给主线程，让主线程去完成UI的刷新。<br>2：我们可以看到该类通过接受请求的字符串，创建了URLRequest以及NSURLConnection对象。从而去进行请求。<br>3：实现文件多次使用到了锁，可以保证数据的安全。当然他也实现了几个数据的NSCoping协议。<br>4：请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态的控制。这里讲一下暂停和恢复。<br>暂 停实际上将网络请求取消掉了。但是由于实现了nscoping协议，已经下载到数据得以保存下来。下次进行相同请求的时候，我们会将已经下载到的数据的节 点一起发送给服务器，告诉服务器这些部门的数据我们不需要了，服务器根据我发送的返回节点给我返回相应的数据即可。从而实现了暂停和恢复功能，也就是断点 续传。<br>5：operation方法的重写。自行google，这里不赘述。<br>6：状态的各种控制方法的实现以及发送状态改变的通知  </li>
 </ol>
@@ -308,6 +316,10 @@
 <h1 id="SDWebImage"><a href="#SDWebImage" class="headerlink" title="SDWebImage"></a>SDWebImage</h1><ol>
 <li>网络图片处理框架<br>包含功能：图片下载、图片缓存、下载进度监控<br>用法简单，功能强大，大大提高了网络图片的处理效率<br><a href="http://github.com/rs/SDWebImage" target="_blank" rel="external">http://github.com/rs/SDWebImage</a></li>
 </ol>
+<h1 id="SnapKit"><a href="#SnapKit" class="headerlink" title="SnapKit"></a>SnapKit</h1><ol>
+<li><a href="https://github.com/SnapKit/SnapKit" target="_blank" rel="external">https://github.com/SnapKit/SnapKit</a></li>
+<li>基于swift的autolayout的框架</li>
+</ol>
 <h1 id="MBProgressHUD"><a href="#MBProgressHUD" class="headerlink" title="MBProgressHUD"></a>MBProgressHUD</h1><ol>
 <li>动态提示框效果。应用显示一个过渡的作用，常用于打开一个联网页面加载过程，防止出现假死现象，如果网速慢则告诉用户已经在很努力很努力的加载中。网页加载、下载等耗时操作中给予用户以提示。</li>
 <li>github 地址：<a href="https://github.com/jdg/MBProgressHUD" target="_blank" rel="external">https://github.com/jdg/MBProgressHUD</a></li>
@@ -317,6 +329,9 @@
 <li>JSONKit是用 Objective-C 实现的一个高性能的 JSON 解析和生成库。json正在逐步取代xml，成为网络数据的通用格式。</li>
 <li>讲解：<a href="http://www.cnblogs.com/jiangyuxuan/archive/2013/03/09/2950984.html" target="_blank" rel="external">http://www.cnblogs.com/jiangyuxuan/archive/2013/03/09/2950984.html</a></li>
 <li>下载地址：<a href="https://github.com/johnezang/JSONKit/" target="_blank" rel="external">https://github.com/johnezang/JSONKit/</a></li>
+</ol>
+<h1 id="Kingfisher"><a href="#Kingfisher" class="headerlink" title="Kingfisher"></a>Kingfisher</h1><ol>
+<li><a href="https://github.com/onevcat/Kingfisher" target="_blank" rel="external">https://github.com/onevcat/Kingfisher</a></li>
 </ol>
 <h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><p>字典转模型</p>
 <h1 id="MJExtension"><a href="#MJExtension" class="headerlink" title="MJExtension"></a>MJExtension</h1><ol>
@@ -337,7 +352,7 @@
         <p><span>本文标题:</span><a href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月05日 - 14时08分</p>
-        <p><span>最后更新:</span>2016年03月29日 - 18时47分</p>
+        <p><span>最后更新:</span>2016年05月04日 - 21时17分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/05/iOS中的第三方框架/" title="iOS中的第三方框架">http://peilinghui.com/2016/03/05/iOS中的第三方框架/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/05/iOS中的第三方框架/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -373,7 +388,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#FMDB"><span class="toc-number">1.</span> <span class="toc-text">FMDB</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AFNetworking"><span class="toc-number">2.</span> <span class="toc-text">AFNetworking</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SDWebImage"><span class="toc-number">3.</span> <span class="toc-text">SDWebImage</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MBProgressHUD"><span class="toc-number">4.</span> <span class="toc-text">MBProgressHUD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSONKit"><span class="toc-number">5.</span> <span class="toc-text">JSONKit</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Extension"><span class="toc-number">6.</span> <span class="toc-text">Extension</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MJExtension"><span class="toc-number">7.</span> <span class="toc-text">MJExtension</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MJRefresh"><span class="toc-number">8.</span> <span class="toc-text">MJRefresh</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#FMDB"><span class="toc-number">1.</span> <span class="toc-text">FMDB</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Alamofire"><span class="toc-number">2.</span> <span class="toc-text">Alamofire</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AlamofireObjectMapper"><span class="toc-number">3.</span> <span class="toc-text">AlamofireObjectMapper</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AFNetworking"><span class="toc-number">4.</span> <span class="toc-text">AFNetworking</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SDWebImage"><span class="toc-number">5.</span> <span class="toc-text">SDWebImage</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SnapKit"><span class="toc-number">6.</span> <span class="toc-text">SnapKit</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MBProgressHUD"><span class="toc-number">7.</span> <span class="toc-text">MBProgressHUD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSONKit"><span class="toc-number">8.</span> <span class="toc-text">JSONKit</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Kingfisher"><span class="toc-number">9.</span> <span class="toc-text">Kingfisher</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Extension"><span class="toc-number">10.</span> <span class="toc-text">Extension</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MJExtension"><span class="toc-number">11.</span> <span class="toc-text">MJExtension</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MJRefresh"><span class="toc-number">12.</span> <span class="toc-text">MJRefresh</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -473,7 +488,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/我的iOS学习之路/">我的iOS学习之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/91夺宝项目/">91夺宝项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/仿iMessage聊天页面开发/">仿iMessage聊天页面开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/最近学习总结/">最近学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/01/斯坦福iPhone开发/">斯坦福iPhone开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/我的iOS学习之路/">我的iOS学习之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");

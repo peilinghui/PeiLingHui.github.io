@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS中的数据存储 | 向着阳光奔跑</title>
+  <title>仿iMessage聊天页面开发 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iOS中的数据存储方式">
+  <meta name="description" content="视频学习笔记。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS中的数据存储">
-<meta property="og:url" content="http://peilinghui.com/2016/03/05/iOS中的数据存储/index.html">
+<meta property="og:title" content="仿iMessage聊天页面开发">
+<meta property="og:url" content="http://peilinghui.com/2016/05/06/仿iMessage聊天页面开发/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="iOS中的数据存储方式">
-<meta property="og:updated_time" content="2016-04-16T08:44:37.000Z">
+<meta property="og:description" content="视频学习笔记。">
+<meta property="og:updated_time" content="2016-05-06T13:24:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中的数据存储">
-<meta name="twitter:description" content="iOS中的数据存储方式">
+<meta name="twitter:title" content="仿iMessage聊天页面开发">
+<meta name="twitter:description" content="视频学习笔记。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -248,11 +248,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-iOS中的数据存储" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-仿iMessage聊天页面开发" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/03/05/iOS中的数据存储/" class="article-date">
-      <time datetime="2016-03-05T05:59:07.000Z" itemprop="datePublished">2016-03-05</time>
+      <a href="/2016/05/06/仿iMessage聊天页面开发/" class="article-date">
+      <time datetime="2016-05-06T12:27:24.000Z" itemprop="datePublished">2016-05-06</time>
 </a>
     </div>
   
@@ -265,7 +265,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS中的数据存储
+      仿iMessage聊天页面开发
     </h1>
   
 
@@ -273,12 +273,12 @@
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-    </div>
-
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift，视频学习/">swift，视频学习</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -286,39 +286,32 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>iOS中的数据存储方式<br><a id="more"></a></p>
-<h1 id="iOS中的数据存储方式"><a href="#iOS中的数据存储方式" class="headerlink" title="iOS中的数据存储方式"></a>iOS中的数据存储方式</h1><h2 id="Plist（NSArray-NSDictionary）"><a href="#Plist（NSArray-NSDictionary）" class="headerlink" title="Plist（NSArray\NSDictionary）"></a>Plist（NSArray\NSDictionary）</h2><p>只能存储数组，字典，但是数组和字典里面不能有自定义对象</p>
-<h2 id="Preference（偏好设置-NSUserDefaults）"><a href="#Preference（偏好设置-NSUserDefaults）" class="headerlink" title="Preference（偏好设置\NSUserDefaults）"></a>Preference（偏好设置\NSUserDefaults）</h2><h2 id="NSCoding（NSKeyedArchiver-NSkeyedUnarchiver归档"><a href="#NSCoding（NSKeyedArchiver-NSkeyedUnarchiver归档" class="headerlink" title="NSCoding（NSKeyedArchiver\NSkeyedUnarchiver归档"></a>NSCoding（NSKeyedArchiver\NSkeyedUnarchiver归档</h2><p>存储自定义对象，局限：一次性做读取的存储的操作</p>
-<h2 id="SQLite3"><a href="#SQLite3" class="headerlink" title="SQLite3"></a>SQLite3</h2><ol>
-<li>什么是SQLite？<br>SQLite是一款轻型的嵌入式数据库;它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了;它的处理速度比Mysql、PostgreSQL这两款著名的数据库都还快  </li>
-<li>怎么解决sqlite锁定的问题？<br>设置数据库锁定的处理函数<br>int sqlite3_busy_handler(sqlite3<em>, int(</em>)(void<em>,int), void</em>);<br>设定锁定时的等待时间<br>int sqlite3_busy_timeout(sqlite3*, 60); ：<h2 id="Core-Data"><a href="#Core-Data" class="headerlink" title="Core Data"></a>Core Data</h2></li>
-<li>什么是Core Data？<br>Core Data是iOS5以后才出现的一个框架，它提供了对象-关系映射（ORM）关系，即能够将OC对象转化成数据，保存在SQLite数据库文件中，也能够将保存在数据库中的数据还原成OC对象，不用编写任何SQL语言（类似于Hibernate框架，没有那么强大）</li>
-<li>使用步骤<ul>
-<li>创建模型文件，<strong>相当于数据库</strong></li>
-<li>添加实体，<strong>相对于表</strong></li>
-<li>创建实体类，<strong>相当于模型类</strong></li>
-<li>生成<strong>上下文</strong> 关联模型文件生成数据库</li>
-</ul>
+        <p>视频学习笔记。<br><a id="more"></a><br>视频地址：<a href="http://www.maiziedu.com/course/ios/754-10847/" target="_blank" rel="external">http://www.maiziedu.com/course/ios/754-10847/</a></p>
+<h2 id="UItableView控件基础"><a href="#UItableView控件基础" class="headerlink" title="UItableView控件基础"></a>UItableView控件基础</h2><h3 id="UITableView的基础用法"><a href="#UITableView的基础用法" class="headerlink" title="UITableView的基础用法"></a>UITableView的基础用法</h3><ol>
+<li>UITableView的创建方式与生命周期<br>设置UITableView的dataSource、delegate。<br>UITableViewDataSource协议：必须实现：</li>
+</ol>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一共有多少组数据</span></span><br><span class="line">- (<span class="built_in">NSInteger</span>)numberOfSectionsInTableView:(<span class="built_in">UITableView</span> *)tableView;</span><br><span class="line"><span class="comment">//每一组有多少行数据</span></span><br><span class="line">- (<span class="built_in">NSInteger</span>)tableView:(<span class="built_in">UITableView</span> *)tableView numberOfRowsInSection:(<span class="built_in">NSInteger</span>)section;</span><br><span class="line"><span class="comment">//每一行显示什么内容</span></span><br><span class="line">- (<span class="built_in">UITableViewCell</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>UITableView中cell的重用机制<br>原理：进入屏幕，当UITableView要求dataSource返回UITableViewCell时,dataSource会先查看这个复用池，如果池中有未使用的UITableViewCell，dataSource会用新的数据配置这个UITableViewCell，然后返回给UITableView，重新显示到窗口中，从而避免创建新对象.当滚动列表时，画出屏幕时，部分UITableViewCell会移出窗口，UITableView会将窗口外的UITableViewCell放入一个对象池中，等待重用。<br>方法：可以在初始化UITableViewCell的时候传入一个特定的字符串标识来设置reuseIdentifier(一般用UITableViewCell的类名)。当UITableView要求dataSource返回UITableViewCell时，先通过一个字符串标识到对象池中查找对应类型的UITableViewCell对象，如果有，就重用，如果没有，就传入这个字符串标识来初始化一个UITableViewCell对象。</li>
+<li><p>UITableViewDataSource协议中方法的意义与使用</p>
+</li>
+<li><p>UITableViewDelegate协议中方法的意义与使用</p>
 </li>
 </ol>
-<p>四，DDL：数据定义语句</p>
-<p>1、Create</p>
-<p>create table 表名（字段名1，字段类型1，字段名2，字段类型2….）;</p>
-<p>create table if not exists 表名（字段名1，字段类型1，字段名2，字段类型2….）;</p>
-<p>2、Drop</p>
-<p>drop table 表名；</p>
-<p>drop table if not exists 表名；</p>
-<p>五、DML ：数据操作语句</p>
-<p>1、Insert</p>
-<p>2、Update</p>
-<p>3、Delete</p>
-<p>六、DQL：数据查询语句</p>
-<p>1、Where</p>
-<p>2、Select</p>
-<p>3、Group by having</p>
-<p>1&gt; select</p>
-<p>2&gt; 别名,可以不用as,<br>• 给数据库取别名的好处:用别名获取字段,有提示。</p>
-<p>3&gt; 计算查询数量count<br>4&gt; 排序: 有条件语句,需要放在条件语句后。<br>5&gt; limit : limit 0,5 跳过第0个,取5个数据,意味着取前5个数据。这个语 句必须放在查询语句最后面。</p>
+<h3 id="定制UITableViewCell"><a href="#定制UITableViewCell" class="headerlink" title="定制UITableViewCell"></a>定制UITableViewCell</h3><ol>
+<li>UITableViewCell的几种系统fengg</li>
+<li>自定义UITableViewCell</li>
+<li>使用Xib文件进行可视化的UITableViewCell开发</li>
+</ol>
+<h3 id="UITableView的编辑操作"><a href="#UITableView的编辑操作" class="headerlink" title="UITableView的编辑操作"></a>UITableView的编辑操作</h3><ol>
+<li>向UITableView中进行增删改查</li>
+<li>对UITableView中每行数据进行重新排序</li>
+</ol>
+<h2 id="iMessages主页面的设计开发"><a href="#iMessages主页面的设计开发" class="headerlink" title="iMessages主页面的设计开发"></a>iMessages主页面的设计开发</h2><ol>
+<li>信息cell的设计</li>
+<li>组合使用搜索栏控件</li>
+<li>增加编辑模式</li>
+</ol>
 
       
     </div>
@@ -327,13 +320,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></p>
+        <p><span>本文标题:</span><a href="/2016/05/06/仿iMessage聊天页面开发/">仿iMessage聊天页面开发</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年03月05日 - 13时59分</p>
-        <p><span>最后更新:</span>2016年04月16日 - 16时44分</p>
+        <p><span>发布时间:</span>2016年05月06日 - 20时27分</p>
+        <p><span>最后更新:</span>2016年05月06日 - 21时24分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/03/05/iOS中的数据存储/" title="iOS中的数据存储">http://peilinghui.com/2016/03/05/iOS中的数据存储/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/05/iOS中的数据存储/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/05/06/仿iMessage聊天页面开发/" title="仿iMessage聊天页面开发">http://peilinghui.com/2016/05/06/仿iMessage聊天页面开发/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/05/06/仿iMessage聊天页面开发/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -347,15 +340,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/03/05/iOS中的第三方框架/">
-                    iOS中的第三方框架
+                <a href="/2016/05/06/91夺宝项目/">
+                    91夺宝项目
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/03/04/iOS中的多线程网络/">
-                    iOS中的多线程网络
+                <a href="/2016/05/06/最近学习总结/">
+                    最近学习总结
                 </a>
             </div>
         
@@ -366,7 +359,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS中的数据存储方式"><span class="toc-number">1.</span> <span class="toc-text">iOS中的数据存储方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Plist（NSArray-NSDictionary）"><span class="toc-number">1.1.</span> <span class="toc-text">Plist（NSArray\NSDictionary）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Preference（偏好设置-NSUserDefaults）"><span class="toc-number">1.2.</span> <span class="toc-text">Preference（偏好设置\NSUserDefaults）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSCoding（NSKeyedArchiver-NSkeyedUnarchiver归档"><span class="toc-number">1.3.</span> <span class="toc-text">NSCoding（NSKeyedArchiver\NSkeyedUnarchiver归档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLite3"><span class="toc-number">1.4.</span> <span class="toc-text">SQLite3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Core-Data"><span class="toc-number">1.5.</span> <span class="toc-text">Core Data</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#UItableView控件基础"><span class="toc-number">1.</span> <span class="toc-text">UItableView控件基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UITableView的基础用法"><span class="toc-number">1.1.</span> <span class="toc-text">UITableView的基础用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定制UITableViewCell"><span class="toc-number">1.2.</span> <span class="toc-text">定制UITableViewCell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UITableView的编辑操作"><span class="toc-number">1.3.</span> <span class="toc-text">UITableView的编辑操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iMessages主页面的设计开发"><span class="toc-number">2.</span> <span class="toc-text">iMessages主页面的设计开发</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -428,7 +421,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/03/05/iOS中的数据存储/" data-title="iOS中的数据存储" data-url="http://peilinghui.com/2016/03/05/iOS中的数据存储/"></div>
+    <div class="ds-thread" data-thread-key="2016/05/06/仿iMessage聊天页面开发/" data-title="仿iMessage聊天页面开发" data-url="http://peilinghui.com/2016/05/06/仿iMessage聊天页面开发/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -452,7 +445,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/03/05/iOS中的第三方框架/" title="上一篇: iOS中的第三方框架">
+            <a href="/2016/05/06/91夺宝项目/" title="上一篇: 91夺宝项目">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -460,7 +453,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/03/04/iOS中的多线程网络/" title="下一篇: iOS中的多线程网络">
+            <a href="/2016/05/06/最近学习总结/" title="下一篇: 最近学习总结">
                 <i class="fa fa-angle-right"></i>
             </a>
         

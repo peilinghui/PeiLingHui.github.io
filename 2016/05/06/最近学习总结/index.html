@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: 读书笔记 | 向着阳光奔跑</title>
+  <title>最近学习总结 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="随心 随笔">
-<meta property="og:type" content="website">
-<meta property="og:title" content="向着阳光奔跑">
-<meta property="og:url" content="http://peilinghui.com/tags/读书笔记/index.html">
+  <meta name="description" content="最近看了三天代码。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最近学习总结">
+<meta property="og:url" content="http://peilinghui.com/2016/05/06/最近学习总结/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="随心 随笔">
+<meta property="og:description" content="最近看了三天代码。">
+<meta property="og:updated_time" content="2016-05-06T08:50:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="向着阳光奔跑">
-<meta name="twitter:description" content="随心 随笔">
+<meta name="twitter:title" content="最近学习总结">
+<meta name="twitter:description" content="最近看了三天代码。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -38,9 +39,9 @@
           fancybox: true,
           animate: true,
           isHome: false,
-          isPost: false,
+          isPost: true,
           isArchive: false,
-          isTag: true,
+          isTag: false,
           isCategory: false,
           open_in_new: false,
       }
@@ -247,54 +248,235 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-最近学习总结" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/04/01/我的iOS学习之路/" class="archive-article-date">
-      <time datetime="2016-04-01T05:01:49.000Z" itemprop="datePublished">04-01</time>
+    <div class="article-meta">
+      <a href="/2016/05/06/最近学习总结/" class="article-date">
+      <time datetime="2016-05-06T08:44:09.000Z" itemprop="datePublished">2016-05-06</time>
 </a>
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/01/我的iOS学习之路/">我的iOS学习之路</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      最近学习总结
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
           
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+        <p>最近看了三天代码。<br><a id="more"></a></p>
+<ol>
+<li>【iOS】#include、#import和@class区别<br>在OC中，引用文件可以通过#include、#import、@class三种方式，本文将讲解这三种方式的不同之处以及选择方式。</li>
+</ol>
+<p>一. #include</p>
+<ol>
+<li>在C语言中，我们使用#include来引入头文件。使用#include “xx.h”来引入自定义的头文件，使用#include<xx.h>来引入库中的头文件。</xx.h></li>
+<li>但是#include并不能防止重复引用头文件，如果在文件中，重复引用头文件，将会报错。（如：A引入了B，B引入了C，A再引入C，就会报错）<br>所以在OC中，几乎没有使用#incldue引头的情况。</li>
+</ol>
+<p>二. #import</p>
+<ol>
+<li>#import是#include的升级版，可以防止重复引入头文件这种现象的发生。</li>
+<li>#import在引入头的时候，就是完全将头文件拷贝到现在的文件中。所以也有效率上的问题。</li>
+<li>#import最大的问题在于，需要避免出现头文件递归引入的现象。（如：A引入B，B引入A，那么A、B的头文件会互相不停的拷贝）</li>
+</ol>
+<p>三. @class</p>
+<ol>
+<li>@class用来告诉编译器，有这样一个类，使书写代码时，不报错。</li>
+<li>因为#import引入头文件有效率问题，所以，当还没有调用类中方法，仅仅是定义类变量的时候，使用@class来提醒编译器。而在真正需要调用类方法的时候，进行#import。<br>（如：现在需要在Student.h文件中定义一个Book类的变量book<br>那么不需要在Student.h中#import “Book.h”<br>而是在Student.h中@class Book 来是编译器不报错，告诉编译器我现在使用的Book是一个类，可以定义变量book<br>在之后的Student.m文件中，需要调用book方法时，在#import “Book.h”<br>从而降低#import在效率上的问题。）</li>
+<li>如果A是B的父类，那么这是在B.h中就必须要使用#import来引入A的头，因为需要知道A类中有哪些变量和方法，以免B类中重复定义。</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/05/06/最近学习总结/">最近学习总结</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
+        <p><span>发布时间:</span>2016年05月06日 - 16时44分</p>
+        <p><span>最后更新:</span>2016年05月06日 - 16时50分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/05/06/最近学习总结/" title="最近学习总结">http://peilinghui.com/2016/05/06/最近学习总结/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/05/06/最近学习总结/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
     </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/05/06/仿iMessage聊天页面开发/">
+                    仿iMessage聊天页面开发
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/05/01/斯坦福iPhone开发/">
+                    斯坦福iPhone开发
+                </a>
+            </div>
+        
+    </nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/05/06/最近学习总结/" data-title="最近学习总结" data-url="http://peilinghui.com/2016/05/06/最近学习总结/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"peilinghui"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/05/06/仿iMessage聊天页面开发/" title="上一篇: 仿iMessage聊天页面开发">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/05/01/斯坦福iPhone开发/" title="下一篇: 斯坦福iPhone开发">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/91夺宝项目/">91夺宝项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/仿iMessage聊天页面开发/">仿iMessage聊天页面开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/最近学习总结/">最近学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/01/斯坦福iPhone开发/">斯坦福iPhone开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/我的iOS学习之路/">我的iOS学习之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
@@ -366,15 +548,6 @@
         };
     })
 </script>
-
-    <button class="hide-labels">TAG 开关</button>
-    <script>
-        $(document).ready(function() {
-            $("button").click(function() {
-                $(".article-info").toggle(200);
-            });
-        });
-    </script>
 
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
