@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="通过不断的学习也接触了不少的第三方框架，就总结一下。">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png">
-<meta property="og:updated_time" content="2016-05-07T05:05:09.000Z">
+<meta property="og:updated_time" content="2016-05-29T10:19:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS中的第三方框架">
 <meta name="twitter:description" content="通过不断的学习也接触了不少的第三方框架，就总结一下。">
@@ -315,7 +315,20 @@
 <p>③：接口文件.h<br>接口文件中，我们可以看到。这个类可以设置AFSecurityPolicy、AFURLRequestSerialization、AFURLResponseSerialization 等参数了。这就是综述所说的降低耦合性的方式。基本使用很简单，这里就不再赘述了。  </p>
 <h1 id="SDWebImage"><a href="#SDWebImage" class="headerlink" title="SDWebImage"></a>SDWebImage</h1><ol>
 <li>网络图片处理框架<br>包含功能：图片下载、图片缓存、下载进度监控<br>用法简单，功能强大，大大提高了网络图片的处理效率<br><a href="http://github.com/rs/SDWebImage" target="_blank" rel="external">http://github.com/rs/SDWebImage</a></li>
+<li>如何防止一个url对应的图片重复下载?/SDWebImage底层是怎么实现的？  </li>
 </ol>
+<ol>
+<li>SDWebImage的默认缓存时长是多少？<br><code>static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week</code></li>
+<li>常用方法<br><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder;</code><br><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options;</code><br><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder completed:(SDWebImageCompletionBlock)completedBlock;</code><br><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageCompletionBlock)completedBlock;</code></li>
+<li>SDWebImageOption:<br>SDWebImageRetryFailed : 下载失败后，会自动重新下载<br>SDWebImageLowPriority : 当正在进行UI交互时，自动暂停内部的一些下载操作<br>SDWebImageRetryFailed | SDWebImageLowPriority : 拥有上面2个功能</li>
+<li>内存处理：当app接收到内存警告时，SDWebImage做了什么？<ul>
+<li>SDWebImage会监听系统的UIApplicationDidReceiveMemoryWarningNotification通知，一旦收到通知，就会清理内存</li>
+<li>应用程序将要终止的通知,UIApplicationWillTerminateNotification, 清理磁盘</li>
+<li>应用程序进入后台的通知，UIApplicationDidEnterBackgroundNotification，也会清理磁盘</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr_selector">[[NSNotificationCenter defaultCenter]</span> <span class="tag">addObserver</span><span class="pseudo">:self</span></span><br><span class="line">                                                 <span class="tag">selector</span>:@<span class="tag">selector</span>(clearMemory)</span><br><span class="line">                                                     <span class="tag">name</span><span class="pseudo">:UIApplicationDidReceiveMemoryWarningNotification</span></span><br><span class="line">                                                   <span class="tag">object</span><span class="pseudo">:nil</span>];</span><br><span class="line">        <span class="attr_selector">[[NSNotificationCenter defaultCenter]</span> <span class="tag">addObserver</span><span class="pseudo">:self</span></span><br><span class="line">                                                 <span class="tag">selector</span>:@<span class="tag">selector</span>(cleanDisk)</span><br><span class="line">                                                     <span class="tag">name</span><span class="pseudo">:UIApplicationWillTerminateNotification</span></span><br><span class="line">                                                   <span class="tag">object</span><span class="pseudo">:nil</span>];</span><br><span class="line">        <span class="attr_selector">[[NSNotificationCenter defaultCenter]</span> <span class="tag">addObserver</span><span class="pseudo">:self</span></span><br><span class="line">                                                 <span class="tag">selector</span>:@<span class="tag">selector</span>(backgroundCleanDisk)</span><br><span class="line">                                                     <span class="tag">name</span><span class="pseudo">:UIApplicationDidEnterBackgroundNotification</span></span><br><span class="line">                                                   <span class="tag">object</span><span class="pseudo">:nil</span>];</span><br></pre></td></tr></table></figure>
 <h1 id="SnapKit"><a href="#SnapKit" class="headerlink" title="SnapKit"></a>SnapKit</h1><ol>
 <li><a href="https://github.com/SnapKit/SnapKit" target="_blank" rel="external">https://github.com/SnapKit/SnapKit</a></li>
 <li>基于swift的autolayout的框架</li>
@@ -356,7 +369,7 @@
         <p><span>本文标题:</span><a href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月05日 - 14时08分</p>
-        <p><span>最后更新:</span>2016年05月07日 - 13时05分</p>
+        <p><span>最后更新:</span>2016年05月29日 - 18时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/05/iOS中的第三方框架/" title="iOS中的第三方框架">http://peilinghui.com/2016/03/05/iOS中的第三方框架/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/05/iOS中的第三方框架/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
