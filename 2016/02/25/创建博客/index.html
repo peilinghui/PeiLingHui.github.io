@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>仿iMessage聊天页面开发 | 向着阳光奔跑</title>
+  <title>创建博客 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="视频学习笔记。">
+  <meta name="description" content="偶然发现大家（周围厉害的同学）还有网上的各种大牛都有属于自己的博客，记录自己的学习历程，然后自己也开始探索搭建博客的历程.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="仿iMessage聊天页面开发">
-<meta property="og:url" content="http://peilinghui.com/2016/05/06/仿iMessage聊天页面开发/index.html">
+<meta property="og:title" content="创建博客">
+<meta property="og:url" content="http://peilinghui.com/2016/02/25/创建博客/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="视频学习笔记。">
-<meta property="og:updated_time" content="2016-05-12T07:59:13.000Z">
+<meta property="og:description" content="偶然发现大家（周围厉害的同学）还有网上的各种大牛都有属于自己的博客，记录自己的学习历程，然后自己也开始探索搭建博客的历程.">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/octopress%E6%9C%80%E5%88%9D.png">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/slash%E4%B8%BB%E9%A2%98.png">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/ghost%E5%88%9D%E5%A7%8B%E5%8D%9A%E5%AE%A2.png">
+<meta property="og:updated_time" content="2016-04-25T14:09:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="仿iMessage聊天页面开发">
-<meta name="twitter:description" content="视频学习笔记。">
+<meta name="twitter:title" content="创建博客">
+<meta name="twitter:description" content="偶然发现大家（周围厉害的同学）还有网上的各种大牛都有属于自己的博客，记录自己的学习历程，然后自己也开始探索搭建博客的历程.">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -248,11 +251,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-仿iMessage聊天页面开发" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-创建博客" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/05/06/仿iMessage聊天页面开发/" class="article-date">
-      <time datetime="2016-05-06T12:27:24.000Z" itemprop="datePublished">2016-05-06</time>
+      <a href="/2016/02/25/创建博客/" class="article-date">
+      <time datetime="2016-02-25T07:21:14.000Z" itemprop="datePublished">2016-02-25</time>
 </a>
     </div>
   
@@ -265,7 +268,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      仿iMessage聊天页面开发
+      创建博客
     </h1>
   
 
@@ -273,12 +276,12 @@
       
       <div class="article-info article-info-post">
         
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift，视频学习/">swift，视频学习</a></li></ul>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/创建博客/">创建博客</a>
     </div>
 
+
+        
         <div class="clearfix"></div>
       </div>
       
@@ -286,52 +289,31 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>视频学习笔记。<br><a id="more"></a><br>视频地址：<a href="http://www.maiziedu.com/course/ios/754-10847/" target="_blank" rel="external">http://www.maiziedu.com/course/ios/754-10847/</a></p>
-<h2 id="UItableView控件基础"><a href="#UItableView控件基础" class="headerlink" title="UItableView控件基础"></a>UItableView控件基础</h2><h3 id="UITableView的基础用法"><a href="#UITableView的基础用法" class="headerlink" title="UITableView的基础用法"></a>UITableView的基础用法</h3><ol>
-<li>UITableView的创建方式与生命周期<br>设置UITableView的dataSource、delegate。<br>UITableViewDataSource协议：必须实现：<br>OC的实现：</li>
-</ol>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一共有多少组数据</span></span><br><span class="line">- (<span class="built_in">NSInteger</span>)numberOfSectionsInTableView:(<span class="built_in">UITableView</span> *)tableView;</span><br><span class="line"><span class="comment">//每一组有多少行数据</span></span><br><span class="line">- (<span class="built_in">NSInteger</span>)tableView:(<span class="built_in">UITableView</span> *)tableView numberOfRowsInSection:(<span class="built_in">NSInteger</span>)section;</span><br><span class="line"><span class="comment">//每一行显示什么内容</span></span><br><span class="line">- (<span class="built_in">UITableViewCell</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath;</span><br></pre></td></tr></table></figure>
-<p>swift中的实现：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">numberOfSectionsInTableView</span><span class="params">(tableView: UITableView)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, numberOfRowsInSection section: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> dataArray!.<span class="built_in">count</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath)</span></span> -&gt; <span class="type">UITableViewCell</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> cell = tableView.dequeueReusableCellWithIdentifier(<span class="string">"cellID"</span>)</span><br><span class="line">        <span class="keyword">if</span> cell == <span class="literal">nil</span> &#123;</span><br><span class="line">            cell = <span class="type">UITableViewCell</span>(style: <span class="type">UITableViewCellStyle</span>.<span class="type">Default</span>, reuseIdentifier: <span class="string">"cellID"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        cell?.textLabel?.text = dataArray![indexPath.row]</span><br><span class="line">        <span class="keyword">return</span> cell!</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<ol>
-<li>UITableView中cell的重用机制<br>原理：进入屏幕，当UITableView要求dataSource返回UITableViewCell时,dataSource会先查看这个复用池，如果池中有未使用的UITableViewCell，dataSource会用新的数据配置这个UITableViewCell，然后返回给UITableView，重新显示到窗口中，从而避免创建新对象.当滚动列表时，画出屏幕时，部分UITableViewCell会移出窗口，UITableView会将窗口外的UITableViewCell放入一个对象池中，等待重用。<br>方法：可以在初始化UITableViewCell的时候传入一个特定的字符串标识来设置reuseIdentifier(一般用UITableViewCell的类名)。当UITableView要求dataSource返回UITableViewCell时，先通过一个字符串标识到对象池中查找对应类型的UITableViewCell对象，如果有，就重用，如果没有，就传入这个字符串标识来初始化一个UITableViewCell对象。</li>
-<li><p>UITableViewDataSource协议中方法的意义与使用</p>
-</li>
-<li><p>UITableViewDelegate协议中方法的意义与使用</p>
-</li>
-</ol>
-<h3 id="定制UITableViewCell"><a href="#定制UITableViewCell" class="headerlink" title="定制UITableViewCell"></a>定制UITableViewCell</h3><ol>
-<li><p>UITableViewCell的几种系统<br>1&gt;UITableViewCellStyle:Default,Value1,Value2,Subtitle<br>2&gt;UITableViewCellSeparatorStyle :<br>3&gt;UITableViewCellSelectionStyle: None，Blue，Gray，Default<br>4&gt;UITableViewCellEditingStyle:None,Delete,Insert<br>5&gt;UITableViewCellAccessoryType :None,DisclosureIndicator,DetailDisclosureButton,Checkmark,DetailButtin</p>
-</li>
-<li><p>自定义UITableViewCell</p>
-</li>
-<li>使用Xib文件进行可视化的UITableViewCell开发<br>代码：<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath)</span></span> -&gt; <span class="type">UITableViewCell</span> &#123;</span><br><span class="line">      <span class="comment">//手动注册cell</span></span><br><span class="line">      <span class="keyword">var</span> cell:<span class="type">TableViewCell</span>? = tableView.dequeueReusableCellWithIdentifier(<span class="string">"cellID"</span>) <span class="keyword">as</span>? <span class="type">TableViewCell</span></span><br><span class="line">      <span class="keyword">if</span> cell == <span class="literal">nil</span> &#123;</span><br><span class="line">          cell = <span class="type">NSBundle</span>.mainBundle().loadNibNamed(<span class="string">"TableViewCell"</span>, owner: <span class="literal">nil</span>, options: <span class="literal">nil</span>).first <span class="keyword">as</span>? <span class="type">TableViewCell</span></span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="UITableView的编辑操作"><a href="#UITableView的编辑操作" class="headerlink" title="UITableView的编辑操作"></a>UITableView的编辑操作</h3><ol>
-<li><p>向UITableView中进行增删改查<br>代码实现：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//与tableView编辑模式有关的几个方法</span></span><br><span class="line">  <span class="comment">//某一行是否支持编辑模式</span></span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//编辑模式--删除</span></span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath)</span></span> -&gt; <span class="type">UITableViewCellEditingStyle</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="type">UITableViewCellEditingStyle</span>.<span class="type">Delete</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//处理具体数据源的数据的操作</span></span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)</span></span> &#123;</span><br><span class="line">      <span class="comment">//tableviewcell的删除操作</span></span><br><span class="line">      <span class="keyword">if</span> editingStyle == <span class="type">UITableViewCellEditingStyle</span>.<span class="type">Delete</span> &#123;</span><br><span class="line">          <span class="built_in">print</span>(<span class="string">"delete"</span>)</span><br><span class="line">          dataArray?.removeAtIndex(indexPath.row)</span><br><span class="line">          <span class="comment">//从左边删除消失</span></span><br><span class="line">         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: <span class="type">UITableViewRowAnimation</span>.<span class="type">Left</span>)            </span><br><span class="line">      &#125;<span class="keyword">else</span> <span class="keyword">if</span> editingStyle == <span class="type">UITableViewCellEditingStyle</span>.<span class="type">Insert</span> &#123;</span><br><span class="line">          <span class="comment">//tableviewcell的插入操作</span></span><br><span class="line">          dataArray?.insert(<span class="string">"新的数据"</span>, atIndex: indexPath.row+<span class="number">1</span>)</span><br><span class="line">          <span class="keyword">let</span> path = <span class="type">NSIndexPath</span>(forRow: indexPath.row+<span class="number">1</span>, inSection: indexPath.section)</span><br><span class="line">          <span class="comment">//从右向左插入</span></span><br><span class="line">          tableView.insertRowsAtIndexPaths([path], withRowAnimation: <span class="type">UITableViewRowAnimation</span>.<span class="type">Right</span>)</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          <span class="built_in">print</span>(<span class="string">"none"</span>)</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>对UITableView中每行数据进行重新排序<br>代码实现：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//tableview的一行是否可以移动</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//tableview移动的位置，原始行到移动位置行</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath)</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"move"</span>)</span><br><span class="line">        <span class="comment">//设置中间变量，</span></span><br><span class="line">        <span class="keyword">let</span> str = dataArray![sourceIndexPath.row]</span><br><span class="line">        <span class="comment">//删除原来的行</span></span><br><span class="line">        dataArray!.removeAtIndex(sourceIndexPath.row)</span><br><span class="line">        <span class="comment">//把行插入</span></span><br><span class="line">        dataArray?.insert(str, atIndex: destinationIndexPath.row)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="iMessages主页面的设计开发"><a href="#iMessages主页面的设计开发" class="headerlink" title="iMessages主页面的设计开发"></a>iMessages主页面的设计开发</h3><h4 id="首页信息页面"><a href="#首页信息页面" class="headerlink" title="首页信息页面"></a>首页信息页面</h4><ol>
-<li>增加编辑模式和新建信息模式</li>
-<li>信息显示的tableview</li>
-<li>组合使用搜索栏控件</li>
-</ol>
-<h4 id="新建信息界面"><a href="#新建信息界面" class="headerlink" title="新建信息界面"></a>新建信息界面</h4><ol>
-<li><p>文本输入框：在屏幕最底部，当输入时有键盘弹起，输入框与键盘对齐。当键盘收起来，再次回到界面底部。位置自适应。<br>当输入框的文字超过一行，高度自适应。</p>
-</li>
-<li><p>系统联系人的添加和操作：<br>可以跳转到系统的联系人，获取联系人的电话。</p>
-</li>
-<li><p>在聊天页面中插入图片信息，从系统相册导入图片。</p>
-</li>
-<li><p>聊天页面的主页面<br>用tableview不显示分隔线。用图片气泡来显示聊天记录。</p>
-</li>
-</ol>
-<h4 id="联系人详细信息页面"><a href="#联系人详细信息页面" class="headerlink" title="联系人详细信息页面"></a>联系人详细信息页面</h4><p>1.tableview的group模式。</p>
-<p>代码放在github上了：<a href="https://github.com/peilinghui/iMessages" target="_blank" rel="external">https://github.com/peilinghui/iMessages</a></p>
+        <p>偶然发现大家（周围厉害的同学）还有网上的各种大牛都有属于自己的博客，记录自己的学习历程，然后自己也开始探索搭建博客的历程.<br><a id="more"></a></p>
+<p>最初搭建了一个Octopress+Github Page的博客，开始就使用的最初的主题，就如图所示：<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/octopress%E6%9C%80%E5%88%9D.png" alt=""> </p>
+<p>然后就开始逛其他人的博客，发现大家博客的主题都好好看，瞬间觉得自己该换个主题了，然后发现了octopress的<a href="https://github.com/tommy351/Octopress-Theme-Slash" target="_blank" rel="external">slash主题</a>然后弄完的样子就是下面如图：</p>
+<p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/slash%E4%B8%BB%E9%A2%98.png" alt=""></p>
+<p>看起来比系统自带的主题好看多了，是吧！  </p>
+<p>当然，在网上逛别人的博客的时候，看到很多博客的主题都是作者自己写的，还有一个自学前端的97年的男生自己搭建了一个网站，还看到看到一个96年的搭建的博客简直炫酷，瞬间计算机这个东西完全靠兴趣啊！然后开始模仿<a href="http://kittenyang.com/myfirstblog/" target="_blank" rel="external">kitten</a>的这篇文章开始了ghost博客之旅，他是在阿里云服务器ECS和Ubuntu系统上安装Ghost博客，开始我想mac和Ubuntu差不多就开始在mac下搞，然后我就去Godaddy（狗爹）上买了二级域名，租了个阿里云服务器，mac上可以显示如图：<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/ghost%E5%88%9D%E5%A7%8B%E5%8D%9A%E5%AE%A2.png" alt=""><br>然后发现其实mac和Ubuntu还是差别挺大的，比如mac上就没有apt-get这个命令，瞬间那个心情。。。自己挖的坑还的要自己填啊！然后就在我那台win10系统上又装了Ubuntu系统，本来是弄得双系统，估计在装的时候选错了，然后就发现win10不见了，555~，然后在Ubuntu下还是没有配置成功。。。真是辛酸泪啊！租的服务器也不会用额。。。。</p>
+<p>然后发现更多的人使用的是Hexo+Github Page,而且网上有关hexo的学习资料还是很多的，于是我就决定转向hexo了。而且hexo写博文很方便也支持markdown,而且主题很多，也很炫酷，就开始了hexo的博客之旅。<br>对于搭建博客，然后在知乎的一篇文章上看到了<a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">hexo的主题</a>：</p>
+<p><a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">(iissnan/hexo-theme-next · GitHub,  470)</a>  这个是next主题，我同学好几个都是用这个主题的。 </p>
+<p><a href="https://link.zhihu.com/?target=https%3A//github.com/litten/hexo-theme-yilia" target="_blank" rel="external">(litten/hexo-theme-yilia, 265)</a>  然后就是我现在用的这个主题。  </p>
+<p><a href="http://yangjian.me/pacman/" target="_blank" rel="external">(A-limon/pacman, 243)</a>这个主题也挺经典的。（吃豆子）</p>
+<p>Yelee:该主题是作者基于Yilia修改而来，改变了大量的样式。</p>
+<p>作者博客：<a href="http://moxfive.xyz/" target="_blank" rel="external">http://moxfive.xyz/</a></p>
+<p>Tranquilpeak<br>预览地址：<a href="http://louisbarranqueiro.github.io/hexo-theme-tranquilpeak/" target="_blank" rel="external">http://louisbarranqueiro.github.io/hexo-theme-tranquilpeak/</a></p>
+<p>Maupassant<br>一款非常简洁的主题<br>作者博客：<a href="https://www.haomwei.com/technology/maupassant-hexo.html" target="_blank" rel="external">https://www.haomwei.com/technology/maupassant-hexo.html</a></p>
+<p>Hueman<br>预览地址：<a href="http://blog.zhangruipeng.me/hexo-theme-hueman/" target="_blank" rel="external">http://blog.zhangruipeng.me/hexo-theme-hueman/</a></p>
+<p>Jacman<br>预览地址：<a href="http://wuchong.me/jacman/" target="_blank" rel="external">http://wuchong.me/jacman/</a></p>
+<p>更多<br>Hexo官方网站上也收集了一些主题<br>地址：<a href="https://hexo.io/themes/" target="_blank" rel="external">https://hexo.io/themes/</a></p>
+<p><a href="https://github.com/xiangming/landscape-plus" target="_blank" rel="external">(xiangming/landscape-plus, 147)</a>优化hexo官方主题landscape。<br>还有很多主题呢！有时间再去尝试一下吧！    </p>
+<pre><code>参考： 
+</code></pre><p>Octopress：<br><a href="http://cnbin.github.io/blog/2015/05/18/octopressbo-ke-da-jian/" target="_blank" rel="external">http://cnbin.github.io/blog/2015/05/18/octopressbo-ke-da-jian/</a><br><a href="http://www.jianshu.com/p/e208ade30f08" target="_blank" rel="external">http://www.jianshu.com/p/e208ade30f08</a><br><a href="https://github.com/imathis/octopress/wiki/Octopress-Sites" target="_blank" rel="external">https://github.com/imathis/octopress/wiki/Octopress-Sites</a><br>ghost:<br><a href="http://jas0n.me/2014/12/05/ghost_blog/" target="_blank" rel="external">http://jas0n.me/2014/12/05/ghost_blog/</a><br><a href="https://www.zhihu.com/question/22755373" target="_blank" rel="external">https://www.zhihu.com/question/22755373</a><br><a href="http://kittenyang.com/myfirstblog/" target="_blank" rel="external">http://kittenyang.com/myfirstblog/</a><br><a href="https://www.zhihu.com/question/22755373" target="_blank" rel="external">https://www.zhihu.com/question/22755373</a><br><a href="https://snowz.me/how-to-install-ghost/" target="_blank" rel="external">https://snowz.me/how-to-install-ghost/</a><br>hexo:<br><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">http://ibruce.info/2013/11/22/hexo-your-blog/</a><br><a href="http://iread.io/archives/page/2/" target="_blank" rel="external">http://iread.io/archives/page/2/</a><br><a href="http://blog.shijinrong.cn/2016/01/03/2016-01-03-how-to-build-blog/" target="_blank" rel="external">http://blog.shijinrong.cn/2016/01/03/2016-01-03-how-to-build-blog/</a><br><a href="https://dearb.me/archive/2015-05-10/use-hexo-build-your-own-blog/" target="_blank" rel="external">https://dearb.me/archive/2015-05-10/use-hexo-build-your-own-blog/</a><br><a href="http://zipperary.com/categories/hexo/" target="_blank" rel="external">http://zipperary.com/categories/hexo/</a><br><a href="http://lucifr.com/2013/01/02/from-octopress-to-hexo/" target="_blank" rel="external">http://lucifr.com/2013/01/02/from-octopress-to-hexo/</a></p>
+<pre><code>最后来几个我同学的博客地址：   
+</code></pre><p> <a href="http://blog.xuanzhangjiong.xyz/" target="_blank" rel="external">囧囧囧-网易安卓</a><br> <a href="http://blog.csdn.net/CHENYUFENG1991/article/category/5655903/4" target="_blank" rel="external">ios大神-人生大赢家-网易</a><br> <a href="http://lysongzi.com/" target="_blank" rel="external">小松子-iOS</a><br> <a href="http://cspilgrimzww.github.io/" target="_blank" rel="external">蔚蔚-PHP</a><br> <a href="http://www.changhuiyuan.com/" target="_blank" rel="external">惠源-安卓</a><br> <a href="http://www.hxdavid.com/" target="_blank" rel="external">PAT大神-网易</a><br> <a href="http://wut0719.github.io/" target="_blank" rel="external">前端-桐神</a></p>
+<p> <a href="http://longliqiang88.github.io/" target="_blank" rel="external">龙哥-云计算</a><br> <a href="https://pangjiuzala.github.io/" target="_blank" rel="external">北大兴爷-大数据</a><br> <a href="http://han.pm/" target="_blank" rel="external">大数据的英国交换生</a><br> <a href="http://frankhu.me/" target="_blank" rel="external">大数据-广州人</a></p>
+<p> <a href="http://judyzhangxin.com/" target="_blank" rel="external">UI设计师</a></p>
+<p> <a href="http://sunus.me/" target="_blank" rel="external">阿里学长</a><br> <a href="http://imhuchao.com/" target="_blank" rel="external">胡超-凤凰网</a>  </p>
 
       
     </div>
@@ -340,13 +322,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/05/06/仿iMessage聊天页面开发/">仿iMessage聊天页面开发</a></p>
+        <p><span>本文标题:</span><a href="/2016/02/25/创建博客/">创建博客</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年05月06日 - 20时27分</p>
-        <p><span>最后更新:</span>2016年05月12日 - 15时59分</p>
+        <p><span>发布时间:</span>2016年02月25日 - 15时21分</p>
+        <p><span>最后更新:</span>2016年04月25日 - 22时09分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/05/06/仿iMessage聊天页面开发/" title="仿iMessage聊天页面开发">http://peilinghui.com/2016/05/06/仿iMessage聊天页面开发/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/05/06/仿iMessage聊天页面开发/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/02/25/创建博客/" title="创建博客">http://peilinghui.com/2016/02/25/创建博客/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/02/25/创建博客/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -360,15 +342,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/05/06/91夺宝项目/">
-                    91夺宝项目
+                <a href="/2016/02/28/关于iOS中的autolayout/">
+                    关于iOS中的autolayout
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/04/14/iOS网络编程/">
-                    iOS网络编程
+                <a href="/2016/02/25/git学习/">
+                    git学习笔记
                 </a>
             </div>
         
@@ -379,7 +361,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#UItableView控件基础"><span class="toc-number">1.</span> <span class="toc-text">UItableView控件基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UITableView的基础用法"><span class="toc-number">1.1.</span> <span class="toc-text">UITableView的基础用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定制UITableViewCell"><span class="toc-number">1.2.</span> <span class="toc-text">定制UITableViewCell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UITableView的编辑操作"><span class="toc-number">1.3.</span> <span class="toc-text">UITableView的编辑操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iMessages主页面的设计开发"><span class="toc-number">1.4.</span> <span class="toc-text">iMessages主页面的设计开发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#首页信息页面"><span class="toc-number">1.4.1.</span> <span class="toc-text">首页信息页面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#新建信息界面"><span class="toc-number">1.4.2.</span> <span class="toc-text">新建信息界面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#联系人详细信息页面"><span class="toc-number">1.4.3.</span> <span class="toc-text">联系人详细信息页面</span></a></li></ol></li></ol></li></ol>
+    
 </div>
 <style>
     .left-col .switch-btn {
@@ -441,7 +423,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/05/06/仿iMessage聊天页面开发/" data-title="仿iMessage聊天页面开发" data-url="http://peilinghui.com/2016/05/06/仿iMessage聊天页面开发/"></div>
+    <div class="ds-thread" data-thread-key="2016/02/25/创建博客/" data-title="创建博客" data-url="http://peilinghui.com/2016/02/25/创建博客/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -465,7 +447,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/05/06/91夺宝项目/" title="上一篇: 91夺宝项目">
+            <a href="/2016/02/28/关于iOS中的autolayout/" title="上一篇: 关于iOS中的autolayout">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -473,7 +455,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/04/14/iOS网络编程/" title="下一篇: iOS网络编程">
+            <a href="/2016/02/25/git学习/" title="下一篇: git学习笔记">
                 <i class="fa fa-angle-right"></i>
             </a>
         
