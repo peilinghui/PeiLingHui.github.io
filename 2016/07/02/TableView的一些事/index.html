@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>TableView的一些事 | 向着阳光奔跑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="UITableView的基本信息，Apple开发文档地址：&amp;lt;&amp;gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TableView的一些事">
+<meta property="og:url" content="http://peilinghui.com/2016/07/02/TableView的一些事/index.html">
+<meta property="og:site_name" content="向着阳光奔跑">
+<meta property="og:description" content="UITableView的基本信息，Apple开发文档地址：&amp;lt;&amp;gt;">
+<meta property="og:updated_time" content="2016-07-04T01:48:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TableView的一些事">
+<meta name="twitter:description" content="UITableView的基本信息，Apple开发文档地址：&amp;lt;&amp;gt;">
+  
+    <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/images/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向阳</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">没有到不了的远方</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/peilinghuibest@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/575544059" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/peilinghui" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ACM/" style="font-size: 10px;">ACM</a> <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/swift，视频学习/" style="font-size: 10px;">swift，视频学习</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://lysongzi.com/">小松子</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/CHENYUFENG1991/article/category/5655903/4">iOS大神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://cspilgrimzww.github.io/">蔚蔚</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changhuiyuan.com/">惠源</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hxdavid.com/">PAT大神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wut0719.github.io/">桐神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pangjiuzala.github.io/">兴爷</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://han.pm/">交换生</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://frankhu.me">frank</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://judyzhangxin.com/">UI设计师</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://sunus.me/">阿里学长</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imhuchao.com/">胡超-凤凰网</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.xuanzhangjiong.xyz/">囧囧囧-网易安卓</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">没有到不了的远方，向往远方。。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向阳</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/images/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向阳</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">没有到不了的远方</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/peilinghuibest@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/575544059" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/peilinghui" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-TableView的一些事" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/02/TableView的一些事/" class="article-date">
+      <time datetime="2016-07-02T02:32:49.000Z" itemprop="datePublished">2016-07-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TableView的一些事
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>UITableView的基本信息，Apple开发文档地址：&lt;&gt;<br><a id="more"></a></p>
+<h2 id="UITableView"><a href="#UITableView" class="headerlink" title="UITableView"></a>UITableView</h2><p>Apple要求开发者提供实现 UITableViewDataSource 和UITableViewDelegate 这两个protocol的支持类来协同对应的UITableView的工作。一般情况下，实现delegate protocol的类是UITableViewController，而data source protocol 可以是controller负责，也可以是其他helper类完成。但更多情况下，我更倾向于单独的modal wrapper类来完成。现在很多的建议data source尽可能不要放在controller中，这样有利于解决mass controller的问题。可以参考objc.io这篇文章：《Lighter View Controllers》</p>
+<h2 id="tableView性能优化"><a href="#tableView性能优化" class="headerlink" title="tableView性能优化"></a>tableView性能优化</h2><p>tableview优化两个思路：缓存操作和异步操作。<br>最主要：复用cell，header，footer实例；使用约束布局cell子控件时不多次添加约束；图片不过大，尽量不使用透明视图；避免阻塞主线程；计算高度方法不做大量逻辑处理。</p>
+<h3 id="cell复用机制。"><a href="#cell复用机制。" class="headerlink" title="cell复用机制。"></a>cell复用机制。</h3><p>如果每次都创建新的cell，在滑动的时候会表现为：刚开始的时候很顺畅，但是会越来越卡，内存跟着一直升高，停止滑动的时候也不会降下来。使用缓存机制创建的cell，开始滑动的时候内存会开始上升，等创建了一个屏幕再加半屏的cell之后，内存趋于平稳。</p>
+<ol>
+<li><p>先注册cell</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">HomeVC</span> ()&lt;<span class="title">UITableViewDataSource</span>, <span class="title">UITableViewDelegate</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">UITableView</span> *tableView;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> *cellId = <span class="string">@"Cell"</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">HomeVC</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.myTableView</span><span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.myTableView</span><span class="variable">.dataSource</span> = <span class="keyword">self</span>;</span><br><span class="line"><span class="comment">//第一种注册cell&lt;nib文件类HomeTableViewCell&gt;</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.tableView</span> registerNib:[<span class="built_in">UINib</span> nibWithNibName:<span class="string">@"HomeTableViewCell"</span> bundle:<span class="literal">nil</span>] forCellReuseIdentifier:cellId];</span><br><span class="line"></span><br><span class="line"><span class="comment">//第二种注册Cell&lt;纯手工打造的HomeVC&gt;</span></span><br><span class="line"><span class="comment">// [self.tableView registerClass:[HomeVC class]forCellReuseIdentifier:cellId];</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重用相关API</p>
+</li>
+</ol>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 复用 Cell：</span></span><br><span class="line">-<span class="ruby"> [<span class="constant">UITableView</span> <span class="symbol">dequeueReusableCellWithIdentifier:</span>];</span><br><span class="line"></span>-<span class="ruby"> [<span class="constant">UITableView</span> <span class="symbol">registerNib:</span><span class="symbol">forCellReuseIdentifier:</span>];</span><br><span class="line"></span>-<span class="ruby"> [<span class="constant">UITableView</span> <span class="symbol">registerClass:</span><span class="symbol">forCellReuseIdentifier:</span>];</span><br><span class="line"></span>-<span class="ruby"> [<span class="constant">UITableView</span> <span class="symbol">dequeueReusableCellWithIdentifier:</span><span class="symbol">forIndexPath:</span>];</span><br><span class="line"></span><span class="comment">// 复用 Section 的 Header/Footer：</span></span><br><span class="line">-<span class="ruby"> [<span class="constant">UITableView</span> <span class="symbol">registerNib:</span><span class="symbol">forHeaderFooterViewReuseIdentifier:</span>];</span><br><span class="line"></span>-<span class="ruby"> [<span class="constant">UITableView</span> <span class="symbol">registerClass:</span><span class="symbol">forHeaderFooterViewReuseIdentifier:</span>];</span><br><span class="line"></span>-<span class="ruby"> [<span class="constant">UITableView</span> <span class="symbol">dequeueReusableHeaderFooterViewWithIdentifier:</span>];</span><br><span class="line"></span>-<span class="ruby"></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><h2 id="pragma-代理"><a href="#pragma-代理" class="headerlink" title="pragma 代理"></a>pragma 代理</h2></li>
+<li><p>(UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath <em>)indexPath{<br>  //获取重用池中的cell<br>  HomeTableViewCell </em>cell = [tableView dequeueReusableCellWithIdentifier:cellId];<br>  //如果没有取到,就初始化<br>  if (!cell) {</p>
+<pre><code>cell = [[HomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+</code></pre><p>  }</p>
+<p>  cell.cellNameLab.text = @”Name”;<br>  return cell;<br>}</p>
+</li>
+</ul>
+<h3 id="cell使用drawRect方法添加子控件"><a href="#cell使用drawRect方法添加子控件" class="headerlink" title="cell使用drawRect方法添加子控件"></a>cell使用drawRect方法添加子控件</h3><p>如果添加了大量的子控件，使用drawRect方法添加子控件，平衡GPU与CPU的负担。同时还需要注意尽量使用不透明视图和不重叠的渐变，否则会加大GPU的负担，造成性能不佳。</p>
+<h3 id="高度计算方法时不做复杂的计算，尽量只使用加减乘除。"><a href="#高度计算方法时不做复杂的计算，尽量只使用加减乘除。" class="headerlink" title="高度计算方法时不做复杂的计算，尽量只使用加减乘除。"></a>高度计算方法时不做复杂的计算，尽量只使用加减乘除。</h3><h3 id="避免快速滑动情况下开过多线程。"><a href="#避免快速滑动情况下开过多线程。" class="headerlink" title="避免快速滑动情况下开过多线程。"></a>避免快速滑动情况下开过多线程。</h3><p>cell中的图片开线程异步加载<sdwebimage(异步操作)>。但是线程开过多了会造成资源浪费，内存开销过大。图片过多时可以不要一滚动就走cellForRow方法，可以在scrollview的代理方法中做限制，当滚动开始减速的时候才加载显示在当前屏幕上的cell（通过tableview的dragging和declearating两个状态也能判断）<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">UITableViewCell</span> *)cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath&#123;</span><br><span class="line">    <span class="built_in">BOOL</span> canLoad:Bool = !tableView<span class="variable">.dragging</span> &amp;&amp; !tableView<span class="variable">.declearating</span></span><br><span class="line">      <span class="keyword">if</span>  canLoad &#123;</span><br><span class="line">          <span class="comment">//开始loaddata，异步加载图片</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)sender&#123; </span><br><span class="line">   <span class="comment">//刷新tableview</span></span><br><span class="line">  <span class="comment">//在此刷新的是屏幕上显示的cell的内容</span></span><br><span class="line">  [<span class="keyword">self</span><span class="variable">.table</span> reloadData];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></sdwebimage(异步操作)></p>
+<h3 id="图片处理"><a href="#图片处理" class="headerlink" title="图片处理"></a>图片处理</h3><p>1）后台下载图片后再回主线程刷新UI，避免阻塞主线程。<br>2）图片过大回造成GPU负担过大，可以在图片下载后压缩尺寸后显示<br>3）避免对layer做过多的操作，尽量设置图片为不透明</p>
+<h2 id="tableView的数据刷新"><a href="#tableView的数据刷新" class="headerlink" title="tableView的数据刷新"></a>tableView的数据刷新</h2><p>对tableView的刷新直接就是reloadData.调用这个方法之后,控制器会把数据源方法重新执行一遍,如果前面我们的数据需要保存,reloadData重新执行一遍,我们的数据都会被刷新掉,那么我改如何解决这个问题呢 ? 这就我们对其中某一个分组,或者某一个指定的Cell进行刷新.具体的代码实现如下,<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一个section刷新    </span></span><br><span class="line">NSIndexSet *indexSet=[[NSIndexSet alloc]<span class="string">initWithIndex:</span><span class="number">2</span>];    </span><br><span class="line">[tableview <span class="string">reloadSections:</span>indexSet <span class="string">withRowAnimation:</span>UITableViewRowAnimationAutomatic];    </span><br><span class="line"><span class="comment">//一个指定cell刷新    </span></span><br><span class="line">NSIndexPath *indexPath=[NSIndexPath <span class="string">indexPathForRow:</span><span class="number">3</span> <span class="string">inSection:</span><span class="number">0</span>];    </span><br><span class="line">[tableView <span class="string">reloadRowsAtIndexPaths:</span>[NSArray <span class="string">arrayWithObjects:</span>indexPath,nil] </span><br><span class="line"><span class="string">withRowAnimation:</span>UITableViewRowAnimationNone];</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/07/02/TableView的一些事/">TableView的一些事</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
+        <p><span>发布时间:</span>2016年07月02日 - 10时32分</p>
+        <p><span>最后更新:</span>2016年07月04日 - 09时48分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/02/TableView的一些事/" title="TableView的一些事">http://peilinghui.com/2016/07/02/TableView的一些事/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/07/02/TableView的一些事/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/07/02/iOS中页面传值和页面跳转/">
+                    iOS中页面传值和页面跳转 
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#UITableView"><span class="toc-number">1.</span> <span class="toc-text">UITableView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tableView性能优化"><span class="toc-number">2.</span> <span class="toc-text">tableView性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cell复用机制。"><span class="toc-number">2.1.</span> <span class="toc-text">cell复用机制。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pragma-代理"><span class="toc-number">3.</span> <span class="toc-text">pragma 代理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cell使用drawRect方法添加子控件"><span class="toc-number">3.1.</span> <span class="toc-text">cell使用drawRect方法添加子控件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高度计算方法时不做复杂的计算，尽量只使用加减乘除。"><span class="toc-number">3.2.</span> <span class="toc-text">高度计算方法时不做复杂的计算，尽量只使用加减乘除。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#避免快速滑动情况下开过多线程。"><span class="toc-number">3.3.</span> <span class="toc-text">避免快速滑动情况下开过多线程。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图片处理"><span class="toc-number">3.4.</span> <span class="toc-text">图片处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tableView的数据刷新"><span class="toc-number">4.</span> <span class="toc-text">tableView的数据刷新</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/07/02/TableView的一些事/" data-title="TableView的一些事" data-url="http://peilinghui.com/2016/07/02/TableView的一些事/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"peilinghui"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/07/02/iOS中页面传值和页面跳转/" title="下一篇: iOS中页面传值和页面跳转 ">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/MVVM学习/">MVVM学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/iOS中的单元测试/">iOS中的单元测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/仿iMessage聊天页面开发/">仿iMessage聊天页面开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/我的iOS学习之路/">我的iOS学习之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 向阳
+            </div>
+            <div class="footer-right">
+	     欢迎光临小站
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS中页面传值和页面跳转  | 向着阳光奔跑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="对于各种软件来说，都离不开页面的跳转和页面的传值。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS中页面传值和页面跳转 ">
+<meta property="og:url" content="http://peilinghui.com/2016/07/02/iOS中页面传值和页面跳转/index.html">
+<meta property="og:site_name" content="向着阳光奔跑">
+<meta property="og:description" content="对于各种软件来说，都离不开页面的跳转和页面的传值。">
+<meta property="og:updated_time" content="2016-07-04T01:44:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS中页面传值和页面跳转 ">
+<meta name="twitter:description" content="对于各种软件来说，都离不开页面的跳转和页面的传值。">
+  
+    <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/images/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向阳</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">没有到不了的远方</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/peilinghuibest@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/575544059" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/peilinghui" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ACM/" style="font-size: 10px;">ACM</a> <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/swift，视频学习/" style="font-size: 10px;">swift，视频学习</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://lysongzi.com/">小松子</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/CHENYUFENG1991/article/category/5655903/4">iOS大神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://cspilgrimzww.github.io/">蔚蔚</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changhuiyuan.com/">惠源</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hxdavid.com/">PAT大神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wut0719.github.io/">桐神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pangjiuzala.github.io/">兴爷</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://han.pm/">交换生</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://frankhu.me">frank</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://judyzhangxin.com/">UI设计师</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://sunus.me/">阿里学长</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imhuchao.com/">胡超-凤凰网</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.xuanzhangjiong.xyz/">囧囧囧-网易安卓</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">没有到不了的远方，向往远方。。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向阳</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/images/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向阳</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">没有到不了的远方</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/peilinghuibest@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/575544059" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/peilinghui" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-iOS中页面传值和页面跳转" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/02/iOS中页面传值和页面跳转/" class="article-date">
+      <time datetime="2016-07-02T02:32:09.000Z" itemprop="datePublished">2016-07-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS中页面传值和页面跳转 
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>对于各种软件来说，都离不开页面的跳转和页面的传值。<br><a id="more"></a></p>
+<h2 id="ios的页面通信"><a href="#ios的页面通信" class="headerlink" title="ios的页面通信"></a>ios的页面通信</h2><p>开发过程中我们在页面传值时我们通常使用的方法有:属性传值法,block传值法,代理传值法,以及单例传值法,通知传值法。</p>
+<h3 id="属性传值"><a href="#属性传值" class="headerlink" title="属性传值"></a>属性传值</h3><blockquote>
+<p>属性传值多用于在将前一个页面的值传到后一个页面去,也就是我们通常说的从前往后传值，  </p>
+</blockquote>
+<p>当第一个页面push到第二个页面的时候.我们在第二个页面声明一个属性用于接受从第一个页面传递过去的值,然后在push这个事件被触发的时候进行赋值.<br>也就是说,先初始化创建第二个控制器(页面),然后通过创建的控制器来访问它所对应的属性,将即将传递的值赋给它,这样就完成了属性传值.于是当页面(控制器)被push到第二个页面之后我们访问它的属性的时候,也就顺便获取到了传递过来的值.<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="typename">void</span>)<span class="string">next:</span>(UINavigationController *)sender&#123;</span><br><span class="line">    ScondViewController *secondNC = [[ScondViewController alloc] init];</span><br><span class="line">    <span class="comment">// 将第一个界面的输入框信息赋值给第二个页面的Label</span></span><br><span class="line">    secondNC.tfString = _firstTF.text;</span><br><span class="line">    [self.navigationController <span class="string">pushViewController:</span>secondNC <span class="string">animated:</span>YES];   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="代理传值"><a href="#代理传值" class="headerlink" title="代理传值"></a>代理传值</h3><blockquote>
+<p>代理传值多用于从后往前传值.只要在协议中声明一个协议方法，然后两个类一个作为委托方一个作为遵守方来调用和实现方法就可以实现传值。十分高效而且针对性很强。委托者：声明delegate属性，调用协议方法。被委托者：遵守协议，设定被委托者，覆写协议方法。</p>
+</blockquote>
+<ol>
+<li><p>我们在SecondViewController的.h中创建一个协议,并且设置代理属性,让其遵循该协议.<br>// 设置一个协议方法<br>@protocol SecondVCDelegate<br> // 代理传值    </p>
+<ul>
+<li>(void)passValue:(NSString *)value;<br>@end</li>
+</ul>
+</li>
+<li><p>声明代理属性进行代理传值<br>@property(nonatomic,weak)id delegate;</p>
+</li>
+<li><p>SecondViewController的导航控制器设置了右按钮(返回按钮),那么,我们只需要在其触发事件(back:)中调用代理方法去执行传值即可.<br>代码如下:</p>
+</li>
+</ol>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">-</span> (void)<span class="tag">back</span>:(UINavigationController *)<span class="tag">sender</span>&#123;</span><br><span class="line">    <span class="comment">// 代理去执行传值</span></span><br><span class="line">    <span class="attr_selector">[_delegate passValue:_secondTF.text]</span>;</span><br><span class="line">    <span class="attr_selector">[self.navigationController popViewControllerAnimated:YES]</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>然后在FirstViewController的next方法中为SecondNC制定其代理为其自身即可.</li>
+<li>实现其代理方法<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)passValue:(NSString *)<span class="keyword">value</span>&#123;</span><br><span class="line">    <span class="number">_f</span>irstLab.text = <span class="keyword">value</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这样我们就可以在第一个页面得到第二个页面的值了.</p>
+<h3 id="block传值"><a href="#block传值" class="headerlink" title="block传值"></a>block传值</h3><blockquote>
+<p>block的本质就和其他OC中变量类似,只不过,block中存储的数据是函数体,但是在使用block时完全可以像调用其他函数似的,传入参数,然后得到返回值.从后往前传值.</p>
+</blockquote>
+<ol>
+<li><p>在SecondViewController中定义并声明block属性.</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义有参无返回值的匿名函数(传递字符串)</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^MyBlock)(<span class="built_in">NSString</span> *);</span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">SecondViewController</span> : <span class="title">UIViewController</span></span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>)MyBlock block;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我们在SecondViewController的back方法中调用block,并且将在这个控制器的textField中的文字作为block的参数传递给block.</p>
+</li>
+</ol>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)back:(<span class="built_in">UINavigationController</span> *)sender&#123;</span><br><span class="line">    <span class="comment">// 代理去执行传值</span></span><br><span class="line">       <span class="keyword">self</span><span class="variable">.block</span>(_secondTF<span class="variable">.text</span>);</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.navigationController</span> popViewControllerAnimated:<span class="literal">YES</span>]; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>FirstViewController的next方法中,也就是alloc出SecondViewController的时候调用SecondViewController的block,实现传值<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)back:(<span class="built_in">UINavigationController</span> *)sender&#123;</span><br><span class="line">    __<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>)temp = <span class="keyword">self</span>;</span><br><span class="line">    secVC<span class="variable">.block</span> = ^(<span class="built_in">NSString</span> *string)&#123;</span><br><span class="line">        <span class="comment">// 通过回调将传进来的字符串赋值给label</span></span><br><span class="line">        temp<span class="variable">.firstLab</span><span class="variable">.text</span> = string;</span><br><span class="line">    &#125;;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.navigationController</span> popViewControllerAnimated:<span class="literal">YES</span>]; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在上述代码中,因为block里面不能直接使用属性,实例变量和方法(因为会造成循环引用),所以我们重新用__weak修饰self并重新命名为temp.这样我们就实现了传值.</p>
+<h3 id="通知传值"><a href="#通知传值" class="headerlink" title="通知传值"></a>通知传值</h3><blockquote>
+<p>类似于广播的一种传值模式，十分简单易用。一般负责在两个不同的类之间传值，且耦合度很低。这种方式中NSNotificationCenter担任一个中介者的身份，已提供观察者与被观察者相互传递信息。</p>
+</blockquote>
+<p>Objective-C中使用NSNotifation表示通知，每个NSNotifation对象都具有名称（NSNotificationCenter根据该名称检索此通知的所有观察者）、来源对象（发布该通知的对象）和可选的userInfo字典（来源对象需要告诉观察者的额外信息）。</p>
+<p>NSNotificationCenter就相当于一个俱乐部，只要一行代码一个类就能加入其中成为会员，当然这个类要告诉俱乐部它对哪些信息感兴趣，当有新的信息出现时，俱乐部会询问每一位会员这个信息是否是它们所需要的。</p>
+<ol>
+<li><p>在ViewController中添加观察者</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="typename">void</span>)<span class="string">prepareForSegue:</span>(UIStoryboardSegue *)segue <span class="string">sender:</span>(id)sender &#123;</span><br><span class="line"><span class="comment">//通知中心添加观察者</span></span><br><span class="line">  [[NSNotificationCenter defaultCenter] <span class="string">addObserver:</span>self <span class="string">selector:</span><span class="annotation">@selector</span>(<span class="string">changeLabelText:</span>) <span class="string">name:</span>@<span class="string">"改变名称"</span> <span class="string">object:</span>nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在ViewController.m中实现观察者接到消息之后执行的方法</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)changeLabelText:(<span class="built_in">NSNotification</span>*)sender</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">self</span><span class="variable">.NameLabel</span><span class="variable">.text</span>=sender<span class="variable">.userInfo</span>[<span class="string">@"名字"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在NextViewController.m中发送消息</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通知中心发送通知</span></span><br><span class="line">-(<span class="keyword">IBAction</span>)<span class="built_in">NSNotificationAction</span>:(<span class="built_in">UIButton</span> *)sender &#123;</span><br><span class="line">  <span class="built_in">NSDictionary</span>* dic=@&#123;<span class="string">@"名字"</span>:<span class="keyword">self</span><span class="variable">.nameTextField</span><span class="variable">.text</span>&#125;;</span><br><span class="line">  [[<span class="built_in">NSNotificationCenter</span> defaultCenter] postNotificationName:<span class="string">@"改变名称"</span> object:<span class="literal">nil</span> userInfo:dic];</span><br><span class="line">  [<span class="keyword">self</span> dismissViewControllerAnimated:<span class="literal">YES</span> completion:^&#123;</span><br><span class="line"></span><br><span class="line">  &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在ViewController.m中要移除观察者</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//移除通知中心</span></span><br><span class="line"><span class="tag">-</span>(void)<span class="tag">dealloc</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr_selector">[[NSNotificationCenter defaultCenter]</span><span class="tag">removeObserver</span><span class="pseudo">:self</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="单例传值"><a href="#单例传值" class="headerlink" title="单例传值"></a>单例传值</h3><blockquote>
+<p>由于单例在内存中只创建一次的并且可以全局访问的属性,我们可以在必要的时候将数据存放在单例的属性中,并且在必要的时候从单例中通过访问其属性进行调用,这样就实现值的传递<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">DataHandle</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="comment">// 创建单例</span></span><br><span class="line">+ (instancetype)sharedDataHandle;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>)<span class="built_in">NSString</span> *Str;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">DataHandle</span></span></span><br><span class="line"><span class="comment">// 声明静态区对象的原因,希望程序运行期间,在内存中一直存在,这样对外界来说,可以随时读取数据</span></span><br><span class="line"><span class="keyword">static</span> DataHandle *dataHandle = <span class="literal">nil</span>;</span><br><span class="line"><span class="comment">// 创建单例(全局区)</span></span><br><span class="line">+ (instancetype)sharedDataHandle&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">nil</span> == dataHandle) &#123;</span><br><span class="line">        <span class="comment">// 我们创建单例使用加号方法的原因是因为,在创建之前,无法存在一个实例对象去调用动态方法来创建它本身</span></span><br><span class="line">        dataHandle = [[DataHandle alloc] init];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dataHandle; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>我们只需要在需要的时候通过其类方法(+ (instancetype)sharedDataHandle)来创建出单例对象来,然后将textField的text属性以赋值的方式赋给单例的Srt属性即可.</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
+        <p><span>发布时间:</span>2016年07月02日 - 10时32分</p>
+        <p><span>最后更新:</span>2016年07月04日 - 09时44分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/02/iOS中页面传值和页面跳转/" title="iOS中页面传值和页面跳转 ">http://peilinghui.com/2016/07/02/iOS中页面传值和页面跳转/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/07/02/iOS中页面传值和页面跳转/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/07/02/TableView的一些事/">
+                    TableView的一些事
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/06/30/MVVM学习/">
+                    MVVM学习
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ios的页面通信"><span class="toc-number">1.</span> <span class="toc-text">ios的页面通信</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性传值"><span class="toc-number">1.1.</span> <span class="toc-text">属性传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代理传值"><span class="toc-number">1.2.</span> <span class="toc-text">代理传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#block传值"><span class="toc-number">1.3.</span> <span class="toc-text">block传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通知传值"><span class="toc-number">1.4.</span> <span class="toc-text">通知传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单例传值"><span class="toc-number">1.5.</span> <span class="toc-text">单例传值</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/07/02/iOS中页面传值和页面跳转/" data-title="iOS中页面传值和页面跳转 " data-url="http://peilinghui.com/2016/07/02/iOS中页面传值和页面跳转/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"peilinghui"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/07/02/TableView的一些事/" title="上一篇: TableView的一些事">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/06/30/MVVM学习/" title="下一篇: MVVM学习">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/MVVM学习/">MVVM学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/iOS中的单元测试/">iOS中的单元测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/仿iMessage聊天页面开发/">仿iMessage聊天页面开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/我的iOS学习之路/">我的iOS学习之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 向阳
+            </div>
+            <div class="footer-right">
+	     欢迎光临小站
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
