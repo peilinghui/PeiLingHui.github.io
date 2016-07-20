@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://peilinghui.com/"/>
-  <updated>2016-07-19T14:57:00.000Z</updated>
+  <updated>2016-07-19T14:23:23.000Z</updated>
   <id>http://peilinghui.com/</id>
   
   <author>
@@ -14,66 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>iOS程序的性能分析和优化</title>
-    <link href="http://peilinghui.com/2016/07/19/iOS%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%92%8C%E4%BC%98%E5%8C%96/"/>
-    <id>http://peilinghui.com/2016/07/19/iOS程序的性能分析和优化/</id>
-    <published>2016-07-19T14:57:00.000Z</published>
-    <updated>2016-07-19T14:57:00.000Z</updated>
-    
-    <content type="html"></content>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>RunLoop的学习</title>
-    <link href="http://peilinghui.com/2016/07/19/RunLoop%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://peilinghui.com/2016/07/19/RunLoop的学习/</id>
-    <published>2016-07-19T14:45:17.000Z</published>
-    <updated>2016-07-19T14:45:17.000Z</updated>
-    
-    <content type="html"></content>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Runtime的学习</title>
-    <link href="http://peilinghui.com/2016/07/05/Runtime%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://peilinghui.com/2016/07/05/Runtime的学习/</id>
-    <published>2016-07-05T08:22:32.000Z</published>
-    <updated>2016-07-19T15:15:02.000Z</updated>
-    
-    <content type="html">&lt;p&gt;官方源代码地址：&lt;a href=&quot;http://opensource.apple.com//source/objc4/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://opensource.apple.com//source/objc4/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;优秀博客学习：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Objective-C Runtime 1小时入门教程：&lt;a href=&quot;https://www.ianisme.com/ios/2019.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.ianisme.com/ios/2019.html&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;Objective-C Runtime：&lt;a href=&quot;http://yulingtianxia.com/blog/2014/11/05/objective-c-runtime/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://yulingtianxia.com/blog/2014/11/05/objective-c-runtime/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;南峰子有一系列：&lt;a href=&quot;http://southpeak.github.io/blog/2014/10/30/objective-c-runtime-yun-xing-shi-zhi-er-:cheng-yuan-bian-liang-yu-shu-xing/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://southpeak.github.io/blog/2014/10/30/objective-c-runtime-yun-xing-shi-zhi-er-:cheng-yuan-bian-liang-yu-shu-xing/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;快速上手Runtime（附MJExtension的底层实现:&lt;a href=&quot;http://www.tuicool.com/articles/YzeiEna&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.tuicool.com/articles/YzeiEna&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;官方源代码地址：&lt;a href=&quot;http://opensource.apple.com//source/objc4/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://opensource.apple.com//source/objc4/&lt;/a
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://peilinghui.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
   
   <entry>
     <title>TableView的一些事</title>
@@ -1567,6 +1507,377 @@ j++;
     
     
       <category term="PAT" scheme="http://peilinghui.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS中的第三方框架</title>
+    <link href="http://peilinghui.com/2016/03/05/iOS%E4%B8%AD%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A1%86%E6%9E%B6/"/>
+    <id>http://peilinghui.com/2016/03/05/iOS中的第三方框架/</id>
+    <published>2016-03-05T06:08:53.000Z</published>
+    <updated>2016-07-19T14:47:57.000Z</updated>
+    
+    <content type="html">&lt;p&gt;通过不断的学习也接触了不少的第三方框架，就总结一下。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;源代码分析：&lt;a href=&quot;https://github.com/Draveness/iOS-Source-Code-Analyze&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/Draveness/iOS-Source-Code-Analyze&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;FMDB&quot;&gt;&lt;a href=&quot;#FMDB&quot; class=&quot;headerlink&quot; title=&quot;FMDB&quot;&gt;&lt;/a&gt;FMDB&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;什么是FMDB：&lt;br&gt;FMDB是iOS平台的SQLite数据库框架；&lt;br&gt;FMDB以OC的方式封装了SQLite的C语言API&lt;/li&gt;
+&lt;li&gt;优点&lt;ul&gt;
+&lt;li&gt;使用起来更加面向对象，省去了很多麻烦、冗余的C语言代码&lt;/li&gt;
+&lt;li&gt;对比苹果自带的Core Data框架，更加轻量级和灵活&lt;/li&gt;
+&lt;li&gt;提供了多线程安全的数据库操作方法，有效地防止数据混乱&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;FMDB的github地址:  &lt;a href=&quot;https://github.com/ccgus/fmdb&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/ccgus/fmdb&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;核心类&lt;br&gt;FMDB有三个主要的类&lt;br&gt;（1）FMDatabase&lt;br&gt;一个FMDatabase对象就代表一个单独的SQLite数据库&lt;br&gt;用来执行SQL语句&lt;br&gt;（2）FMResultSet&lt;br&gt;使用FMDatabase执行查询后的结果集&lt;br&gt;（3）FMDatabaseQueue&lt;br&gt;用于在多线程中执行多个查询或更新，它是线程安全的&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;Alamofire&quot;&gt;&lt;a href=&quot;#Alamofire&quot; class=&quot;headerlink&quot; title=&quot;Alamofire&quot;&gt;&lt;/a&gt;Alamofire&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/Alamofire/Alamofire&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/Alamofire/Alamofire&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;AlamofireObjectMapper&quot;&gt;&lt;a href=&quot;#AlamofireObjectMapper&quot; class=&quot;headerlink&quot; title=&quot;AlamofireObjectMapper&quot;&gt;&lt;/a&gt;AlamofireObjectMapper&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/tristanhimmelman/AlamofireObjectMapper&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/tristanhimmelman/AlamofireObjectMapper&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;AFNetworking&quot;&gt;&lt;a href=&quot;#AFNetworking&quot; class=&quot;headerlink&quot; title=&quot;AFNetworking&quot;&gt;&lt;/a&gt;AFNetworking&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;AFN 与 ASI 有什么区别&lt;br&gt;AFN基于NSURL，ASI基于底层的CFNetwork框架，因此ASI的性能优于AFN&lt;br&gt;AFN采取block的方式处理请求，ASI最初采取delegate的方式处理请求，后面也增加了block的方式。&lt;br&gt;AFN只封装了一些常用功能，满足基本需求，直接忽略了很多扩展功能，比如没有封装同步请求；ASI提供的功能较多，预留了各种接口和工具供开发者自行扩展。AFN直接解析服务器返回的JSON、XML等数据，而ASI比较原始，返回的是NSData二进制数据。&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+&lt;li&gt;讲解：&lt;br&gt;1&amp;gt;&lt;strong&gt;AFHTTPRequestOperation&lt;/strong&gt;&lt;br&gt;HTTP或HTTPS协议请求的AFURLConnectionOperation的子类。它封装的可接受状态码和内容的类型，判定一个请求结果是成功或失败。&lt;br&gt;实际上对系统的HTTP网络请求增加了几个HTTP需要用到的参数。&lt;br&gt;2&amp;gt;&lt;strong&gt;AFURLConnectionOperation&lt;/strong&gt;&lt;br&gt;可以说是AFN最基础的类。继承自NSOperation类，将网络请求依附到一个operation上。从而让我们能够有效的控制并观察一个网络请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态。&lt;br&gt;①：综述&lt;br&gt;AFURLConnectionOperation 将Operation和URLConnection结合到一起，利用operation可以监听到状态以及可以建立相互之间的依赖关系的特性，实现了对于 一个NSURLConnection对象的完美控制，并将请求的结果通过block友好的返回。&lt;br&gt;②：实现文件.m&lt;br&gt;我们总结下.m中这个类主要有哪些方法。&lt;br&gt;1： 首先我们可以看到它创建了一个单例线程。这个线程将会常驻内存，用来处理AFN发起的所有请求任务。当然，线程也跟随着一个runloop，AFN将这个 runloop的模式设置为NSDefaultRunLoopMode。NSDefaultRunLoopMode是无法检测到connection的状 态的。这说明了，AFN将不会在这该线程处理connection完成后的UI刷新等工作，而是会将数据抛给主线程，让主线程去完成UI的刷新。&lt;br&gt;2：我们可以看到该类通过接受请求的字符串，创建了URLRequest以及NSURLConnection对象。从而去进行请求。&lt;br&gt;3：实现文件多次使用到了锁，可以保证数据的安全。当然他也实现了几个数据的NSCoping协议。&lt;br&gt;4：请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态的控制。这里讲一下暂停和恢复。&lt;br&gt;暂 停实际上将网络请求取消掉了。但是由于实现了nscoping协议，已经下载到数据得以保存下来。下次进行相同请求的时候，我们会将已经下载到的数据的节 点一起发送给服务器，告诉服务器这些部门的数据我们不需要了，服务器根据我发送的返回节点给我返回相应的数据即可。从而实现了暂停和恢复功能，也就是断点 续传。&lt;br&gt;5：operation方法的重写。自行google，这里不赘述。&lt;br&gt;6：状态的各种控制方法的实现以及发送状态改变的通知  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;③：接口文件.h&lt;br&gt;接口文档中的属性方法，基本可以概括为以下几个方法&lt;br&gt;1：只读的数据，让管理者可以接收到。&lt;br&gt;2：设置runloop的modes。不再使用类库默认设置的defaultmodes。&lt;br&gt;3：状态的控制方法&lt;br&gt;4：安全策略的设置&lt;br&gt;总而言之，接口文件.h暴露的接口都是为了让manager可以去完全控制这个operation以及其中的网络请求。&lt;/p&gt;
+&lt;p&gt;3&amp;gt;&lt;strong&gt;AFHTTPRequestOperationManager&lt;/strong&gt;&lt;br&gt;这个类是AFN类库的核心类。它封装完成了一种通用的模式，可以帮助我们轻松友好的完成请求的创建、响应的系列化，网络状态的监控以及安全策略以及每一个请求operation的管理（operation的相互依赖或状态改变）。&lt;br&gt;①：综述&lt;br&gt;这个类可以说是整个类库的核心类了。据说AFN2.0之前的时候，所有的网络请求相关的设置都杂糅到一个client中，导致client特别的臃肿。2.0后，AFN将一些设置提取出来，线程了专门的类【AFSecurityPolicy、AFURLRequestSerialization、AFURLResponseSerialization】。现在看来，AFN整体的设计是非常完美的。耦合性变得非常低，一些1.0版本中存在的问题也得到了改善。  &lt;/p&gt;
+&lt;p&gt;②：实现文件.m&lt;br&gt;实现文件较为简单，可以看到他创建了一个队列。并将各个operation加入到队列中。在队列中，各个请求就可以设置依赖关系，并发的数量等等。  &lt;/p&gt;
+&lt;p&gt;③：接口文件.h&lt;br&gt;接口文件中，我们可以看到。这个类可以设置AFSecurityPolicy、AFURLRequestSerialization、AFURLResponseSerialization 等参数了。这就是综述所说的降低耦合性的方式。基本使用很简单，这里就不再赘述了。&lt;br&gt;&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 基础的URL，主机路径&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.baseURL&lt;/span&gt; = url;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 请求的解析器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.requestSerializer&lt;/span&gt; = [AFHTTPRequestSerializer serializer];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 响应的解析器(默认直接解析JSON)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.responseSerializer&lt;/span&gt; = [AFJSONResponseSerializer serializer];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用实例1：GET方法  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//获得请求管理者（管理请求，帮助发请求）&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//发送get请求&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;NSMutableDictionary&lt;/span&gt; *params = [&lt;span class=&quot;built_in&quot;&gt;NSMutableDictionary&lt;/span&gt; dictionary];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    params[&lt;span class=&quot;string&quot;&gt;@&quot;username&quot;&lt;/span&gt;]=&lt;span class=&quot;string&quot;&gt;@&quot;123&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    params[&lt;span class=&quot;string&quot;&gt;@&quot;pwd&quot;&lt;/span&gt;]=&lt;span class=&quot;string&quot;&gt;@&quot;123&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [manager GET:&lt;span class=&quot;string&quot;&gt;@&quot;http://.....//login&quot;&lt;/span&gt; parameters:params success:^(AFHTTPRequestOperation *operation,&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; responseObject)&amp;#123;&lt;span class=&quot;comment&quot;&gt;//responseObject就是字典&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;请求成功————&quot;&lt;/span&gt;,responseObject);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;failure:^(AFHTTPRequestOperation *operation,&lt;span class=&quot;built_in&quot;&gt;NSError&lt;/span&gt; *error)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;请求失败————&quot;&lt;/span&gt;,error);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用实例2：POST方法&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight clojure&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;collection&quot;&gt;[manager POST:urlStr parameters:params success:^&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;AFHTTPRequestOperation&lt;/span&gt; *operation, id responseObject)&lt;/span&gt; &lt;span class=&quot;collection&quot;&gt;&amp;#123;       &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        NSLog&lt;span class=&quot;list&quot;&gt;(@&lt;span class=&quot;string&quot;&gt;&quot;%@  %@&quot;&lt;/span&gt;, responseObject, &lt;span class=&quot;collection&quot;&gt;[NSThread currentThread]&lt;/span&gt;)&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;        &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt; failure:^&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;AFHTTPRequestOperation&lt;/span&gt; *operation, NSError *error)&lt;/span&gt; &lt;span class=&quot;collection&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        NSLog&lt;span class=&quot;list&quot;&gt;(@&lt;span class=&quot;string&quot;&gt;&quot;%@&quot;&lt;/span&gt;, error)&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;        &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;]&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用实例3：XML解析&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight 1c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 假如想使用DOM进行解析XML，可以指定响应的类型是二进制。拿到二进制数据就可以进行DOM解析&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    manager.responseSerializer = [AFHTTPResponseSerializer serializer];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用实例4：上传图片、文件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// url&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;NSString *urlStr = @&lt;span class=&quot;string&quot;&gt;&quot;http://127.0.0.1/post/upload.php&quot;&lt;/span&gt;;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//获得请求管理者（管理请求，帮助发请求）&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;NSMutableDictionary *params = [NSMutableDictionary dictionary];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;params[@&lt;span class=&quot;string&quot;&gt;&quot;username&quot;&lt;/span&gt;]=@&lt;span class=&quot;string&quot;&gt;&quot;zhangsan&quot;&lt;/span&gt;;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[manager &lt;span class=&quot;string&quot;&gt;POST:&lt;/span&gt;urlStr &lt;span class=&quot;string&quot;&gt;parameters:&lt;/span&gt;params &lt;span class=&quot;string&quot;&gt;constructingBodyWithBlock:&lt;/span&gt;^(id&amp;lt;AFMultipartFormData&amp;gt; formData) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 要上传的图片的路径，一定要在这个Block中添加文件参数&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    NSURL *fileUrl = [[NSBundle mainBundle] &lt;span class=&quot;string&quot;&gt;URLForResource:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;Snip20150123_3.png&quot;&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;withExtension:&lt;/span&gt;nil];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [formData &lt;span class=&quot;string&quot;&gt;appendPartWithFileURL:&lt;/span&gt;fileUrl &lt;span class=&quot;string&quot;&gt;name:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;userfile&quot;&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;fileName:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;123321.png&quot;&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;mimeType:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;image/png&quot;&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;error:&lt;/span&gt;NULL];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125; &lt;span class=&quot;string&quot;&gt;success:&lt;/span&gt;^(AFHTTPRequestOperation *operation, id responseObject) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    NSLog(@&lt;span class=&quot;string&quot;&gt;&quot;success&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125; &lt;span class=&quot;string&quot;&gt;failure:&lt;/span&gt;^(AFHTTPRequestOperation *operation, NSError *error) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    NSLog(@&lt;span class=&quot;string&quot;&gt;&quot;failure&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用实例5： 网络监控&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//1.获得网络监控的管理者&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    AFNetworkReachabilityManager *mgr = [AFNetworkReachabilityManager sharedManager];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//2.设置网络状态改变后的处理&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [mgr &lt;span class=&quot;string&quot;&gt;setReachabilityStatusChangeBlock:&lt;/span&gt;^(AFNetworkReachabilityStatus status)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//当网络状态改变了，就会调用这个Block&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;switch&lt;/span&gt; (status) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;AFNetworkReachabilityStatusUnknown:&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;//未知网络                &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;keyword&quot;&gt;break&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;AFNetworkReachabilityStatusNotReachable:&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;//没有网络&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;keyword&quot;&gt;break&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;AFNetworkReachabilityStatusReachableViaWWAN:&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;//手机自带网络&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;keyword&quot;&gt;break&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;AFNetworkReachabilityStatusReachableViaWiFi:&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;//wifi&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;keyword&quot;&gt;break&lt;/span&gt;;               &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;label&quot;&gt;            default:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;keyword&quot;&gt;break&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//3. 开始监控&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [mgr startMonitoring];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h1 id=&quot;SDWebImage&quot;&gt;&lt;a href=&quot;#SDWebImage&quot; class=&quot;headerlink&quot; title=&quot;SDWebImage&quot;&gt;&lt;/a&gt;SDWebImage&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;网络图片处理框架&lt;br&gt;包含功能：图片下载、图片缓存、下载进度监控&lt;br&gt;用法简单，功能强大，大大提高了网络图片的处理效率&lt;br&gt;&lt;a href=&quot;http://github.com/rs/SDWebImage&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://github.com/rs/SDWebImage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;如何防止一个url对应的图片重复下载?/SDWebImage底层是怎么实现的？  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+&lt;li&gt;SDWebImage的默认缓存时长是多少？&lt;br&gt;&lt;code&gt;static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;常用方法&lt;br&gt;&lt;code&gt;- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder;&lt;/code&gt;&lt;br&gt;&lt;code&gt;- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options;&lt;/code&gt;&lt;br&gt;&lt;code&gt;- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder completed:(SDWebImageCompletionBlock)completedBlock;&lt;/code&gt;&lt;br&gt;&lt;code&gt;- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageCompletionBlock)completedBlock;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;SDWebImageOption:&lt;br&gt;SDWebImageRetryFailed : 下载失败后，会自动重新下载&lt;br&gt;SDWebImageLowPriority : 当正在进行UI交互时，自动暂停内部的一些下载操作&lt;br&gt;SDWebImageRetryFailed | SDWebImageLowPriority : 拥有上面2个功能&lt;/li&gt;
+&lt;li&gt;内存处理：当app接收到内存警告时，SDWebImage做了什么？&lt;ul&gt;
+&lt;li&gt;SDWebImage会监听系统的UIApplicationDidReceiveMemoryWarningNotification通知，一旦收到通知，就会清理内存&lt;/li&gt;
+&lt;li&gt;应用程序将要终止的通知,UIApplicationWillTerminateNotification, 清理磁盘&lt;/li&gt;
+&lt;li&gt;应用程序进入后台的通知，UIApplicationDidEnterBackgroundNotification，也会清理磁盘&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight less&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr_selector&quot;&gt;[[NSNotificationCenter defaultCenter]&lt;/span&gt; &lt;span class=&quot;tag&quot;&gt;addObserver&lt;/span&gt;&lt;span class=&quot;pseudo&quot;&gt;:self&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                 &lt;span class=&quot;tag&quot;&gt;selector&lt;/span&gt;:@&lt;span class=&quot;tag&quot;&gt;selector&lt;/span&gt;(clearMemory)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                     &lt;span class=&quot;tag&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pseudo&quot;&gt;:UIApplicationDidReceiveMemoryWarningNotification&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                   &lt;span class=&quot;tag&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;pseudo&quot;&gt;:nil&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr_selector&quot;&gt;[[NSNotificationCenter defaultCenter]&lt;/span&gt; &lt;span class=&quot;tag&quot;&gt;addObserver&lt;/span&gt;&lt;span class=&quot;pseudo&quot;&gt;:self&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                 &lt;span class=&quot;tag&quot;&gt;selector&lt;/span&gt;:@&lt;span class=&quot;tag&quot;&gt;selector&lt;/span&gt;(cleanDisk)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                     &lt;span class=&quot;tag&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pseudo&quot;&gt;:UIApplicationWillTerminateNotification&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                   &lt;span class=&quot;tag&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;pseudo&quot;&gt;:nil&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr_selector&quot;&gt;[[NSNotificationCenter defaultCenter]&lt;/span&gt; &lt;span class=&quot;tag&quot;&gt;addObserver&lt;/span&gt;&lt;span class=&quot;pseudo&quot;&gt;:self&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                 &lt;span class=&quot;tag&quot;&gt;selector&lt;/span&gt;:@&lt;span class=&quot;tag&quot;&gt;selector&lt;/span&gt;(backgroundCleanDisk)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                     &lt;span class=&quot;tag&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pseudo&quot;&gt;:UIApplicationDidEnterBackgroundNotification&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                   &lt;span class=&quot;tag&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;pseudo&quot;&gt;:nil&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;过程&lt;br&gt;SDWebImage提供了如下三个category来进行缓存。&lt;ul&gt;
+&lt;li&gt;MKAnnotationView(WebCache)&lt;/li&gt;
+&lt;li&gt;UIButton(WebCache)&lt;/li&gt;
+&lt;li&gt;UIImageView(WebCache)&lt;br&gt;以最为常用的UIImageView为例:&lt;br&gt;1&amp;gt; UIImageView+WebCache:  setImageWithURL:placeholderImage:options: &lt;strong&gt;先显示 placeholderImage ，同时由SDWebImageManager 根据 URL 来在本地查找图片。&lt;/strong&gt;&lt;br&gt;2&amp;gt;SDWebImageManager: downloadWithURL:delegate:options:userInfo: SDWebImageManager是将UIImageView+WebCache同SDImageCache链接起来的类， SDImageCache： queryDiskCacheForKey:delegate:userInfo:&lt;strong&gt;用来从缓存根据CacheKey查找图片是否已经在缓存中&lt;/strong&gt;&lt;br&gt;3&amp;gt;如果内存中已经有图片缓存， SDWebImageManager会回调SDImageCacheDelegate : imageCache:didFindImage:forKey:userInfo:&lt;br&gt;4&amp;gt;而 UIImageView+WebCache 则回调SDWebImageManagerDelegate:  webImageManager:didFinishWithImage:来显示图片。&lt;br&gt;5&amp;gt;如果内存中没有图片缓存，那么生成 NSInvocationOperation 添加到队列，从硬盘查找图片是否已被下载缓存。&lt;br&gt;6&amp;gt;根据 URLKey 在硬盘缓存目录下尝试读取图片文件。这一步是在 NSOperation 进行的操作，所以回主线程进行结果回调 notifyDelegate:。&lt;br&gt;7&amp;gt;如果上一操作从硬盘读取到了图片，将图片添加到内存缓存中（如果空闲内存过小，会先清空内存缓存）。SDImageCacheDelegate 回调 imageCache:didFindImage:forKey:userInfo:。进而回调展示图片。&lt;br&gt;8&amp;gt;如果从硬盘缓存目录读取不到图片，说明所有缓存都不存在该图片，需要下载图片，回调 imageCache:didNotFindImageForKey:userInfo:。&lt;br&gt;9&amp;gt;共享或重新生成一个下载器 SDWebImageDownloader 开始下载图片。&lt;br&gt;10&amp;gt;图片下载由 NSURLConnection 来做，实现相关 delegate 来判断图片下载中、下载完成和下载失败。&lt;br&gt;11&amp;gt;connection:didReceiveData: 中利用 ImageIO 做了按图片下载进度加载效果。&lt;br&gt;12&amp;gt;connectionDidFinishLoading: 数据下载完成后交给 SDWebImageDecoder 做图片解码处理。&lt;br&gt;13&amp;gt;图片解码处理在一个 NSOperationQueue 完成，不会拖慢主线程 UI。如果有需要对下载的图片进行二次处理，最好也在这里完成，效率会好很多。&lt;br&gt;14&amp;gt;在主线程 notifyDelegateOnMainThreadWithInfo: 宣告解码完成，imageDecoder:didFinishDecodingImage:userInfo: 回调给 SDWebImageDownloader。&lt;br&gt;15&amp;gt;imageDownloader:didFinishWithImage: 回调给 SDWebImageManager 告知图片下载完成。&lt;br&gt;16&amp;gt;通知所有的 downloadDelegates 下载完成，回调给需要的地方展示图片。&lt;br&gt;17&amp;gt;将图片保存到 SDImageCache 中，内存缓存和硬盘缓存同时保存。&lt;br&gt;18&amp;gt;写文件到硬盘在单独 NSInvocationOperation 中完成，避免拖慢主线程。&lt;br&gt;19&amp;gt;如果是在iOS上运行，SDImageCache 在初始化的时候会注册notification 到 UIApplicationDidReceiveMemoryWarningNotification 以及  UIApplicationWillTerminateNotification,在内存警告的时候清理内存图片缓存，应用结束的时候清理过期图片。&lt;br&gt;20&amp;gt;SDWebImagePrefetcher 可以预先下载图片，方便后续使用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;SnapKit&quot;&gt;&lt;a href=&quot;#SnapKit&quot; class=&quot;headerlink&quot; title=&quot;SnapKit&quot;&gt;&lt;/a&gt;SnapKit&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/SnapKit/SnapKit&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/SnapKit/SnapKit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;基于swift的autolayout的框架&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;MBProgressHUD&quot;&gt;&lt;a href=&quot;#MBProgressHUD&quot; class=&quot;headerlink&quot; title=&quot;MBProgressHUD&quot;&gt;&lt;/a&gt;MBProgressHUD&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;动态提示框效果。应用显示一个过渡的作用，常用于打开一个联网页面加载过程，防止出现假死现象，如果网速慢则告诉用户已经在很努力很努力的加载中。网页加载、下载等耗时操作中给予用户以提示。&lt;/li&gt;
+&lt;li&gt;github 地址：&lt;a href=&quot;https://github.com/jdg/MBProgressHUD&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/jdg/MBProgressHUD&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;讲解：&lt;a href=&quot;http://blog.csdn.net/lanmanck/article/details/38496113&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/lanmanck/article/details/38496113&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://blog.csdn.net/duxinfeng2010/article/details/8510894&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/duxinfeng2010/article/details/8510894&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://blog.csdn.net/chenyufeng1991/article/details/50273315&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/chenyufeng1991/article/details/50273315&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;GPUImage&quot;&gt;&lt;a href=&quot;#GPUImage&quot; class=&quot;headerlink&quot; title=&quot;GPUImage&quot;&gt;&lt;/a&gt;GPUImage&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;GPUImage为基于GPU的图像和视频处理一个开源的iOS框架&lt;/li&gt;
+&lt;li&gt;下载地址：&lt;a href=&quot;https://github.com/BradLarson/GPUImage&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/BradLarson/GPUImage&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;JSONKit&quot;&gt;&lt;a href=&quot;#JSONKit&quot; class=&quot;headerlink&quot; title=&quot;JSONKit&quot;&gt;&lt;/a&gt;JSONKit&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;JSONKit是用 Objective-C 实现的一个高性能的 JSON 解析和生成库。json正在逐步取代xml，成为网络数据的通用格式。&lt;/li&gt;
+&lt;li&gt;讲解：&lt;a href=&quot;http://www.cnblogs.com/jiangyuxuan/archive/2013/03/09/2950984.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/jiangyuxuan/archive/2013/03/09/2950984.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;下载地址：&lt;a href=&quot;https://github.com/johnezang/JSONKit/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/johnezang/JSONKit/&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;Kingfisher&quot;&gt;&lt;a href=&quot;#Kingfisher&quot; class=&quot;headerlink&quot; title=&quot;Kingfisher&quot;&gt;&lt;/a&gt;Kingfisher&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/onevcat/Kingfisher&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/onevcat/Kingfisher&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;Extension&quot;&gt;&lt;a href=&quot;#Extension&quot; class=&quot;headerlink&quot; title=&quot;Extension&quot;&gt;&lt;/a&gt;Extension&lt;/h1&gt;&lt;p&gt;字典转模型&lt;/p&gt;
+&lt;h1 id=&quot;MJExtension&quot;&gt;&lt;a href=&quot;#MJExtension&quot; class=&quot;headerlink&quot; title=&quot;MJExtension&quot;&gt;&lt;/a&gt;MJExtension&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;MJExtension是JSON和Model(字典和模型)之间互相转换的超轻量级框架.&lt;/li&gt;
+&lt;li&gt;MJExtension能完成的功能&lt;br&gt;字典（JSON） –&amp;gt; 模型（Model）&lt;br&gt;模型（Model） –&amp;gt; 字典（JSON）&lt;br&gt;字典数组（JSON Array） –&amp;gt; 模型数组（Model Array）&lt;br&gt;模型数组（Model Array） –&amp;gt; 字典数组（JSON Array）&lt;/li&gt;
+&lt;li&gt;讲解：&lt;a href=&quot;http://www.jianshu.com/p/93c242452b&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/93c242452b&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;GitHub链接：&lt;a href=&quot;https://github.com/CoderMJLee/MJExtension&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/CoderMJLee/MJExtension&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;MJRefresh&quot;&gt;&lt;a href=&quot;#MJRefresh&quot; class=&quot;headerlink&quot; title=&quot;MJRefresh&quot;&gt;&lt;/a&gt;MJRefresh&lt;/h1&gt;&lt;p&gt;主要用于刷新操作，提供了常用的刷新操作，还有刷新动画，用着很好用。&lt;/p&gt;
+&lt;h1 id=&quot;YYModel&quot;&gt;&lt;a href=&quot;#YYModel&quot; class=&quot;headerlink&quot; title=&quot;YYModel&quot;&gt;&lt;/a&gt;YYModel&lt;/h1&gt;&lt;h1 id=&quot;YYKit&quot;&gt;&lt;a href=&quot;#YYKit&quot; class=&quot;headerlink&quot; title=&quot;YYKit&quot;&gt;&lt;/a&gt;YYKit&lt;/h1&gt;&lt;p&gt;#JSPath&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;通过不断的学习也接触了不少的第三方框架，就总结一下。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://peilinghui.com/categories/iOS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>iOS中的数据存储</title>
+    <link href="http://peilinghui.com/2016/03/05/iOS%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
+    <id>http://peilinghui.com/2016/03/05/iOS中的数据存储/</id>
+    <published>2016-03-05T05:59:07.000Z</published>
+    <updated>2016-04-16T08:44:37.000Z</updated>
+    
+    <content type="html">&lt;p&gt;iOS中的数据存储方式&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;iOS中的数据存储方式&quot;&gt;&lt;a href=&quot;#iOS中的数据存储方式&quot; class=&quot;headerlink&quot; title=&quot;iOS中的数据存储方式&quot;&gt;&lt;/a&gt;iOS中的数据存储方式&lt;/h1&gt;&lt;h2 id=&quot;Plist（NSArray-NSDictionary）&quot;&gt;&lt;a href=&quot;#Plist（NSArray-NSDictionary）&quot; class=&quot;headerlink&quot; title=&quot;Plist（NSArray\NSDictionary）&quot;&gt;&lt;/a&gt;Plist（NSArray\NSDictionary）&lt;/h2&gt;&lt;p&gt;只能存储数组，字典，但是数组和字典里面不能有自定义对象&lt;/p&gt;
+&lt;h2 id=&quot;Preference（偏好设置-NSUserDefaults）&quot;&gt;&lt;a href=&quot;#Preference（偏好设置-NSUserDefaults）&quot; class=&quot;headerlink&quot; title=&quot;Preference（偏好设置\NSUserDefaults）&quot;&gt;&lt;/a&gt;Preference（偏好设置\NSUserDefaults）&lt;/h2&gt;&lt;h2 id=&quot;NSCoding（NSKeyedArchiver-NSkeyedUnarchiver归档&quot;&gt;&lt;a href=&quot;#NSCoding（NSKeyedArchiver-NSkeyedUnarchiver归档&quot; class=&quot;headerlink&quot; title=&quot;NSCoding（NSKeyedArchiver\NSkeyedUnarchiver归档&quot;&gt;&lt;/a&gt;NSCoding（NSKeyedArchiver\NSkeyedUnarchiver归档&lt;/h2&gt;&lt;p&gt;存储自定义对象，局限：一次性做读取的存储的操作&lt;/p&gt;
+&lt;h2 id=&quot;SQLite3&quot;&gt;&lt;a href=&quot;#SQLite3&quot; class=&quot;headerlink&quot; title=&quot;SQLite3&quot;&gt;&lt;/a&gt;SQLite3&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;什么是SQLite？&lt;br&gt;SQLite是一款轻型的嵌入式数据库;它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了;它的处理速度比Mysql、PostgreSQL这两款著名的数据库都还快  &lt;/li&gt;
+&lt;li&gt;怎么解决sqlite锁定的问题？&lt;br&gt;设置数据库锁定的处理函数&lt;br&gt;int sqlite3_busy_handler(sqlite3&lt;em&gt;, int(&lt;/em&gt;)(void&lt;em&gt;,int), void&lt;/em&gt;);&lt;br&gt;设定锁定时的等待时间&lt;br&gt;int sqlite3_busy_timeout(sqlite3*, 60); ：&lt;h2 id=&quot;Core-Data&quot;&gt;&lt;a href=&quot;#Core-Data&quot; class=&quot;headerlink&quot; title=&quot;Core Data&quot;&gt;&lt;/a&gt;Core Data&lt;/h2&gt;&lt;/li&gt;
+&lt;li&gt;什么是Core Data？&lt;br&gt;Core Data是iOS5以后才出现的一个框架，它提供了对象-关系映射（ORM）关系，即能够将OC对象转化成数据，保存在SQLite数据库文件中，也能够将保存在数据库中的数据还原成OC对象，不用编写任何SQL语言（类似于Hibernate框架，没有那么强大）&lt;/li&gt;
+&lt;li&gt;使用步骤&lt;ul&gt;
+&lt;li&gt;创建模型文件，&lt;strong&gt;相当于数据库&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;添加实体，&lt;strong&gt;相对于表&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;创建实体类，&lt;strong&gt;相当于模型类&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;生成&lt;strong&gt;上下文&lt;/strong&gt; 关联模型文件生成数据库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;四，DDL：数据定义语句&lt;/p&gt;
+&lt;p&gt;1、Create&lt;/p&gt;
+&lt;p&gt;create table 表名（字段名1，字段类型1，字段名2，字段类型2….）;&lt;/p&gt;
+&lt;p&gt;create table if not exists 表名（字段名1，字段类型1，字段名2，字段类型2….）;&lt;/p&gt;
+&lt;p&gt;2、Drop&lt;/p&gt;
+&lt;p&gt;drop table 表名；&lt;/p&gt;
+&lt;p&gt;drop table if not exists 表名；&lt;/p&gt;
+&lt;p&gt;五、DML ：数据操作语句&lt;/p&gt;
+&lt;p&gt;1、Insert&lt;/p&gt;
+&lt;p&gt;2、Update&lt;/p&gt;
+&lt;p&gt;3、Delete&lt;/p&gt;
+&lt;p&gt;六、DQL：数据查询语句&lt;/p&gt;
+&lt;p&gt;1、Where&lt;/p&gt;
+&lt;p&gt;2、Select&lt;/p&gt;
+&lt;p&gt;3、Group by having&lt;/p&gt;
+&lt;p&gt;1&amp;gt; select&lt;/p&gt;
+&lt;p&gt;2&amp;gt; 别名,可以不用as,&lt;br&gt;• 给数据库取别名的好处:用别名获取字段,有提示。&lt;/p&gt;
+&lt;p&gt;3&amp;gt; 计算查询数量count&lt;br&gt;4&amp;gt; 排序: 有条件语句,需要放在条件语句后。&lt;br&gt;5&amp;gt; limit : limit 0,5 跳过第0个,取5个数据,意味着取前5个数据。这个语 句必须放在查询语句最后面。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;iOS中的数据存储方式&lt;br&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://peilinghui.com/categories/iOS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>iOS中的多线程网络</title>
+    <link href="http://peilinghui.com/2016/03/04/iOS%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C/"/>
+    <id>http://peilinghui.com/2016/03/04/iOS中的多线程网络/</id>
+    <published>2016-03-04T13:31:31.000Z</published>
+    <updated>2016-07-16T01:03:52.000Z</updated>
+    
+    <content type="html">&lt;p&gt;不论是什么开发，多线程网络始终是学习的重点。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;多线程网络&quot;&gt;&lt;a href=&quot;#多线程网络&quot; class=&quot;headerlink&quot; title=&quot;多线程网络&quot;&gt;&lt;/a&gt;多线程网络&lt;/h1&gt;&lt;h2 id=&quot;NSthread&quot;&gt;&lt;a href=&quot;#NSthread&quot; class=&quot;headerlink&quot; title=&quot;NSthread&quot;&gt;&lt;/a&gt;NSthread&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;创建和启动线程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;//创建一个新线程对象，实例方法，返回一个NSThread对象必须调用start方法启动线程 （实例方法）&lt;br&gt;&lt;code&gt;-(id)initWithTarget:(id)target selector:(SEL)selector object:(id)arg:&lt;/code&gt;&lt;br&gt;//创建并启动新线程，不会返回NSThread对象。会直接创建并启动线程(类方法)&lt;br&gt;&lt;code&gt;+(void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(id)arg:&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;target对象的selector方法的方法体代表了线程需要完成的任务，相当于把target对象的selector方法转换为线程执行体. &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//创建多线程对象
+NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) object:nil];
+//启动多线程
+[thread start];
+
+//创建并启动多线程
+[NSThread detachNewThreadSelector:@selector(run) toTarget:self withObject:nil];
+&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;线程的状态&lt;br&gt;线程的状态会在运行、就绪状态之间切换。&lt;br&gt;启用线程使用了start方法后，该线程进入就绪状态，系统会为其创建方法调用栈和程序计数器。&lt;strong&gt;当系统调度线程后，线程才会进入运行状态。&lt;/strong&gt;&lt;br&gt;注意：若想要子线程的start方法后子线程立即开始执行，可以调用[NSThread sleepForTimeInterval:0.01];&lt;br&gt;从而让子线程立即获得执行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;终止子线程&lt;br&gt;1&amp;gt;线程执行体方法执行完成，线程正常结束。&lt;br&gt;2&amp;gt;线程执行过程中出现了错误&lt;br&gt;3&amp;gt;直接调用NSThread类的exit方法来中止当前正在执行的线程。&lt;/p&gt;
+&lt;figure class=&quot;highlight less&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;if&lt;/span&gt; ([NSThread currentThread].isCancelled) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//中止当前正在执行的线程&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;attr_selector&quot;&gt;[NSThread exit]&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+&lt;li&gt;线程睡眠&lt;br&gt;NSThread的两种类方法：&lt;br&gt;//让当前正在执行的线程暂停到aDate代表的时间，并进入阻塞状态&lt;br&gt;&lt;code&gt;+ (void)sleepUntilDate:(NSDate *)aDate:&lt;/code&gt;&lt;br&gt;//让当前正在执行的线程暂停ti秒，并进入阻塞状态&lt;br&gt;&lt;code&gt;+ (void)sleepForTimeInterval:(NSTimeInterval)ti:&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;例子：&lt;br&gt;使用线程下载网络图片：&lt;br&gt;&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//创建多线程对象&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;NSThread *thread = [[NSThread alloc]&lt;span class=&quot;string&quot;&gt;initWithTarget:&lt;/span&gt;self &lt;span class=&quot;string&quot;&gt;selector:&lt;/span&gt;&lt;span class=&quot;annotation&quot;&gt;@selector&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;downloadImageFromURL:&lt;/span&gt;) &lt;span class=&quot;string&quot;&gt;object:&lt;/span&gt;nil];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//启动多线程&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[thread start];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;downloadImageFromURL:&lt;/span&gt;方法作为线程执行体，当线程启动调用该方法。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//在主线程中执行updateUI：方法 来更新iv控件显示的图片&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[self &lt;span class=&quot;string&quot;&gt;performSelectorOnMainThread:&lt;/span&gt;&lt;span class=&quot;annotation&quot;&gt;@selector&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;updateUI:&lt;/span&gt;) &lt;span class=&quot;string&quot;&gt;withObject:&lt;/span&gt;image &lt;span class=&quot;string&quot;&gt;waitUntilDone:&lt;/span&gt;YES];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;iOS规定只能在UI线程中修改UI控件的属性&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;改变优先级&lt;br&gt;NSThread中的实例方法和类方法：&lt;br&gt;+threadPriority&lt;br&gt;-threadPriority&lt;br&gt;+setThreadPriority：(double)priority:&lt;br&gt;-setThreadPriority：(double)priority:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;线程同步与线程通信&quot;&gt;&lt;a href=&quot;#线程同步与线程通信&quot; class=&quot;headerlink&quot; title=&quot;线程同步与线程通信&quot;&gt;&lt;/a&gt;线程同步与线程通信&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;在多线程中引入同步解决线程安全问题&lt;br&gt;使用方法： @synchronized (obj) {&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//同步代码块
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; }&lt;br&gt;obj是同步监视器&lt;br&gt;任何时刻只能有一个线程可以获得对同步监视器的锁定，当同步代码块执行完毕的后，该线程会释放对同步监视器的锁定。&lt;br&gt;可变类的线程安全是以降低程序的运行效率作为代价的，为了减少线程安全所带来的负面影响，程序可以采用：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不要对线程安全类的所有方法都进行同步，只对那些会改变竞争资源的方法进行同步。&lt;/li&gt;
+&lt;li&gt;如果可变类有两种运行环境：单线程和多线程环境，则应该为该可变类提供两种版本-单线程环境中使用线程不安全版本以保证性能，多线程环境中使用线程安全版本。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;释放对同步监视器的锁定&lt;br&gt;任何线程在进入同步代码块之前，必须先获得对同步监视器的锁定，那么何时会释放对同步监视器的锁定呢？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当前线程的同步代码块执行结束  &lt;/li&gt;
+&lt;li&gt;当前代码块在同步代码块中遇到了goto.return终止了该代码块、该方法继续执行时，当前线程会释放同步监视器。&lt;/li&gt;
+&lt;li&gt;当线程在同步代码块中出现了错误，导致该代码块异常结束时，将会释放同步监视器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;同步锁（NSLock）&lt;br&gt;Foundation提供NSLock，通过显式定义同步锁对象来实现同步。&lt;br&gt;NSlock是控制多个线程对共享资源进行访问的工具，通常锁提供了对共享资源的独占访问。在实现线程安全的控制中，使用NSlock对象可以显示地加锁，释放锁。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用NSCondition控制线程通信&lt;br&gt;NSCondition实现了NSLocking协议，因此也可以调用lock，unlock来实现线程同步。也可以让那些已经锁定NSCondition对象却无法继续执行的线程释放NSCondition对象，NSCondition对象也可以唤醒其他处于等待状态的线程。&lt;br&gt;方法：-wait，知道其他线程调用NSCondition的signal方法或broadcast方法来唤醒该线程。&lt;br&gt;-（BOOL）waitUntilDate：(NSDate *)limiteout,&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;参考：&lt;a href=&quot;http://blog.csdn.net/totogo2010/article/details/8010231&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/totogo2010/article/details/8010231&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;GCD&quot;&gt;&lt;a href=&quot;#GCD&quot; class=&quot;headerlink&quot; title=&quot;GCD&quot;&gt;&lt;/a&gt;GCD&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;Grand Central Dispatch “牛逼的中枢调度器”&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;是苹果公司为多核的并行运算提出的解决方案&lt;/li&gt;
+&lt;li&gt;GCD会自动利用更多CPU内核&lt;/li&gt;
+&lt;li&gt;会自动管理线程的生命周期（创建线程，调度任务，销毁线程）&lt;/li&gt;
+&lt;li&gt;程序员只需要告诉GCD该做什么，而不需要写代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;使用2个步骤：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定制任务（执行什么操作）&lt;/li&gt;
+&lt;li&gt;将任务添加到队列中（GCD会自动将队列中的任务取出，放到对应的线程中执行）（先进先出，后进后出）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;创建队列&lt;br&gt;队列：把任务放到队列里面，队列先进先出的原则，&lt;br&gt; 串行队列：顺序，一个一个执行(必须一个任务执行完了，才能从队列里面取出下一个任务)&lt;strong&gt;main queue&lt;/strong&gt;用来更新UI&lt;br&gt; 并发队列：同时执行很多个任务（可以同时取出很多个任务，只要有线程去执行）&lt;strong&gt;global queue&lt;/strong&gt;&lt;br&gt;1&amp;gt;获取全局并发队列:&lt;br&gt;&lt;code&gt;dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);&lt;/code&gt;&lt;br&gt;2&amp;gt;获取系统主线程关联的串行队列&lt;br&gt;&lt;code&gt;dispatch_queue_t queue = dispatch_get_main_queue();&lt;/code&gt;&lt;br&gt;3&amp;gt;创建串行队列&lt;br&gt;&lt;code&gt;dispatch_queue_t queue = dispatch_queue_create(&amp;quot;mmmm.queue&amp;quot;, DISPATCH_QUEUE_SERIAL);&lt;/code&gt;&lt;br&gt;4&amp;gt;创建并发队列&lt;br&gt;&lt;code&gt;dispatch_queue_t queue = dispatch_queue_create(&amp;quot;mmmm.queue&amp;quot;, DISPATCH_QUEUE_CONCURRENT);&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;同步：dispatch_sync(dispatch_queue_t, dispatch_block_t block);&lt;br&gt;异步：dispatch_async(dispatch_queue_t, dispatch_block_t block);&lt;br&gt;同步和异步的区别：&lt;br&gt;同步：在当前线程中执行,不具备开启新线程的能力&lt;br&gt;异步：在另一条新线程中执行，具备开启新线程的能力&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用GCD下载图片&lt;/p&gt;
+&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;dispatch_async&lt;/span&gt;(dispatch_get_global_queue(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;), ^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;%@&quot;&lt;/span&gt;,[&lt;span class=&quot;built_in&quot;&gt;NSThread&lt;/span&gt; currentThread]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//耗时操作&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//1.url,确定一个网络上的资源文件路径&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;NSURL&lt;/span&gt; *url = [&lt;span class=&quot;built_in&quot;&gt;NSURL&lt;/span&gt; URLWithString:&lt;span class=&quot;string&quot;&gt;@&quot;http://p18.qhimg.com/t0144d6a0802f22be4f.jpg&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//2.通过URL下载对应的网络资源，网络资源传输的都是二进制&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;NSData&lt;/span&gt; *data = [&lt;span class=&quot;built_in&quot;&gt;NSData&lt;/span&gt; dataWithContentsOfFile:url];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//3.把二进制转成图片&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;UIImage&lt;/span&gt; *image = [&lt;span class=&quot;built_in&quot;&gt;UIImage&lt;/span&gt; imageWithData:data];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//4.更新UI，在主线程-&amp;gt;直接把主线程添加到主队列，就会在主队列执行&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;dispatch_async&lt;/span&gt;(dispatch_get_global_queue(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;), ^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.iconView&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.image&lt;/span&gt; = image;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;多次执行的任务&lt;br&gt;控制的代码块执行了5次。&lt;br&gt;` dispatch_apply(5, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(size_t time){&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;NSLog(@&amp;quot;==执行【%lu次】==%@&amp;quot;,time,[NSThread currentThread]);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;}`&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;只执行一次的任务&lt;br&gt;`static dispatch_once_t oneceToken;&lt;br&gt; dispatch_once(&amp;amp;oneceToken,^{&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;NSLog(@&amp;quot;==执行代码块==&amp;quot;);
+//线程暂停3秒
+[NSThread sleepForTimeInterval:3];
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; });`&lt;br&gt;dispatch_once_t控制函数只执行一次&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;后台运行&quot;&gt;&lt;a href=&quot;#后台运行&quot; class=&quot;headerlink&quot; title=&quot;后台运行&quot;&gt;&lt;/a&gt;后台运行&lt;/h1&gt;&lt;p&gt;进入后台，系统会自动回调系统程序委托的applicationDidEnterBackground：方法。所有应用需要做：  &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- 释放所有可以释放的内存  
+- 保存用户数据或状态信息，所有没写入磁盘的文件或信息，在进入后台之前，都应该写入磁盘，因为程序可能在后台被杀死。
+&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;
+&lt;li&gt;进入后台时释放内存&lt;br&gt;如果应用没有启用ARC机制，程序需要在进入后台是，将那些需要释放的资源的引用计数变为0，从而让系统回收这些资源，当应用转入前台，系统需要重新恢复这些资源。&lt;br&gt;如果应用启用了ARC机制，程序只要在应用进入后台时，将应用那些需要释放的资源的变量赋值为nil即可。当应用转入前台是，系统需要重新恢复这些资源。&lt;/li&gt;
+&lt;li&gt;进入后台时保存状态  &lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用NSUserDefault读取系统已经保存的积分&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   NSNumber* scoreNumber;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ((scoreNumber = [[NSUserDefaults standardUserDefaults]&lt;span class=&quot;string&quot;&gt;setInteger:&lt;/span&gt;score &lt;span class=&quot;string&quot;&gt;forKey:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;score&quot;&lt;/span&gt;])) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       score = scoreNumber.integerValue;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+&lt;li&gt;请求更多后台时间&lt;br&gt;为了请求更多后台时间，应该使用如下步骤：&lt;ul&gt;
+&lt;li&gt;调用UIApplication对象的beginBackgroundTaskWithExpirationHandler:方法请求获取更多的后台执行时间。&lt;/li&gt;
+&lt;li&gt;调用dispatch_async()方法将指定代码块提交给后台执行&lt;/li&gt;
+&lt;li&gt;后台任务执行完成是，调用UIApplication对象的endBackgroundTask:方法结束后台任务。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;使用NSOperation与NSOperationQueue实现多线程&quot;&gt;&lt;a href=&quot;#使用NSOperation与NSOperationQueue实现多线程&quot; class=&quot;headerlink&quot; title=&quot;使用NSOperation与NSOperationQueue实现多线程&quot;&gt;&lt;/a&gt;使用NSOperation与NSOperationQueue实现多线程&lt;/h1&gt;&lt;p&gt;使用步骤：  &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- 创建NSOperationQueue队列，并为该队列设置相关属性。  
+- 创建NSOperation子类的对象，并将该对象提交给NSOperationQueue队列，该队列将会按顺序启动每个NSOperation。   
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;MaxConcurrentOperationCount    设置最大并发线程数。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用NSblockOperation下载图片&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//创建NSBlock&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;NSBlockOperation&lt;/span&gt; *operation = [&lt;span class=&quot;built_in&quot;&gt;NSBlockOperation&lt;/span&gt; blockOperationWithBlock:^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//从网络获取数据&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;NSData&lt;/span&gt; *data = [[&lt;span class=&quot;built_in&quot;&gt;NSData&lt;/span&gt; alloc]initWithContentsOfURL:[&lt;span class=&quot;built_in&quot;&gt;NSURL&lt;/span&gt; URLWithString:url]];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;comment&quot;&gt;//将网络数据初始化为UIImage对象&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;built_in&quot;&gt;UIImage&lt;/span&gt; *image = [[&lt;span class=&quot;built_in&quot;&gt;UIImage&lt;/span&gt; alloc]initWithData:data];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(image!= &lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;//在主线程中updateUI：方法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;             [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt; performSelectorOnMainThread:&lt;span class=&quot;keyword&quot;&gt;@selector&lt;/span&gt;(updateUI:)withObject:image waitUntilDone:&lt;span class=&quot;literal&quot;&gt;YES&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;下载图片出现错误&quot;&lt;/span&gt;);           &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+&lt;li&gt;定义NSOperation子类&lt;br&gt;创建NSOperation的子类需要重写一个方法：-（void）main，该方法将作为NSOpQueue完成任务。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;面试题&quot;&gt;&lt;a href=&quot;#面试题&quot; class=&quot;headerlink&quot; title=&quot;面试题&quot;&gt;&lt;/a&gt;面试题&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;什么是多线程&lt;br&gt;进程：是指在系统中正在运行的一个应用程序。1个进程要想执行任务，必须得有线程。（一个进程至少要有一个线程）特征：独立性，动态性，并发性。&lt;br&gt;线程：是进程的基本执行单元，一个进程（程序）的所有任务都在线程中执行。当一个程序运行时，内部可能包含了多个顺序执行流，每个顺序执行流就是一个线程的。&lt;br&gt;多线程：在一个进程中可以开启多个线程，每条线程可以并发（同时）执行不同的任务。&lt;br&gt;多线程编程的优点：  &lt;ul&gt;
+&lt;li&gt;进程间不能共享内存，但线程之间共享内存非常容易&lt;/li&gt;
+&lt;li&gt;系统创建进程需要为该进程重新分配系统资源，但创建线程则代价小得多，因此使用多线程来实现多任务并发比多进程的效率高。&lt;/li&gt;
+&lt;li&gt;iOS提供了多种多线程实现方式，从而简化了iOS的多线程编程。&lt;br&gt;参考：&lt;a href=&quot;http://1108038.blog.51cto.com/1098038/420330&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://1108038.blog.51cto.com/1098038/420330&lt;/a&gt;&lt;br&gt;进程间通信—&amp;gt;管道(pipe)、信号(signal)、消息队列、共享内存、信号量、套接字；&lt;br&gt;线程间通信—&amp;gt;信号量、消息、事件event&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;iOS中如何实现多线程&lt;ul&gt;
+&lt;li&gt;pthread（一套通用的多线程API，使用难度大 &lt;strong&gt;C语言（底层）&lt;/strong&gt;）程序员管理，几乎不用&lt;br&gt;&lt;code&gt;#include &amp;lt;pthread.h&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;NSThread（面向对象，简单易用，可直接操作多线程对象,&lt;strong&gt;OC&lt;/strong&gt;），偶尔使用&lt;/li&gt;
+&lt;li&gt;GCD（旨在替代NSThread等线程技术，充分利用设备的多核，&lt;strong&gt;C语言&lt;/strong&gt;）自动管理，经常使用&lt;/li&gt;
+&lt;li&gt;NSOperation（基于GCD，比GCD多了一些简单实用的功能，&lt;strong&gt;OC&lt;/strong&gt;）自动管理，经常使用.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;线程间通讯的方法&lt;br&gt;控制器在子线程发送请求给服务器&lt;br&gt;服务器在主线程刷新UI界面到控制器&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;还可以使用GCD，主线程和子线程的通信。&lt;br&gt; &lt;code&gt;dispath_async(dispatch_get_main_queue(),^{
+ });&lt;/code&gt; &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;网络图片处理问题中怎么解决一个相同的网络地址重复请求的问题？&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E8%87%AA%E5%AE%9A%E4%B9%89NSOperation%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;利用字典（图片地址为key，下载操作为value）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;多线程安全的几种解决办法及多线程安全怎么控制？&lt;br&gt;线程安全的概念: 就是在多个线程同时执行的时候，能够保证资源信息的准确性.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;苹果约定，&lt;strong&gt;所有程序的更新UI都在主线程进行&lt;/strong&gt;，也就不会出现多个线程同时改变一个资源。在主线程更新UI，有什么好处？只在主线程更新UI，就不会出现多个线程同时改变同一个UI控件;主线程的优先级最高。也就意味UI的更新优先级高。 会让用户感觉很流畅    .&lt;/li&gt;
+&lt;li&gt;如果要防止资源抢夺，得用synchronized进行加锁保护.&lt;br&gt;线程同步：多条线程按顺序的执行任务（互斥锁）互斥锁使用格式&lt;br&gt;&lt;code&gt;@synchronized(锁对象){
+//需要锁定的代码
+}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;如果异步操作要保证线程安全等问题, 尽量使用GCD(有些函数默认就是安全的)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;GCD内部怎么实现的&lt;br&gt;1&amp;gt; iOS和OS X的核心是XNU内核，GCD是基于XNU内核实现的&lt;br&gt;2&amp;gt; GCD的API全部在libdispatch库中&lt;br&gt;3&amp;gt; GCD的底层实现主要有Dispatch Queue和Dispatch Source&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Dispatch Queue ：管理block(操作)&lt;/li&gt;
+&lt;li&gt;Dispatch Source ：处理事件(比如线程间的通讯)&lt;br&gt;补充：GCD：Grand Central Dispatch “牛逼的中枢调度器”，自动利用更多CPU内核，自动管理线程的生命周期（创建线程，调度任务，销毁线程).使用2个步骤：  &lt;/li&gt;
+&lt;li&gt;定制任务（执行什么操作）用block来封装任务  &lt;/li&gt;
+&lt;li&gt;将任务添加到队列中（自动将队列中的任务取出，放到对应的线程中执行）（先进先出，后进后出）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;GCD和NSoperation区别&lt;br&gt;1&amp;gt;GCD是纯C语言的API，NSOperationQueue是基于GCD的OC版本封装&lt;br&gt;2&amp;gt;GCD只支持FIFO的队列，NSOperationQueue可以很方便地调整执行顺序、设置最大并发数量&lt;br&gt;3&amp;gt;NSOperationQueue可以在轻松在Operation间设置依赖关系，而GCD需要写很多的代码才能实现&lt;br&gt;4&amp;gt;NSOperationQueue支持KVO，可以监测operation是否正在执行（isExecuted）、是否结束（isFinished），是否取消（isCanceld）&lt;br&gt;5&amp;gt;GCD的执行速度比NSOperationQueue快&lt;br&gt;任务之间不太互相依赖：GCD&lt;br&gt;任务之间有依赖(或者要监听任务的执行情况)：NSOperationQueue&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Socket的实现原理以及Socket是如何实现通信的？&lt;br&gt;Socket：称之为套接字，是一种用于网络传输的“工具”。&lt;br&gt;socket的实现原理：是基于TCP/UDP的（TCP：传输控制协议，是一种面向连接的，安全的，基于IP传输层的协议，三次握手。例如：XMPP等网络聊天）（UDP：传输控制协议，是一种面向连接的，不安全的，基于IP传输层的协议，特点：快，只管发，不管收到没有。例如：游戏,QQ视频，红蜘蛛）&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;http协议的实现&lt;br&gt;HTTP：是一种超文本协议，定义了网络传输的格式（短连接）&lt;br&gt;如果利用HTTP做聊天，每次都要重新创建连接，因为HTTP是短连接，一次回话后就断开了，如果利用HTTP做聊天，如果聊天特别频繁，会不断的创建连接，消耗资源，性能不好，服务端不会主动给客户端发送请求。      &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;runloop定时源和输入源?&lt;br&gt;1&amp;gt;你创建的程序不需要显示的创建run loop；每个线程，包括程序的主线程（main thread）都有与之相应的run loop对象, 主线程会自行创建并运行run loop&lt;br&gt;2&amp;gt;Run loop处理的输入事件有两种不同的来源：输入源（input source）（异步）（处理其他线程回到主线程的消息）和定时源（timer source）（同步）（定时检查界面上有没有点击事件，检查主线程的事件）&lt;br&gt;3&amp;gt;输入源传递异步消息，通常来自于其他线程或者程序。定时源则传递同步消息，在特定时间或者一定的时间间隔发生&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/runloop.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;NSRunLoop的实现机制,及在多线程中如何使用&lt;br&gt;NSRunLoop是IOS消息机制的处理模式.&lt;blockquote&gt;
+&lt;p&gt;1.NSRunLoop的主要作用：控制NSRunLoop里面线程的执行和休眠，在有事情做的时候使当前NSRunLoop控制的线程工作，没有事情做让当前NSRunLoop的控制的线程休眠。&lt;br&gt;2.NSRunLoop 就是一直在循环检测，从线程start到线程end，检测inputsource(如点击，双击等操作)异步事件，检测timesource同步事件，检测到输入源会执行处理函数，首先会产生通知，corefunction向线程添加runloop observers来监听事件，意在监听事件发生时来做处理。&lt;br&gt;3.runloopmode是一个集合，包括监听：事件源，定时器，以及需通知的runloop observers&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;只有在为你的程序创建次线程的时候，才需要运行run loop。对于程序的主线程而言，run loop是关键部分。Cocoa提供了运行主线程run loop的代码同时也会自动运行run loop。IOS程序UIApplication中的run方法在程序正常启动的时候就会启动run loop。如果你使用xcode提供的模板创建的程序，那你永远不需要自己去启动run loop&lt;/li&gt;
+&lt;li&gt;在多线程中，你需要判断是否需要run loop。如果需要run loop，那么你要负责配置run loop并启动。你不需要在任何情况下都去启动run loop。比如，你使用线程去处理一个预先定义好的耗时极长的任务时，你就可以毋需启动run loop。Run loop只在你要和线程有交互时才需要&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;不论是什么开发，多线程网络始终是学习的重点。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://peilinghui.com/categories/iOS/"/>
+    
+    
+      <category term="多线程" scheme="http://peilinghui.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   
