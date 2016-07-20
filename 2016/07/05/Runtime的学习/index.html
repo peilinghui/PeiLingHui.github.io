@@ -3,18 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS中的单元测试 | 向着阳光奔跑</title>
+  <title>Runtime的学习 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在iOS开发中，我们不光有测试QA姐姐，还要自己测试一下自己的代码，这时测试就显得非常重要。">
+  <meta name="description" content="官方源代码地址：http://opensource.apple.com//source/objc4/
+优秀博客学习：
+
+Objective-C Runtime 1小时入门教程：https://www.ianisme.com/ios/2019.html  
+Objective-C Runtime：http://yulingtianxia.com/blog/2014/11/05/objective-c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS中的单元测试">
-<meta property="og:url" content="http://peilinghui.com/2016/06/03/iOS中的单元测试/index.html">
+<meta property="og:title" content="Runtime的学习">
+<meta property="og:url" content="http://peilinghui.com/2016/07/05/Runtime的学习/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="在iOS开发中，我们不光有测试QA姐姐，还要自己测试一下自己的代码，这时测试就显得非常重要。">
-<meta property="og:updated_time" content="2016-06-03T10:32:01.000Z">
+<meta property="og:description" content="官方源代码地址：http://opensource.apple.com//source/objc4/
+优秀博客学习：
+
+Objective-C Runtime 1小时入门教程：https://www.ianisme.com/ios/2019.html  
+Objective-C Runtime：http://yulingtianxia.com/blog/2014/11/05/objective-c">
+<meta property="og:updated_time" content="2016-07-19T15:15:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中的单元测试">
-<meta name="twitter:description" content="在iOS开发中，我们不光有测试QA姐姐，还要自己测试一下自己的代码，这时测试就显得非常重要。">
+<meta name="twitter:title" content="Runtime的学习">
+<meta name="twitter:description" content="官方源代码地址：http://opensource.apple.com//source/objc4/
+优秀博客学习：
+
+Objective-C Runtime 1小时入门教程：https://www.ianisme.com/ios/2019.html  
+Objective-C Runtime：http://yulingtianxia.com/blog/2014/11/05/objective-c">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -248,11 +260,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-iOS中的单元测试" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Runtime的学习" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/06/03/iOS中的单元测试/" class="article-date">
-      <time datetime="2016-06-03T08:34:43.000Z" itemprop="datePublished">2016-06-03</time>
+      <a href="/2016/07/05/Runtime的学习/" class="article-date">
+      <time datetime="2016-07-05T08:22:32.000Z" itemprop="datePublished">2016-07-05</time>
 </a>
     </div>
   
@@ -265,7 +277,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS中的单元测试
+      Runtime的学习
     </h1>
   
 
@@ -275,6 +287,10 @@
         
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -282,14 +298,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在iOS开发中，我们不光有测试QA姐姐，还要自己测试一下自己的代码，这时测试就显得非常重要。<br><a id="more"></a></p>
-<p>软件测试有：</p>
+        <p>官方源代码地址：<a href="http://opensource.apple.com//source/objc4/" target="_blank" rel="external">http://opensource.apple.com//source/objc4/</a></p>
+<p>优秀博客学习：</p>
 <ol>
-<li>单元测试：测试范围最小，仅仅是测试一个小单元(比如一个方法或一个函数)，对软件的稳定性有很大的帮助。</li>
-<li>集群测试：测试范围比较大，测试项目中的所有功能</li>
-<li>压力测试：模拟大批量数据\大批量用户<br>下面主要说一下单元测试的内容：<br>参考：<a href="http://liuyanwei.jumppo.com/2016/03/10/iOS-unit-test.html" target="_blank" rel="external">http://liuyanwei.jumppo.com/2016/03/10/iOS-unit-test.html</a><br>Xcode5以后默认有单元测试：<br>单元测试2大颜色:<br>1.红色 : 测试失败<br>2.绿色 : 测试通过<br>好处：轻量级的测试，不用完全跑程序；及时看到错误的地方；不像NSLog，不需要运行整个程序，更快；</li>
+<li>Objective-C Runtime 1小时入门教程：<a href="https://www.ianisme.com/ios/2019.html" target="_blank" rel="external">https://www.ianisme.com/ios/2019.html</a>  </li>
+<li>Objective-C Runtime：<a href="http://yulingtianxia.com/blog/2014/11/05/objective-c-runtime/" target="_blank" rel="external">http://yulingtianxia.com/blog/2014/11/05/objective-c-runtime/</a></li>
+<li>南峰子有一系列：<a href="http://southpeak.github.io/blog/2014/10/30/objective-c-runtime-yun-xing-shi-zhi-er-:cheng-yuan-bian-liang-yu-shu-xing/" target="_blank" rel="external">http://southpeak.github.io/blog/2014/10/30/objective-c-runtime-yun-xing-shi-zhi-er-:cheng-yuan-bian-liang-yu-shu-xing/</a></li>
+<li>快速上手Runtime（附MJExtension的底层实现:<a href="http://www.tuicool.com/articles/YzeiEna" target="_blank" rel="external">http://www.tuicool.com/articles/YzeiEna</a></li>
 </ol>
-<p>断言\猜测\估计：<br>XCTAssertEqual<br>XCTAssertTrue<br>XCTAssertFalse</p>
 
       
     </div>
@@ -298,13 +314,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/06/03/iOS中的单元测试/">iOS中的单元测试</a></p>
+        <p><span>本文标题:</span><a href="/2016/07/05/Runtime的学习/">Runtime的学习</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年06月03日 - 16时34分</p>
-        <p><span>最后更新:</span>2016年06月03日 - 18时32分</p>
+        <p><span>发布时间:</span>2016年07月05日 - 16时22分</p>
+        <p><span>最后更新:</span>2016年07月19日 - 23时15分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/06/03/iOS中的单元测试/" title="iOS中的单元测试">http://peilinghui.com/2016/06/03/iOS中的单元测试/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/06/03/iOS中的单元测试/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/05/Runtime的学习/" title="Runtime的学习">http://peilinghui.com/2016/07/05/Runtime的学习/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/07/05/Runtime的学习/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -318,15 +334,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/06/29/ReactiveCocoa学习笔记/">
-                    ReactiveCocoa学习笔记
+                <a href="/2016/07/19/RunLoop的学习/">
+                    RunLoop的学习
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/05/14/iOS调试技巧/">
-                    iOS调试技巧
+                <a href="/2016/07/02/TableView的一些事/">
+                    TableView的一些事
                 </a>
             </div>
         
@@ -399,7 +415,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/06/03/iOS中的单元测试/" data-title="iOS中的单元测试" data-url="http://peilinghui.com/2016/06/03/iOS中的单元测试/"></div>
+    <div class="ds-thread" data-thread-key="2016/07/05/Runtime的学习/" data-title="Runtime的学习" data-url="http://peilinghui.com/2016/07/05/Runtime的学习/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -423,7 +439,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/06/29/ReactiveCocoa学习笔记/" title="上一篇: ReactiveCocoa学习笔记">
+            <a href="/2016/07/19/RunLoop的学习/" title="上一篇: RunLoop的学习">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -431,7 +447,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/05/14/iOS调试技巧/" title="下一篇: iOS调试技巧">
+            <a href="/2016/07/02/TableView的一些事/" title="下一篇: TableView的一些事">
                 <i class="fa fa-angle-right"></i>
             </a>
         

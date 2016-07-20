@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://peilinghui.com/2016/04/14/iOS网络编程/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="iOS网络编程知识总结">
-<meta property="og:updated_time" content="2016-04-14T14:07:58.000Z">
+<meta property="og:updated_time" content="2016-07-16T00:56:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS网络编程">
 <meta name="twitter:description" content="iOS网络编程知识总结">
@@ -150,7 +150,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/ACM/" style="font-size: 10px;">ACM</a> <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/swift，视频学习/" style="font-size: 10px;">swift，视频学习</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+                        <a href="/tags/ACM/" style="font-size: 10px;">ACM</a> <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/swift，视频学习/" style="font-size: 10px;">swift，视频学习</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
                     </div>
                 </section>
                 
@@ -362,13 +362,16 @@
 </code></pre><ol>
 <li>使用JSON语法创建对象<br>直接创建一个JavaScript对象，</li>
 <li>使用JSON语法创建数组<br><code>var a = [&#39;yeeku&#39;,&#39;nono&#39;];</code></li>
-<li>第三方类库解析JSON，使用NSJSONSerialization处理JSON数据<br>满足条件：<br>顶级对象只能是NSArray或NSDictionary。<br>集合中包含对象只能是NSString，NSNumber，NSArray，NSDictionary或NSNull对象。<br>所有NSDictionary的key只能是NSString。<br>NSNumber保证的数值不是NaN或Infinity。  </li>
+<li>使用NSJSONSerialization处理JSON数据 (系统自带)<br>满足条件：<br>顶级对象只能是NSArray或NSDictionary。<br>集合中包含对象只能是NSString，NSNumber，NSArray，NSDictionary或NSNull对象。<br>所有NSDictionary的key只能是NSString。<br>NSNumber保证的数值不是NaN或Infinity。  </li>
 <li>使用SBJson解析JSON数据<br>提供了两个工具类：SBJsonParser和SBJsonWriter.<br>SBJsonParser负责吧NSData或NSString形式的JSON数据转换为objective-c对象。<br>SBJSonWriter负责把objective-c对象转换为NSData或NSString形式的JSON数据。</li>
-<li>使用JSONKit解析JSON数据<br>JSONKit速度快，JsonKit1.4不支持ARC，需要在支持ARC的项目中设置‘fno-objc-arc’选项来禁用ARC。<br>JSONKit采用分类方式为已有的类增加了新方法。用于将JSON数据恢复为objective-c对象。</li>
+<li>第三方类库解析JSON， 使用JSONKit解析JSON数据<br>地址：<a href="https://github.com/johnezang/JSONKit" target="_blank" rel="external">https://github.com/johnezang/JSONKit</a><br>JSONKit速度快，JsonKit1.4不支持ARC，需要在支持ARC的项目中设置‘fno-objc-arc’选项来禁用ARC。<br>JSONKit采用分类方式为已有的类增加了新方法。用于将JSON数据恢复为objective-c对象。<br>研究一下第三方框架就可以发现:<br>JSONKit用分类为NSString和NSDate增加了如下方法，<br>把JSON数据转换为OC对象：</li>
 </ol>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)objectFromJSO<span class="built_in">NString</span>;</span><br><span class="line">- (<span class="keyword">id</span>)objectFromJSO<span class="built_in">NStringWithParseOptions</span>:(JKParseOptionFlags)parseOptionFlags;</span><br><span class="line">- (<span class="keyword">id</span>)objectFromJSO<span class="built_in">NStringWithParseOptions</span>:(JKParseOptionFlags)parseOptionFlags error:(<span class="built_in">NSError</span> **)error;</span><br><span class="line">- (<span class="keyword">id</span>)mutableObjectFromJSO<span class="built_in">NString</span>;</span><br><span class="line">- (<span class="keyword">id</span>)mutableObjectFromJSO<span class="built_in">NStringWithParseOptions</span>:(JKParseOptionFlags)parseOptionFlags;</span><br><span class="line">- (<span class="keyword">id</span>)mutableObjectFromJSO<span class="built_in">NStringWithParseOptions</span>:(JKParseOptionFlags)parseOptionFlags error:(<span class="built_in">NSError</span> **)error;</span><br></pre></td></tr></table></figure>
+<p>JSONKit用分类为NSString、NSStringArray和NSDictionary增加了如下方法：将OC对象装潢为NSString和NSData形式的JSON数据。<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> (<span class="constant">NSData</span> *)<span class="constant">JSONData</span>;</span><br><span class="line"></span>-<span class="ruby"> (<span class="constant">NSString</span> *)<span class="constant">JSONString</span>;</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="使用AFNetworking实现网络通信"><a href="#使用AFNetworking实现网络通信" class="headerlink" title="使用AFNetworking实现网络通信"></a>使用AFNetworking实现网络通信</h2><p>只是需要向web某个站点的某个简单页面提交请求并获取服务器响应，则使用NSURLConnection来完成。为了更好的处理web站点请求，包括处理Session,Cookie，可以用AFNetworking，用于发送HTTP请求，接受HTTP响应。但不会缓存服务器响应，不能执行HTML页面中嵌入的JavaScript代码，也不会对页面内容进行任何解析处理。AFNetworking还支持JSON、Plist属性文件和XML解析。</p>
 <ol>
-<li>提交GET请求与提交POST请求<br>步骤：<ul>
+<li><p>提交GET请求与提交POST请求<br>步骤：</p>
+<ul>
 <li>创建AFHTTRequestOperationManager对象。</li>
 <li>根据服务器响应内容不同，为HTTORequestOperationManager对象指定不同的解析器。（JSON或Plist数据）</li>
 <li>如果需要发送GET请求，调用AFHTTRequestOperationManager对象的GET：parameters:success：failure：方法即可 。</li>
@@ -376,9 +379,12 @@
 <li>在success：参数指定的代码块中处理服务器响应成功的正确数据。</li>
 </ul>
 </li>
-<li>处理JSON和Plist响应<br>可以直接将JSON和Plist转化为NSArray或NSDictionary对象。  AFHTTORequestOperationManager默认可以处理JSON或Plist对象。</li>
-<li>处理XML响应<br>为AFHTTORequestOperationManager显示使用<br>AF X MLParserResponseSerializer响应解析器，当使用AF X MLParserResponseSerializer解析器时，服务器返回的数据是一个NSXMLParser对象。</li>
-<li>上传文件<br>AFHTTRequestOperationManager对象的POST：    parameters:constructingBodyWithBlock:success：failure：方法提交POST请求即可，多了三个参数，一个是带AFMultipartFormData形参的代码块。</li>
+<li><p>处理JSON和Plist响应<br>可以直接将JSON和Plist转化为NSArray或NSDictionary对象。  AFHTTORequestOperationManager默认可以处理JSON或Plist对象。</p>
+</li>
+<li><p>处理XML响应<br>为AFHTTORequestOperationManager显示使用<br>AF X MLParserResponseSerializer响应解析器，当使用AF X MLParserResponseSerializer解析器时，服务器返回的数据是一个NSXMLParser对象。</p>
+</li>
+<li><p>上传文件<br>AFHTTRequestOperationManager对象的POST：    parameters:constructingBodyWithBlock:success：failure：方法提交POST请求即可，多了三个参数，一个是带AFMultipartFormData形参的代码块。</p>
+</li>
 </ol>
 <h2 id="使用ASIHTTPRequest框架实现网络编程"><a href="#使用ASIHTTPRequest框架实现网络编程" class="headerlink" title="使用ASIHTTPRequest框架实现网络编程"></a>使用ASIHTTPRequest框架实现网络编程</h2><ol>
 <li>发送同步或异步的GET请求<br>准备步骤：<br>目前不支持ARC，应该需要在支持ARC的项目中设置‘fno-objc-arc’选项来禁用ARC。<br>步骤：</li>
@@ -397,7 +403,7 @@
         <p><span>本文标题:</span><a href="/2016/04/14/iOS网络编程/">iOS网络编程</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年04月14日 - 22时07分</p>
-        <p><span>最后更新:</span>2016年04月14日 - 22时07分</p>
+        <p><span>最后更新:</span>2016年07月16日 - 08时56分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/04/14/iOS网络编程/" title="iOS网络编程">http://peilinghui.com/2016/04/14/iOS网络编程/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/04/14/iOS网络编程/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -533,7 +539,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/MVVM学习/">MVVM学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/iOS中的单元测试/">iOS中的单元测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/仿iMessage聊天页面开发/">仿iMessage聊天页面开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/我的iOS学习之路/">我的iOS学习之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/iOS程序的性能分析和优化/">iOS程序的性能分析和优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop的学习/">RunLoop的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime的学习/">Runtime的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/MVVM学习/">MVVM学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/iOS中的单元测试/">iOS中的单元测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/仿iMessage聊天页面开发/">仿iMessage聊天页面开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/我的iOS学习之路/">我的iOS学习之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/iOS小项目/">iOS小项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
