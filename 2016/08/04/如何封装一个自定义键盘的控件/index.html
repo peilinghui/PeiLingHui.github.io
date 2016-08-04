@@ -3,18 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>仿iMessage聊天页面开发 | 向着阳光奔跑</title>
+  <title>如何封装一个自定义键盘的控件 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="视频学习笔记。">
+  <meta name="description" content="自定义控件，刚刚学起来。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="仿iMessage聊天页面开发">
-<meta property="og:url" content="http://peilinghui.com/2016/05/06/仿iMessage聊天页面开发/index.html">
+<meta property="og:title" content="如何封装一个自定义键盘的控件">
+<meta property="og:url" content="http://peilinghui.com/2016/08/04/如何封装一个自定义键盘的控件/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="视频学习笔记。">
-<meta property="og:updated_time" content="2016-05-12T07:59:13.000Z">
+<meta property="og:description" content="自定义控件，刚刚学起来。">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E9%94%AE%E7%9B%981">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E9%94%AE%E7%9B%982">
+<meta property="og:updated_time" content="2016-08-04T15:37:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="仿iMessage聊天页面开发">
-<meta name="twitter:description" content="视频学习笔记。">
+<meta name="twitter:title" content="如何封装一个自定义键盘的控件">
+<meta name="twitter:description" content="自定义控件，刚刚学起来。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -248,11 +250,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-仿iMessage聊天页面开发" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-如何封装一个自定义键盘的控件" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/05/06/仿iMessage聊天页面开发/" class="article-date">
-      <time datetime="2016-05-06T12:27:24.000Z" itemprop="datePublished">2016-05-06</time>
+      <a href="/2016/08/04/如何封装一个自定义键盘的控件/" class="article-date">
+      <time datetime="2016-08-04T15:25:50.000Z" itemprop="datePublished">2016-08-04</time>
 </a>
     </div>
   
@@ -265,7 +267,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      仿iMessage聊天页面开发
+      如何封装一个自定义键盘的控件
     </h1>
   
 
@@ -275,10 +277,6 @@
         
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift，视频学习/">swift，视频学习</a></li></ul>
-    </div>
-
         <div class="clearfix"></div>
       </div>
       
@@ -286,52 +284,34 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>视频学习笔记。<br><a id="more"></a><br>视频地址：<a href="http://www.maiziedu.com/course/ios/754-10847/" target="_blank" rel="external">http://www.maiziedu.com/course/ios/754-10847/</a></p>
-<h2 id="UItableView控件基础"><a href="#UItableView控件基础" class="headerlink" title="UItableView控件基础"></a>UItableView控件基础</h2><h3 id="UITableView的基础用法"><a href="#UITableView的基础用法" class="headerlink" title="UITableView的基础用法"></a>UITableView的基础用法</h3><ol>
-<li>UITableView的创建方式与生命周期<br>设置UITableView的dataSource、delegate。<br>UITableViewDataSource协议：必须实现：<br>OC的实现：</li>
-</ol>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一共有多少组数据</span></span><br><span class="line">- (<span class="built_in">NSInteger</span>)numberOfSectionsInTableView:(<span class="built_in">UITableView</span> *)tableView;</span><br><span class="line"><span class="comment">//每一组有多少行数据</span></span><br><span class="line">- (<span class="built_in">NSInteger</span>)tableView:(<span class="built_in">UITableView</span> *)tableView numberOfRowsInSection:(<span class="built_in">NSInteger</span>)section;</span><br><span class="line"><span class="comment">//每一行显示什么内容</span></span><br><span class="line">- (<span class="built_in">UITableViewCell</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath;</span><br></pre></td></tr></table></figure>
-<p>swift中的实现：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">numberOfSectionsInTableView</span><span class="params">(tableView: UITableView)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, numberOfRowsInSection section: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> dataArray!.<span class="built_in">count</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath)</span></span> -&gt; <span class="type">UITableViewCell</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> cell = tableView.dequeueReusableCellWithIdentifier(<span class="string">"cellID"</span>)</span><br><span class="line">        <span class="keyword">if</span> cell == <span class="literal">nil</span> &#123;</span><br><span class="line">            cell = <span class="type">UITableViewCell</span>(style: <span class="type">UITableViewCellStyle</span>.<span class="type">Default</span>, reuseIdentifier: <span class="string">"cellID"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        cell?.textLabel?.text = dataArray![indexPath.row]</span><br><span class="line">        <span class="keyword">return</span> cell!</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+        <p>自定义控件，刚刚学起来。</p>
+<a id="more"></a>
+<p>可以封装一个键盘控件，然后作为一个pod，引入所需要使用的工程里面。<br>写法：<br><code>pod &quot;TDFKeyboard&quot;, :git =&gt; &#39;git@git.....:ios/TDFKeyboard.git&#39;, :branch =&gt; &#39;master&#39;</code><br>对于podfile文件的格式可以参考这篇文章：<a href="http://www.jianshu.com/p/8af475c4f717" target="_blank" rel="external">http://www.jianshu.com/p/8af475c4f717</a></p>
+<p>此键盘主要用于输入整数和浮点数还有IP地址。<br>主要是写了两种键盘，一种是不带“-”号的数字键盘1，一种是带“-”号的数字键盘2。如图：<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E9%94%AE%E7%9B%981" alt=""></p>
+<p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E9%94%AE%E7%9B%982" alt=""></p>
+<p>上面的响应的是系统的UITextField的输入，下面的响应的是自定义的TextView。  </p>
 <ol>
-<li>UITableView中cell的重用机制<br>原理：进入屏幕，当UITableView要求dataSource返回UITableViewCell时,dataSource会先查看这个复用池，如果池中有未使用的UITableViewCell，dataSource会用新的数据配置这个UITableViewCell，然后返回给UITableView，重新显示到窗口中，从而避免创建新对象.当滚动列表时，画出屏幕时，部分UITableViewCell会移出窗口，UITableView会将窗口外的UITableViewCell放入一个对象池中，等待重用。<br>方法：可以在初始化UITableViewCell的时候传入一个特定的字符串标识来设置reuseIdentifier(一般用UITableViewCell的类名)。当UITableView要求dataSource返回UITableViewCell时，先通过一个字符串标识到对象池中查找对应类型的UITableViewCell对象，如果有，就重用，如果没有，就传入这个字符串标识来初始化一个UITableViewCell对象。</li>
-<li><p>UITableViewDataSource协议中方法的意义与使用</p>
+<li><p>首先在ViewController的viewDidLoad方法中：<br>初始化键盘1，然后把键盘的responder设置为系统的textField。<br>然后初始化自定义的TextView，初始化键盘2，然后把自定义的inputView设置为自定义键盘。</p>
 </li>
-<li><p>UITableViewDelegate协议中方法的意义与使用</p>
-</li>
-</ol>
-<h3 id="定制UITableViewCell"><a href="#定制UITableViewCell" class="headerlink" title="定制UITableViewCell"></a>定制UITableViewCell</h3><ol>
-<li><p>UITableViewCell的几种系统<br>1&gt;UITableViewCellStyle:Default,Value1,Value2,Subtitle<br>2&gt;UITableViewCellSeparatorStyle :<br>3&gt;UITableViewCellSelectionStyle: None，Blue，Gray，Default<br>4&gt;UITableViewCellEditingStyle:None,Delete,Insert<br>5&gt;UITableViewCellAccessoryType :None,DisclosureIndicator,DetailDisclosureButton,Checkmark,DetailButtin</p>
-</li>
-<li><p>自定义UITableViewCell</p>
-</li>
-<li>使用Xib文件进行可视化的UITableViewCell开发<br>代码：<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath)</span></span> -&gt; <span class="type">UITableViewCell</span> &#123;</span><br><span class="line">      <span class="comment">//手动注册cell</span></span><br><span class="line">      <span class="keyword">var</span> cell:<span class="type">TableViewCell</span>? = tableView.dequeueReusableCellWithIdentifier(<span class="string">"cellID"</span>) <span class="keyword">as</span>? <span class="type">TableViewCell</span></span><br><span class="line">      <span class="keyword">if</span> cell == <span class="literal">nil</span> &#123;</span><br><span class="line">          cell = <span class="type">NSBundle</span>.mainBundle().loadNibNamed(<span class="string">"TableViewCell"</span>, owner: <span class="literal">nil</span>, options: <span class="literal">nil</span>).first <span class="keyword">as</span>? <span class="type">TableViewCell</span></span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<li><p>两个键盘的父类：Keyboard（UIView的子类）<br>其中用枚举设置键盘输入类型有整数，浮点型和IP地址型。<br><code>@property(weak,nonatomic)UIView&lt;UIKeyInput&gt; *responder;</code><br>在UIKit中有UIKeyInput(是一个协议@protocol)<br>UIView 的首要问题就是既能从代码中初始化，也能从 xib 中初始化，两者有何不同?<br>UIView 是支持 NSCoding 协议的，当在 xib 或 storyboard 里存在一个 UIView 的时候，其实是将 UIView 序列化到文件里（xib 和 storyboard 都是以 XML 格式来保存的），加载的时候反序列化出来，所以：</p>
+<pre><code>当从代码实例化 UIView 的时候，initWithFrame 会执行；
+当从文件加载 UIView 的时候，initWithCoder 会执行。
+</code></pre><p>设置view的布局：<br><code>self.autoresizingMask = UIViewAutoresizingNone;</code><br>解释：UIView中的autoresizingMask属性，枚举类型，定义如下：主要作用是自动调整子控件与父控件中间的位置，宽和高。  </p>
 </li>
 </ol>
-<h3 id="UITableView的编辑操作"><a href="#UITableView的编辑操作" class="headerlink" title="UITableView的编辑操作"></a>UITableView的编辑操作</h3><ol>
-<li><p>向UITableView中进行增删改查<br>代码实现：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//与tableView编辑模式有关的几个方法</span></span><br><span class="line">  <span class="comment">//某一行是否支持编辑模式</span></span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//编辑模式--删除</span></span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath)</span></span> -&gt; <span class="type">UITableViewCellEditingStyle</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="type">UITableViewCellEditingStyle</span>.<span class="type">Delete</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//处理具体数据源的数据的操作</span></span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)</span></span> &#123;</span><br><span class="line">      <span class="comment">//tableviewcell的删除操作</span></span><br><span class="line">      <span class="keyword">if</span> editingStyle == <span class="type">UITableViewCellEditingStyle</span>.<span class="type">Delete</span> &#123;</span><br><span class="line">          <span class="built_in">print</span>(<span class="string">"delete"</span>)</span><br><span class="line">          dataArray?.removeAtIndex(indexPath.row)</span><br><span class="line">          <span class="comment">//从左边删除消失</span></span><br><span class="line">         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: <span class="type">UITableViewRowAnimation</span>.<span class="type">Left</span>)            </span><br><span class="line">      &#125;<span class="keyword">else</span> <span class="keyword">if</span> editingStyle == <span class="type">UITableViewCellEditingStyle</span>.<span class="type">Insert</span> &#123;</span><br><span class="line">          <span class="comment">//tableviewcell的插入操作</span></span><br><span class="line">          dataArray?.insert(<span class="string">"新的数据"</span>, atIndex: indexPath.row+<span class="number">1</span>)</span><br><span class="line">          <span class="keyword">let</span> path = <span class="type">NSIndexPath</span>(forRow: indexPath.row+<span class="number">1</span>, inSection: indexPath.section)</span><br><span class="line">          <span class="comment">//从右向左插入</span></span><br><span class="line">          tableView.insertRowsAtIndexPaths([path], withRowAnimation: <span class="type">UITableViewRowAnimation</span>.<span class="type">Right</span>)</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          <span class="built_in">print</span>(<span class="string">"none"</span>)</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>对UITableView中每行数据进行重新排序<br>代码实现：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//tableview的一行是否可以移动</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//tableview移动的位置，原始行到移动位置行</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath)</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"move"</span>)</span><br><span class="line">        <span class="comment">//设置中间变量，</span></span><br><span class="line">        <span class="keyword">let</span> str = dataArray![sourceIndexPath.row]</span><br><span class="line">        <span class="comment">//删除原来的行</span></span><br><span class="line">        dataArray!.removeAtIndex(sourceIndexPath.row)</span><br><span class="line">        <span class="comment">//把行插入</span></span><br><span class="line">        dataArray?.insert(str, atIndex: destinationIndexPath.row)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">NS_OPTIONS</span><span class="params">(NSUInteger, UIViewAutoresizing)</span> </span>&#123;</span><br><span class="line">    UIViewAutoresizingNone                 = <span class="number">0</span>,    <span class="comment">//不自动调整</span></span><br><span class="line">    UIViewAutoresizingFlexibleLeftMargin   = <span class="number">1</span> &lt;&lt; <span class="number">0</span>,   <span class="comment">// 自动调整与superView左边的距离，保证与superView右边的距离不变</span></span><br><span class="line">    UIViewAutoresizingFlexibleWidth        = <span class="number">1</span> &lt;&lt; <span class="number">1</span>,</span><br><span class="line">    UIViewAutoresizingFlexibleRightMargin  = <span class="number">1</span> &lt;&lt; <span class="number">2</span>,</span><br><span class="line">    UIViewAutoresizingFlexibleTopMargin    = <span class="number">1</span> &lt;&lt; <span class="number">3</span>,  <span class="comment">//自动调整与superView顶部的距离，保证与superView底部的距离不变。</span></span><br><span class="line">    UIViewAutoresizingFlexibleHeight       = <span class="number">1</span> &lt;&lt; <span class="number">4</span>,    <span class="comment">//自动调整自己的高度，保证与superView顶部和底部的距离不变</span></span><br><span class="line">    UIViewAutoresizingFlexibleBottomMargin = <span class="number">1</span> &lt;&lt; <span class="number">5</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>UIViewAutoresizingFlexibleLeftMargin  |UIViewAutoresizingFlexibleRightMargin 自动调整与superView左边的距离，保证与左边的距离和右边的距离和原来距左边和右边的距离的比例不变。比如原来距离为20，30，调整后的距离应为68，102，即68/20=102/30。</p>
+<ol>
+<li>子类有键盘1(TDFNumbericKeyboard)和键盘2(TDFSymbolNumbericKeyboard):<br>在子类中实现了UIKeyInput协议方法，其中默认的方法有：</li>
 </ol>
-<h3 id="iMessages主页面的设计开发"><a href="#iMessages主页面的设计开发" class="headerlink" title="iMessages主页面的设计开发"></a>iMessages主页面的设计开发</h3><h4 id="首页信息页面"><a href="#首页信息页面" class="headerlink" title="首页信息页面"></a>首页信息页面</h4><ol>
-<li>增加编辑模式和新建信息模式</li>
-<li>信息显示的tableview</li>
-<li>组合使用搜索栏控件</li>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> (<span class="constant">BOOL</span>)hasText;</span><br><span class="line"></span>-<span class="ruby"> (void)<span class="symbol">insertText:</span>(<span class="constant">NSString</span> *)text;</span><br><span class="line"></span>-<span class="ruby"> (void)deleteBackward;</span></span><br></pre></td></tr></table></figure>
+<p>然后实现xib中的按钮的点击action事件。</p>
+<ol>
+<li>在自定义textView中定义协议代理并实现其方法：<br>其中有手势：UITapGestureRecognizer，当然这只是手势的其中一个。<br>下面还有几个如：<br>UITapGestureRecognizer<br>UIPinchGestureRecognizer<br>UIRotationGestureRecognizer<br>UISwipeGestureRecognizer<br>UIPanGestureRecognizer<br>UILongPressGestureRecognizer<br>从命名上不难了解這些类別所对应代表的手势，分別是 Tap（点一下）、Pinch（二指往內或往外拨动）、Rotation（旋转）、Swipe（滑动，快速移动）、Pan （拖移，慢速移动）以及 LongPress（长按）。  </li>
 </ol>
-<h4 id="新建信息界面"><a href="#新建信息界面" class="headerlink" title="新建信息界面"></a>新建信息界面</h4><ol>
-<li><p>文本输入框：在屏幕最底部，当输入时有键盘弹起，输入框与键盘对齐。当键盘收起来，再次回到界面底部。位置自适应。<br>当输入框的文字超过一行，高度自适应。</p>
-</li>
-<li><p>系统联系人的添加和操作：<br>可以跳转到系统的联系人，获取联系人的电话。</p>
-</li>
-<li><p>在聊天页面中插入图片信息，从系统相册导入图片。</p>
-</li>
-<li><p>聊天页面的主页面<br>用tableview不显示分隔线。用图片气泡来显示聊天记录。</p>
-</li>
-</ol>
-<h4 id="联系人详细信息页面"><a href="#联系人详细信息页面" class="headerlink" title="联系人详细信息页面"></a>联系人详细信息页面</h4><p>1.tableview的group模式。</p>
-<p>代码放在github上了：<a href="https://github.com/peilinghui/iMessages" target="_blank" rel="external">https://github.com/peilinghui/iMessages</a></p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UITapGestureRecognizer</span> *tap = [[<span class="built_in">UITapGestureRecognizer</span> alloc]initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(becomeFirstResponder)];</span><br><span class="line">       [<span class="keyword">self</span> addGestureRecognizer:tap];</span><br><span class="line">       [<span class="keyword">self</span> addSubview:<span class="keyword">self</span><span class="variable">.textLabel</span>];</span><br></pre></td></tr></table></figure>
+<p>代码地址：<a href="https://github.com/peilinghui/PLHKeyboard" target="_blank" rel="external">https://github.com/peilinghui/PLHKeyboard</a>  </p>
+<p>参考：<br>如何设计一个 iOS 控件?(iOS 控件完全解析) ：<a href="http://blog.csdn.net/zhangao0086/article/details/45622875" target="_blank" rel="external">http://blog.csdn.net/zhangao0086/article/details/45622875</a>      ·<br>ios手势：<a href="http://blog.sina.com.cn/s/blog_7c336a8301011b3e.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_7c336a8301011b3e.html</a></p>
 
       
     </div>
@@ -340,13 +320,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/05/06/仿iMessage聊天页面开发/">仿iMessage聊天页面开发</a></p>
+        <p><span>本文标题:</span><a href="/2016/08/04/如何封装一个自定义键盘的控件/">如何封装一个自定义键盘的控件</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年05月06日 - 20时27分</p>
-        <p><span>最后更新:</span>2016年05月12日 - 15时59分</p>
+        <p><span>发布时间:</span>2016年08月04日 - 23时25分</p>
+        <p><span>最后更新:</span>2016年08月04日 - 23时37分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/05/06/仿iMessage聊天页面开发/" title="仿iMessage聊天页面开发">http://peilinghui.com/2016/05/06/仿iMessage聊天页面开发/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/05/06/仿iMessage聊天页面开发/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/08/04/如何封装一个自定义键盘的控件/" title="如何封装一个自定义键盘的控件">http://peilinghui.com/2016/08/04/如何封装一个自定义键盘的控件/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/08/04/如何封装一个自定义键盘的控件/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -359,16 +339,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/05/14/iOS调试技巧/">
-                    iOS调试技巧
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/04/14/iOS网络编程/">
-                    iOS网络编程
+                <a href="/2016/07/02/TableView的一些事/">
+                    TableView的一些事
                 </a>
             </div>
         
@@ -379,7 +353,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#UItableView控件基础"><span class="toc-number">1.</span> <span class="toc-text">UItableView控件基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UITableView的基础用法"><span class="toc-number">1.1.</span> <span class="toc-text">UITableView的基础用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定制UITableViewCell"><span class="toc-number">1.2.</span> <span class="toc-text">定制UITableViewCell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UITableView的编辑操作"><span class="toc-number">1.3.</span> <span class="toc-text">UITableView的编辑操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iMessages主页面的设计开发"><span class="toc-number">1.4.</span> <span class="toc-text">iMessages主页面的设计开发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#首页信息页面"><span class="toc-number">1.4.1.</span> <span class="toc-text">首页信息页面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#新建信息界面"><span class="toc-number">1.4.2.</span> <span class="toc-text">新建信息界面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#联系人详细信息页面"><span class="toc-number">1.4.3.</span> <span class="toc-text">联系人详细信息页面</span></a></li></ol></li></ol></li></ol>
+    
 </div>
 <style>
     .left-col .switch-btn {
@@ -441,7 +415,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/05/06/仿iMessage聊天页面开发/" data-title="仿iMessage聊天页面开发" data-url="http://peilinghui.com/2016/05/06/仿iMessage聊天页面开发/"></div>
+    <div class="ds-thread" data-thread-key="2016/08/04/如何封装一个自定义键盘的控件/" data-title="如何封装一个自定义键盘的控件" data-url="http://peilinghui.com/2016/08/04/如何封装一个自定义键盘的控件/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -465,15 +439,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/05/14/iOS调试技巧/" title="上一篇: iOS调试技巧">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/04/14/iOS网络编程/" title="下一篇: iOS网络编程">
+            <a href="/2016/07/02/TableView的一些事/" title="下一篇: TableView的一些事">
                 <i class="fa fa-angle-right"></i>
             </a>
         

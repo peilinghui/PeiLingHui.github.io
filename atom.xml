@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://peilinghui.com/"/>
-  <updated>2016-07-19T14:23:23.000Z</updated>
+  <updated>2016-08-04T15:37:09.000Z</updated>
   <id>http://peilinghui.com/</id>
   
   <author>
@@ -14,6 +14,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何封装一个自定义键盘的控件</title>
+    <link href="http://peilinghui.com/2016/08/04/%E5%A6%82%E4%BD%95%E5%B0%81%E8%A3%85%E4%B8%80%E4%B8%AA%E8%87%AA%E5%AE%9A%E4%B9%89%E9%94%AE%E7%9B%98%E7%9A%84%E6%8E%A7%E4%BB%B6/"/>
+    <id>http://peilinghui.com/2016/08/04/如何封装一个自定义键盘的控件/</id>
+    <published>2016-08-04T15:25:50.000Z</published>
+    <updated>2016-08-04T15:37:09.000Z</updated>
+    
+    <content type="html">&lt;p&gt;自定义控件，刚刚学起来。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;可以封装一个键盘控件，然后作为一个pod，引入所需要使用的工程里面。&lt;br&gt;写法：&lt;br&gt;&lt;code&gt;pod &amp;quot;TDFKeyboard&amp;quot;, :git =&amp;gt; &amp;#39;git@git.....:ios/TDFKeyboard.git&amp;#39;, :branch =&amp;gt; &amp;#39;master&amp;#39;&lt;/code&gt;&lt;br&gt;对于podfile文件的格式可以参考这篇文章：&lt;a href=&quot;http://www.jianshu.com/p/8af475c4f717&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/8af475c4f717&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;此键盘主要用于输入整数和浮点数还有IP地址。&lt;br&gt;主要是写了两种键盘，一种是不带“-”号的数字键盘1，一种是带“-”号的数字键盘2。如图：&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E9%94%AE%E7%9B%981&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E9%94%AE%E7%9B%982&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;上面的响应的是系统的UITextField的输入，下面的响应的是自定义的TextView。  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;首先在ViewController的viewDidLoad方法中：&lt;br&gt;初始化键盘1，然后把键盘的responder设置为系统的textField。&lt;br&gt;然后初始化自定义的TextView，初始化键盘2，然后把自定义的inputView设置为自定义键盘。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;两个键盘的父类：Keyboard（UIView的子类）&lt;br&gt;其中用枚举设置键盘输入类型有整数，浮点型和IP地址型。&lt;br&gt;&lt;code&gt;@property(weak,nonatomic)UIView&amp;lt;UIKeyInput&amp;gt; *responder;&lt;/code&gt;&lt;br&gt;在UIKit中有UIKeyInput(是一个协议@protocol)&lt;br&gt;UIView 的首要问题就是既能从代码中初始化，也能从 xib 中初始化，两者有何不同?&lt;br&gt;UIView 是支持 NSCoding 协议的，当在 xib 或 storyboard 里存在一个 UIView 的时候，其实是将 UIView 序列化到文件里（xib 和 storyboard 都是以 XML 格式来保存的），加载的时候反序列化出来，所以：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;当从代码实例化 UIView 的时候，initWithFrame 会执行；
+当从文件加载 UIView 的时候，initWithCoder 会执行。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;设置view的布局：&lt;br&gt;&lt;code&gt;self.autoresizingMask = UIViewAutoresizingNone;&lt;/code&gt;&lt;br&gt;解释：UIView中的autoresizingMask属性，枚举类型，定义如下：主要作用是自动调整子控件与父控件中间的位置，宽和高。  &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;NS_OPTIONS&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(NSUInteger, UIViewAutoresizing)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    UIViewAutoresizingNone                 = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,    &lt;span class=&quot;comment&quot;&gt;//不自动调整&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    UIViewAutoresizingFlexibleLeftMargin   = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,   &lt;span class=&quot;comment&quot;&gt;// 自动调整与superView左边的距离，保证与superView右边的距离不变&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    UIViewAutoresizingFlexibleWidth        = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    UIViewAutoresizingFlexibleRightMargin  = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    UIViewAutoresizingFlexibleTopMargin    = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,  &lt;span class=&quot;comment&quot;&gt;//自动调整与superView顶部的距离，保证与superView底部的距离不变。&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    UIViewAutoresizingFlexibleHeight       = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;,    &lt;span class=&quot;comment&quot;&gt;//自动调整自己的高度，保证与superView顶部和底部的距离不变&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    UIViewAutoresizingFlexibleBottomMargin = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;UIViewAutoresizingFlexibleLeftMargin  |UIViewAutoresizingFlexibleRightMargin 自动调整与superView左边的距离，保证与左边的距离和右边的距离和原来距左边和右边的距离的比例不变。比如原来距离为20，30，调整后的距离应为68，102，即68/20=102/30。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;子类有键盘1(TDFNumbericKeyboard)和键盘2(TDFSymbolNumbericKeyboard):&lt;br&gt;在子类中实现了UIKeyInput协议方法，其中默认的方法有：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight haml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;-&lt;span class=&quot;ruby&quot;&gt; (&lt;span class=&quot;constant&quot;&gt;BOOL&lt;/span&gt;)hasText;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;-&lt;span class=&quot;ruby&quot;&gt; (void)&lt;span class=&quot;symbol&quot;&gt;insertText:&lt;/span&gt;(&lt;span class=&quot;constant&quot;&gt;NSString&lt;/span&gt; *)text;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;-&lt;span class=&quot;ruby&quot;&gt; (void)deleteBackward;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后实现xib中的按钮的点击action事件。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在自定义textView中定义协议代理并实现其方法：&lt;br&gt;其中有手势：UITapGestureRecognizer，当然这只是手势的其中一个。&lt;br&gt;下面还有几个如：&lt;br&gt;UITapGestureRecognizer&lt;br&gt;UIPinchGestureRecognizer&lt;br&gt;UIRotationGestureRecognizer&lt;br&gt;UISwipeGestureRecognizer&lt;br&gt;UIPanGestureRecognizer&lt;br&gt;UILongPressGestureRecognizer&lt;br&gt;从命名上不难了解這些类別所对应代表的手势，分別是 Tap（点一下）、Pinch（二指往內或往外拨动）、Rotation（旋转）、Swipe（滑动，快速移动）、Pan （拖移，慢速移动）以及 LongPress（长按）。  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;UITapGestureRecognizer&lt;/span&gt; *tap = [[&lt;span class=&quot;built_in&quot;&gt;UITapGestureRecognizer&lt;/span&gt; alloc]initWithTarget:&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt; action:&lt;span class=&quot;keyword&quot;&gt;@selector&lt;/span&gt;(becomeFirstResponder)];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt; addGestureRecognizer:tap];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt; addSubview:&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.textLabel&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;代码地址：&lt;a href=&quot;https://github.com/peilinghui/PLHKeyboard&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/peilinghui/PLHKeyboard&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;参考：&lt;br&gt;如何设计一个 iOS 控件?(iOS 控件完全解析) ：&lt;a href=&quot;http://blog.csdn.net/zhangao0086/article/details/45622875&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/zhangao0086/article/details/45622875&lt;/a&gt;      ·&lt;br&gt;ios手势：&lt;a href=&quot;http://blog.sina.com.cn/s/blog_7c336a8301011b3e.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.sina.com.cn/s/blog_7c336a8301011b3e.html&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;自定义控件，刚刚学起来。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>TableView的一些事</title>
@@ -1690,194 +1736,6 @@ j++;
     
       <category term="iOS" scheme="http://peilinghui.com/categories/iOS/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>iOS中的多线程网络</title>
-    <link href="http://peilinghui.com/2016/03/04/iOS%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C/"/>
-    <id>http://peilinghui.com/2016/03/04/iOS中的多线程网络/</id>
-    <published>2016-03-04T13:31:31.000Z</published>
-    <updated>2016-07-16T01:03:52.000Z</updated>
-    
-    <content type="html">&lt;p&gt;不论是什么开发，多线程网络始终是学习的重点。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;多线程网络&quot;&gt;&lt;a href=&quot;#多线程网络&quot; class=&quot;headerlink&quot; title=&quot;多线程网络&quot;&gt;&lt;/a&gt;多线程网络&lt;/h1&gt;&lt;h2 id=&quot;NSthread&quot;&gt;&lt;a href=&quot;#NSthread&quot; class=&quot;headerlink&quot; title=&quot;NSthread&quot;&gt;&lt;/a&gt;NSthread&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;创建和启动线程&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;//创建一个新线程对象，实例方法，返回一个NSThread对象必须调用start方法启动线程 （实例方法）&lt;br&gt;&lt;code&gt;-(id)initWithTarget:(id)target selector:(SEL)selector object:(id)arg:&lt;/code&gt;&lt;br&gt;//创建并启动新线程，不会返回NSThread对象。会直接创建并启动线程(类方法)&lt;br&gt;&lt;code&gt;+(void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(id)arg:&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;target对象的selector方法的方法体代表了线程需要完成的任务，相当于把target对象的selector方法转换为线程执行体. &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;//创建多线程对象
-NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) object:nil];
-//启动多线程
-[thread start];
-
-//创建并启动多线程
-[NSThread detachNewThreadSelector:@selector(run) toTarget:self withObject:nil];
-&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;线程的状态&lt;br&gt;线程的状态会在运行、就绪状态之间切换。&lt;br&gt;启用线程使用了start方法后，该线程进入就绪状态，系统会为其创建方法调用栈和程序计数器。&lt;strong&gt;当系统调度线程后，线程才会进入运行状态。&lt;/strong&gt;&lt;br&gt;注意：若想要子线程的start方法后子线程立即开始执行，可以调用[NSThread sleepForTimeInterval:0.01];&lt;br&gt;从而让子线程立即获得执行。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;终止子线程&lt;br&gt;1&amp;gt;线程执行体方法执行完成，线程正常结束。&lt;br&gt;2&amp;gt;线程执行过程中出现了错误&lt;br&gt;3&amp;gt;直接调用NSThread类的exit方法来中止当前正在执行的线程。&lt;/p&gt;
-&lt;figure class=&quot;highlight less&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;if&lt;/span&gt; ([NSThread currentThread].isCancelled) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//中止当前正在执行的线程&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;attr_selector&quot;&gt;[NSThread exit]&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;线程睡眠&lt;br&gt;NSThread的两种类方法：&lt;br&gt;//让当前正在执行的线程暂停到aDate代表的时间，并进入阻塞状态&lt;br&gt;&lt;code&gt;+ (void)sleepUntilDate:(NSDate *)aDate:&lt;/code&gt;&lt;br&gt;//让当前正在执行的线程暂停ti秒，并进入阻塞状态&lt;br&gt;&lt;code&gt;+ (void)sleepForTimeInterval:(NSTimeInterval)ti:&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;例子：&lt;br&gt;使用线程下载网络图片：&lt;br&gt;&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//创建多线程对象&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;NSThread *thread = [[NSThread alloc]&lt;span class=&quot;string&quot;&gt;initWithTarget:&lt;/span&gt;self &lt;span class=&quot;string&quot;&gt;selector:&lt;/span&gt;&lt;span class=&quot;annotation&quot;&gt;@selector&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;downloadImageFromURL:&lt;/span&gt;) &lt;span class=&quot;string&quot;&gt;object:&lt;/span&gt;nil];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//启动多线程&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[thread start];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;downloadImageFromURL:&lt;/span&gt;方法作为线程执行体，当线程启动调用该方法。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//在主线程中执行updateUI：方法 来更新iv控件显示的图片&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[self &lt;span class=&quot;string&quot;&gt;performSelectorOnMainThread:&lt;/span&gt;&lt;span class=&quot;annotation&quot;&gt;@selector&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;updateUI:&lt;/span&gt;) &lt;span class=&quot;string&quot;&gt;withObject:&lt;/span&gt;image &lt;span class=&quot;string&quot;&gt;waitUntilDone:&lt;/span&gt;YES];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;iOS规定只能在UI线程中修改UI控件的属性&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;改变优先级&lt;br&gt;NSThread中的实例方法和类方法：&lt;br&gt;+threadPriority&lt;br&gt;-threadPriority&lt;br&gt;+setThreadPriority：(double)priority:&lt;br&gt;-setThreadPriority：(double)priority:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;线程同步与线程通信&quot;&gt;&lt;a href=&quot;#线程同步与线程通信&quot; class=&quot;headerlink&quot; title=&quot;线程同步与线程通信&quot;&gt;&lt;/a&gt;线程同步与线程通信&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;在多线程中引入同步解决线程安全问题&lt;br&gt;使用方法： @synchronized (obj) {&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;//同步代码块
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; }&lt;br&gt;obj是同步监视器&lt;br&gt;任何时刻只能有一个线程可以获得对同步监视器的锁定，当同步代码块执行完毕的后，该线程会释放对同步监视器的锁定。&lt;br&gt;可变类的线程安全是以降低程序的运行效率作为代价的，为了减少线程安全所带来的负面影响，程序可以采用：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;不要对线程安全类的所有方法都进行同步，只对那些会改变竞争资源的方法进行同步。&lt;/li&gt;
-&lt;li&gt;如果可变类有两种运行环境：单线程和多线程环境，则应该为该可变类提供两种版本-单线程环境中使用线程不安全版本以保证性能，多线程环境中使用线程安全版本。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;释放对同步监视器的锁定&lt;br&gt;任何线程在进入同步代码块之前，必须先获得对同步监视器的锁定，那么何时会释放对同步监视器的锁定呢？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;当前线程的同步代码块执行结束  &lt;/li&gt;
-&lt;li&gt;当前代码块在同步代码块中遇到了goto.return终止了该代码块、该方法继续执行时，当前线程会释放同步监视器。&lt;/li&gt;
-&lt;li&gt;当线程在同步代码块中出现了错误，导致该代码块异常结束时，将会释放同步监视器。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;同步锁（NSLock）&lt;br&gt;Foundation提供NSLock，通过显式定义同步锁对象来实现同步。&lt;br&gt;NSlock是控制多个线程对共享资源进行访问的工具，通常锁提供了对共享资源的独占访问。在实现线程安全的控制中，使用NSlock对象可以显示地加锁，释放锁。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;使用NSCondition控制线程通信&lt;br&gt;NSCondition实现了NSLocking协议，因此也可以调用lock，unlock来实现线程同步。也可以让那些已经锁定NSCondition对象却无法继续执行的线程释放NSCondition对象，NSCondition对象也可以唤醒其他处于等待状态的线程。&lt;br&gt;方法：-wait，知道其他线程调用NSCondition的signal方法或broadcast方法来唤醒该线程。&lt;br&gt;-（BOOL）waitUntilDate：(NSDate *)limiteout,&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;参考：&lt;a href=&quot;http://blog.csdn.net/totogo2010/article/details/8010231&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/totogo2010/article/details/8010231&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;GCD&quot;&gt;&lt;a href=&quot;#GCD&quot; class=&quot;headerlink&quot; title=&quot;GCD&quot;&gt;&lt;/a&gt;GCD&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;Grand Central Dispatch “牛逼的中枢调度器”&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;是苹果公司为多核的并行运算提出的解决方案&lt;/li&gt;
-&lt;li&gt;GCD会自动利用更多CPU内核&lt;/li&gt;
-&lt;li&gt;会自动管理线程的生命周期（创建线程，调度任务，销毁线程）&lt;/li&gt;
-&lt;li&gt;程序员只需要告诉GCD该做什么，而不需要写代码&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;使用2个步骤：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;定制任务（执行什么操作）&lt;/li&gt;
-&lt;li&gt;将任务添加到队列中（GCD会自动将队列中的任务取出，放到对应的线程中执行）（先进先出，后进后出）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;创建队列&lt;br&gt;队列：把任务放到队列里面，队列先进先出的原则，&lt;br&gt; 串行队列：顺序，一个一个执行(必须一个任务执行完了，才能从队列里面取出下一个任务)&lt;strong&gt;main queue&lt;/strong&gt;用来更新UI&lt;br&gt; 并发队列：同时执行很多个任务（可以同时取出很多个任务，只要有线程去执行）&lt;strong&gt;global queue&lt;/strong&gt;&lt;br&gt;1&amp;gt;获取全局并发队列:&lt;br&gt;&lt;code&gt;dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);&lt;/code&gt;&lt;br&gt;2&amp;gt;获取系统主线程关联的串行队列&lt;br&gt;&lt;code&gt;dispatch_queue_t queue = dispatch_get_main_queue();&lt;/code&gt;&lt;br&gt;3&amp;gt;创建串行队列&lt;br&gt;&lt;code&gt;dispatch_queue_t queue = dispatch_queue_create(&amp;quot;mmmm.queue&amp;quot;, DISPATCH_QUEUE_SERIAL);&lt;/code&gt;&lt;br&gt;4&amp;gt;创建并发队列&lt;br&gt;&lt;code&gt;dispatch_queue_t queue = dispatch_queue_create(&amp;quot;mmmm.queue&amp;quot;, DISPATCH_QUEUE_CONCURRENT);&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;同步：dispatch_sync(dispatch_queue_t, dispatch_block_t block);&lt;br&gt;异步：dispatch_async(dispatch_queue_t, dispatch_block_t block);&lt;br&gt;同步和异步的区别：&lt;br&gt;同步：在当前线程中执行,不具备开启新线程的能力&lt;br&gt;异步：在另一条新线程中执行，具备开启新线程的能力&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;使用GCD下载图片&lt;/p&gt;
-&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;dispatch_async&lt;/span&gt;(dispatch_get_global_queue(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;), ^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;%@&quot;&lt;/span&gt;,[&lt;span class=&quot;built_in&quot;&gt;NSThread&lt;/span&gt; currentThread]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//耗时操作&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//1.url,确定一个网络上的资源文件路径&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;NSURL&lt;/span&gt; *url = [&lt;span class=&quot;built_in&quot;&gt;NSURL&lt;/span&gt; URLWithString:&lt;span class=&quot;string&quot;&gt;@&quot;http://p18.qhimg.com/t0144d6a0802f22be4f.jpg&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//2.通过URL下载对应的网络资源，网络资源传输的都是二进制&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;NSData&lt;/span&gt; *data = [&lt;span class=&quot;built_in&quot;&gt;NSData&lt;/span&gt; dataWithContentsOfFile:url];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//3.把二进制转成图片&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;UIImage&lt;/span&gt; *image = [&lt;span class=&quot;built_in&quot;&gt;UIImage&lt;/span&gt; imageWithData:data];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//4.更新UI，在主线程-&amp;gt;直接把主线程添加到主队列，就会在主队列执行&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;dispatch_async&lt;/span&gt;(dispatch_get_global_queue(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;), ^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.iconView&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.image&lt;/span&gt; = image;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;多次执行的任务&lt;br&gt;控制的代码块执行了5次。&lt;br&gt;` dispatch_apply(5, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(size_t time){&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;NSLog(@&amp;quot;==执行【%lu次】==%@&amp;quot;,time,[NSThread currentThread]);
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;}`&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;只执行一次的任务&lt;br&gt;`static dispatch_once_t oneceToken;&lt;br&gt; dispatch_once(&amp;amp;oneceToken,^{&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;NSLog(@&amp;quot;==执行代码块==&amp;quot;);
-//线程暂停3秒
-[NSThread sleepForTimeInterval:3];
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; });`&lt;br&gt;dispatch_once_t控制函数只执行一次&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&quot;后台运行&quot;&gt;&lt;a href=&quot;#后台运行&quot; class=&quot;headerlink&quot; title=&quot;后台运行&quot;&gt;&lt;/a&gt;后台运行&lt;/h1&gt;&lt;p&gt;进入后台，系统会自动回调系统程序委托的applicationDidEnterBackground：方法。所有应用需要做：  &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;- 释放所有可以释放的内存  
-- 保存用户数据或状态信息，所有没写入磁盘的文件或信息，在进入后台之前，都应该写入磁盘，因为程序可能在后台被杀死。
-&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;
-&lt;li&gt;进入后台时释放内存&lt;br&gt;如果应用没有启用ARC机制，程序需要在进入后台是，将那些需要释放的资源的引用计数变为0，从而让系统回收这些资源，当应用转入前台，系统需要重新恢复这些资源。&lt;br&gt;如果应用启用了ARC机制，程序只要在应用进入后台时，将应用那些需要释放的资源的变量赋值为nil即可。当应用转入前台是，系统需要重新恢复这些资源。&lt;/li&gt;
-&lt;li&gt;进入后台时保存状态  &lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用NSUserDefault读取系统已经保存的积分&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   NSNumber* scoreNumber;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ((scoreNumber = [[NSUserDefaults standardUserDefaults]&lt;span class=&quot;string&quot;&gt;setInteger:&lt;/span&gt;score &lt;span class=&quot;string&quot;&gt;forKey:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;score&quot;&lt;/span&gt;])) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       score = scoreNumber.integerValue;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;请求更多后台时间&lt;br&gt;为了请求更多后台时间，应该使用如下步骤：&lt;ul&gt;
-&lt;li&gt;调用UIApplication对象的beginBackgroundTaskWithExpirationHandler:方法请求获取更多的后台执行时间。&lt;/li&gt;
-&lt;li&gt;调用dispatch_async()方法将指定代码块提交给后台执行&lt;/li&gt;
-&lt;li&gt;后台任务执行完成是，调用UIApplication对象的endBackgroundTask:方法结束后台任务。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&quot;使用NSOperation与NSOperationQueue实现多线程&quot;&gt;&lt;a href=&quot;#使用NSOperation与NSOperationQueue实现多线程&quot; class=&quot;headerlink&quot; title=&quot;使用NSOperation与NSOperationQueue实现多线程&quot;&gt;&lt;/a&gt;使用NSOperation与NSOperationQueue实现多线程&lt;/h1&gt;&lt;p&gt;使用步骤：  &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;- 创建NSOperationQueue队列，并为该队列设置相关属性。  
-- 创建NSOperation子类的对象，并将该对象提交给NSOperationQueue队列，该队列将会按顺序启动每个NSOperation。   
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;MaxConcurrentOperationCount    设置最大并发线程数。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;使用NSblockOperation下载图片&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//创建NSBlock&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;NSBlockOperation&lt;/span&gt; *operation = [&lt;span class=&quot;built_in&quot;&gt;NSBlockOperation&lt;/span&gt; blockOperationWithBlock:^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//从网络获取数据&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;NSData&lt;/span&gt; *data = [[&lt;span class=&quot;built_in&quot;&gt;NSData&lt;/span&gt; alloc]initWithContentsOfURL:[&lt;span class=&quot;built_in&quot;&gt;NSURL&lt;/span&gt; URLWithString:url]];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;comment&quot;&gt;//将网络数据初始化为UIImage对象&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;built_in&quot;&gt;UIImage&lt;/span&gt; *image = [[&lt;span class=&quot;built_in&quot;&gt;UIImage&lt;/span&gt; alloc]initWithData:data];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(image!= &lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;//在主线程中updateUI：方法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;             [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt; performSelectorOnMainThread:&lt;span class=&quot;keyword&quot;&gt;@selector&lt;/span&gt;(updateUI:)withObject:image waitUntilDone:&lt;span class=&quot;literal&quot;&gt;YES&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;下载图片出现错误&quot;&lt;/span&gt;);           &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;定义NSOperation子类&lt;br&gt;创建NSOperation的子类需要重写一个方法：-（void）main，该方法将作为NSOpQueue完成任务。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&quot;面试题&quot;&gt;&lt;a href=&quot;#面试题&quot; class=&quot;headerlink&quot; title=&quot;面试题&quot;&gt;&lt;/a&gt;面试题&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;什么是多线程&lt;br&gt;进程：是指在系统中正在运行的一个应用程序。1个进程要想执行任务，必须得有线程。（一个进程至少要有一个线程）特征：独立性，动态性，并发性。&lt;br&gt;线程：是进程的基本执行单元，一个进程（程序）的所有任务都在线程中执行。当一个程序运行时，内部可能包含了多个顺序执行流，每个顺序执行流就是一个线程的。&lt;br&gt;多线程：在一个进程中可以开启多个线程，每条线程可以并发（同时）执行不同的任务。&lt;br&gt;多线程编程的优点：  &lt;ul&gt;
-&lt;li&gt;进程间不能共享内存，但线程之间共享内存非常容易&lt;/li&gt;
-&lt;li&gt;系统创建进程需要为该进程重新分配系统资源，但创建线程则代价小得多，因此使用多线程来实现多任务并发比多进程的效率高。&lt;/li&gt;
-&lt;li&gt;iOS提供了多种多线程实现方式，从而简化了iOS的多线程编程。&lt;br&gt;参考：&lt;a href=&quot;http://1108038.blog.51cto.com/1098038/420330&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://1108038.blog.51cto.com/1098038/420330&lt;/a&gt;&lt;br&gt;进程间通信—&amp;gt;管道(pipe)、信号(signal)、消息队列、共享内存、信号量、套接字；&lt;br&gt;线程间通信—&amp;gt;信号量、消息、事件event&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;iOS中如何实现多线程&lt;ul&gt;
-&lt;li&gt;pthread（一套通用的多线程API，使用难度大 &lt;strong&gt;C语言（底层）&lt;/strong&gt;）程序员管理，几乎不用&lt;br&gt;&lt;code&gt;#include &amp;lt;pthread.h&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;NSThread（面向对象，简单易用，可直接操作多线程对象,&lt;strong&gt;OC&lt;/strong&gt;），偶尔使用&lt;/li&gt;
-&lt;li&gt;GCD（旨在替代NSThread等线程技术，充分利用设备的多核，&lt;strong&gt;C语言&lt;/strong&gt;）自动管理，经常使用&lt;/li&gt;
-&lt;li&gt;NSOperation（基于GCD，比GCD多了一些简单实用的功能，&lt;strong&gt;OC&lt;/strong&gt;）自动管理，经常使用.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;线程间通讯的方法&lt;br&gt;控制器在子线程发送请求给服务器&lt;br&gt;服务器在主线程刷新UI界面到控制器&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;还可以使用GCD，主线程和子线程的通信。&lt;br&gt; &lt;code&gt;dispath_async(dispatch_get_main_queue(),^{
- });&lt;/code&gt; &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;网络图片处理问题中怎么解决一个相同的网络地址重复请求的问题？&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E8%87%AA%E5%AE%9A%E4%B9%89NSOperation%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;利用字典（图片地址为key，下载操作为value）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;多线程安全的几种解决办法及多线程安全怎么控制？&lt;br&gt;线程安全的概念: 就是在多个线程同时执行的时候，能够保证资源信息的准确性.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;苹果约定，&lt;strong&gt;所有程序的更新UI都在主线程进行&lt;/strong&gt;，也就不会出现多个线程同时改变一个资源。在主线程更新UI，有什么好处？只在主线程更新UI，就不会出现多个线程同时改变同一个UI控件;主线程的优先级最高。也就意味UI的更新优先级高。 会让用户感觉很流畅    .&lt;/li&gt;
-&lt;li&gt;如果要防止资源抢夺，得用synchronized进行加锁保护.&lt;br&gt;线程同步：多条线程按顺序的执行任务（互斥锁）互斥锁使用格式&lt;br&gt;&lt;code&gt;@synchronized(锁对象){
-//需要锁定的代码
-}&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;如果异步操作要保证线程安全等问题, 尽量使用GCD(有些函数默认就是安全的)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;GCD内部怎么实现的&lt;br&gt;1&amp;gt; iOS和OS X的核心是XNU内核，GCD是基于XNU内核实现的&lt;br&gt;2&amp;gt; GCD的API全部在libdispatch库中&lt;br&gt;3&amp;gt; GCD的底层实现主要有Dispatch Queue和Dispatch Source&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Dispatch Queue ：管理block(操作)&lt;/li&gt;
-&lt;li&gt;Dispatch Source ：处理事件(比如线程间的通讯)&lt;br&gt;补充：GCD：Grand Central Dispatch “牛逼的中枢调度器”，自动利用更多CPU内核，自动管理线程的生命周期（创建线程，调度任务，销毁线程).使用2个步骤：  &lt;/li&gt;
-&lt;li&gt;定制任务（执行什么操作）用block来封装任务  &lt;/li&gt;
-&lt;li&gt;将任务添加到队列中（自动将队列中的任务取出，放到对应的线程中执行）（先进先出，后进后出）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;GCD和NSoperation区别&lt;br&gt;1&amp;gt;GCD是纯C语言的API，NSOperationQueue是基于GCD的OC版本封装&lt;br&gt;2&amp;gt;GCD只支持FIFO的队列，NSOperationQueue可以很方便地调整执行顺序、设置最大并发数量&lt;br&gt;3&amp;gt;NSOperationQueue可以在轻松在Operation间设置依赖关系，而GCD需要写很多的代码才能实现&lt;br&gt;4&amp;gt;NSOperationQueue支持KVO，可以监测operation是否正在执行（isExecuted）、是否结束（isFinished），是否取消（isCanceld）&lt;br&gt;5&amp;gt;GCD的执行速度比NSOperationQueue快&lt;br&gt;任务之间不太互相依赖：GCD&lt;br&gt;任务之间有依赖(或者要监听任务的执行情况)：NSOperationQueue&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;Socket的实现原理以及Socket是如何实现通信的？&lt;br&gt;Socket：称之为套接字，是一种用于网络传输的“工具”。&lt;br&gt;socket的实现原理：是基于TCP/UDP的（TCP：传输控制协议，是一种面向连接的，安全的，基于IP传输层的协议，三次握手。例如：XMPP等网络聊天）（UDP：传输控制协议，是一种面向连接的，不安全的，基于IP传输层的协议，特点：快，只管发，不管收到没有。例如：游戏,QQ视频，红蜘蛛）&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;http协议的实现&lt;br&gt;HTTP：是一种超文本协议，定义了网络传输的格式（短连接）&lt;br&gt;如果利用HTTP做聊天，每次都要重新创建连接，因为HTTP是短连接，一次回话后就断开了，如果利用HTTP做聊天，如果聊天特别频繁，会不断的创建连接，消耗资源，性能不好，服务端不会主动给客户端发送请求。      &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;runloop定时源和输入源?&lt;br&gt;1&amp;gt;你创建的程序不需要显示的创建run loop；每个线程，包括程序的主线程（main thread）都有与之相应的run loop对象, 主线程会自行创建并运行run loop&lt;br&gt;2&amp;gt;Run loop处理的输入事件有两种不同的来源：输入源（input source）（异步）（处理其他线程回到主线程的消息）和定时源（timer source）（同步）（定时检查界面上有没有点击事件，检查主线程的事件）&lt;br&gt;3&amp;gt;输入源传递异步消息，通常来自于其他线程或者程序。定时源则传递同步消息，在特定时间或者一定的时间间隔发生&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/runloop.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;NSRunLoop的实现机制,及在多线程中如何使用&lt;br&gt;NSRunLoop是IOS消息机制的处理模式.&lt;blockquote&gt;
-&lt;p&gt;1.NSRunLoop的主要作用：控制NSRunLoop里面线程的执行和休眠，在有事情做的时候使当前NSRunLoop控制的线程工作，没有事情做让当前NSRunLoop的控制的线程休眠。&lt;br&gt;2.NSRunLoop 就是一直在循环检测，从线程start到线程end，检测inputsource(如点击，双击等操作)异步事件，检测timesource同步事件，检测到输入源会执行处理函数，首先会产生通知，corefunction向线程添加runloop observers来监听事件，意在监听事件发生时来做处理。&lt;br&gt;3.runloopmode是一个集合，包括监听：事件源，定时器，以及需通知的runloop observers&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;只有在为你的程序创建次线程的时候，才需要运行run loop。对于程序的主线程而言，run loop是关键部分。Cocoa提供了运行主线程run loop的代码同时也会自动运行run loop。IOS程序UIApplication中的run方法在程序正常启动的时候就会启动run loop。如果你使用xcode提供的模板创建的程序，那你永远不需要自己去启动run loop&lt;/li&gt;
-&lt;li&gt;在多线程中，你需要判断是否需要run loop。如果需要run loop，那么你要负责配置run loop并启动。你不需要在任何情况下都去启动run loop。比如，你使用线程去处理一个预先定义好的耗时极长的任务时，你就可以毋需启动run loop。Run loop只在你要和线程有交互时才需要&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;不论是什么开发，多线程网络始终是学习的重点。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="http://peilinghui.com/categories/iOS/"/>
-    
-    
-      <category term="多线程" scheme="http://peilinghui.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   
