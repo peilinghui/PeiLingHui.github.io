@@ -257,14 +257,7 @@
     // EVENTS
     
     document.addEventListener("keydown", function ( event ) {
-        if ( event.keyCode == 9 || ( event.keyCode >= 32 && event.keyCode <= 34 ) || (event.keyCode >= 37 && event.keyCode <= 40) ) {
-            var next = active;
-            switch( event.keyCode ) {
-                case 33: ; // pg up
-                case 37: ; // left
-                case 38:   // up
-                         next = steps.indexOf( active ) - 1;
-                         next = next >= 0 ? steps[ next ] : steps[ steps.length-1 ];
+        if ( event.keyCode == 9 || ( event.keyCode >= 32 && event.keyCode <= 34="" )="" ||="" (event.keycode="">= 37 && event.keyCode <= 40)="" )="" {="" var="" next="active;" switch(="" event.keycode="" case="" 33:="" ;="" pg="" up="" 37:="" left="" 38:="" active="" -="" 1;="">= 0 ? steps[ next ] : steps[ steps.length-1 ];
                          break;
                 case 9:  ; // tab
                 case 32: ; // space
@@ -321,3 +314,4 @@
     select(getElementFromUrl() || steps[0]);
 
 })(document, window);
+</=></=>
