@@ -1,101 +1,144 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!doctype html>
+
+<html lang="en">
 <head>
-    <title>Our Meeting Story</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <style type="text/css">
-        @font-face {
-            font-family: digit;
-            src: url('digital-7_mono.ttf') format("truetype");
-        }
-    </style>
-    <link href="default.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="jquery.js"></script>
-    <script type="text/javascript" src="garden_dev.js"></script>
-    <script type="text/javascript" src="functions_dev.js"></script>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=1024" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<title>关于我 | 向阳</title>
+
+	<meta name="description" content="I am @onevcat, a Unity3D/iOS/Mac programmer from China and working in Japan." />
+	<meta name="author" content="Wei Wang" />
+
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+	<link href="styles.css" rel="stylesheet" />
+
+	<link rel="shortcut icon" href="favicon.png" />
+	<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+	<base target="_blank">
 </head>
 
-<body>
-<div id="mainDiv">
-    <div id="content">
-        <div id="code">
-            <span class="comments">/**</span><br />
-            <span class="space"/><span class="comments">写给自己的表白信</span><br />
-            <span class="space"/><span class="comments">未来的一天要幸福</span><br />
-            <span class="space"/><span class="comments">也祝大家都幸福~</span><br />
-            Boy i = <span class="keyword">new</span>Boy (<span class="string">"XXX"</span>);<br />
-            Girl u = <span class="keyword">new</span> Girl(<span class="string">"huihui"</span>);<br />
-            <span class="comments">//某年某月某日 </span><br />
-            i.love(u);<br />
-            <span class="comments">//某年某月某日</span><br />
-            u.accepted();<br />
-            <span class="comments">//某年某月某日</span><br />
-            i.miss(u);<br />
-            <span class="comments">//某年某月某日</span><br />
-            i.takeCareOf(u);<br />
-            <span class="keyword">boolean</span> isHesitate = <span class="keyword">true</span>;<br />
-            <span class="keyword">while</span> (isHesitate) {<br />
-            <span class="placeholder"/>i.waitFor(u);<br />
-            <span class="placeholder"/><span class="comments">// I think it is an important decision</span><br />
-            <span class="placeholder"/><span class="comments">// and you should think it over.</span><br />
-            <span class="placeholder"/>isHesitate = u.thinkOver();<br />
-            }<br />
-            <span class="comments">// After a romantic wedding, we will live happily ever after.</span><br />
-            i.marry(u);<br />
-            i.liveHappilyWith(u);<br />
-        </div>
-        <div id="loveHeart">
-            <canvas id="garden"></canvas>
-            <div id="words">
-                <div id="messages">
-                    huihui, I have fallen in love with you for
-                    <div id="elapseClock"></div>
-                </div>
-                <div id="loveu">
-                    Love u forever and ever.<br/>
-                    <div class="signature">- XXXX</div>
-                </div>
-            </div>
-        </div>
-    </div>
+<body class="impress-not-supported">
+
+<div class="fallback-message">
+	<p>为了获取最佳效果，请使用最新版的<b>Chrome</b>, <b>Safari</b> 或 <b>Firefox</b> 浏览器</p>
+	<p>珍爱生命，保护地球，远离IE。空格键跳转</p>
 </div>
-<script type="text/javascript">
-    var offsetX = $("#loveHeart").width() / 2;
-    var offsetY = $("#loveHeart").height() / 2 - 55;
-    var displayMode = 1;
-    var together = new Date();
-    together.setFullYear(2016, 1, 16);
-    together.setHours(20);
-    together.setMinutes(0);
-    together.setSeconds(0);
-    together.setMilliseconds(0);
 
-//    $("#loveHeart").click(function(){
-//        displayMode *= -1;
-//        timeElapse(together, displayMode);
-//    });
+<div id="impress">
 
-    if (!document.createElement('canvas').getContext) {
-        var msg = document.createElement("div");
-        msg.id = "errorMsg";
-        msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+";
-        document.body.appendChild(msg);
-        $("#code").css("display", "none")
-        document.execCommand("stop");
-    } else {
-        setTimeout(function () {
-            adjustWordsPosition();
-            startHeartAnimation();
-        }, 5000);
+	<div id="welcome" class="step" data-x="-2000" data-y="-2500">
+		<p>欢迎来到</p>
+		<p><span class="title"><b>向阳花的土地</b></span></p>
+		<p><span class="footnote"><sup>*</sup>我叫<span class="name">裴灵晖</span>，这里是我的巢</span></p>
+	</div>
 
-        timeElapse(together, displayMode);
-        setInterval(function () {
-            timeElapse(together, displayMode);
-        }, 500);
+	<div id="me" class="step" data-x="0" data-y="-2500">
+		<b class="now_me">现在的我：</b>
+		<ul>
+			<li><b class="unity">即将毕业的学生</b></li>
+			<li><b class="ios">iOS学习者</b></li>
+			<li><b class="photo">一名运动爱好者</b></li>
+		</ul>
+	</div>
 
-        adjustCodePosition();
-        $("#code").typewriter();
-    }
+	<div id="whereiam" class="step" data-x="850" data-y="3000" data-rotate="90" data-scale="3">
+		<p>长于<span class="kunming">山西</span></p>
+		<p><span class="born">一个四季分明的城市</span></p>
+		<p>本科就读<span>天津</span></p>
+		<p><span class="study">习惯了津城的繁华</span></p>
+		<p>有幸<span>来到浙大软院</span></p>
+	</div>
+
+	<div id="japan" class="step" data-x="3500" data-y="2100" data-rotate="180" data-scale="4">
+		<p>学习<b class="trans">思考</b><p>
+		<p>如何度过生命的每一秒<sup>*</sup>的同时，也在寻求如何才能使生活更有意义<sup>**</sup></p>
+		<p><span class="footnote">*其实只是想要看到不同的风景</span></p>
+	</div>
+
+	<div id="world" class="step" data-x="-100" data-y="2900"  data-z="900" data-rotate="-90" data-scale="5">
+		<p>有时候会觉得，世界真的很小</p>
+	</div>
+
+	<div id="meet" class="step" data-x="1300" data-y="6000" data-z="2400" data-scale="6">
+		<p>也许我们就在某时某地</p>
+		<p>曾经擦肩而过</p>
+		<p>而你我，却浑然不觉</p>
+	</div>
+
+	<div id="tiny" class="step" data-x="1300" data-y="6000" data-z="-3000" data-rotate="300" data-scale="1">
+		<p>但是</p>
+	</div>
+
+	<div id="comein" class="step" data-x="0" data-y="7000" data-z="-3000" data-rotate="300">
+		<p>从此刻开始，从您踏入<a href="http://peilinghui.com">向阳花的土地</a>开始</p>
+		<p>我们的生活便有了<b>交集</b></p>
+	</div>
+
+	<div id="mywords" class="step" data-x="4500" data-y="3500" data-z="3000" data-rotate="160">
+		<p>也常常也会纠结</p>
+		<p>自己是为何选择走上程序员这条不归路的</p>
+		<p>但既然要做就一定要当做喜欢的事来做</p>
+	</div>
+
+	<div id="grow" class="step" data-x="3500" data-y="-850" data-z="3000" data-rotate="270" data-scale="6">
+		<p>只要每天都能做自己喜欢的事</p>
+		<p><b>就不会觉得累了，甚至还会发现乐趣</b></p>
+	</div>
+
+	<div id="knowme" class="step" data-x="-6000" data-y="-800" data-z="0" data-rotate="0" data-scale="1">
+		<p>只希望</p>
+		<p>能不断的前进</p>
+	</div>
+
+	<div id="prizeme" class="step" data-x="-6000" data-y="-500" data-z="-500" data-rotate-x="-40" data-rotate-y="10" data-scale="2">
+		<p><span class="horse">也许前方就能看到不一样的世界</span> <span class="moutain">不一样的风景</span> <span class="hope">感谢</span> <span class="youare">您</span> <span class="my">能在百忙中来看看我</span> <b></p>
+	</div>
+
+	<div id="findme" class="step" data-x="-6000" data-y="1000" data-scale="4">
+		<p>您可以在<a href="http://weibo.com/2402463137/profile">新浪微博</a>，<a href="https://twitter.com/peilinghuibest1">Twitter</a>或者<a href="https://github.com/peilinghui">Github</a>上找到我</p>
+	</div>
+
+	<!--<div id="subcribe" class="step" data-x="-6000" data-y="3100" data-rotate="180" data-scale="4">-->
+		<!--<p>如果您有兴趣持续关注本站，可以添加本站的<a href="http://onevcat.com/rss">RSS</a></p>-->
+		<!--<p>当然也欢迎您通过<a href="http://eepurl.com/wNSkj">邮件订阅</a>本站。</p>-->
+		<!--<p><span class="adv">这样<del>我就可以光明正大地给您发送我的app的广告了</del>您就可以第一时间看到本站的新文章了</span></p>-->
+	<!--</div>-->
+
+	<div id="one-more-thing" class="step" data-x="-1500" data-y="-1100" data-z="0" data-scale="2">
+		<p>One More Thing</p>
+		<p>其实是一句话，想分享给您</p>
+	</div>
+
+	<div id="motto" class="step" data-x="0" data-y="1500" data-z= "6000" data-scale="5">
+		<p>不论您走到哪儿</p>
+		<p>都相信明天会更好！</p>
+		<p><b>明天的太阳依旧灿烂！</b></p>
+	</div>
+
+
+	<div id="back" class="step" data-x="-6000" data-y="5200" data-scale="2">
+		<p>谢谢您的来访</p>
+		<p>点击<a href="http://peilinghui.com">这里</a>返回</p>
+	</div>
+
+	<div id="overview" class="step" data-x="0" data-y="2500" data-scale="16">
+	</div>
+
+</div>
+
+<div class="hint">
+	<p>使用空格或方向键继续</p>
+</div>
+<script>
+	if ("ontouchstart" in document.documentElement) {
+		document.querySelector(".hint").innerHTML = "<p>在左侧或右侧点击继续</p>";
+	}
 </script>
+
+<script src="impress.js"></script>
+<script>impress().init();</script>
+
 </body>
 </html>
