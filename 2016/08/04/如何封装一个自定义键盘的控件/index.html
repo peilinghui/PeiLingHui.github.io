@@ -3,18 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>ACM练习 | 向着阳光奔跑</title>
+  <title>如何封装一个自定义键盘的控件 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="做一些简单的ACM题。">
+  <meta name="description" content="自定义控件，刚刚学起来。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ACM练习">
-<meta property="og:url" content="http://peilinghui.com/2016/03/14/ACM练习/index.html">
+<meta property="og:title" content="如何封装一个自定义键盘的控件">
+<meta property="og:url" content="http://peilinghui.com/2016/08/04/如何封装一个自定义键盘的控件/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="做一些简单的ACM题。">
-<meta property="og:updated_time" content="2016-03-28T14:37:23.000Z">
+<meta property="og:description" content="自定义控件，刚刚学起来。">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E9%94%AE%E7%9B%981">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E9%94%AE%E7%9B%982">
+<meta property="og:updated_time" content="2016-08-04T15:37:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ACM练习">
-<meta name="twitter:description" content="做一些简单的ACM题。">
+<meta name="twitter:title" content="如何封装一个自定义键盘的控件">
+<meta name="twitter:description" content="自定义控件，刚刚学起来。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -248,11 +250,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-ACM练习" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-如何封装一个自定义键盘的控件" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/03/14/ACM练习/" class="article-date">
-      <time datetime="2016-03-14T07:59:15.000Z" itemprop="datePublished">2016-03-14</time>
+      <a href="/2016/08/04/如何封装一个自定义键盘的控件/" class="article-date">
+      <time datetime="2016-08-04T15:25:50.000Z" itemprop="datePublished">2016-08-04</time>
 </a>
     </div>
   
@@ -265,7 +267,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ACM练习
+      如何封装一个自定义键盘的控件
     </h1>
   
 
@@ -273,16 +275,8 @@
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/算法编程/">算法编程</a>
-    </div>
-
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li></ul>
-    </div>
-
         <div class="clearfix"></div>
       </div>
       
@@ -290,18 +284,34 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>做一些简单的ACM题。<br><a id="more"></a></p>
-<h3 id="1928-日期差值"><a href="#1928-日期差值" class="headerlink" title="1928. 日期差值"></a>1928. 日期差值</h3><p>有两个日期，求两个日期之间的天数，如果两个日期是连续的我们规定他们之间的天数为两天。<br>输入<br>有多组数据，每组数据有两行，分别表示两个日期，形式为YYYYMMDD</p>
-<p>输出<br>每组数据输出一行，即日期差值</p>
-<p>样例输入<br>20130101<br>20130105<br>样例输出<br>5<br>答案：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="comment">//预先存好每个月的天数，第一列为平年的天数，第二列为闰年的天数</span></span><br><span class="line"><span class="keyword">int</span> m[<span class="number">13</span>][<span class="number">2</span>]=&#123;<span class="number">0</span>,<span class="number">0</span>,</span><br><span class="line">              <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">              <span class="number">28</span>,<span class="number">29</span>,</span><br><span class="line">              <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">              <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">              <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">              <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">              <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">              <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">              <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">              <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">              <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">              <span class="number">31</span>,<span class="number">31</span>&#125;;</span><br><span class="line"><span class="comment">//判断某一年是不是闰年</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">leap</span><span class="params">(<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (y%<span class="number">4</span>==<span class="number">0</span>&amp;&amp;y%<span class="number">100</span>!=<span class="number">0</span>)||(y%<span class="number">400</span> == <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//计算某个日期在本年已经过了多少天</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">day</span><span class="params">(<span class="keyword">int</span> Y,<span class="keyword">int</span> M,<span class="keyword">int</span> D)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>,i,d;<span class="comment">//k为标识平年还是闰年，闰年为1，i为月份，d为天数</span></span><br><span class="line">    <span class="keyword">if</span> (leap(Y)) k=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (d=<span class="number">0</span>,i=<span class="number">1</span>; i&lt;M;i++) &#123;</span><br><span class="line">        d+=m[i][k];</span><br><span class="line">    &#125;</span><br><span class="line">        d+=D;</span><br><span class="line">        <span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> Y1,M1,D1,Y2,M2,D2,i,d1,d2;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%4d%2d%2d"</span>,&amp;Y1,&amp;M1,&amp;D1)!=EOF) &#123;<span class="comment">//读取第一个日期</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%4d%2d%2d"</span>,&amp;Y2,&amp;M2,&amp;D2);<span class="comment">//读取第二个日期</span></span><br><span class="line">        d1 = day(Y1, M1, D1);</span><br><span class="line">        d2 = day(Y2, M2, D2);</span><br><span class="line">        <span class="comment">//选一个基准从0年1月1日到Y1-1年的12月31日一共有多少天，并累加到d1</span></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; Y1; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (leap(i))d1 +=<span class="number">366</span>;</span><br><span class="line">            <span class="keyword">else</span> d1 +=<span class="number">365</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//选一个基准从0年1月1日到Y2-1年的12月31日一共有多少天，并累加到d1</span></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; Y2; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (leap(i))d2 +=<span class="number">366</span>;</span><br><span class="line">            <span class="keyword">else</span> d2 +=<span class="number">365</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//最后俩个天数做差绝对值加1</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,(<span class="keyword">int</span>)<span class="built_in">fabs</span>(d1-d2)+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="1933-输出梯形"><a href="#1933-输出梯形" class="headerlink" title="1933. 输出梯形"></a>1933. 输出梯形</h3><p>输出一个高度h，输出一个高为h，上底边为h的梯形。<br>输入<br>一个整数h(1&lt;=h&lt;=1000)<br>输出<br>h所对应的梯形。<br>样例输入<br>5<br>样例输出</p>
-<pre><code>    *****
-  *******
-*********
-</code></pre><hr>
-<hr>
-<p>答案：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h,i,j;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;h)!=EOF) &#123;<span class="comment">//当题目没有说明有多少数据需要读入时，用这种方法</span></span><br><span class="line">        <span class="keyword">for</span> (i =<span class="number">1</span>; i &lt;= h; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (j =<span class="number">1</span> ; j &lt;=(h-i)*<span class="number">2</span>; j++)<span class="built_in">printf</span>(<span class="string">" "</span>);</span><br><span class="line">            <span class="keyword">for</span> (j&gt;(h-i)*<span class="number">2</span>; j &lt;=h+(h-<span class="number">1</span>)*<span class="number">2</span>; j++) <span class="built_in">printf</span>(<span class="string">"*"</span>);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="1934-找x"><a href="#1934-找x" class="headerlink" title="1934.找x"></a>1934.找x</h3><p>题目：输入一个数n<strong>(1=&lt;n&lt;=200)</strong>,然后输入n个数值各不相同的数，再输入一个值x,输出这个值在这个数组中的下标（从0开始，若不在数组中则输出-1）<br>样例输入：<br>4<br>1 2 3 4<br>3<br>样例输出：2<br>思路：遍历查找，找到x的时候就停止<br>答案：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,x,i,a[<span class="number">200</span>];</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)!=EOF) &#123;<span class="comment">//当题目没有说明有多少数据需要读入时，用这种方法</span></span><br><span class="line">        <span class="keyword">for</span> (i =<span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;x);</span><br><span class="line">            <span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (a[i]==x) &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,i);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span> (i == n)  <span class="built_in">puts</span>(<span class="string">"-1"</span>);           </span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <p>自定义控件，刚刚学起来。</p>
+<a id="more"></a>
+<p>可以封装一个键盘控件，然后作为一个pod，引入所需要使用的工程里面。<br>写法：<br><code>pod &quot;TDFKeyboard&quot;, :git =&gt; &#39;git@git.....:ios/TDFKeyboard.git&#39;, :branch =&gt; &#39;master&#39;</code><br>对于podfile文件的格式可以参考这篇文章：<a href="http://www.jianshu.com/p/8af475c4f717" target="_blank" rel="external">http://www.jianshu.com/p/8af475c4f717</a></p>
+<p>此键盘主要用于输入整数和浮点数还有IP地址。<br>主要是写了两种键盘，一种是不带“-”号的数字键盘1，一种是带“-”号的数字键盘2。如图：<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E9%94%AE%E7%9B%981" alt=""></p>
+<p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E9%94%AE%E7%9B%982" alt=""></p>
+<p>上面的响应的是系统的UITextField的输入，下面的响应的是自定义的TextView。  </p>
+<ol>
+<li><p>首先在ViewController的viewDidLoad方法中：<br>初始化键盘1，然后把键盘的responder设置为系统的textField。<br>然后初始化自定义的TextView，初始化键盘2，然后把自定义的inputView设置为自定义键盘。</p>
+</li>
+<li><p>两个键盘的父类：Keyboard（UIView的子类）<br>其中用枚举设置键盘输入类型有整数，浮点型和IP地址型。<br><code>@property(weak,nonatomic)UIView&lt;UIKeyInput&gt; *responder;</code><br>在UIKit中有UIKeyInput(是一个协议@protocol)<br>UIView 的首要问题就是既能从代码中初始化，也能从 xib 中初始化，两者有何不同?<br>UIView 是支持 NSCoding 协议的，当在 xib 或 storyboard 里存在一个 UIView 的时候，其实是将 UIView 序列化到文件里（xib 和 storyboard 都是以 XML 格式来保存的），加载的时候反序列化出来，所以：</p>
+<pre><code>当从代码实例化 UIView 的时候，initWithFrame 会执行；
+当从文件加载 UIView 的时候，initWithCoder 会执行。
+</code></pre><p>设置view的布局：<br><code>self.autoresizingMask = UIViewAutoresizingNone;</code><br>解释：UIView中的autoresizingMask属性，枚举类型，定义如下：主要作用是自动调整子控件与父控件中间的位置，宽和高。  </p>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">NS_OPTIONS</span><span class="params">(NSUInteger, UIViewAutoresizing)</span> </span>&#123;</span><br><span class="line">    UIViewAutoresizingNone                 = <span class="number">0</span>,    <span class="comment">//不自动调整</span></span><br><span class="line">    UIViewAutoresizingFlexibleLeftMargin   = <span class="number">1</span> &lt;&lt; <span class="number">0</span>,   <span class="comment">// 自动调整与superView左边的距离，保证与superView右边的距离不变</span></span><br><span class="line">    UIViewAutoresizingFlexibleWidth        = <span class="number">1</span> &lt;&lt; <span class="number">1</span>,</span><br><span class="line">    UIViewAutoresizingFlexibleRightMargin  = <span class="number">1</span> &lt;&lt; <span class="number">2</span>,</span><br><span class="line">    UIViewAutoresizingFlexibleTopMargin    = <span class="number">1</span> &lt;&lt; <span class="number">3</span>,  <span class="comment">//自动调整与superView顶部的距离，保证与superView底部的距离不变。</span></span><br><span class="line">    UIViewAutoresizingFlexibleHeight       = <span class="number">1</span> &lt;&lt; <span class="number">4</span>,    <span class="comment">//自动调整自己的高度，保证与superView顶部和底部的距离不变</span></span><br><span class="line">    UIViewAutoresizingFlexibleBottomMargin = <span class="number">1</span> &lt;&lt; <span class="number">5</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>UIViewAutoresizingFlexibleLeftMargin  |UIViewAutoresizingFlexibleRightMargin 自动调整与superView左边的距离，保证与左边的距离和右边的距离和原来距左边和右边的距离的比例不变。比如原来距离为20，30，调整后的距离应为68，102，即68/20=102/30。</p>
+<ol>
+<li>子类有键盘1(TDFNumbericKeyboard)和键盘2(TDFSymbolNumbericKeyboard):<br>在子类中实现了UIKeyInput协议方法，其中默认的方法有：</li>
+</ol>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> (<span class="constant">BOOL</span>)hasText;</span><br><span class="line"></span>-<span class="ruby"> (void)<span class="symbol">insertText:</span>(<span class="constant">NSString</span> *)text;</span><br><span class="line"></span>-<span class="ruby"> (void)deleteBackward;</span></span><br></pre></td></tr></table></figure>
+<p>然后实现xib中的按钮的点击action事件。</p>
+<ol>
+<li>在自定义textView中定义协议代理并实现其方法：<br>其中有手势：UITapGestureRecognizer，当然这只是手势的其中一个。<br>下面还有几个如：<br>UITapGestureRecognizer<br>UIPinchGestureRecognizer<br>UIRotationGestureRecognizer<br>UISwipeGestureRecognizer<br>UIPanGestureRecognizer<br>UILongPressGestureRecognizer<br>从命名上不难了解這些类別所对应代表的手势，分別是 Tap（点一下）、Pinch（二指往內或往外拨动）、Rotation（旋转）、Swipe（滑动，快速移动）、Pan （拖移，慢速移动）以及 LongPress（长按）。  </li>
+</ol>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UITapGestureRecognizer</span> *tap = [[<span class="built_in">UITapGestureRecognizer</span> alloc]initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(becomeFirstResponder)];</span><br><span class="line">       [<span class="keyword">self</span> addGestureRecognizer:tap];</span><br><span class="line">       [<span class="keyword">self</span> addSubview:<span class="keyword">self</span><span class="variable">.textLabel</span>];</span><br></pre></td></tr></table></figure>
+<p>代码地址：<a href="https://github.com/peilinghui/PLHKeyboard" target="_blank" rel="external">https://github.com/peilinghui/PLHKeyboard</a>  </p>
+<p>参考：<br>如何设计一个 iOS 控件?(iOS 控件完全解析) ：<a href="http://blog.csdn.net/zhangao0086/article/details/45622875" target="_blank" rel="external">http://blog.csdn.net/zhangao0086/article/details/45622875</a>      ·<br>ios手势：<a href="http://blog.sina.com.cn/s/blog_7c336a8301011b3e.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_7c336a8301011b3e.html</a></p>
 
       
     </div>
@@ -310,13 +320,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/03/14/ACM练习/">ACM练习</a></p>
+        <p><span>本文标题:</span><a href="/2016/08/04/如何封装一个自定义键盘的控件/">如何封装一个自定义键盘的控件</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年03月14日 - 15时59分</p>
-        <p><span>最后更新:</span>2016年03月28日 - 22时37分</p>
+        <p><span>发布时间:</span>2016年08月04日 - 23时25分</p>
+        <p><span>最后更新:</span>2016年08月04日 - 23时37分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/03/14/ACM练习/" title="ACM练习">http://peilinghui.com/2016/03/14/ACM练习/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/14/ACM练习/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/08/04/如何封装一个自定义键盘的控件/" title="如何封装一个自定义键盘的控件">http://peilinghui.com/2016/08/04/如何封装一个自定义键盘的控件/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/08/04/如何封装一个自定义键盘的控件/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -330,15 +340,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/03/14/数据结构/">
-                    数据结构
+                <a href="/2016/10/12/iOS的开发设计模式/">
+                    iOS的开发设计模式
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/03/11/PAT练习/">
-                    PAT练习
+                <a href="/2016/07/02/TableView的一些事/">
+                    TableView的一些事
                 </a>
             </div>
         
@@ -349,7 +359,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1928-日期差值"><span class="toc-number">1.</span> <span class="toc-text">1928. 日期差值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1933-输出梯形"><span class="toc-number">2.</span> <span class="toc-text">1933. 输出梯形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1934-找x"><span class="toc-number">3.</span> <span class="toc-text">1934.找x</span></a></li></ol>
+    
 </div>
 <style>
     .left-col .switch-btn {
@@ -411,7 +421,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/03/14/ACM练习/" data-title="ACM练习" data-url="http://peilinghui.com/2016/03/14/ACM练习/"></div>
+    <div class="ds-thread" data-thread-key="2016/08/04/如何封装一个自定义键盘的控件/" data-title="如何封装一个自定义键盘的控件" data-url="http://peilinghui.com/2016/08/04/如何封装一个自定义键盘的控件/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -435,7 +445,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/03/14/数据结构/" title="上一篇: 数据结构">
+            <a href="/2016/10/12/iOS的开发设计模式/" title="上一篇: iOS的开发设计模式">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -443,7 +453,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/03/11/PAT练习/" title="下一篇: PAT练习">
+            <a href="/2016/07/02/TableView的一些事/" title="下一篇: TableView的一些事">
                 <i class="fa fa-angle-right"></i>
             </a>
         
