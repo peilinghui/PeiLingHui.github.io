@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://peilinghui.com/"/>
-  <updated>2016-10-12T13:33:33.000Z</updated>
+  <updated>2016-08-04T15:37:09.000Z</updated>
   <id>http://peilinghui.com/</id>
   
   <author>
@@ -14,92 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>iOS的开发设计模式</title>
-    <link href="http://peilinghui.com/2016/10/12/iOS%E7%9A%84%E5%BC%80%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://peilinghui.com/2016/10/12/iOS的开发设计模式/</id>
-    <published>2016-10-12T12:09:28.000Z</published>
-    <updated>2016-10-12T13:33:33.000Z</updated>
-    
-    <content type="html">&lt;p&gt;iOS的设计模式是在业务不断扩大的同时需要考虑的问题。好的APP必须有有更好的设计模式才能提供更好的用户体验感。&lt;/p&gt;
-&lt;h2 id=&quot;Objective-C编程之道：iOS-设计模式（读书笔记）&quot;&gt;&lt;a href=&quot;#Objective-C编程之道：iOS-设计模式（读书笔记）&quot; class=&quot;headerlink&quot; title=&quot;Objective-C编程之道：iOS 设计模式（读书笔记）&quot;&gt;&lt;/a&gt;Objective-C编程之道：iOS 设计模式（读书笔记）&lt;/h2&gt;&lt;h4 id=&quot;InfoQ-iOS应用架构谈-推荐指数-5星&quot;&gt;&lt;a href=&quot;#InfoQ-iOS应用架构谈-推荐指数-5星&quot; class=&quot;headerlink&quot; title=&quot;InfoQ - iOS应用架构谈 - 推荐指数 5星&quot;&gt;&lt;/a&gt;InfoQ - iOS应用架构谈 - 推荐指数 5星&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://casatwy.com/iosying-yong-jia-gou-tan-kai-pian.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS应用架构谈（一）：架构设计的方法论&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://casatwy.com/iosying-yong-jia-gou-tan-viewceng-de-zu-zhi-he-diao-yong-fang-an.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS应用架构谈（二）：View层的组织和调用方案&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://casatwy.com/iosying-yong-jia-gou-tan-wang-luo-ceng-she-ji-fang-an.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS应用架构谈（三）：网络层设计方案&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://casatwy.com/iosying-yong-jia-gou-tan-ben-di-chi-jiu-hua-fang-an-ji-dong-tai-bu-shu.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS应用架构谈（四）：本地持久化方案及动态部署&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;App-架构设计实践&quot;&gt;&lt;a href=&quot;#App-架构设计实践&quot; class=&quot;headerlink&quot; title=&quot;App 架构设计实践&quot;&gt;&lt;/a&gt;App 架构设计实践&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.sdk.cn/news/2023&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;饿了么移动APP的架构演进&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.infoq.com/cn/news/2016/03/lixianhui-interview&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;滴滴iOS客户端的架构演变之路&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&amp;amp;mid=403412672&amp;amp;idx=1&amp;amp;sn=2cceb873ee4640830aad3261ae177df5&amp;amp;scene=0&amp;amp;key=710a5d99946419d9ba63d1d480eb3f0c2d49be9d244f34e460226b2f4caaa02565fc4d16af8f64ca79085f4db276e89f&amp;amp;ascene=0&amp;amp;uin=MjY1NTg0NzMyMQ%3D%3D&amp;amp;devicetype=iMac+MacBookPro11%2C4+OSX+OSX+10.11.4+build(15E65&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;携程移动App架构优化之旅&lt;/a&gt;&amp;amp;version=11020201&amp;amp;pass_ticket=JxdNVNrS%2BerOsvJdjWQGHAqgDkV2%2FmL9OHAETsCT%2Bvp0%2B%2FLiXasOwpgYIsgQQn8O)&lt;a href=&quot;http://www.stuq.org/ppt/frame_show/659/4c79d4c7eb2061f8790b5e7e6fe42703#/1&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;PPT&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzA3ODg4MDk0Ng==&amp;amp;mid=2651112273&amp;amp;idx=1&amp;amp;sn=893a66a04e541a99b7bc4d7cf227e2f7#rd&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;新浪微博iOS客户端架构与优化之路&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzA3ODg4MDk0Ng==&amp;amp;mid=2651112231&amp;amp;idx=1&amp;amp;sn=4578ff1009ee774093c45a3d8c19dd58#rd&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Weex详解：移动端高性能动态化方案&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;组件化设计-casatwy-VS-Limboy&quot;&gt;&lt;a href=&quot;#组件化设计-casatwy-VS-Limboy&quot; class=&quot;headerlink&quot; title=&quot;组件化设计 - casatwy VS Limboy&quot;&gt;&lt;/a&gt;组件化设计 - casatwy VS Limboy&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://limboy.me/ios/2016/03/10/mgj-components.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;蘑菇街 App 的组件化之路&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://limboy.me/ios/2016/03/14/mgj-components-continued.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;蘑菇街 App 的组件化之路·续&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://casatwy.com/iOS-Modulization.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS应用架构谈（五）：组件化方案&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://blog.cnbang.net/tech/3080/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS 组件化方案探索&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://chuansong.me/n/320688951236&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;糯米移动组件架构演进之路&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;####IM架构梳理&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/skymingst/article/details/49448717&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;IM架构梳理&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MzAwNjQwNzU2NQ==&amp;amp;mid=402441278&amp;amp;idx=1&amp;amp;sn=af82781e3e6b694d82ac8454dbe3ae67&amp;amp;scene=0&amp;amp;key=710a5d99946419d9ebeb6a76103f5b3c9a2a96d61dd040e7eaacca508005e842656a35d9b9664ec603be12ce0c3f25c7&amp;amp;ascene=0&amp;amp;uin=MjY1NTg0NzMyMQ%3D%3D&amp;amp;devicetype=iMac+MacBookPro11%2C4+OSX+OSX+10.11.3+build(15D21&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;58到家消息系统设计与开发实践&lt;/a&gt;&amp;amp;version=11020201&amp;amp;pass_ticket=TlXzGHRFhCo4eytB1hbIW0fFZq50RM%2BdZKQ7eajgE1C8Lc0aRV7IIgbSt6S4h5eZ)&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&amp;amp;mid=205775353&amp;amp;idx=1&amp;amp;sn=ecc1f32ec9585f2c7672a27dfbc726ca&amp;amp;scene=1&amp;amp;srcid=0317WNL1c9K3dhx6rqsrhXL5&amp;amp;key=710a5d99946419d970963f96a056ab527d7e0a5ec70e2094cbb32922797076e77c9282e8ead417792c53ca5798beac51&amp;amp;ascene=0&amp;amp;uin=MjY1NTg0NzMyMQ%3D%3D&amp;amp;devicetype=iMac+MacBookPro11%2C4+OSX+OSX+10.11.3+build(15D21&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;im协议设计选型（上）&lt;/a&gt;&amp;amp;version=11020201&amp;amp;pass_ticket=TlXzGHRFhCo4eytB1hbIW0fFZq50RM%2BdZKQ7eajgE1C8Lc0aRV7IIgbSt6S4h5eZ)&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&amp;amp;mid=205034544&amp;amp;idx=1&amp;amp;sn=26bbbf4a49ae6b6c4b8c3cba7f79764f&amp;amp;scene=1&amp;amp;srcid=0317zhrXNGEHs2T4xAjbCoeO&amp;amp;key=710a5d99946419d9f10782b19962c97c88912b052aadce02ef6e5d82a2b2814aa055d499a22072c468f7c1d3f085cc8a&amp;amp;ascene=0&amp;amp;uin=MjY1NTg0NzMyMQ%3D%3D&amp;amp;devicetype=iMac+MacBookPro11%2C4+OSX+OSX+10.11.3+build(15D21&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;webim如何保证消息的可靠投递&lt;/a&gt;&amp;amp;version=11020201&amp;amp;pass_ticket=TlXzGHRFhCo4eytB1hbIW0fFZq50RM%2BdZKQ7eajgE1C8Lc0aRV7IIgbSt6S4h5eZ)&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&amp;amp;mid=205001346&amp;amp;idx=1&amp;amp;sn=fd87cc010bf4548589c9fabea80c4cad&amp;amp;scene=1&amp;amp;srcid=0317oohatukhxTbBwWHKP6cU&amp;amp;key=710a5d99946419d9708e602d966c3a50e34f09ca848c5b3bf380b79bc6b34ad6e84062ed43a22333531a6525cc8fa07d&amp;amp;ascene=0&amp;amp;uin=MjY1NTg0NzMyMQ%3D%3D&amp;amp;devicetype=iMac+MacBookPro11%2C4+OSX+OSX+10.11.3+build(15D21&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;webim如何用轮询保证消息绝对实时&lt;/a&gt;&amp;amp;version=11020201&amp;amp;pass_ticket=TlXzGHRFhCo4eytB1hbIW0fFZq50RM%2BdZKQ7eajgE1C8Lc0aRV7IIgbSt6S4h5eZ)&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MjM5MzA0ODkyMA==&amp;amp;mid=405991976&amp;amp;idx=1&amp;amp;sn=4bf8982f2dc2ea2df62c312e4fe508f4&amp;amp;scene=0&amp;amp;key=710a5d99946419d98e3fd2dc46318f0db3ec6994c949bcf1ed7aa9792993c67eb1388d95f0019d30c30a407b14211064&amp;amp;ascene=0&amp;amp;uin=MjY1NTg0NzMyMQ%3D%3D&amp;amp;devicetype=iMac+MacBookPro11%2C4+OSX+OSX+10.11.3+build(15D21&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;一套简洁的即时通信 (IM) 系统&lt;/a&gt;&amp;amp;version=11020201&amp;amp;pass_ticket=TlXzGHRFhCo4eytB1hbIW0fFZq50RM%2BdZKQ7eajgE1C8Lc0aRV7IIgbSt6S4h5eZ)&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&amp;amp;mid=205117508&amp;amp;idx=1&amp;amp;sn=71eecf04581e68deee4a44f7786309f5&amp;amp;scene=1&amp;amp;srcid=0317jpSQhhxbYvM2Kz6vlhOK&amp;amp;key=710a5d99946419d9c798c52d8b5dd4f67c1c4b144bb07217906e72260d353ac92559a0451d7548f74cc70ca9e0223637&amp;amp;ascene=0&amp;amp;uin=MjY1NTg0NzMyMQ%3D%3D&amp;amp;devicetype=iMac+MacBookPro11%2C4+OSX+OSX+10.11.3+build(15D21&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;微博与im消息实现对比[随想]&lt;/a&gt;&amp;amp;version=11020201&amp;amp;pass_ticket=TlXzGHRFhCo4eytB1hbIW0fFZq50RM%2BdZKQ7eajgE1C8Lc0aRV7IIgbSt6S4h5eZ)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;####伯乐在线-翻译Ray Wenderlich文章：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://blog.jobbole.com/48115/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS设计模式之一：MVC模式和单例模式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://blog.jobbole.com/48166/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS设计模式之二：外观模式和装饰器模式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://blog.jobbole.com/48254/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS设计模式之三：适配器模式和观察者模式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://blog.jobbole.com/48179/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS设计模式之四：备忘录模式和命令模式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://blog.jobbole.com/55505/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS设计模式之观察者模式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://blog.jobbole.com/56439/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS设计模式反思之单例模式的进化-非翻译&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://blog.jobbole.com/20496/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;关于 23 种设计模式的有趣见解-非翻译&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;####官网资料：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://developer.apple.com/legacy/library/documentation/Cocoa/Conceptual/CocoaFundamentals/CocoaDesignPatterns/CocoaDesignPatterns.html#//apple_ref/doc/uid/TP40002974-CH6-SW6&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Cocoa Design Patterns&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://download.csdn.net/detail/sc_cheng/2981710&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Cocoa Design Patterns 中文翻译下载地址&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;####实战学习&lt;br&gt;最后推荐些可以帮助理解实战的开源项目：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/singro/v2ex&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;V2EX - V2EX iOS客户端，已上线项目&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/mozilla/firefox-ios&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Firox-IOS - Firox iOS客户端，用Swift写的&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/peter-iakovlev/Telegram&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Telegram - 一个非常牛XXX的开源社交项目&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/netease-im/NIM_iOS_Demo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;网易云信开源UI组件&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;####其他资源：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://objccn.io/issue-13/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;objccn - 架构 - 强烈推荐&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.cocoachina.com/programmer/20150617/12170.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;怎么面试架构师&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/zhuchaowe/EasyIOS&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;EasyIOS&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/uxyheaven/NativeAppFrameworkDesign&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;移动App架构设计&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://realm.io/cn/news/slug-marcus-zarra-exploring-mvcn-swift/?utm_source=tuicool&amp;amp;utm_medium=referral&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;探索 Swift 中的 MVC-N 模式&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;史上最全设计模式导学目录（完整版&quot;&gt;&lt;a href=&quot;#史上最全设计模式导学目录（完整版&quot; class=&quot;headerlink&quot; title=&quot;史上最全设计模式导学目录（完整版)&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://blog.csdn.net/lovelion/article/details/17517213&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;史上最全设计模式导学目录（完整版)&lt;/a&gt;&lt;/h4&gt;&lt;blockquote&gt;
-&lt;p&gt;强烈推荐，推荐指数五颗星，刘伟老师力作，讲的非常好，通俗易懂，而且举例的应用场景也非常恰当，遗憾的是样例代码是 Java 写的，不过模式是通用的。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&quot;图说设计模式&quot;&gt;&lt;a href=&quot;#图说设计模式&quot; class=&quot;headerlink&quot; title=&quot;图说设计模式&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://design-patterns.readthedocs.org/zh_CN/latest/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;图说设计模式&lt;/a&gt;&lt;/h4&gt;&lt;blockquote&gt;
-&lt;p&gt;推荐指数4颗星，讲了不少UML的相关知识，能更好的理解设计模式中时序图等Mac下的UML工具推荐 StarUML ,做的也不错。&lt;/p&gt;
-&lt;/blockquote&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;iOS的设计模式是在业务不断扩大的同时需要考虑的问题。好的APP必须有有更好的设计模式才能提供更好的用户体验感。&lt;/p&gt;
-&lt;h2 id=&quot;Objective-C编程之道：iOS-设计模式（读书笔记）&quot;&gt;&lt;a href=&quot;#Objective-C编程之道：iOS-设计模式（读
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>如何封装一个自定义键盘的控件</title>
@@ -1905,6 +1819,58 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
     
     
       <category term="多线程" scheme="http://peilinghui.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CocosPods</title>
+    <link href="http://peilinghui.com/2016/03/04/CocosPods/"/>
+    <id>http://peilinghui.com/2016/03/04/CocosPods/</id>
+    <published>2016-03-04T08:54:28.000Z</published>
+    <updated>2016-05-10T12:39:32.000Z</updated>
+    
+    <content type="html">&lt;p&gt;也在项目中用过一些第三方框架，第三方库，然后就知道了CocoaPods.&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;CocoaPods是什么？&quot;&gt;&lt;a href=&quot;#CocoaPods是什么？&quot; class=&quot;headerlink&quot; title=&quot;CocoaPods是什么？&quot;&gt;&lt;/a&gt;CocoaPods是什么？&lt;/h1&gt;&lt;p&gt;CocoaPods应该是iOS最常用最有名的类库管理工具.开发 iOS 项目不可避免地要使用第三方开源库，CocoaPods 的出现使得我们可以节省设置和更新第三方开源库的时间。&lt;a href=&quot;https://blog.cocoapods.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CocoaPod&lt;/a&gt;  &lt;/p&gt;
+&lt;h1 id=&quot;Cocoapods原理&quot;&gt;&lt;a href=&quot;#Cocoapods原理&quot; class=&quot;headerlink&quot; title=&quot;Cocoapods原理&quot;&gt;&lt;/a&gt;Cocoapods原理&lt;/h1&gt;&lt;p&gt;Pods项目最终会编译成一个名为 libPods.a 的文件，主项目只需要依赖这个 .a 文件即可。&lt;br&gt;对于资源文件，CocoaPods 提供了一个名为 Pods-resources.sh的 bash脚本，该脚本在每次项目编译的时候都会执行，将第三方库的各种资源文件复制到目标目录中。&lt;br&gt;CocoaPods 通过一个名为 Pods.xcconfig 的文件来在编译时设置所有的依赖和参数。&lt;/p&gt;
+&lt;h1 id=&quot;安装CocoaPods&quot;&gt;&lt;a href=&quot;#安装CocoaPods&quot; class=&quot;headerlink&quot; title=&quot;安装CocoaPods&quot;&gt;&lt;/a&gt;安装CocoaPods&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;要先确保电脑本地是否有 Ruby环境，因为CocoaPods运行于 Ruby之上，默认情况下，Mac 是自带了 Ruby 环境的，可以通过命令行 ruby -v查看当前Ruby的版本。&lt;br&gt;执行命令：&lt;br&gt; &lt;code&gt;$ ruby -v&lt;/code&gt;&lt;br&gt;已经安装了Ruby开发环境，那么在终端（Terminal）中使用以下命令即可直接安装：&lt;br&gt; &lt;code&gt;$ sudo gem install cocoapods&lt;/code&gt;&lt;br&gt; &lt;code&gt;$ pod setup&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装过程中可能遇到的问题&lt;br&gt;①执行完install命令半天没反应&lt;br&gt;这有可能是因为Ruby的默认源使用的是cocoapods.org，国内访问这个网址有时候会有问题，网上的一种解决方案是将远替换成淘宝的，替换方式如下：&lt;br&gt; &lt;code&gt;$ gem sources --remove https://rubygems.org/&lt;/code&gt;&lt;br&gt;//等有反应之后再敲入以下命令&lt;br&gt; &lt;code&gt;$ gem sources -a https://ruby.taobao.org/&lt;/code&gt;&lt;br&gt;要想验证是否替换成功了，可以执行：&lt;br&gt; &lt;code&gt;$ gem sources -l&lt;/code&gt;&lt;br&gt;正常的输出是：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%9B%BE1%EF%BC%88%E9%95%9C%E5%83%8F%EF%BC%89.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;②gem版本过老&lt;br&gt;gem是管理Ruby库和程序的标准包，如果它的版本过低也可能导致安装失败，解决方案自然是升级gem，执行下述命令即可：&lt;br&gt;    &lt;code&gt;$ sudo gem update --system&lt;/code&gt;&lt;br&gt;③安装完成后，执行pod setup命令时报错：&lt;br&gt;这就是路径设置的问题，可以通过执行：&lt;br&gt;    &lt;code&gt;$ rvm use ruby-1.9.3-p448&lt;/code&gt;&lt;br&gt;最近遇到问题：&lt;br&gt;$ sudo gem install cocoapods&lt;/p&gt;
+&lt;p&gt;ERROR: While executing gem … (Errno::EPERM)&lt;br&gt;Operation not permitted - /usr/bin/xcodeproj&lt;br&gt;解决方法：&lt;a href=&quot;https://github.com/CocoaPods/CocoaPods/issues/3692&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/CocoaPods/CocoaPods/issues/3692&lt;/a&gt;&lt;br&gt;&lt;code&gt;$ mkdir -p $HOME/Software/ruby&lt;/code&gt;&lt;br&gt;&lt;code&gt;$ export GEM_HOME=$HOME/Software/ruby&lt;/code&gt;&lt;br&gt;&lt;code&gt;$ gem install cocoapods&lt;/code&gt;&lt;br&gt;[…]&lt;br&gt;1 gem installed&lt;br&gt;&lt;code&gt;$ export PATH=$PATH:$HOME/Software/ruby/bin&lt;/code&gt;&lt;br&gt;&lt;code&gt;$ pod --version&lt;/code&gt;&lt;br&gt;0.39.0&lt;br&gt;或者：&lt;br&gt;&lt;code&gt;$ sudo gem install -n /usr/local/bin cocoapods&lt;/code&gt;&lt;br&gt;&lt;code&gt;$ sudo xcode-select --switch /Applications/Xcode.app&lt;/code&gt;&lt;br&gt;最后记得要执行命令：&lt;br&gt;&lt;code&gt;$ pod setup&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;升级CocoaPods&lt;br&gt;升级很简单，再次执行安装命令即可：&lt;br&gt; &lt;code&gt;$ sudo gem install cocoapods&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看pod版本输入命令：&lt;br&gt; &lt;code&gt;$ pod --version&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;至此，你本地文件夹下就有一个cocoapod文件夹。&lt;br&gt;    &lt;code&gt;$ cd ~/.cocoapods&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&quot;使用CocoaPods&quot;&gt;&lt;a href=&quot;#使用CocoaPods&quot; class=&quot;headerlink&quot; title=&quot;使用CocoaPods&quot;&gt;&lt;/a&gt;使用CocoaPods&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;创建一个项目，比如swift或者oc项目，然后在终端下打开文件夹：&lt;br&gt;输入命令：&lt;br&gt; &lt;code&gt;$ touch Podfile&lt;/code&gt;&lt;br&gt; &lt;code&gt;$ vi Podfile&lt;/code&gt;   &lt;/li&gt;
+&lt;li&gt;可以输入命令&lt;br&gt; &lt;code&gt;$ pod search ...&lt;/code&gt;来找到所需要的版本  &lt;/li&gt;
+&lt;li&gt;在Podfile中输入&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/podfile.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;注意：ios小写。一般设置为‘8.0’，这样就可以适配多个版本。&lt;/li&gt;
+&lt;li&gt;然后仍旧是在项目根目录下执行如下命令&lt;br&gt; &lt;code&gt;$ pod install&lt;/code&gt;&lt;br&gt;现在，你的所有第三方库都已经下载完成并且设置好了编译参数和依赖，你只需要记住如下 2 点即可：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 CocoaPods 生成的 .xcworkspace 文件来打开工程，而不是以前的 .xcodeproj 文件。&lt;/li&gt;
+&lt;li&gt;每次更改了 Podfile 文件，你需要重新执行一次pod update命令。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;参考&lt;/strong&gt;：&lt;a href=&quot;http://cnbin.github.io/blog/2015/05/25/cocoapods-an-zhuang-he-shi-yong/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://cnbin.github.io/blog/2015/05/25/cocoapods-an-zhuang-he-shi-yong/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://blog.devtang.com/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.devtang.com/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/index.html&lt;/a&gt;&lt;br&gt;深入理解CocoaPods:&lt;a href=&quot;http://objccn.io/issue-6-4/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://objccn.io/issue-6-4/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;也在项目中用过一些第三方框架，第三方库，然后就知道了CocoaPods.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://peilinghui.com/categories/iOS/"/>
+    
+    
+      <category term="CocoaPods，iOS" scheme="http://peilinghui.com/tags/CocoaPods%EF%BC%8CiOS/"/>
     
   </entry>
   
