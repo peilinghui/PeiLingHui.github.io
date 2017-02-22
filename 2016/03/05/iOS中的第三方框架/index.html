@@ -3,19 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS中的第三方框架 | 向着阳光奔跑</title>
+  <title>iOS中的第三方库 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="通过不断的学习也接触了不少的第三方框架，就总结一下。">
+  <meta name="description" content="通过不断的学习也接触了不少的第三方库，就总结一下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS中的第三方框架">
+<meta property="og:title" content="iOS中的第三方库">
 <meta property="og:url" content="http://peilinghui.com/2016/03/05/iOS中的第三方框架/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="通过不断的学习也接触了不少的第三方框架，就总结一下。">
+<meta property="og:description" content="通过不断的学习也接触了不少的第三方库，就总结一下。">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-20%20%E4%B8%8A%E5%8D%8810.45.38.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png">
-<meta property="og:updated_time" content="2016-07-19T14:47:57.000Z">
+<meta property="og:updated_time" content="2017-02-20T03:07:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中的第三方框架">
-<meta name="twitter:description" content="通过不断的学习也接触了不少的第三方框架，就总结一下。">
+<meta name="twitter:title" content="iOS中的第三方库">
+<meta name="twitter:description" content="通过不断的学习也接触了不少的第三方库，就总结一下。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -151,7 +152,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/ACM/" style="font-size: 10px;">ACM</a> <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+                        <a href="/tags/ACM/" style="font-size: 10px;">ACM</a> <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/PAT/" style="font-size: 20px;">PAT</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
                     </div>
                 </section>
                 
@@ -266,7 +267,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS中的第三方框架
+      iOS中的第三方库
     </h1>
   
 
@@ -287,8 +288,12 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>通过不断的学习也接触了不少的第三方框架，就总结一下。<br><a id="more"></a><br>源代码分析：<a href="https://github.com/Draveness/iOS-Source-Code-Analyze" target="_blank" rel="external">https://github.com/Draveness/iOS-Source-Code-Analyze</a></p>
-<h1 id="FMDB"><a href="#FMDB" class="headerlink" title="FMDB"></a>FMDB</h1><ol>
+        <p>通过不断的学习也接触了不少的第三方库，就总结一下。<br><a id="more"></a><br>源代码分析：<a href="https://github.com/Draveness/iOS-Source-Code-Analyze" target="_blank" rel="external">https://github.com/Draveness/iOS-Source-Code-Analyze</a></p>
+<p><strong>开源库</strong><br>公开源代码，能看到具体实现<br>比如SDWebImage、AFNetworking</p>
+<p><strong>闭源库</strong><br>不公开源代码，是经过编译后的二进制文件，看不到具体实现<br>主要分为：静态库、动态库  </p>
+<ol>
+<li>静态库和动态库的存在形式<br>静态库：.a 和 .framework<br>动态库：.dylib 和 .framework<br>系统的 .framework 是动态库…..<br>我们自己建立的 .framework 是静态库</li>
+<li>静态库和动态库在使用上的区别<br>静态库：链接时，静态库会被完整地复制到可执行文件中，被多次使用就有多份冗余拷贝（左图所示）<br>动态库：链接时不复制，程序运行时由系统动态加载到内存，供程序调用，系统只加载一次，多个程序共用，节省内存<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-20%20%E4%B8%8A%E5%8D%8810.45.38.png" alt=""><h1 id="FMDB"><a href="#FMDB" class="headerlink" title="FMDB"></a>FMDB</h1></li>
 <li>什么是FMDB：<br>FMDB是iOS平台的SQLite数据库框架；<br>FMDB以OC的方式封装了SQLite的C语言API</li>
 <li>优点<ul>
 <li>使用起来更加面向对象，省去了很多麻烦、冗余的C语言代码</li>
@@ -306,7 +311,7 @@
 <li><a href="https://github.com/tristanhimmelman/AlamofireObjectMapper" target="_blank" rel="external">https://github.com/tristanhimmelman/AlamofireObjectMapper</a></li>
 </ol>
 <h1 id="AFNetworking"><a href="#AFNetworking" class="headerlink" title="AFNetworking"></a>AFNetworking</h1><ol>
-<li>AFN 与 ASI 有什么区别<br>AFN基于NSURL，ASI基于底层的CFNetwork框架，因此ASI的性能优于AFN<br>AFN采取block的方式处理请求，ASI最初采取delegate的方式处理请求，后面也增加了block的方式。<br>AFN只封装了一些常用功能，满足基本需求，直接忽略了很多扩展功能，比如没有封装同步请求；ASI提供的功能较多，预留了各种接口和工具供开发者自行扩展。AFN直接解析服务器返回的JSON、XML等数据，而ASI比较原始，返回的是NSData二进制数据。<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png" alt=""></li>
+<li>AFN 与 ASI 有什么区别?<br>AFN基于NSURL，ASI基于底层的CFNetwork框架，因此ASI的性能优于AFN.<br>AFN采取block的方式处理请求，ASI最初采取delegate的方式处理请求，后面也增加了block的方式。<br>AFN只封装了一些常用功能，满足基本需求，直接忽略了很多扩展功能，比如没有封装同步请求；<br>ASI提供的功能较多，预留了各种接口和工具供开发者自行扩展。<br>AFN直接解析服务器返回的JSON、XML等数据，而ASI比较原始，返回的是NSData二进制数据。<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png" alt=""></li>
 <li>讲解：<br>1&gt;<strong>AFHTTPRequestOperation</strong><br>HTTP或HTTPS协议请求的AFURLConnectionOperation的子类。它封装的可接受状态码和内容的类型，判定一个请求结果是成功或失败。<br>实际上对系统的HTTP网络请求增加了几个HTTP需要用到的参数。<br>2&gt;<strong>AFURLConnectionOperation</strong><br>可以说是AFN最基础的类。继承自NSOperation类，将网络请求依附到一个operation上。从而让我们能够有效的控制并观察一个网络请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态。<br>①：综述<br>AFURLConnectionOperation 将Operation和URLConnection结合到一起，利用operation可以监听到状态以及可以建立相互之间的依赖关系的特性，实现了对于 一个NSURLConnection对象的完美控制，并将请求的结果通过block友好的返回。<br>②：实现文件.m<br>我们总结下.m中这个类主要有哪些方法。<br>1： 首先我们可以看到它创建了一个单例线程。这个线程将会常驻内存，用来处理AFN发起的所有请求任务。当然，线程也跟随着一个runloop，AFN将这个 runloop的模式设置为NSDefaultRunLoopMode。NSDefaultRunLoopMode是无法检测到connection的状 态的。这说明了，AFN将不会在这该线程处理connection完成后的UI刷新等工作，而是会将数据抛给主线程，让主线程去完成UI的刷新。<br>2：我们可以看到该类通过接受请求的字符串，创建了URLRequest以及NSURLConnection对象。从而去进行请求。<br>3：实现文件多次使用到了锁，可以保证数据的安全。当然他也实现了几个数据的NSCoping协议。<br>4：请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态的控制。这里讲一下暂停和恢复。<br>暂 停实际上将网络请求取消掉了。但是由于实现了nscoping协议，已经下载到数据得以保存下来。下次进行相同请求的时候，我们会将已经下载到的数据的节 点一起发送给服务器，告诉服务器这些部门的数据我们不需要了，服务器根据我发送的返回节点给我返回相应的数据即可。从而实现了暂停和恢复功能，也就是断点 续传。<br>5：operation方法的重写。自行google，这里不赘述。<br>6：状态的各种控制方法的实现以及发送状态改变的通知  </li>
 </ol>
 <p>③：接口文件.h<br>接口文档中的属性方法，基本可以概括为以下几个方法<br>1：只读的数据，让管理者可以接收到。<br>2：设置runloop的modes。不再使用类库默认设置的defaultmodes。<br>3：状态的控制方法<br>4：安全策略的设置<br>总而言之，接口文件.h暴露的接口都是为了让manager可以去完全控制这个operation以及其中的网络请求。</p>
@@ -350,6 +355,11 @@
 <ol>
 <li>SDWebImage的默认缓存时长是多少？<br><code>static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week</code></li>
 <li>常用方法<br><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder;</code><br><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options;</code><br><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder completed:(SDWebImageCompletionBlock)completedBlock;</code><br><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageCompletionBlock)completedBlock;</code></li>
+</ol>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="typename">void</span>)<span class="string">sd_setImageWithURL:</span>(NSURL *)url <span class="string">placeholderImage:</span>(UIImage *)placeholder &#123;</span><br><span class="line">    [self <span class="string">sd_setImageWithURL:</span>url <span class="string">placeholderImage:</span>placeholder <span class="string">options:</span><span class="number">0</span> <span class="string">progress:</span>nil <span class="string">completed:</span>nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用栗子：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[cell.img <span class="string">sd_setImageWithURL:</span>[NSURL <span class="string">URLWithString:</span>[NSString <span class="string">urlFilterRan:</span>item.filePath]] <span class="string">placeholderImage:</span>[UIImage <span class="string">imageNamed:</span>@<span class="string">"img_default.png"</span>]];</span><br><span class="line">[self.cardImageView <span class="string">sd_setImageWithURL:</span>[NSURL <span class="string">URLWithString:</span>self.bgImageNamePath] <span class="string">placeholderImage:</span>[UIImage <span class="string">imageNamed:</span>self.bgDefultImageName]</span><br></pre></td></tr></table></figure>
+<ol>
 <li>SDWebImageOption:<br>SDWebImageRetryFailed : 下载失败后，会自动重新下载<br>SDWebImageLowPriority : 当正在进行UI交互时，自动暂停内部的一些下载操作<br>SDWebImageRetryFailed | SDWebImageLowPriority : 拥有上面2个功能</li>
 <li>内存处理：当app接收到内存警告时，SDWebImage做了什么？<ul>
 <li>SDWebImage会监听系统的UIApplicationDidReceiveMemoryWarningNotification通知，一旦收到通知，就会清理内存</li>
@@ -405,12 +415,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></p>
+        <p><span>本文标题:</span><a href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月05日 - 14时08分</p>
-        <p><span>最后更新:</span>2016年07月19日 - 22时47分</p>
+        <p><span>最后更新:</span>2017年02月20日 - 11时07分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/03/05/iOS中的第三方框架/" title="iOS中的第三方框架">http://peilinghui.com/2016/03/05/iOS中的第三方框架/</a>
+            <span>原始链接:</span><a class="post-url" href="/2016/03/05/iOS中的第三方框架/" title="iOS中的第三方库">http://peilinghui.com/2016/03/05/iOS中的第三方框架/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/05/iOS中的第三方框架/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
@@ -506,7 +516,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/03/05/iOS中的第三方框架/" data-title="iOS中的第三方框架" data-url="http://peilinghui.com/2016/03/05/iOS中的第三方框架/"></div>
+    <div class="ds-thread" data-thread-key="2016/03/05/iOS中的第三方框架/" data-title="iOS中的第三方库" data-url="http://peilinghui.com/2016/03/05/iOS中的第三方框架/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -544,7 +554,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/15/前端框架/">前端框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/前端面试题总结/">前端面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/04/如何封装一个自定义键盘的控件/">如何封装一个自定义键盘的控件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop的学习/">RunLoop的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime的学习/">Runtime的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/MVVM学习/">MVVM学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/iOS中的单元测试/">iOS中的单元测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/我的iOS学习之路/">我的iOS学习之路</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/15/前端框架/">前端框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/04/如何封装一个自定义键盘的控件/">如何封装一个自定义键盘的控件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop的学习/">RunLoop的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime的学习/">Runtime的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/MVVM学习/">MVVM学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/iOS中的单元测试/">iOS中的单元测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/iOS读书笔记md/">iOS读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/28/常用算法/">常用算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/15/PAT练习-Advanced-Level/">PAT练习(Advanced Level)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/数据结构/">数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ACM练习/">ACM练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/PAT练习/">PAT练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
