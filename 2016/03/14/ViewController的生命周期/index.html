@@ -5,22 +5,17 @@
   
   <title>ViewController的生命周期 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ViewController的生命周期&amp;lt;!--more&amp;gt;
-![屏幕快照 2016-11-30 下午4.57.03.png](http://upload-images.jianshu.io/upload_images/1436896-16bffaa910655097.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-当你alloc并ini">
+  <meta name="description" content="ViewController的生命周期">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ViewController的生命周期">
 <meta property="og:url" content="http://peilinghui.com/2016/03/14/ViewController的生命周期/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="ViewController的生命周期&amp;lt;!--more&amp;gt;
-![屏幕快照 2016-11-30 下午4.57.03.png](http://upload-images.jianshu.io/upload_images/1436896-16bffaa910655097.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-当你alloc并ini">
-<meta property="og:updated_time" content="2017-02-19T14:43:18.000Z">
+<meta property="og:description" content="ViewController的生命周期">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1436896-16bffaa910655097.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-03-04T11:40:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ViewController的生命周期">
-<meta name="twitter:description" content="ViewController的生命周期&amp;lt;!--more&amp;gt;
-![屏幕快照 2016-11-30 下午4.57.03.png](http://upload-images.jianshu.io/upload_images/1436896-16bffaa910655097.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-当你alloc并ini">
+<meta name="twitter:description" content="ViewController的生命周期">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -156,7 +151,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
+                        <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
                     </div>
                 </section>
                 
@@ -288,11 +283,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>ViewController的生命周期<!--more>
-![屏幕快照 2016-11-30 下午4.57.03.png](http://upload-images.jianshu.io/upload_images/1436896-16bffaa910655097.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-当你alloc并init了一个ViewController时，这个ViewController应该是还没有创建view的。ViewController的view是使用了lazyInit方式创建，就是说你调用的view属性的getter：［self view］。在getter里会先判断view是否创建，如果没有创建，那么会调用loadView来创建view。loadView完成时会继续调用viewDidLoad。loadView和viewDidLoad的一个区别就是：loadView时还没有view。而viewDidLoad时view以及创建好了。
-loadView 此方法在控制器的view为nil的时候被调用。 此方法用于以编程的方式创建view的时候用到。 如：
- <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- ( void ) loadView &#123;</span><br><span class="line">  UIView *view = <span class="comment">[ <span class="comment">[ UIView alloc]</span> initWithFrame:<span class="comment">[ UIScreen mainScreen]</span> .applicationFrame]</span> ;</span><br><span class="line">  <span class="comment">[ view setBackgroundColor:_color]</span> ;</span><br><span class="line">  self.view = view;</span><br><span class="line">  <span class="comment">[ view release]</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <p>ViewController的生命周期<br><a id="more"></a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1436896-16bffaa910655097.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2016-11-30 下午4.57.03.png"><br>当你alloc并init了一个ViewController时，这个ViewController应该是还没有创建view的。ViewController的view是使用了lazyInit方式创建，就是说你调用的view属性的getter：［self view］。在getter里会先判断view是否创建，如果没有创建，那么会调用loadView来创建view。loadView完成时会继续调用viewDidLoad。loadView和viewDidLoad的一个区别就是：loadView时还没有view。而viewDidLoad时view以及创建好了。<br>loadView 此方法在控制器的view为nil的时候被调用。 此方法用于以编程的方式创建view的时候用到。 如：<br> <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- ( void ) loadView &#123;</span><br><span class="line">  UIView *view = <span class="comment">[ <span class="comment">[ UIView alloc]</span> initWithFrame:<span class="comment">[ UIScreen mainScreen]</span> .applicationFrame]</span> ;</span><br><span class="line">  <span class="comment">[ view setBackgroundColor:_color]</span> ;</span><br><span class="line">  self.view = view;</span><br><span class="line">  <span class="comment">[ view release]</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>三、代码组织（如何设计良好的viewcontroller）<br>ViewController生命周期中有那么多函数，一个重要问题就是什么代码该写在什么地方。<br>1、init里不要出现创建view的代码。良好的设计，在init里应该只有相关数据的初始化，而且这些数据都是比较关键的数据。init里不要掉self.view，否则会导致viewcontroller创建view。（因为view是lazyinit的）。<br>2、loadView中只初始化view，一般用于创建比较关键的view如tableViewController的tabView，UINavigationController的navgationBar，不可掉用view的getter（在掉super loadView前），最好也不要初始化一些非关键的view。如果你是从nib文件中创建的viewController在这里一定要首先调用super的loadView方法，但建议不要重载这个方法。<br>3、viewDidLoad 这时候view已经有了，最适合创建一些附加的view和控件了。有一点需要注意的是，viewDidLoad会调用多次（viewcontroller可能多次载入view，参见图2）。<br>4、viewWillAppear 这个一般在view被添加到superview之前，切换动画之前调用。在这里可以进行一些显示前的处理。比如键盘弹出，一些特殊的过程动画（比如状态条和navigationbar颜色）。<br>5、viewDidAppear 一般用于显示后，在切换动画后，如果有需要的操作，可以在这里加入相关代码。<br>6、viewDidUnload 这时候viewController的view已经是nil了。由于这一般发生在内存警告时，所以在这里你应该将那些不在显示的view释放了。比如你在viewcontroller的view上加了一个label，而且这个label是viewcontroller的属性，那么你要把这个属性设置成nil，以免占用不必要的内存，而这个label在viewDidLoad时会重新创建。</p>
 <h2 id="一、-ARC环境"><a href="#一、-ARC环境" class="headerlink" title="一、 ARC环境"></a>一、 ARC环境</h2><h3 id="单个viewController的生命周期"><a href="#单个viewController的生命周期" class="headerlink" title="单个viewController的生命周期"></a><strong><em>单个viewController的生命周期</em></strong></h3><ul>
 <li>initWithCoder:(NSCoder *)aDecoder：（如果使用storyboard或者xib）</li>
@@ -335,7 +327,7 @@ loadView 此方法在控制器的view为nil的时候被调用。 此方法用于
 <li>viewDidUnload：（iOS6废除）<br>当视图从内存中被消除后调用<br>视图在地的内存情况下不再被销毁所以这个方法也不再会调用<br>在iOS5之前，地的内存状况发生之后，当前的试图控制器的视图不再被需要，系统会选择性的在视图控制器的视图被销毁后调用。这个方法使你执行一些最后清空任务的最后机会如果你的视图控制器存储着对视图的或子控件的单独引用，你应该使用这个方法去释放这些引用。你也可以使用这个方法去消除一些你再创建视图时候所创建的但是当视图不再的时候不再需要的关于对象的引用。你不应该使用这个方法去释放用户数据或者一些不能轻易被重新创建的数据。</li>
 </ul>
 <p>在iOS6之后，清空在试图控制器中对views和其他对象的引用已经没有必要了。<br>当这个方法被调用的时候，视图的属性是空的。                   </p>
---></p>
+
       
     </div>
     
@@ -346,7 +338,7 @@ loadView 此方法在控制器的view为nil的时候被调用。 此方法用于
         <p><span>本文标题:</span><a href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月14日 - 22时40分</p>
-        <p><span>最后更新:</span>2017年02月19日 - 22时43分</p>
+        <p><span>最后更新:</span>2017年03月04日 - 19时40分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/14/ViewController的生命周期/" title="ViewController的生命周期">http://peilinghui.com/2016/03/14/ViewController的生命周期/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/14/ViewController的生命周期/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -370,8 +362,8 @@ loadView 此方法在控制器的view为nil的时候被调用。 此方法用于
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/03/05/iOS中的第三方框架/">
-                    iOS中的第三方库
+                <a href="/2016/03/06/研究SDWebImage框架/">
+                    研究SDWebImage框架
                 </a>
             </div>
         
@@ -382,7 +374,7 @@ loadView 此方法在控制器的view为nil的时候被调用。 此方法用于
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、-ARC环境"><span class="toc-number">1.</span> <span class="toc-text">一、 ARC环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单个viewController的生命周期"><span class="toc-number">1.1.</span> <span class="toc-text">单个viewController的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多个viewControllers跳转"><span class="toc-number">1.2.</span> <span class="toc-text">多个viewControllers跳转</span></a></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -476,13 +468,13 @@ loadView 此方法在控制器的view为nil的时候被调用。 此方法用于
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/03/05/iOS中的第三方框架/" title="下一篇: iOS中的第三方库">
+            <a href="/2016/03/06/研究SDWebImage框架/" title="下一篇: 研究SDWebImage框架">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/04/如何封装一个自定义键盘的控件/">如何封装一个自定义键盘的控件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop的学习/">RunLoop的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime的学习/">Runtime的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/MVVM学习/">MVVM学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/iOS中的单元测试/">iOS中的单元测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Objective-C高级编程读书笔记/">Objective-C高级编程读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Objective-C高级编程读书笔记/">Objective-C高级编程读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");

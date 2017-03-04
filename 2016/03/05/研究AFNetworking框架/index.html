@@ -3,20 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS中的第三方库 | 向着阳光奔跑</title>
+  <title>研究AFNetworking框架 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="通过不断的学习也接触了不少的第三方库，就总结一下。">
+  <meta name="description" content="研究AFNetworking框架。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS中的第三方库">
-<meta property="og:url" content="http://peilinghui.com/2016/03/05/iOS中的第三方框架/index.html">
+<meta property="og:title" content="研究AFNetworking框架">
+<meta property="og:url" content="http://peilinghui.com/2016/03/05/研究AFNetworking框架/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="通过不断的学习也接触了不少的第三方库，就总结一下。">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-20%20%E4%B8%8A%E5%8D%8810.45.38.png">
+<meta property="og:description" content="研究AFNetworking框架。">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png">
-<meta property="og:updated_time" content="2017-02-20T03:07:52.000Z">
+<meta property="og:updated_time" content="2017-03-04T11:42:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中的第三方库">
-<meta name="twitter:description" content="通过不断的学习也接触了不少的第三方库，就总结一下。">
+<meta name="twitter:title" content="研究AFNetworking框架">
+<meta name="twitter:description" content="研究AFNetworking框架。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -152,7 +151,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/CocoaPods，iOS/" style="font-size: 10px;">CocoaPods，iOS</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
+                        <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
                     </div>
                 </section>
                 
@@ -250,10 +249,10 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-iOS中的第三方框架" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-研究AFNetworking框架" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/03/05/iOS中的第三方框架/" class="article-date">
+      <a href="/2016/03/05/研究AFNetworking框架/" class="article-date">
       <time datetime="2016-03-05T06:08:53.000Z" itemprop="datePublished">2016-03-05</time>
 </a>
     </div>
@@ -267,7 +266,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS中的第三方库
+      研究AFNetworking框架
     </h1>
   
 
@@ -288,28 +287,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>通过不断的学习也接触了不少的第三方库，就总结一下。<br><a id="more"></a><br>源代码分析：<a href="https://github.com/Draveness/iOS-Source-Code-Analyze" target="_blank" rel="external">https://github.com/Draveness/iOS-Source-Code-Analyze</a></p>
-<p><strong>开源库</strong><br>公开源代码，能看到具体实现<br>比如SDWebImage、AFNetworking</p>
-<p><strong>闭源库</strong><br>不公开源代码，是经过编译后的二进制文件，看不到具体实现<br>主要分为：静态库、动态库  </p>
-<ol>
-<li>静态库和动态库的存在形式<br>静态库：.a 和 .framework<br>动态库：.dylib 和 .framework<br>系统的 .framework 是动态库…..<br>我们自己建立的 .framework 是静态库</li>
-<li>静态库和动态库在使用上的区别<br>静态库：链接时，静态库会被完整地复制到可执行文件中，被多次使用就有多份冗余拷贝（左图所示）<br>动态库：链接时不复制，程序运行时由系统动态加载到内存，供程序调用，系统只加载一次，多个程序共用，节省内存<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-20%20%E4%B8%8A%E5%8D%8810.45.38.png" alt=""><h1 id="FMDB"><a href="#FMDB" class="headerlink" title="FMDB"></a>FMDB</h1></li>
-<li>什么是FMDB：<br>FMDB是iOS平台的SQLite数据库框架；<br>FMDB以OC的方式封装了SQLite的C语言API</li>
-<li>优点<ul>
-<li>使用起来更加面向对象，省去了很多麻烦、冗余的C语言代码</li>
-<li>对比苹果自带的Core Data框架，更加轻量级和灵活</li>
-<li>提供了多线程安全的数据库操作方法，有效地防止数据混乱</li>
-</ul>
-</li>
-<li>FMDB的github地址:  <a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">https://github.com/ccgus/fmdb</a></li>
-<li>核心类<br>FMDB有三个主要的类<br>（1）FMDatabase<br>一个FMDatabase对象就代表一个单独的SQLite数据库<br>用来执行SQL语句<br>（2）FMResultSet<br>使用FMDatabase执行查询后的结果集<br>（3）FMDatabaseQueue<br>用于在多线程中执行多个查询或更新，它是线程安全的</li>
-</ol>
-<h1 id="Alamofire"><a href="#Alamofire" class="headerlink" title="Alamofire"></a>Alamofire</h1><ol>
-<li><a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="external">https://github.com/Alamofire/Alamofire</a></li>
-</ol>
-<h1 id="AlamofireObjectMapper"><a href="#AlamofireObjectMapper" class="headerlink" title="AlamofireObjectMapper"></a>AlamofireObjectMapper</h1><ol>
-<li><a href="https://github.com/tristanhimmelman/AlamofireObjectMapper" target="_blank" rel="external">https://github.com/tristanhimmelman/AlamofireObjectMapper</a></li>
-</ol>
+        <p>研究AFNetworking框架。<br><a id="more"></a></p>
 <h1 id="AFNetworking"><a href="#AFNetworking" class="headerlink" title="AFNetworking"></a>AFNetworking</h1><ol>
 <li>AFN 与 ASI 有什么区别?<br>AFN基于NSURL，ASI基于底层的CFNetwork框架，因此ASI的性能优于AFN.<br>AFN采取block的方式处理请求，ASI最初采取delegate的方式处理请求，后面也增加了block的方式。<br>AFN只封装了一些常用功能，满足基本需求，直接忽略了很多扩展功能，比如没有封装同步请求；<br>ASI提供的功能较多，预留了各种接口和工具供开发者自行扩展。<br>AFN直接解析服务器返回的JSON、XML等数据，而ASI比较原始，返回的是NSData二进制数据。<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png" alt=""></li>
 <li>讲解：<br>1&gt;<strong>AFHTTPRequestOperation</strong><br>HTTP或HTTPS协议请求的AFURLConnectionOperation的子类。它封装的可接受状态码和内容的类型，判定一个请求结果是成功或失败。<br>实际上对系统的HTTP网络请求增加了几个HTTP需要用到的参数。<br>2&gt;<strong>AFURLConnectionOperation</strong><br>可以说是AFN最基础的类。继承自NSOperation类，将网络请求依附到一个operation上。从而让我们能够有效的控制并观察一个网络请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态。<br>①：综述<br>AFURLConnectionOperation 将Operation和URLConnection结合到一起，利用operation可以监听到状态以及可以建立相互之间的依赖关系的特性，实现了对于 一个NSURLConnection对象的完美控制，并将请求的结果通过block友好的返回。<br>②：实现文件.m<br>我们总结下.m中这个类主要有哪些方法。<br>1： 首先我们可以看到它创建了一个单例线程。这个线程将会常驻内存，用来处理AFN发起的所有请求任务。当然，线程也跟随着一个runloop，AFN将这个 runloop的模式设置为NSDefaultRunLoopMode。NSDefaultRunLoopMode是无法检测到connection的状 态的。这说明了，AFN将不会在这该线程处理connection完成后的UI刷新等工作，而是会将数据抛给主线程，让主线程去完成UI的刷新。<br>2：我们可以看到该类通过接受请求的字符串，创建了URLRequest以及NSURLConnection对象。从而去进行请求。<br>3：实现文件多次使用到了锁，可以保证数据的安全。当然他也实现了几个数据的NSCoping协议。<br>4：请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态的控制。这里讲一下暂停和恢复。<br>暂 停实际上将网络请求取消掉了。但是由于实现了nscoping协议，已经下载到数据得以保存下来。下次进行相同请求的时候，我们会将已经下载到的数据的节 点一起发送给服务器，告诉服务器这些部门的数据我们不需要了，服务器根据我发送的返回节点给我返回相应的数据即可。从而实现了暂停和恢复功能，也就是断点 续传。<br>5：operation方法的重写。自行google，这里不赘述。<br>6：状态的各种控制方法的实现以及发送状态改变的通知  </li>
@@ -348,65 +326,6 @@
 </blockquote>
 </blockquote>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.获得网络监控的管理者</span></span><br><span class="line">    AFNetworkReachabilityManager *mgr = [AFNetworkReachabilityManager sharedManager];</span><br><span class="line">    <span class="comment">//2.设置网络状态改变后的处理</span></span><br><span class="line">    [mgr <span class="string">setReachabilityStatusChangeBlock:</span>^(AFNetworkReachabilityStatus status)&#123;</span><br><span class="line">        <span class="comment">//当网络状态改变了，就会调用这个Block</span></span><br><span class="line">        <span class="keyword">switch</span> (status) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusUnknown:</span><span class="comment">//未知网络                </span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusNotReachable:</span><span class="comment">//没有网络</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusReachableViaWWAN:</span><span class="comment">//手机自带网络</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusReachableViaWiFi:</span><span class="comment">//wifi</span></span><br><span class="line">                <span class="keyword">break</span>;               </span><br><span class="line"><span class="label">            default:</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="comment">//3. 开始监控</span></span><br><span class="line">    [mgr startMonitoring];</span><br></pre></td></tr></table></figure>
-<h1 id="SDWebImage"><a href="#SDWebImage" class="headerlink" title="SDWebImage"></a>SDWebImage</h1><ol>
-<li>网络图片处理框架<br>包含功能：图片下载、图片缓存、下载进度监控<br>用法简单，功能强大，大大提高了网络图片的处理效率<br><a href="http://github.com/rs/SDWebImage" target="_blank" rel="external">http://github.com/rs/SDWebImage</a></li>
-<li>如何防止一个url对应的图片重复下载?/SDWebImage底层是怎么实现的？  </li>
-</ol>
-<ol>
-<li>SDWebImage的默认缓存时长是多少？<br><code>static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week</code></li>
-<li>常用方法<br><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder;</code><br><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options;</code><br><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder completed:(SDWebImageCompletionBlock)completedBlock;</code><br><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageCompletionBlock)completedBlock;</code></li>
-</ol>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="typename">void</span>)<span class="string">sd_setImageWithURL:</span>(NSURL *)url <span class="string">placeholderImage:</span>(UIImage *)placeholder &#123;</span><br><span class="line">    [self <span class="string">sd_setImageWithURL:</span>url <span class="string">placeholderImage:</span>placeholder <span class="string">options:</span><span class="number">0</span> <span class="string">progress:</span>nil <span class="string">completed:</span>nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用栗子：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[cell.img <span class="string">sd_setImageWithURL:</span>[NSURL <span class="string">URLWithString:</span>[NSString <span class="string">urlFilterRan:</span>item.filePath]] <span class="string">placeholderImage:</span>[UIImage <span class="string">imageNamed:</span>@<span class="string">"img_default.png"</span>]];</span><br><span class="line">[self.cardImageView <span class="string">sd_setImageWithURL:</span>[NSURL <span class="string">URLWithString:</span>self.bgImageNamePath] <span class="string">placeholderImage:</span>[UIImage <span class="string">imageNamed:</span>self.bgDefultImageName]</span><br></pre></td></tr></table></figure>
-<ol>
-<li>SDWebImageOption:<br>SDWebImageRetryFailed : 下载失败后，会自动重新下载<br>SDWebImageLowPriority : 当正在进行UI交互时，自动暂停内部的一些下载操作<br>SDWebImageRetryFailed | SDWebImageLowPriority : 拥有上面2个功能</li>
-<li>内存处理：当app接收到内存警告时，SDWebImage做了什么？<ul>
-<li>SDWebImage会监听系统的UIApplicationDidReceiveMemoryWarningNotification通知，一旦收到通知，就会清理内存</li>
-<li>应用程序将要终止的通知,UIApplicationWillTerminateNotification, 清理磁盘</li>
-<li>应用程序进入后台的通知，UIApplicationDidEnterBackgroundNotification，也会清理磁盘</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr_selector">[[NSNotificationCenter defaultCenter]</span> <span class="tag">addObserver</span><span class="pseudo">:self</span></span><br><span class="line">                                                 <span class="tag">selector</span>:@<span class="tag">selector</span>(clearMemory)</span><br><span class="line">                                                     <span class="tag">name</span><span class="pseudo">:UIApplicationDidReceiveMemoryWarningNotification</span></span><br><span class="line">                                                   <span class="tag">object</span><span class="pseudo">:nil</span>];</span><br><span class="line"><span class="attr_selector">[[NSNotificationCenter defaultCenter]</span> <span class="tag">addObserver</span><span class="pseudo">:self</span></span><br><span class="line">                                                 <span class="tag">selector</span>:@<span class="tag">selector</span>(cleanDisk)</span><br><span class="line">                                                     <span class="tag">name</span><span class="pseudo">:UIApplicationWillTerminateNotification</span></span><br><span class="line">                                                   <span class="tag">object</span><span class="pseudo">:nil</span>];</span><br><span class="line"><span class="attr_selector">[[NSNotificationCenter defaultCenter]</span> <span class="tag">addObserver</span><span class="pseudo">:self</span></span><br><span class="line">                                                 <span class="tag">selector</span>:@<span class="tag">selector</span>(backgroundCleanDisk)</span><br><span class="line">                                                     <span class="tag">name</span><span class="pseudo">:UIApplicationDidEnterBackgroundNotification</span></span><br><span class="line">                                                   <span class="tag">object</span><span class="pseudo">:nil</span>];</span><br></pre></td></tr></table></figure>
-<ol>
-<li>过程<br>SDWebImage提供了如下三个category来进行缓存。<ul>
-<li>MKAnnotationView(WebCache)</li>
-<li>UIButton(WebCache)</li>
-<li>UIImageView(WebCache)<br>以最为常用的UIImageView为例:<br>1&gt; UIImageView+WebCache:  setImageWithURL:placeholderImage:options: <strong>先显示 placeholderImage ，同时由SDWebImageManager 根据 URL 来在本地查找图片。</strong><br>2&gt;SDWebImageManager: downloadWithURL:delegate:options:userInfo: SDWebImageManager是将UIImageView+WebCache同SDImageCache链接起来的类， SDImageCache： queryDiskCacheForKey:delegate:userInfo:<strong>用来从缓存根据CacheKey查找图片是否已经在缓存中</strong><br>3&gt;如果内存中已经有图片缓存， SDWebImageManager会回调SDImageCacheDelegate : imageCache:didFindImage:forKey:userInfo:<br>4&gt;而 UIImageView+WebCache 则回调SDWebImageManagerDelegate:  webImageManager:didFinishWithImage:来显示图片。<br>5&gt;如果内存中没有图片缓存，那么生成 NSInvocationOperation 添加到队列，从硬盘查找图片是否已被下载缓存。<br>6&gt;根据 URLKey 在硬盘缓存目录下尝试读取图片文件。这一步是在 NSOperation 进行的操作，所以回主线程进行结果回调 notifyDelegate:。<br>7&gt;如果上一操作从硬盘读取到了图片，将图片添加到内存缓存中（如果空闲内存过小，会先清空内存缓存）。SDImageCacheDelegate 回调 imageCache:didFindImage:forKey:userInfo:。进而回调展示图片。<br>8&gt;如果从硬盘缓存目录读取不到图片，说明所有缓存都不存在该图片，需要下载图片，回调 imageCache:didNotFindImageForKey:userInfo:。<br>9&gt;共享或重新生成一个下载器 SDWebImageDownloader 开始下载图片。<br>10&gt;图片下载由 NSURLConnection 来做，实现相关 delegate 来判断图片下载中、下载完成和下载失败。<br>11&gt;connection:didReceiveData: 中利用 ImageIO 做了按图片下载进度加载效果。<br>12&gt;connectionDidFinishLoading: 数据下载完成后交给 SDWebImageDecoder 做图片解码处理。<br>13&gt;图片解码处理在一个 NSOperationQueue 完成，不会拖慢主线程 UI。如果有需要对下载的图片进行二次处理，最好也在这里完成，效率会好很多。<br>14&gt;在主线程 notifyDelegateOnMainThreadWithInfo: 宣告解码完成，imageDecoder:didFinishDecodingImage:userInfo: 回调给 SDWebImageDownloader。<br>15&gt;imageDownloader:didFinishWithImage: 回调给 SDWebImageManager 告知图片下载完成。<br>16&gt;通知所有的 downloadDelegates 下载完成，回调给需要的地方展示图片。<br>17&gt;将图片保存到 SDImageCache 中，内存缓存和硬盘缓存同时保存。<br>18&gt;写文件到硬盘在单独 NSInvocationOperation 中完成，避免拖慢主线程。<br>19&gt;如果是在iOS上运行，SDImageCache 在初始化的时候会注册notification 到 UIApplicationDidReceiveMemoryWarningNotification 以及  UIApplicationWillTerminateNotification,在内存警告的时候清理内存图片缓存，应用结束的时候清理过期图片。<br>20&gt;SDWebImagePrefetcher 可以预先下载图片，方便后续使用。</li>
-</ul>
-</li>
-</ol>
-<h1 id="SnapKit"><a href="#SnapKit" class="headerlink" title="SnapKit"></a>SnapKit</h1><ol>
-<li><a href="https://github.com/SnapKit/SnapKit" target="_blank" rel="external">https://github.com/SnapKit/SnapKit</a></li>
-<li>基于swift的autolayout的框架</li>
-</ol>
-<h1 id="MBProgressHUD"><a href="#MBProgressHUD" class="headerlink" title="MBProgressHUD"></a>MBProgressHUD</h1><ol>
-<li>动态提示框效果。应用显示一个过渡的作用，常用于打开一个联网页面加载过程，防止出现假死现象，如果网速慢则告诉用户已经在很努力很努力的加载中。网页加载、下载等耗时操作中给予用户以提示。</li>
-<li>github 地址：<a href="https://github.com/jdg/MBProgressHUD" target="_blank" rel="external">https://github.com/jdg/MBProgressHUD</a></li>
-<li>讲解：<a href="http://blog.csdn.net/lanmanck/article/details/38496113" target="_blank" rel="external">http://blog.csdn.net/lanmanck/article/details/38496113</a><br><a href="http://blog.csdn.net/duxinfeng2010/article/details/8510894" target="_blank" rel="external">http://blog.csdn.net/duxinfeng2010/article/details/8510894</a><br><a href="http://blog.csdn.net/chenyufeng1991/article/details/50273315" target="_blank" rel="external">http://blog.csdn.net/chenyufeng1991/article/details/50273315</a></li>
-</ol>
-<h1 id="GPUImage"><a href="#GPUImage" class="headerlink" title="GPUImage"></a>GPUImage</h1><ol>
-<li>GPUImage为基于GPU的图像和视频处理一个开源的iOS框架</li>
-<li>下载地址：<a href="https://github.com/BradLarson/GPUImage" target="_blank" rel="external">https://github.com/BradLarson/GPUImage</a></li>
-</ol>
-<h1 id="JSONKit"><a href="#JSONKit" class="headerlink" title="JSONKit"></a>JSONKit</h1><ol>
-<li>JSONKit是用 Objective-C 实现的一个高性能的 JSON 解析和生成库。json正在逐步取代xml，成为网络数据的通用格式。</li>
-<li>讲解：<a href="http://www.cnblogs.com/jiangyuxuan/archive/2013/03/09/2950984.html" target="_blank" rel="external">http://www.cnblogs.com/jiangyuxuan/archive/2013/03/09/2950984.html</a></li>
-<li>下载地址：<a href="https://github.com/johnezang/JSONKit/" target="_blank" rel="external">https://github.com/johnezang/JSONKit/</a></li>
-</ol>
-<h1 id="Kingfisher"><a href="#Kingfisher" class="headerlink" title="Kingfisher"></a>Kingfisher</h1><ol>
-<li><a href="https://github.com/onevcat/Kingfisher" target="_blank" rel="external">https://github.com/onevcat/Kingfisher</a></li>
-</ol>
-<h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><p>字典转模型</p>
-<h1 id="MJExtension"><a href="#MJExtension" class="headerlink" title="MJExtension"></a>MJExtension</h1><ol>
-<li>MJExtension是JSON和Model(字典和模型)之间互相转换的超轻量级框架.</li>
-<li>MJExtension能完成的功能<br>字典（JSON） –&gt; 模型（Model）<br>模型（Model） –&gt; 字典（JSON）<br>字典数组（JSON Array） –&gt; 模型数组（Model Array）<br>模型数组（Model Array） –&gt; 字典数组（JSON Array）</li>
-<li>讲解：<a href="http://www.jianshu.com/p/93c242452b" target="_blank" rel="external">http://www.jianshu.com/p/93c242452b</a></li>
-<li>GitHub链接：<a href="https://github.com/CoderMJLee/MJExtension" target="_blank" rel="external">https://github.com/CoderMJLee/MJExtension</a></li>
-</ol>
-<h1 id="MJRefresh"><a href="#MJRefresh" class="headerlink" title="MJRefresh"></a>MJRefresh</h1><p>主要用于刷新操作，提供了常用的刷新操作，还有刷新动画，用着很好用。</p>
-<h1 id="YYModel"><a href="#YYModel" class="headerlink" title="YYModel"></a>YYModel</h1><h1 id="YYKit"><a href="#YYKit" class="headerlink" title="YYKit"></a>YYKit</h1><p>#JSPath</p>
 
       
     </div>
@@ -415,13 +334,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></p>
+        <p><span>本文标题:</span><a href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月05日 - 14时08分</p>
-        <p><span>最后更新:</span>2017年02月20日 - 11时07分</p>
+        <p><span>最后更新:</span>2017年03月04日 - 19时42分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/03/05/iOS中的第三方框架/" title="iOS中的第三方库">http://peilinghui.com/2016/03/05/iOS中的第三方框架/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/05/iOS中的第三方框架/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/03/05/研究AFNetworking框架/" title="研究AFNetworking框架">http://peilinghui.com/2016/03/05/研究AFNetworking框架/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/05/研究AFNetworking框架/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -435,8 +354,8 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/03/14/ViewController的生命周期/">
-                    ViewController的生命周期
+                <a href="/2016/03/06/研究SDWebImage框架/">
+                    研究SDWebImage框架
                 </a>
             </div>
         
@@ -454,7 +373,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#FMDB"><span class="toc-number">1.</span> <span class="toc-text">FMDB</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Alamofire"><span class="toc-number">2.</span> <span class="toc-text">Alamofire</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AlamofireObjectMapper"><span class="toc-number">3.</span> <span class="toc-text">AlamofireObjectMapper</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AFNetworking"><span class="toc-number">4.</span> <span class="toc-text">AFNetworking</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SDWebImage"><span class="toc-number">5.</span> <span class="toc-text">SDWebImage</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SnapKit"><span class="toc-number">6.</span> <span class="toc-text">SnapKit</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MBProgressHUD"><span class="toc-number">7.</span> <span class="toc-text">MBProgressHUD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GPUImage"><span class="toc-number">8.</span> <span class="toc-text">GPUImage</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSONKit"><span class="toc-number">9.</span> <span class="toc-text">JSONKit</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Kingfisher"><span class="toc-number">10.</span> <span class="toc-text">Kingfisher</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Extension"><span class="toc-number">11.</span> <span class="toc-text">Extension</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MJExtension"><span class="toc-number">12.</span> <span class="toc-text">MJExtension</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MJRefresh"><span class="toc-number">13.</span> <span class="toc-text">MJRefresh</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#YYModel"><span class="toc-number">14.</span> <span class="toc-text">YYModel</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#YYKit"><span class="toc-number">15.</span> <span class="toc-text">YYKit</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#AFNetworking"><span class="toc-number">1.</span> <span class="toc-text">AFNetworking</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -516,7 +435,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/03/05/iOS中的第三方框架/" data-title="iOS中的第三方库" data-url="http://peilinghui.com/2016/03/05/iOS中的第三方框架/"></div>
+    <div class="ds-thread" data-thread-key="2016/03/05/研究AFNetworking框架/" data-title="研究AFNetworking框架" data-url="http://peilinghui.com/2016/03/05/研究AFNetworking框架/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -540,7 +459,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/03/14/ViewController的生命周期/" title="上一篇: ViewController的生命周期">
+            <a href="/2016/03/06/研究SDWebImage框架/" title="上一篇: 研究SDWebImage框架">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -554,7 +473,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/04/如何封装一个自定义键盘的控件/">如何封装一个自定义键盘的控件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop的学习/">RunLoop的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime的学习/">Runtime的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/MVVM学习/">MVVM学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/iOS中的单元测试/">iOS中的单元测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Objective-C高级编程读书笔记/">Objective-C高级编程读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/关于iOS中的autolayout/">关于iOS中的autolayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/创建博客/">创建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Objective-C高级编程读书笔记/">Objective-C高级编程读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
