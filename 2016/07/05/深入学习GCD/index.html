@@ -3,18 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS中的数据存储 | 向着阳光奔跑</title>
+  <title>深入学习GCD | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iOS中的数据存储方式">
+  <meta name="description" content="再次学习GCD的内容，并总结。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS中的数据存储">
-<meta property="og:url" content="http://peilinghui.com/2016/03/05/iOS中的数据存储/index.html">
+<meta property="og:title" content="深入学习GCD">
+<meta property="og:url" content="http://peilinghui.com/2016/07/05/深入学习GCD/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="iOS中的数据存储方式">
-<meta property="og:updated_time" content="2016-04-16T08:44:37.000Z">
+<meta property="og:description" content="再次学习GCD的内容，并总结。">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-16%20%E4%B8%8B%E5%8D%885.08.16.png">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%AD%BB%E9%94%81.png">
+<meta property="og:updated_time" content="2017-03-08T08:01:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中的数据存储">
-<meta name="twitter:description" content="iOS中的数据存储方式">
+<meta name="twitter:title" content="深入学习GCD">
+<meta name="twitter:description" content="再次学习GCD的内容，并总结。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -248,11 +250,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-iOS中的数据存储" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-深入学习GCD" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/03/05/iOS中的数据存储/" class="article-date">
-      <time datetime="2016-03-05T05:59:07.000Z" itemprop="datePublished">2016-03-05</time>
+      <a href="/2016/07/05/深入学习GCD/" class="article-date">
+      <time datetime="2016-07-05T08:22:32.000Z" itemprop="datePublished">2016-07-05</time>
 </a>
     </div>
   
@@ -265,7 +267,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS中的数据存储
+      深入学习GCD
     </h1>
   
 
@@ -273,12 +275,12 @@
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-    </div>
-
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -286,39 +288,83 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>iOS中的数据存储方式<br><a id="more"></a></p>
-<h1 id="iOS中的数据存储方式"><a href="#iOS中的数据存储方式" class="headerlink" title="iOS中的数据存储方式"></a>iOS中的数据存储方式</h1><h2 id="Plist（NSArray-NSDictionary）"><a href="#Plist（NSArray-NSDictionary）" class="headerlink" title="Plist（NSArray\NSDictionary）"></a>Plist（NSArray\NSDictionary）</h2><p>只能存储数组，字典，但是数组和字典里面不能有自定义对象</p>
-<h2 id="Preference（偏好设置-NSUserDefaults）"><a href="#Preference（偏好设置-NSUserDefaults）" class="headerlink" title="Preference（偏好设置\NSUserDefaults）"></a>Preference（偏好设置\NSUserDefaults）</h2><h2 id="NSCoding（NSKeyedArchiver-NSkeyedUnarchiver归档"><a href="#NSCoding（NSKeyedArchiver-NSkeyedUnarchiver归档" class="headerlink" title="NSCoding（NSKeyedArchiver\NSkeyedUnarchiver归档"></a>NSCoding（NSKeyedArchiver\NSkeyedUnarchiver归档</h2><p>存储自定义对象，局限：一次性做读取的存储的操作</p>
-<h2 id="SQLite3"><a href="#SQLite3" class="headerlink" title="SQLite3"></a>SQLite3</h2><ol>
-<li>什么是SQLite？<br>SQLite是一款轻型的嵌入式数据库;它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了;它的处理速度比Mysql、PostgreSQL这两款著名的数据库都还快  </li>
-<li>怎么解决sqlite锁定的问题？<br>设置数据库锁定的处理函数<br>int sqlite3_busy_handler(sqlite3<em>, int(</em>)(void<em>,int), void</em>);<br>设定锁定时的等待时间<br>int sqlite3_busy_timeout(sqlite3*, 60); ：<h2 id="Core-Data"><a href="#Core-Data" class="headerlink" title="Core Data"></a>Core Data</h2></li>
-<li>什么是Core Data？<br>Core Data是iOS5以后才出现的一个框架，它提供了对象-关系映射（ORM）关系，即能够将OC对象转化成数据，保存在SQLite数据库文件中，也能够将保存在数据库中的数据还原成OC对象，不用编写任何SQL语言（类似于Hibernate框架，没有那么强大）</li>
-<li>使用步骤<ul>
-<li>创建模型文件，<strong>相当于数据库</strong></li>
-<li>添加实体，<strong>相对于表</strong></li>
-<li>创建实体类，<strong>相当于模型类</strong></li>
-<li>生成<strong>上下文</strong> 关联模型文件生成数据库</li>
-</ul>
-</li>
-</ol>
-<p>四，DDL：数据定义语句</p>
-<p>1、Create</p>
-<p>create table 表名（字段名1，字段类型1，字段名2，字段类型2….）;</p>
-<p>create table if not exists 表名（字段名1，字段类型1，字段名2，字段类型2….）;</p>
-<p>2、Drop</p>
-<p>drop table 表名；</p>
-<p>drop table if not exists 表名；</p>
-<p>五、DML ：数据操作语句</p>
-<p>1、Insert</p>
-<p>2、Update</p>
-<p>3、Delete</p>
-<p>六、DQL：数据查询语句</p>
-<p>1、Where</p>
-<p>2、Select</p>
-<p>3、Group by having</p>
-<p>1&gt; select</p>
-<p>2&gt; 别名,可以不用as,<br>• 给数据库取别名的好处:用别名获取字段,有提示。</p>
-<p>3&gt; 计算查询数量count<br>4&gt; 排序: 有条件语句,需要放在条件语句后。<br>5&gt; limit : limit 0,5 跳过第0个,取5个数据,意味着取前5个数据。这个语 句必须放在查询语句最后面。</p>
+        <p>再次学习GCD的内容，并总结。</p>
+<a id="more"></a>
+<h2 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h2><h3 id="GCD概要"><a href="#GCD概要" class="headerlink" title="GCD概要"></a>GCD概要</h3><p><strong>介绍</strong><br>异步执行的技术之一，开发者只需要定义向执行的任务并追加到适当的Dispatch Queue中，GCD就能生成必要的线程并计划执行任务。<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">dispatch_async</span>(queue,^&#123;</span><br><span class="line">	<span class="tag">dispatch_async</span>(<span class="function">dispatch_get_main_queue</span>(),^&#123;</span><br><span class="line">	<span class="comment">//主线程可以执行的处理：用户页面更新</span></span><br><span class="line">	&#125;);</span><br><span class="line">	&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>多线程, 并发</strong><br> 一个应用就相当于一个进程, 而一个进程可以同时分发几个线程同时处理任务.而并发正是一个进程开启多个线程同时执行任务的意思, 主线程专门用来刷新UI,处理触摸事件等 而子线程呢, 则用来执行耗时的操作, 例如访问数据库, 下载数据等..<br>1个CPU执行的CPU命令列为一条无分叉路径，即为“线程”。<br>由于使用多线程的程序可以在某个线程和其他线程之间反复多次进行上下文切换，因此看上去就好像1个CPU能够并列执行多个线程一样。</p>
+<p><strong>GCD的优势</strong><br>说到优势, 当然有比较, 才能显得出优势所在. 事实上, iOS中我们能使用的多线程管理技术有</p>
+<pre><code>pthread(来自Clang, 纯C语言, 需要手动创建线程, 销毁线程, 手动进行线程管理. 而且代码极其恶心, )
+NSThread(Foundation框架下的OC对象, 依旧需要自己进行线程管理，线程同步。 线程同步对数据的加锁会有一定的开销。)
+GCD(两个字, 牛逼, 虽然是纯C语言, 但是它用难以置信的非常简洁的方式实现了极其复杂的多线程编程, 而且还支持block内联形式进行制定任务. 简洁! 高效! 而且我们再也不用手动进行线程管理了.)
+NSOperationQueue(相当于Foundation框架的GCD, 以面向对象的语法对GCD进行了封装. 效率一样高)
+</code></pre><h3 id="GCD的API"><a href="#GCD的API" class="headerlink" title="GCD的API"></a>GCD的API</h3><p>在介绍GCD的API之前, 我们先搞清楚四个名词: 串行, 并行, 同步, 异步</p>
+<pre><code>串行 : 一个任务执行完, 再执行下一个任务
+并行 : 多个任务同时执行
+同步 : 在当前线程中执行任务, 不具备开启线程的能力
+异步 : 在新的线程中执行任务, 具备开启线程的能力
+</code></pre><p><strong>Dispatch Queue</strong><br>Dispatch Queue是执行处理的等待队列, 按照先进先出(FIFO, First-In-First-Out)的顺序进行任务处理.队列分两种.<br>一种是串行队列(Serial Dispatch Queue),<br>一种是并行队列(Concurrent Dispatch Queue).  </p>
+<pre><code>Dispatch Queue的种类            说明  
+Serial Dispatch Queue            等待现在执行中处理结束  
+Concurrent Dispatch Queue       不等待现在执行中处理结束
+</code></pre><p>并发队列 : 让多个任务同时执行(自动开启多个线程执行任务)<br>并发功能只有在异步函数(dispatch_async)下才有效(想想看为什么?)<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-16%20%E4%B8%8B%E5%8D%885.08.16.png" alt=""> </p>
+<p><strong>创建队列</strong>  </p>
+<p> <code>dispatch_queue_create(const char *label, dispatch_queue_attr_t attr)</code><br> 手动创建一个队列.</p>
+<pre><code>label : 队列的标识符, 日后可用来调试程序
+attr : 队列类型
+DISPATCH_QUEUE_CONCURRENT : 并发队列
+DISPATCH_QUEUE_SERIAL 或 NULL : 串行队列
+</code></pre><p>需要注意的是, 通过dispatch_queue_create函数生成的queue在使用结束后需要通过dispatch_release函数来释放.(只有在MRC下才需要释放)</p>
+<p>并不是什么时候都需要手动创建队列, 事实上系统给我们提供2个很常用的队列. </p>
+<p><strong>主队列</strong><br>dispatch_get_main_queue();<br>该方法返回的是主线程中执行的同步队列. 用户界面的更新等一些必须在主线程中执行的操作追加到此队列中.  </p>
+<p><strong>全局并发队列</strong><br>dispatch_get_global_queue(long identifier, unsigned long flags);<br>该方法返回的是全局并发队列. 使用十分广泛.</p>
+<pre><code>identifier : 优先级
+DISPATCH_QUEUE_PRIORITY_HIGH : 高优先级
+DISPATCH_QUEUE_PRIORITY_DEFAULT : 默认优先级
+DISPATCH_QUEUE_PRIORITY_LOW : 低优先级
+DISPATCH_QUEUE_PRIORITY_BACKGROUND : 后台优先级
+flags : 暂时用不上, 传 0 即可
+</code></pre><p>注意 : 对Main Dispatch Queue和Global Dispatch Queue执行dispatch_release和dispatch_retain没有任何问题. (MRC)</p>
+<p><strong>同步函数</strong><br><code>dispatch_sync(dispatch_queue_t queue, ^(void)block);</code><br>在参数queue队列下同步执行block</p>
+<p><strong>异步函数</strong><br><code>dispatch_async(dispatch_queue_t queue, ^(void)block);</code><br>在参数queue队列下异步执行block(开启新线程)</p>
+<p><strong>时间</strong><br><code>dispatch_time(dispatch_time_t when, int64_t delta);</code><br>根据传入的时间(when)和延迟(delta)计算出一个未来的时间</p>
+<pre><code>when :
+DISPATCH_TIME_NOW : 现在
+DISPATCH_TIME_FOREVER : 永远(别传这个参数, 否则该时间很大)
+delta : 该参数接收的是纳秒, 可以用一个宏NSEC_PER_SEC来进行转换, 例如你要延迟3秒, 则为 3 * NSEC_PER_SEC.
+</code></pre><p><strong>延迟执行</strong><br><code>dispatch_after(dispatch_time_t when, dispatch_queue_t queue, ^(void)block);</code></p>
+<p>有了上述获取时间的函数, 则可以直接把时间传入, 然后定义该延迟执行的block在哪一个queue队列中执行.<br>苹果还给我们提供了一个在主队列中延迟执行的代码块, 如下</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_after<span class="list">(<span class="keyword">dispatch_time</span><span class="list">(<span class="keyword">DISPATCH_TIME_NOW</span>, <span class="list">(<span class="keyword">int64_t</span>)</span><span class="list">(<span class="keyword">delayInSeconds</span> <span class="variable">* NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</span><br><span class="line">            code to be executed after a specified delay</span><br><span class="line">        &#125;);</span></span></span></span></span><br></pre></td></tr></table></figure>
+<p>我们只需要传入需要延迟的秒数(delayInSeconds)和执行的任务block就可以直接调用了, 方便吧~</p>
+<p>注意 : 延迟执行不是在指定时间后执行任务处理, 而是在指定时间后将处理追加到队列中, 这个是要分清楚的.</p>
+<p><strong>队列组</strong><br><code>dispatch_group_create();</code><br>有时候我们想要在队列中的多个任务都处理完毕之后做一些事情, 就能用到这个Group. 同队列一样, Group在使用完毕也是需要dispatch_release掉的(MRC).</p>
+<p><strong>栅栏</strong><br> <code>dispatch_barrier_async(dispatch_queue_t queue, ^(void)block)</code></p>
+<p>在访问数据库或文件时, 为了提高效率, 读取操作放在并行队列中执行. 但是写入操作必须在串行队列中执行(避免资源抢夺问题). 为了避免麻烦, 此时dispatch_barrier_async函数作用就出来了, 在这函数里进行写入操作, 写入操作会等到所有读取操作完毕后, 形成一道栅栏, 然后进行写入操作, 写入完毕后再把栅栏移除, 同时开放读取操作. </p>
+<p><strong>快速迭代</strong></p>
+<p><code>dispatch_apply(10, dispatch_get_global_queue(0, 0), ^(size_t index){
+    // code here
+});</code></p>
+<p>执行10次代码, index顺序不确定. dispatch_apply会等待全部处理执行结束才会返回. 意味着dispatch_apply会阻塞当前线程. 所以dispatch_apply一般用于异步函数的block中.</p>
+<p><strong>一次性代码</strong><br><code>static dispatch_once_t onceToken;
+dispatch_once(&amp;onceToken, ^{
+// 只执行1次的代码(这里面默认是线程安全的)
+});</code><br>该代码在整个程序的生命周期中只会执行一次.</p>
+<p><strong>挂起和恢复</strong><br><code>dispatch_suspend(queue)</code><br>挂起指定的queue队列, 对已经执行的没有影响, 追加到队列中尚未执行的停止执行.</p>
+<p> <code>dispatch_resume(queue)</code><br>恢复指定的queue队列, 使尚未执行的处理继续执行. </p>
+<p><strong>GCD的注意点</strong><br>因为在ARC下, 不需要我们释放自己创建的队列, 所以GCD的注意点就剩下死锁<br><strong>死锁</strong></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">NSLog</span>(<span class="at_rule">@<span class="string">"111"</span>);</span></span><br><span class="line"><span class="function">dispatch_sync</span>(<span class="function">dispatch_get_main_queue</span>(), ^&#123;</span><br><span class="line">    <span class="function">NSLog</span>(<span class="at_rule">@<span class="string">"222"</span>);</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="function">NSLog</span>(<span class="at_rule">@<span class="string">"333"</span>);</span></span><br></pre></td></tr></table></figure>
+<p>以上三行代码将输出什么?<br>111<br>222<br>333 ?<br>还是<br>111<br>333 ?<br>其实都不对, 输出结果是<br>111<br>无疑问会先输出111, 然后在当前队列下调用dispatch_sync函数, dispatch_sync函数会把block追加到当前队列上, 然后等待block调用完毕该函数才会返回, 不巧的是, block在队列的尾端, 而队列正在执行的是dispatch_sync函数. 现在的情况是, block不执行完毕, dispatch_sync函数就不能返回, dispatch_sync不返回, 就没机会执行block函数. 这种你等我, 我也等你的情况就是死锁, 后果就是大家都执行不了, 当前线程卡死在这里.   </p>
+<p><strong>如何避免死锁?</strong><br>不要在当前队列使用同步函数, 在队列嵌套的情况下也不允许. 如下图,<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%AD%BB%E9%94%81.png" alt=""><br>队列嵌套调用同步函数引发死锁</p>
+<p>大家可以想象, 队列1执行完NSLog后到队列2中执行NSLog, 队列2执行完后又跳回队列1中执行NSLog, 由于都是同步函数, 所以最内层的NSLog(“333”); 追加到队列1中, 实际上最外层的dispatch_sync是还没返回的, 所以它没有执行的机会. 也形成死锁. 运行程序, 果不其然, 打印如下 :<br>111<br>222</p>
+<h3 id="GCD实现-GCD的使用场景"><a href="#GCD实现-GCD的使用场景" class="headerlink" title="GCD实现.(GCD的使用场景)"></a>GCD实现.(GCD的使用场景)</h3><p><strong>线程间的通信</strong></p>
+<p>这是GCD最常用的使用场景了, 如下代码</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dispatch_async<span class="list">(<span class="keyword">dispatch_get_global_queue</span><span class="list">(<span class="keyword">DISPATCH_QUEUE_PRIORITY_DEFAULT</span>, <span class="number">0</span>)</span>, ^&#123;</span><br><span class="line">    // 执行耗时操作</span><br><span class="line">    dispatch_async<span class="list">(<span class="keyword">dispatch_get_main_queue</span><span class="list">()</span>, ^&#123;</span><br><span class="line">        // 回到主线程作刷新UI等操作</span><br><span class="line">    &#125;)</span><span class="comment">;</span></span><br><span class="line">&#125;)</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>为了不阻塞主线程, 我们总是在后台线程中发送网络请求, 处理数据, 然后再回到主线程中刷新UI界面.  </p>
+<p><strong>单例</strong><br>     <br>单例也就是在程序的整个生命周期中, 该类有且仅有一个实例对象, 此时为了保证只有一个实例对象, 我们这里用到了dispatch_once函数</p>
+<p><strong>同步队列和锁</strong><br>利用队列, 实现getter方法可以并发执行, 而setter方法串行执行并且setter和getter不能并发执行呢??? 没错, 我们这里用到了dispatch_barrier_async函数.</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSString</span> )myString</span><br><span class="line">&#123;</span><br><span class="line">    __block <span class="built_in">NSString</span> localMyString = <span class="literal">nil</span>;</span><br><span class="line">    <span class="built_in">dispatch_sync</span>(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>), ^&#123;</span><br><span class="line">        localMyString = <span class="keyword">self</span><span class="variable">.myString</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> localMyString;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)setMyString:(<span class="built_in">NSString</span> *)myString</span><br><span class="line">&#123;</span><br><span class="line">    dispatch_barrier_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>), ^&#123;</span><br><span class="line">        _myString = myString;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里利用了栅栏块必须单独执行, 不能与其他块并行的特性, 写入操作就必须等当前的读取操作都执行完毕, 然后单独执行写入操作, 等待写入操作执行完毕后再继续处理读取. </p>
+<p><strong>Dispatch Source</strong><br>它是BSD系内核惯有功能kqueue的包装. kqueue的CPU负荷非常小, 可以说是应用程序处理XNU内核中发生的各种事件的方法中最优秀的一种. </p>
+<p>参考：<br>Objective-C高级编程书。</p>
 
       
     </div>
@@ -327,13 +373,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></p>
+        <p><span>本文标题:</span><a href="/2016/07/05/深入学习GCD/">深入学习GCD</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年03月05日 - 13时59分</p>
-        <p><span>最后更新:</span>2016年04月16日 - 16时44分</p>
+        <p><span>发布时间:</span>2016年07月05日 - 16时22分</p>
+        <p><span>最后更新:</span>2017年03月08日 - 16时01分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/03/05/iOS中的数据存储/" title="iOS中的数据存储">http://peilinghui.com/2016/03/05/iOS中的数据存储/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/05/iOS中的数据存储/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/05/深入学习GCD/" title="深入学习GCD">http://peilinghui.com/2016/07/05/深入学习GCD/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/07/05/深入学习GCD/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -347,15 +393,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/03/05/研究AFNetworking框架/">
-                    研究AFNetworking框架
+                <a href="/2016/07/05/深入学习Runtime/">
+                    深入学习Runtime
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/03/04/iOS中的多线程网络/">
-                    iOS中的多线程网络
+                <a href="/2016/07/02/TableView的一些事/">
+                    TableView的一些事
                 </a>
             </div>
         
@@ -366,7 +412,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS中的数据存储方式"><span class="toc-number">1.</span> <span class="toc-text">iOS中的数据存储方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Plist（NSArray-NSDictionary）"><span class="toc-number">1.1.</span> <span class="toc-text">Plist（NSArray\NSDictionary）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Preference（偏好设置-NSUserDefaults）"><span class="toc-number">1.2.</span> <span class="toc-text">Preference（偏好设置\NSUserDefaults）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSCoding（NSKeyedArchiver-NSkeyedUnarchiver归档"><span class="toc-number">1.3.</span> <span class="toc-text">NSCoding（NSKeyedArchiver\NSkeyedUnarchiver归档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLite3"><span class="toc-number">1.4.</span> <span class="toc-text">SQLite3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Core-Data"><span class="toc-number">1.5.</span> <span class="toc-text">Core Data</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GCD"><span class="toc-number">1.</span> <span class="toc-text">GCD</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GCD概要"><span class="toc-number">1.1.</span> <span class="toc-text">GCD概要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GCD的API"><span class="toc-number">1.2.</span> <span class="toc-text">GCD的API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GCD实现-GCD的使用场景"><span class="toc-number">1.3.</span> <span class="toc-text">GCD实现.(GCD的使用场景)</span></a></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -428,7 +474,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/03/05/iOS中的数据存储/" data-title="iOS中的数据存储" data-url="http://peilinghui.com/2016/03/05/iOS中的数据存储/"></div>
+    <div class="ds-thread" data-thread-key="2016/07/05/深入学习GCD/" data-title="深入学习GCD" data-url="http://peilinghui.com/2016/07/05/深入学习GCD/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -452,7 +498,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/03/05/研究AFNetworking框架/" title="上一篇: 研究AFNetworking框架">
+            <a href="/2016/07/05/深入学习Runtime/" title="上一篇: 深入学习Runtime">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -460,7 +506,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/03/04/iOS中的多线程网络/" title="下一篇: iOS中的多线程网络">
+            <a href="/2016/07/02/TableView的一些事/" title="下一篇: TableView的一些事">
                 <i class="fa fa-angle-right"></i>
             </a>
         
