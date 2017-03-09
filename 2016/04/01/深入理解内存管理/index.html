@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>深入理解内存管理 | 向着阳光奔跑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="深入理解内存管理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解内存管理">
+<meta property="og:url" content="http://peilinghui.com/2016/04/01/深入理解内存管理/index.html">
+<meta property="og:site_name" content="向着阳光奔跑">
+<meta property="og:description" content="深入理解内存管理。">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%888.13.46.png">
+<meta property="og:updated_time" content="2017-03-09T08:15:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解内存管理">
+<meta name="twitter:description" content="深入理解内存管理。">
+  
+    <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/images/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向阳</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">没有到不了的远方</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/peilinghuibest@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/575544059" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/peilinghui" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://lysongzi.com/">小松子</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/CHENYUFENG1991/article/category/5655903/4">iOS大神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://cspilgrimzww.github.io/">蔚蔚</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changhuiyuan.com/">惠源</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hxdavid.com/">PAT大神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wut0719.github.io/">桐神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pangjiuzala.github.io/">兴爷</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://han.pm/">交换生</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://frankhu.me">frank</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://judyzhangxin.com/">UI设计师</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://sunus.me/">阿里学长</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imhuchao.com/">胡超-凤凰网</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.xuanzhangjiong.xyz/">囧囧囧-网易安卓</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">没有到不了的远方，向往远方。。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向阳</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/images/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向阳</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">没有到不了的远方</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/peilinghuibest@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/575544059" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/peilinghui" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-深入理解内存管理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/01/深入理解内存管理/" class="article-date">
+      <time datetime="2016-04-01T05:01:49.000Z" itemprop="datePublished">2016-04-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入理解内存管理
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>深入理解内存管理。<br><a id="more"></a></p>
+<h2 id="ARC自动引用计数"><a href="#ARC自动引用计数" class="headerlink" title="ARC自动引用计数"></a>ARC自动引用计数</h2><p>  Automatic Reference Counting，降低了程序崩溃、内存泄露的风险，很大程度上减少了开发程序的工作量。<br> 使用条件：</p>
+<ul>
+<li>使用Xcode4.2或以上版本</li>
+<li>使用LLVM编译器3.0或以上版本</li>
+<li>编译器选项中设置ARC为有效</li>
+</ul>
+<p><strong>在LLVM编译器中设置ARC为有效状态，就无需再次键入retain或release代码</strong></p>
+<ol>
+<li>内存管理的思考方式<br>1&gt; 自己生成的对象，自己持有<br>alloc,new,copy,mutablecopy(copy方法利用NSCopying方法约定，由各类实现copyWithZone：方法生成并持有不可变对象的副本)<br>2&gt; 非自己生成的对象，自己持有<br>NSMutableArray类的array方法。使用retain方法可以持有<br><code>id obj = [NSMutableArray array];
+ [obj retain];</code><br>3&gt;不再需要自己持有的对象时释放<br>用alloc\new\copy\mutableCopy方法生成并持有的对象，或用retain方法持有的对象，一旦不再需要，务必要用release进行释放。  </li>
+</ol>
+<p>4&gt;无法释放非自己持有的对象<br><strong>程序崩溃情况</strong>：</p>
+<pre><code>- 再度释放已经释放了的对象
+- 访问已经释放的对象时。
+- 释放了非自己持有的对象
+</code></pre><ol>
+<li><p>alloc/retain/release/dealloc在GUNstep中的实现：</p>
+<ul>
+<li>在objective-c的对象中存有引用计数这一整数值</li>
+<li>调用alloc或是retain方法后，引用计数值加1.</li>
+<li>调用release后，引用计数值减1.</li>
+<li>引用计数值为0时，调用dealloc方法废弃对象。</li>
+</ul>
+</li>
+<li><p>GNUstep将用内存块头部管理引用计数的好处：</p>
+<ul>
+<li>少量代码即可完成</li>
+<li>能够统一管理引用计数用内存块与对象用内存块。</li>
+</ul>
+</li>
+<li><p>苹果实现通过引用技术表来管理引用计数的好处：</p>
+<ul>
+<li>对象用内存块的分配无需考虑内存块头部</li>
+<li>引用计数表各记录中存有内存块地址，可以从各个记录追溯到各对象的内存块。（在调试的时候，只要内存技术表没有被破坏，就可以确认各内存块的位置；使用工具检测内存泄露时，引用计数表的各记录也有助于检测各对象的持有者是否存在）</li>
+</ul>
+</li>
+<li><p>autorelease的具体使用方法：</p>
+<ul>
+<li>生成并持有NSAutoreleasePool对象。</li>
+<li>调用已分配对象的autorelease实例方法。</li>
+<li>废弃NSAutoreleasePool对象。</li>
+</ul>
+</li>
+</ol>
+<p><strong>RunLoop开始 -&gt; 创建autoreleasepool -&gt; 线程处理事件循环 -&gt; 废弃autoreleasepool -&gt; RunLoop结束 -&gt; 等待下一个Loop开始</strong></p>
+<ol>
+<li>autorelease简介<br>1&gt;autorelease方法的基本作用<br>给对象发送一条autorelease消息, 会将对象放到一个自动释放池中<br>当自动释放池被销毁时，会对池子里面的所有对象做一次release操作<br>会返回对象本身<br>调用完autorelease方法后，对象的计数器不变</li>
+</ol>
+<p>2&gt;autorelease的好处<br>不用再关心对象释放的时间<br>不用再关心什么时候调用release</p>
+<p>3&gt;autorelease的使用注意<br>占用内存较大的对象不要随便使用autorelease<br>占用内存较小的对象使用autorelease，没有太大影响<br> <strong>release和autorelease区别</strong>：</p>
+<blockquote>
+<p>release立即释放，autorelease不立即释放，先放到autoreleasepool中，当pool结束后自动调用release。</p>
+<p>一般来说,除了alloc、new或copy之外的方法创建的对象都被声明了autorelease.</p>
+</blockquote>
+<ol>
+<li><p>autorelease的实现<br>autorelease实例方法的本质就是调用了NSAutoreleasePool对象的addObjective类方法。<br>可通过objc4库的runtime/objc-arr.mm来确认苹果中autorelease的实现。</p>
+</li>
+<li><p>内存不足的产生的例子？如何解决？<br>在for循环中读入大量图片的同时，改变其尺寸。图像文件读入到NSData对象，并从中产生UIImage对象，改变该尺寸后生成新的UIImage对象，这种情况就会产生大量的autorelease的对象。不废弃NSAutoreleasePool对象，那么生成的对象就不能释放，就会产生内存不足。<br>解决：在适当的地方生成、持有或废弃NSAutoreleasePool对象；<br>返回NSMutableArray类的arrayWithCapcity方法。来返回autorelease对象。</p>
+</li>
+<li><p>所有权修饰符</p>
+<pre><code>__strong
+__weak
+__unsafe_unretained
+__autoreleasing
+</code></pre></li>
+</ol>
+<p><strong>__strong</strong></p>
+<p>ARC中, id及其他对象默认就是<strong>strong修饰符修饰<br>MRC中, 使用</strong>strong修饰符, 不必再次键入retain/release. 持有强引用的变量超出其作用域时被废弃, 随着强引用的失效, 引用的对象会随之释放.</p>
+<p><strong>__weak</strong></p>
+<p>解决循环引用问题. 并且弱引用的对象被废弃时, 则此弱引用将自动失效并等于nil</p>
+<p>通过__weak变量访问对象实际上必定是访问注册到autoreleasepool的对象, 因为该修饰符只持有对象的弱引用, 在访问对象的过程中, 该对象可能被废弃, 如果把要访问的对象注册到autoreleasepool中, 那么在block结束之前都能确保该对象存在.</p>
+<p><strong>__unsafe_unretained</strong></p>
+<p>不安全的修饰符, 附有该修饰符的变量不属于编译器的内存管理对象. 该修饰符与__weak一样, 是弱引用, 并不能持有对象.并且访问该修饰符的变量时如果不能确保其确实存在, 则应用程序会崩溃!</p>
+<p><strong>__autoreleasing</strong></p>
+<p>对象赋值给<strong>autoreleasing修饰的变量相当于MRC下手动调用autorelease方法.可理解为, ARC下用@autoreleasepool block代替NSAutoreleasePool类, 用</strong>autoreleasing修饰符的变量代替autorelease方法.<br>但是, 显式使用<strong>autoreleasing修饰符跟</strong>strong一样罕见,</p>
+<p>ps : id的指针或者对象的指针会被隐式附上__autoreleasing修饰符, 如 :</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id <span class="keyword">*</span>obj == id __autoreleasing <span class="keyword">*</span>obj;</span><br><span class="line">NSObject <span class="keyword">*</span><span class="keyword">*</span>obj == NSObject <span class="keyword">*</span> __autoreleasing <span class="keyword">*</span>obj;</span><br></pre></td></tr></table></figure>
+<h3 id="ARC的规则"><a href="#ARC的规则" class="headerlink" title="ARC的规则"></a>ARC的规则</h3><ol>
+<li>设置ARC有效的编译方法：<ul>
+<li>使用clang（LLVM编译器）3.0或以上版本</li>
+<li>指定编译器属性为“-fobjc-arc”</li>
+</ul>
+</li>
+<li><p>所有权修饰符<br>变量类型定义为id类型和各种对象类型。<br>对象类型：指向NSobject这样的OC指针，如：“NSObject <em>”<br>id类型：用于隐藏对象类型的类名部分，相当于C语言的“void </em>”<br>1&gt;<strong>strong修饰符（默认的）强引用，适用于普通对象,相当于MRC中的retain<br>2&gt;</strong>weak修饰符，弱引用，解决循环引用(很容易发生内存泄露), 相当于MRC中的assign.<br>3&gt;<strong>unsafe</strong>retained修饰符，和<strong>weak一样，自己生成并持有的对象不能继续为自己所有，所以生成的对象会立即释放。<br>4&gt;</strong>autorelease修饰符。<br>在ARC有效时，用@autorelease块代替NSAutoreleasePool类，用附有__autorelease修饰符的变量代替autorelease方法。</p>
+</li>
+<li><p>ARC规则</p>
+<ul>
+<li>不能使用retain/release/retainCount/autorelease</li>
+<li>不能使用NSAllocateObject/NSDeallocateObject(alloc实现实际上是通过直接调用NSAllocateObject函数来生成并持有对象, ARC下禁止使用NSAllocateObject函数与NSDeallocateObject函数)</li>
+<li>需遵循内存管理的方法命名规则</li>
+<li>不要显示调用dealloc(可以重写dealloc，但是不能调用[super dealloc])</li>
+<li>使用@autoreleasepool块代替NSAutoreleasePool</li>
+<li>不能使用区域（NSZone）</li>
+<li>对象型变量不能作为C语言结构体(struct/union)的成员(可强制转换为void *或者是添加<strong>unsafe</strong>retained修饰符)</li>
+<li>显示转换id和“void <em>”（通过__bridge可以id和void </em>相互转换，<strong>bridge</strong>retain可使要转换赋值的变量也持有所赋值的对象相当于retain，<strong>bridge</strong>transfer被转换的变量所持有的对象在该变量被赋值给转换目标变量后随之释放相当于release）</li>
+</ul>
+</li>
+</ol>
+<p><strong>小结</strong><br><strong> bridge_retained转换与retain类似, </strong> bridge_transfer转换与release类似. 该两种转换多用于Foundation对象与Core Foundation对象之间的转换.<br>在ARC下, 以下可作为这种属性声明中使用的属性来用.<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%888.13.46.png" alt=""><br>以上各种属性赋值给指定的属性中就相当于赋值给附加各属性对应的所有权修饰符的变量中.</p>
+<h3 id="ARC的实现"><a href="#ARC的实现" class="headerlink" title="ARC的实现"></a>ARC的实现</h3><p>ARC是由编译器+运行时库共同完成的.</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">id</span> __<span class="keyword">strong</span> obj = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line">&#125;</span><br><span class="line">可转换为以下代码</span><br><span class="line"><span class="keyword">id</span> obj = objc_msgSend(<span class="built_in">NSObject</span>, <span class="keyword">@selector</span>(alloc));</span><br><span class="line">objc_msgSend(obj, <span class="keyword">@selector</span>(init));</span><br><span class="line">objc_release(obj);</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">id</span> __<span class="keyword">strong</span> obj = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">&#125;</span><br><span class="line">可转换为以下代码</span><br><span class="line"><span class="keyword">id</span> obj = objc_msgSend(<span class="built_in">NSMutableArray</span>, <span class="keyword">@selector</span>(array));</span><br><span class="line">objc_retainAutoreleasedReturnValue(obj);</span><br><span class="line">objc_release(obj);</span><br></pre></td></tr></table></figure>
+<p>objc_retainAutoreleasedReturnValue函数主要用于最优化程序运行. 它是用来持有返回注册在autoreleasepool中对象的方法.这个函数是成对的, 另外一个objc_autoreleaseReturnValue函数则用于alloc/new/copy/mutableCopy方法以外的类方法返回对象的实现上, 如下 :</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">id</span>)array</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> [[<span class="built_in">NSMutableArray</span> alloc] init];</span><br><span class="line">&#125;</span><br><span class="line">可转换为以下代码</span><br><span class="line">+ (<span class="keyword">id</span>)array</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">id</span> obj = objc_msgSend(<span class="built_in">NSMutableArray</span>, <span class="keyword">@selector</span>(alloc));</span><br><span class="line">    objc_msgSend(obj, <span class="keyword">@selector</span>(init));</span><br><span class="line">    <span class="keyword">return</span> objc_autoreleaseReturnValue(obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么objc_autoreleaseReturnValue函数和objc_retainAutoreleasedReturnValue函数有什么用?</p>
+<p>可以这样来总结 :</p>
+<pre><code>如果调用autorelease之后又紧接着调用retain的话, 这两部就显得多余, 所以以上两个函数就发挥其作用了.
+用objc_autoreleaseReturnValue函数替代autorelease, 该函数检测如果对象紧接着会调用retain, 他就不调用autorelease了(并设置一个标志)
+用objc_retainAutoreleasedReturnValue函数来替代retain, 该函数会检测对象的标志是否被设置, 如被设置, 则不调用retain; 反之则调用retain方法.
+通过这两个函数能优化程序, 减少不必要的多余的操作.
+</code></pre><p><strong>__weak修饰符</strong></p>
+<pre><code>若附有__weak修饰符的变量所引用的对象被废弃, 则将nil赋值给该变量.
+使用附有__weak修饰符的变量, 即是使用注册到autoreleasepool中的对象.
+</code></pre><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    id __weak obj1 = obj<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line">可转换为以下代码</span><br><span class="line">id obj1<span class="comment">;</span></span><br><span class="line">objc_initWeak(&amp;obj1, obj)<span class="comment">;</span></span><br><span class="line">objc_destroyWeak(&amp;obj1)<span class="comment">;</span></span><br><span class="line">也可转换为以下代码</span><br><span class="line">id obj1<span class="comment">;</span></span><br><span class="line">obj1 = 0<span class="comment">;</span></span><br><span class="line">objc_storeWeak(&amp;obj1, obj)<span class="comment">;</span></span><br><span class="line">objc_storeWeak(&amp;obj1, 0)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>访问__weak变量时, 相当于访问注册到autoreleasepool的对象</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">id</span> __<span class="keyword">weak</span> obj1 = obj;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, obj1);</span><br><span class="line">&#125;</span><br><span class="line">可转换为以下代码</span><br><span class="line"><span class="keyword">id</span> obj1;</span><br><span class="line">objc_initWeak(&amp;obj1, obj);</span><br><span class="line"><span class="keyword">id</span> tmp = objc_loadWeakRetained(&amp;obj1);</span><br><span class="line">objc_autorelease(tmp);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, tmp);</span><br><span class="line">objc_destroyWeak(&amp;obj1);</span><br><span class="line"><span class="comment">// objc_loadWeakRetained函数取出附有__weak修饰符变量所引用对象并retain</span></span><br></pre></td></tr></table></figure>
+<p>需要注意的是, 通过<strong>weak变量访问所引用的对象几次, 对象就被注册到autoreleasepool里几次. (将附有</strong>weak修饰符的变量赋值给附有<strong>strong修饰符的变量后再使用可避免此问题)
+</strong>autoreleasing修饰符</p>
+<p>将对象赋值给附有__autoreleasing修饰符的变量等同于MRC下调用对象的autorelease方法.</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@autoreleasepool</span>&#123;</span><br><span class="line">    <span class="keyword">id</span> __autoreleasing obj = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line">&#125;</span><br><span class="line">可转换为以下代码</span><br><span class="line"><span class="keyword">id</span> pool = objc_autoreleasePoolPush();</span><br><span class="line"><span class="keyword">id</span> obj = objc_msgSend(<span class="built_in">NSObject</span>, <span class="keyword">@selector</span>(alloc));</span><br><span class="line">objc_msgSend(obj, <span class="keyword">@selector</span>(init));</span><br><span class="line">objc_autorelease(obj);</span><br><span class="line">objc_autoreleasePoolPop(pool);</span><br><span class="line"></span><br><span class="line">那么调用alloc/new/<span class="keyword">copy</span>/mutableCopy以外的方法会怎样呢?</span><br><span class="line"></span><br><span class="line"><span class="keyword">@autoreleasepool</span>&#123;</span><br><span class="line">    <span class="keyword">id</span> __autoreleasing obj = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">&#125;</span><br><span class="line">可转换为以下代码</span><br><span class="line"><span class="keyword">id</span> pool = objc_autoreleasePoolPush();</span><br><span class="line"><span class="keyword">id</span> obj = objc_msgSend(<span class="built_in">NSMutableArray</span>, <span class="keyword">@selector</span>(array));</span><br><span class="line">objc_retainAutoreleasedReturnValue(obj);</span><br><span class="line">objc_autorelease(obj);</span><br><span class="line">objc_autoreleasePoolPop(pool);</span><br></pre></td></tr></table></figure>
+<p>可见注册autorelease的方法没有改变, 仍是objc_autorelease函数</p>
+<p><strong>如何获取引用计数值</strong></p>
+<p>获取引用数值的函数<br>uinptr_t _objc_rootRetainCount(id obj)</p>
+<pre><code>- (NSUInteger)retainCount;
+该方法返回的引用计数不一定准确, 因为有时系统会优化对象的释放行为, 在保留计数为1的时候就把它回收. 所以你用这个方法打印出来的引用计数可能永远不会出现0. 我们不应该根据retainCount来调试程序!!
+</code></pre><p><strong>总结</strong></p>
+<p>我们现在的工程几乎都运行在ARC下, 所以大部分内存管理代码都不需要我们自己写, 而由编译器帮我们搞定. 所以在ARC下我们只需要怎样不要去破坏这个生态即可</p>
+<pre><code>避免循环引用(使用__weak修饰符)
+遵循ARC方法命名规则
+适时清空指针(赋值nil即可, 避免野指针错误)
+如用到Core Foundation对象, 则在dealloc方法中释放
+在dealloc方法中只释放引用并移除监听(不能在dealloc中开启异步任务)
+对于内存开销较大的资源, 如file descriptor, socket, 大块内存等应在不需要使用的时候调用close方法释放掉而不是在dealloc中处理.
+适当使用@autoreleasepool block来降低内存峰值(之前我写的一篇文章中有demo)
+必要时开启&quot;僵尸对象&quot;调试内存管理问题
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/04/01/深入理解内存管理/">深入理解内存管理</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
+        <p><span>发布时间:</span>2016年04月01日 - 13时01分</p>
+        <p><span>最后更新:</span>2017年03月09日 - 16时15分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/04/01/深入理解内存管理/" title="深入理解内存管理">http://peilinghui.com/2016/04/01/深入理解内存管理/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/04/01/深入理解内存管理/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/04/01/深入学习Block/">
+                    深入学习Block
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/03/27/iOS面试题/">
+                    iOS面试题
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ARC自动引用计数"><span class="toc-number">1.</span> <span class="toc-text">ARC自动引用计数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ARC的规则"><span class="toc-number">1.1.</span> <span class="toc-text">ARC的规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARC的实现"><span class="toc-number">1.2.</span> <span class="toc-text">ARC的实现</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/04/01/深入理解内存管理/" data-title="深入理解内存管理" data-url="http://peilinghui.com/2016/04/01/深入理解内存管理/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"peilinghui"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/04/01/深入学习Block/" title="上一篇: 深入学习Block">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/03/27/iOS面试题/" title="下一篇: iOS面试题">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入理解内存管理/">深入理解内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 向阳
+            </div>
+            <div class="footer-right">
+	     欢迎光临小站
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

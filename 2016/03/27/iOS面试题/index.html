@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="总结一下一些面试题。">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/UILabel%E6%95%88%E6%9E%9C.png">
-<meta property="og:updated_time" content="2017-03-08T07:45:15.000Z">
+<meta property="og:updated_time" content="2017-03-09T09:00:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS面试题">
 <meta name="twitter:description" content="总结一下一些面试题。">
@@ -151,7 +151,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
+                        <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
                     </div>
                 </section>
                 
@@ -316,10 +316,9 @@
 <li><p>页面的跳转的两种方式；<br>一种直接跳,一种通过导航.<br>第一种 直接跳转 思路大致就是new一个目的页面，然后设置下页面跳转动画 中间还可以做点目的页面的数据初始化:<br>第二种:利用UINavigationController，调用pushViewController，进行跳转；这种采用压栈和出栈的方式，进行Controller的管理。调用popViewControllerAnimated方法可以返回。<br><a href="http://blog.it985.com/13090.html" target="_blank" rel="external">http://blog.it985.com/13090.html</a>  </p>
 </li>
 <li>属性修饰符retain、assign、copy等等之间的区别；</li>
-<li><p>讲讲block；</p>
-</li>
-<li><p>Tableview要实现哪两个协议；</p>
-</li>
+</ol>
+<ol>
+<li>Tableview要实现哪两个协议；</li>
 <li>category和extension的区别；<br>Category；<ul>
 <li>用于给class及其subclass添加新的方法</li>
 <li>有自己单独的 .h 和 .m 文件</li>
@@ -337,17 +336,14 @@
 类别的缺陷：一是无法向类中添加新的实例变量。二是名称冲突，在自己的类别方法名中添加一个前缀，以确保不会发生冲突。
 类别的优势：将类的实现代码分散到多个不同文件或框架中，创建对私有方法的前向引用，以及向对象添加非正式协议。
 </code></pre><ol>
-<li>多线程有哪几种实现方式，GCD的具体使用；</li>
-<li>GCD中的数据不安全是怎么处理的；</li>
-<li>dispatch_main,同步和异步如何使用;</li>
 <li><p>讲讲最近你的项目；</p>
 </li>
 <li><p>Core Animation /Core Graphics<br>CoreGraphics是底层绘制框架，我们实际会用到的也就是CG开头的一些底层绘制函数和变量，这是一个纯C语言框架。</p>
 </li>
 </ol>
 <p>QuartzCore也就是你说的包含了CoreAnimation的框架，是iOS系统的基本渲染框架，是一个OC语言框架，是一套基于CoreGraphics的OC语言封装，封装出了基本渲染类CALayer。</p>
-<p>**一面电面：15min；<br>1.算法：数组中（无序的正整数数）如何找到第n大的数；<br><a href="http://blog.sina.com.cn/s/blog_54f82cc201013tke.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_54f82cc201013tke.html</a><br>2.算法：数组中1—100的无序数字如何找到第n大的数；（遍历计数）<br>思路：<br>1&gt;假设数组中有n个元素，a1~an，而我们要求第k大的数字，就相当于求排序后的第m = n - k + 1个数字。<br>2&gt;假设一次快速排序之后，如果枢纽的是第x个（1~n）。<br>3&gt;如果x = m，则这个枢纽ax就是我们要求的第k大的数字，结束；如果x &lt; m，则对a0 ~ ax-1进行一次快速排序，重复第2）步；如果x &gt; m，则对ax+1 ~ an 进行一次快速排序，重复第2）步。<br> 快速选择的代码如下：<br> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//a[] - 要排序的数组</span></span><br><span class="line"><span class="comment">//b - 要排序的子区间的开始索引</span></span><br><span class="line"><span class="comment">//e - 要排序的子区间的结束索引</span></span><br><span class="line"><span class="comment">//k - 求出排序后第k个数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">quickselect</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> b, <span class="keyword">int</span> e, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> i = b ;</span><br><span class="line">  <span class="keyword">int</span> j = e + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">int</span> x = a[i];</span><br><span class="line">  <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    <span class="keyword">while</span>(a[++i] &lt; x &amp;&amp; i &lt; j);</span><br><span class="line">    <span class="keyword">while</span>(a[--j] &gt; x);</span><br><span class="line">    <span class="keyword">if</span>(i &gt;= j)</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      swap(a[i], a[j]);</span><br><span class="line">  &#125;</span><br><span class="line">  a[b] = a[j];</span><br><span class="line">  a[j] = x;</span><br><span class="line">  <span class="keyword">if</span>(k - <span class="number">1</span> == j)</span><br><span class="line">    <span class="keyword">return</span> a[j];</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(k - <span class="number">1</span> &gt; j)</span><br><span class="line">    <span class="keyword">return</span> quickselect(a, j + <span class="number">1</span>, e, k);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> quickselect(a, b, j - <span class="number">1</span>, k);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>总结：快速选择可以用于这类面试题：<br>       1）求出无序数组中第k大的数<br>       2）求出无序数组中最大/小的k个数<br>3.讲一讲OC中的运行时，动态性；<br>4.OC中是如何找到一个方法的，通过函数名key的方式找到的，每一个函数名肯定是不一样的；<br>5.OC中有没有函数重载（没有）；Swift中有没有函数重载（有的）；<br>6.内存管理，MRC，ARC的区别；<br>7.releasepool被释放了，里面的对象都会被释放吗？过程是怎样的。</p>
+<p>**一面电面：15min；<br>1.算法：数组中（无序的正整数数）如何找到第n大的数；<br><a href="http://blog.sina.com.cn/s/blog_54f82cc201013tke.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_54f82cc201013tke.html</a></p>
+<p>4.OC中是如何找到一个方法的，通过函数名key的方式找到的，每一个函数名肯定是不一样的；<br>5.OC中有没有函数重载（没有）；Swift中有没有函数重载（有的）；<br>6.内存管理，MRC，ARC的区别；<br>7.releasepool被释放了，里面的对象都会被释放吗？过程是怎样的。</p>
 <h2 id="二面："><a href="#二面：" class="headerlink" title="二面：  "></a>二面：  </h2><ol>
 <li>C++和OC 的内存管理比较，以及实现方式；</li>
 <li><p>两个数组，一个有100万的数据，另一个有1亿的数据，如何找出相同的数据，时间复杂度是什么？<br>hash统计：先对这批海量数据预处理(维护一个Key为Query字串，Value为该Query出现次数的HashTable，即Hashmap(Query，Value)，每次读取一个Query，如果该字串不在Table中，那么加入该字串，并且将Value值设为1；如果该字串在Table中，那么将该字串的计数加一即可。最终我们在O(N)的时间复杂度内用Hash表完成了统计；<br>参考：<a href="http://www.cnblogs.com/v-July-v/archive/2012/03/22/2413055.html" target="_blank" rel="external">http://www.cnblogs.com/v-July-v/archive/2012/03/22/2413055.html</a>  </p>
@@ -362,19 +358,15 @@
 <ol>
 <li>Swift与OC有哪些区别；<br>Swift没有地址/指针的概念<br>泛型<br>类型严谨 对比oc的动态绑定<br>参考：<a href="http://www.cnblogs.com/dsxniubility/p/4294658.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://www.cnblogs.com/dsxniubility/p/4294658.html?utm_source=tuicool&amp;utm_medium=referral</a><br><a href="http://www.jianshu.com/p/34718b0fc910" target="_blank" rel="external">http://www.jianshu.com/p/34718b0fc910</a></li>
 </ol>
-<h2 id="网易："><a href="#网易：" class="headerlink" title="网易："></a>网易：</h2><ol>
-<li>介绍一下GCD</li>
-<li>如果没有GCD，你怎样实现多线程</li>
-<li><p>NSthread的缺点是什么？使用NSthread怎么实现数据同步？<br>缺点：需要自己管理线程的生命周期，线程同步。线程同步对数据的加锁会有一定的系统开销<br>两种锁，一种NSCondition ，一种是：NSLock。我们可以使用指令 @synchronized 来简化 NSLock的使用，这样我们就不必显示编写创建NSLock,加锁并解锁相关代码</p>
-</li>
+<h2 id="网易："><a href="#网易：" class="headerlink" title="网易："></a>网易：</h2><p>缺点：需要自己管理线程的生命周期，线程同步。线程同步对数据的加锁会有一定的系统开销<br>两种锁，一种NSCondition ，一种是：NSLock。我们可以使用指令 @synchronized 来简化 NSLock的使用，这样我们就不必显示编写创建NSLock,加锁并解锁相关代码</p>
+<ol>
 <li><p>介绍protocol？<br>protocol（协议）类似java中的接口，定义了一些类需要公用到的方法，只要遵守这个协议，就可以拥有这些方法并可以去实现它们，这样可以避免许多重复的代码。@required代表协议里的方法必须实现，否则编译器会警告，不写默认是@required，@optional代表协议里的方法是选择实现。</p>
 </li>
 <li><p>protocol，category和继承的区别？<br>protocol的作用是为一些列类仅仅提供一套公用的接口，而完全没 有办法也没可能去提供具体的一些实现情况；<br>category则是为一个已有的类提供一些额外的接口和具体实现；<br>而继承则基于两者之间，既可以想 protocol一样提供只是纯粹提供接口，也可以像Category一样提供完整的实现，而且继承还能对类以后的功能进行改写，所以说继承的力量是最强 大的。</p>
 </li>
-<li><p>block和delegate你更倾向于用哪个？为什么？<br>Block.<br>block使代码更紧凑,便于阅读,delegate可以设置必选和可选的方法实现.<br>block可以访存局部变量. 不需要像以前的回调一样，把在操作后所有需要用到的数据封装成特定的数据结构, 你完全可以直接访问局部变量.</p>
-</li>
-<li><p>UIalertviewcontroller的内部实现？</p>
-</li>
+</ol>
+<ol>
+<li>UIalertviewcontroller的内部实现？</li>
 </ol>
 <ol>
 <li><p>如何理解MVC设计模式<br>MVC是一种架构模式，M表示MOdel，V表示视图View，C表示控制器Controller： </p>
@@ -388,21 +380,20 @@
 <li>加密算法？<br>常见的加解密方式(rsa,aes,md5）<br>RSA：基于公钥和私钥的非对程加密算法。适用范围广。<br>AES：是一种对程加密的流行方式。加密涉及矩阵运算。<br>MD5:将任意长度的“字节串”变换成一个128bit的大整数，并且它是一个不可逆的字符串变换算法，</li>
 <li>ios应用的调试技巧<br>1&gt;如遇到crash，分析崩溃日志（symbolicatedrash工具的适用）保留崩溃版本的.dSYM文件<br>2&gt;在 XCode 中进入断点管理窗口；然后点击右下方的 +，增加新的 Exception Breakpoint。<br>3&gt;如遇到EXC_BAD_ACCESS，打开Scheme选项选择EditScheme。然后按图勾上Enable Zombie Objects和Malloc Stack那两项。<br>4&gt;有效的日志管理。NSLog和加入一些开源的日志管理框架。<br>5&gt;程序断点debug模式。</li>
 </ol>
-<h2 id="网易二面："><a href="#网易二面：" class="headerlink" title="网易二面："></a>网易二面：</h2><p>学习oc对你有什么提升？<br>nsdictionary如何实现深拷贝？<br>如果有多层，怎样实现？<br>autolayout？<br>主线程可以执行下载任务吗？为什么？<br>主线程使用数据库，想在其他线程也访问数据库，怎么实现？<br>有没有写过category？里面能不能加属性？为什么？<br>谈一下你对mvc模式的理解？<br>ARC和MRC ：<br>ARC是依靠什么实现的？<br><a href="https://onevcat.com/2012/06/arc-hand-by-hand/" target="_blank" rel="external">https://onevcat.com/2012/06/arc-hand-by-hand/</a><br>release如何实现对象释放？autorelease如何实现？两者的区别与联系？release能做的事情autorelease都能做，那么release可不可以舍弃？为什么？<br>weak和assign的区别？<br>谈一下运行时？</p>
-<p>网易一面：<br>1.UIview中的俩个label的自适应代码。<br>2.项目：音乐播放器，后台实现除了有音乐播放器，还有什么？<br>3.我回答的是通知，通知你用过吗？本地通知和远程通知，有什么区别，远程通知是从哪里获取的。<br>4.音乐播放的数据库是怎么实现的。<br>5.怎么学习iOS的。<br>6.学过JS，JS学的怎么样？JS和OC实现热点会吗？</p>
-<h2 id="网易其他面试题："><a href="#网易其他面试题：" class="headerlink" title="网易其他面试题："></a>网易其他面试题：</h2><p>内存管理基础<br>多线程介绍</p>
-<p>图片下载，缓存是同步还是异步<br>Objective的对象结构<br>ISA指针是指向什么<br>block在MRC下如何解决循环引用<br>NSCache的优点，使用字典可不可以，优缺点分析<br>JAVA和OC的区别，不同，在哪些上最明显<br>UItableView的优化，为什么这么优化<br>CEll如何计算<br>dealloc里做哪些操作<br>NOtification哪些使用场景，同步还是异步？主线程还是子线程<br>dealloc不remove通知会怎么样</p>
-<p>消息转发原理<br>何时用到串行队列</p>
-<p>越狱后APP的安全<br>动态更新<br>链式反应<br>UIbutton的多次点击</p>
+<h2 id="网易二面："><a href="#网易二面：" class="headerlink" title="网易二面："></a>网易二面：</h2><p>nsdictionary如何实现深拷贝？</p>
+<p>autolayout？<br>主线程可以执行下载任务吗？为什么？<br>主线程使用数据库，想在其他线程也访问数据库，怎么实现？</p>
+<p>谈一下你对mvc模式的理解？<br>ARC和MRC ：<br>ARC是依靠什么实现的？<br><a href="https://onevcat.com/2012/06/arc-hand-by-hand/" target="_blank" rel="external">https://onevcat.com/2012/06/arc-hand-by-hand/</a><br>release如何实现对象释放？autorelease如何实现？两者的区别与联系？release能做的事情autorelease都能做，那么release可不可以舍弃？为什么？<br>weak和assign的区别？</p>
+<p>网易一面：<br>1.UIview中的俩个label的自适应代码。<br>2.项目：音乐播放器，后台实现除了有音乐播放器，还有什么？<br>3.我回答的是通知，通知你用过吗？本地通知和远程通知，有什么区别，远程通知是从哪里获取的。<br>4.音乐播放的数据库是怎么实现的。<br>6.学过JS，JS学的怎么样？JS和OC实现热点会吗？</p>
+<h2 id="网易其他面试题："><a href="#网易其他面试题：" class="headerlink" title="网易其他面试题："></a>网易其他面试题：</h2><p>内存管理基础</p>
+<p>图片下载，缓存是同步还是异步<br>Objective的对象结构</p>
+<p>NSCache的优点，使用字典可不可以，优缺点分析<br>JAVA和OC的区别，不同，在哪些上最明显<br>UItableView的优化，为什么这么优化<br>CEll如何计算<br>dealloc里做哪些操作<br>NOtification哪些使用场景，同步还是异步？主线程还是子线程<br>dealloc不remove通知会怎么样<br>何时用到串行队列<br>越狱后APP的安全<br>动态更新<br>链式反应<br>UIbutton的多次点击</p>
 <h2 id="网易笔试："><a href="#网易笔试：" class="headerlink" title="网易笔试："></a>网易笔试：</h2><ol>
-<li>用户点击某按钮时下载一张图片，当用户再次点击此按钮是下载时取消，为了保证尽量节省用户流量，请尽快取消真实的下载请求。<br>请描述解决此问题的方法和思路。</li>
-</ol>
-<ol>
-<li>实现多线程有哪些方式，各有什么优势？</li>
-<li>请使用category实现NSMutableDictionary的深度拷贝？</li>
-</ol>
-<ol>
-<li>使用Autolayout实现UIView包含两个子元素[UILabel不定字数]和[UILabel不定字数文字]：<ul>
+<li><p>用户点击某按钮时下载一张图片，当用户再次点击此按钮是下载时取消，为了保证尽量节省用户流量，请尽快取消真实的下载请求。<br>请描述解决此问题的方法和思路。</p>
+</li>
+<li><p>请使用category实现NSMutableDictionary的深度拷贝？</p>
+</li>
+<li><p>使用Autolayout实现UIView包含两个子元素[UILabel不定字数]和[UILabel不定字数文字]：</p>
+<ul>
 <li>Label1和Label2横向排布，间距5pt.</li>
 <li>Label需要宽度自适应</li>
 <li>Label1和Label2纵向居中对齐</li>
@@ -418,13 +409,15 @@
 </ol>
 <p>每一个 UIView 的身后对应一个 Core Animation 框架中的 CALayer. 每一个 UIView 都是 CALayer 的代理.<br>UIView 实际上就是对 CALayer 的轻量级的封装. <strong>UIView 继承自 UIResponder</strong>, 用来处理来自用户的事件; <strong>CALayer 继承自 NSObject</strong> 主要用于处理图层的渲染和动画. 这么设计有以下几个原因:</p>
 <p>你可以通过操作 UIView 在一个更高的层级上处理与用户的交互, 触摸, 点击, 拖拽等事件, 这些都是在 UIKit 这个层级上完成的.<br>UIView 和 NSView(AppKit) 的实现极其不同, 而使用 Core Animation 可以实现底层代码地重用, 在 Mac 和 iOS 平台上都使用着近乎相同的 Core Animation 代码, 这样我们可以对这个层级进行抽象在两种平台上产生 UIKit 和 AppKit 用于不同平台的框架.<br>使用 CALayer 的唯一原因大概是便于移植到不同的平台, 如果仅仅使用 Core Animation 层级进行开发, 处理用户的交互时间需要写更多的代码.</p>
+<p>在每一个UIView实例当中，都有一个默认的支持图层，UIView负责创建并且管理这个图层。实际上这个CALayer图层才是真正用来在屏幕上显示的，UIView仅仅是对它的一层封装，实现了CALayer的delegate，提供了处理事件交互的具体功能，还有动画底层方法的高级API。</p>
+<p>可以说CALayer是UIView的内部实现细节。</p>
 <ol>
 <li><p>自动释放池底层是如何实现的？</p>
 </li>
 <li><p>宏定义和const关键字的区别？</p>
 </li>
-<li>GCD和NSOperation的区别？NSOperation并发有顺序吗？</li>
-<li>沙盒的目录，NSUserDefault是存在什么目录下的？哪种形式？</li>
+<li><p>沙盒的目录，NSUserDefault是存在什么目录下的？哪种形式？</p>
+</li>
 <li>Runloop的机制？</li>
 </ol>
 <ol>
@@ -433,34 +426,34 @@
 <li>H5,JS和网页，Native与iOS开发结合用过吗？</li>
 </ol>
 <h2 id="腾讯面试题："><a href="#腾讯面试题：" class="headerlink" title="腾讯面试题："></a>腾讯面试题：</h2><ol>
-<li>如何绘制一个三角形？<br>1.1 如何绘制大量三角形？<br>1.2 一定要重写drawRect吗？<br>当你调用 setNeedsDisplay 方法时, UIKit 将会把当前图层标记为 dirty, 但还是会显示原来的内容, 直到下一次的视图渲染周期, 才会为标记为 dirty 的图层重新建立 Core Graphics 上下文, 然后将内存中的数据恢复出来, 再使用 CGContextRef 进行绘制.<br>1.3 如何刷新View界面？<br>1.4 Layer好在哪？</li>
+<li>如何绘制一个三角形？<br>1.1 如何绘制大量三角形？<br>1.2 一定要重写drawRect吗？<br>当你调用 setNeedsDisplay 方法时, UIKit 将会把当前图层标记为 dirty, 但还是会显示原来的内容, 直到下一次的视图渲染周期, 才会为标记为 dirty 的图层重新建立 Core Graphics 上下文, 然后将内存中的数据恢复出来, 再使用 CGContextRef 进行绘制.<br>1.3 如何刷新View界面？</li>
 <li>assign和weak的区别</li>
 <li>线程和RunLoop的关系<br>3.1 一个autorealese对象在什么时刻释放？（比如在一个vc的viewDidLoad中创建）</li>
 <li>NSTimer有什么需注意的以及和RunLoop的关系？</li>
 <li>NSString copy 和 NSString mutableCopy 的区别</li>
 <li>线程加锁原理（信号量，临界区，自选锁）</li>
-<li>iOS7 - iOS9的区别</li>
-<li>GCD指向了野指针了怎么办</li>
-<li>用HTTP传数据，丢包严重怎么办</li>
+<li><p>iOS7 - iOS9的区别</p>
+</li>
+<li><p>用HTTP传数据，丢包严重怎么办</p>
+</li>
 <li>iOS中广播的种类</li>
 <li>app slying</li>
 <li>AFNetworking的内部实现原理？</li>
-<li>block循环引用了如何解决？</li>
-<li>如何用GCD同步若干个异步调用？（如根据若干个url异步加载多张图片，然后在都下载完成后合成一张整图）</li>
-<li>UIKit的框架结构？<br>腾讯面试题：</li>
 </ol>
-<hr>
 <ol>
-<li><p>app上架流程</p>
-</li>
+<li>UIKit的框架结构？<br>1</li>
+</ol>
+<h2 id="腾讯面试题：-1"><a href="#腾讯面试题：-1" class="headerlink" title="腾讯面试题："></a>腾讯面试题：</h2><ol>
 <li><p>线程和进程区别 及之间通信<br><a href="http://1108038.blog.51cto.com/1098038/420330" target="_blank" rel="external">http://1108038.blog.51cto.com/1098038/420330</a><br>进程是表示资源分配的基本单位，又是调度运行的基本单位。<br>线程是进程中执行运算的最小单位，亦即执行处理机调度的基本单位。<br>进程间通信—&gt;管道(pipe)、信号(signal)、消息队列、共享内存、信号量、套接字；<br>线程间通信—&gt;信号量、消息、事件event</p>
 </li>
 <li><p>tableview cell 缓存机制<br>在UITableView内部有一个缓存池，初始化时使用initWithStyle:(UITableViewCellStyle) reuseIdentifier:(NSString *)方法指定一个可重用标识，就可以将这个cell放到缓存池。然后在使用时使用指定的标识去缓存池中取得对应的cell然后修改cell内容即可。</p>
 </li>
 <li><p>tableview cell高度优化：</p>
 </li>
-<li>深入理解runloop<br><a href="http://blog.ibireme.com/2015/05/18/runloop/" target="_blank" rel="external">http://blog.ibireme.com/2015/05/18/runloop/</a></li>
-<li>主线程runloop(mainRunloop)主要执行事件：<br>负责创建Autoreleasepool和释放autoreleasepool,  周期大概是event loop(事件循环)；<br>事件响应—&gt;当一个硬件事件(触摸/锁屏/摇晃等)发生后，首先由 IOKit.framework 生成一个 IOHIDEvent 事件并由 SpringBoard 接收。SpringBoard 只接收按键(锁屏/静音等)，触摸，加速，接近传感器等几种 Event，随后用 mach port 转发给需要的App进程。随后苹果注册的那个 Source1 就会触发回调，并调用 _UIApplicationHandleEventQueue() 进行应用内部的分发。_UIApplicationHandleEventQueue() 会把 IOHIDEvent 处理并包装成 UIEvent 进行处理或分发，其中包括识别 UIGesture/处理屏幕旋转/发送给 UIWindow 等。通常事件比如 UIButton 点击、touchesBegin/Move/End/Cancel 事件都是在这个回调中完成的。</li>
+<li><p>深入理解runloop<br><a href="http://blog.ibireme.com/2015/05/18/runloop/" target="_blank" rel="external">http://blog.ibireme.com/2015/05/18/runloop/</a></p>
+</li>
+<li><p>主线程runloop(mainRunloop)主要执行事件：<br>负责创建Autoreleasepool和释放autoreleasepool,  周期大概是event loop(事件循环)；<br>事件响应—&gt;当一个硬件事件(触摸/锁屏/摇晃等)发生后，首先由 IOKit.framework 生成一个 IOHIDEvent 事件并由 SpringBoard 接收。SpringBoard 只接收按键(锁屏/静音等)，触摸，加速，接近传感器等几种 Event，随后用 mach port 转发给需要的App进程。随后苹果注册的那个 Source1 就会触发回调，并调用 _UIApplicationHandleEventQueue() 进行应用内部的分发。_UIApplicationHandleEventQueue() 会把 IOHIDEvent 处理并包装成 UIEvent 进行处理或分发，其中包括识别 UIGesture/处理屏幕旋转/发送给 UIWindow 等。通常事件比如 UIButton 点击、touchesBegin/Move/End/Cancel 事件都是在这个回调中完成的。</p>
+</li>
 </ol>
 <p>手势识别—&gt;当上面的 _UIApplicationHandleEventQueue() 识别了一个手势时，其首先会调用 Cancel 将当前的 touchesBegin/Move/End 系列回调打断。随后系统将对应的 UIGestureRecognizer 标记为待处理。</p>
 <p>界面更新—&gt;当在操作 UI 时，比如改变了 Frame、更新了 UIView/CALayer 的层次时，或者手动调用了 UIView/CALayer 的 setNeedsLayout/setNeedsDisplay方法后，这个 UIView/CALayer 就被标记为待处理，并被提交到一个全局的容器去。</p>
@@ -475,14 +468,13 @@
 </li>
 <li><p>红黑树</p>
 </li>
-<li>QQ小红点动画的实现原理</li>
-<li>设计一个网络图片缓存器(SDWebImage实现原理必需要了解)</li>
-<li>PNG和JPG的区别</li>
+<li><p>QQ小红点动画的实现原理</p>
+</li>
+<li><p>PNG和JPG的区别</p>
+</li>
 <li>如何压缩JPG</li>
-<li>TCP/IP协议<br>自己面试题：</li>
-<li>GCD有何缺点？</li>
-<li>CocosPods?</li>
-<li>项目重构的一些规范和命名规范？</li>
+</ol>
+<ol>
 <li>如何push到某个特定的controller？</li>
 </ol>
 <h2 id="腾讯面试："><a href="#腾讯面试：" class="headerlink" title="腾讯面试："></a>腾讯面试：</h2><ol>
@@ -490,9 +482,10 @@
 <li>属性ARC下有什么？</li>
 <li>属性中weak和strong的区别？<br>strong：先保留新值，再释放旧值，然后再将新值设置上去。weak:不保留新值，也不释放旧值，在属性所指对象遭到摧毁时，属性值也会清空。</li>
 <li>assign为何不能修饰对象？如果修饰了会怎么样？</li>
-<li>copy在哪里用？<br>NSString</li>
-<li>Block在栈中还是堆中？全局变量是在栈还是在堆中？成员变量呢？</li>
-<li>怎么定义一个类的属性？写代码。</li>
+<li><p>copy在哪里用？<br>NSString</p>
+</li>
+<li><p>怎么定义一个类的属性？写代码。</p>
+</li>
 <li>——#import与#include的区别？</li>
 <li>如果自己实现一个setter方法，该如何写代码？</li>
 <li>oc中有什么容器？</li>
@@ -500,27 +493,32 @@
 <li></li>
 </ol>
 <p>arc、跟property有关的关键字、多线程（GCD、NSOperation、NSThread）、runloop、图片渲染、事件处理机制、mvc模型</p>
-<h2 id="一-搜狐快站"><a href="#一-搜狐快站" class="headerlink" title="一.搜狐快站"></a>一.搜狐快站</h2><p>1.谈谈你做过的项目；<br>2.项目中最有成就感的部分；<br>3.倒计时如何实现？（NSTimer，还有其他的实现方式吗）；<br>4.UIButton的继承关系？<br>5.iOS中可以进行输入的控件？（UITextView,UITextField）;<br>6.快排的实现原理；<br>7.短信验证码会有倒计时功能吗?第一次验证失败后还可以再进行验证吗？<br>8.Android开发和iOS开发的区别； </p>
-<h2 id="二-搜狐社交产品中心"><a href="#二-搜狐社交产品中心" class="headerlink" title="二.搜狐社交产品中心"></a>二.搜狐社交产品中心</h2><p>1.我们项目中用到的缓存方式；用的是数据库还是归档？<br>2.我们项目中使用的网络库是什么？<br>3.TableView的优化和重用；比如不等高的cell如何重用？不同的cell里面包含的UI不同如何重用？滑动太卡如何优化？<br>4.图片缓存如何优化？圆角图片如何优化？<br>5.JSON等数据格式如何模型化？使用哪些第三方库？<br>6.MVC，MVVM？<br>7.开发中用到的设计模式？单例、MVC、delegate。<br>8.数据结构堆与栈的区别；栈与队列的区别；<br>9.用OC如何实现栈与队列；<br>10.如何防止死锁；<br>11.GCD如何实现同步任务，即如何执行完一段代码后再去执行另一段代码；（线程组，barrier，信号量）<br>12.block如何解除循环引用；<br>13.block的原理是什么，如何去找到这个block；（函数指针）<br>14.运行时替换系统的设置颜色的方法，但是在某几处还是要使用系统的方法，如何使用运行时实现；<br>15.OC和Java的区别；<br>16.面向对象的三大特性，iOS开发时如何体现面向对象的；<br>17.你们UI使用什么开发方式；<br>18.H5混编：OC如何调用js的代码；js调用OC的代码；分别是如何进行调用的；<br>19.分享功能你们是如何实现的；<br>20.应用之间如何唤起，如何把scheme加入白名单；</p>
-<h2 id="三-蚂蚁金服"><a href="#三-蚂蚁金服" class="headerlink" title="三.蚂蚁金服"></a>三.蚂蚁金服</h2><p>1.在第一家实习公司时做的项目，完成了哪些模块；<br>2.在当前公司时做的项目，完成了哪些模块；<br>3.序列化与反序列化；JSON怎么转化为模型；<br>4.iOS中的数据库，CoreData；<br>5.开源项目中OnceNote中的技术闪亮点；<br>6.数学建模时做的题目，是怎么建模的，使用了什么工具；<br>7.Java和OC的优缺点，与Android中的Java有什么区别；<br>8.NSString为什么用的copy，copy和strong有什么区别；<br>9.NSCopying,NSCoding,讲讲这两个东西；<br>10.面向对象的三大特性，讲讲多态；<br>11.类A想调用类C的方法，类C继承自类B，需要如何实现；<br>12.一个类实现的功能是越多越好还是越少越好？单一职责原则； </p>
-<p>1.在两家公司做的项目介绍；<br>2.内联函数是什么？<br>3.堆和栈的区别；如何优化堆和栈！！！；哪一种会造成内存碎片；block分配在哪里；<br>4.block的循环引用；block的代码实现；为什么会造成循环引用；block是如何强引用self的；<br>5.如何去自己实现一个自动释放池；自动释放池的作用；自动释放池是如何管理对象的；<br>6.static的作用；static const为什么要加static；static const与#define的区别；<br>7.项目中做的比较好的部分；<br>8.block在传递的时候，是否会改变存储位置？比如是否会从栈复制到堆；原来的block是否会被释放； </p>
-<h2 id="四-微店"><a href="#四-微店" class="headerlink" title="四.微店"></a>四.微店</h2><p>1.Block的实现内部机制，外部的变量是怎么传到Block中去的；<br>2.快速排序的实现，复杂度；有其他哪些排序算法；<br>3.判断单向链表中是否有环；<br>4.iOS的内存管理机制，和GC有什么区别；</p>
+<h2 id="一-搜狐快站"><a href="#一-搜狐快站" class="headerlink" title="一.搜狐快站"></a>一.搜狐快站</h2><p>3.倒计时如何实现？（NSTimer，还有其他的实现方式吗）；<br>4.UIButton的继承关系？<br>5.iOS中可以进行输入的控件？（UITextView,UITextField）;<br>6.快排的实现原理；<br>7.短信验证码会有倒计时功能吗?第一次验证失败后还可以再进行验证吗？</p>
+<h2 id="二-搜狐社交产品中心"><a href="#二-搜狐社交产品中心" class="headerlink" title="二.搜狐社交产品中心"></a>二.搜狐社交产品中心</h2><p>1.我们项目中用到的缓存方式；用的是数据库还是归档？<br>2.我们项目中使用的网络库是什么？<br>3.TableView的优化和重用；比如不等高的cell如何重用？不同的cell里面包含的UI不同如何重用？滑动太卡如何优化？<br>4.图片缓存如何优化？圆角图片如何优化？<br>5.JSON等数据格式如何模型化？使用哪些第三方库？<br>6.MVC，MVVM？<br>7.开发中用到的设计模式？单例、MVC、delegate。<br>8.数据结构堆与栈的区别；栈与队列的区别；<br>9.用OC如何实现栈与队列；</p>
+<p>14.运行时替换系统的设置颜色的方法，但是在某几处还是要使用系统的方法，如何使用运行时实现；<br>15.OC和Java的区别；<br>16.面向对象的三大特性，iOS开发时如何体现面向对象的；<br>17.你们UI使用什么开发方式；<br>18.H5混编：OC如何调用js的代码；js调用OC的代码；分别是如何进行调用的；<br>19.分享功能你们是如何实现的；<br>20.应用之间如何唤起，如何把scheme加入白名单；</p>
+<h2 id="三-蚂蚁金服"><a href="#三-蚂蚁金服" class="headerlink" title="三.蚂蚁金服"></a>三.蚂蚁金服</h2><p>1.在第一家实习公司时做的项目，完成了哪些模块；<br>2.在当前公司时做的项目，完成了哪些模块；<br>3.序列化与反序列化；JSON怎么转化为模型；<br>4.iOS中的数据库，CoreData；</p>
+<p>8.NSString为什么用的copy，copy和strong有什么区别；<br>9.NSCopying,NSCoding,讲讲这两个东西；<br>10.面向对象的三大特性，讲讲多态；<br>11.类A想调用类C的方法，类C继承自类B，需要如何实现；<br>12.一个类实现的功能是越多越好还是越少越好？单一职责原则； </p>
+<p>2.内联函数是什么？<br>3.堆和栈的区别；如何优化堆和栈！！！；哪一种会造成内存碎片；</p>
+<p>5.如何去自己实现一个自动释放池；自动释放池的作用；自动释放池是如何管理对象的；<br>6.static的作用；static const为什么要加static；static const与#define的区别；</p>
+<h2 id="四-微店"><a href="#四-微店" class="headerlink" title="四.微店"></a>四.微店</h2><p>4.iOS的内存管理机制，和GC有什么区别；</p>
 <p>6.C++中函数是如何调用的；<br>7.如果不使用UICollectionView，那么如何实现瀑布流，如何设计数据结构，讲讲思路；<br>8.如果有一个比内存大的大文件，那么如何实现排序；<br>9.http和https的区别，https使用了什么加密算法；<br>10.https的效率一定比http低吗，是每一次都低吗？<br>11.storyboard到手机UI显示，整个过程是怎样的？<br>12.xib、nib需要被编译吗？它们分别是什么类型的文件？</p>
-<h2 id="五-网易金融"><a href="#五-网易金融" class="headerlink" title="五.网易金融"></a>五.网易金融</h2><p>1.实习期间做的工作，以下问题都是基于实习项目展开的；<br>2.简单说说你实现哪些功能模块？<br>3.Autolayout的使用，几个View如何布局，如何设置cell的高度，几个并列的View如何居中？<br>4.项目中你使用了哪些设计模式？<br>5.你们项目中是怎样架构的（MVC？MVVM？）；<br>6.你们项目中的多线程是如何实现的？<br>7.队列有哪些？队列和线程的关系？<br>8.说说列表功能的实现（涉及cell的自定义等）；<br>9.Block中的循环引用；Block的复制；Block的存储位置；Block如何改变外面的变量；__block修饰符的内部机制！！！；<br>10.简单的需求：几个任务执行完以后再去做某项任务，如何实现？（GCD线程组？）<br>11.你是如何进行持续学习的？你是学习方式是怎样的？<br>12.最近你在学习哪些技术，现在你感兴趣的是哪方面？<br>13.聊了聊iOS安全方面的内容；<br>14.Swift中的Protocol。。。；<br>15.你们的项目用的是OC还是Swift；</p>
-<p>17.属性修饰符：copy，weak。。。<br>18.NSNotification是同步的还是异步的？？？（貌似是同步的）<br>19.NSNotification的使用需要注意什么？（不用时要移除通知？）<br>20.Block的嵌套使用；<br>21.iOS安全，如何在客户端实现一些安全措施。比如如何做用户输入密码时的键盘输入安全。</p>
-<h2 id="六-腾讯"><a href="#六-腾讯" class="headerlink" title="六.腾讯"></a>六.腾讯</h2><p>1.算法：一棵多叉树，每个节点上有个值，求一条路径上值的和为sum的路径有哪些；<br>2.在网络请求中，如何来处理网络速度慢、网络中断网络抖动等等网络问题；<br>3.你做的项目的难点在哪里？<br>4.你未来三年的规划是什么？ </p>
+<h2 id="五-网易金融"><a href="#五-网易金融" class="headerlink" title="五.网易金融"></a>五.网易金融</h2><p>3.Autolayout的使用，几个View如何布局，如何设置cell的高度，几个并列的View如何居中？<br>4.项目中你使用了哪些设计模式？<br>5.你们项目中是怎样架构的（MVC？MVVM？）；<br>6.你们项目中的多线程是如何实现的？<br>7.队列有哪些？队列和线程的关系？<br>8.说说列表功能的实现（涉及cell的自定义等）；</p>
+<p>13.聊了聊iOS安全方面的内容；</p>
+<p>17.属性修饰符：copy，weak。。。<br>18.NSNotification是同步的还是异步的？？？（貌似是同步的）<br>19.NSNotification的使用需要注意什么？（不用时要移除通知？）</p>
+<p>21.iOS安全，如何在客户端实现一些安全措施。比如如何做用户输入密码时的键盘输入安全。</p>
+<h2 id="六-腾讯"><a href="#六-腾讯" class="headerlink" title="六.腾讯"></a>六.腾讯</h2><p>1.算法：一棵多叉树，每个节点上有个值，求一条路径上值的和为sum的路径有哪些；<br>2.在网络请求中，如何来处理网络速度慢、网络中断网络抖动等等网络问题；<br>3.你做的项目的难点在哪里？</p>
 <h2 id="七-百度"><a href="#七-百度" class="headerlink" title="七.百度"></a>七.百度</h2><p>1.用过哪些设计模式，用代码实现单例模式，讲讲代理模式的优点，画出代理模式的类结构图；<br>2.手写二插搜索树的查找，分别用循环和递归实现，哪一种的效率高，递归的空间复杂度是多少；<br>3.App端的数据缓存；<br>4.有哪些查找算法，复杂度分别是多少；<br>5.哈希查找的时间复杂度是多少，如何解决冲突，如何优化哈希；<br>6.有哪些进程调度或内存管理的算法？（比如先来先服务，高优先级服务，最近最久未使用等等）；<br>7.使用什么数据结构来实现LRU最近最久未使用，画图来模拟一下；<br>8.Linux命令行，搜索某个文件的命令； </p>
-<p>1.项目中的图片上传功能如何实现，为什么使用队列上传，为什么不用异步上传；<br>2.安卓开发与iOS开发的区别和优缺点；<br>3.转到后台的应用如何保持活跃，而不被系统kill；应用转到后台的整个过程是怎样的？<br>4.iOS中如何实现单例，用GCD来实现一下；<br>5.GCD的全拼；<br>6.Xcode开发中如何创建一个代码块（代码片）；<br>7.iOS10中的新特性，聊了聊WWDC；<br>8.对项目中用到的图片选择器的优化和自定义，包括图片多选功能；<br>9.GCD中如何创建异步线程，GCD中是否能stop一个线程执行； </p>
-<p>1.讲讲iOS系统；<br>2.你们有没有用到什么新的技术；<br>3.你算法怎么样？<br>4.讲讲体现你学习能力的事情？<br>5.为什么从上一家公司实习离职？ </p>
+<p>1.项目中的图片上传功能如何实现，为什么使用队列上传，为什么不用异步上传；<br>2.安卓开发与iOS开发的区别和优缺点；<br>3.转到后台的应用如何保持活跃，而不被系统kill；应用转到后台的整个过程是怎样的？</p>
+<p>6.Xcode开发中如何创建一个代码块（代码片）；<br>7.iOS10中的新特性，聊了聊WWDC；<br>8.对项目中用到的图片选择器的优化和自定义，包括图片多选功能；</p>
 <h2 id="八-小红书"><a href="#八-小红书" class="headerlink" title="八.小红书"></a>八.小红书</h2><p>1.你实习的项目中哪些是你做的？<br>2.你觉得我们小红书的App怎么样？<br>3.手写代码：给定一个字符串，同时给定两个字符，求出包含这两个字符的最小子串的长度；<br>比如输入：addcddabc    ,a  ,c<br>那么包含的子串为：addc,   cdda,   abc  —&gt;最小的子串长度为3;<br>4.说说iOS和Android开发的区别； </p>
 <h2 id="九-网易杭研"><a href="#九-网易杭研" class="headerlink" title="九.网易杭研"></a>九.网易杭研</h2><p>1.你们的iOS应用是如何来提高安全性的；<br>2.应用的砸壳过程；<br>3.https的秘钥协商过程，证书交换过程；</p>
 <p>5.讲讲iOS的内存管理；<br>6.你们APP中的一些方案选型问题：如网路库选型，页面路由选型；<br>7.页面的动画或者渲染的优化如何做？讲讲CoreAnimation；<br>8.讲讲Foundation和CoreFoundation之间的区别；CoreFoundation是不支持ARC的，如何与Foundation之间进行转化。<br>9.如何实现界面栈的重构，如何移除栈中的界面；<br>10.如何对UITableView进行优化，你们的cell都是等高的么；<br>11.如果让你自己实现下拉刷新的功能，你如何实现；<br>12.MVVM以及代码臃肿问题；<br>13.简单聊聊ReactiveCocoa以及数据刷新问题； </p>
-<h2 id="十-图片社交in"><a href="#十-图片社交in" class="headerlink" title="十.图片社交in"></a>十.图片社交in</h2><p>1.项目中的alert sheet的层级，是添加到哪里？以及key window的层级结构；<br>2.应用中的安全机制；有哪些对称加密、非对称加密算法；<br>3.进行直播，使用字典存储观众，观众有进入和离开，人数比较多，如何实现这样一个功能；以及如何实现排序；<br>4.字典中是如何去进行查找的？并发查找；<br>5.笔记在更新的时候进行修改，如何处理这种情况，如何防止脏数据；<br>6.GCD中有哪些方法？<br>7.讲讲runloop；</p>
+<h2 id="十-图片社交in"><a href="#十-图片社交in" class="headerlink" title="十.图片社交in"></a>十.图片社交in</h2><p>1.项目中的alert sheet的层级，是添加到哪里？以及key window的层级结构；<br>2.应用中的安全机制；有哪些对称加密、非对称加密算法；<br>3.进行直播，使用字典存储观众，观众有进入和离开，人数比较多，如何实现这样一个功能；以及如何实现排序；<br>4.字典中是如何去进行查找的？并发查找；<br>5.笔记在更新的时候进行修改，如何处理这种情况，如何防止脏数据；</p>
+<p>7.讲讲runloop；</p>
 <p>9.本地化持久方案；<br>10.在什么时候我们需要使用autoreleasepool；什么时候需要我们手动去写一个autoreleasepool；<br>11.单例的作用，什么场景下才需要使用单例；<br>12.ARC是一种编译时特性还是运行时特性； </p>
 <h2 id="十一-墨迹天气"><a href="#十一-墨迹天气" class="headerlink" title="十一.墨迹天气"></a>十一.墨迹天气</h2><p>1.模块化开发框架有哪些用过？<br>2.weak的作用；<br>3.有哪些属性修饰符；<br>4.混合开发中如何传递数据，即js和oc如何传递数据、参数；<br>5.做过那些优化？<br>6.说说我们的App中有哪些需要改进的；<br>7.讲讲MVC，MVVM；<br>8.atomic一定是线程安全的吗？<br>9.iOS中多线程的实现方式；<br>10.碰到过内存泄露吗？如何查看或者检测内存泄露；<br>11.你们是如何封装网络请求库的；</p>
 <h2 id="十二-同花顺"><a href="#十二-同花顺" class="headerlink" title="十二.同花顺"></a>十二.同花顺</h2><p>2.UITableView的复用，如果UITableView的高度很高，即frame的高度超过屏幕高度，会怎么进行复用；<br>3.weak、assign的区别；<br>4.什么是死锁；<br>5.二叉树的搜索，搜索二叉树中所有值为2的节点，并返回，代码实现；</p>
 <p>7.weak为什么比assign安全，其实现原理是怎样的；<br>8.消息推送如何实现，整个过程是怎样的；<br>9.缓存图片如何实现，缓存到哪里；如果图片显示有破损，可能是什么原因造成的；</p>
-<h2 id="十三-华为"><a href="#十三-华为" class="headerlink" title="十三.华为"></a>十三.华为</h2><p>1.算法：str = “4213523…..54”很长的数字字符串，如何判断是否能被6整除；</p>
 <h2 id="十四-搜狐集团"><a href="#十四-搜狐集团" class="headerlink" title="十四.搜狐集团"></a>十四.搜狐集团</h2><ol>
 <li>iOS做过哪些渲染优化；</li>
 <li>二叉树非递归中序遍历代码实现；</li>
@@ -552,24 +550,13 @@
 </li>
 </ul>
 <ol>
-<li><p>GCD和NSOperation的区别；哪一个的复用性更好；NSOperation的队列可以cancel吗，里面的任务可以cancel吗；  </p>
-</li>
-<li><p>block和self的循环引用；到底是如何循环引用的；<br>笔记关于Block的循环引用</p>
-</li>
-<li><p>SDWebImage的缓存策略，是如何从缓存中hit一张图片的；使用了几级缓存；缓存如何满了如何处理，是否要设置过期时间；</p>
-</li>
-</ol>
-<p>如何给 UIImageView 加载图片做一个总结吧, SDWebImage 中为 UIView 提供了一个分类叫做 WebCache, 这个分类中有一个最常用的接口, sd_setImageWithURL:placeholderImage:, 这个分类同时提供了很多类似的方法, 这些方法最终会调用一个同时具有 option progressBlock completionBlock 的方法, 而在这个类最终被调用的方法首先会检查是否传入了 placeholderImage 以及对应的参数, 并设置 placeholderImage.</p>
-<p>然后会获取 SDWebImageManager 中的单例调用一个 downloadImageWithURL:… 的方法来获取图片, 而这个 manager 获取图片的过程有大体上分为两部分, 它首先会在 SDWebImageCache 中寻找图片是否有对应的缓存, 它会以 url 作为数据的索引先在内存中寻找是否有对应的缓存, 如果缓存未命中就会在磁盘中利用 MD5 处理过的 key 来继续查询对应的数据, 如果找到了, 就会把磁盘中的缓存备份到内存中.</p>
-<p>然而, 假设我们在内存和磁盘缓存中都没有命中, 那么 manager 就会调用它持有的一个 SDWebImageDownloader 对象的方法 downloadImageWithURL:… 来下载图片, 这个方法会在执行的过程中调用另一个方法 addProgressCallback:andCompletedBlock:fotURL:createCallback: 来存储下载过程中和下载完成的回调, 当回调块是第一次添加的时候, 方法会实例化一个 NSMutableURLRequest 和 SDWebImageDownloaderOperation, 并将后者加入 downloader 持有的下载队列开始图片的异步下载.</p>
-<p>而在图片下载完成之后, 就会在主线程设置 image, 完成整个图像的异步下载和配置.</p>
-<ol>
 <li>讲讲RunLoop；</li>
-<li>讲讲iOS动画，比如CoreAnimation；<br>9.屏幕上点击一个View，事件是如何去响应的；<br>10.深拷贝与浅拷贝；<br>11.有哪几种类型的block；什么情况下block会从栈区复制到堆区；<br>12.在一个函数中的局部变量，需要return，那么这个局部变量什么时候会被释放；它是分配在哪里？<br>13.CALayer和UIView的区别；动画可以作用于CALayer和UIView吗？</li>
+<li>讲讲iOS动画，比如CoreAnimation；<br>9.屏幕上点击一个View，事件是如何去响应的；<br>10.深拷贝与浅拷贝；</li>
 </ol>
+<p>12.在一个函数中的局部变量，需要return，那么这个局部变量什么时候会被释放；它是分配在哪里？<br>13.CALayer和UIView的区别；动画可以作用于CALayer和UIView吗？</p>
 <p>15.讲讲逆向工程； </p>
 <p>1.算法:double power(double  x, int n)函数实现，最好是O(long)复杂度；<br>2.使用关联对象把属性添加到category中，具体步骤是怎样的；</p>
-<p>4.weak和assign的区别；<br>5.weak在它指向的对象被释放后，会被置为nil，该机制是如何实现的；<br>6.NSString为什么要修饰成copy；block为什么要修饰为copy；<br>7.哪些属性需要修饰为weak；<br>8.NSMutableArray在block中修改时，是否要修饰为__block;   int类型呢； </p>
+<p>4.weak和assign的区别；<br>5.weak在它指向的对象被释放后，会被置为nil，该机制是如何实现的；<br>6.NSString为什么要修饰成copy；<br>7.哪些属性需要修饰为weak；<br> int类型呢； </p>
 <p>1.讲讲JSPatch；使用了iOS的什么原理；<br>2.讲讲MVC，MVVM，MVP；MVP是哪三个单词的缩写；<br>3.操作系统进程间通讯的方式；<br>4.讲讲共享锁和互斥锁；</p>
 <p>6.UIViewController的生命周期；<br>7.UITableView滑动卡顿如何解决优化；<br>8.iOS多线程有哪几种方式；<br>9.让你印象深刻的学到的技术；安全？<br>10.Linux和Unix相关知识；</p>
 <p>13.非对称加密方式有哪些，数字签名如何实现； </p>
@@ -584,13 +571,8 @@
 </ol>
 <ol>
 <li>讲讲单例设计模式，在什么情况下使用单例模式？<br>在读书笔记的单例模式。</li>
-<li>iOS响应链<br>读书笔记</li>
-<li><p>isa指针的作用；</p>
-<pre><code>1.每一个对象都包含一个isa指针.这个指针指向当前对象所属的类。
-2.[d bark];表示给d所指向的对象发送一条bark消息,调用对象的bark方法,此时对象会顺着内部的isa指针找到存储于类中的方法并执行。        
-3.isa是对象中的隐藏指针,指向创建这个对象的类。
-4.通过isa指针我们可以在运行的时候知道当前对象是属于那个类。
-</code></pre></li>
+<li><p>iOS响应链<br>读书笔记</p>
+</li>
 <li><p>列表中图片缓存与内存优化，有没有出现过OOM的情况；</p>
 <pre><code>1.遇到图片较多且不需要缓存的情况下，不要用imageNamed方法，用initWithContentOfFile加载图片
 2.UITableView的cell复用：把界面上看不见的cell放入缓存池中，要创建新的cell时先判断缓存池中有无相同identifier可以循环利用的，没有的话再进行创建
@@ -618,7 +600,7 @@
         <p><span>本文标题:</span><a href="/2016/03/27/iOS面试题/">iOS面试题</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月27日 - 14时37分</p>
-        <p><span>最后更新:</span>2017年03月08日 - 15时45分</p>
+        <p><span>最后更新:</span>2017年03月09日 - 17时00分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/27/iOS面试题/" title="iOS面试题">http://peilinghui.com/2016/03/27/iOS面试题/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/27/iOS面试题/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -635,8 +617,8 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/04/01/Objective-C高级编程读书笔记/">
-                    Objective-C高级编程读书笔记
+                <a href="/2016/04/01/深入理解内存管理/">
+                    深入理解内存管理
                 </a>
             </div>
         
@@ -654,7 +636,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二面："><span class="toc-number">1.</span> <span class="toc-text">二面：  </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网易："><span class="toc-number">2.</span> <span class="toc-text">网易：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网易二面："><span class="toc-number">3.</span> <span class="toc-text">网易二面：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网易其他面试题："><span class="toc-number">4.</span> <span class="toc-text">网易其他面试题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网易笔试："><span class="toc-number">5.</span> <span class="toc-text">网易笔试：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他公司面试题："><span class="toc-number">6.</span> <span class="toc-text">其他公司面试题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#腾讯面试题："><span class="toc-number">7.</span> <span class="toc-text">腾讯面试题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#腾讯面试："><span class="toc-number">8.</span> <span class="toc-text">腾讯面试：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一-搜狐快站"><span class="toc-number">9.</span> <span class="toc-text">一.搜狐快站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-搜狐社交产品中心"><span class="toc-number">10.</span> <span class="toc-text">二.搜狐社交产品中心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-蚂蚁金服"><span class="toc-number">11.</span> <span class="toc-text">三.蚂蚁金服</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-微店"><span class="toc-number">12.</span> <span class="toc-text">四.微店</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五-网易金融"><span class="toc-number">13.</span> <span class="toc-text">五.网易金融</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六-腾讯"><span class="toc-number">14.</span> <span class="toc-text">六.腾讯</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七-百度"><span class="toc-number">15.</span> <span class="toc-text">七.百度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八-小红书"><span class="toc-number">16.</span> <span class="toc-text">八.小红书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九-网易杭研"><span class="toc-number">17.</span> <span class="toc-text">九.网易杭研</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十-图片社交in"><span class="toc-number">18.</span> <span class="toc-text">十.图片社交in</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十一-墨迹天气"><span class="toc-number">19.</span> <span class="toc-text">十一.墨迹天气</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十二-同花顺"><span class="toc-number">20.</span> <span class="toc-text">十二.同花顺</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十三-华为"><span class="toc-number">21.</span> <span class="toc-text">十三.华为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十四-搜狐集团"><span class="toc-number">22.</span> <span class="toc-text">十四.搜狐集团</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十五-今日头条"><span class="toc-number">23.</span> <span class="toc-text">十五.今日头条</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十六-中国移动杭研"><span class="toc-number">24.</span> <span class="toc-text">十六.中国移动杭研</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二面："><span class="toc-number">1.</span> <span class="toc-text">二面：  </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网易："><span class="toc-number">2.</span> <span class="toc-text">网易：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网易二面："><span class="toc-number">3.</span> <span class="toc-text">网易二面：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网易其他面试题："><span class="toc-number">4.</span> <span class="toc-text">网易其他面试题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网易笔试："><span class="toc-number">5.</span> <span class="toc-text">网易笔试：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他公司面试题："><span class="toc-number">6.</span> <span class="toc-text">其他公司面试题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#腾讯面试题："><span class="toc-number">7.</span> <span class="toc-text">腾讯面试题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#腾讯面试题：-1"><span class="toc-number">8.</span> <span class="toc-text">腾讯面试题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#腾讯面试："><span class="toc-number">9.</span> <span class="toc-text">腾讯面试：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一-搜狐快站"><span class="toc-number">10.</span> <span class="toc-text">一.搜狐快站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-搜狐社交产品中心"><span class="toc-number">11.</span> <span class="toc-text">二.搜狐社交产品中心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-蚂蚁金服"><span class="toc-number">12.</span> <span class="toc-text">三.蚂蚁金服</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-微店"><span class="toc-number">13.</span> <span class="toc-text">四.微店</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五-网易金融"><span class="toc-number">14.</span> <span class="toc-text">五.网易金融</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六-腾讯"><span class="toc-number">15.</span> <span class="toc-text">六.腾讯</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七-百度"><span class="toc-number">16.</span> <span class="toc-text">七.百度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八-小红书"><span class="toc-number">17.</span> <span class="toc-text">八.小红书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九-网易杭研"><span class="toc-number">18.</span> <span class="toc-text">九.网易杭研</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十-图片社交in"><span class="toc-number">19.</span> <span class="toc-text">十.图片社交in</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十一-墨迹天气"><span class="toc-number">20.</span> <span class="toc-text">十一.墨迹天气</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十二-同花顺"><span class="toc-number">21.</span> <span class="toc-text">十二.同花顺</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十四-搜狐集团"><span class="toc-number">22.</span> <span class="toc-text">十四.搜狐集团</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十五-今日头条"><span class="toc-number">23.</span> <span class="toc-text">十五.今日头条</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十六-中国移动杭研"><span class="toc-number">24.</span> <span class="toc-text">十六.中国移动杭研</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -740,7 +722,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/04/01/Objective-C高级编程读书笔记/" title="上一篇: Objective-C高级编程读书笔记">
+            <a href="/2016/04/01/深入理解内存管理/" title="上一篇: 深入理解内存管理">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -754,7 +736,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Objective-C高级编程读书笔记/">Objective-C高级编程读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入理解内存管理/">深入理解内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
