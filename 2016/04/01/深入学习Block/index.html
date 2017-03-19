@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%882.38.12.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%882.38.19.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%883.12.58.png">
-<meta property="og:updated_time" content="2017-03-09T09:00:13.000Z">
+<meta property="og:updated_time" content="2017-03-17T05:31:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入学习Block">
 <meta name="twitter:description" content="深入学习Block。">
@@ -158,7 +158,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
+                        <a href="/tags/OC/" style="font-size: 15px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 15px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
                     </div>
                 </section>
                 
@@ -296,7 +296,7 @@
           
         <p>深入学习Block。<br><a id="more"></a></p>
 <h1 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h1><h2 id="Block的概要"><a href="#Block的概要" class="headerlink" title="Block的概要"></a>Block的概要</h2><ol>
-<li><p>Block是带有自动变量(局部变量)的匿名函数(不带名称的函数)。Blocks 是闭包在 OC 语言中的实现，并不是 iOS 独有的概念，在 C++、Java 等语言也有实现闭包，只是名称不同而已。</p>
+<li><p>Block功能：带有自动变量(局部变量)的匿名函数(不带名称的函数)。Blocks 是闭包在 OC 语言中的实现，并不是 iOS 独有的概念，在 C++、Java 等语言也有实现闭包，只是名称不同而已。在objc中，block实际上就算是对象。</p>
 </li>
 <li><p>Block语法：</p>
 <figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">^void</span><span class="list">(<span class="keyword"><span class="built_in">int</span></span> event)</span><span class="collection">&#123;</span><br><span class="line">	print<span class="list">(<span class="string">"buttonId:%d event = %d\n"</span>,i,event)</span><span class="comment">;</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
@@ -346,20 +346,23 @@ dispose : 用于释放捕获的对象
 <pre><code>Stack 对象的生命周期所导致的问题。例如一旦函数返回，则所在的 Stack Frame（栈帧）就会被销毁。那么此时返回的对象也会一并销毁。这个时候我们去 retain 这个对象是无效的。因为整个 Stack Frame 都已经被销毁了。简单而言，就是 Stack 对象的生命周期不适合 OC 的引用计数内存管理方法。
 
 Stack 对象不够灵活，不具备足够的扩展性。创建时长度已经是固定的,而stack对象的拥有者也就是所在的 Stack Frame。
-</code></pre><h3 id="Block-存储域"><a href="#Block-存储域" class="headerlink" title="Block 存储域"></a>Block 存储域</h3><pre><code>全局块(_NSConcreteGlobalBlock)程序的数据区域(.data区)
+</code></pre><h3 id="Block-存储域"><a href="#Block-存储域" class="headerlink" title="Block 存储域"></a>Block 存储域</h3><p>block中的isa指向的是该block的Class。在block runtime中</p>
+<pre><code>全局块(_NSConcreteGlobalBlock)程序的数据区域(.data区)
 栈块(_NSConcreteStackBlock)
 堆块(_NSConcreteMallocBlock)
 
 全局块存在于全局内存中, 相当于单例.
 栈块存在于栈内存中, 超出其作用域则马上被销毁
 堆块存在于堆内存中, 是一个带引用计数的对象, 需要自行管理其内存
-</code></pre><p><strong>全局块(_NSConcreteGlobalBlock)</strong></p>
+</code></pre><p>当struct第一次被创建时，它是存在于该函数的栈帧上的，其Class是固定的_NSConcreteStackBlock。其捕获的变量是会赋值到结构体的成员上，所以当block初始化完成后，捕获到的变量不能更改。</p>
+<p>当函数返回时，函数的栈帧被销毁，这个block的内存也会被清除。所以在函数结束后仍然需要这个block时，就必须用Block_copy()方法将它拷贝到堆上。这个方法的核心动作很简单：申请内存，将栈数据复制过去，将Class改一下，最后向捕获到的对象发送retain，增加block的引用计数。详细代码可以直接点这里查看。</p>
+<p><strong>全局块(_NSConcreteGlobalBlock)</strong></p>
 <pre><code>block定义在全局变量的地方
 block没有截获任何自动变量
 </code></pre><p>以上两个情况满足任意一个则该block为全局块, 全局块的生命周期贯穿整个程序, 相当于单例.全局的静态 Block，不会访问任何外部变量。<br>简单地讲，如果一个block钟没有引用外部变量并且没有被其他对象持有，就是NSConcreteGlobalBlock。NSConcreteGlobalBlock是全局的block，在编译期间就已经决定了，如同宏一样。</p>
 <p><strong>栈块(_NSConcreteStackBlock)</strong><br>保存在栈中的 Block，当函数返回时会被销毁。（ARC 中系统实现了自动 copy, 将创建在栈上的 Block 自动拷贝到堆上，所以不存在此类型的 Block）NSConcreteStackBlock就是引用了外部变量的block，</p>
 <p><strong>堆块(_NSConcreteMallocBlock)</strong><br>栈块copy之后就变成堆块，一个block被copy时，将生成NSConcreteMallocBlock（block没有retain）<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8A%E5%8D%889.51.44.png" alt=""><br>只要这个NSConcreteMallocBlock存在，内部对象的引用计数就会+1。</p>
-<h3 id="block变量的存储域"><a href="#block变量的存储域" class="headerlink" title="__block变量的存储域"></a>__block变量的存储域</h3><p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8A%E5%8D%8811.14.42.png" alt=""><br>block的copy操作究竟做了什么呢?</p>
+<h3 id="block变量的存储域"><a href="#block变量的存储域" class="headerlink" title="__block变量的存储域"></a>__block变量的存储域</h3><p>默认block捕获到的变量，都是赋值给block的结构体的，相当于const不可改。为了让block能访问并修改外部变量，需要加上__block修饰词。<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8A%E5%8D%8811.14.42.png" alt=""><br>block的copy操作究竟做了什么呢?</p>
 <p>由上图可知, 对一个栈块进行copy操作会连同block与<strong>block变量(不管有没有使用)在内一同copy到堆上, 并且block会持有</strong>block变量(使用).<br>ps : 堆上的block及__block变量均为对象, 都有各自的引用计数</p>
 <p>当然, 当block被销毁时, block持有的__block也会被释放<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%882.38.12.png" alt=""><br>到这里我们能知道, 此思考方式与Objective-C的引用计数内存管理完全相同.</p>
 <p>那么有人就会问了, 既然<strong>block变量也被复制到堆上去了, 那么访问该变量是访问栈上的还是堆上的呢?? </strong>forwarding 终于要闪亮登场了.<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%882.38.19.png" alt=""><br>通过<strong>forwarding, 无论实在block中, block外访问</strong>block变量, 也不管该变量在栈上或堆上, 都能顺利地访问同一个__block变量. </p>
@@ -401,7 +404,19 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
 
 对于用 __block 修饰的外部变量引用，Block 是复制其引用地址来实现访问的
 </code></pre><h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><ol>
-<li>讲讲block；</li>
+<li><p>讲讲block；</p>
+</li>
+<li><p>block在ARC中和传统的MRC中的行为和用法有没有什么区别，需要注意些什么?  </p>
+</li>
+</ol>
+<p>注意：1&gt;block的内存管理 (block的实现是基于指针和函数指针)   </p>
+<pre><code>- 如果没有copy操作，block代码默认放在栈内存（弱引用）。
+- 如果有copy操作，block升级放在堆内存（强引用）。  
+</code></pre><p>2&gt;防止循环引用<br>       解决：非ARC（MRC）：<strong>__block</strong><br>ARC：<strong>__weak</strong>或者<strong>__unsafe_unretained</strong></p>
+<blockquote>
+<p>补充：<strong>__block</strong> 和 <strong>__weak</strong>修饰符的区别<br><strong>__block</strong> 不管是ARC还是MRC模式下都可以使用，可以修饰对象，还可以修饰基本数据类型。<br><strong>__weak</strong>只能在ARC模式下使用，也只能修饰对象（NSString），不能修饰基本数据类型（int）。<br><strong>__block</strong> 对象可以在block中被重新赋值，<strong>__weak</strong>不可以。</p>
+</blockquote>
+<ol>
 <li>block和self的循环引用；到底是如何循环引用的；block的代码实现；为什么会造成循环引用；block是如何强引用self的；</li>
 <li>block为什么要修饰为copy；<br>11.有哪几种类型的block；什么情况下block会从栈区复制到堆区；</li>
 <li>NSMutableArray在block中修改时，是否要修饰为__block;</li>
@@ -412,14 +427,17 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
 </ol>
 <ol>
 <li>block循环引用了如何解决？如何解除循环引用；</li>
-<li><ol>
-<li>Block在栈中还是堆中？全局变量是在栈还是在堆中？成员变量呢？block分配在哪里；<br>13.block的原理是什么，如何去找到这个block；（函数指针）</li>
+<li>Block在栈中还是堆中？全局变量是在栈还是在堆中？成员变量呢？block分配在哪里；</li>
+<li>block的原理是什么，如何去找到这个block；（函数指针）</li>
 </ol>
+<ol>
+<li><p>block在传递的时候，是否会改变存储位置？比如是否会从栈复制到堆；原来的block是否会被释放；</p>
+</li>
+<li><p>Block的实现内部机制，外部的变量是怎么传到Block中去的；</p>
+</li>
+<li><p>Block中的循环引用；Block的复制；Block的存储位置；Block如何改变外面的变量；__block修饰符的内部机制！！！；</p>
 </li>
 </ol>
-<p>8.block在传递的时候，是否会改变存储位置？比如是否会从栈复制到堆；原来的block是否会被释放；</p>
-<p>1.Block的实现内部机制，外部的变量是怎么传到Block中去的；</p>
-<p>9.Block中的循环引用；Block的复制；Block的存储位置；Block如何改变外面的变量；__block修饰符的内部机制！！！；</p>
 <p>20.Block的嵌套使用；</p>
 <p>参考：<br><http: 28="" 2013="" blog.devtang.com="" 07="" a-look-inside-blocks=""><br><a href="http://www.jianshu.com/p/abeb5848b57a#" target="_blank" rel="external">http://www.jianshu.com/p/abeb5848b57a#</a><br><a href="http://www.jianshu.com/p/e03292674e60#" target="_blank" rel="external">http://www.jianshu.com/p/e03292674e60#</a><br><a href="http://www.jianshu.com/p/e03292674e60#" target="_blank" rel="external">http://www.jianshu.com/p/e03292674e60#</a></http:></p>
 <p>　　
@@ -438,7 +456,7 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
         <p><span>本文标题:</span><a href="/2016/04/01/深入学习Block/">深入学习Block</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年04月01日 - 13时01分</p>
-        <p><span>最后更新:</span>2017年03月09日 - 17时00分</p>
+        <p><span>最后更新:</span>2017年03月17日 - 13时31分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/04/01/深入学习Block/" title="深入学习Block">http://peilinghui.com/2016/04/01/深入学习Block/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/04/01/深入学习Block/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -455,15 +473,15 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/04/03/effective objective-c 2.0读书笔记/">
-                    effective objective-c 2.0读书笔记
+                <a href="/2016/04/01/深入理解内存管理/">
+                    深入理解内存管理
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/04/01/深入理解内存管理/">
-                    深入理解内存管理
+                <a href="/2016/03/27/iOS面试题/">
+                    iOS面试题
                 </a>
             </div>
         
@@ -560,7 +578,7 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/04/03/effective objective-c 2.0读书笔记/" title="上一篇: effective objective-c 2.0读书笔记">
+            <a href="/2016/04/01/深入理解内存管理/" title="上一篇: 深入理解内存管理">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -568,13 +586,13 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/04/01/深入理解内存管理/" title="下一篇: 深入理解内存管理">
+            <a href="/2016/03/27/iOS面试题/" title="下一篇: iOS面试题">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入理解内存管理/">深入理解内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入理解内存管理/">深入理解内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/详解深拷贝和浅拷贝/">详解深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");

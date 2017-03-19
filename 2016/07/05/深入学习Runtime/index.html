@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/runtime.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/rumtime%E5%BD%92%E6%A1%A3.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/runtime%E8%A7%A3%E6%A1%A3.png">
-<meta property="og:updated_time" content="2017-03-09T09:00:14.000Z">
+<meta property="og:updated_time" content="2017-03-18T06:58:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入学习Runtime">
 <meta name="twitter:description" content="研究Runtime的源码。看runtime.h文件。runtime是一套比较底层的纯C语言API。平时编写的OC代码, 在程序运行过程中, 其实最终都是转成了runtime的C语言代码。">
@@ -157,7 +157,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
+                        <a href="/tags/OC/" style="font-size: 15px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 15px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
                     </div>
                 </section>
                 
@@ -419,13 +419,6 @@
 <h3 id="字典转模型"><a href="#字典转模型" class="headerlink" title="字典转模型"></a>字典转模型</h3><p>要将JSON转换为Model啦！<br>利用runtime遍历模型对象的所有属性，根据属性名从字典中取出对应的值，设置到模型的属性上。</p>
 <h3 id="利用runtime遍历模型对象的所有属性来归档和解档"><a href="#利用runtime遍历模型对象的所有属性来归档和解档" class="headerlink" title="利用runtime遍历模型对象的所有属性来归档和解档"></a>利用runtime遍历模型对象的所有属性来归档和解档</h3><p> <img src="http://7xr8q7.com1.z0.glb.clouddn.com/runtime.png" alt=""><br> <img src="http://7xr8q7.com1.z0.glb.clouddn.com/rumtime%E5%BD%92%E6%A1%A3.png" alt=""><br> <img src="http://7xr8q7.com1.z0.glb.clouddn.com/runtime%E8%A7%A3%E6%A1%A3.png" alt="">    </p>
 <h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><ol>
-<li>runtime如何实现weak变量的自动置nil？<br>weak:“非拥有关系” (nonowning relationship)。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。此特质同assign类似， 然而在属性所指的对象遭到摧毁时，属性值也会清空(nil out)。</li>
-</ol>
-<p>runtime 对注册的类， 会进行布局，对于 weak 对象会放入一个 hash 表中。 用 weak 指向的对象内存地址作为 key，当此对象的引用计数为0的时候会 dealloc，假如 weak 指向的对象内存地址是a，那么就会以a为键， 在这个 weak 表中搜索，找到所有以a为键的 weak 对象，从而设置为 nil。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">id <span class="function"><span class="title">objc_loadWeak</span><span class="params">(id *location)</span></span><span class="comment">//加载对象引用的一个弱指针并返回它</span></span><br><span class="line">id <span class="function"><span class="title">objc_storeWeak</span><span class="params">(id *location, id obj)</span></span> <span class="comment">//这个函数存储一个新值到一个__weak变量</span></span><br><span class="line">const uint8_t *<span class="function"><span class="title">class_getWeakIvarLayout</span><span class="params">(Class cls)</span></span><span class="comment">//为一个给定的类实例变量返回一个弱的布局的描述</span></span><br><span class="line">void <span class="function"><span class="title">class_setWeakIvarLayout</span><span class="params">(Class cls, const uint8_t *layout)</span></span><span class="comment">//为给定的类设置一个weak Ivars的布局</span></span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>Category和Extension；Category的缺点和优点；如何克服或者弥补这个缺点（不能添加实例变量，用Runtime实现？）；</p>
-</li>
 <li><p>讲讲Runtime，以及消息转发过程；</p>
 </li>
 <li><p>讲讲runtime，以及hook，以及如何进行方法交换；</p>
@@ -440,20 +433,57 @@
 </li>
 <li><p>如何去手动触发KVO，如何让KVO去监听一个方法；</p>
 </li>
-<li><p>isa指针的作用；</p>
-<pre><code>1.每一个对象都包含一个isa指针.这个指针指向当前对象所属的类。
-2.[d bark];表示给d所指向的对象发送一条bark消息,调用对象的bark方法,此时对象会顺着内部的isa指针找到存储于类中的方法并执行。        
-3.isa是对象中的隐藏指针,指向创建这个对象的类。
-4.通过isa指针我们可以在运行的时候知道当前对象是属于那个类。
-</code></pre><p>ISA指针是指向什么</p>
+</ol>
+<ol>
+<li><p>[※※]objc中向一个nil对象发送消息将会发生什么？<br>在 Objective-C 中向 nil 发送消息是完全有效的——只是在运行时不会有任何作用。</p>
+</li>
+<li><p>[※※※]objc中向一个对象发送消息[obj foo]和objc_msgSend()函数之间有什么关系？</p>
 </li>
 </ol>
+<blockquote>
+<p>objc是动态语言，每个方法在运行时会被动态转为消息发送，即：objc_msgSend(receiver, selector)。</p>
+</blockquote>
+<ol>
+<li>[※※※]什么时候会报unrecognized selector的异常？<br>objc在向一个对象发送消息时，runtime库会根据对象的isa指针找到该对象实际所属的类，然后在该类中的方法列表以及其父类方法列表中寻找方法运行，如果，在最顶层的父类中依然找不到相应的方法时，程序在运行时会挂掉并抛出异常unrecognized selector sent to XXX 。但是在这之前，objc的运行时会给出三次拯救程序崩溃的机会：<br>见上图。</li>
+</ol>
+<ol>
+<li>[※※※※]一个objc对象如何进行内存布局？（考虑有父类的情况）  </li>
+</ol>
+<ul>
+<li>所有父类的成员变量和自己的成员变量都会存放在该对象所对应的存储空间中.</li>
+<li>每一个对象内部都有一个isa指针,指向他的类对象,类对象中存放着本对象的对象方法列表成员变量的列表,属性列表。它内部也有一个isa指针指向元对象(meta class),元对象内部存放的是类方法列表,类对象内部还有一个superclass的指针,指向他的父类对象。</li>
+<li>根对象就是NSObject，它的superclass指针指向nil。</li>
+<li>类对象既然称为对象，那它也是一个实例。类对象中也有一个isa指针指向它的元类(meta class)，即类对象是元类的实例。元类内部存放的是类方法列表，根元类的isa指针指向自己，superclass指针指向NSObject类。</li>
+</ul>
+<ol>
+<li><p>[※※※※]一个objc对象的isa的指针指向什么？有什么作用？</p>
+<pre><code>isa是对象中的隐藏指针,指向创建这个对象的类。
+对象会顺着内部的isa指针找到存储于类中的方法并执行。
+</code></pre></li>
+<li>[※※※※]runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）<br>selector本质就是方法名称,通过这个方法名称就可以在方法列表中找到对应的方法实现.</li>
+<li><p>[※※※※]使用runtime Associate方法关联的对象，需要在主对象dealloc的时候释放么？</p>
+<blockquote>
+<p>无论在MRC下还是ARC下均不需要。</p>
+</blockquote>
+</li>
+<li><p>[※※※※※]objc中的类方法和实例方法有什么本质区别和联系？</p>
+</li>
+<li><p>[※※※※※]_objc_msgForward函数是做什么的，直接调用它将会发生什么？</p>
+</li>
+<li>[※※※※※]runtime如何实现weak变量的自动置nil？</li>
+<li>[※※※※※]能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？</li>
+</ol>
+<ul>
+<li>不能向编译后得到的类中增加实例变量;</li>
+<li>能向运行时创建的类中添加实例变量;</li>
+</ul>
 <p>参考：<br>Objective-C 消息发送与转发机制原理<br><a href="http://yulingtianxia.com/blog/2016/06/15/Objective-C-Message-Sending-and-Forwarding/" target="_blank" rel="external">http://yulingtianxia.com/blog/2016/06/15/Objective-C-Message-Sending-and-Forwarding/</a></p>
 <p>Objective-C Runtime 1小时入门教程：<br><a href="https://www.ianisme.com/ios/2019.html" target="_blank" rel="external">https://www.ianisme.com/ios/2019.html</a></p>
 <p>Objective-C对象模型及应用<a href="http://blog.devtang.com/2013/10/15/objective-c-object-model/" target="_blank" rel="external">http://blog.devtang.com/2013/10/15/objective-c-object-model/</a></p>
 <p>Method Swizzling 和 AOP 实践<a href="http://tech.glowing.com/cn/method-swizzling-aop/" target="_blank" rel="external">http://tech.glowing.com/cn/method-swizzling-aop/</a></p>
 <p>Method Swizzling<br><a href="http://nshipster.com/method-swizzling/" target="_blank" rel="external">http://nshipster.com/method-swizzling/</a></p>
 <p>手Runtime（附MJExtension的底层实现）<br><a href="http://www.devstore.cn/essay/essayInfo/3270.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://www.devstore.cn/essay/essayInfo/3270.html?utm_source=tuicool&amp;utm_medium=referral</a></p>
+<p><a href="http://blog.sunnyxx.com/2015/07/04/ios-interview/" target="_blank" rel="external">http://blog.sunnyxx.com/2015/07/04/ios-interview/</a></p>
 
       
     </div>
@@ -465,7 +495,7 @@
         <p><span>本文标题:</span><a href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年07月05日 - 16时22分</p>
-        <p><span>最后更新:</span>2017年03月09日 - 17时00分</p>
+        <p><span>最后更新:</span>2017年03月18日 - 14时58分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/07/05/深入学习Runtime/" title="深入学习Runtime">http://peilinghui.com/2016/07/05/深入学习Runtime/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/07/05/深入学习Runtime/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -482,8 +512,8 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/12/20/二维码/">
-                    二维码
+                <a href="/2016/07/19/深入学习RunLoop/">
+                    深入学习RunLoop
                 </a>
             </div>
         
@@ -587,7 +617,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/12/20/二维码/" title="上一篇: 二维码">
+            <a href="/2016/07/19/深入学习RunLoop/" title="上一篇: 深入学习RunLoop">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -601,7 +631,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入理解内存管理/">深入理解内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入理解内存管理/">深入理解内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/详解深拷贝和浅拷贝/">详解深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");

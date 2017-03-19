@@ -11,13 +11,11 @@
 <meta property="og:url" content="http://peilinghui.com/2016/03/01/iOS面试题总结/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%8D%95%E4%BE%8B%E6%8A%BD%E5%87%BA%E5%AE%8F.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/2.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/KVC.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/KVC%E7%9A%84.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/KVO.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B7%A7%E4%BA%A4%E6%8D%A2.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/runtime.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/rumtime%E5%BD%92%E6%A1%A3.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/runtime%E8%A7%A3%E6%A1%A3.png">
@@ -27,7 +25,7 @@
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5%E8%B0%83%E7%94%A8.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%BF%9C%E7%A8%8B%E9%80%9A%E7%9F%A5.png">
-<meta property="og:updated_time" content="2016-04-19T02:23:26.000Z">
+<meta property="og:updated_time" content="2017-03-17T05:56:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS面试题总结">
 <meta name="twitter:description" content="快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。">
@@ -166,7 +164,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 10px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
+                        <a href="/tags/OC/" style="font-size: 15px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 15px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
                     </div>
                 </section>
                 
@@ -308,43 +306,6 @@
           
         <p>快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。</p>
 <a id="more"></a>
-<h1 id="内存管理（MRC和ARC）"><a href="#内存管理（MRC和ARC）" class="headerlink" title="内存管理（MRC和ARC）"></a>内存管理（MRC和ARC）</h1><p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.png" alt=""><br>讲解：<a href="http://www.jianshu.com/p/3129ce12e020" target="_blank" rel="external">http://www.jianshu.com/p/3129ce12e020</a></p>
-<ol>
-<li>block在ARC中和传统的MRC中的行为和用法有没有什么区别，需要注意些什么？<br>注意：1&gt;block的内存管理 (block的实现是基于指针和函数指针) <ul>
-<li>如果没有copy操作，block代码默认放在栈内存（弱引用）。</li>
-<li>如果有copy操作，block升级放在堆内存（强引用）。<br>2&gt;防止循环引用<br> 解决：非ARC（MRC）：<strong>__block</strong><br>ARC：<strong>__weak</strong>或者<strong>__unsafe_unretained</strong><blockquote>
-<p>补充：<strong>__block</strong> 和 <strong>__weak</strong>修饰符的区别<br><strong>__block</strong> 不管是ARC还是MRC模式下都可以使用，可以修饰对象，还可以修饰基本数据类型。<br><strong>__weak</strong>只能在ARC模式下使用，也只能修饰对象（NSString），不能修饰基本数据类型（int）。<br><strong>__block</strong> 对象可以在block中被重新赋值，<strong>__weak</strong>不可以。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>自动释放池底层怎么实现<br>自动释放池以栈的形式实现:当你创建一个新的自动释放池时，它将被添加到栈顶。当一个对象收到发送autorelease消息时,它被添加到当前线程的处于栈顶的自动释放池中,当自动释放池被回收时,它们从栈中被删除, 并且会给池子里面所有的对象都会做一次release操作.</li>
-<li>怎么保证多人开发进行内存泄露的检查.<br>1&gt;使用Product-&gt;Analyze进行代码的静态分析<br>2&gt;为避免不必要的麻烦, 多人开发时尽量使用ARC</li>
-<li>什么情况下会发生内存泄漏和内存溢出？<br>内存泄露：不再需要的对象没有释放，导致内存泄露，内存泄露会导致应用闪退。循环引用造成内存不可回收。<br>1&gt;block中使用strong self，如果不注意很容易造成内存泄露<br>2&gt;delegate如果设置为strong也很大可能造成内存泄露，不过具体还要看有没有循环引用.</li>
-</ol>
-<h3 id="引用计数："><a href="#引用计数：" class="headerlink" title="引用计数："></a><strong>引用计数</strong>：</h3><p>OC在内存管理上采用了引用计数（retain count），在对象内部保存一个数字，用来表示被引用的次数。init、new和copy都会让retain count加1。当销毁对象的时候，系统不会直接调用dealloc方法，而是先调用release，让retain count 减1，当retain count等于0的时候，系统才会调用dealloc方法来销毁对象。<br>在指针赋值的时候，retain count是不会自动增加的，为了避免上面所说的错误，我们需要在赋值的时候手动retain一次，让retain count增加1。<br>ClassA <em>a = [[ClassA alloc] init]; // retain count = 1<br>ClassA </em>b = a;<br>[b retain]; // retain count = 2<br>[a dealloc];<br>这样在执行到第四行的时候，对象的retain count只是减了1，并没有被销毁，指针b仍然有效。  </p>
-<p><strong>内存泄露</strong>：<br>就如上面列子所示，当生成ClassA对象时，指针a拥有对该对象的访问权。如果失去了对一个对象的访问权，而又没有将retain count减至0，就会造成内存泄露。也就是说，分配出去的内存无法回收。<br>ClassA *a = [[ClassA alloc] init];<br>a = nil; </p>
-<h3 id="Autorelease-Pool"><a href="#Autorelease-Pool" class="headerlink" title="Autorelease Pool"></a><strong>Autorelease Pool</strong></h3><p>一般地，在新建一个iphone 项目的时候，xcode会自动地为你创建一个autorelease pool，这个pool就写在Main函数里面。<br>在NSAutoreleasePool中包含了一个可变数组，用来存储被声明为autorelease的对象。当NSAutoreleasePool自身被销毁的时候，它会遍历这个数组，release数组中的每一个成员（注意，这里只是release，并没有直接销毁对象）。若成员的retain count 大于1，那么对象没有被销毁，造成内存泄露。<br>默认的NSAutoreleasePool只有一个，你可以在你的程序中创建NSAutoreleasePool，被标记为autorelease的对象会跟最近的 NSAutoreleasePool匹配。<br> NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];<br>//Create some objects<br>//do something…<br>[pool  release];<br>你也可以嵌套使用NSAutoreleasePool ，就像你嵌套使用for一样。<br>即使NSAutoreleasePool 看起来没有手动release那么繁琐，但是使用NSAutoreleasePool 来管理内存的方法还是不推荐的。因为在一个NSAutoreleasePool 里面，如果有大量对象被标记为autorelease，在程序运行的时候，内存会剧增，直到NSAutoreleasePool 被销毁的时候才会释放。如果其中的对象足够的多，在运行过程中你可能会收到系统的低内存警告，或者直接crash。  </p>
-<p><strong>Autorelease Pool 扩展</strong>：<br> 如果你极具好奇心，把Main函数中的NSAutoreleasePool代码删除掉，然后再自己的代码中把对象声明为autorelease，你会 发现系统并不会给你发出错误信息或者警告。用内存检测工具去检测内存的话，你可能会惊奇的发现你的对象仍然被销毁了。<br>其实在新生成一个Run Loop的时候，系统会自动的创建一个NSAutoreleasePool ，这个NSAutoreleasePool 无法被删除。<br>在做内存测试的时候，请不要用NSString。OC对字符串作了特殊处理<br>NSString *str =[[NSString alloc] stringWithString:@”123”];<br>在输出str的retain count 的时候，你会发现retain count 大于1。  </p>
-<h3 id="手动管理内存"><a href="#手动管理内存" class="headerlink" title="手动管理内存"></a><strong>手动管理内存</strong></h3><p>使用alloc、new、copy创建一个对象，该对象的retain count都等于1，需要用release来释放该对象。谁创建，谁去释放。在这3钟方法以外的方法创建的对象，都被系统默认的声明为autorelease。<br>ClassA <em>a = [[ClassA alloc] init];//对象的retain count等于1<br>ClassA </em>b = a;//把一个指针赋值给另外一个指针的时候，a 指针所指向的对象的引用次数并没有增加，也就是说，对象的retain count依然等于1。<br>[b retain];//retain了之后，retain count加1<br>[a release];//a指针放弃了对对象的访问权，对象的retain count 减1，对象没有被销毁。<br>[b release];//只有当b也执行了release方法之后，才会将对象销毁掉。因此，谁retain了，谁就要release。<br>b = nil;//对象被销毁之后，指针依然是存在的。所以在release了之后，最好把指针赋为空，防止无头指针的出现<br>顺便一说，release一个空指针是合法的，但是不会发生任何事情。<br>如果你在一个函数中创建并返回一个对象，那么你需要把这个对象声明为autorelease.<br>(ClassA  <em>)Function(){<br>ClassA </em>a = [[[ClassA alloc] init] autorelease];<br>return a;}<br>不这样做的话，会造成内存泄露。</p>
-<h3 id="属性与内存管理"><a href="#属性与内存管理" class="headerlink" title="属性与内存管理"></a><strong>属性与内存管理</strong></h3><p>@property实际上是getter和setter，@synthesize是合成这2个方法.<br>@property()，如果你里面什么都不写，那么系统会默认的把你的属性设置为：<br>@property(atomic, assign)….  </p>
-<p><strong>关于nonatomic</strong><br>指定 nonatomic特性，编译器合成访问器的时候不会去考虑线程安全问题。<br>如果你的多个线程在同一时间会访问到这个变量的话，可以将特性声明为 atomic(通过省略关键字nonatomic)。在这种特性的状态下，编辑器在合成访问器的时候就会在访问器里面加一个锁 （@synchronized），在同一时间只能有一个线程访问该变量。<br>但是使用锁是需要付出代价的，一个声明为atomic的属性，在设置和获取这个变量的时候都要比声明为nonatomic的慢。所以如果你不打算编写多线程代码，最好把变量的属性特性声明为nonatomic。</p>
-<p><strong>关于assign、retain和copy</strong> </p>
-<blockquote>
-<p>assign：适用基本数据类型，（不适用于对象）简单赋值，不更改索引计数（因为assign对于在引用计数下的对象特性，只创建了一个弱引用（也就是平时说的浅复制）。这样使用变量会很危险。当你release了前一个对象的时候，被赋值的对象指针就成了无头指针了。因此在为对象类型的变量声明属性的时候，尽量不要使用assign。）<br>retain：适用于普通对象。释放旧的对象，将旧对象的值赋予输入对象，再提高输入对象的索引计数为1。<br>copy：适用于NSString与block。建立一个索引计数为1的对象，然后释放旧对象。</p>
-</blockquote>
-<p>weak和strong的区别：</p>
-<blockquote>
-<p>weak和strong不同的是 当一个对象不再有strong类型的指针指向它的时候 它会被释放 ，即使还有weak型指针指向它。一旦最后一个strong型指针离去 ，这个对象将被释放，所有剩余的weak型指针都将被清除。</p>
-</blockquote>
-<p>copy与retain的区别：</p>
-<blockquote>
-<p>copy其实是建立了一个相同的对象，而retain不是；<br>copy是内容拷贝，retain是指针拷贝；<br>copy是内容的拷贝 ,对于像NSString,的确是这样，如果拷贝的是NSArray这时只是copy了指向array中相对应元素的指针.这便是所谓的”浅复制”。</p>
-</blockquote>
-<p>assign和weak的区别；</p>
-<blockquote>
-<p>assign是指针赋值，不对引用计数操作，使用之后如果没有置为nil，可能就会产生野指针；而weak一旦不进行使用后，永远不会使用了，就不会产生野指针！ 用weak避免循环引用.</p>
-</blockquote>
 <h1 id="单例设计模式-Singleton"><a href="#单例设计模式-Singleton" class="headerlink" title="单例设计模式(Singleton)"></a>单例设计模式(Singleton)</h1><ol>
 <li>定义：它可以保证某个类创建出来的对象永远只有1个。</li>
 <li>作用：节省内存资源，一个应用就一个对象  例如：工具类(音频Sound)</li>
@@ -382,10 +343,9 @@
 <li>数据类型之间的转换<br>ARC:<strong>__bridge_retained</strong>,<strong>__bridge_transfer</strong><br>非ARC:<strong>__bridge</strong></li>
 </ul>
 </li>
-<li><p>不用中间变量,用两种方法交换A和B的值<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B7%A7%E4%BA%A4%E6%8D%A2.png" alt=""><br>或者使用<strong>位运算符</strong>异或<br>A = A^B;<br>B = A^B;<br>A = A^B;</p>
-</li>
-<li><p>是否使用Core Text（核心文本（富文本））或者Core Image等？如果使用过，请谈谈你使用Core Text或者Core Image的体验。<br>Core Text：随意修改文本的样式，图文混排(纯C语言)第三方框架:Niumb（国外）<br>Core Image(滤镜处理框架)： 能调节图片的各种属性(对比度, 色温, 色差等)</p>
-</li>
+</ol>
+<ol>
+<li>是否使用Core Text（核心文本（富文本））或者Core Image等？如果使用过，请谈谈你使用Core Text或者Core Image的体验。<br>Core Text：随意修改文本的样式，图文混排(纯C语言)第三方框架:Niumb（国外）<br>Core Image(滤镜处理框架)： 能调节图片的各种属性(对比度, 色温, 色差等)</li>
 <li>controllers间怎么进行通信。<br>在IOS应用不断的出现三种模式来实现这种通信：（可以做到监听）<ul>
 <li>委托delegation代理；（一个controller定义了一个协议（一对一）监听scroll的滚动，使用安全，比较规范，但是代码多，先用协议-&gt;代理属性-&gt;设置代理-&gt;实现代理方法）</li>
 <li>通知中心Notification Center；(通知比较灵活(1个通知能被多个对象接收, 1个对象能接收多个通知(多对多)，监听键盘弹出)</li>
@@ -476,7 +436,7 @@
         <p><span>本文标题:</span><a href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月01日 - 16时57分</p>
-        <p><span>最后更新:</span>2016年04月19日 - 10时23分</p>
+        <p><span>最后更新:</span>2017年03月17日 - 13时56分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/01/iOS面试题总结/" title="iOS面试题总结">http://peilinghui.com/2016/03/01/iOS面试题总结/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/01/iOS面试题总结/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -512,7 +472,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#内存管理（MRC和ARC）"><span class="toc-number">1.</span> <span class="toc-text">内存管理（MRC和ARC）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#引用计数："><span class="toc-number">1.0.1.</span> <span class="toc-text">引用计数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Autorelease-Pool"><span class="toc-number">1.0.2.</span> <span class="toc-text">Autorelease Pool</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手动管理内存"><span class="toc-number">1.0.3.</span> <span class="toc-text">手动管理内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性与内存管理"><span class="toc-number">1.0.4.</span> <span class="toc-text">属性与内存管理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#单例设计模式-Singleton"><span class="toc-number">2.</span> <span class="toc-text">单例设计模式(Singleton)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#KVC"><span class="toc-number">3.</span> <span class="toc-text">KVC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#KVO"><span class="toc-number">4.</span> <span class="toc-text">KVO</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Foundation"><span class="toc-number">5.</span> <span class="toc-text">Foundation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#runtime"><span class="toc-number">6.</span> <span class="toc-text">runtime</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UI"><span class="toc-number">7.</span> <span class="toc-text">UI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用程序"><span class="toc-number">8.</span> <span class="toc-text">应用程序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-number">9.</span> <span class="toc-text">其他</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OC的对象类型"><span class="toc-number">10.</span> <span class="toc-text">OC的对象类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类对象"><span class="toc-number">10.0.1.</span> <span class="toc-text">类对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#id"><span class="toc-number">10.0.1.1.</span> <span class="toc-text">id</span></a></li></ol></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#单例设计模式-Singleton"><span class="toc-number">1.</span> <span class="toc-text">单例设计模式(Singleton)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#KVC"><span class="toc-number">2.</span> <span class="toc-text">KVC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#KVO"><span class="toc-number">3.</span> <span class="toc-text">KVO</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Foundation"><span class="toc-number">4.</span> <span class="toc-text">Foundation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#runtime"><span class="toc-number">5.</span> <span class="toc-text">runtime</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UI"><span class="toc-number">6.</span> <span class="toc-text">UI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用程序"><span class="toc-number">7.</span> <span class="toc-text">应用程序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-number">8.</span> <span class="toc-text">其他</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OC的对象类型"><span class="toc-number">9.</span> <span class="toc-text">OC的对象类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类对象"><span class="toc-number">9.0.1.</span> <span class="toc-text">类对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#id"><span class="toc-number">9.0.1.1.</span> <span class="toc-text">id</span></a></li></ol></li></ol></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -612,7 +572,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入理解内存管理/">深入理解内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入理解内存管理/">深入理解内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/详解深拷贝和浅拷贝/">详解深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
