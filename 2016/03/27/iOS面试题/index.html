@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="总结一下一些面试题。">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/UILabel%E6%95%88%E6%9E%9C.png">
-<meta property="og:updated_time" content="2017-03-17T07:50:01.000Z">
+<meta property="og:updated_time" content="2017-03-24T05:13:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS面试题">
 <meta name="twitter:description" content="总结一下一些面试题。">
@@ -151,7 +151,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/OC/" style="font-size: 15px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 15px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
+                        <a href="/tags/OC/" style="font-size: 12.5px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 15px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 17.5px;">面试</a>
                     </div>
                 </section>
                 
@@ -293,6 +293,50 @@
           
         <p>总结一下一些面试题。</p>
 <a id="more"></a>
+<p>1.iOS中属性是怎么实现的。<br>@property的本质是什么？</p>
+<p>@property = ivar + getter + setter;<br>下面解释下：</p>
+<p>“属性”（property）有两大概念：ivar（实例变量），存取方法（访问方法= getter + setter）。<br>“属性”（property）作为Objective-C的一项特性，主要的作用在就封装对象中的数据。Objective-C对象通常会把其所需要的数据保存为各种实例变量。 “获取方法”（getter）用于读取变量值，而“设置方法”（setter）用于写入变量值。这个概念已经定型，并且经由“属性“这一特性而成为Objective-C 2.0的一部分。而在正规的Objective-C编码风格中，存在方法有着严格的命名规范。正因为有了这种严格的命名规范，所以Objective-C这门语言才能根据名称自动创建出存取方法。其实也可以把属性当做一种关键字，其表示：</p>
+<p>编码器会自动写出一套存取方法，用于访问给定类型中的变量。所以你也可以这么说：</p>
+<p>@property = getter + setter;<br>例如下面这个类：</p>
+<p>@interface  Person：NSObject<br>@property  NSString <em> firstName;<br>@property  NSString </em> lastName;<br>@结束<br>上述代码写出来的类与下面这种写法等效：</p>
+<p>@interface  Person：NSObject </p>
+<ul>
+<li>（NSString *）firstName ;</li>
+<li>（void）setFirstName ：（NSString *）firstName ;</li>
+<li>（NSString *）lastName ;</li>
+<li>（void）setLastName ：（NSString *）lastName ;<br>@结束<br>更新：</li>
+</ul>
+<p>property在运行时中是objc_property_t定义如下：</p>
+<p>typedef  struct  objc_property * objc_property_t ;<br>而objc_property是一个结构体，包括名称和属性，定义如下：</p>
+<p>struct  property_t {<br>     const  char <em> name;<br>    const  char </em> attributes;<br>};<br>而attributes本质是objc_property_attribute_t，定义了属性的一些属性，定义如下：</p>
+<p>// /定义属性属性<br>typedef  struct {<br>     const  char <em> name;           / </em> <em> &lt;属性的名称</em> /<br>     const  char <em> value;          / </em> <em> &lt;属性的值（通常为空）</em> /<br>} objc_property_attribute_t ;<br>而attributes的具体内容是什么呢？其实，包括：类型，原子性，内存语义和对应的实例变量。</p>
+<p>例如：我们定义一个字符串的属性@property (nonatomic, copy) NSString *string;，通过property_getAttributes(property)获取属性并打印出来之后的结果为T@”NSString”,C,N,V_string</p>
+<p>其中T代表类型，可参阅类型编码，C就代表复制，N代表非原子，V就代表对于的实例变量。</p>
+<p>ivar，getter，setter是如何生成并添加到这个类中的？</p>
+<p>“自动合成”（autosynthesis）<br>完成属性定义后，编译器会自动编写访问这些属性所需的方法，此过程叫做“自动合成”（autosynthesis）。需要强调的是，这个过程由编译器执行，所以编辑器里看不到这些“合成方法”（合成方法）的源代码。除了生成方法代码getter，setter之外，编译器还要自动向类中添加适当类型的实例变量，并且在属性名前面加下划线，以此作为实例变量的名字。在前例中，会生成两个实例变量，其名称分别为 _firstName与_lastName。也可以在类的实现代码里通过 @synthesize语法来指定实例变量的名字。</p>
+<p>@implementation  Person<br>@synthesize firstName = _myFirstName;<br>@synthesize lastName = _myLastName;<br>@结束<br>我为了搞清属性是怎么实现的，曾经反编译过相关的代码，他大致生成了五个东西</p>
+<p>OBJC<em>IVAR</em>$类名$属性名称 ：该属性的“偏移量”（offset），这个偏移量是“硬编码”（hardcode），表示该变量距离存储对象的内存区域的起始地址有多远。<br>setter与getter方法对应的实现函数<br>ivar_list ：成员变量列表<br>method_list ：方法列表<br>prop_list ：属性列表<br>也就是说我们每次在增加一个属性，系统都在ivar_list中添加一个成员变量的描述，在method_list中增加setter与getter方法的描述，在属性列表中增加一个属性的描述，然后计算该属性在对象中偏移量，然后给出setter与getter方法对应的实现，在setter方法中从偏移量的位置开始赋值，在getter方法中从偏移量开始取值，为了能够读取正确字节数，系统对象偏移量的指针类型进行。<br>2.TCP和UDP的区别</p>
+<p>3.TCP三次握手机制，发送的包叫啥（报文段）</p>
+<p>4.iOS中数据持久化的几种方式</p>
+<p>5.进程和线程的区别，进程和线程的调度方式，临界区，进程同步</p>
+<p>7.block修改外部变量值，block是否会循环引用，怎么解决</p>
+<p>8.多线程的三种方式。GCD：假设有8个异步线程，如何先并发三个，再执行一个，再并发后面4个。</p>
+<p>9.10万个数中如何找出前K个数</p>
+<p>11.你项目中的数据具体缓存怎么做的。</p>
+<p>12.不用框架，谈谈你如何处理图片缓存以及优化</p>
+<p>iOS：<br>1.多线程有哪些方式；<br>2.NSOperation和GCD有什么区别；为什么GCD效率更高？<br>3.assign和weak的区别；<br>4.weak是怎么实现自动设置为nil的？<br>答：当把一个强引用的变量赋值给一个弱引用的变量时， 实际上编译器做了以下几步:<br>     1、把<strong>weak变量初始化为0<br>     2、使用</strong>strong变量的地址作为键值，把<strong>weak变量的地址注册到weak表中，weak表是一个散列表<br>     3、如果</strong>strong变量的地址为0，就把对应<strong>weak变量的地址从weak表中删除<br>使用weak表，使用废弃变量的地址作为键值进行检索，就能高速获取对应的附有</strong>weak修饰符的变量的地址。<br>废弃谁都不持有的对象时，编译器进行了如下几步操作：<br>     1、从weak表中获取废弃对象的地址作为键值的记录<br>     2、将记录中所有weak变量的地址赋值为nil<br>     3、将记录从weak表中删除<br>     4、将废弃对象的地址作为键值的记录从引用计数表中删除<br>因此，如果大量的使用附有<strong>weak修饰符的变量，会消耗相应的CPU资源，所以应该只在为了避免循环引用时再使用</strong>weak修饰符。</p>
+<p>扩展：</p>
+<p>与被赋值时相比，在使用附有__weak修饰符变量的情形下，增加了对objc_loadWeakRetained函数和objc_autorelease函数的调用。这些函数的动作如下：</p>
+<ol>
+<li><p>objc_loadWeakRetained函数取出附有__weak修饰符变量所引用的对象并retain</p>
+</li>
+<li><p>objc_autorelease函数将对象注册到autoreleasepool中。</p>
+</li>
+</ol>
+<p>由此可知，因为附有__weak修饰符变量所引用的对象这样被注册到autorelease中，所以在@autoreleasepool块结束之前都可以放心使用。</p>
+<p>注：OC中有一些类，并不支持ARC，例如NSMachPort类。可以通过allowsWeakReference/retainWeakReference方法的返回值来判断是否支持ARC，若为no，则不支持。</p>
+<p>5.什么是KVO?什么是KVC？什么是Runtime机制？<br>6.用过什么第三方框架？看过源代码么？XXX是怎么实现的？<br>7.AutoLayout;<br>8.MVC，MVVM;<br>9.UIScrollView是怎么实现滑动的?<br>10.frame和bounds的区别;<br>11.IOS有哪些数据存储的方式？<br>12.coreData和sqlite的区别;<br>13.什么是沙盒机制。有那几个目录，这几个目录有什么区别？</p>
+<p>梦妃<br>阿里面试：<br>无序数组去重<br>@propoty的作用<br> SDWebImage url拦截？<br>runtime kvo 引用计数<br>mrc</p>
 <ol>
 <li>图文混合的新闻中，如何获取图片的位置；<br>1&gt;纯文字排版文字排版开发组件：CoreText。CoreText库中提供了很多的工具来对文本进行操作，例如CTFont、CTLine、CTFrame等。利用这些工具可以对文字字体每一行每一段落进行操作。<br>2&gt;UIwebview去实现的,内容拼接的好处就是数据显示比较同步<br>过网络请求获得相关的信息,再通过手机端进行拼HTML,然后在WebView进行展示，</li>
 <li>Tableview的优化，如果卡顿如何处理；<ul>
@@ -384,25 +428,16 @@
 </li>
 <li><p>沙盒的目录，NSUserDefault是存在什么目录下的？哪种形式？</p>
 </li>
-<li>Runloop的机制？</li>
-</ol>
-<ol>
-<li>Git和SVN的区别？</li>
-<li>静态库和动态库的区别？</li>
+<li><p>静态库和动态库的区别？</p>
+</li>
 <li>H5,JS和网页，Native与iOS开发结合用过吗？</li>
 </ol>
 <h2 id="腾讯面试题："><a href="#腾讯面试题：" class="headerlink" title="腾讯面试题："></a>腾讯面试题：</h2><ol>
 <li>如何绘制一个三角形？<br>1.1 如何绘制大量三角形？<br>1.2 一定要重写drawRect吗？<br>用专有图层CAShapeLayer,CAShapeLayer是一个通过矢量图形而不是bitmap来绘制的图层子类。用CGPath来定义想要绘制的图形，CAShapeLayer会自动渲染。它可以完美替代我们的直接使用Core Graphics绘制layer，对比之下使用CAShapeLayer有以下优点：</li>
 </ol>
 <p>渲染快速。CAShapeLayer使用了硬件加速，绘制同一图形会比用Core Graphics快很多。<br>高效使用内存。一个CAShapeLayer不需要像普通CALayer一样创建一个寄宿图形，所以无论有多大，都不会占用太多的内存。<br>不会被图层边界剪裁掉。<br>不会出现像素化。</p>
-<p>1.3 如何刷新View界面？</p>
 <ol>
-<li><p>线程和RunLoop的关系</p>
-</li>
-<li><p>NSTimer有什么需注意的以及和RunLoop的关系？</p>
-</li>
-<li><p>线程加锁原理（信号量，临界区，自选锁）</p>
-</li>
+<li>线程加锁原理（信号量，临界区，自选锁）</li>
 <li><p>iOS7 - iOS9的区别</p>
 </li>
 <li><p>用HTTP传数据，丢包严重怎么办</p>
@@ -421,18 +456,8 @@
 </li>
 <li><p>tableview cell高度优化：</p>
 </li>
-<li><p>深入理解runloop<br><a href="http://blog.ibireme.com/2015/05/18/runloop/" target="_blank" rel="external">http://blog.ibireme.com/2015/05/18/runloop/</a></p>
-</li>
-<li><p>主线程runloop(mainRunloop)主要执行事件：<br>负责创建Autoreleasepool和释放autoreleasepool,  周期大概是event loop(事件循环)；<br>事件响应—&gt;当一个硬件事件(触摸/锁屏/摇晃等)发生后，首先由 IOKit.framework 生成一个 IOHIDEvent 事件并由 SpringBoard 接收。SpringBoard 只接收按键(锁屏/静音等)，触摸，加速，接近传感器等几种 Event，随后用 mach port 转发给需要的App进程。随后苹果注册的那个 Source1 就会触发回调，并调用 _UIApplicationHandleEventQueue() 进行应用内部的分发。_UIApplicationHandleEventQueue() 会把 IOHIDEvent 处理并包装成 UIEvent 进行处理或分发，其中包括识别 UIGesture/处理屏幕旋转/发送给 UIWindow 等。通常事件比如 UIButton 点击、touchesBegin/Move/End/Cancel 事件都是在这个回调中完成的。</p>
-</li>
 </ol>
-<p>手势识别—&gt;当上面的 _UIApplicationHandleEventQueue() 识别了一个手势时，其首先会调用 Cancel 将当前的 touchesBegin/Move/End 系列回调打断。随后系统将对应的 UIGestureRecognizer 标记为待处理。</p>
-<p>界面更新—&gt;当在操作 UI 时，比如改变了 Frame、更新了 UIView/CALayer 的层次时，或者手动调用了 UIView/CALayer 的 setNeedsLayout/setNeedsDisplay方法后，这个 UIView/CALayer 就被标记为待处理，并被提交到一个全局的容器去。</p>
 <ol>
-<li><p>NSTimer事件</p>
-</li>
-<li><p>PerformSelecter—&gt;performSelector:onThread: 时，实际上其会创建一个 Timer 加到对应的线程去</p>
-</li>
 <li><p>虚拟内存：<br>当应用程序占用内存很大或很多，则会导致内存消耗殆尽。为解决该问题，Windows中运用了虚拟内存技术，即匀出一部分硬盘空间来充当内存使用。当内存耗尽时，电脑就会自动调用硬盘来充当内存，以缓解内存的紧张。</p>
 </li>
 <li><p>红黑树</p>
@@ -480,7 +505,7 @@
 <p>4.混合开发中如何传递数据，即js和oc如何传递数据、参数；<br>5.做过那些优化？<br>6.说说我们的App中有哪些需要改进的；<br>7.讲讲MVC，MVVM；</p>
 <p>9.iOS中多线程的实现方式；</p>
 <p>11.你们是如何封装网络请求库的；</p>
-<h2 id="十二-同花顺"><a href="#十二-同花顺" class="headerlink" title="十二.同花顺"></a>十二.同花顺</h2><p>2.UITableView的复用，如果UITableView的高度很高，即frame的高度超过屏幕高度，会怎么进行复用；<br>3.weak、assign的区别；</p>
+<h2 id="十二-同花顺"><a href="#十二-同花顺" class="headerlink" title="十二.同花顺"></a>十二.同花顺</h2><p>2.UITableView的复用，如果UITableView的高度很高，即frame的高度超过屏幕高度，会怎么进行复用；</p>
 <p>5.二叉树的搜索，搜索二叉树中所有值为2的节点，并返回，代码实现；</p>
 <p>8.消息推送如何实现，整个过程是怎样的；<br>9.缓存图片如何实现，缓存到哪里；如果图片显示有破损，可能是什么原因造成的；</p>
 <h2 id="十四-搜狐集团"><a href="#十四-搜狐集团" class="headerlink" title="十四.搜狐集团"></a>十四.搜狐集团</h2><ol>
@@ -516,11 +541,14 @@
 <ol>
 <li>讲讲iOS动画，比如CoreAnimation；</li>
 </ol>
-<p>12.在一个函数中的局部变量，需要return，那么这个局部变量什么时候会被释放；它是分配在哪里？<br>13.CALayer和UIView的区别；动画可以作用于CALayer和UIView吗？</p>
+<ol>
+<li>在一个函数中的局部变量，需要return，那么这个局部变量什么时候会被释放；它是分配在哪里？</li>
+<li>CALayer和UIView的区别；动画可以作用于CALayer和UIView吗？</li>
+</ol>
 <p>15.讲讲逆向工程； </p>
 <p>1.算法:double power(double  x, int n)函数实现，最好是O(long)复杂度；</p>
 <p>1.讲讲JSPatch；使用了iOS的什么原理；<br>2.讲讲MVC，MVVM，MVP；MVP是哪三个单词的缩写；<br>3.操作系统进程间通讯的方式；<br>4.讲讲共享锁和互斥锁；</p>
-<p>7.UITableView滑动卡顿如何解决优化；<br>8.iOS多线程有哪几种方式；<br>9.让你印象深刻的学到的技术；安全？<br>10.Linux和Unix相关知识；</p>
+<p>7.UITableView滑动卡顿如何解决优化；</p>
 <p>13.非对称加密方式有哪些，数字签名如何实现；<br>移动支付安全；</p>
 <ol>
 <li><p>列表中图片缓存与内存优化，有没有出现过OOM的情况；</p>
@@ -550,7 +578,7 @@
         <p><span>本文标题:</span><a href="/2016/03/27/iOS面试题/">iOS面试题</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月27日 - 14时37分</p>
-        <p><span>最后更新:</span>2017年03月17日 - 15时50分</p>
+        <p><span>最后更新:</span>2017年03月24日 - 13时13分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/27/iOS面试题/" title="iOS面试题">http://peilinghui.com/2016/03/27/iOS面试题/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/27/iOS面试题/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -567,8 +595,8 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/04/01/深入学习Block/">
-                    深入学习Block
+                <a href="/2016/04/01/设计模式解析/">
+                    设计模式解析
                 </a>
             </div>
         
@@ -672,7 +700,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/04/01/深入学习Block/" title="上一篇: 深入学习Block">
+            <a href="/2016/04/01/设计模式解析/" title="上一篇: 设计模式解析">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -686,7 +714,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入理解内存管理/">深入理解内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/详解深拷贝和浅拷贝/">详解深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/深入学习KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/深入学习内存管理/">深入学习内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式解析/">设计模式解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/详解深拷贝和浅拷贝/">详解深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");

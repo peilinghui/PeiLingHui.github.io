@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%882.38.12.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%882.38.19.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%883.12.58.png">
-<meta property="og:updated_time" content="2017-03-17T05:31:16.000Z">
+<meta property="og:updated_time" content="2017-03-24T04:10:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入学习Block">
 <meta name="twitter:description" content="深入学习Block。">
@@ -158,7 +158,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/OC/" style="font-size: 15px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 15px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
+                        <a href="/tags/OC/" style="font-size: 12.5px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 15px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 17.5px;">面试</a>
                     </div>
                 </section>
                 
@@ -394,14 +394,18 @@ block没有截获任何自动变量
 MRC下用__block可以避免循环引用(原因见上面block特性之截获自动变量值)
 ARC下用__weak来避免循环引用
 </code></pre><p>这里需要提醒大家的是, 只有堆块(_NSConcreteMallocBlock)才可能会造成循环引用, 其他两种block不会</p>
+<h3 id="Block用weakSelf、strongSelf、-weakify、-strongify解决循环引用"><a href="#Block用weakSelf、strongSelf、-weakify、-strongify解决循环引用" class="headerlink" title="Block用weakSelf、strongSelf、@weakify、@strongify解决循环引用"></a>Block用weakSelf、strongSelf、@weakify、@strongify解决循环引用</h3><pre><code>weakSelf 是为了block不持有self，避免Retain Circle循环引用。在 Block 内如果需要访问 self 的方法、变量，建议使用 weakSelf。
+
+strongSelf的目的是因为一旦进入block执行，假设不允许self在这个执行过程中释放，就需要加入strongSelf。block执行完后这个strongSelf 会自动释放，没有不会存在循环引用问题。如果在 Block 内需要多次 访问 self，则需要使用 strongSelf。
+</code></pre><p>AFN经典说起，以下是AFN其中的一段代码：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#pragma mark - NSOperation</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)setCompletionBlock:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))block &#123;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.lock</span> lock];</span><br><span class="line">    <span class="keyword">if</span> (!block) &#123;</span><br><span class="line">        [<span class="keyword">super</span> setCompletionBlock:<span class="literal">nil</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        __<span class="keyword">weak</span> __<span class="keyword">typeof</span>(<span class="keyword">self</span>)weakSelf = <span class="keyword">self</span>;</span><br><span class="line">        [<span class="keyword">super</span> setCompletionBlock:^ &#123;</span><br><span class="line">            __<span class="keyword">strong</span> __<span class="keyword">typeof</span>(weakSelf)strongSelf = weakSelf;</span><br><span class="line">            dispatch_group_t group = strongSelf<span class="variable">.completionGroup</span> ?: url_request_operation_completion_group();</span><br><span class="line">            <span class="built_in">dispatch_queue_t</span> queue = strongSelf<span class="variable">.completionQueue</span> ?: dispatch_get_main_queue();</span><br><span class="line"><span class="preprocessor">#pragma clang diagnostic pop</span></span><br><span class="line"></span><br><span class="line">            dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">                block();</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            dispatch_group_notify(group, url_request_operation_completion_queue(), ^&#123;</span><br><span class="line">                [strongSelf setCompletionBlock:<span class="literal">nil</span>];</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.lock</span> unlock];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果block里面不加<strong>strong </strong>typeof(weakSelf)strongSelf = weakSelf会如何呢？就会输出null。<br><strong>weakSelf之后，无法控制什么时候会被释放，为了保证在block内不会被释放，需要添加__strong。</strong></p>
+<p><strong>在block里面使用的__strong修饰的weakSelf是为了在函数生命周期中防止self提前释放。strongSelf是一个自动变量当block执行完毕就会释放自动变量strongSelf不会对self进行一直进行强引用</strong>。</p>
+<p>@weakify(self) 和 @strongify(self) 就是比我们日常写的weakSelf、strongSelf多了一个@autoreleasepool{}而已.</p>
 <h2 id="要点总结"><a href="#要点总结" class="headerlink" title="要点总结"></a>要点总结</h2><pre><code>Block 执行的代码其实在编译的时候就已经准备好了
-
 本身 Block 就是一个普通的 OC 对象。正因为它是对象，Block 可以被作为参数传递，可以作为返回值从一个方法返回，可以用来给变量赋值
-
 __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加 1
-
 对于 Block 外的变量引用，Block 默认是将其复制到其数据结构中来实现访问的
-
 对于用 __block 修饰的外部变量引用，Block 是复制其引用地址来实现访问的
 </code></pre><h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><ol>
 <li><p>讲讲block；</p>
@@ -418,6 +422,10 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
 </blockquote>
 <ol>
 <li>block和self的循环引用；到底是如何循环引用的；block的代码实现；为什么会造成循环引用；block是如何强引用self的；</li>
+</ol>
+<p>一个对象中强引用了block，在block中又强引用了该对象，就会发射循环引用。</p>
+<p>检测代码中是否存在循环引用问题，可使用 Facebook 开源的一个检测工具 FBRetainCycleDetector 。</p>
+<ol>
 <li>block为什么要修饰为copy；<br>11.有哪几种类型的block；什么情况下block会从栈区复制到堆区；</li>
 <li>NSMutableArray在block中修改时，是否要修饰为__block;</li>
 <li><p>block和delegate你更倾向于用哪个？为什么？<br>Block.<br>block使代码更紧凑,便于阅读,delegate可以设置必选和可选的方法实现.<br>block可以访存局部变量. 不需要像以前的回调一样，把在操作后所有需要用到的数据封装成特定的数据结构, 你完全可以直接访问局部变量.</p>
@@ -437,9 +445,13 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
 </li>
 <li><p>Block中的循环引用；Block的复制；Block的存储位置；Block如何改变外面的变量；__block修饰符的内部机制！！！；</p>
 </li>
+<li><p>Block的嵌套使用；</p>
+</li>
+<li>[※※]在block内如何修改block外部变量？</li>
+<li>[※※※]使用系统的某些block api（如UIView的block版本写动画时），是否也考虑引用循环问题？<br>UIView的block版本写动画时不需要考虑</li>
 </ol>
-<p>20.Block的嵌套使用；</p>
 <p>参考：<br><http: 28="" 2013="" blog.devtang.com="" 07="" a-look-inside-blocks=""><br><a href="http://www.jianshu.com/p/abeb5848b57a#" target="_blank" rel="external">http://www.jianshu.com/p/abeb5848b57a#</a><br><a href="http://www.jianshu.com/p/e03292674e60#" target="_blank" rel="external">http://www.jianshu.com/p/e03292674e60#</a><br><a href="http://www.jianshu.com/p/e03292674e60#" target="_blank" rel="external">http://www.jianshu.com/p/e03292674e60#</a></http:></p>
+<p>深入研究Block用weakSelf、strongSelf、@weakify、@strongify解决循环引用<a href="https://halfrost.com/ios_block_retain_circle/" target="_blank" rel="external">https://halfrost.com/ios_block_retain_circle/</a></p>
 <p>　　
 　　
 　　
@@ -456,7 +468,7 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
         <p><span>本文标题:</span><a href="/2016/04/01/深入学习Block/">深入学习Block</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年04月01日 - 13时01分</p>
-        <p><span>最后更新:</span>2017年03月17日 - 13时31分</p>
+        <p><span>最后更新:</span>2017年03月24日 - 12时10分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/04/01/深入学习Block/" title="深入学习Block">http://peilinghui.com/2016/04/01/深入学习Block/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/04/01/深入学习Block/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -473,15 +485,15 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/04/01/深入理解内存管理/">
-                    深入理解内存管理
+                <a href="/2016/04/03/effective objective-c 2.0读书笔记/">
+                    effective objective-c 2.0读书笔记
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/03/27/iOS面试题/">
-                    iOS面试题
+                <a href="/2016/04/01/设计模式解析/">
+                    设计模式解析
                 </a>
             </div>
         
@@ -492,7 +504,7 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Block"><span class="toc-number">1.</span> <span class="toc-text">Block</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Block的概要"><span class="toc-number">1.1.</span> <span class="toc-text">Block的概要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Block模式—block特性"><span class="toc-number">1.2.</span> <span class="toc-text">Block模式—block特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#截获自动变量值"><span class="toc-number">1.2.1.</span> <span class="toc-text">截获自动变量值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#截获对象"><span class="toc-number">1.2.2.</span> <span class="toc-text">截获对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Block的实现"><span class="toc-number">1.3.</span> <span class="toc-text">Block的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Block的实质"><span class="toc-number">1.3.1.</span> <span class="toc-text">Block的实质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block-存储域"><span class="toc-number">1.3.2.</span> <span class="toc-text">Block 存储域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#block变量的存储域"><span class="toc-number">1.3.3.</span> <span class="toc-text">__block变量的存储域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block-循环引用"><span class="toc-number">1.3.4.</span> <span class="toc-text">Block 循环引用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#要点总结"><span class="toc-number">1.4.</span> <span class="toc-text">要点总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#面试题"><span class="toc-number">2.</span> <span class="toc-text">面试题</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Block"><span class="toc-number">1.</span> <span class="toc-text">Block</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Block的概要"><span class="toc-number">1.1.</span> <span class="toc-text">Block的概要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Block模式—block特性"><span class="toc-number">1.2.</span> <span class="toc-text">Block模式—block特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#截获自动变量值"><span class="toc-number">1.2.1.</span> <span class="toc-text">截获自动变量值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#截获对象"><span class="toc-number">1.2.2.</span> <span class="toc-text">截获对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Block的实现"><span class="toc-number">1.3.</span> <span class="toc-text">Block的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Block的实质"><span class="toc-number">1.3.1.</span> <span class="toc-text">Block的实质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block-存储域"><span class="toc-number">1.3.2.</span> <span class="toc-text">Block 存储域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#block变量的存储域"><span class="toc-number">1.3.3.</span> <span class="toc-text">__block变量的存储域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block-循环引用"><span class="toc-number">1.3.4.</span> <span class="toc-text">Block 循环引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block用weakSelf、strongSelf、-weakify、-strongify解决循环引用"><span class="toc-number">1.3.5.</span> <span class="toc-text">Block用weakSelf、strongSelf、@weakify、@strongify解决循环引用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#要点总结"><span class="toc-number">1.4.</span> <span class="toc-text">要点总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#面试题"><span class="toc-number">2.</span> <span class="toc-text">面试题</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -578,7 +590,7 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/04/01/深入理解内存管理/" title="上一篇: 深入理解内存管理">
+            <a href="/2016/04/03/effective objective-c 2.0读书笔记/" title="上一篇: effective objective-c 2.0读书笔记">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -586,13 +598,13 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/03/27/iOS面试题/" title="下一篇: iOS面试题">
+            <a href="/2016/04/01/设计模式解析/" title="下一篇: 设计模式解析">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入理解内存管理/">深入理解内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/详解深拷贝和浅拷贝/">详解深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/深入学习KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/深入学习内存管理/">深入学习内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式解析/">设计模式解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/详解深拷贝和浅拷贝/">详解深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");

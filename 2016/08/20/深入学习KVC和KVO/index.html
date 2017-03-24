@@ -3,24 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS面试题总结 | 向着阳光奔跑</title>
+  <title>深入学习KVC和KVO | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。">
+  <meta name="description" content="深入学习KVC和KVO。研究源码NSKeyValueCoding.h和NSKeyValueObserving.h.在Foundation框架中。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS面试题总结">
-<meta property="og:url" content="http://peilinghui.com/2016/03/01/iOS面试题总结/index.html">
+<meta property="og:title" content="深入学习KVC和KVO">
+<meta property="og:url" content="http://peilinghui.com/2016/08/20/深入学习KVC和KVO/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95%E5%89%AF%E6%9C%AC.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/UILabel.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/label%E6%98%BE%E7%A4%BA.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5%E8%B0%83%E7%94%A8.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%BF%9C%E7%A8%8B%E9%80%9A%E7%9F%A5.png">
-<meta property="og:updated_time" content="2017-03-23T06:54:27.000Z">
+<meta property="og:description" content="深入学习KVC和KVO。研究源码NSKeyValueCoding.h和NSKeyValueObserving.h.在Foundation框架中。">
+<meta property="og:updated_time" content="2017-03-23T06:52:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS面试题总结">
-<meta name="twitter:description" content="快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。">
+<meta name="twitter:title" content="深入学习KVC和KVO">
+<meta name="twitter:description" content="深入学习KVC和KVO。研究源码NSKeyValueCoding.h和NSKeyValueObserving.h.在Foundation框架中。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -254,11 +248,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-iOS面试题总结" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-深入学习KVC和KVO" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/03/01/iOS面试题总结/" class="article-date">
-      <time datetime="2016-03-01T08:57:25.000Z" itemprop="datePublished">2016-03-01</time>
+      <a href="/2016/08/20/深入学习KVC和KVO/" class="article-date">
+      <time datetime="2016-08-20T05:57:47.000Z" itemprop="datePublished">2016-08-20</time>
 </a>
     </div>
   
@@ -271,7 +265,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS面试题总结
+      深入学习KVC和KVO
     </h1>
   
 
@@ -279,16 +273,8 @@
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/面试/">面试</a>
-    </div>
-
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OC/">OC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS面试/">iOS面试</a></li></ul>
-    </div>
-
         <div class="clearfix"></div>
       </div>
       
@@ -296,77 +282,84 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。</p>
+        <p>深入学习KVC和KVO。研究源码NSKeyValueCoding.h和NSKeyValueObserving.h.在Foundation框架中。</p>
 <a id="more"></a>
-<h1 id="Foundation"><a href="#Foundation" class="headerlink" title="Foundation"></a>Foundation</h1><ol>
-<li><p>是否可以把比较耗时的操作放在NSNotificationCenter中<br>如果在异步线程发的通知，那么可以执行比较耗时的操作；<br>如果在主线程发的通知，那么就不可以执行比较耗时的操作.</p>
-</li>
-<li><p>Foundation对象与Core Foundation对象有什么区别  </p>
+<h1 id="KVC"><a href="#KVC" class="headerlink" title="KVC"></a>KVC</h1><h3 id="什么是-KVC？"><a href="#什么是-KVC？" class="headerlink" title="什么是 KVC？"></a><strong>什么是 KVC？</strong></h3><ul>
+<li>KVC 是 Key-Value-Coding 的简称。</li>
+<li>KVC 是一种可以直接通过字符串的名字 key 来访问类属性的机制，而不是通过调用 setter、getter 方法去访问。</li>
+<li>我们可以通过在运行时动态的访问和修改对象的属性。而不是在编译时确定，KVC 是 iOS 开发中的黑魔法之一。</li>
+</ul>
+<blockquote>
+<p>键值编码（key-value coding）是一种间接更改对象状态的方式。通过传入的字符串（key）查找要更改的对象的状态。查找的规则是，先查找以字符串（key）命名的getter和setter方法。如果没有找到对应的方法，再查找key和_key的实例变量。KVC 是字典转模型，模型转字典的神器  </p>
+</blockquote>
+<h3 id="KVC的主要方法"><a href="#KVC的主要方法" class="headerlink" title="KVC的主要方法"></a>KVC的主要方法</h3><p>KVC 定义了一种按名称访问对象属性的机制，支持这种访问的主要方法是：</p>
 <ul>
-<li>Foundation对象是OC的，Core Foundation对象是C对象</li>
-<li>数据类型之间的转换<br>ARC:<strong>__bridge_retained</strong>,<strong>__bridge_transfer</strong><br>非ARC:<strong>__bridge</strong></li>
+<li>设置值<br>keyPath包含了key的功能<br>key：只能访问当前对象的属性<br>keyPath：能利用运算符一层一层往内部访问属性<br>对于标量值，会自动进行装箱和拆箱。</li>
 </ul>
-</li>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// value的值为OC对象，如果是基本数据类型要包装成NSNumber</span></span><br><span class="line">- (<span class="typename">void</span>)<span class="string">setValue:</span>(id)value <span class="string">forKey:</span>(NSString *)key;</span><br><span class="line"></span><br><span class="line"><span class="comment">// keyPath键路径，类型为xx.xx</span></span><br><span class="line">- (<span class="typename">void</span>)<span class="string">setValue:</span>(id)value <span class="string">forKeyPath:</span>(NSString *)keyPath;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 它的默认实现是抛出异常，可以重写这个函数做错误处理。</span></span><br><span class="line">- (<span class="typename">void</span>)<span class="string">setValue:</span>(id)value <span class="string">forUndefinedKey:</span>(NSString *)key;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取值:</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果Key不存在，且没有KVC无法搜索到任何和Key有关的字段或者属性，则会调用这个方法，默认是抛出异常</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForUndefinedKey:(<span class="built_in">NSString</span> *)key;</span><br></pre></td></tr></table></figure>
+<h3 id="KVC-实现细节"><a href="#KVC-实现细节" class="headerlink" title="KVC 实现细节"></a>KVC 实现细节</h3><ol>
+<li>设置值<code>- (void)setValue:(id)value forKey:(NSString *)key;</code></li>
 </ol>
+<ul>
+<li>首先搜索 setter 方法，有就直接赋值。</li>
+<li><p>如果上面的 setter 方法没有找到，再检查类方法<code>+ (BOOL)accessInstanceVariablesDirectly</code></p>
+<pre><code>返回 NO，则执行setValue：forUNdefinedKey：
+返回 YES，则按_&lt;key&gt;，_&lt;isKey&gt;，&lt;key&gt;，&lt;isKey&gt;的顺序搜索成员名。
+</code></pre></li>
+<li><p>还没有找到的话，就调用setValue:forUndefinedKey:</p>
+<pre><code>当一个对象调用setValue方法时，方法内部会做以下操作：
+①检查是否存在相应key的set方法，如果存在，就调用set方法
+②如果set方法不存在，就会查找与key相同名称并且带下划线的成员属性，如果有，则直接给成员属性赋值
+③如果没有找到_key,就会查找相同名称的属性key，如果有就直接赋值
+④如果还没找到，则调用valueForUndefinedKey:和setValue:forUndefinedKey:方法。
+这些方法的默认实现都是抛出异常，我们可以根据需要重写它们。
+</code></pre></li>
+</ul>
 <ol>
-<li>是否使用Core Text（核心文本（富文本））或者Core Image等？如果使用过，请谈谈你使用Core Text或者Core Image的体验。<br>Core Text：随意修改文本的样式，图文混排(纯C语言)第三方框架:Niumb（国外）<br>Core Image(滤镜处理框架)： 能调节图片的各种属性(对比度, 色温, 色差等)</li>
-<li>controllers间怎么进行通信。<br>在IOS应用不断的出现三种模式来实现这种通信：（可以做到监听）<ul>
-<li>委托delegation代理；（一个controller定义了一个协议（一对一）监听scroll的滚动，使用安全，比较规范，但是代码多，先用协议-&gt;代理属性-&gt;设置代理-&gt;实现代理方法）</li>
-<li>通知中心Notification Center；(通知比较灵活(1个通知能被多个对象接收, 1个对象能接收多个通知(多对多)，监听键盘弹出)</li>
-<li>键值观察key value observing，KVO(KVO性能不好(底层会动态产生新的类)，只能监听某个对象属性的改变, 不推荐使用(1个对象的属性能被多个对象监听(一对多)监听对象属性的改变)<br>参考：<a href="http://blog.csdn.net/dqjyong/article/details/7685933" target="_blank" rel="external">http://blog.csdn.net/dqjyong/article/details/7685933</a>  </li>
-</ul>
-</li>
+<li>获取值<code>- (id)valueForKey:(NSString *)key;</code> </li>
 </ol>
-<h1 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h1><ol>
-<li>介绍一下isa指针,怎么用？<br>每一个对象内部都有一个ISA指针，对象的ISA指针就指向它的真实类型它所属的类。</li>
-<li>控制器的生命周期<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95%E5%89%AF%E6%9C%AC.png" alt=""></li>
-<li>怎么解决缓存池满的问题(cell)<br>ios中不存在缓存池满的情况，因为通常我们ios中开发，对象都是在需要的时候才会创建，有种常用的说话叫做懒加载，还有在UITableView中一般只会创建刚开始出现在屏幕中的cell，之后都是从缓存池里取，不会再创建新对象。缓存池里最多也就一两个对象（缓存池满的这种情况一般在开发java中比较常见，java中一般把最近最少使用的对象先释放）</li>
-<li>如何渲染自定义格式字符串的UILabel?<br>通过NSAttributedString类<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/UILabel.png" alt=""><br>显示效果如下：<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/label%E6%98%BE%E7%A4%BA.png" alt=""></li>
-</ol>
-<h1 id="应用程序"><a href="#应用程序" class="headerlink" title="应用程序"></a>应用程序</h1><ol>
-<li>IOS7之前,后台执行内容有几种形式,都是什么？<br>一般的应用在进入后台的时候可以获取一定时间来运行相关任务，也就是说可以在后台运行一小段时间(10S左右)。<ul>
-<li>后台播放音乐</li>
-<li>后台GPS跟踪</li>
-<li>后台voip支持（网络电话）</li>
-<li>7以后查看，在Support Interface orientations中添加Requried background modes</li>
-</ul>
+<ul>
+<li><p>首先查找 getter 方法，找到直接调用。如果是 bool、int、float 等基本数据类型，会做 NSNumber 的转换。</p>
 </li>
-<li>APP的启动过程,从main文件开始说起<br>程序启动分为两类:<br>1&gt;有storyboard<ul>
-<li>main函数</li>
-<li>UIApplicationMain(创建UIApplication对象,创建UIApplication的delegate对象)</li>
-<li>根据Info.plist获得最主要storyboard的文件名,加载最主要的storyboard(创建UIWindow,创建和设置UIWindow的rootViewController,显示窗口)<br>2&gt;没有storyboard情况下:</li>
-<li>main函数</li>
-<li>UIApplicationMain（创建UIApplication对象，创建UIApplication的delegate对象）</li>
-<li>delegate对象开始处理(监听)系统事件(没有storyboard)<br>程序启动完毕的时候, 就会调用代理的<br><code>application:didFinishLaunchingWithOptions:方法</code><br><code>在application:didFinishLaunchingWithOptions:中创建UIWindow</code><br>创建和设置UIWindow的rootViewController<br>显示窗口</li>
+<li><p>如果没查到，再检查类方法+ (BOOL)accessInstanceVariablesDirectly</p>
+<pre><code>返回 NO，则执行valueForUNdefinedKey:
+返回 YES，则按_&lt;key&gt;,_is&lt;Key&gt;,&lt;key&gt;,is&lt;Key&gt;的顺序搜索成员名。
+</code></pre></li>
+<li>还没有找到的话，调用valueForUndefinedKey:</li>
 </ul>
-</li>
-<li>把程序自己关掉和程序进入后台,远程推送的区别<br>1&gt;关掉后不执行任何代码, 不能处理事件<br>2&gt;应用程序进入<strong>后台状态</strong>不久后转入<strong>挂起状态</strong>。在这种状态下，应用程序不执行任何代码，并有可能在任意时候从内存中删除。只有当用户再次运行此应用，应用才会从挂起状态唤醒，代码得以继续执行<br>3&gt;或者进入后台时开启多任务状态，保留在内存中，这样就可以<br>执行系统允许的动作<br>4&gt;远程推送是由远程服务器上的程序发送到APNS,再由APNS把消息推送至设备上的程序,当应用程序收到推送的消息会自动调用特定的方法执行事先写好的代码</li>
-<li>本地通知和远程推送通知对基本概念和用法？<br>本地通知和远程推送通知的基本目的都是让应用程序能够通知用户某些事情, 而且不需要应用程序在前台运行.<br>本地通知由本应用负责调用,只能从当前设备上的iOS发出<br>远程通知由远程服务器上的程序发送到APNS,再由APNS把消息推送至设备上的程序<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5.png" alt=""><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5%E8%B0%83%E7%94%A8.png" alt=""><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%BF%9C%E7%A8%8B%E9%80%9A%E7%9F%A5.png" alt=""><h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1></li>
-<li>客户端安全性处理方式？<ul>
-<li>网络数据传输(敏感数据[账号\密码\消费数据\银行卡账号], 不能明文发送)</li>
-<li>协议的问题(自定义协议, 游戏代练)</li>
-<li>本地文件存储(游戏的存档)</li>
-<li>源代码</li>
+<h3 id="KVC-与点语法比较"><a href="#KVC-与点语法比较" class="headerlink" title="KVC 与点语法比较"></a><strong>KVC 与点语法比较</strong></h3><p>用 KVC 访问属性和用点语法访问属性的区别：</p>
+<ul>
+<li>用点语法编译器会做预编译检查，访问不存在的属性编译器会报错，但是用 KVC 方式编译器无法做检查，如果有错误只能运行的时候才能发现（crash）。</li>
+<li>相比点语法用 KVC 方式 KVC 的效率会稍低一点，但是灵活，可以在程序运行时决定访问哪些属性。</li>
+<li>用 KVC 可以访问对象的私有成员变量。</li>
 </ul>
-</li>
-<li>sip是什么？<br>SIP（Session Initiation Protocol），会话发起协议<br>SIP是建立VOIP连接的 IETF 标准，IETF是全球互联网最具权威的技术标准化组织.<br>所谓VOIP，就是网络电话，直接用互联网打电话，不用耗手机话费.</li>
-<li>有些图片加载的比较慢怎么处理?你是怎么优化程序的性能的?<br>图片下载放在异步线程;<br>图片下载过程中使用占位图片;<br>如果图片较大，可以考虑多线程断点下载.</li>
-<li>你实现过一个框架或者库以供别人使用么？如果有，请谈一谈构建框架或者库时候的经验；如果没有，请设想和设计框架的public的API，并指出大概需要如何做、需要注意一些什么方面，来使别人容易地使用你的框架。<ul>
-<li>提供给外界的接口功能是否实用、够用</li>
-<li>别人使用我的框架时，能不能根据类名、方法名就猜出接口的具体作用</li>
-<li>别人调用接口时，提供的参数是否够用、调用起来是否简单</li>
-<li>别人使用我的框架时，要不要再导入依赖其他的框架</li>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="字典转模型"><a href="#字典转模型" class="headerlink" title="字典转模型"></a>字典转模型</h3><p><code>- (void)setValuesForKeysWithDictionary:(NSDictionary *)keyedValues;</code></p>
+<h3 id="KVC-总结"><a href="#KVC-总结" class="headerlink" title="KVC 总结"></a>KVC 总结</h3><p>键值编码是一种间接访问对象的属性使用字符串来标识属性，而不是通过调用存取方法直接或通过实例变量访问的机制，非对象类型的变量将被自动封装或者解封成对象，很多情况下会简化程序代码。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>不需要通过 setter、getter 方法去访问对象的属性，</li>
+<li>可以访问私有成员变量的值，可以间接修改私有变量的值。</li>
+<li>可以轻松处理集合类(NSArray)。</li>
 </ul>
-</li>
-<li>App需要加载超大量的数据，给服务器发送请求，但是服务器卡住了如何解决？  <ul>
-<li>设置请求超时</li>
-<li>给用户提示请求超时</li>
-<li>根据用户操作再次请求数据</li>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>一旦使用KVC你的编译器无法检查出错误，即不会对设置的键、键值路径进行错误检查。</li>
+<li>执行效率要低于 setter 和 getter 方法。因为使用 KVC 键值编码，它必须先解析字符串，然后在设置或者访问对象的实例变量。</li>
+<li>使用 KVC 会破坏类的封装性。</li>
 </ul>
-</li>
-<li>json解析的具体实现<br>SBJson<br>JSONKit<br>NSJSONSerialization</li>
-<li>如果在网络数据处理过程中,发现一处比较卡,一般怎么解决？<br>检查网络请求操作是否被放在主线程了<br>看看异步请求的数量是否太多了（子线程数量）<br>数据量是否太大？如果太大，先清除一些不必要的对象（看不见的数据、图片）<br>手机CPU使用率和内存问题。</li>
-</ol>
+<h1 id="KVO"><a href="#KVO" class="headerlink" title="KVO"></a>KVO</h1><p>KVO 是 Key-Value-Observing 的简称。</p>
+<p>KVO 是一个观察者模式。观察一个对象的属性，注册一个指定的路径，若这个对象的的属性被修改，则 KVO 会自动通知观察者。</p>
+<p>更通俗的话来说就是任何对象都允许观察其他对象的属性，并且可以接收其他对象状态变化的通知。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span><span class="comment">// 注册观察者，实施监听；</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.person</span> addObserver:<span class="keyword">self</span></span><br><span class="line">              forKeyPath:<span class="string">@"age"</span></span><br><span class="line">                 options:<span class="built_in">NSKeyValueObservingOptionNew</span></span><br><span class="line">                 context:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span><span class="comment">// 回调方法，在这里处理属性发生的变化；</span></span><br><span class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath</span><br><span class="line">                      ofObject:(<span class="keyword">id</span>)object</span><br><span class="line">                        change:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; *)change</span><br><span class="line">                       context:(<span class="keyword">void</span> *)context</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">3.</span><span class="comment">// 移除观察者；</span></span><br><span class="line">[<span class="keyword">self</span> removeObserver:<span class="keyword">self</span> forKeyPath:@“age<span class="string">"];</span></span><br></pre></td></tr></table></figure>
+<p>KVO是基于runtime机制实现的<br>Apple 使用了 isa 搅拌技术（isa-swizzling）来实现的 KVO 。当一个观察者注册对象的一个属性 isa 观察对象的指针被修改，指着一个中间类而不是在真正的类。</p>
+<p>当某个类的对象第一次被观察时，系统就会在运行期动态地创建该类的一个派生类，在这个派生类中重写基类中任何被观察属性的 setter 方法。<br>派生类在被重写的 setter 方法实现真正的通知机制（Person-&gt;NSKVONotifying_Person）</p>
+<h1 id="应用-1"><a href="#应用-1" class="headerlink" title="应用"></a>应用</h1><h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><p>[※※]addObserver:forKeyPath:options:context:各个参数的作用分别是什么，observer中需要实现哪个方法才能获得KVO回调？<br>[※※※]如何手动触发一个value的KVO<br>[※※※]若一个类有实例变量NSString *_foo，调用setValue:forKey:时，可以以foo还是_foo作为key？<br>[※※※※]KVC的keyPath中的集合运算符如何使用？<br>[※※※※]KVC和KVO的keyPath一定是属性么？<br>[※※※※※]如何关闭默认的KVO的默认实现，并进入自定义的KVO实现？<br>[※※※※※]apple用什么方式实现对一个对象的KVO？</p>
+<p>参考：</p>
+<p><a href="https://github.com/leejayID/KVC-KVO" target="_blank" rel="external">https://github.com/leejayID/KVC-KVO</a></p>
 
       
     </div>
@@ -375,13 +368,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></p>
+        <p><span>本文标题:</span><a href="/2016/08/20/深入学习KVC和KVO/">深入学习KVC和KVO</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年03月01日 - 16时57分</p>
-        <p><span>最后更新:</span>2017年03月23日 - 14时54分</p>
+        <p><span>发布时间:</span>2016年08月20日 - 13时57分</p>
+        <p><span>最后更新:</span>2017年03月23日 - 14时52分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/03/01/iOS面试题总结/" title="iOS面试题总结">http://peilinghui.com/2016/03/01/iOS面试题总结/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/01/iOS面试题总结/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/08/20/深入学习KVC和KVO/" title="深入学习KVC和KVO">http://peilinghui.com/2016/08/20/深入学习KVC和KVO/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/08/20/深入学习KVC和KVO/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -395,15 +388,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/03/01/计算机基础知识/">
-                    计算机基础知识总结
+                <a href="/2016/12/20/二维码/">
+                    二维码
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/03/01/经典排序算法总结与实现/">
-                    经典排序算法总结与实现
+                <a href="/2016/07/19/深入学习RunLoop/">
+                    深入学习RunLoop
                 </a>
             </div>
         
@@ -414,7 +407,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Foundation"><span class="toc-number">1.</span> <span class="toc-text">Foundation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UI"><span class="toc-number">2.</span> <span class="toc-text">UI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用程序"><span class="toc-number">3.</span> <span class="toc-text">应用程序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-number">4.</span> <span class="toc-text">其他</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#KVC"><span class="toc-number">1.</span> <span class="toc-text">KVC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是-KVC？"><span class="toc-number">1.0.1.</span> <span class="toc-text">什么是 KVC？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KVC的主要方法"><span class="toc-number">1.0.2.</span> <span class="toc-text">KVC的主要方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KVC-实现细节"><span class="toc-number">1.0.3.</span> <span class="toc-text">KVC 实现细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KVC-与点语法比较"><span class="toc-number">1.0.4.</span> <span class="toc-text">KVC 与点语法比较</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用"><span class="toc-number">1.1.</span> <span class="toc-text">应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字典转模型"><span class="toc-number">1.1.1.</span> <span class="toc-text">字典转模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KVC-总结"><span class="toc-number">1.1.2.</span> <span class="toc-text">KVC 总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#KVO"><span class="toc-number">2.</span> <span class="toc-text">KVO</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用-1"><span class="toc-number">3.</span> <span class="toc-text">应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#面试题"><span class="toc-number">4.</span> <span class="toc-text">面试题</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -476,7 +469,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/03/01/iOS面试题总结/" data-title="iOS面试题总结" data-url="http://peilinghui.com/2016/03/01/iOS面试题总结/"></div>
+    <div class="ds-thread" data-thread-key="2016/08/20/深入学习KVC和KVO/" data-title="深入学习KVC和KVO" data-url="http://peilinghui.com/2016/08/20/深入学习KVC和KVO/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -500,7 +493,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/03/01/计算机基础知识/" title="上一篇: 计算机基础知识总结">
+            <a href="/2016/12/20/二维码/" title="上一篇: 二维码">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -508,7 +501,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/03/01/经典排序算法总结与实现/" title="下一篇: 经典排序算法总结与实现">
+            <a href="/2016/07/19/深入学习RunLoop/" title="下一篇: 深入学习RunLoop">
                 <i class="fa fa-angle-right"></i>
             </a>
         

@@ -3,24 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS面试题总结 | 向着阳光奔跑</title>
+  <title>设计模式解析 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。">
+  <meta name="description" content="设计模式解析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS面试题总结">
-<meta property="og:url" content="http://peilinghui.com/2016/03/01/iOS面试题总结/index.html">
+<meta property="og:title" content="设计模式解析">
+<meta property="og:url" content="http://peilinghui.com/2016/04/01/设计模式解析/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95%E5%89%AF%E6%9C%AC.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/UILabel.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/label%E6%98%BE%E7%A4%BA.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5%E8%B0%83%E7%94%A8.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%BF%9C%E7%A8%8B%E9%80%9A%E7%9F%A5.png">
-<meta property="og:updated_time" content="2017-03-23T06:54:27.000Z">
+<meta property="og:description" content="设计模式解析">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%8D%95%E4%BE%8B%E6%8A%BD%E5%87%BA%E5%AE%8F.png">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/2.png">
+<meta property="og:updated_time" content="2017-03-23T06:42:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS面试题总结">
-<meta name="twitter:description" content="快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。">
+<meta name="twitter:title" content="设计模式解析">
+<meta name="twitter:description" content="设计模式解析">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -254,11 +250,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-iOS面试题总结" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-设计模式解析" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/03/01/iOS面试题总结/" class="article-date">
-      <time datetime="2016-03-01T08:57:25.000Z" itemprop="datePublished">2016-03-01</time>
+      <a href="/2016/04/01/设计模式解析/" class="article-date">
+      <time datetime="2016-04-01T05:01:49.000Z" itemprop="datePublished">2016-04-01</time>
 </a>
     </div>
   
@@ -271,7 +267,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS面试题总结
+      设计模式解析
     </h1>
   
 
@@ -279,14 +275,10 @@
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/面试/">面试</a>
-    </div>
-
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OC/">OC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS面试/">iOS面试</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -296,77 +288,41 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>快找实习了，近几天要总结一下iOS中重要的知识点。以备面试之用。</p>
-<a id="more"></a>
-<h1 id="Foundation"><a href="#Foundation" class="headerlink" title="Foundation"></a>Foundation</h1><ol>
-<li><p>是否可以把比较耗时的操作放在NSNotificationCenter中<br>如果在异步线程发的通知，那么可以执行比较耗时的操作；<br>如果在主线程发的通知，那么就不可以执行比较耗时的操作.</p>
-</li>
-<li><p>Foundation对象与Core Foundation对象有什么区别  </p>
-<ul>
-<li>Foundation对象是OC的，Core Foundation对象是C对象</li>
-<li>数据类型之间的转换<br>ARC:<strong>__bridge_retained</strong>,<strong>__bridge_transfer</strong><br>非ARC:<strong>__bridge</strong></li>
-</ul>
-</li>
+        <p>设计模式解析<br><a id="more"></a></p>
+<h2 id="第七章-单例模式"><a href="#第七章-单例模式" class="headerlink" title="第七章 单例模式"></a>第七章 单例模式</h2><p>单例模式：它可以保证某个类创建出来的对象永远只有1个。类的一个对象成为系统中的唯一实例。<strong>一个类仅有一个实例，并提供一个访问它的全局访问点。</strong><br>定义包含三层含义：一是某个类只能有一个实例；二是它必须自行创建这个实例；三是它必须向整个系统提供这个实例。</p>
+<h3 id="何时使用单例"><a href="#何时使用单例" class="headerlink" title="何时使用单例"></a>何时使用单例</h3><ol>
+<li>类只能有一个实例。作用：节省内存资源</li>
+<li>这个唯一的实例只能通过子类化进行扩展，而且扩展的对象不会破坏客户端代码。</li>
 </ol>
+<h3 id="单例模式的实现"><a href="#单例模式的实现" class="headerlink" title="单例模式的实现"></a>单例模式的实现</h3><p>在Objective-C中实现单例模式，需要完成如下四个步骤：</p>
+<p>第一步：定义一个静态实例变量mySingleton(名字可以自己取)，初始化为nil，代码如下所示：</p>
+<p><code>static MySingleton *mySingleton = nil;</code></p>
+<p>第二步：实现一个类方法检查上面声明的静态实例是否为nil，如果是则新建并返回一个本类的实例，代码如下所示：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">id</span>)sharedInstance</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">     <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">       <span class="keyword">if</span>(mySingleton == <span class="literal">nil</span>)</span><br><span class="line">         &#123;</span><br><span class="line">            mySingleton = [[<span class="keyword">self</span> alloc] init];</span><br><span class="line">            <span class="comment">// mySingleton = [[super allocWithZone:NULL]init];    如果在self中重载了基本的对象分配方法，就需要借用父类(NSObject)的功能，来帮助处理底层内存分配的杂务   </span></span><br><span class="line">            &#125;</span><br><span class="line">     &#125;);</span><br><span class="line">    <span class="keyword">return</span> mySingleton;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p> dispatch_once函数是GCD中的API，它保证应用程序即使在多线程环境下，也只执行一次。当然，也可以使用@synchronize来达到线程安全的目的，如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">id</span>)sharedInstance</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">@synchronized</span> (<span class="keyword">self</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (mySingleton == <span class="literal">nil</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            mySingleton = [[<span class="keyword">self</span> alloc] init];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> mySingleton;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第三步：重写allocWithZone方法，用来保证使用alloc和init试图获得一个新实例的时候不产生新实例，代码如下所示：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">id</span>)allocWithZone:(<span class="built_in">NSZone</span> *)zone</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">        <span class="keyword">if</span> (mySingleton == <span class="literal">nil</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            mySingleton = [<span class="keyword">super</span> allocWithZone:zone];</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"allocWithZone"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> mySingleton; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第四步：适当实现copyWithZone，release和autorelease等方法。代码如下所示：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果有其他初始化操作，可在这里进行初始化</span></span><br><span class="line">- (<span class="keyword">id</span>)init</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> != <span class="literal">nil</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 其他初始化操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 防止外界拷贝造成多个实例，保证实例的唯一性。</span></span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 因为只有一个实例对象，所以retain不能增加引用计数。</span></span><br><span class="line">- (<span class="keyword">id</span>)retain</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 因为只有一个实例对象，设置默认引用计数。这里是取的NSUinteger的最大值，当然也可以设置成1或其他值。</span></span><br><span class="line">- (<span class="built_in">NSUInteger</span>)retainCount</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">UINT_MAX</span>;  <span class="comment">// denotes an object that cannot be released</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// oneway是用于多线程编程中，表示单向执行，不能“回滚”，即原子操作。该方法是空的,不让用户release掉这个对象。</span></span><br><span class="line">- (<span class="keyword">oneway</span> <span class="keyword">void</span>)release</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//do nothing</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//除了返回单例外，什么也不做。</span></span><br><span class="line">- (<span class="keyword">id</span>)autorelease</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 该方法永远不会被调用,因为在程序的生命周期内容，该单例一直都存在。（所以该方法可以不实现）</span></span><br><span class="line">- (<span class="keyword">void</span>)dealloc</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> dealloc];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="子类化Singleton"><a href="#子类化Singleton" class="headerlink" title="子类化Singleton"></a>子类化Singleton</h3><p>【补充】说明，对于第二步和第三步可以这样实现：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">id</span>)sharedInstance</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">@synchronized</span>(<span class="keyword">self</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mySingleton == <span class="literal">nil</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            mySingleton = [[<span class="keyword">super</span> allocWithZone:<span class="literal">NULL</span>] init];</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"allocWithZone"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> mySingleton;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过返回当前的sharedInstance实例，就能防止实例化一个新的对象。</span></span><br><span class="line">+ (<span class="keyword">id</span>)allocWithZone:(<span class="built_in">NSZone</span> *)zone</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> [[<span class="keyword">self</span> sharedInstance] retain];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>alloc调用被转发给super，意味着NSObject晖处理对象分配，如果不做修改的子类化Singleton，返回的实例总是Single。因为Singleton重载了所以实例化相关的方法，实现如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">SingletonSon</span></span></span><br><span class="line"><span class="keyword">static</span> Singleton *shareSingleton=<span class="literal">nil</span>; <span class="comment">//向上转型，重定义自己的sharedsingleton类变量，不与父类共享。</span></span><br><span class="line">+(SingletonSon *) shareInstance</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span>(sharedSingleton==<span class="literal">nil</span>)</span><br><span class="line">    &#123;</span><br><span class="line">     <span class="comment">//不调用父类alloc方法，在此调用父类alloc方法可能回调此方法，从而产生死循环，我们直接创建对象。(重点下面函数)</span></span><br><span class="line">     sharedSingleton=[<span class="built_in">NSAllocateObject</span>(<span class="keyword">self</span> class),<span class="number">0</span>,<span class="literal">NULL</span>) init];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">// 子类可以重写一下retain copy release autorelease进行合适的内存管理。</span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <ol>
-<li>是否使用Core Text（核心文本（富文本））或者Core Image等？如果使用过，请谈谈你使用Core Text或者Core Image的体验。<br>Core Text：随意修改文本的样式，图文混排(纯C语言)第三方框架:Niumb（国外）<br>Core Image(滤镜处理框架)： 能调节图片的各种属性(对比度, 色温, 色差等)</li>
-<li>controllers间怎么进行通信。<br>在IOS应用不断的出现三种模式来实现这种通信：（可以做到监听）<ul>
-<li>委托delegation代理；（一个controller定义了一个协议（一对一）监听scroll的滚动，使用安全，比较规范，但是代码多，先用协议-&gt;代理属性-&gt;设置代理-&gt;实现代理方法）</li>
-<li>通知中心Notification Center；(通知比较灵活(1个通知能被多个对象接收, 1个对象能接收多个通知(多对多)，监听键盘弹出)</li>
-<li>键值观察key value observing，KVO(KVO性能不好(底层会动态产生新的类)，只能监听某个对象属性的改变, 不推荐使用(1个对象的属性能被多个对象监听(一对多)监听对象属性的改变)<br>参考：<a href="http://blog.csdn.net/dqjyong/article/details/7685933" target="_blank" rel="external">http://blog.csdn.net/dqjyong/article/details/7685933</a>  </li>
+<li>单例模式实现代码：（MRC）<br> <code>static MJSoundTool *_soundTool = nil;</code><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%8D%95%E4%BE%8B%E6%8A%BD%E5%87%BA%E5%AE%8F.png" alt=""><br>若是ARC：<br>在build加标记-fobjc-arc<br>与MRC类似，只是没有了release，retain。<br>在宏中用<code>if__has_feature(objc_arc)</code>判断<br>创建单例设计模式的基本步骤：<ul>
+<li>声明一个单件对象的静态实例,并初始化为nil。 </li>
+<li>创建一个类的类工厂方法,当且仅当这个类的实例为nil时生成一个该类的实例</li>
+<li>实现NScopying协议, 覆盖allocWithZone:方法,确保用户在直接分配和初始化对象时,不会产 生另一个对象。<br><code>@interface MJSoundTool : NSObject&lt;NSCopying&gt;</code><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/2.png" alt=""></li>
+<li>覆盖release、autorelease、retain、retainCount方法, 以此确保单例的状态。 </li>
+<li>在多线程的环境中,注意使用@synchronized关键字或GCD,确保静态实例被正确的创建和初始化。 </li>
 </ul>
 </li>
 </ol>
-<h1 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h1><ol>
-<li>介绍一下isa指针,怎么用？<br>每一个对象内部都有一个ISA指针，对象的ISA指针就指向它的真实类型它所属的类。</li>
-<li>控制器的生命周期<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95%E5%89%AF%E6%9C%AC.png" alt=""></li>
-<li>怎么解决缓存池满的问题(cell)<br>ios中不存在缓存池满的情况，因为通常我们ios中开发，对象都是在需要的时候才会创建，有种常用的说话叫做懒加载，还有在UITableView中一般只会创建刚开始出现在屏幕中的cell，之后都是从缓存池里取，不会再创建新对象。缓存池里最多也就一两个对象（缓存池满的这种情况一般在开发java中比较常见，java中一般把最近最少使用的对象先释放）</li>
-<li>如何渲染自定义格式字符串的UILabel?<br>通过NSAttributedString类<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/UILabel.png" alt=""><br>显示效果如下：<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/label%E6%98%BE%E7%A4%BA.png" alt=""></li>
-</ol>
-<h1 id="应用程序"><a href="#应用程序" class="headerlink" title="应用程序"></a>应用程序</h1><ol>
-<li>IOS7之前,后台执行内容有几种形式,都是什么？<br>一般的应用在进入后台的时候可以获取一定时间来运行相关任务，也就是说可以在后台运行一小段时间(10S左右)。<ul>
-<li>后台播放音乐</li>
-<li>后台GPS跟踪</li>
-<li>后台voip支持（网络电话）</li>
-<li>7以后查看，在Support Interface orientations中添加Requried background modes</li>
-</ul>
-</li>
-<li>APP的启动过程,从main文件开始说起<br>程序启动分为两类:<br>1&gt;有storyboard<ul>
-<li>main函数</li>
-<li>UIApplicationMain(创建UIApplication对象,创建UIApplication的delegate对象)</li>
-<li>根据Info.plist获得最主要storyboard的文件名,加载最主要的storyboard(创建UIWindow,创建和设置UIWindow的rootViewController,显示窗口)<br>2&gt;没有storyboard情况下:</li>
-<li>main函数</li>
-<li>UIApplicationMain（创建UIApplication对象，创建UIApplication的delegate对象）</li>
-<li>delegate对象开始处理(监听)系统事件(没有storyboard)<br>程序启动完毕的时候, 就会调用代理的<br><code>application:didFinishLaunchingWithOptions:方法</code><br><code>在application:didFinishLaunchingWithOptions:中创建UIWindow</code><br>创建和设置UIWindow的rootViewController<br>显示窗口</li>
-</ul>
-</li>
-<li>把程序自己关掉和程序进入后台,远程推送的区别<br>1&gt;关掉后不执行任何代码, 不能处理事件<br>2&gt;应用程序进入<strong>后台状态</strong>不久后转入<strong>挂起状态</strong>。在这种状态下，应用程序不执行任何代码，并有可能在任意时候从内存中删除。只有当用户再次运行此应用，应用才会从挂起状态唤醒，代码得以继续执行<br>3&gt;或者进入后台时开启多任务状态，保留在内存中，这样就可以<br>执行系统允许的动作<br>4&gt;远程推送是由远程服务器上的程序发送到APNS,再由APNS把消息推送至设备上的程序,当应用程序收到推送的消息会自动调用特定的方法执行事先写好的代码</li>
-<li>本地通知和远程推送通知对基本概念和用法？<br>本地通知和远程推送通知的基本目的都是让应用程序能够通知用户某些事情, 而且不需要应用程序在前台运行.<br>本地通知由本应用负责调用,只能从当前设备上的iOS发出<br>远程通知由远程服务器上的程序发送到APNS,再由APNS把消息推送至设备上的程序<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5.png" alt=""><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%9C%AC%E5%9C%B0%E9%80%9A%E7%9F%A5%E8%B0%83%E7%94%A8.png" alt=""><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%BF%9C%E7%A8%8B%E9%80%9A%E7%9F%A5.png" alt=""><h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1></li>
-<li>客户端安全性处理方式？<ul>
-<li>网络数据传输(敏感数据[账号\密码\消费数据\银行卡账号], 不能明文发送)</li>
-<li>协议的问题(自定义协议, 游戏代练)</li>
-<li>本地文件存储(游戏的存档)</li>
-<li>源代码</li>
-</ul>
-</li>
-<li>sip是什么？<br>SIP（Session Initiation Protocol），会话发起协议<br>SIP是建立VOIP连接的 IETF 标准，IETF是全球互联网最具权威的技术标准化组织.<br>所谓VOIP，就是网络电话，直接用互联网打电话，不用耗手机话费.</li>
-<li>有些图片加载的比较慢怎么处理?你是怎么优化程序的性能的?<br>图片下载放在异步线程;<br>图片下载过程中使用占位图片;<br>如果图片较大，可以考虑多线程断点下载.</li>
-<li>你实现过一个框架或者库以供别人使用么？如果有，请谈一谈构建框架或者库时候的经验；如果没有，请设想和设计框架的public的API，并指出大概需要如何做、需要注意一些什么方面，来使别人容易地使用你的框架。<ul>
-<li>提供给外界的接口功能是否实用、够用</li>
-<li>别人使用我的框架时，能不能根据类名、方法名就猜出接口的具体作用</li>
-<li>别人调用接口时，提供的参数是否够用、调用起来是否简单</li>
-<li>别人使用我的框架时，要不要再导入依赖其他的框架</li>
-</ul>
-</li>
-<li>App需要加载超大量的数据，给服务器发送请求，但是服务器卡住了如何解决？  <ul>
-<li>设置请求超时</li>
-<li>给用户提示请求超时</li>
-<li>根据用户操作再次请求数据</li>
-</ul>
-</li>
-<li>json解析的具体实现<br>SBJson<br>JSONKit<br>NSJSONSerialization</li>
-<li>如果在网络数据处理过程中,发现一处比较卡,一般怎么解决？<br>检查网络请求操作是否被放在主线程了<br>看看异步请求的数量是否太多了（子线程数量）<br>数据量是否太大？如果太大，先清除一些不必要的对象（看不见的数据、图片）<br>手机CPU使用率和内存问题。</li>
-</ol>
+<h3 id="单例模式在IOS中的应用"><a href="#单例模式在IOS中的应用" class="headerlink" title="单例模式在IOS中的应用"></a>单例模式在IOS中的应用</h3><p>单例模式在IOS中的应用非常广泛，如<br>　　[NSNotificationCenter defaultCenter]、<br>　　[UIApplication sharedApplication]、<br>　　[NSFileManager defaultManager]<br>　　[UIAccelerometer sharedAccelerometer]接收来自单例实例的加速度数据等。
+　　
+　　
+　　</p>
 
       
     </div>
@@ -375,13 +331,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></p>
+        <p><span>本文标题:</span><a href="/2016/04/01/设计模式解析/">设计模式解析</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年03月01日 - 16时57分</p>
-        <p><span>最后更新:</span>2017年03月23日 - 14时54分</p>
+        <p><span>发布时间:</span>2016年04月01日 - 13时01分</p>
+        <p><span>最后更新:</span>2017年03月23日 - 14时42分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/03/01/iOS面试题总结/" title="iOS面试题总结">http://peilinghui.com/2016/03/01/iOS面试题总结/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/01/iOS面试题总结/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/04/01/设计模式解析/" title="设计模式解析">http://peilinghui.com/2016/04/01/设计模式解析/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/04/01/设计模式解析/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -395,15 +351,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/03/01/计算机基础知识/">
-                    计算机基础知识总结
+                <a href="/2016/04/01/深入学习Block/">
+                    深入学习Block
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/03/01/经典排序算法总结与实现/">
-                    经典排序算法总结与实现
+                <a href="/2016/03/27/iOS面试题/">
+                    iOS面试题
                 </a>
             </div>
         
@@ -414,7 +370,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Foundation"><span class="toc-number">1.</span> <span class="toc-text">Foundation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UI"><span class="toc-number">2.</span> <span class="toc-text">UI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用程序"><span class="toc-number">3.</span> <span class="toc-text">应用程序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-number">4.</span> <span class="toc-text">其他</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第七章-单例模式"><span class="toc-number">1.</span> <span class="toc-text">第七章 单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#何时使用单例"><span class="toc-number">1.1.</span> <span class="toc-text">何时使用单例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单例模式的实现"><span class="toc-number">1.2.</span> <span class="toc-text">单例模式的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子类化Singleton"><span class="toc-number">1.3.</span> <span class="toc-text">子类化Singleton</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单例模式在IOS中的应用"><span class="toc-number">1.4.</span> <span class="toc-text">单例模式在IOS中的应用</span></a></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -476,7 +432,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/03/01/iOS面试题总结/" data-title="iOS面试题总结" data-url="http://peilinghui.com/2016/03/01/iOS面试题总结/"></div>
+    <div class="ds-thread" data-thread-key="2016/04/01/设计模式解析/" data-title="设计模式解析" data-url="http://peilinghui.com/2016/04/01/设计模式解析/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -500,7 +456,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/03/01/计算机基础知识/" title="上一篇: 计算机基础知识总结">
+            <a href="/2016/04/01/深入学习Block/" title="上一篇: 深入学习Block">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -508,7 +464,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/03/01/经典排序算法总结与实现/" title="下一篇: 经典排序算法总结与实现">
+            <a href="/2016/03/27/iOS面试题/" title="下一篇: iOS面试题">
                 <i class="fa fa-angle-right"></i>
             </a>
         
