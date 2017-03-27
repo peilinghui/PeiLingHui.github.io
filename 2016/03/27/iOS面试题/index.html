@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="总结一下一些面试题。">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/UILabel%E6%95%88%E6%9E%9C.png">
-<meta property="og:updated_time" content="2017-03-24T05:13:24.000Z">
+<meta property="og:updated_time" content="2017-03-26T10:59:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS面试题">
 <meta name="twitter:description" content="总结一下一些面试题。">
@@ -151,7 +151,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/OC/" style="font-size: 12.5px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 15px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 17.5px;">面试</a>
+                        <a href="/tags/OC/" style="font-size: 13.33px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 16.67px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
                     </div>
                 </section>
                 
@@ -324,7 +324,8 @@
 <p>9.10万个数中如何找出前K个数</p>
 <p>11.你项目中的数据具体缓存怎么做的。</p>
 <p>12.不用框架，谈谈你如何处理图片缓存以及优化</p>
-<p>iOS：<br>1.多线程有哪些方式；<br>2.NSOperation和GCD有什么区别；为什么GCD效率更高？<br>3.assign和weak的区别；<br>4.weak是怎么实现自动设置为nil的？<br>答：当把一个强引用的变量赋值给一个弱引用的变量时， 实际上编译器做了以下几步:<br>     1、把<strong>weak变量初始化为0<br>     2、使用</strong>strong变量的地址作为键值，把<strong>weak变量的地址注册到weak表中，weak表是一个散列表<br>     3、如果</strong>strong变量的地址为0，就把对应<strong>weak变量的地址从weak表中删除<br>使用weak表，使用废弃变量的地址作为键值进行检索，就能高速获取对应的附有</strong>weak修饰符的变量的地址。<br>废弃谁都不持有的对象时，编译器进行了如下几步操作：<br>     1、从weak表中获取废弃对象的地址作为键值的记录<br>     2、将记录中所有weak变量的地址赋值为nil<br>     3、将记录从weak表中删除<br>     4、将废弃对象的地址作为键值的记录从引用计数表中删除<br>因此，如果大量的使用附有<strong>weak修饰符的变量，会消耗相应的CPU资源，所以应该只在为了避免循环引用时再使用</strong>weak修饰符。</p>
+<p>iOS：<br>1.多线程有哪些方式；<br>2.NSOperation和GCD有什么区别；为什么GCD效率更高？</p>
+<p>4.weak是怎么实现自动设置为nil的？<br>答：当把一个强引用的变量赋值给一个弱引用的变量时， 实际上编译器做了以下几步:<br>     1、把<strong>weak变量初始化为0<br>     2、使用</strong>strong变量的地址作为键值，把<strong>weak变量的地址注册到weak表中，weak表是一个散列表<br>     3、如果</strong>strong变量的地址为0，就把对应<strong>weak变量的地址从weak表中删除<br>使用weak表，使用废弃变量的地址作为键值进行检索，就能高速获取对应的附有</strong>weak修饰符的变量的地址。<br>废弃谁都不持有的对象时，编译器进行了如下几步操作：<br>     1、从weak表中获取废弃对象的地址作为键值的记录<br>     2、将记录中所有weak变量的地址赋值为nil<br>     3、将记录从weak表中删除<br>     4、将废弃对象的地址作为键值的记录从引用计数表中删除<br>因此，如果大量的使用附有<strong>weak修饰符的变量，会消耗相应的CPU资源，所以应该只在为了避免循环引用时再使用</strong>weak修饰符。</p>
 <p>扩展：</p>
 <p>与被赋值时相比，在使用附有__weak修饰符变量的情形下，增加了对objc_loadWeakRetained函数和objc_autorelease函数的调用。这些函数的动作如下：</p>
 <ol>
@@ -335,7 +336,8 @@
 </ol>
 <p>由此可知，因为附有__weak修饰符变量所引用的对象这样被注册到autorelease中，所以在@autoreleasepool块结束之前都可以放心使用。</p>
 <p>注：OC中有一些类，并不支持ARC，例如NSMachPort类。可以通过allowsWeakReference/retainWeakReference方法的返回值来判断是否支持ARC，若为no，则不支持。</p>
-<p>5.什么是KVO?什么是KVC？什么是Runtime机制？<br>6.用过什么第三方框架？看过源代码么？XXX是怎么实现的？<br>7.AutoLayout;<br>8.MVC，MVVM;<br>9.UIScrollView是怎么实现滑动的?<br>10.frame和bounds的区别;<br>11.IOS有哪些数据存储的方式？<br>12.coreData和sqlite的区别;<br>13.什么是沙盒机制。有那几个目录，这几个目录有什么区别？</p>
+<p>5.什么是KVO?什么是KVC？什么是Runtime机制？</p>
+<p>8.MVC，MVVM;<br>9.UIScrollView是怎么实现滑动的?<br>10.frame和bounds的区别;<br>11.IOS有哪些数据存储的方式？<br>12.coreData和sqlite的区别;<br>13.什么是沙盒机制。有那几个目录，这几个目录有什么区别？</p>
 <p>梦妃<br>阿里面试：<br>无序数组去重<br>@propoty的作用<br> SDWebImage url拦截？<br>runtime kvo 引用计数<br>mrc</p>
 <ol>
 <li>图文混合的新闻中，如何获取图片的位置；<br>1&gt;纯文字排版文字排版开发组件：CoreText。CoreText库中提供了很多的工具来对文本进行操作，例如CTFont、CTLine、CTFrame等。利用这些工具可以对文字字体每一行每一段落进行操作。<br>2&gt;UIwebview去实现的,内容拼接的好处就是数据显示比较同步<br>过网络请求获得相关的信息,再通过手机端进行拼HTML,然后在WebView进行展示，</li>
@@ -394,13 +396,24 @@
 <li><p>ios应用的调试技巧<br>1&gt;如遇到crash，分析崩溃日志（symbolicatedrash工具的适用）保留崩溃版本的.dSYM文件<br>2&gt;在 XCode 中进入断点管理窗口；然后点击右下方的 +，增加新的 Exception Breakpoint。<br>3&gt;如遇到EXC_BAD_ACCESS，打开Scheme选项选择EditScheme。然后按图勾上Enable Zombie Objects和Malloc Stack那两项。<br>4&gt;有效的日志管理。NSLog和加入一些开源的日志管理框架。<br>5&gt;程序断点debug模式。</p>
 </li>
 </ol>
-<h2 id="网易二面："><a href="#网易二面：" class="headerlink" title="网易二面："></a>网易二面：</h2><p>autolayout？<br>主线程可以执行下载任务吗？为什么？<br>主线程使用数据库，想在其他线程也访问数据库，怎么实现？</p>
+<h2 id="网易二面："><a href="#网易二面：" class="headerlink" title="网易二面："></a>网易二面：</h2><p>主线程可以执行下载任务吗？为什么？<br>主线程使用数据库，想在其他线程也访问数据库，怎么实现？</p>
 <p>谈一下你对mvc模式的理解？</p>
 <p>网易一面：<br>1.UIview中的俩个label的自适应代码。<br>2.项目：音乐播放器，后台实现除了有音乐播放器，还有什么？<br>3.我回答的是通知，通知你用过吗？本地通知和远程通知，有什么区别，远程通知是从哪里获取的。<br>4.音乐播放的数据库是怎么实现的。<br>6.学过JS，JS学的怎么样？JS和OC实现热点会吗？</p>
 <h2 id="网易其他面试题："><a href="#网易其他面试题：" class="headerlink" title="网易其他面试题："></a>网易其他面试题：</h2><p>图片下载，缓存是同步还是异步<br>Objective的对象结构</p>
-<p>NSCache的优点，使用字典可不可以，优缺点分析<br>JAVA和OC的区别，不同，在哪些上最明显<br>UItableView的优化，为什么这么优化<br>CEll如何计算</p>
+<p>NSCache的优点，使用字典可不可以，优缺点分析</p>
+<p>UItableView的优化，为什么这么优化<br>CEll如何计算</p>
 <p>NOtification哪些使用场景，同步还是异步？主线程还是子线程</p>
-<p>何时用到串行队列<br>越狱后APP的安全<br>动态更新<br>链式反应<br>UIbutton的多次点击</p>
+<p>何时用到串行队列<br>越狱后APP的安全<br>动态更新<br>链式反应</p>
+<ol>
+<li>防止UIButton重复点击的三种实现方式？</li>
+</ol>
+<ul>
+<li>使用UIButton的enabled或userInteractionEnabled。(使用UIButton的enabled属性, 在点击后, 禁止UIButton的交互, 直到完成指定任务之后再将其enable即可.)</li>
+<li>使用performSelector:withObject:afterDelay:和cancelPreviousPerformRequestsWithTarget(使用这种方式, 会在连续重复点击UIButton的时候, 自动取消掉之前的操作, 延时1s后执行实际的操作.)</li>
+<li>使用runtime来对sendAction:to:forEvent:方法进行hook。</li>
+</ul>
+<p>在实现文件中通过runtime的关联对象的方式, 为UIButton添加以上两个属性. 代码如下:</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"UIControl+CS_FixMultiClick.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">&lt;objc/runtime.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UIButton</span> (<span class="title">CS_FixMultiClick</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 因category不能添加属性，只能通过关联对象的方式。</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">UIControl_acceptEventInterval</span> = <span class="string">"UIControl_acceptEventInterval"</span>;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSTimeInterval</span>)cs_acceptEventInterval &#123;</span><br><span class="line">    <span class="keyword">return</span>  [objc_getAssociatedObject(<span class="keyword">self</span>, <span class="built_in">UIControl_acceptEventInterval</span>) doubleValue];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)setCs_acceptEventInterval:(<span class="built_in">NSTimeInterval</span>)cs_acceptEventInterval &#123;</span><br><span class="line">    objc_setAssociatedObject(<span class="keyword">self</span>, <span class="built_in">UIControl_acceptEventInterval</span>, @(cs_acceptEventInterval), OBJC_ASSO<span class="built_in">CIATION_RETAIN_NONATOMIC</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">UIControl_acceptEventTime</span> = <span class="string">"UIControl_acceptEventTime"</span>;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSTimeInterval</span>)cs_acceptEventTime &#123;</span><br><span class="line">    <span class="keyword">return</span>  [objc_getAssociatedObject(<span class="keyword">self</span>, <span class="built_in">UIControl_acceptEventTime</span>) doubleValue];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)setCs_acceptEventTime:(<span class="built_in">NSTimeInterval</span>)cs_acceptEventTime &#123;</span><br><span class="line">    objc_setAssociatedObject(<span class="keyword">self</span>, <span class="built_in">UIControl_acceptEventTime</span>, @(cs_acceptEventTime), OBJC_ASSO<span class="built_in">CIATION_RETAIN_NONATOMIC</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在load时执行hook</span></span><br><span class="line">+ (<span class="keyword">void</span>)load &#123;</span><br><span class="line">    Method before   = class_getInstanceMethod(<span class="keyword">self</span>, <span class="keyword">@selector</span>(sendAction:to:forEvent:));</span><br><span class="line">    Method after    = class_getInstanceMethod(<span class="keyword">self</span>, <span class="keyword">@selector</span>(cs_sendAction:to:forEvent:));</span><br><span class="line">    method_exchangeImplementations(before, after);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)cs_sendAction:(SEL)action to:(<span class="keyword">id</span>)target forEvent:(<span class="built_in">UIEvent</span> *)event &#123;</span><br><span class="line">    <span class="keyword">if</span> ([<span class="built_in">NSDate</span> date]<span class="variable">.timeIntervalSince1970</span> - <span class="keyword">self</span><span class="variable">.cs_acceptEventTime</span> &lt; <span class="keyword">self</span><span class="variable">.cs_acceptEventInterval</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.cs_acceptEventInterval</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.cs_acceptEventTime</span> = [<span class="built_in">NSDate</span> date]<span class="variable">.timeIntervalSince1970</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="keyword">self</span> cs_sendAction:action to:target forEvent:event];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <h2 id="网易笔试："><a href="#网易笔试：" class="headerlink" title="网易笔试："></a>网易笔试：</h2><ol>
 <li><p>用户点击某按钮时下载一张图片，当用户再次点击此按钮是下载时取消，为了保证尽量节省用户流量，请尽快取消真实的下载请求。<br>请描述解决此问题的方法和思路。</p>
 </li>
@@ -513,9 +526,8 @@
 <li>二叉树非递归中序遍历代码实现；</li>
 <li><p>合并两个已经有序的链表代码实现； </p>
 </li>
-<li><p>Android应用是否可以读取本机号码；iOS应用是否可以读取本机号码；</p>
+<li><p>使用位运算符实现两个整型加法代码实现，不考虑溢出； </p>
 </li>
-<li>使用位运算符实现两个整型加法代码实现，不考虑溢出； </li>
 </ol>
 <h2 id="十五-今日头条"><a href="#十五-今日头条" class="headerlink" title="十五.今日头条"></a>十五.今日头条</h2><ol>
 <li>算法：二叉树的左右子树交换代码实现；</li>
@@ -578,7 +590,7 @@
         <p><span>本文标题:</span><a href="/2016/03/27/iOS面试题/">iOS面试题</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月27日 - 14时37分</p>
-        <p><span>最后更新:</span>2017年03月24日 - 13时13分</p>
+        <p><span>最后更新:</span>2017年03月26日 - 18时59分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/27/iOS面试题/" title="iOS面试题">http://peilinghui.com/2016/03/27/iOS面试题/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/27/iOS面试题/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

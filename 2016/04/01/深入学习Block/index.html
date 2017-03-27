@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%882.38.12.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%882.38.19.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%883.12.58.png">
-<meta property="og:updated_time" content="2017-03-24T04:10:52.000Z">
+<meta property="og:updated_time" content="2017-03-25T12:30:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入学习Block">
 <meta name="twitter:description" content="深入学习Block。">
@@ -158,7 +158,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/OC/" style="font-size: 12.5px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 15px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 17.5px;">面试</a>
+                        <a href="/tags/OC/" style="font-size: 13.33px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 16.67px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
                     </div>
                 </section>
                 
@@ -283,10 +283,6 @@
         
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-    </div>
-
         <div class="clearfix"></div>
       </div>
       
@@ -361,36 +357,36 @@ Stack 对象不够灵活，不具备足够的扩展性。创建时长度已经�
 block没有截获任何自动变量
 </code></pre><p>以上两个情况满足任意一个则该block为全局块, 全局块的生命周期贯穿整个程序, 相当于单例.全局的静态 Block，不会访问任何外部变量。<br>简单地讲，如果一个block钟没有引用外部变量并且没有被其他对象持有，就是NSConcreteGlobalBlock。NSConcreteGlobalBlock是全局的block，在编译期间就已经决定了，如同宏一样。</p>
 <p><strong>栈块(_NSConcreteStackBlock)</strong><br>保存在栈中的 Block，当函数返回时会被销毁。（ARC 中系统实现了自动 copy, 将创建在栈上的 Block 自动拷贝到堆上，所以不存在此类型的 Block）NSConcreteStackBlock就是引用了外部变量的block，</p>
+<p>NSConcreteGlobalBlock由于处在 data段，可以通过指针安全访问。StackBlock处在内存栈区，如果其变量作用域结束， 这个 block 就被废弃，block 上的<strong>block变量也同样会被废弃。为了解决这个问题，block 提供了 copy 的功能，将block和</strong>block 变量从栈拷贝到堆。当 block 从栈拷贝到堆后，当栈上变量作用域结束时，仍然可以继续使用 block。堆上的 block 类型为 _NSConcreteMallocBlock，会将 _NSConcreteMallocBlock 写入 isa。</p>
 <p><strong>堆块(_NSConcreteMallocBlock)</strong><br>栈块copy之后就变成堆块，一个block被copy时，将生成NSConcreteMallocBlock（block没有retain）<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8A%E5%8D%889.51.44.png" alt=""><br>只要这个NSConcreteMallocBlock存在，内部对象的引用计数就会+1。</p>
+<p>NSConcreteStackBlock处于内存的栈区,ARC中大部分情况下编译器通常会将创建在栈上的 block 自动拷贝到堆上。当block 作为方法或函数的参数传递时，编译器不会自动调用 copy 方法。但方法/函数在内部已经实现了一份拷贝了 block 参数的代码，或者如果编译器自动拷贝，那么调用者就不需再手动拷贝。</p>
 <h3 id="block变量的存储域"><a href="#block变量的存储域" class="headerlink" title="__block变量的存储域"></a>__block变量的存储域</h3><p>默认block捕获到的变量，都是赋值给block的结构体的，相当于const不可改。为了让block能访问并修改外部变量，需要加上__block修饰词。<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8A%E5%8D%8811.14.42.png" alt=""><br>block的copy操作究竟做了什么呢?</p>
 <p>由上图可知, 对一个栈块进行copy操作会连同block与<strong>block变量(不管有没有使用)在内一同copy到堆上, 并且block会持有</strong>block变量(使用).<br>ps : 堆上的block及__block变量均为对象, 都有各自的引用计数</p>
 <p>当然, 当block被销毁时, block持有的__block也会被释放<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%882.38.12.png" alt=""><br>到这里我们能知道, 此思考方式与Objective-C的引用计数内存管理完全相同.</p>
 <p>那么有人就会问了, 既然<strong>block变量也被复制到堆上去了, 那么访问该变量是访问栈上的还是堆上的呢?? </strong>forwarding 终于要闪亮登场了.<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%882.38.19.png" alt=""><br>通过<strong>forwarding, 无论实在block中, block外访问</strong>block变量, 也不管该变量在栈上或堆上, 都能顺利地访问同一个__block变量. </p>
-<p>那么Blocks提供的复制方法究竟是什么？<br>ARC有效的时候，大多数轻型下编译器会恰当的进行判断，自动生成将Block从栈上复制到堆上的代码。<br>ARC下, 以下几种情况下, 编译器会帮我们把栈上的block复制到堆中</p>
-<pre><code>block作为函数返回值返回时
-将block赋值给__strong修饰符id类型或block类型成员变量时
-在方法名中含有usingBlock的Cocoa框架方法或GCD的API中传递block时
-</code></pre><p>调用Block的copy实例方法时<br><strong>此外的情况需要手动对block调用copy方法</strong><br>把block作为函数/方法的参数传入时才需要对block进行copy操作.<br>我们对不同地方的block调用copy会产生什么效果呢?<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%883.12.58.png" alt=""><br>所以, 不管block是什么类型, 在什么地方, 用copy方法都不会引起任何问题.如下表格所示. 就算是反复多次调用copy方法, 如</p>
-<p> <code>blk = [[[[blk copy] copy] copy] copy];</code></p>
-<p>该源码可解释如下 :</p>
-<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">block</span> tmp = [blk copy]; // <span class="keyword">block</span>被tmp持有</span><br><span class="line">    blk = tmp; // <span class="keyword">block</span>被tmp和blk持有</span><br><span class="line">&#125;</span><br><span class="line">// tmp超出作用域, 其指向的<span class="keyword">block</span>也被释放, <span class="keyword">block</span>被blk持有</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">block</span> tmp = [blk copy]; // <span class="keyword">block</span>被tmp和blk持有</span><br><span class="line">    blk = tmp; // blk指向的旧<span class="keyword">block</span>释放, 并强引用新<span class="keyword">block</span>, 最终<span class="keyword">block</span>被tmp和blk持有</span><br><span class="line">&#125;</span><br><span class="line">// tmp超出作用域, 其指向的<span class="keyword">block</span>也被释放, <span class="keyword">block</span>被blk持有</span><br><span class="line">...下面不断重复该过程</span><br></pre></td></tr></table></figure>
-<p>我们知道, 这只是一个循环的过程, block被tmp持有 -&gt; block被tmp和blk持有 -&gt; block被blk持有 -&gt; block被tmp和blk持有 -&gt; ……</p>
-<p>由此可得知, 在ARC下该代码也没有任何问题. </p>
-<p><strong>总结 : 如果block需要给作用域外的地方使用, 但是你不知道需不需要copy, 那就copy吧. 反正不会错</strong></p>
+<p>当 block 从栈被拷贝到堆时，<strong>forwarding 指针变量也会指向堆区的结构体。但是为什么要这么做呢？为什么要让原本指向栈区的结构体的指针，去指向堆区的结构体呢？看起来匪夷所思，实则原因很简单，要从 </strong>forwarding 产生的缘由说起。想想起初为什么要给 block 添加 copy 的功能，就是因为 block 获取了局部变量，当要在其他地方（超出局部变量作用范围）使用这个 block 的时候，由于访问局部变量异常，导致程序崩溃。为了解决这个问题，就给 block 添加了 copy 功能。在将 block 拷贝到堆上的同时，将 <strong>forwarding 指针指向堆上结构体。后面如果要想使用 </strong>block 变量，只要通过 __forwarding 访问堆上变量，就不会出现程序崩溃了。。</p>
+<h3 id="block-的自动拷贝和手动拷贝"><a href="#block-的自动拷贝和手动拷贝" class="headerlink" title="block 的自动拷贝和手动拷贝"></a>block 的自动拷贝和手动拷贝</h3><p>那么Blocks提供的复制方法究竟是什么？</p>
+<p>ARC有效的时候，大多数轻型下编译器会恰当的进行判断，自动生成将Block从栈上复制到堆上的代码。</p>
+<h4 id="block-的自动拷贝"><a href="#block-的自动拷贝" class="headerlink" title="block 的自动拷贝"></a>block 的自动拷贝</h4><p>ARC下, 以下几种情况下, 编译器会帮我们把栈上的block复制到堆中</p>
+<pre><code>block作为函数返回值返回时。编译器自动将 block 作为 _Block_copy 函数，效果等同于 block 直接调用 copy 方法；
+
+将block赋值给__strong修饰符id类型或block类型成员变量时。编译器自动将 block 作为 _Block_copy 函数，效果等同于 block 直接调用 copy 方法；
+在方法名中含有usingBlock的Cocoa框架方法或GCD的API中传递block时。这些方法会在内部对传递进来的 block 调用 copy 或 _Block_copy 进行拷贝;
+</code></pre><h4 id="block-的手动拷贝"><a href="#block-的手动拷贝" class="headerlink" title="block 的手动拷贝"></a>block 的手动拷贝</h4><p><strong>此外的情况需要手动对block调用copy方法</strong></p>
+<blockquote>
+<p>把block作为函数/方法的参数传入时才需要对block进行copy操作.</p>
+</blockquote>
+<p>我们对不同地方的block调用copy会产生什么效果呢?<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%883.12.58.png" alt=""></p>
 <h3 id="Block-循环引用"><a href="#Block-循环引用" class="headerlink" title="Block 循环引用"></a>Block 循环引用</h3><p>如果在 Block 中使用附有 __strong 修饰符的对象类型自动变量，那么当 Block 从栈复制到堆时，该对象为 Block 所持有，于是便导致了循环引用的产生。<br>self 持有 Block，Block 持有 self，这正是循环引用。</p>
 <p><strong>比较</strong></p>
 <p>下面对使用 block 变量避免循环引用的方法和使用 weak 修饰符及 __unsafe_unretained 修饰符避免循环引用的方法做个比较。  </p>
 <p>使用 __block 变量的优点如下：</p>
 <pre><code>通过 __block 变量可控制对象的持有期间
-
 在不能使用 __weak 修饰符的环境中不使用 __unsafe_unretained 修饰符即可（不必担心 悬垂指针 ）
-
 在执行 Block 时可动态地决定是否将 nil 或其他对象赋值在 __block 变量中。
 </code></pre><p>使用 __block 变量的缺点如下：</p>
 <pre><code>为避免循环引用必须执行 Block
-
 存在执行了 Block 语法，却不执行 Block 的路径时，无法避免循环引用。若由于 Block 引发了循环引用时，根据 Block 的用途选择使用 __block 变量、 __weak 修饰符或 __unsafe_unretained 修饰符来避免循环引用。
-
 MRC下用__block可以避免循环引用(原因见上面block特性之截获自动变量值)
 ARC下用__weak来避免循环引用
 </code></pre><p>这里需要提醒大家的是, 只有堆块(_NSConcreteMallocBlock)才可能会造成循环引用, 其他两种block不会</p>
@@ -410,24 +406,33 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
 </code></pre><h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><ol>
 <li><p>讲讲block；</p>
 </li>
-<li><p>block在ARC中和传统的MRC中的行为和用法有没有什么区别，需要注意些什么?  </p>
-</li>
-</ol>
-<p>注意：1&gt;block的内存管理 (block的实现是基于指针和函数指针)   </p>
-<pre><code>- 如果没有copy操作，block代码默认放在栈内存（弱引用）。
-- 如果有copy操作，block升级放在堆内存（强引用）。  
-</code></pre><p>2&gt;防止循环引用<br>       解决：非ARC（MRC）：<strong>__block</strong><br>ARC：<strong>__weak</strong>或者<strong>__unsafe_unretained</strong></p>
-<blockquote>
+<li><p>block在ARC中和传统的MRC中的行为和用法有没有什么区别，需要注意些什么?<br>注意：1&gt;block的内存管理 (block的实现是基于指针和函数指针)   </p>
+<ul>
+<li>如果没有copy操作，block代码默认放在栈内存（弱引用）。</li>
+<li>如果有copy操作，block升级放在堆内存（强引用）。<br>2&gt;防止循环引用<br> 解决：非ARC（MRC）：<strong>__block</strong><br>ARC：<strong>__weak</strong>或者<strong>__unsafe_unretained</strong><blockquote>
 <p>补充：<strong>__block</strong> 和 <strong>__weak</strong>修饰符的区别<br><strong>__block</strong> 不管是ARC还是MRC模式下都可以使用，可以修饰对象，还可以修饰基本数据类型。<br><strong>__weak</strong>只能在ARC模式下使用，也只能修饰对象（NSString），不能修饰基本数据类型（int）。<br><strong>__block</strong> 对象可以在block中被重新赋值，<strong>__weak</strong>不可以。</p>
 </blockquote>
-<ol>
-<li>block和self的循环引用；到底是如何循环引用的；block的代码实现；为什么会造成循环引用；block是如何强引用self的；</li>
+</li>
+</ul>
+</li>
 </ol>
-<p>一个对象中强引用了block，在block中又强引用了该对象，就会发射循环引用。</p>
+<ol>
+<li><p>block和self的循环引用；到底是如何循环引用的；block的代码实现；为什么会造成循环引用；block是如何强引用self的；</p>
+<p>一个对象中强引用了block，在block中又强引用了该对象，就会发射循环引用。<br>解决方法是将该对象使用<strong>weak或者</strong>block修饰符修饰之后再在block中使用。</p>
+</li>
+</ol>
+<p>id weak weakSelf = self; 或者 weak <strong>typeof(&amp;*self)weakSelf = self该方法可以设置宏<br>id </strong>block weakSelf = self;<br>或者将其中一方强制制空 xxx = nil。</p>
 <p>检测代码中是否存在循环引用问题，可使用 Facebook 开源的一个检测工具 FBRetainCycleDetector 。</p>
 <ol>
-<li>block为什么要修饰为copy；<br>11.有哪几种类型的block；什么情况下block会从栈区复制到堆区；</li>
-<li>NSMutableArray在block中修改时，是否要修饰为__block;</li>
+<li>block为什么要修饰为copy；</li>
+</ol>
+<ol>
+<li><p>有哪几种类型的block；什么情况下block会从栈区复制到堆区；<br>三种。在开启 ARC 时，大部分情况下编译器通常会将创建在栈上的 block 自动拷贝到堆上，只有当block 作为方法或函数的参数传递时，编译器不会自动调用 copy 方法；</p>
+</li>
+<li><p>NSMutableArray在block中修改时，是否要修饰为__block;</p>
+</li>
+</ol>
+<ol>
 <li><p>block和delegate你更倾向于用哪个？为什么？<br>Block.<br>block使代码更紧凑,便于阅读,delegate可以设置必选和可选的方法实现.<br>block可以访存局部变量. 不需要像以前的回调一样，把在操作后所有需要用到的数据封装成特定的数据结构, 你完全可以直接访问局部变量.</p>
 </li>
 <li><p>block在MRC下如何解决循环引用</p>
@@ -441,17 +446,25 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
 <ol>
 <li><p>block在传递的时候，是否会改变存储位置？比如是否会从栈复制到堆；原来的block是否会被释放；</p>
 </li>
-<li><p>Block的实现内部机制，外部的变量是怎么传到Block中去的；</p>
+<li><p>Block的实现内部机制，</p>
 </li>
 <li><p>Block中的循环引用；Block的复制；Block的存储位置；Block如何改变外面的变量；__block修饰符的内部机制！！！；</p>
 </li>
 <li><p>Block的嵌套使用；</p>
 </li>
-<li>[※※]在block内如何修改block外部变量？</li>
-<li>[※※※]使用系统的某些block api（如UIView的block版本写动画时），是否也考虑引用循环问题？<br>UIView的block版本写动画时不需要考虑</li>
+<li><p>[※※]在block内如何修改block外部变量？外部的变量是怎么传到Block中去的；</p>
+</li>
 </ol>
+<p>Block不允许修改外部变量的值，这里所说的外部变量的值，指的是栈中指针的内存地址。__block 所起到的作用就是只要观察到该变量被 block 所持有，就将“外部变量”在栈中的内存地址放到了堆中。进而在block内部也可以修改外部变量的值。</p>
+<ol>
+<li>[※※※]使用系统的某些block api（如UIView的block版本写动画时），是否也考虑引用循环问题？<br>UIView的block版本写动画时不需要考虑。</li>
+</ol>
+<p>系统的某些block api中，UIView的block版本写动画时不需要考虑，但也有一些api 需要考虑：</p>
+<p>所谓“引用循环”是指双向的强引用，所以那些“单向的强引用”（block 强引用 self ）没有问题，<br>但如果你使用一些参数中可能含有 ivar 的系统 api ，如 GCD 、NSNotificationCenter就要小心一点：比如GCD 内部如果引用了 self，而且 GCD 的其他参数是 ivar，则要考虑到循环引用：</p>
 <p>参考：<br><http: 28="" 2013="" blog.devtang.com="" 07="" a-look-inside-blocks=""><br><a href="http://www.jianshu.com/p/abeb5848b57a#" target="_blank" rel="external">http://www.jianshu.com/p/abeb5848b57a#</a><br><a href="http://www.jianshu.com/p/e03292674e60#" target="_blank" rel="external">http://www.jianshu.com/p/e03292674e60#</a><br><a href="http://www.jianshu.com/p/e03292674e60#" target="_blank" rel="external">http://www.jianshu.com/p/e03292674e60#</a></http:></p>
 <p>深入研究Block用weakSelf、strongSelf、@weakify、@strongify解决循环引用<a href="https://halfrost.com/ios_block_retain_circle/" target="_blank" rel="external">https://halfrost.com/ios_block_retain_circle/</a></p>
+<p>block没那么难（一）：block的实现<a href="https://www.zybuluo.com/MicroCai/note/51116" target="_blank" rel="external">https://www.zybuluo.com/MicroCai/note/51116</a></p>
+<p>Block<a href="http://www.samirchen.com/block-in-objc/" target="_blank" rel="external">http://www.samirchen.com/block-in-objc/</a></p>
 <p>　　
 　　
 　　
@@ -468,7 +481,7 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
         <p><span>本文标题:</span><a href="/2016/04/01/深入学习Block/">深入学习Block</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年04月01日 - 13时01分</p>
-        <p><span>最后更新:</span>2017年03月24日 - 12时10分</p>
+        <p><span>最后更新:</span>2017年03月25日 - 20时30分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/04/01/深入学习Block/" title="深入学习Block">http://peilinghui.com/2016/04/01/深入学习Block/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/04/01/深入学习Block/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -504,7 +517,7 @@ __block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Block"><span class="toc-number">1.</span> <span class="toc-text">Block</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Block的概要"><span class="toc-number">1.1.</span> <span class="toc-text">Block的概要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Block模式—block特性"><span class="toc-number">1.2.</span> <span class="toc-text">Block模式—block特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#截获自动变量值"><span class="toc-number">1.2.1.</span> <span class="toc-text">截获自动变量值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#截获对象"><span class="toc-number">1.2.2.</span> <span class="toc-text">截获对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Block的实现"><span class="toc-number">1.3.</span> <span class="toc-text">Block的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Block的实质"><span class="toc-number">1.3.1.</span> <span class="toc-text">Block的实质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block-存储域"><span class="toc-number">1.3.2.</span> <span class="toc-text">Block 存储域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#block变量的存储域"><span class="toc-number">1.3.3.</span> <span class="toc-text">__block变量的存储域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block-循环引用"><span class="toc-number">1.3.4.</span> <span class="toc-text">Block 循环引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block用weakSelf、strongSelf、-weakify、-strongify解决循环引用"><span class="toc-number">1.3.5.</span> <span class="toc-text">Block用weakSelf、strongSelf、@weakify、@strongify解决循环引用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#要点总结"><span class="toc-number">1.4.</span> <span class="toc-text">要点总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#面试题"><span class="toc-number">2.</span> <span class="toc-text">面试题</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Block"><span class="toc-number">1.</span> <span class="toc-text">Block</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Block的概要"><span class="toc-number">1.1.</span> <span class="toc-text">Block的概要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Block模式—block特性"><span class="toc-number">1.2.</span> <span class="toc-text">Block模式—block特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#截获自动变量值"><span class="toc-number">1.2.1.</span> <span class="toc-text">截获自动变量值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#截获对象"><span class="toc-number">1.2.2.</span> <span class="toc-text">截获对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Block的实现"><span class="toc-number">1.3.</span> <span class="toc-text">Block的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Block的实质"><span class="toc-number">1.3.1.</span> <span class="toc-text">Block的实质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block-存储域"><span class="toc-number">1.3.2.</span> <span class="toc-text">Block 存储域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#block变量的存储域"><span class="toc-number">1.3.3.</span> <span class="toc-text">__block变量的存储域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#block-的自动拷贝和手动拷贝"><span class="toc-number">1.3.4.</span> <span class="toc-text">block 的自动拷贝和手动拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#block-的自动拷贝"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">block 的自动拷贝</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#block-的手动拷贝"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">block 的手动拷贝</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block-循环引用"><span class="toc-number">1.3.5.</span> <span class="toc-text">Block 循环引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block用weakSelf、strongSelf、-weakify、-strongify解决循环引用"><span class="toc-number">1.3.6.</span> <span class="toc-text">Block用weakSelf、strongSelf、@weakify、@strongify解决循环引用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#要点总结"><span class="toc-number">1.4.</span> <span class="toc-text">要点总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#面试题"><span class="toc-number">2.</span> <span class="toc-text">面试题</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {

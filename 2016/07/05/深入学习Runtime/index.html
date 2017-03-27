@@ -14,11 +14,10 @@
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-07%20%E4%B8%8B%E5%8D%883.09.36.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/objective-runtime-1.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-08%20%E4%B8%8A%E5%8D%889.16.01.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/runtime.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/rumtime%E5%BD%92%E6%A1%A3.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/runtime%E8%A7%A3%E6%A1%A3.png">
-<meta property="og:updated_time" content="2017-03-23T09:05:02.000Z">
+<meta property="og:updated_time" content="2017-03-27T02:16:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入学习Runtime">
 <meta name="twitter:description" content="研究Runtime的源码。看runtime.h文件。runtime是一套比较底层的纯C语言API。平时编写的OC代码, 在程序运行过程中, 其实最终都是转成了runtime的C语言代码。">
@@ -157,7 +156,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/OC/" style="font-size: 12.5px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 15px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 17.5px;">面试</a>
+                        <a href="/tags/OC/" style="font-size: 13.33px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 16.67px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
                     </div>
                 </section>
                 
@@ -386,7 +385,6 @@
 <li>动态方法解析：对象收到无法解读的消息后，调用类方法：<br><code>+(BOOL)resolveInstanceMethod:(SEL)selector</code><br>要访问CoreData框架中的NSManagedObjects对象时，用resolveInstanceMethod来实现@dynamic属性。  </li>
 <li>备援接收者：能不能把这条消息传给其他接收者来处理<br><code>-(id)forwardingTargetForSelector:(SEL)selctor;</code></li>
 <li>完整的消息转发：首先，创建NSInvocation对象，把选择子，目标(target)及参数都封装于其中，在触发NSInvocation对象时，“消息派发系统”（message-dispatch system）将亲自出马，把消息指派给目标对象。<br><code>-(void)forwardInvocation:(NSInvocation *)invocation;</code></li>
-<li>消息转发的全流程：<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91.png" alt=""></li>
 <li>以完整的例子演示动态方法解析<br>由开发者来添加属性定义，并将其声明为@dynamic，而类则会自动处理相关属性值的存放于获取操作。</li>
 </ol>
 <h4 id="第14条：理解“类对象”的用意"><a href="#第14条：理解“类对象”的用意" class="headerlink" title="第14条：理解“类对象”的用意"></a>第14条：理解“类对象”的用意</h4><ol>
@@ -402,7 +400,6 @@
 <p>Objective-C中的KVC和KVO<a href="http://yulingtianxia.com/blog/2014/05/12/objective-czhong-de-kvche-kvo/" target="_blank" rel="external">http://yulingtianxia.com/blog/2014/05/12/objective-czhong-de-kvche-kvo/</a></p>
 <h3 id="Method-Swizzling-应用"><a href="#Method-Swizzling-应用" class="headerlink" title="Method Swizzling 应用"></a>Method Swizzling 应用</h3><p>Objective-C 提供了以下 API 来动态替换类方法或实例方法的实现：<br>class_replaceMethod 替换类方法的定义<br><strong>method_exchangeImplementations 交换 2 个方法的实现</strong><br>method_setImplementation 设置 1 个方法的实现</p>
 <p>使用 method swizlling 来修改原有的方法时, 就是在分类 load 中实现的.不在 initialize 方法中改变方法实现的原因是 initialize 可能会被子类所继承并重新执行最终导致无限递归, 而 load 并不会被继承.</p>
-<p>【扩展：load; 和 initialize; 有什么用处？】<br>initialize 方法和 load 方法有一些不同, 它虽然也会在整个 runtime 过程中调用一次, 但是它是在该类的第一个方法执行之前调用, 也就是说 initialize 的调用是惰性的, 它的实现也与我们在平时使用的惰性初始化属性时基本相同. 我在实际的项目中并没有遇到过必须使用这个方法的情况, 在该方法中主要做静态变量的设置并用于确保在实例初始化前某些条件必须满足.</p>
 <h4 id="第13条：用method-swizzling调试黑盒方法"><a href="#第13条：用method-swizzling调试黑盒方法" class="headerlink" title="第13条：用method swizzling调试黑盒方法"></a>第13条：用method swizzling调试黑盒方法</h4><p>method swizzling：与给定的选择子名称相对应得方法也可以在运行期改变。（不需要源码，也不需要通过继承子类来覆写方法就能改变这个类本身的功能）可用在本类的所有实例中。<strong>使用另一份实现来替换原有的方法实现</strong><br>IMP指针：id(*IMP)(id,SEL,….)类的方法列表会吧选择子的名称映射到相关方法实现之上，使得“动态消息派发系统”能够据此找到应该调用的方法。这些方法均以函数指针的形式来表示。<br>互换两个方法的实现：  </p>
 <ol>
 <li>互换两个已经写好方法实现：(两个参数为待交换的两个方法实现)<br><code>void method_exchangeImplementations(Method m1,Method m2)</code></li>
@@ -469,9 +466,30 @@
 <li><p>[※※※※※]objc中的类方法和实例方法有什么本质区别和联系？</p>
 </li>
 <li><p>[※※※※※]_objc_msgForward函数是做什么的，直接调用它将会发生什么？</p>
+<blockquote>
+<p>_objc_msgForward是IMP类型，用于消息转发的：当向一个对象发送一条消息，但它并没有实现的时候，_objc_msgForward会尝试做消息转发。</p>
+</blockquote>
 </li>
-<li>[※※※※※]runtime如何实现weak变量的自动置nil？</li>
-<li>[※※※※※]能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？</li>
+</ol>
+<p>首先在 Class 中的缓存查找 IMP （没缓存则初始化缓存），如果没找到，则向父类的 Class 查找。如果一直查找到根类仍旧没有实现，则用_objc_msgForward函数指针代替 IMP 。最后，执行这个 IMP 。<br>_objc_msgForward在进行消息转发的过程中会涉及以下这几个方法：</p>
+<p>resolveInstanceMethod:方法 (或 resolveClassMethod:)。<br>forwardingTargetForSelector:方法<br>methodSignatureForSelector:方法<br>forwardInvocation:方法<br>doesNotRecognizeSelector: 方法</p>
+<p>直接调用调用_objc_msgForward，将跳过查找 IMP 的过程，直接触发“消息转发”，</p>
+<p>如果调用了_objc_msgForward，即使这个对象确实已经实现了这个方法，你也会告诉objc_msgSend：“我没有在这个对象里找到这个方法的实现”</p>
+<p>哪些场景需要直接调用_objc_msgForward？最常见的场景是：你想获取某方法所对应的NSInvocation对象。举例说明：</p>
+<ul>
+<li><p>JSPatch （Github 链接）就是直接调用_objc_msgForward来实现其核心功能的：JSPatch 以小巧的体积做到了让JS调用/替换任意OC方法，让iOS APP具备热更新的能力。<br>作者的博文《JSPatch实现原理详解》详细记录了实现原理，有兴趣可以看下。</p>
+</li>
+<li><p>RAC(ReactiveCocoa) 源码中也用到了该方法。</p>
+</li>
+</ul>
+<ol>
+<li><p>[※※※※※]runtime如何实现weak变量的自动置nil？</p>
+<blockquote>
+<p>runtime 对注册的类， 会进行布局，对于 weak 对象会放入一个 hash 表中。 用 weak 指向的对象内存地址作为 key，当此对象的引用计数为0的时候会 dealloc，假如 weak 指向的对象内存地址是a，那么就会以a为键， 在这个 weak 表中搜索，找到所有以a为键的 weak 对象，从而设置为 nil。</p>
+</blockquote>
+</li>
+<li><p>[※※※※※]能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？</p>
+</li>
 </ol>
 <ul>
 <li>不能向编译后得到的类中增加实例变量;</li>
@@ -488,7 +506,7 @@
 <p>Method Swizzling 和 AOP 实践<a href="http://tech.glowing.com/cn/method-swizzling-aop/" target="_blank" rel="external">http://tech.glowing.com/cn/method-swizzling-aop/</a></p>
 <p>Method Swizzling<br><a href="http://nshipster.com/method-swizzling/" target="_blank" rel="external">http://nshipster.com/method-swizzling/</a></p>
 <p>手Runtime（附MJExtension的底层实现）<br><a href="http://www.devstore.cn/essay/essayInfo/3270.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://www.devstore.cn/essay/essayInfo/3270.html?utm_source=tuicool&amp;utm_medium=referral</a></p>
-<p><a href="http://blog.sunnyxx.com/2015/07/04/ios-interview/" target="_blank" rel="external">http://blog.sunnyxx.com/2015/07/04/ios-interview/</a></p>
+<p>iOS面试题sunny<a href="http://blog.sunnyxx.com/2015/07/04/ios-interview/" target="_blank" rel="external">http://blog.sunnyxx.com/2015/07/04/ios-interview/</a><br><a href="https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88/%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%8B%EF%BC%89.md" target="_blank" rel="external">答案</a></p>
 
       
     </div>
@@ -500,7 +518,7 @@
         <p><span>本文标题:</span><a href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年07月05日 - 16时22分</p>
-        <p><span>最后更新:</span>2017年03月23日 - 17时05分</p>
+        <p><span>最后更新:</span>2017年03月27日 - 10时16分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/07/05/深入学习Runtime/" title="深入学习Runtime">http://peilinghui.com/2016/07/05/深入学习Runtime/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/07/05/深入学习Runtime/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
