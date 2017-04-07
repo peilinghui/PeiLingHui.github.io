@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://peilinghui.com/2016/03/03/详解深拷贝和浅拷贝/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="深拷贝和浅拷贝这个问题说简单也简单，说复杂也复杂。">
-<meta property="og:updated_time" content="2017-03-17T04:10:00.000Z">
+<meta property="og:updated_time" content="2017-03-27T13:13:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="详解深拷贝和浅拷贝">
 <meta name="twitter:description" content="深拷贝和浅拷贝这个问题说简单也简单，说复杂也复杂。">
@@ -325,7 +325,10 @@
 <ol>
 <li>用@property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？</li>
 </ol>
-<p>用 @property 声明 NSString、NSArray、NSDictionary 经常使用 copy 关键字，是因为他们有对应的可变类型：NSMutableString、NSMutableArray、NSMutableDictionary，他们之间可能进行赋值操作，为确保对象中的字符串值不会无意间变动，应该在设置新属性值时拷贝一份。<br>如果我们使用是 strong ,会持有原来的对象，使原来的对象的引用计数+1，其实就是指针拷贝。浅拷贝。这个属性就可能指向一个可变对象,如果这个可变对象在外部被修改了,那么会影响该属性.</p>
+<ul>
+<li>因为父类指针可以指向子类对象，使用copy的目的是为了让本对象的属性不受外界影响，使用copy无论传给我的是一个可变对象还是不可变对象，我本身就持有一个不可变的副本。</li>
+<li>如果我们使用是 strong ,会持有原来的对象，使原来的对象的引用计数+1，其实就是指针拷贝。浅拷贝。这个属性就可能指向一个可变对象,如果这个可变对象在外部被修改了,那么会影响该属性.</li>
+</ul>
 <p>参考:</p>
 <p> iOS开发——深拷贝与浅拷贝详解:<a href="http://blog.csdn.net/chenyufeng1991/article/details/51771728" target="_blank" rel="external">http://blog.csdn.net/chenyufeng1991/article/details/51771728</a></p>
 <p> iOS 集合的深复制与浅复制<a href="https://www.zybuluo.com/MicroCai/note/50592" target="_blank" rel="external">https://www.zybuluo.com/MicroCai/note/50592</a></p>
@@ -341,7 +344,7 @@
         <p><span>本文标题:</span><a href="/2016/03/03/详解深拷贝和浅拷贝/">详解深拷贝和浅拷贝</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月03日 - 16时57分</p>
-        <p><span>最后更新:</span>2017年03月17日 - 12时10分</p>
+        <p><span>最后更新:</span>2017年03月27日 - 21时13分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/03/详解深拷贝和浅拷贝/" title="详解深拷贝和浅拷贝">http://peilinghui.com/2016/03/03/详解深拷贝和浅拷贝/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/03/详解深拷贝和浅拷贝/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
