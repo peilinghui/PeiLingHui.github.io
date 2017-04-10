@@ -16,7 +16,9 @@
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-28%20%E4%B8%8B%E5%8D%8812.53.34.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%AF%94%E8%BE%83get%E5%92%8Cpost.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%85%B6%E4%BB%96%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F.png">
-<meta property="og:updated_time" content="2017-03-24T10:42:43.000Z">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%889.07.08.png">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/OSI.png">
+<meta property="og:updated_time" content="2017-04-10T13:40:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络基础知识与安全">
 <meta name="twitter:description" content="计算机网络基础知识与安全。">
@@ -155,7 +157,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/OC/" style="font-size: 13.33px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 16.67px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
+                        <a href="/tags/OC/" style="font-size: 13.33px;">OC</a> <a href="/tags/RAC-学习笔记/" style="font-size: 10px;">RAC,学习笔记</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS面试/" style="font-size: 16.67px;">iOS面试</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 16.67px;">面试</a>
                     </div>
                 </section>
                 
@@ -297,7 +299,8 @@
           
         <p>计算机网络基础知识与安全。</p>
 <a id="more"></a>
-<h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="OSI参考模型"><a href="#OSI参考模型" class="headerlink" title="OSI参考模型"></a>OSI参考模型</h2><p>OSI有七层，从下到上分别是：物理层、数据链路层、网络层、<strong>传输层</strong>、会话层、表示层、应用层。<br>数据链路层：负责分配Mac地址，一个网卡会有一个全球固定的MAC地址。</p>
+<h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="OSI参考模型"><a href="#OSI参考模型" class="headerlink" title="OSI参考模型"></a>OSI参考模型</h2><p>OSI有七层，从下到上分别是：物理层、数据链路层、网络层、<strong>传输层</strong>、会话层、表示层、应用层。</p>
+<p>数据链路层：负责分配Mac地址，一个网卡会有一个全球固定的MAC地址。</p>
 <p>物理层设备：中继器和集线、网卡。数据链路层的设备：网桥或交换机。实现同一种数据链路下的包传递。</p>
 <p><strong>网络层：</strong>对数据包进行路由选择和存储转发。协议：IP、IPX、ICMP、IGMP、ARP、RARP、OSPF等；数据单位为分组或数据包。设备：路由器。实现跨越不同数据链路的包传递。</p>
 <p><strong>传输层：</strong>第一个端到端，进程到进程的层次。有复用和分用的功能。协议：TCP、UDP、SCTP等。传输层数据的单位为报文或数据段。</p>
@@ -361,10 +364,6 @@
 <li>客户端每次都会把 cookie 发送到服务端，因此服务端可以知道 cookie，但是客户端不知道 session。</li>
 </ol>
 <p>当服务器接收到 cookie 后，会根据 cookie 中的 SessionID 来找到这个客户的 session。如果没有，则会生成一个新的 SessionID 发送给客户端。</p>
-<p><strong>HTTPS</strong></p>
-<p>HTTPS 协议是如何避免三大风险</p>
-<p>窃听风险：第三方节点可以获知通信内容。<br>篡改风险：第三方节点可以修改通信内容。<br>冒充风险：第三方节点可以冒充他人身份参与通信。</p>
-<p>先用非对称加密传输密码，然后用这个密码对称加密数据，使得第三方无法获得通信内容<br>发送方将数据的哈希结果写到数据中，接收方解密后对比数据的哈希结果，如果不一致则说明被修改。由于传输数据加密，第三方无法修改哈希结果。<br>由权威机构颁发证书，再加上证书校验机制，避免第三方伪装参与通信。</p>
 <p><strong>输入URL按下回车后究竟发生了什么？</strong></p>
 <ol>
 <li>浏览器向DNS服务器查询URL对应的IP地址</li>
@@ -377,49 +376,29 @@
 <li>浏览器开始渲染HTML</li>
 <li>浏览器发送嵌入到HTML中的对象请求</li>
 <li>浏览器进一步发送异步（Ajax）请求</li>
-<li><p>浏览器关闭TCP连接</p>
-</li>
-<li><p>http和https的区别；抓包的时候有什么区别；</p>
-<ul>
-<li>HTTP 的URL 以http:// 开头，而HTTPS 的URL 以https:// 开头     - HTTP 是不安全的，而 HTTPS 是安全的 </li>
-<li>HTTP 标准端口是80 ，而 HTTPS 的标准端口是443</li>
-<li>在OSI 网络模型中，HTTP工作于应用层，而HTTPS 工作在传输层 </li>
-<li>HTTP 无法加密，而HTTPS 对传输的数据进行加密 </li>
-<li>HTTP无需证书，而HTTPS需要CA机构wosign的颁发的SSL证书 </li>
-<li>HTTP无安全锁，HTTPS有安全锁</li>
-<li>HTTP不能防钓鱼网站，HTTPS可以预防钓鱼网站</li>
-<li>HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议,要比http协议安全</li>
-</ul>
-</li>
+<li>浏览器关闭TCP连接</li>
 </ol>
 <h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><ol>
 <li>概念<br>HTTPS 是安全的 HTTP。</li>
 </ol>
 <p>HTTP 协议中的内容都是明文传输，HTTPS 的目的是将这些内容加密，确保信息传输安全。最后一个字母 S 指的是 SSL/TLS 协议，它位于 HTTP 协议与 TCP/IP 协议中间。</p>
+<p><strong>HTTPS</strong><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%889.07.08.png" alt=""></p>
 <ol>
-<li><p>HTTPS使用的是对称加密技术。<br>引入对称加密后，HTTPS 的握手流程就会多了两步，用来传递对称加密的秘钥:</p>
-<pre><code>客户端: 你好，我需要发起一个 HTTPS 请求
-服务器: 好的，你的秘钥是 1。
-</code></pre></li>
-<li><p>对称秘钥如何传输<br>利用非对称加密，非对称加密的特性决定了服务器用私钥加密的内容并不是真正的加密，因为公钥所有人都有，所以服务器的密文能被所有人解析。但私钥只掌握在服务器手上，这就带来了两个巨大的优势:</p>
-<p> 服务器下发的内容不可能被伪造，因为别人都没有私钥，所以无法加密。强行加密的后果是客户端用公钥无法解开。<br> 任何人用公钥加密的内容都是绝对安全的，因为私钥只有服务器有，也就是只有真正的服务器可以看到被加密的原文。<br>所以当引入非对称加密后，HTTPS 的握手流程依然是两步，不过细节略有变化:</p>
-<pre><code>客户端: 你好，我需要发起一个 HTTPS 请求，这是我的 (用公钥加密后的) 秘钥。
-服务器: 好的，我知道你的秘钥了，后续就用它传输。
-</code></pre></li>
-<li><p>公钥怎么传输<br>用公钥加密。每一个使用 HTTPS 的服务器都必须去专门的证书机构注册一个证书，证书中存储了用权威机构私钥加密的公钥。这样客户端用权威机构的公钥解密就可以了。<br>现在 HTTPS 协议的握手阶段变成了四步:</p>
-<pre><code>客户端: 你好，我要发起一个 HTTPS 请求，请给我公钥
-服务器: 好的，这是我的证书，里面有加密后的公钥
-客户端: 解密成功以后告诉服务器: 这是我的 (用公钥加密后的) 对称秘钥。
-服务器: 好的，我知道你的秘钥了，后续就用它传输。
-</code></pre></li>
-<li><p>服务器第一次会返回证书，也就是加密以后的公钥，那我怎么知道这个证书是可靠的？<br>将信息 hash 值随着信息一起传递</p>
-</li>
-<li><p>Charles 可以调试 HTTPS 通信，它的原理就是需要用户安装 Charles 的根证书，然后我们的请求会被代理到 Charles 服务器，它下发的 Charles 证书才能被正确解析。另一方面，Charles 会作为客户端，从真正的服务器哪里拿到正确的 https 证书并用于后续通信。幸好 Charles 不是流氓软件，或者它的私钥一旦泄露，对用户都会造成很大的影响。</p>
-</li>
+<li>Charles 可以调试 HTTPS 通信，它的原理就是需要用户安装 Charles 的根证书，然后我们的请求会被代理到 Charles 服务器，它下发的 Charles 证书才能被正确解析。另一方面，Charles 会作为客户端，从真正的服务器哪里拿到正确的 https 证书并用于后续通信。幸好 Charles 不是流氓软件，或者它的私钥一旦泄露，对用户都会造成很大的影响。</li>
+</ol>
+<ol>
 <li>TCP 有三次握手，再加上 HTTPS 的四次握手，会不会影响性能？<br>影响肯定有，但是可以接受</li>
 </ol>
-<p>首先，HTTPS 肯定会更慢一点，时间主要花费在两组 SSL 之间的耗时和证书的读取验证上，对称算法的加解密时间几乎可以忽略不计。</p>
-<p>##关于AppStore强制使用HTTPS的 解决方法</p>
+<p>首先，HTTPS 肯定会更慢一点，时间主要花费在两组 SSL 之间的耗时和证书的读取验证上，对称算法的加解密时间几乎可以忽略不计。<br>http和https的区别；抓包的时候有什么区别；</p>
+<pre><code>- HTTP 的URL 以http:// 开头，而HTTPS 的URL 以https:// 开头     - HTTP 是不安全的，而 HTTPS 是安全的 
+- HTTP 标准端口是80 ，而 HTTPS 的标准端口是443
+- 在OSI 网络模型中，HTTP工作于应用层，而HTTPS 工作在传输层 
+- HTTP 无法加密，而HTTPS 对传输的数据进行加密 
+- HTTP无需证书，而HTTPS需要CA机构wosign的颁发的SSL证书 
+- HTTP无安全锁，HTTPS有安全锁
+- HTTP不能防钓鱼网站，HTTPS可以预防钓鱼网站
+- HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议,要比http协议安全
+</code></pre><p>##关于AppStore强制使用HTTPS的 解决方法</p>
 <ul>
 <li>请公司从CA购买证书</li>
 <li>请运维同学部署服务器配置SSL层证书(服务器必须支持最新的TLS1.2协议和ECDH加密算法)</li>
@@ -428,6 +407,7 @@
 <li>请运营同学在2017年1月1日之后应用在确保所有请求修改为https后再提交审核</li>
 <li>浏览器类应用和音视频资源文件可仍然使用http链接访问</li>
 </ul>
+<p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/OSI.png" alt=""></p>
 <h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><ol>
 <li>https是怎么实现更安全的连接的?</li>
 <li>了解哪些常用的加解密，解压缩的方法？</li>
@@ -445,7 +425,7 @@
         <p><span>本文标题:</span><a href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2016年03月01日 - 16时57分</p>
-        <p><span>最后更新:</span>2017年03月24日 - 18时42分</p>
+        <p><span>最后更新:</span>2017年04月10日 - 21时40分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/01/计算机网络基础知识与安全/" title="计算机网络基础知识与安全">http://peilinghui.com/2016/03/01/计算机网络基础知识与安全/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/01/计算机网络基础知识与安全/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -581,7 +561,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/深入学习KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/深入学习内存管理/">深入学习内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式解析/">设计模式解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/iOS面试题/">iOS面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/10/关于NSString的引用计数问题/">关于NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/详解深拷贝和浅拷贝/">详解深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/深入学习KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/深入学习内存管理/">深入学习内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/关于NSString的引用计数问题/">关于NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式解析/">设计模式解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/关于深拷贝和浅拷贝/">关于深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/iOS面试题总结/">iOS面试题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
