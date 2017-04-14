@@ -3,24 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于NSString的引用计数问题 | 向着阳光奔跑</title>
+  <title>自动化测试 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="NSString的神奇的引用计数问题。">
+  <meta name="description" content="不仅得会开发，也得懂得测试的相关东西。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于NSString的引用计数问题">
-<meta property="og:url" content="http://peilinghui.com/2016/04/10/关于NSString的引用计数问题/index.html">
+<meta property="og:title" content="自动化测试">
+<meta property="og:url" content="http://peilinghui.com/2017/02/16/自动化测试/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="NSString的神奇的引用计数问题。">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.43.32.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.43.43.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.57.27.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.57.46.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.03.40.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.03.48.png">
-<meta property="og:updated_time" content="2017-04-10T12:29:27.000Z">
+<meta property="og:description" content="不仅得会开发，也得懂得测试的相关东西。">
+<meta property="og:updated_time" content="2017-04-14T14:57:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于NSString的引用计数问题">
-<meta name="twitter:description" content="NSString的神奇的引用计数问题。">
+<meta name="twitter:title" content="自动化测试">
+<meta name="twitter:description" content="不仅得会开发，也得懂得测试的相关东西。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -254,11 +248,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-关于NSString的引用计数问题" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-自动化测试" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/10/关于NSString的引用计数问题/" class="article-date">
-      <time datetime="2016-04-10T10:11:36.000Z" itemprop="datePublished">2016-04-10</time>
+      <a href="/2017/02/16/自动化测试/" class="article-date">
+      <time datetime="2017-02-16T11:17:25.000Z" itemprop="datePublished">2017-02-16</time>
 </a>
     </div>
   
@@ -271,7 +265,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于NSString的引用计数问题
+      自动化测试
     </h1>
   
 
@@ -288,29 +282,78 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>NSString的神奇的引用计数问题。</p>
+        <p>不仅得会开发，也得懂得测试的相关东西。</p>
 <a id="more"></a>
-<h3 id="NSString的retainCount的变化"><a href="#NSString的retainCount的变化" class="headerlink" title="NSString的retainCount的变化"></a>NSString的retainCount的变化</h3><h4 id="用NSString声明的字符串变量的retainCount变化由你初始化字符串时的方式决定"><a href="#用NSString声明的字符串变量的retainCount变化由你初始化字符串时的方式决定" class="headerlink" title="用NSString声明的字符串变量的retainCount变化由你初始化字符串时的方式决定"></a>用NSString声明的字符串变量的retainCount变化由你初始化字符串时的方式决定</h4><p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.43.32.png" alt=""><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.43.43.png" alt=""></p>
-<h4 id="NSCFConstantString（编译时）"><a href="#NSCFConstantString（编译时）" class="headerlink" title="__NSCFConstantString（编译时）"></a>__NSCFConstantString（编译时）</h4><p>用NSString <em>str = @”123”;定义的字符串是常量字符串<br>这些对象地址相同，是因为他们都是<em>*__NSCFConstantString</em></em>对象，也就是字符串常量对象，可以看到其isa都是__NSCFConstantString，该对象存储在栈上，创建之后由系统来管理内存释放，相同内容的NSCFConstantString对象地址相同。该对象引用计数很大，为固定值不会变化，表示无限运行的retainCount，对其进行retain或release也不会影响其引用计数。</p>
-<p>当创建一个NSCFConstantString对象时，会检测这个字符串内容是否已经存在，如果存在，则直接将地址赋值给变量；不存在的话，则创建新地址，再赋值。</p>
-<p>总的来说，对于NSCFConstantString对象，只要字符串内容不变，就不会分配新的内存地址，无论你是赋值、retain、copy。这种优化在大量使用NSString的情况下可以节省内存，提高性能。</p>
-<h4 id="NSCFString（运行时）"><a href="#NSCFString（运行时）" class="headerlink" title="__NSCFString（运行时）"></a>__NSCFString（运行时）</h4><p>使用stringWithFormat创建的NSString为变量，系统会进行引用计数。<br>在上面的输出结果中，我们看到另外还有两类isa分别是：<strong>__NSCFString</strong>和<strong>NSTaggedPointerString</strong>，先来看__NSCFString。</p>
-<p>在我的理解，__NSCFString对象是一种NSString子类，存储在堆上，不属于字符串常量对象。该对象创建之后和其他的Obj对象一样引用计数为1，对其执行retain和release将改变其retainCount。</p>
-<h4 id="NSTaggedPointerString"><a href="#NSTaggedPointerString" class="headerlink" title="__NSTaggedPointerString"></a>__NSTaggedPointerString</h4><p>这个对象是标签指针，苹果在 64 位环境下对NSString、NSNumber等对象做了一些优化。简单的说就是把指针指向的内容直接放在了指针变量的内存地址中，在 64 位环境下指针变量的大小达到了 8 位，能容纳长度较小的内容，于是使用了标签指针来优化数据的存储。从其引用计数可以看出，这种对象也是无垠的retainCount，这种对象存储在指针的内容中。</p>
-<p>对 NSString对象来说，当非字面量的数字，英文字母字符串的长度小于等于9的时候会自动成为NSTaggedPointerString类型，如果有中文或其他特殊符号（可能是非 ASCII 字符）存在的话则会直接成为__NSCFString类型。</p>
-<p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.57.27.png" alt=""><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.57.46.png" alt=""></p>
+<h1 id="测试基础"><a href="#测试基础" class="headerlink" title="测试基础"></a>测试基础</h1><h2 id="按测试手段分"><a href="#按测试手段分" class="headerlink" title="按测试手段分"></a>按测试手段分</h2><h3 id="黑盒测试和白盒测试-按可见度分"><a href="#黑盒测试和白盒测试-按可见度分" class="headerlink" title="黑盒测试和白盒测试(按可见度分)"></a>黑盒测试和白盒测试(按可见度分)</h3><p><strong>黑盒测试</strong><br>黑盒测试主要是通过相关的暴露的接口，接收输入，然后看是否能够输出正确。  </p>
+<p>优点：容易实施，不需要关注内部实现，主要关注的是用户需求。</p>
+<p>缺点：测试覆盖率低，不到40%，自动化测试覆盖率低，维护成本高，</p>
+<p>测试内容：是否有不正确或遗漏的功能？接口上输入是否能正确接受，输出是否能输出正确的结果？性能上是否能满足？</p>
+<p>测试方法：</p>
+<p><strong>白盒测试</strong><br>内部结构对测试人员透明，用逻辑覆盖率(语句，判断，条件，分支，路径)</p>
+<p>优点：迫使测试人员思考软件的实现，理解原理。<br>可以检测代码的每条分支和路径。揭示隐藏在代码中的错误。对代码的测试比较彻底。</p>
+<p>缺点：昂贵。无法检测代码中遗漏的路径和数据敏感性错误。不能直接验证需求的正确性。</p>
+<p>测试方法：</p>
+<h3 id="静态测试和动态测试"><a href="#静态测试和动态测试" class="headerlink" title="静态测试和动态测试"></a>静态测试和动态测试</h3><p><strong>静态测试</strong><br>不运行被测程序本身，仅通过分析或检查源程序的语法、结构、过程，评审软件文档或代码。只做静态检查。</p>
+<p><strong>动态测试</strong><br>运行被测试的程序，检查运行结果和预期结果的差异，并分析运行效率和健壮性等性能。这种方法由三部分组成:构造测试实例、执行程序、分析程序癿输出结果。软件的动态测试，就是通过运行软件来检验软件的动态行为和运行结构的正确性。目前，动态测试也是公司的测试工作的主要方式。 根据动态测试在软件开发过程中所处的阶段和作用。动态测试可分为如下几个步骤:1、单元测试 2、集成测试 3、系统测试 4、验收测试 5、回归测试。<br>单元测试：<br>JUnit、OCUnit、GHUnit、GTM<br>集成测试：<br>API接口测试和iOS功能集成测试。<br>系统测试：</p>
+<h3 id="手工测试和自动化测试"><a href="#手工测试和自动化测试" class="headerlink" title="手工测试和自动化测试"></a>手工测试和自动化测试</h3><p><strong>手工测试</strong><br>测试人员从用户视角来满足设计要求，深度测试和主观判断的测试，分为众包测试和探索式测试。</p>
+<p><strong>自动化测试</strong><br>借助单独的测试工具软件，控制测试的自动化执行以及对预期和结果进行自动检查。主要分为：单元测试，接口测试和性能测试。</p>
+<h2 id="按测试模式来分类"><a href="#按测试模式来分类" class="headerlink" title="按测试模式来分类"></a>按测试模式来分类</h2><p>瀑布模式，敏捷测试，基于脚本的测试，基于风险的测试，探索式测试。<br><strong>瀑布模型</strong><br>项目计划–需求分析–软件设计–程序开发–软件测试–集成维护</p>
+<p>扩展模型：<br>V模型，W 模型、H 模型、X 模型和前置模型。</p>
+<p><strong>敏捷测试</strong></p>
+<p>强调从客户角度，重点关注迭代测试新功能。尽早测试，不间断测试。</p>
+<h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><p>负载测试，压力测试和稳定性的测试</p>
+<p>考虑并发用户数(VU)和每秒事务数(TPS)<br>来看系统响应时间和设备的性能。</p>
+<p>测试工具：LoadRunner，</p>
+<h1 id="ios中自动化测试UI-Automation"><a href="#ios中自动化测试UI-Automation" class="headerlink" title="ios中自动化测试UI Automation"></a>ios中自动化测试UI Automation</h1><p>UI Automation不但支持脚本编写方式的自动化测试，还支持录制回放方式的自动化测试，是一款功能强大的自动化测试工具。<br>Instruments工具还自带了UI Automation脚本的录制功能。用户只需开启录制功能，然后在真是的设备或模拟器上进行操作即可。操作的动作会被翻译成自动化脚本显示在脚本的编辑区，等待用户确认。在脚本录制完成以后，可以通过选择来编辑脚本，如果选项中没有我们需要的操作选项，则只能删除手动写脚本。</p>
+<h1 id="Selenium"><a href="#Selenium" class="headerlink" title="Selenium"></a>Selenium</h1><p><a href="https://github.com/SeleniumHQ/selenium" target="_blank" rel="external">https://github.com/SeleniumHQ/selenium</a><br>Web自动化测试中，Selenium是最成熟且应用最广泛的Web自动化测试工具。WebDriver的原理结构：<br>WebDriver Client–&gt;Json Wire Protocol–&gt;Selenium Server</p>
+<p>WebDriver API：这一层表示WebDriver提供给使用者的最外层接口，使用者可以使用这些API进行自动化脚本的编辑。例如：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">diver.<span class="function"><span class="title">findElement</span><span class="params">(By.name(<span class="string">"q"</span>)</span></span>)或者</span><br><span class="line">element.<span class="function"><span class="title">click</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure></p>
+<p>Json Wire Protocol:是WebDriver的开发者们制定并命名的一种协议，使用REST风格的，并且以Json方法进行传输，协议传输测试脚本需要控制的控件，并且通知Selenium Server。</p>
+<p>Selenium Server：接受Json Wire Protocol协议并且解析，可以控制启动或者停止某一款浏览器，也可以完成对某一个控件的具体操作。</p>
+<h1 id="Appium"><a href="#Appium" class="headerlink" title="Appium"></a>Appium</h1><p>适用于iOS，Android和Windows应用的自动化。<br>GitHub地址：<a href="https://github.com/appium" target="_blank" rel="external">https://github.com/appium</a><br>API:<a href="http://appium.io/slate/cn/master/?ruby#about-appium" target="_blank" rel="external">http://appium.io/slate/cn/master/?ruby#about-appium</a></p>
+<h2 id="Appium简介"><a href="#Appium简介" class="headerlink" title="Appium简介"></a>Appium简介</h2><p>Appium使用WebDriver的json wire协议，来驱动Apple系统的UIAutomation库、Android系统的UIAutomator框架。  </p>
+<p>好处：</p>
 <ol>
-<li>stringWithString取决于后面跟的string, 后面string的retainCount是多少那么用stringWithString创建的对象就为多少</li>
+<li>Appium在不同平台中使用了标准的自动化APIs，所以在跨平台时，不需要重新编译或者修改自己的应用。</li>
+<li>Appium支持Selenium WebDriver支持的所有语言，如java、Object-C、JavaScript、Php、Python、Ruby、C#、Clojure，或者Perl语言，更可以使用Selenium WebDriver的Api。Appium支持任何一种测试框架。<br>如果只使用Apple的UIAutomation，我们只能用javascript来编写测试用例，而且只能用Instruction来运行测试用例。<br>如果只使用Google的UIAutomation，我们就只能用java来编写测试用例。Appium实现了真正的跨平台自动化测试。</li>
 </ol>
-<h3 id="用NSMutableArray结合着NSMutableString来观察一下retainCount的变化。"><a href="#用NSMutableArray结合着NSMutableString来观察一下retainCount的变化。" class="headerlink" title="用NSMutableArray结合着NSMutableString来观察一下retainCount的变化。"></a>用NSMutableArray结合着NSMutableString来观察一下retainCount的变化。</h3><p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.03.40.png" alt=""><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.03.48.png" alt=""></p>
-<p>操作系统的内存管理分成堆和栈。</p>
-<p>在堆中分配的内存，都适用引用计数模式；在栈中则不是。</p>
-<p>NSString 定义的对象是保存在栈中，所以它没有引用计数，不是通过引用计数对内存进行管理的。常量的引用计数会是一个很大的整数，测试的结果显示它是－1. 对该对象进行 retain 操作，不好改变它的retainCount 值。</p>
-<p>NSMutableNSString 定义的对象，需要先分配堆中的内存空间，再初始化才能使用。它是采用引用计数管理内存的。对该对象做 retainCount 操作则每次增加一个。</p>
-<p>其实，引用计数是对内存区域的空间管理方式，是应从内存块的视角去看的。任何对象都是指向内存块的指针，有多少个指针指向这个内存块，这个内存块就有多少个引用计算。</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>提供各个语言的第三方库，将测试脚本转化成 WebDriver 协议下的 URL，通过 Node 服务发送到各个平台上的代理工具，代理工具在运行过程中不断接收 URL，根据 WebDriver 协议解析出要执行的操作，然后调用各个平台上的原生测试框架完成测试，再将测试结果返回给 Node 服务器。</p>
+<p>WebDriver Client–&gt;Json Wire Protocol–&gt;Selenium Server–&gt;UI Automation</p>
+<h2 id="mac下搭建appium环境"><a href="#mac下搭建appium环境" class="headerlink" title="mac下搭建appium环境"></a>mac下搭建appium环境</h2><p>使用node.js实现的，首先确定有没有安装node,可以用HomeBrew安装。再看node解释器是否安装npm,然后下载并启动Appium.<br>参考文章：<a href="http://www.15yan.com/story/4GbuTwXQKDU/" target="_blank" rel="external">http://www.15yan.com/story/4GbuTwXQKDU/</a></p>
+<h2 id="windows-环境搭建Java和Android开发环境"><a href="#windows-环境搭建Java和Android开发环境" class="headerlink" title="windows 环境搭建Java和Android开发环境"></a>windows 环境搭建Java和Android开发环境</h2><p>参考书:<a href="https://anikikun.gitbooks.io/appium-girls-tutorial/content/index.html" target="_blank" rel="external">https://anikikun.gitbooks.io/appium-girls-tutorial/content/index.html</a><br>英文版：<a href="https://nishantverma.gitbooks.io/appium-for-android/" target="_blank" rel="external">https://nishantverma.gitbooks.io/appium-for-android/</a></p>
+<h1 id="iOS的持续集成"><a href="#iOS的持续集成" class="headerlink" title="iOS的持续集成"></a>iOS的持续集成</h1><p>持续集成工具可以对代码库进行监测，一旦发现有代码变动，该工具会自动编译和测试应用程序。如果出现错误，会立即通知开发人员。</p>
+<p>持续集成可以提供更快的反馈，从而降低项目风险。是集成和回归问题更快、更流畅，出现的错误更少。通过部署过程自动化，持续集成可以帮助软件测试人员更快、更可靠地、更省力地搭建测试环境和执行自动化测试。</p>
+<h2 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h2><p>Jenkins易于安装，不需要数据库的支持，直接通过Web界面进行配置，而且集成了RSS/Email的通知机制，支持分布式构建，具有丰富的插件，这些都是Jenkins相比其他持续集成服务器的优势所在。</p>
+<h3 id="Jenkins的安装"><a href="#Jenkins的安装" class="headerlink" title="Jenkins的安装"></a>Jenkins的安装</h3><p>在Jenkins的官网<a href="https://jenkins.io/index.html" target="_blank" rel="external">https://jenkins.io/index.html</a>下载war包，并且执行 ‘java -jar jenkins.war’正确配置Java环境。</p>
+<p>mac下直接下载mac版本的Jenkins安装程序</p>
+<h3 id="Jenkins的相关插件"><a href="#Jenkins的相关插件" class="headerlink" title="Jenkins的相关插件"></a>Jenkins的相关插件</h3><ol>
+<li><p>Xcode integration<br>通过对Xcode integration的简单设置，即可完成iOS项目的编译打包，还可以修改iOS应用的Technical Version和Marketing Version。</p>
+</li>
+<li><p>Git Plugin<br>通过Git Plugin，用户可以很方便的下载项目的源代码，不是默认安装，需要用户手动安装。</p>
+</li>
+<li><p>Junit test result report<br>是Jenkins默认安装的插件之一。只需指定测试工具生成的XML形式的report文件，插件会自动解析XML，并且以更易查看的方式展现测试结果。</p>
+</li>
+</ol>
+<h2 id="iOS测试策略以及测试方法"><a href="#iOS测试策略以及测试方法" class="headerlink" title="iOS测试策略以及测试方法"></a>iOS测试策略以及测试方法</h2><ol>
+<li>功能测试：根据产品需求、用户的使用场景和代码实现方式等设计测试用例。</li>
+<li>兼容性测试：硬件、软件、数据兼容性。iOS设备的多样化兼容测试</li>
+<li>网络流量的测试：根据不同的网络状况测试，网速，弱网环境的测试。</li>
+<li>升级测试：老版本升级到新版本的测试、</li>
+<li>性能测试：服务器端性能测试。客户端性能测试：大数据测试，显示速度。</li>
+<li>稳定性测试：检测应用程序长期稳定的运行能力。</li>
+</ol>
+<h3 id="Instrument"><a href="#Instrument" class="headerlink" title="Instrument"></a><strong>Instrument</strong></h3><ol>
+<li>网络流量监测数据，监控电量、监控GPS和WIFI是否开启等状态。丽日：在一些音乐APP和一些FM的APP中是否支持自动同步喜欢的歌曲到设备上。当网络接入点只选择了在WiFi情况下同步，就必须保证用户的流量不被使用。Net Activity运行库图。</li>
+<li><strong>性能测试：</strong></li>
+</ol>
+<ul>
+<li>快速启动测试：用instruments中TimeProfile来分析启动时的CPU消耗，并且以消耗CPU的数据为依据进行优化。</li>
+<li>内存泄露的检查：用Xcode分析（Analyze）代码。静态分析器可以根据经验猜测执行代码后可能发生的情况并报告问题，这些问题中可以存在内存泄露问题。静态分析器在检查代码时会枚举所有的代码路径，分别检查所以的函数和方法。为了看到静态分析的结构，在Recipes项目中可以随意找到几处release或者autorelease的调用项并删除，然后运行静态分析，用Instrument的两个组件来组合查看内存泄露的问题：Allocations和Leaks.</li>
+<li>Allocations：是监控对象调用了alloc方法申请内存以后的内存使用情况，可以记录对象这个生命周期内的内存引用计数的变化，在对象被正常释放后，Allocations 不再继续追踪。Leaks会监控内存泄露，一般和Allocations一起使用，因为在监控到内存泄露时需要定位问题。可以得到详细的内存泄露信息。</li>
+<li>稳定性测试：猴子测试，直接在instruments中运行UI Automation脚本。考虑在一些零界条件下对应用程序进行稳定性测试。考虑：1.频繁收到内存警告。2.电池电量低。3.3G网络不稳定时断时续的。</li>
+</ul>
+<p>及时响应用户交互和优秀的内存管理。通过测试定位并且解决问题。</p>
 <p>参考：</p>
-<p><a href="http://stackoverflow.com/questions/10220683/what-is-the-different-between-nscfstring-and-nsconstantstring" target="_blank" rel="external">stackoverflow上关于NSCFString和NSConstantstring的区别</a></p>
-<p><a href="https://blog.cnbluebox.com/blog/2014/04/16/nsstringte-xing-fen-xi-xue-xi/" target="_blank" rel="external">NSString特性分析学习</a></p>
+<p>国内首家移动测试的社区网站：<a href="https://testerhome.com/" target="_blank" rel="external">https://testerhome.com/</a><br>构建基于Jenkins + Github的持续集成环境 <a href="http://blog.csdn.net/john_cdy/article/details/7738393" target="_blank" rel="external">http://blog.csdn.net/john_cdy/article/details/7738393</a><br>电子书：<a href="http://files.cnblogs.com/files/itech/Jenkins%E5%85%A5%E9%97%A8.pdf" target="_blank" rel="external">http://files.cnblogs.com/files/itech/Jenkins%E5%85%A5%E9%97%A8.pdf</a></p>
 
       
     </div>
@@ -319,13 +362,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/04/10/关于NSString的引用计数问题/">关于NSString的引用计数问题</a></p>
+        <p><span>本文标题:</span><a href="/2017/02/16/自动化测试/">自动化测试</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年04月10日 - 18时11分</p>
-        <p><span>最后更新:</span>2017年04月10日 - 20时29分</p>
+        <p><span>发布时间:</span>2017年02月16日 - 19时17分</p>
+        <p><span>最后更新:</span>2017年04月14日 - 22时57分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/04/10/关于NSString的引用计数问题/" title="关于NSString的引用计数问题">http://peilinghui.com/2016/04/10/关于NSString的引用计数问题/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/04/10/关于NSString的引用计数问题/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/16/自动化测试/" title="自动化测试">http://peilinghui.com/2017/02/16/自动化测试/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/02/16/自动化测试/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -338,16 +381,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/04/14/iOS网络编程/">
-                    iOS网络编程
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/04/03/effective objective-c 2.0读书笔记/">
-                    effective objective-c 2.0读书笔记
+                <a href="/2017/02/13/JavaScript高级程序设计读书笔记/">
+                    JavaScript高级程序设计读书笔记
                 </a>
             </div>
         
@@ -358,7 +395,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSString的retainCount的变化"><span class="toc-number">1.</span> <span class="toc-text">NSString的retainCount的变化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用NSString声明的字符串变量的retainCount变化由你初始化字符串时的方式决定"><span class="toc-number">1.1.</span> <span class="toc-text">用NSString声明的字符串变量的retainCount变化由你初始化字符串时的方式决定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NSCFConstantString（编译时）"><span class="toc-number">1.2.</span> <span class="toc-text">__NSCFConstantString（编译时）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NSCFString（运行时）"><span class="toc-number">1.3.</span> <span class="toc-text">__NSCFString（运行时）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NSTaggedPointerString"><span class="toc-number">1.4.</span> <span class="toc-text">__NSTaggedPointerString</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用NSMutableArray结合着NSMutableString来观察一下retainCount的变化。"><span class="toc-number">2.</span> <span class="toc-text">用NSMutableArray结合着NSMutableString来观察一下retainCount的变化。</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#测试基础"><span class="toc-number">1.</span> <span class="toc-text">测试基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#按测试手段分"><span class="toc-number">1.1.</span> <span class="toc-text">按测试手段分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#黑盒测试和白盒测试-按可见度分"><span class="toc-number">1.1.1.</span> <span class="toc-text">黑盒测试和白盒测试(按可见度分)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态测试和动态测试"><span class="toc-number">1.1.2.</span> <span class="toc-text">静态测试和动态测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手工测试和自动化测试"><span class="toc-number">1.1.3.</span> <span class="toc-text">手工测试和自动化测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#按测试模式来分类"><span class="toc-number">1.2.</span> <span class="toc-text">按测试模式来分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能测试"><span class="toc-number">1.3.</span> <span class="toc-text">性能测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ios中自动化测试UI-Automation"><span class="toc-number">2.</span> <span class="toc-text">ios中自动化测试UI Automation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Selenium"><span class="toc-number">3.</span> <span class="toc-text">Selenium</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Appium"><span class="toc-number">4.</span> <span class="toc-text">Appium</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Appium简介"><span class="toc-number">4.1.</span> <span class="toc-text">Appium简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工作原理"><span class="toc-number">4.2.</span> <span class="toc-text">工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mac下搭建appium环境"><span class="toc-number">4.3.</span> <span class="toc-text">mac下搭建appium环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#windows-环境搭建Java和Android开发环境"><span class="toc-number">4.4.</span> <span class="toc-text">windows 环境搭建Java和Android开发环境</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS的持续集成"><span class="toc-number">5.</span> <span class="toc-text">iOS的持续集成</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Jenkins"><span class="toc-number">5.1.</span> <span class="toc-text">Jenkins</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Jenkins的安装"><span class="toc-number">5.1.1.</span> <span class="toc-text">Jenkins的安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Jenkins的相关插件"><span class="toc-number">5.1.2.</span> <span class="toc-text">Jenkins的相关插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iOS测试策略以及测试方法"><span class="toc-number">5.2.</span> <span class="toc-text">iOS测试策略以及测试方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Instrument"><span class="toc-number">5.2.1.</span> <span class="toc-text">Instrument</span></a></li></ol></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -420,7 +457,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/04/10/关于NSString的引用计数问题/" data-title="关于NSString的引用计数问题" data-url="http://peilinghui.com/2016/04/10/关于NSString的引用计数问题/"></div>
+    <div class="ds-thread" data-thread-key="2017/02/16/自动化测试/" data-title="自动化测试" data-url="http://peilinghui.com/2017/02/16/自动化测试/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -444,15 +481,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/04/14/iOS网络编程/" title="上一篇: iOS网络编程">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/04/03/effective objective-c 2.0读书笔记/" title="下一篇: effective objective-c 2.0读书笔记">
+            <a href="/2017/02/13/JavaScript高级程序设计读书笔记/" title="下一篇: JavaScript高级程序设计读书笔记">
                 <i class="fa fa-angle-right"></i>
             </a>
         
