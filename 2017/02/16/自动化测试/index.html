@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://peilinghui.com/2017/02/16/自动化测试/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="不仅得会开发，也得懂得测试的相关东西。">
-<meta property="og:updated_time" content="2017-04-14T14:57:56.000Z">
+<meta property="og:updated_time" content="2017-04-17T11:50:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自动化测试">
 <meta name="twitter:description" content="不仅得会开发，也得懂得测试的相关东西。">
@@ -288,11 +288,11 @@
 <p>优点：容易实施，不需要关注内部实现，主要关注的是用户需求。</p>
 <p>缺点：测试覆盖率低，不到40%，自动化测试覆盖率低，维护成本高，</p>
 <p>测试内容：是否有不正确或遗漏的功能？接口上输入是否能正确接受，输出是否能输出正确的结果？性能上是否能满足？</p>
-<p>测试方法：</p>
+<p>测试方法：等价类划分法、流程分析法、边界值分析、状态迁移图、正交试验法、因果图法、错误推测法。</p>
 <p><strong>白盒测试</strong><br>内部结构对测试人员透明，用逻辑覆盖率(语句，判断，条件，分支，路径)</p>
 <p>优点：迫使测试人员思考软件的实现，理解原理。<br>可以检测代码的每条分支和路径。揭示隐藏在代码中的错误。对代码的测试比较彻底。</p>
 <p>缺点：昂贵。无法检测代码中遗漏的路径和数据敏感性错误。不能直接验证需求的正确性。</p>
-<p>测试方法：</p>
+<p>测试方法：代码检测法、静态结构分析法、静态质量度量法、逻辑覆盖法、基本路径法</p>
 <h3 id="静态测试和动态测试"><a href="#静态测试和动态测试" class="headerlink" title="静态测试和动态测试"></a>静态测试和动态测试</h3><p><strong>静态测试</strong><br>不运行被测程序本身，仅通过分析或检查源程序的语法、结构、过程，评审软件文档或代码。只做静态检查。</p>
 <p><strong>动态测试</strong><br>运行被测试的程序，检查运行结果和预期结果的差异，并分析运行效率和健壮性等性能。这种方法由三部分组成:构造测试实例、执行程序、分析程序癿输出结果。软件的动态测试，就是通过运行软件来检验软件的动态行为和运行结构的正确性。目前，动态测试也是公司的测试工作的主要方式。 根据动态测试在软件开发过程中所处的阶段和作用。动态测试可分为如下几个步骤:1、单元测试 2、集成测试 3、系统测试 4、验收测试 5、回归测试。<br>单元测试：<br>JUnit、OCUnit、GHUnit、GTM<br>集成测试：<br>API接口测试和iOS功能集成测试。<br>系统测试：</p>
 <h3 id="手工测试和自动化测试"><a href="#手工测试和自动化测试" class="headerlink" title="手工测试和自动化测试"></a>手工测试和自动化测试</h3><p><strong>手工测试</strong><br>测试人员从用户视角来满足设计要求，深度测试和主观判断的测试，分为众包测试和探索式测试。</p>
@@ -365,7 +365,7 @@
         <p><span>本文标题:</span><a href="/2017/02/16/自动化测试/">自动化测试</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2017年02月16日 - 19时17分</p>
-        <p><span>最后更新:</span>2017年04月14日 - 22时57分</p>
+        <p><span>最后更新:</span>2017年04月17日 - 19时50分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/02/16/自动化测试/" title="自动化测试">http://peilinghui.com/2017/02/16/自动化测试/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/02/16/自动化测试/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -380,6 +380,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/04/21/UIView的Frame和bounds区别/">
+                    UIView的Frame和bounds区别
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -481,7 +487,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2017/04/21/UIView的Frame和bounds区别/" title="上一篇: UIView的Frame和bounds区别">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -493,7 +501,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/深入学习KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/深入学习内存管理/">深入学习内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/关于NSString的引用计数问题/">关于NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式解析/">设计模式解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/关于深拷贝和浅拷贝/">关于深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/深入学习KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/深入学习内存管理/">深入学习内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/关于NSString的引用计数问题/">关于NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式解析/">设计模式解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/关于深拷贝和浅拷贝/">关于深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
