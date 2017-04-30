@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://peilinghui.com/"/>
-  <updated>2017-04-22T06:19:05.000Z</updated>
+  <updated>2017-04-30T09:18:27.000Z</updated>
   <id>http://peilinghui.com/</id>
   
   <author>
@@ -14,6 +14,122 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>深入学习NSURLProtocol</title>
+    <link href="http://peilinghui.com/2017/04/30/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0NSURLProtocol/"/>
+    <id>http://peilinghui.com/2017/04/30/深入学习NSURLProtocol/</id>
+    <published>2017-04-30T04:59:56.000Z</published>
+    <updated>2017-04-30T09:18:27.000Z</updated>
+    
+    <content type="html">&lt;p&gt;研究一下NSURLProtocol.h。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;NSURLProtocol是什么？&quot;&gt;&lt;a href=&quot;#NSURLProtocol是什么？&quot; class=&quot;headerlink&quot; title=&quot;NSURLProtocol是什么？&quot;&gt;&lt;/a&gt;NSURLProtocol是什么？&lt;/h1&gt;&lt;p&gt;NSURLProtocol是URL Loading System的重要组成部分。&lt;br&gt;首先虽然名叫NSURLProtocol，但它却不是协议。它是一个抽象类。我们要使用它的时候需要创建它的一个子类。&lt;br&gt;NSURLProtocol在iOS系统中大概处于这样一个位置。&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-30%20%E4%B8%8B%E5%8D%882.12.33.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;如果开发者自定义的一个NSURLProtocol并且注册到app中，那么在这个自定义的NSURLProtocol中我们可以拦截UIWebView，基于系统的NSURLConnection或者NSURLSession进行封装的网络请求，然后做到自定义的response返回。非常强大。&lt;/p&gt;
+&lt;h1 id=&quot;NSURLProtocol能拦截哪些网络请求&quot;&gt;&lt;a href=&quot;#NSURLProtocol能拦截哪些网络请求&quot; class=&quot;headerlink&quot; title=&quot;NSURLProtocol能拦截哪些网络请求&quot;&gt;&lt;/a&gt;NSURLProtocol能拦截哪些网络请求&lt;/h1&gt;&lt;p&gt;URL Loading System&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-30%20%E4%B8%8B%E5%8D%882.13.34.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;所以，可以拦截的网络请求包括NSURLSession，NSURLConnection以及UIWebVIew。&lt;br&gt;基于CFNetwork的网络请求，以及WKWebView的请求是无法拦截的。&lt;/p&gt;
+&lt;p&gt;现在主流的iOS网络库，例如AFNetworking，Alamofire等网络库都是基于NSURLSession或NSURLConnection的，所以这些网络库的网络请求都可以被NSURLProtocol所拦截 。&lt;br&gt;还有一些年代比较久远的网络库，例如ASIHTTPRequest，MKNetwokit等网路库都是基于CFNetwork的，所以这些网络库的网络请求无法被NSURLProtocol拦截。&lt;/p&gt;
+&lt;h1 id=&quot;如何使用&quot;&gt;&lt;a href=&quot;#如何使用&quot; class=&quot;headerlink&quot; title=&quot;如何使用&quot;&gt;&lt;/a&gt;如何使用&lt;/h1&gt;&lt;p&gt;NSURLProtocol是一个抽象类。我们要使用它的时候需要创建它的一个子类。&lt;br&gt;&lt;code&gt;@interface PLHHTTPProtocol : NSURLProtocol&lt;/code&gt;&lt;br&gt;使用NSURLProtocol的主要可以分为5个步骤：&lt;br&gt;注册—&amp;gt;拦截—&amp;gt;转发—&amp;gt;回调—&amp;gt;结束&lt;/p&gt;
+&lt;h2 id=&quot;注册：&quot;&gt;&lt;a href=&quot;#注册：&quot; class=&quot;headerlink&quot; title=&quot;注册：&quot;&gt;&lt;/a&gt;注册：&lt;/h2&gt;&lt;p&gt;在系统加载的时候，把自定义的PLHHTTPProtocol注册到URL加载系统中，这样 所有的URL请求都有机会进入我们自定义的PLHHTTPProtocol进行拦截处理。&lt;/p&gt;
+&lt;figure class=&quot;highlight less&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;-&lt;/span&gt; (BOOL)&lt;span class=&quot;tag&quot;&gt;application&lt;/span&gt;:(UIApplication *)&lt;span class=&quot;tag&quot;&gt;application&lt;/span&gt; &lt;span class=&quot;tag&quot;&gt;didFinishLaunchingWithOptions&lt;/span&gt;:(NSDictionary *)&lt;span class=&quot;tag&quot;&gt;launchOptions&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attr_selector&quot;&gt;[NSURLProtocol registerClass:[PLHHTTPURLProtocol class]&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;对于基于NSURLSession的网络请求，需要通过配置NSURLSessionConfiguration对象的protocolClasses属性。&lt;/p&gt;
+&lt;figure class=&quot;highlight lua&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sessionConfiguration.protocolClasses = @&lt;span class=&quot;string&quot;&gt;[[NSClassFromString(@&quot;CustomURLProtocol&quot;) class]]&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;拦截：&quot;&gt;&lt;a href=&quot;#拦截：&quot; class=&quot;headerlink&quot; title=&quot;拦截：&quot;&gt;&lt;/a&gt;拦截：&lt;/h2&gt;&lt;p&gt;在拦截到网络请求后，NSURLProtocol会依次执行下列方法：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;+ (BOOL)canInitWithRequest:(NSURLRequest *)request&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;该方法会拿到request的对象，我们可以通过该方法的返回值来筛选request是否需要被NSURLProtocol做拦截处理。&lt;br&gt;如果返回YES则进入该自定义加载器进行处理，如果返回NO则不进入该自定义选择器，使用系统默认行为进行处理。&lt;/p&gt;
+&lt;p&gt;重新设置NSURLRequest的信息:&lt;br&gt;&lt;code&gt;+ (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request&lt;/code&gt;&lt;br&gt;比如请求重定向或者添加头部信息等等。如果没有特殊需求，直接返回request就可以了。但是因为这个方法在会在一次请求中被调用多次（暂时我也不知道什么原因为什么需要回调多洗），所以request重定向和添加头部信息也可以在开始加载中startLoading方法中重新设置。&lt;/p&gt;
+&lt;h2 id=&quot;转发&quot;&gt;&lt;a href=&quot;#转发&quot; class=&quot;headerlink&quot; title=&quot;转发&quot;&gt;&lt;/a&gt;转发&lt;/h2&gt;&lt;p&gt;在拦截到网络请求，并且对网络请求进行定制处理以后。我们需要将网络请求重新发送出去。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;- (id)initWithRequest:(NSURLRequest *)request cachedResponse:(NSCachedURLResponse *)cachedResponse client:(id&amp;lt;NSURLProtocolClient&amp;gt;)client&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;该方法会创建一个NSURLProtocol实例，这里每一个网络请求都会创建一个新的实例。被拦截的请求开始执行的地方.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;- (void)startLoading&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;接下来就是转发的核心方法startLoading。在该方法中，我们把处理过的request重新发送出去。至于发送的形式，可以是基于NSURLConnection，NSURLSession甚至CFNetwork。&lt;/p&gt;
+&lt;h2 id=&quot;回调&quot;&gt;&lt;a href=&quot;#回调&quot; class=&quot;headerlink&quot; title=&quot;回调&quot;&gt;&lt;/a&gt;回调&lt;/h2&gt;&lt;p&gt;既是面向切面的编程，就不能影响到原来网络请求的逻辑。所以上一步将网络请求转发出去以后，当收到网络请求的返回，还需要再将返回值返回给原来发送网络请求的地方。&lt;br&gt;主要需要需要调用到&lt;/p&gt;
+&lt;figure class=&quot;highlight armasm&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[&lt;span class=&quot;keyword&quot;&gt;self.client &lt;/span&gt;URLProtocol:&lt;span class=&quot;keyword&quot;&gt;self &lt;/span&gt;didFailWithError:error]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[&lt;span class=&quot;keyword&quot;&gt;self.client &lt;/span&gt;URLProtocolDidFinishLoading:&lt;span class=&quot;keyword&quot;&gt;self];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;[&lt;span class=&quot;keyword&quot;&gt;self.client &lt;/span&gt;URLProtocol:&lt;span class=&quot;keyword&quot;&gt;self &lt;/span&gt;didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageNotAllowed]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[&lt;span class=&quot;keyword&quot;&gt;self.client &lt;/span&gt;URLProtocol:&lt;span class=&quot;keyword&quot;&gt;self &lt;/span&gt;didLoadData:&lt;span class=&quot;preprocessor&quot;&gt;data&lt;/span&gt;]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这四个方法来回调给原来发送网络请求的地方。&lt;br&gt;这里假设我们在转发过程中是使用NSURLSession发送的网络请求，那么在NSURLSession的回调方法中，我们做相应的处理即可。并且我们也可以对这些返回，进行定制化处理。&lt;/p&gt;
+&lt;h2 id=&quot;结束：&quot;&gt;&lt;a href=&quot;#结束：&quot; class=&quot;headerlink&quot; title=&quot;结束：&quot;&gt;&lt;/a&gt;结束：&lt;/h2&gt;&lt;p&gt;在一个网络请求完全结束以后，NSURLProtocol回调用到.结束加载URL请求&lt;br&gt;&lt;code&gt;- (void)stopLoading&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&quot;应用&quot;&gt;&lt;a href=&quot;#应用&quot; class=&quot;headerlink&quot; title=&quot;应用&quot;&gt;&lt;/a&gt;应用&lt;/h1&gt;&lt;p&gt;既然NSURLProtocol功能非常强大，那么在具体开发中，会有哪些应用呢？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自定义请求和响应&lt;/li&gt;
+&lt;li&gt;网络的缓存处理（H5离线包 和 网络图片缓存）&lt;/li&gt;
+&lt;li&gt;重定向网络请求&lt;/li&gt;
+&lt;li&gt;为测试提供数据Mocking功能，在没有网络的情况下使用本地数据返回。&lt;/li&gt;
+&lt;li&gt;过滤掉一些非法请求&lt;/li&gt;
+&lt;li&gt;快速进行测试环境的切换&lt;/li&gt;
+&lt;li&gt;拦截图片加载请求，转为从本地文件加载&lt;/li&gt;
+&lt;li&gt;可以拦截UIWebView，基于系统的NSURLConnection或者NSURLSession进行封装的网络请求。目前WKWebView无法被NSURLProtocol拦截。&lt;/li&gt;
+&lt;li&gt;当有多个自定义NSURLProtocol注册到系统中的话，会按照他们注册的反向顺序依次调用URL加载流程。当其中有一个NSURLProtocol拦截到请求的话，后续的NSURLProtocol就无法拦截到该请求。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;DEMO地址：&lt;a href=&quot;https://github.com/peilinghui/BokeDemo/tree/master/PLHHTTPDNSDemo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/peilinghui/BokeDemo/tree/master/PLHHTTPDNSDemo&lt;/a&gt;      &lt;/p&gt;
+&lt;h1 id=&quot;参考&quot;&gt;&lt;a href=&quot;#参考&quot; class=&quot;headerlink&quot; title=&quot;参考&quot;&gt;&lt;/a&gt;参考&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/02781c0bbca9&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;NSURLProtocol全攻略&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/55f5ac1ab817&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;WKWebView 不支持 NSURLProtocol 吗&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;研究一下NSURLProtocol.h。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>学习React Native</title>
+    <link href="http://peilinghui.com/2017/04/25/%E5%AD%A6%E4%B9%A0React-Native/"/>
+    <id>http://peilinghui.com/2017/04/25/学习React-Native/</id>
+    <published>2017-04-25T09:51:37.000Z</published>
+    <updated>2017-04-27T06:20:52.000Z</updated>
+    
+    <content type="html">&lt;p&gt;抽时间学习一下&lt;a href=&quot;https://github.com/facebook/react-native&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React Native&lt;/a&gt;.&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;React-Native-简介&quot;&gt;&lt;a href=&quot;#React-Native-简介&quot; class=&quot;headerlink&quot; title=&quot;React Native 简介&quot;&gt;&lt;/a&gt;React Native 简介&lt;/h1&gt;&lt;h2 id=&quot;环境搭建&quot;&gt;&lt;a href=&quot;#环境搭建&quot; class=&quot;headerlink&quot; title=&quot;环境搭建&quot;&gt;&lt;/a&gt;环境搭建&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;安装Node.js&lt;br&gt;下载node.js：&lt;a href=&quot;https://nodejs.org/en/download/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://nodejs.org/en/download/&lt;/a&gt;&lt;br&gt;或者安装brew来安装node.js.&lt;br&gt;&lt;code&gt;node -v&lt;/code&gt;最新的版本&lt;/li&gt;
+&lt;li&gt;安装React Native&lt;br&gt;先通过HomeBrew安装watchman和flow&lt;br&gt;&lt;code&gt;brew install watchman&lt;/code&gt;&lt;br&gt;&lt;code&gt;brew install flow&lt;/code&gt;&lt;br&gt;再通过npm安装react-native-cli的工具&lt;br&gt;&lt;code&gt;sudo npm install -g react-native-cli&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;使用NVM来管理node.js版本&lt;br&gt;&lt;code&gt;git clone https://github.com/creationix/nvm&lt;/code&gt;或者&lt;code&gt;git clone https://github.com/cnpm/nvm&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;创建项目&lt;br&gt;创建项目Hello：用react-native init命令&lt;code&gt;react-native init Hello&lt;/code&gt;，打开Xcode文件后运行，自动启动终端和模拟器。然后模拟器就出现了字，显示成功。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;debug的方式&quot;&gt;&lt;a href=&quot;#debug的方式&quot; class=&quot;headerlink&quot; title=&quot;debug的方式&quot;&gt;&lt;/a&gt;debug的方式&lt;/h2&gt;&lt;p&gt;在模拟器上点击commend+D，出现下面的界面。开始调试。&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-25%20%E4%B8%8B%E5%8D%887.11.44.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;reload：刷新页面，只有修改了JS文件的时候刷新有效。&lt;/li&gt;
+&lt;li&gt;Debug Remote JS主要是在chrome上，开发者工具(Commod)&lt;br&gt;APPdelegate中改bug，打开注释，进行debug。或者使用工具nuclide。&lt;/li&gt;
+&lt;li&gt;Enable Live Reload：自动刷新，&lt;h1 id=&quot;React-Native组件&quot;&gt;&lt;a href=&quot;#React-Native组件&quot; class=&quot;headerlink&quot; title=&quot;React Native组件&quot;&gt;&lt;/a&gt;React Native组件&lt;/h1&gt;&lt;a href=&quot;https://facebook.github.io/react/docs/hello-world.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React JS&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://facebook.github.io/react-native/docs/getting-started.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React Native&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://nuclide.io/docs/quick-start/getting-started/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;nuclide插件&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;Render-amp-JSX&quot;&gt;&lt;a href=&quot;#Render-amp-JSX&quot; class=&quot;headerlink&quot; title=&quot;Render&amp;amp;JSX&quot;&gt;&lt;/a&gt;Render&amp;amp;JSX&lt;/h2&gt;&lt;figure class=&quot;highlight dust&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;xml&quot;&gt;render() &lt;/span&gt;&lt;span class=&quot;expression&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;variable&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;variable&quot;&gt;txt&lt;/span&gt; = &#39;&lt;span class=&quot;variable&quot;&gt;Hello&lt;/span&gt;&#39;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;variable&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;variable&quot;&gt;say&lt;/span&gt;(&lt;span class=&quot;variable&quot;&gt;name&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;variable&quot;&gt;return&lt;/span&gt; &#39;&lt;span class=&quot;variable&quot;&gt;I&lt;/span&gt; &lt;span class=&quot;variable&quot;&gt;am&lt;/span&gt; &#39;+&lt;span class=&quot;variable&quot;&gt;name&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  return (&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;View&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;Text&lt;/span&gt;&amp;gt;&lt;/span&gt;This is a title!&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;Text&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;Text&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;expression&quot;&gt;&amp;#123;&lt;span class=&quot;variable&quot;&gt;txt&lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;Text&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;View&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;Image&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;source&lt;/span&gt;=&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;expression&quot;&gt;&amp;#123;&lt;span class=&quot;variable&quot;&gt;require&lt;/span&gt;(&#39;&lt;span class=&quot;variable&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;end-block&quot;&gt;/img&lt;/span&gt;&lt;span class=&quot;end-block&quot;&gt;/bg.png&lt;/span&gt;&#39;)&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;Image&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;source&lt;/span&gt;=&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;expression&quot;&gt;&amp;#123;&lt;span class=&quot;variable&quot;&gt;require&lt;/span&gt;(&#39;&lt;span class=&quot;variable&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;end-block&quot;&gt;/img&lt;/span&gt;&lt;span class=&quot;end-block&quot;&gt;/icon.png&lt;/span&gt;&#39;)&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;Text&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;expression&quot;&gt;&amp;#123;&lt;span class=&quot;variable&quot;&gt;say&lt;/span&gt;(&#39;&lt;span class=&quot;variable&quot;&gt;React&lt;/span&gt;&#39;)&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;Text&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;View&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;View&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  );&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;组件生命周期&quot;&gt;&lt;a href=&quot;#组件生命周期&quot; class=&quot;headerlink&quot; title=&quot;组件生命周期&quot;&gt;&lt;/a&gt;组件生命周期&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;初始化&lt;ul&gt;
+&lt;li&gt;getDefaultProps&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;getInitialState&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;componentWillMount&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;render&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;componentDidMount&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;运行时&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;componentWillReceiveProps&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;shouldComponentUpdate // return true|false&lt;/p&gt;
+&lt;figure class=&quot;highlight applescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;shouldComponentUpdate(nextProps, nextState) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;command&quot;&gt;return&lt;/span&gt; nextProps.&lt;span class=&quot;property&quot;&gt;id&lt;/span&gt; !== this.props.&lt;span class=&quot;property&quot;&gt;id&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;componentWillUpdate //not called for the initial render&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;render&lt;/li&gt;
+&lt;li&gt;componentDidUpdate&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;销毁&lt;ul&gt;
+&lt;li&gt;componentWillUnmount&lt;br&gt;更多：&lt;a href=&quot;https://race604.com/react-native-component-lifecycle/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://race604.com/react-native-component-lifecycle/&lt;/a&gt;&lt;h2 id=&quot;Props-amp-States&quot;&gt;&lt;a href=&quot;#Props-amp-States&quot; class=&quot;headerlink&quot; title=&quot;Props &amp;amp; States&quot;&gt;&lt;/a&gt;Props &amp;amp; States&lt;/h2&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Props:properties属性，在初始化的时候传入并且可以显示不同的状态。&lt;br&gt;props不可变&lt;br&gt;states不可变&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;React-Native的常用组件和API&quot;&gt;&lt;a href=&quot;#React-Native的常用组件和API&quot; class=&quot;headerlink&quot; title=&quot;React Native的常用组件和API&quot;&gt;&lt;/a&gt;React Native的常用组件和API&lt;/h1&gt;&lt;h2 id=&quot;flexbox布局&quot;&gt;&lt;a href=&quot;#flexbox布局&quot; class=&quot;headerlink&quot; title=&quot;flexbox布局&quot;&gt;&lt;/a&gt;flexbox布局&lt;/h2&gt;&lt;h1 id=&quot;学习资料&quot;&gt;&lt;a href=&quot;#学习资料&quot; class=&quot;headerlink&quot; title=&quot;学习资料&quot;&gt;&lt;/a&gt;学习资料&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/reactnativecn/react-native-guide&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React-Native学习指南&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.gitbook.com/book/unbug/react-native-training/details&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;gitbook&lt;/a&gt;—–&lt;br&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PLC_rYRxEnwQGLQqrHR0aho33U6DCeJamC&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;对应的视频&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/crazycodeboy/react-native-awesome&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React Native学习资源精选仓库&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.devio.org/tags/#React Native&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;博客&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;抽时间学习一下&lt;a href=&quot;https://github.com/facebook/react-native&quot;&gt;React Native&lt;/a&gt;.&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>UIView的Frame和bounds区别</title>
@@ -2429,764 +2545,6 @@ RACReplaySubject *replaySubject = [RACReplaySubject subject];
     <summary type="html">
     
       &lt;p&gt;NSString的神奇的引用计数问题。&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>effective objective-c 2.0读书笔记</title>
-    <link href="http://peilinghui.com/2016/04/03/effective%20objective-c%202.0%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    <id>http://peilinghui.com/2016/04/03/effective objective-c 2.0读书笔记/</id>
-    <published>2016-04-03T05:01:49.000Z</published>
-    <updated>2017-03-27T07:22:53.000Z</updated>
-    
-    <content type="html">&lt;p&gt;effective objective-c 2.0读书笔记.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;effective-objective-c-2-0&quot;&gt;&lt;a href=&quot;#effective-objective-c-2-0&quot; class=&quot;headerlink&quot; title=&quot;effective objective-c 2.0&quot;&gt;&lt;/a&gt;effective objective-c 2.0&lt;/h1&gt;&lt;p&gt;作者网站：&lt;a href=&quot;http://www.galloway.me.uk/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.galloway.me.uk/&lt;/a&gt;&lt;br&gt;英文原版：&lt;a href=&quot;https://www.gitbook.com/book/xiaoxueying/effective-objective-c-2-0/details&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.gitbook.com/book/xiaoxueying/effective-objective-c-2-0/details&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;就把重点的几个摘录出来了。&lt;/p&gt;
-&lt;h2 id=&quot;熟悉Objective-c&quot;&gt;&lt;a href=&quot;#熟悉Objective-c&quot; class=&quot;headerlink&quot; title=&quot;熟悉Objective-c&quot;&gt;&lt;/a&gt;熟悉Objective-c&lt;/h2&gt;&lt;h3 id=&quot;Objective-C是一门动态语言-该语言使用的是”消息结构”而非”函数调用”&quot;&gt;&lt;a href=&quot;#Objective-C是一门动态语言-该语言使用的是”消息结构”而非”函数调用”&quot; class=&quot;headerlink&quot; title=&quot;Objective-C是一门动态语言, 该语言使用的是”消息结构”而非”函数调用”.&quot;&gt;&lt;/a&gt;Objective-C是一门动态语言, 该语言使用的是”消息结构”而非”函数调用”.&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;消息结构 : 运行时所执行的代码由运行时环境决定
-函数调用 : 运行时所执行的代码由编译期决定.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; &lt;code&gt;[person run];&lt;/code&gt;&lt;br&gt;给person对象发送一条run消息 : 不到程序运行的时候你都不知道他究竟会执行什么代码. 而且, person这个对象究竟是Person类的对象, 还是其他类的对象, 也要到运行时才能确定, 这个过程叫动态绑定.&lt;/p&gt;
-&lt;p&gt;对象所占内存总是分配在堆空间中. 不能在栈中分配Objective-C对象.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;栈空间 : 栈空间的内存不用程序员管理.
-堆空间 : 堆空间的内存需要程序员管理.
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;第2条：在类的头文件中尽量少引入其他头文件&quot;&gt;&lt;a href=&quot;#第2条：在类的头文件中尽量少引入其他头文件&quot; class=&quot;headerlink&quot; title=&quot;第2条：在类的头文件中尽量少引入其他头文件&quot;&gt;&lt;/a&gt;第2条：在类的头文件中尽量少引入其他头文件&lt;/h3&gt;&lt;p&gt;在.h文件中用@Class,在.m文件中再引入头文件。来缩短编译时间，降低彼此的依赖程度，降低类之间的耦合。&lt;/p&gt;
-&lt;h3 id=&quot;第3条：多用字面量语法，少用与之等价的方法&quot;&gt;&lt;a href=&quot;#第3条：多用字面量语法，少用与之等价的方法&quot; class=&quot;headerlink&quot; title=&quot;第3条：多用字面量语法，少用与之等价的方法&quot;&gt;&lt;/a&gt;第3条：多用字面量语法，少用与之等价的方法&lt;/h3&gt;&lt;p&gt;字面量数值：&lt;code&gt;NSNumber *someNumber = @1;&lt;/code&gt;&lt;br&gt;字面量数组：&lt;code&gt;NSArray *animals=@[@&amp;quot;cat&amp;quot;,@&amp;quot;dog&amp;quot;,@&amp;quot;mouse&amp;quot;];&lt;/code&gt;  取某个下标所对应的对象更方便：&lt;code&gt;NSString *dog = animals[1]&lt;/code&gt;&lt;br&gt;字面量字典：&lt;code&gt;NSDictionary *personData = @{
-                @&amp;quot;firstname&amp;quot;: @&amp;quot;pei&amp;quot;,
-                @&amp;quot;lastname&amp;quot;: @&amp;quot;linghui&amp;quot;,
-                @&amp;quot;age&amp;quot;: @&amp;quot;21&amp;quot;;
-     };&lt;/code&gt;取值：&lt;code&gt;mutableDictionary[@&amp;quot;firstname&amp;quot;] = @&amp;quot;pei&amp;quot;;&lt;/code&gt;&lt;br&gt;使用字面量语法创建出来的字符串、数组、字典对象都是不可变的，若想变成可变的需在后面添加mutableCopy;&lt;/p&gt;
-&lt;p&gt;我用们字面量语法替代传统的alloc-init来创建对象的好处 :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;方便直观
-更加安全
-更利于debug
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;局限性 :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;只有NSString, NSArray, NSDictionary, NSNumber支持字面量语法
-若想用字面量语法创建出可变对象, 则需要再次调用mutableCopy方法复制多一份(多调用了一个方法, 多创建了一个对象. 不必要)
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;第4条：多用类型常量，少用-define预处理指令&quot;&gt;&lt;a href=&quot;#第4条：多用类型常量，少用-define预处理指令&quot; class=&quot;headerlink&quot; title=&quot;第4条：多用类型常量，少用#define预处理指令&quot;&gt;&lt;/a&gt;第4条：多用类型常量，少用#define预处理指令&lt;/h3&gt;&lt;p&gt;一般在工程中，会把常量定义在prefix.pch或者是一些接口常量定义在Constants.h文件中。更好的方法是在.m文件中用static与const来声明&lt;code&gt;static const NSTimeInterval Duration = 0.3&lt;/code&gt;&lt;br&gt;若是全局变量，则在.h中用extern关键字修饰，在.m文件中赋值。&lt;br&gt;&lt;code&gt;extern NSString *const TDFConstants&lt;/code&gt;&lt;br&gt;&lt;code&gt;NSString *const TDFConstants = @&amp;quot;VALUE&amp;quot;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;编译器通常不为普通const常量分配存储空间，而是将它们保存在符号表中，这使得它成为一个编译期间的常量，没有了存储与读内存的操作，使得它的效率比宏定义要高.  &lt;/p&gt;
-&lt;p&gt;宏能做到const不能办到的事.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;宏能定义函数
-OC的单例模式用到宏
-宏还能根据传入的参数生成字符串
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;为什么少用#define预处理指令?&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;用预处理指令定义的常量不含类型信息
-编译时只会进行简单查找与替代操作, 会分配多次内存
-如果有人重新定义了常量值, 则会导致程序中常量值不一致
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;为什么多用类型常量?&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;在实现文件中使用static const定义只在该文件内可见的常量, 其他文件无法使用(无需给常量名称加前缀)
-在头文件中使用extern来声明全局常量, 并在实现文件中定义其值, 可以供整个程序使用(需要给常量名称加前缀)
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;第5条：用枚举表示状态、选项、状态码&quot;&gt;&lt;a href=&quot;#第5条：用枚举表示状态、选项、状态码&quot; class=&quot;headerlink&quot; title=&quot;第5条：用枚举表示状态、选项、状态码&quot;&gt;&lt;/a&gt;第5条：用枚举表示状态、选项、状态码&lt;/h3&gt;&lt;figure class=&quot;highlight crystal&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;typedef &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;enum&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;constant&quot;&gt;KIND_CASH&lt;/span&gt;=&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,      &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;现金&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;constant&quot;&gt;KIND_CARD&lt;/span&gt;=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,      &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;银行卡&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;constant&quot;&gt;KIND_CREDIT_ACCOUNT&lt;/span&gt;=&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;,   &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;挂账&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;span class=&quot;constant&quot;&gt;KindPay_Kind&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;如果枚举类型的多个选项不需要组合使用, 则用NS_ENUM&lt;/p&gt;
-&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;NS_ENUM&lt;/span&gt;(&lt;span class=&quot;built_in&quot;&gt;NSInteger&lt;/span&gt;, &lt;span class=&quot;built_in&quot;&gt;UIViewAnimationTransition&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;built_in&quot;&gt;UIViewAnimationTransitionNone&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;built_in&quot;&gt;UIViewAnimationTransitionFlipFromLeft&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;built_in&quot;&gt;UIViewAnimationTransitionFlipFromRight&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;built_in&quot;&gt;UIViewAnimationTransitionCurlUp&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;built_in&quot;&gt;UIViewAnimationTransitionCurlDown&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;如果枚举类型的多个选项可能组合使用, 则用NS_OPTIONS&lt;/p&gt;
-&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;NS_OPTIONS&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(NSUInteger, UIViewAutoresizing)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        UIViewAutoresizingNone                 = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        UIViewAutoresizingFlexibleLeftMargin   = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        UIViewAutoresizingFlexibleWidth        = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        UIViewAutoresizingFlexibleRightMargin  = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        UIViewAutoresizingFlexibleTopMargin    = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        UIViewAutoresizingFlexibleHeight       = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        UIViewAutoresizingFlexibleBottomMargin = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;lt;&amp;lt; &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;以上代码为苹果源码.&lt;strong&gt;使用NS_ENUM和NS_OPTIONS来替代C语言的enum的好处&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;可以自定义枚举的底层数据类型
-在C中使用C的语法, 在OC中使用OC的语法, 保持语法的统一
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;另外, 在处理枚举的switch语句中, 不要使用default分支, 因为以后你加入新枚举之后, 编译器会提示开发者 : switch语句没有处理所有枚举(没使用default的情况下).&lt;/p&gt;
-&lt;h2 id=&quot;对象、消息、运行期&quot;&gt;&lt;a href=&quot;#对象、消息、运行期&quot; class=&quot;headerlink&quot; title=&quot;对象、消息、运行期&quot;&gt;&lt;/a&gt;对象、消息、运行期&lt;/h2&gt;&lt;h3 id=&quot;第6条：属性&quot;&gt;&lt;a href=&quot;#第6条：属性&quot; class=&quot;headerlink&quot; title=&quot;第6条：属性&quot;&gt;&lt;/a&gt;第6条：属性&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;@property, @synthesize, @dynamic&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;@property&lt;/strong&gt;可以自动创建存取方法，帮我们分解成setter和getter方法声明&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;@synthesize&lt;/strong&gt;&lt;br&gt;&lt;code&gt;@implementation Person
-@synthesize firstName;
-@end&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;以上代码相当于给Person类添加一个_firstName的实例变量并为该实例变量生成setter和getter方法的实现(存取方法).&lt;br&gt;手动调用@synthesize可以用来修改实例变量的名称&lt;br&gt;&lt;strong&gt;@dynamic&lt;/strong&gt;&lt;br&gt;&lt;code&gt;@implementation Person
-@dynamic firstName;
-@end&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;该代码会告诉编译器 : 不要自动创建实现属性(property)所用的实例变量(_property)和存取方法实现(setter和getter).&lt;br&gt;也就是说, 实例变量不存在了, 因为编译器不会自动帮你创建了. 而且如果你不手动实现setter和getter, 使用者用点语法或者对象方法调用setter和getter时, 程序会直接崩溃, 崩溃原因很简单 : unrecognized selector sent to instance&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;特性&lt;/strong&gt; &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;- 原子性：nonatomic不使用同步锁。
-- 读写权限：readwrite(读写)有setter和getter由@synthesize自动实现；readonly(只读)只有getter方法
-- 内存管理：assign：简单赋值(纯量)；strong：先保留新值，再释放旧值，然后再将新值设置上去。weak:不保留新值，也不释放旧值，在属性所指对象遭到摧毁时，属性值也会清空。unsafe_retained:在属性所指对象遭到摧毁时，属性值不会清空，与assign类似，不过只用于对象。copy：与strong类似，但是不保留新值，而是拷贝，用于NSString。
-- 方法名：getter=&amp;lt;name&amp;gt;;  setter=&amp;lt;name&amp;gt;;
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;第7条：在对象内部尽量直接访问实例变量&quot;&gt;&lt;a href=&quot;#第7条：在对象内部尽量直接访问实例变量&quot; class=&quot;headerlink&quot; title=&quot;第7条：在对象内部尽量直接访问实例变量&quot;&gt;&lt;/a&gt;第7条：在对象内部尽量直接访问实例变量&lt;/h3&gt;&lt;p&gt;为什么呢? 使用点语法不好吗? 这里说说区别&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;直接用_xxx访问实例变量而不用点语法可以绕过OC的&amp;quot;方法派发&amp;quot;, 效率比用点语法来访问快
-直接用_xxx访问实例变量而不用点语法不会调用setter方法, 所以不会触发KVO(Key Value Observing), 同时如果你访问的该属性是声明为copy的属性, 则不会进行拷贝, 而是直接保留新值, 释放旧值.
-使用点语法访问有助于debug, 因为可以在setter或getter中增加断点来监控方法的调用
-属性使用懒加载时, 必须使用点语法, 否则实例变量永远不会初始化(因为懒加载实际就是调用getter方法, 直接访问实例变量绕过了该方法, 所以该变量则永远为nil)
-&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;
-&lt;li&gt;在&lt;strong&gt;读取&lt;/strong&gt;实例变量的时候采用&lt;strong&gt;直接访问&lt;/strong&gt;的形式，在&lt;strong&gt;设置&lt;/strong&gt;实例变量的时候采用通过&lt;strong&gt;属性&lt;/strong&gt;。 &lt;/li&gt;
-&lt;li&gt;在初始化方法以及dealloc方法中，直接通过实例变量来读写数据&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;第8条：对象等同性&quot;&gt;&lt;a href=&quot;#第8条：对象等同性&quot; class=&quot;headerlink&quot; title=&quot;第8条：对象等同性&quot;&gt;&lt;/a&gt;第8条：对象等同性&lt;/h3&gt;&lt;p&gt;比较两个对象是否相同.&lt;br&gt;我们可以重写isEqual方法自定义对象等同的条件&lt;/p&gt;
-&lt;h3 id=&quot;第9条：类族模式&quot;&gt;&lt;a href=&quot;#第9条：类族模式&quot; class=&quot;headerlink&quot; title=&quot;第9条：类族模式&quot;&gt;&lt;/a&gt;第9条：类族模式&lt;/h3&gt;&lt;p&gt;Objective-C的系统框架中普遍使用此模式, 用子类来隐藏”抽象基类”的内部实现细节.&lt;br&gt;我们肯定使用过UIButton的这个类方法&lt;/p&gt;
-&lt;p&gt; &lt;code&gt;+ (UIButton *)buttonWithType:(UIButtonType)type;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;这就是UIButton类实现的”工厂方法”, 根据传入的枚举创建并返回合乎条件的子类.&lt;/p&gt;
-&lt;p&gt;Foundation框架中大部分容器类都是类族, 如NSArray与NSMutableArray, NSSet与NSMutableSet, NSDictionary与NSMutableDictionary.&lt;/p&gt;
-&lt;p&gt;用isKindOfClass方法可以判断对象所属的类是否位于类族之中.&lt;/p&gt;
-&lt;p&gt;在类族中实现子类时所需遵循的规范一般都会定义于基类的文档之中, 使用前应先看看.&lt;/p&gt;
-&lt;p&gt;具体类族的使用方法大家请看书~~&lt;/p&gt;
-&lt;h3 id=&quot;第10条：在既有类中使用关联对象存放自定义数据&quot;&gt;&lt;a href=&quot;#第10条：在既有类中使用关联对象存放自定义数据&quot; class=&quot;headerlink&quot; title=&quot;第10条：在既有类中使用关联对象存放自定义数据&quot;&gt;&lt;/a&gt;第10条：在既有类中使用关联对象存放自定义数据&lt;/h3&gt;&lt;p&gt;在类的内部利用哈希表映射技术, 关联一个与该类毫无耦合的对象.&lt;br&gt;使用场景&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;为现有的类添加私有变量以帮助实现细节
-为现有的类添加公有属性
-为KVO创建一个关联的观察者
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;鉴于书中所说, 容易出现循环引用, 以及关联对象释放和移除不同步等缺陷,&lt;/p&gt;
-&lt;h3 id=&quot;第11条：理解objc-msgSend的作用&quot;&gt;&lt;a href=&quot;#第11条：理解objc-msgSend的作用&quot; class=&quot;headerlink&quot; title=&quot;第11条：理解objc_msgSend的作用&quot;&gt;&lt;/a&gt;第11条：理解objc_msgSend的作用&lt;/h3&gt;&lt;p&gt;消息有名称(name)或选择子(selector).可以接受参数，而且可能有返回值。方法在objc文件中的message.h。&lt;br&gt;OC的消息机制&lt;br&gt;&lt;code&gt;[someObject messageName: parameter]&lt;/code&gt;&lt;br&gt;&lt;code&gt;id returnValue = objc_msgSend(someObject,@selector(messageName:),parameter);&lt;/code&gt; &lt;/p&gt;
-&lt;p&gt;objc_msgSend会根据接收者和选择子的类型来调用适当的方法, 流程如下&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;查找接收者的所属类的cache列表, 如果没有则下一步
-查找接收者所属类的&amp;quot;方法列表&amp;quot;
-如果能找到与选择子名称相符的方法, 就跳至其实现代码
-找不到, 就沿着继承体系继续向上查找
-如果能找到与选择子名称相符的方法, 就跳至其实现代码
-找不到, 执行&amp;quot;消息转发&amp;quot;.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;另一些函数：&lt;br&gt;objc_msgSend_stret:待发送的消息要返回结构体&lt;br&gt;objc_msgSend_fpret:消息返回的是浮点数&lt;br&gt;objc_msgSendSuper:要给超类发送消息&lt;/p&gt;
-&lt;h2 id=&quot;接口与API设计&quot;&gt;&lt;a href=&quot;#接口与API设计&quot; class=&quot;headerlink&quot; title=&quot;接口与API设计&quot;&gt;&lt;/a&gt;接口与API设计&lt;/h2&gt;&lt;h3 id=&quot;第15条：用前缀避免命名空间的冲突&quot;&gt;&lt;a href=&quot;#第15条：用前缀避免命名空间的冲突&quot; class=&quot;headerlink&quot; title=&quot;第15条：用前缀避免命名空间的冲突&quot;&gt;&lt;/a&gt;第15条：用前缀避免命名空间的冲突&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;选择与你公司、应用程序或者二者皆有关联之名称作为类名的前缀，并在所有代码中均使用这一前缀。
-若自己所开发的程序库中用到了第三方库，则应为其中的名称加上前缀。
-Apple宣称保留使用所有两字母前缀的权利，所以自己所选用的前缀最好是三字母的。
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;第16条：提供“全能初始化方法”&quot;&gt;&lt;a href=&quot;#第16条：提供“全能初始化方法”&quot; class=&quot;headerlink&quot; title=&quot;第16条：提供“全能初始化方法”&quot;&gt;&lt;/a&gt;第16条：提供“全能初始化方法”&lt;/h3&gt;&lt;h3 id=&quot;第17条：实现description方法&quot;&gt;&lt;a href=&quot;#第17条：实现description方法&quot; class=&quot;headerlink&quot; title=&quot;第17条：实现description方法&quot;&gt;&lt;/a&gt;第17条：实现description方法&lt;/h3&gt;&lt;p&gt;调试程序时，LLDB调试，在封装的JSONHelper中看到了这样的方法：&lt;br&gt;&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//对象转换为json对象.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+(NSString *) &lt;span class=&quot;string&quot;&gt;transJson:&lt;/span&gt;(Jastor *) obj&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    NSMutableDictionary *returnDic = [[NSMutableDictionary alloc] init];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    NSArray *array =[JastorRuntimeHelper &lt;span class=&quot;string&quot;&gt;propertyNames:&lt;/span&gt;[obj &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt;]];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;title&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;title&quot;&gt;NSString&lt;/span&gt; *&lt;span class=&quot;title&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;array&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;([key &lt;span class=&quot;string&quot;&gt;isEqualToString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;description&quot;&lt;/span&gt;] || [key &lt;span class=&quot;string&quot;&gt;isEqualToString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;debugDescription&quot;&lt;/span&gt;] || [key &lt;span class=&quot;string&quot;&gt;isEqualToString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;superclass&quot;&lt;/span&gt;])&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;continue&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [returnDic &lt;span class=&quot;string&quot;&gt;setValue:&lt;/span&gt;[obj &lt;span class=&quot;string&quot;&gt;valueForKey:&lt;/span&gt;key] &lt;span class=&quot;string&quot;&gt;forKey:&lt;/span&gt;key];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    NSString *returnString = [returnDic JSONString];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; returnString;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;其中description在Foundation框架的NSString.h中&lt;br&gt;&lt;code&gt;@property (readonly, copy) NSString *description;&lt;/code&gt;&lt;br&gt;在objc的NSObject.h中&lt;br&gt;`+ (NSString *)description;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;(NSString *)debugDescription;`&lt;br&gt;在Foundation框架的NSproxy.h中&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;第18条：尽量使用不可变对象&quot;&gt;&lt;a href=&quot;#第18条：尽量使用不可变对象&quot; class=&quot;headerlink&quot; title=&quot;第18条：尽量使用不可变对象&quot;&gt;&lt;/a&gt;第18条：尽量使用不可变对象&lt;/h3&gt;&lt;h3 id=&quot;第19条：使用清晰而协调的命名方式&quot;&gt;&lt;a href=&quot;#第19条：使用清晰而协调的命名方式&quot; class=&quot;headerlink&quot; title=&quot;第19条：使用清晰而协调的命名方式&quot;&gt;&lt;/a&gt;第19条：使用清晰而协调的命名方式&lt;/h3&gt;&lt;h3 id=&quot;第20条：为私有方法名加前缀&quot;&gt;&lt;a href=&quot;#第20条：为私有方法名加前缀&quot; class=&quot;headerlink&quot; title=&quot;第20条：为私有方法名加前缀&quot;&gt;&lt;/a&gt;第20条：为私有方法名加前缀&lt;/h3&gt;&lt;p&gt;便于修改方法名或方法签名，可以使用- (void)p_private{};私有方法只在实现的时候声明。&lt;br&gt;不要单用一个下划线做私有方法的前缀，因为这种做法的预留给苹果公司用的。&lt;/p&gt;
-&lt;h3 id=&quot;第21条：理解Objective-C错误模型&quot;&gt;&lt;a href=&quot;#第21条：理解Objective-C错误模型&quot; class=&quot;headerlink&quot; title=&quot;第21条：理解Objective-C错误模型&quot;&gt;&lt;/a&gt;第21条：理解Objective-C错误模型&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;ARC下,想生成“异常安全”的代码，需要打开的编译器标志叫做-fobjc-arc-exception.&lt;/li&gt;
-&lt;li&gt;objective-c所采用的方法：只在极其罕见的情况下抛出异常，异常抛出后，无需考虑恢复问题，而且应用程序此时也应该退出。最好的方法：在那些子类必须覆写的超类方法里抛出异常。令方法返回nil/0.或是使用NSError，以表明其中有错误发生。如：  &lt;/li&gt;
-&lt;li&gt;初始化方法无法根据传入的参数来初始化当前实例，那么就可以令其返回nil/0。&lt;/li&gt;
-&lt;li&gt;NSError：&lt;ul&gt;
-&lt;li&gt;Error domain（类型为字符串）：用全局变量定义，在从URL中解析或取得数据时出错了，就使用NSURLErrorDomain来表示错误范围。&lt;/li&gt;
-&lt;li&gt;Error code（类型为整数）：用enum定义，当HTTP请求出错时，可能会把HTTP状态码设置为错误码。&lt;/li&gt;
-&lt;li&gt;User Info（类型为字典）：可将错误串成“错误链”。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;NSError的用法：&lt;ul&gt;
-&lt;li&gt;通过委托协议来传递此错误。NSURLConnection在NSURLConnectionDelegate中定义了：&lt;code&gt;-(void)connection:(NSURLConnection *)connection didFail WithError:(NSError *)error&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;经由方法的“输出参数”返回给调用者&lt;code&gt;-(BOOL)doSomething:(NSError **)error&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;总结：&lt;br&gt; 只有发生了可使整个应用程序崩溃的严重错误时，才使用异常。&lt;br&gt; 在错误不那么严重的情况下，可以指派委托方法来处理错误，也可把错误信息放在NSError对象里，经由输出参数返回给调用者。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;第22条：理解NSCopying协议&quot;&gt;&lt;a href=&quot;#第22条：理解NSCopying协议&quot; class=&quot;headerlink&quot; title=&quot;第22条：理解NSCopying协议&quot;&gt;&lt;/a&gt;第22条：理解NSCopying协议&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;copy 执行的一定是不可变版本的拷贝，哪怕NSMutableArray, NSMutableString 这类可变对象，进行&lt;code&gt;copy&lt;/code&gt;操作，返回对象的也是不可变的，返回对象类型本质为 NSArray， NSString 类型&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;mutableCopy 执行的是可变版本的拷贝，不论对象是可变的对象（NSMutableString， NSMutableArray），还是不可变对象（NSArray， NSString），执行&lt;code&gt;mutableCopy&lt;/code&gt;方法后返回对象都是可变的。 &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;Foundation 框架中的所有collection类在默认情况下都执行浅拷贝，即，只拷贝容器对象本身，而不复制其中数据。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;没有专门定义深拷贝的协议，绝大多数遵从&lt;code&gt;NSCoping&lt;/code&gt;协议的对象执行的都是浅拷贝。除非文档说明是深拷贝，或者自定义方法来实现。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;若想令自己所写的对象具有拷贝功能，则需遵循NSCopying协议。&lt;br&gt;实现方法：&lt;code&gt;-(id)copyWithZone:(NSZone *)zone&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;如果自定义的对象分为可变版本与不可变版本，那么就要同时实现NSCopying与NSMutableCopying协议。&lt;/li&gt;
-&lt;li&gt;深拷贝：在拷贝对象自身时，将其底层数据也一并复制过去。&lt;br&gt;浅拷贝：在拷贝对象时，只拷贝容器对象本身，而不复制其中每个对象。（Foundation框架中的所有collection类在默认情况下执行浅拷贝）&lt;br&gt;复制对象时，一般执行浅拷贝。&lt;/li&gt;
-&lt;li&gt;如果你所写的对象需要深拷贝，那么可考虑新增一个专门执行深拷贝的方法。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;协议与分类&quot;&gt;&lt;a href=&quot;#协议与分类&quot; class=&quot;headerlink&quot; title=&quot;协议与分类&quot;&gt;&lt;/a&gt;协议与分类&lt;/h2&gt;&lt;h3 id=&quot;第23条：通过delegate与data-source协议进行对象间通信&quot;&gt;&lt;a href=&quot;#第23条：通过delegate与data-source协议进行对象间通信&quot; class=&quot;headerlink&quot; title=&quot;第23条：通过delegate与data source协议进行对象间通信&quot;&gt;&lt;/a&gt;第23条：通过delegate与data source协议进行对象间通信&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;Delegate pattern：定义一套接口，某对象若想接受另一个对象的委托，需遵从该接口，以便成为其“委托对象”。而这“另一个对象”则可以给其委托对象回传一些信息，也可以在发生相关事件时通知委托对象。    &lt;/li&gt;
-&lt;li&gt;好处：可将数据与业务解耦，如：页面有个显示一系列数据所用的视图，此视图只需要包含显示数据所需的逻辑代码，而不应该决定要显示何种数据以及数据之间如何交互。  &lt;/li&gt;
-&lt;li&gt;委托协议名要在相关类名@protocol后面加Delegate，类中用一个用一个属性来存放其委托对象，&lt;code&gt;@property(nonatomic,weak)id&amp;lt;TDFNetworkingDelegate&amp;gt;delegate;&lt;/code&gt;必须设置为weak或unsafe_unretained（使用strong容易引入“保留环”）&lt;br&gt;委托协议常用@option来标注大部分或全部方法。&lt;/li&gt;
-&lt;li&gt;委托模式：对象把应对某个行为的责任委托给另外一个类了。&lt;/li&gt;
-&lt;li&gt;数据源模式：信息从data source流向Class再流向delegate。&lt;/li&gt;
-&lt;li&gt;若有必要，可实现含有位段的结构体，将委托对象是否能响应相关协议方法这一信息缓存至其中。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;第24条：将类的实现代码分散到便于管理的数个分类之中&quot;&gt;&lt;a href=&quot;#第24条：将类的实现代码分散到便于管理的数个分类之中&quot; class=&quot;headerlink&quot; title=&quot;第24条：将类的实现代码分散到便于管理的数个分类之中&quot;&gt;&lt;/a&gt;第24条：将类的实现代码分散到便于管理的数个分类之中&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;使用category机制把类的实现代码划分成易于管理的小块。&lt;/li&gt;
-&lt;li&gt;将应该视为私有的方法归入名叫Private的分类中，以隐藏实现细节。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;第25条：总是为第三方类的分类名称加前缀&quot;&gt;&lt;a href=&quot;#第25条：总是为第三方类的分类名称加前缀&quot; class=&quot;headerlink&quot; title=&quot;第25条：总是为第三方类的分类名称加前缀&quot;&gt;&lt;/a&gt;第25条：总是为第三方类的分类名称加前缀&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;向第三方类中添加分类时，总应给其名称加上你专用的前缀。&lt;/li&gt;
-&lt;li&gt;向第三方类中添加分类时，总应给其中的方法名加上你专用的前缀。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;第26条：勿在分类中声明属性&quot;&gt;&lt;a href=&quot;#第26条：勿在分类中声明属性&quot; class=&quot;headerlink&quot; title=&quot;第26条：勿在分类中声明属性&quot;&gt;&lt;/a&gt;第26条：勿在分类中声明属性&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;把封装数据所用的全部属性都定义在主接口里。&lt;/li&gt;
-&lt;li&gt;在class-continuation分类之外的其他分类中，可以定义存取方法，但尽量不要定义属性。&lt;/li&gt;
-&lt;li&gt;如果需要在分类中为该属性实现存取方法，可以把存取方法声明为@dynamic。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;第27条：使用class-continuation分类隐藏实现细节&quot;&gt;&lt;a href=&quot;#第27条：使用class-continuation分类隐藏实现细节&quot; class=&quot;headerlink&quot; title=&quot;第27条：使用class-continuation分类隐藏实现细节&quot;&gt;&lt;/a&gt;第27条：使用class-continuation分类隐藏实现细节&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;class-continuation分类与普通分类不同，它必须定义在其所接续的那个类的实现文件中，唯一能声明实例变量的分类。&lt;/li&gt;
-&lt;li&gt;作用：定义方法和实例变量。&lt;/li&gt;
-&lt;li&gt;可以实现OC和C++的混编，如：网页浏览器的框架WebKit，大部分代码是C++，而对外显示的却是OC代码，CoreAnimation里面后端代码使用C++，对外公布却是OC接口。&lt;/li&gt;
-&lt;li&gt;将public接口中声明为“只读”的属性扩展为“可读写”以便在类的内部使用其属性。（我们通常不直接访问实例变量，而是通过设置访问方法来做，因为这样能触发KVO通知，其他对象有可能监听此事件）&lt;h3 id=&quot;第28条：通过协议提供匿名对象&quot;&gt;&lt;a href=&quot;#第28条：通过协议提供匿名对象&quot; class=&quot;headerlink&quot; title=&quot;第28条：通过协议提供匿名对象&quot;&gt;&lt;/a&gt;第28条：通过协议提供匿名对象&lt;/h3&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;内存管理&quot;&gt;&lt;a href=&quot;#内存管理&quot; class=&quot;headerlink&quot; title=&quot;内存管理&quot;&gt;&lt;/a&gt;内存管理&lt;/h2&gt;&lt;h3 id=&quot;第29条：理解引用计数&quot;&gt;&lt;a href=&quot;#第29条：理解引用计数&quot; class=&quot;headerlink&quot; title=&quot;第29条：理解引用计数&quot;&gt;&lt;/a&gt;第29条：理解引用计数&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;OC 使用引用计数来管理内存&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&quot;引用计数工作原理&quot;&gt;&lt;a href=&quot;#引用计数工作原理&quot; class=&quot;headerlink&quot; title=&quot;引用计数工作原理&quot;&gt;&lt;/a&gt;引用计数工作原理&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;引用计数：用以表示当前有多少个事物想令此对象继续存活下去。查看引用计数的属性为&lt;code&gt;retainCount&lt;/code&gt;，但只能作为参考。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;retain：递增&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;release：递减&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;autorelease：在清理“自动释放池”（autorelease pool）时，才递减引用计数&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;对象A被创建出来时，引用计数最少为1，因为不确定在&lt;code&gt;alloc&lt;/code&gt;或&lt;code&gt;init&lt;/code&gt;方法中，是否有其他对象B也保留了该对象A。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;当引用计数为1时，再次调用release方法，对象就被回收了，而这时候调用对象的&lt;code&gt;retainCount&lt;/code&gt;方法，不一定为0，因为：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;向一个已经被回收的对象发送&lt;code&gt;retainCount&lt;/code&gt;消息，输出结果是不确定的，而且，如果对象内存被重新使用了，就可能造成程序异常崩溃&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;当执行最后一次release时，系统知道马上就要回收内存，就没必要将&lt;code&gt;retainCount&lt;/code&gt;减1，可以减少一次内存的写操作，加速对象的回收&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;悬挂指针（dangling pointer）：指针所指向的对象内存被释放了，但指针没有清空，指针指向的是无效对象。所以一般对象被释放后，要把指针置为&lt;code&gt;nil&lt;/code&gt;。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;声明为retain/strong的属性，设置set方法时，应该是先保留新值，再释放旧值，最后更新实例变量。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;因为如果新旧值一样的话，先执行release，可能会导致系统将值对象永久回收，而后续的retain操作是无法令已经彻底回收的对象复生的，于是实例变量就成了悬挂指针&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;autorelease使用：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;一般是在方法中，有返回对象时，不可能在&lt;code&gt;return&lt;/code&gt;之后，再进行&lt;code&gt;release&lt;/code&gt;，这时候就需要&lt;code&gt;autorelease&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;autorelease 可以让保证对象在跨越“方法调用边界”（method call boundary）后存活一段时间&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;autorelease实际释放是在清空最外层的自动释放池时，即当前线程的下一次事件循环。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;循环引用会导致内存泄漏，因为循环中的对象其保留技术不会降为0，永远不会释放。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;1. 引用计数机制通过可以递增递减的计数器来管理内存。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;2. 在对象生命期中，其余对象通过引用来保留或释放此对象，保留与释放操作分别会递增及递减引用计数&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&quot;第36条：不要使用retainCount&quot;&gt;&lt;a href=&quot;#第36条：不要使用retainCount&quot; class=&quot;headerlink&quot; title=&quot;第36条：不要使用retainCount&quot;&gt;&lt;/a&gt;第36条：不要使用retainCount&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;retainCount&lt;/code&gt;返回的保留计数只是某个给定时间点上的值。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;该方法并未考虑到系统会稍后把自动释放池清空，因而不会将后续的释放操作从返回值里减去&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;retainCount&lt;/code&gt;可能永远不为0&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;标签指针（tagged pointer）：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;标注特定类型的值，一般是存储小的对象，eg：NSNumber，NSDate&lt;/li&gt;
-&lt;li&gt;把与数值有关的全部消息都放在指针里面&lt;/li&gt;
-&lt;li&gt;内存读取效率高 ，提升性能、节省内存&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;第30条：以ARC简化引用计数&quot;&gt;&lt;a href=&quot;#第30条：以ARC简化引用计数&quot; class=&quot;headerlink&quot; title=&quot;第30条：以ARC简化引用计数&quot;&gt;&lt;/a&gt;第30条：以ARC简化引用计数&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;使用ARC时，引用计数实际上还是要执行的，只是由ARC自动添加保留和释放操作。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;ARC在执行&lt;code&gt;retain&lt;/code&gt;和&lt;code&gt;release&lt;/code&gt;方法时，会直接调用其底层C语言版本，这样性能更好，节省CPU。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;使用ARC时必须遵循的方法命名规则&quot;&gt;&lt;a href=&quot;#使用ARC时必须遵循的方法命名规则&quot; class=&quot;headerlink&quot; title=&quot;使用ARC时必须遵循的方法命名规则&quot;&gt;&lt;/a&gt;使用ARC时必须遵循的方法命名规则&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;以&lt;code&gt;alloc&lt;/code&gt;、&lt;code&gt;new&lt;/code&gt;、&lt;code&gt;copy&lt;/code&gt;、&lt;code&gt;mutableCopy&lt;/code&gt;开头的方法名（这里称方法X）返回的对象归调用者所有，调用者要负责返回对象的释放。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;比如以&lt;code&gt;new&lt;/code&gt;开头的方法&lt;code&gt;+ (NSString *)newName&lt;/code&gt;，在返回的时候，ARC在&lt;code&gt;return&lt;/code&gt;的时候不会加上&lt;code&gt;autorelease&lt;/code&gt;，因为它是被调用者所拥有的，它必须被调用者来释放。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;NSString *newName = [NSString newName];
-//对newName进行处理，完之后执行下面语句
-[newName release];
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;而其他不以这四个词开头的方法（以下均称为方法Y），返回对象不归调用者所有，它们在方法内生成的时候，&lt;code&gt;return&lt;/code&gt;后面会加上&lt;code&gt;autorelease&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;ARC 在编译期会把能够互相抵消的retain、release、autorelease操作约简。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;比如在同一个对象上执行多次保留与释放操作，ARC有时可以成对地移除这两个操作。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;ARC 也包含运行期组件&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;以方法Y创建的对象，在外层使用的时候，因为不被拥有，需要进行&lt;code&gt;retain&lt;/code&gt;操作，而这时，运行期会进行优化：&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;调用对象的&lt;code&gt;autorelease&lt;/code&gt;方法时，会改为调用&lt;code&gt;objc_autoreleaseReturnValue&lt;/code&gt;，当后面发现&lt;code&gt;retain&lt;/code&gt;方法时，会设置全局的一个标志位，并且不执行&lt;code&gt;autorelease&lt;/code&gt;操作&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;调用对象的&lt;code&gt;retain&lt;/code&gt;方法时，改为执行&lt;code&gt;objc_retainAutoreleaseReturnValue&lt;/code&gt;，如果发现之前的标志位，就直接返回对象，不执行&lt;code&gt;retain&lt;/code&gt;操作&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;设置并检测标志位，比调用&lt;code&gt;autorelease&lt;/code&gt;和&lt;code&gt;retain&lt;/code&gt;更快&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;以上的所有处理，只能由编译器的开发者来完成。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&quot;变量的内存管理语义&quot;&gt;&lt;a href=&quot;#变量的内存管理语义&quot; class=&quot;headerlink&quot; title=&quot;变量的内存管理语义&quot;&gt;&lt;/a&gt;变量的内存管理语义&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;默认情况下，每个变量都是指向对象的强引用&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;ARC在设置set方法时：先保留新值，再释放旧值，最后设置实例变量。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;__strong: 默认语义，保留此值&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;unsafe&lt;/strong&gt;unretained: 不保留此值，对象被回收，指针不为空，可能会出问题&lt;/li&gt;
-&lt;li&gt;__weak: 不保留此值，对象被回收，指针变量会自动清空&lt;/li&gt;
-&lt;li&gt;__autoreleasing: 把对象“按引用传递”（pass by reference）给方法时，使用这个特殊的修饰符，此值在方法返回时自动释放。&lt;/li&gt;
-&lt;li&gt;__weak 最经常用来打破由block所引入的“保留环”（retain cycle）。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&quot;ARC-清理实例变量&quot;&gt;&lt;a href=&quot;#ARC-清理实例变量&quot; class=&quot;headerlink&quot; title=&quot;ARC 清理实例变量&quot;&gt;&lt;/a&gt;ARC 清理实例变量&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;ARC也负责对实例变量进行内存管理。在回收分配给对象的内存时生成必要的清理代码，凡是具备强引用的变量，都必须释放。手动管理时在dealloc方法中进行&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;- (void)dealloc {
-    //ARC 自动添加的代码
-    [_foo release];
-    [_bar release];
-    [super dealloc];
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;对于非Objective-C的对象，需要手动进行内存管理：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;//释放有malloc创建的对象
-void     (*free)(struct _malloc_zone_t *zone, void *ptr); 
-//释放CoreFoundation中的对象
-void CFRelease(CFTypeRef cf);
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;ARC 下，不能覆写内存管理方法。 &lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;1. ARC之后，无需担心内存管理问题，也可省去类中的许多样板代码&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;&lt;em&gt;2. ARC管理对象生命期的办法基本上就是：在合适的地方插入“保留”与“释放”操作。ARC下变量的内存管理语义由修饰符来指明&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;&lt;em&gt;3. 由方法所返回的对象，其内存管理语义总是通过方法名来体现（注意方法X和方法Y）&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;&lt;em&gt;4. ARC只负责管理OC对象的内存，CoreFoundation对象要手动管理，需要适时调用CFRetain/CFRelease&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&quot;第31条：在dealloc方法中只释放引用并解除监听&quot;&gt;&lt;a href=&quot;#第31条：在dealloc方法中只释放引用并解除监听&quot; class=&quot;headerlink&quot; title=&quot;第31条：在dealloc方法中只释放引用并解除监听&quot;&gt;&lt;/a&gt;第31条：在dealloc方法中只释放引用并解除监听&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;对象在经历其生命周期后，最终会为系统所回收，这时就要执行&lt;code&gt;dealloc&lt;/code&gt;方法，每个对象的声明周期内，此方法仅执行一次&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;运行期系统会在适当的时机调用&lt;code&gt;dealloc&lt;/code&gt;方法，最好不要自己手动调用。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;dealloc 中执行的内容：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;释放对象所拥有的引用，即所有OC对象都释放掉&lt;/li&gt;
-&lt;li&gt;非OC对象需要手工释放&lt;/li&gt;
-&lt;li&gt;清理所有配置过的观测行为（observation behavior）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;开销较大或系统内稀缺的资源（文件描述符、套接字、大块内存等）最好不要等到系统调用&lt;code&gt;dealloc&lt;/code&gt;方法时才释放，应该是在应用程序用完资源对象后，手工实现方法来释放。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;对于上述资源，最好添加释放标志，在dealloc中进行检测，以防忘记清理。 &lt;/li&gt;
-&lt;li&gt;系统并不保证创建的每个对象都会执行&lt;code&gt;dealloc&lt;/code&gt;方法。&lt;/li&gt;
-&lt;li&gt;在&lt;code&gt;dealloc&lt;/code&gt;方法中，尽量不要调用其他方法&lt;/li&gt;
-&lt;li&gt;调用&lt;code&gt;dealloc&lt;/code&gt;的线程，并不一定是主线程&lt;/li&gt;
-&lt;li&gt;在&lt;code&gt;dealloc&lt;/code&gt;方法中，禁止调用属性的存取方法，（MRC下释放属性变量的时候，要使用&lt;code&gt;_&lt;/code&gt;，而不能是&lt;code&gt;self.&lt;/code&gt;）&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;1. 在&lt;code&gt;dealloc&lt;/code&gt;方法中，只能做的是释放指向其他对象的引用，并取消原来订阅的“键值观测”（KVO）或&lt;code&gt;NSNotificationCenter&lt;/code&gt;等通知，不要做其他事情&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;&lt;em&gt;2. 如果对象持有文件描述符等系统资源，应该专门编写一个方法来释放此种资源，并约定为规则&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;&lt;em&gt;3. 执行异步任务的方法不应再dealloc里调用；只能在正常状态下执行的方法也不应再dealloc里调用，因为此时对象已处于正在回收的状态&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&quot;第32条：编写异常安全代码时留意内存管理问题&quot;&gt;&lt;a href=&quot;#第32条：编写异常安全代码时留意内存管理问题&quot; class=&quot;headerlink&quot; title=&quot;第32条：编写异常安全代码时留意内存管理问题&quot;&gt;&lt;/a&gt;第32条：编写异常安全代码时留意内存管理问题&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在运行期系统中，C++与Objective-C的异常相互兼容，即从其中一门语言里抛出的异常能用另外一门语言所编的“异常处理程序”（exception handler）来捕获&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&quot;第33条：以弱引用避免重复引用&quot;&gt;&lt;a href=&quot;#第33条：以弱引用避免重复引用&quot; class=&quot;headerlink&quot; title=&quot;第33条：以弱引用避免重复引用&quot;&gt;&lt;/a&gt;第33条：以弱引用避免重复引用&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;当对象以某种方式互相引用就会形成“环”，这些引用会使对象永远不会被系统所回收，从而造成内存泄漏。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;避免保留环的最佳方法就是弱引用。&lt;/li&gt;
-&lt;li&gt;使用&lt;code&gt;weak&lt;/code&gt;比&lt;code&gt;unsafe_unretained&lt;/code&gt;更安全，&lt;code&gt;weak&lt;/code&gt;修饰的属性，一旦被系统回收，属性值会自动设为&lt;code&gt;nil&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;当一个对象实例被回收，其所有的属性和变量都应当置空，如果还能使用的话，就是编程错误。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;避免循环引用，使用weak弱引用，两种方式：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;__weak __typeof(self)weakSelf = self;   
-  __weak ClassName *weakSelf = self;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;第34条：以自动释放池块降低内存峰值&quot;&gt;&lt;a href=&quot;#第34条：以自动释放池块降低内存峰值&quot; class=&quot;headerlink&quot; title=&quot;第34条：以自动释放池块降低内存峰值&quot;&gt;&lt;/a&gt;第34条：以自动释放池块降低内存峰值&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;自动释放池用于存放那些需要在稍后某个时刻释放的对象。清空（drain）自动释放池时，系统会向其中的对象发送&lt;code&gt;release&lt;/code&gt;消息&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;系统会自动创建一些线程，比如主线程或GCD中的线程，这些线程默认都有自动释放池，每次执行事件循环时，都会将其清空。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;主main函数的自动释放池包裹应用程序的主入口点（main application entry point），是最外围捕获自动释放对象所用的池。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;当循环创建了大量对象时，应该在循环内创建&lt;code&gt;autoreleasepool&lt;/code&gt;，这样在每次进行循环的时候就会创建自动释放池，并且把新建的对象放在池中，使用完之后，在块的末尾把对象回收。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;内存峰值（high-memory waterline）是指应用程序在某个特定时间段内的最大内存用量（highest memory footprint）。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;自动释放池机制就像栈一样。系统创建好自动释放池后，就将其推入栈中，而清空自动释放池，则相当于将其从栈中弹出。在对象上执行自动释放操作，就等于将其放入栈顶的那个池里。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;@autoreleasepool&lt;/code&gt;要视情况使用，当内存用量没达到需要优化的程度，尽量不要创建额外的自动释放池。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;NSAutoreleasePool&lt;/code&gt;通过用来创建那种偶尔需要清空的池，相比&lt;code&gt;@autoreleasepool&lt;/code&gt;更为重量级。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;NSAutoreleasePool&lt;/code&gt;是通过&lt;code&gt;init&lt;/code&gt;和&lt;code&gt;drain&lt;/code&gt;来限定范围的，不如&lt;code&gt;@autoreleasepool{}&lt;/code&gt;显而易见。所以，@autoreleasepool好处：可以避免无意间误用了那些在清空池后已为系统所回收的对象。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;第35条：用“僵尸对象”调试内存管理问题&quot;&gt;&lt;a href=&quot;#第35条：用“僵尸对象”调试内存管理问题&quot; class=&quot;headerlink&quot; title=&quot;第35条：用“僵尸对象”调试内存管理问题&quot;&gt;&lt;/a&gt;第35条：用“僵尸对象”调试内存管理问题&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;启用“僵尸对象”（Zombie Object）后，运行期系统会把所有已经回收的实例转化成特殊的僵尸对象，其所在的内存将无法重用，因此不可能遭到覆写&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;僵尸对象收到消息后，会抛出异常，其中准确说明了发送过来的消息，并描述了回收之前的那个对象。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;编辑应用程序的Scheme，对话框左侧选择“Run”，切换至“Diagnostics”分页，勾选“Enable Zombie Objects”&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;僵尸对象工作原理：    &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;启动僵尸对象功能后，在回收对象时，系统会把对象转化为僵尸对象，而不会彻底回收&lt;/li&gt;
-&lt;li&gt;运行期系统如果发现&lt;code&gt;NSZombieEnable&lt;/code&gt;环境变量已设置，就会调配&lt;code&gt;dealloc&lt;/code&gt;方法，对象所属的类会变成&lt;code&gt;_NSZombie_OriginalClass&lt;/code&gt;    &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;僵尸类（zombie class）是从名为&lt;code&gt;_NSZombie_&lt;/code&gt;的模板类里赋值出来的，只是充当一个标记。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;僵尸类没有实现任何方法，因此接收到的消息都要经过完整的消息转发机制。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;僵尸类经过消息转发后，打印一条特殊的消息，其中指明僵尸对象所收到的消息及原来所属的类，然后应用程序终止。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;1. 通过&lt;code&gt;NSZombieEnable&lt;/code&gt;开启僵尸对象功能，系统不会真正回收对象，而将其转发为僵尸对象，以避免对象内存覆写&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;2. 系统会修改对象的isa指针，令其指向特殊的僵尸类，从而使对象变为僵尸对象。僵尸类能够响应所有的选择子，响应方法为：打印一条包含消息内容及接收者的消息，然后终止应用程序&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&quot;block与GCD&quot;&gt;&lt;a href=&quot;#block与GCD&quot; class=&quot;headerlink&quot; title=&quot;block与GCD&quot;&gt;&lt;/a&gt;block与GCD&lt;/h2&gt;&lt;h3 id=&quot;第37条：理解block的概念&quot;&gt;&lt;a href=&quot;#第37条：理解block的概念&quot; class=&quot;headerlink&quot; title=&quot;第37条：理解block的概念&quot;&gt;&lt;/a&gt;第37条：理解block的概念&lt;/h3&gt;&lt;p&gt;block的基础知识&lt;/p&gt;
-&lt;p&gt;Block的内部结构&lt;/p&gt;
-&lt;p&gt;Block的三种块&lt;/p&gt;
-&lt;p&gt;给块对象发送copy消息可解决在定义它的范围之外使用了。&lt;br&gt;ARC下回自动copy&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;块是C,C++,Objective-C中的词法闭包.&lt;/li&gt;
-&lt;li&gt;块可接受参数,也可返回值.&lt;/li&gt;
-&lt;li&gt;块可以分配在栈或堆上,也可以是全局的.分配在栈上的块可拷贝到堆里,这样的话,就和标准的Objective-C对象一样,具备引用计数了. &lt;h3 id=&quot;第38条：为常用的block类型创建typedef&quot;&gt;&lt;a href=&quot;#第38条：为常用的block类型创建typedef&quot; class=&quot;headerlink&quot; title=&quot;第38条：为常用的block类型创建typedef&quot;&gt;&lt;/a&gt;第38条：为常用的block类型创建typedef&lt;/h3&gt;以typedef重新定义块类型,可令块变量用起来更加简单.&lt;br&gt;定义新类型时应遵从现有的命名习惯,勿使其名称与别的类型相冲突.&lt;br&gt;不妨为同一个块签名定义多个类型命名.如果要重构的代码使用了块类型的某个别名,那么只需修改相应typedef中的块签名即可,无须改动其它typedef.&lt;h3 id=&quot;第39条：用handler块降低代码分散程度&quot;&gt;&lt;a href=&quot;#第39条：用handler块降低代码分散程度&quot; class=&quot;headerlink&quot; title=&quot;第39条：用handler块降低代码分散程度&quot;&gt;&lt;/a&gt;第39条：用handler块降低代码分散程度&lt;/h3&gt;同时开启若干个下载器, 那么在代理方法里面是不是就要对各个下载器进行判断然后执行对应的操作呢? 很麻烦对吧, 一大堆判断, if, else, if, else. 然而handler的优势马上展现出来了.&lt;/li&gt;
-&lt;li&gt;在创建对象时,可以使用内联的handle块将相关业务逻辑一并声明.&lt;/li&gt;
-&lt;li&gt;在有多个实例需要监控时,如果采用委托模式,那么经常需要根据传入的对象来切换,而若改用handler块来实现.则可直接将块与相关对象放在一起.&lt;/li&gt;
-&lt;li&gt;设计API时如果用到了handler块,那么可以增加一个参数,使调用者可通过此参数来决定应该把块安排在哪个队列上执行.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;第40条：用block引用其所属对象时不要出现循环引用&quot;&gt;&lt;a href=&quot;#第40条：用block引用其所属对象时不要出现循环引用&quot; class=&quot;headerlink&quot; title=&quot;第40条：用block引用其所属对象时不要出现循环引用&quot;&gt;&lt;/a&gt;第40条：用block引用其所属对象时不要出现循环引用&lt;/h3&gt;&lt;p&gt;我们知道, 使用__weak确实可以避免循环引用. 但是还有点小瑕疵, 假如block是在子线程中执行, 而对象本身在主线程中被销毁了, 那么block内部的弱引用就会置空(nil). 而这在KVO中会导致崩溃.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Strong-Weak Dance&lt;/strong&gt;就是针对以上问题的. 使用方法很简单, 只需要加一行代码&lt;/p&gt;
-&lt;figure class=&quot;highlight nimrod&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;__weak typeof(self) wself = self;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;self.completionHandler = ^(&lt;span class=&quot;type&quot;&gt;NSInteger&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;result&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    __strong typeof(wself) sself = wself;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [sself removeObserver: sself forKeyPath:@&lt;span class=&quot;string&quot;&gt;&quot;dog&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;这样一来, block中sself所指向的对象在block执行完毕之前都不会被释放掉, 因为在ARC下, 只要对象被强引用着, 就不会被释放.&lt;/p&gt;
-&lt;h3 id=&quot;第41条：多用派发队列dispatch-sync和async，少用同步锁&quot;&gt;&lt;a href=&quot;#第41条：多用派发队列dispatch-sync和async，少用同步锁&quot; class=&quot;headerlink&quot; title=&quot;第41条：多用派发队列dispatch_sync和async，少用同步锁&quot;&gt;&lt;/a&gt;第41条：多用派发队列dispatch_sync和async，少用同步锁&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;派发队列可用来表述同步语义(synchronization semantic),这种做法要比使用@synchronized块或NSLock对象更简单.&lt;/li&gt;
-&lt;li&gt;将同步与异步派发结合起来,可以实现与普通加锁机制一样的同步行为,而这么做却不会阻塞执行异步派发的线程.&lt;/li&gt;
-&lt;li&gt;使用同步队列与栅栏块,可以令同步行为更加高效.（在并发队列中，读取操作使用普通的块来实现，写入操作则用栅栏块来实现。读取操作可以并行，但是写入操作必须单独执行）dispatch_barrier_sync&lt;/li&gt;
-&lt;li&gt;&lt;h3 id=&quot;第42条：用GCD，少用performSelector系列方法&quot;&gt;&lt;a href=&quot;#第42条：用GCD，少用performSelector系列方法&quot; class=&quot;headerlink&quot; title=&quot;第42条：用GCD，少用performSelector系列方法&quot;&gt;&lt;/a&gt;第42条：用GCD，少用performSelector系列方法&lt;/h3&gt;&lt;/li&gt;
-&lt;li&gt;performSelector 系列方法在内存管理方面容易有疏失.它无法确定将要执行的选择子具体是什么,因而ARC编译器也就无法插入适当的内存管理方法.&lt;/li&gt;
-&lt;li&gt;performSelector 系列方法所能处理的选择子太过局限了,选择子的返回值类型及发送给方法的参数个数都受到限制.&lt;/li&gt;
-&lt;li&gt;如果想把任务放在另一个线程上执行,那么最好不要用performSelector系列方法,而是应该把任务封闭到块里,然后调用大中枢派发机制的相关方法来实现.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;第43条：掌握GCD及操作队列的使用时机&quot;&gt;&lt;a href=&quot;#第43条：掌握GCD及操作队列的使用时机&quot; class=&quot;headerlink&quot; title=&quot;第43条：掌握GCD及操作队列的使用时机&quot;&gt;&lt;/a&gt;第43条：掌握GCD及操作队列的使用时机&lt;/h3&gt;&lt;p&gt;NSOperation和GCD的区别：&lt;/p&gt;
-&lt;p&gt;NSOperation的底层是用GCD来实现的。GCD是纯C的API。&lt;/p&gt;
-&lt;p&gt;使用NSOperation以及NSOperationQueue的好处：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;取消某个操作，在运行任务之前，在NSOperation对象上调用cancel方法，会设置对象内的标识为，用以表示此任务不需执行。&lt;/li&gt;
-&lt;li&gt;指定操作间的依赖关系。可以指定操作之间的依赖关系，使得特定的操作再另外的操作顺利执行后方可执行。&lt;/li&gt;
-&lt;li&gt;通过KVO检测NSOperation对象的属性。用isCancel属性来判断任务是否已经取消。isFinish来判断任务是否已经完成。&lt;/li&gt;
-&lt;li&gt;指定操作的优先级。&lt;/li&gt;
-&lt;li&gt;重用NSOperation对象。系统内置了一些NSOperation的子类（NSBlockOperation）供开发者使用。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;第44条：通过Dispatch-Group机制根据系统资源状况来执行任务&quot;&gt;&lt;a href=&quot;#第44条：通过Dispatch-Group机制根据系统资源状况来执行任务&quot; class=&quot;headerlink&quot; title=&quot;第44条：通过Dispatch Group机制根据系统资源状况来执行任务&quot;&gt;&lt;/a&gt;第44条：通过Dispatch Group机制根据系统资源状况来执行任务&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;dispatch group 能够把任务分组&lt;/strong&gt;。调用者可以等待这组任务执行完毕，也可以在提供回调函数之后继续往下执行，这组任务完成时，调用者会得到通知。&lt;br&gt;&lt;strong&gt;通常是将要并发执行的多个任务合为一组，调用者就可以知道这些任务何时全部执行完毕。&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;创建group&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;code&gt;dispatch_group_t group = dispatch_group_create();&lt;/code&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;将任务编组，两种方式：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;把queue添加group里面&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;dispatch_group_async(&lt;span class=&quot;keyword&quot;&gt;dispatch_group_t&lt;/span&gt; group,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  					 &lt;span class=&quot;keyword&quot;&gt;dispatch_queue_t&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;queue&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  					 &lt;span class=&quot;keyword&quot;&gt;dispatch_block_t&lt;/span&gt; block);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ul&gt;
-&lt;li&gt;设置标志位，只要在标志位中间的queue都属于group，但必须要一一对应。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight axapta&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;dispatch_group_enter(dispatch_group_t &lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 中间的线程都属于group	&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dispatch_group_leave(dispatch_group_t &lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ol&gt;
-&lt;li&gt;等待group执行完毕，等待时间为timeout，线程阻塞时间也由timeout决定，直至线程全部执行完毕&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;code&gt;dispatch_group_wait(dispatch_group_t group, dispatch_time_t timeout);&lt;/code&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;group执行完毕回调方法，在特定的线程queue上执行block方法&lt;/li&gt;
-&lt;/ol&gt;
-&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;dispatch_group_notify(&lt;span class=&quot;keyword&quot;&gt;dispatch_group_t&lt;/span&gt; group,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              		  &lt;span class=&quot;keyword&quot;&gt;dispatch_queue_t&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;queue&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              		  &lt;span class=&quot;keyword&quot;&gt;dispatch_block_t&lt;/span&gt; block);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;dispatch group 在并发队列中比较有用，在串行队列中，意义不大。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;在并发队列中，执行任务所用的并发线程的数量，取决于各种因素，而GCD主要是根据系统资源状况来判定这些因素的，即GCD通过判定这些因素，来具体创建多少线程来执行任务.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;GCD 有并发队列机制，能够根据可用的系统资源状况来并发执行任务。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;dispatch_apply函数会将块(block)反复执行一定次数(iterations)，并且每次传给块的参数值都会递增&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;queue 可以是并发队列，系统会根据资源来并行执行&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;也可以是串行队列，但会阻塞线程，直到所有任务执行完毕&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;dispatch_apply(&lt;span class=&quot;keyword&quot;&gt;size_t&lt;/span&gt; iterations, &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			   &lt;span class=&quot;keyword&quot;&gt;dispatch_queue_t&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;queue&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			   &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; (^block)(&lt;span class=&quot;keyword&quot;&gt;size_t&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;一系列任务可归入一个dispatch group之中，开发者可在这组任务执行完毕时获得通知&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;通过dispatch group，可以在并发式队列里同时执行多项任务，此时，GCD会根据系统资源状况来调度这些并发执行的任务&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;第45条：使用dispatch-once来执行只需运行一次的线程安全代码&quot;&gt;&lt;a href=&quot;#第45条：使用dispatch-once来执行只需运行一次的线程安全代码&quot; class=&quot;headerlink&quot; title=&quot;第45条：使用dispatch_once来执行只需运行一次的线程安全代码&quot;&gt;&lt;/a&gt;第45条：使用dispatch_once来执行只需运行一次的线程安全代码&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;dispatch_once最常用于单例模式，整个类中只有一个共用的单例实例，每次调用时不会创建新的实例。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;dispatch_once(&lt;span class=&quot;keyword&quot;&gt;dispatch_once_t&lt;/span&gt; *predicate,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			  &lt;span class=&quot;keyword&quot;&gt;dispatch_block_t&lt;/span&gt; block)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;+ (FDNetwork *)shareManager &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; FDNetwork *manager = &lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;dispatch_once_t&lt;/span&gt; onceToken;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;dispatch_once&lt;/span&gt;(&amp;amp;onceToken, ^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        manager = [[FDNetwork alloc] init];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; manager;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;使用dispatch_once&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;简化代码并且彻底保证线层安全，而且高效&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;标记声明为&lt;code&gt;static&lt;/code&gt;，可以保证每次调用时都是完全相同的标记。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;第46条：不要使用dispatch-get-current-queue&quot;&gt;&lt;a href=&quot;#第46条：不要使用dispatch-get-current-queue&quot; class=&quot;headerlink&quot; title=&quot;第46条：不要使用dispatch_get_current_queue&quot;&gt;&lt;/a&gt;第46条：不要使用dispatch_get_current_queue&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;dispatch_get_current_queue函数的行为常常与开发者所预期的不同.此函数已经废弃,只应做调试之用.&lt;/li&gt;
-&lt;li&gt;由于派发队列是按层级来组织的,所以无法单用某个队列对象来描述”当前的队列”这一概念.&lt;/li&gt;
-&lt;li&gt;dispatch_get_current_queue函数用于解决由不可重入的代码所引发的死锁,然而能用此函数解决的问题,通常也能改为”队列特定数据”来解决.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;系统框架&quot;&gt;&lt;a href=&quot;#系统框架&quot; class=&quot;headerlink&quot; title=&quot;系统框架&quot;&gt;&lt;/a&gt;系统框架&lt;/h2&gt;&lt;h3 id=&quot;第47条：熟悉系统框架&quot;&gt;&lt;a href=&quot;#第47条：熟悉系统框架&quot; class=&quot;headerlink&quot; title=&quot;第47条：熟悉系统框架&quot;&gt;&lt;/a&gt;第47条：熟悉系统框架&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;许多系统框架都可以直接使用.其中最重要的是Foundation与CoreFoundation,这两个框架提供了构建应用程序所需的许多核心功能.&lt;/li&gt;
-&lt;li&gt;很多常见任务都能用框架来做,例如音频与视频处理,网络通信,数据管理等&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;第48条：多用块枚举，少用for循环&quot;&gt;&lt;a href=&quot;#第48条：多用块枚举，少用for循环&quot; class=&quot;headerlink&quot; title=&quot;第48条：多用块枚举，少用for循环&quot;&gt;&lt;/a&gt;第48条：多用块枚举，少用for循环&lt;/h3&gt;&lt;h4 id=&quot;for循环&quot;&gt;&lt;a href=&quot;#for循环&quot; class=&quot;headerlink&quot; title=&quot;for循环&quot;&gt;&lt;/a&gt;for循环&lt;/h4&gt;&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;NSDictionary&lt;/span&gt; *adictionary = &lt;span class=&quot;comment&quot;&gt;/* ... */&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;NSArray&lt;/span&gt; *array = [adictionary allkeys];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; array&lt;span class=&quot;variable&quot;&gt;.count&lt;/span&gt;; i++) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; key = keys[i];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; value = adictionary[key];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h4 id=&quot;NSEnumerator遍历法&quot;&gt;&lt;a href=&quot;#NSEnumerator遍历法&quot; class=&quot;headerlink&quot; title=&quot;NSEnumerator遍历法&quot;&gt;&lt;/a&gt;NSEnumerator遍历法&lt;/h4&gt;&lt;p&gt; NSEnumerator是抽象基类，这种方法已经过时了&lt;/p&gt;
-&lt;h4 id=&quot;快速遍历&quot;&gt;&lt;a href=&quot;#快速遍历&quot; class=&quot;headerlink&quot; title=&quot;快速遍历&quot;&gt;&lt;/a&gt;快速遍历&lt;/h4&gt;&lt;figure class=&quot;highlight elixir&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;constant&quot;&gt;NSArray &lt;/span&gt;*array = &lt;span class=&quot;regexp&quot;&gt;/* ... */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (id obj &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; array) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;do&lt;/span&gt; something with &lt;span class=&quot;string&quot;&gt;&#39;obj&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h4 id=&quot;基于块的遍历方式&quot;&gt;&lt;a href=&quot;#基于块的遍历方式&quot; class=&quot;headerlink&quot; title=&quot;基于块的遍历方式&quot;&gt;&lt;/a&gt;基于块的遍历方式&lt;/h4&gt;&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;NSArray&lt;/span&gt;, &lt;span class=&quot;built_in&quot;&gt;NSDictionary&lt;/span&gt;, &lt;span class=&quot;built_in&quot;&gt;NSSet&lt;/span&gt;都有基于block的遍历方式, 例如数组的 :&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;NSArray&lt;/span&gt; *array = &lt;span class=&quot;comment&quot;&gt;/* ... */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[array enumerateObjectsUsingBlock:^(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; obj, &lt;span class=&quot;built_in&quot;&gt;NSUInteger&lt;/span&gt; idx, &lt;span class=&quot;built_in&quot;&gt;BOOL&lt;/span&gt; *stop) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// do something with &#39;obj&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (shouldStop) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        *stop = &lt;span class=&quot;literal&quot;&gt;YES&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;不仅能简单遍历, 还能控制什么时候退出遍历. 还有更高级的块遍历方法能够指定选项, 例如反向遍历, 并行快速遍历等等.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 数组的方法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)enumerateObjectsWithOptions:(&lt;span class=&quot;built_in&quot;&gt;NSEnumerationOptions&lt;/span&gt;)opts usingBlock:(&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; (^)(ObjectType obj, &lt;span class=&quot;built_in&quot;&gt;NSUInteger&lt;/span&gt; idx, &lt;span class=&quot;built_in&quot;&gt;BOOL&lt;/span&gt; *stop))block;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 字典的方法&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)enumerateKeysAndObjectsWithOptions:(&lt;span class=&quot;built_in&quot;&gt;NSEnumerationOptions&lt;/span&gt;)opts usingBlock:(&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; (^)(KeyType key, ObjectType obj, &lt;span class=&quot;built_in&quot;&gt;BOOL&lt;/span&gt; *stop))block;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ul&gt;
-&lt;li&gt;遍历collection有四种方式.最基本的办法是for循环,其次是NSEnumerator遍历法及快速遍历法,最新,最先进的方式则是”块枚举法”.&lt;/li&gt;
-&lt;li&gt;“块枚举法”本身就能通过GCD来并发执行遍历操作,无须另行编写代码.而采用其他遍历方式则无法轻易实现这一点.&lt;/li&gt;
-&lt;li&gt;若提前知道待遍历的collection含有何种对象,则应修改块签名,指出对象的具体类型.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;第49条：队自定义其内存管理语义的collection使用无缝桥接&quot;&gt;&lt;a href=&quot;#第49条：队自定义其内存管理语义的collection使用无缝桥接&quot; class=&quot;headerlink&quot; title=&quot;第49条：队自定义其内存管理语义的collection使用无缝桥接&quot;&gt;&lt;/a&gt;第49条：队自定义其内存管理语义的collection使用无缝桥接&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;通过无缝桥接技术,可以在Foundation框架中的Objective-C对象与CoreFoundation框架中的C语言数据结构之间来回转换.&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;在CoreFoundation层面创建collection时,可以指定许多回调函数,这些函数表示此collection应如何处理其元素.然后,可运用无缝桥接技术,将其转换成具备特殊内存管理语义的Objective-C collection.&lt;/p&gt;
-&lt;h3 id=&quot;第50条：构建缓存是选用NSCachae而非NSDictionary&quot;&gt;&lt;a href=&quot;#第50条：构建缓存是选用NSCachae而非NSDictionary&quot; class=&quot;headerlink&quot; title=&quot;第50条：构建缓存是选用NSCachae而非NSDictionary&quot;&gt;&lt;/a&gt;第50条：构建缓存是选用NSCachae而非NSDictionary&lt;/h3&gt;&lt;p&gt;NSCache是Foundation框架中为缓存而生的类. NSCache对比NSDictionary的优点&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;当系统的资源将要耗尽时, 它可以自动删减缓存.先行删减”最久未使用的对象”&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;NSCache不会”拷贝”键, 而是”保留”键. 所有在键不支持拷贝的情况下比字典方便.&lt;/li&gt;
-&lt;li&gt;线程安全, 开发者无需自己编写加锁代码&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;开发者可以操纵缓存删减其内容的时机, 也就是清理缓存的策略&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;缓存中的对象总数(countLimit属性)&lt;/li&gt;
-&lt;li&gt;缓存中所有对象的总开销(totalCostLimit属性)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;NSCache还经常会跟NSPurgeableData(NSMutableData的子类)搭配使用, 当NSPurgeableData对象所占内存被系统所丢弃时, 该对象自身也会从缓存中移除.&lt;/p&gt;
-&lt;p&gt;该类有2个特别的方法&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;beginContentAccess : 告诉它, 现在还不应该丢弃自己所占据的内存&lt;/li&gt;
-&lt;li&gt;endContentAccess : 告诉它, 必要时可以丢弃自己所占据的内存了&lt;br&gt;缓存使用得当, 将会大大提高应用程序的响应速度. 但并不是什么东西都需要缓存, 只有那种”重新计算起来费劲”的数据, 才值得放入缓存中. 例如从网络获取或从磁盘读取的数据.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;第51条：精简initialize与load的实现代码&quot;&gt;&lt;a href=&quot;#第51条：精简initialize与load的实现代码&quot; class=&quot;headerlink&quot; title=&quot;第51条：精简initialize与load的实现代码&quot;&gt;&lt;/a&gt;第51条：精简initialize与load的实现代码&lt;/h3&gt;&lt;p&gt;&lt;code&gt;+ (void)load&lt;/code&gt;&lt;br&gt;该方法特点如下 :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;程序一启动, 就会调用每个类及分类的load方法.&lt;/li&gt;
-&lt;li&gt;执行子类的load方法之前必定会先执行超类的load方法.&lt;/li&gt;
-&lt;li&gt;执行分类的load方法之前必定会先执行本类的load方法&lt;/li&gt;
-&lt;li&gt;该方法不遵从继承规则, 也就是说如果子类没有实现load方法, 那么不管其超类有没有实现该方法, 系统都不会自动调用.&lt;/li&gt;
-&lt;li&gt;该方法会阻塞主线程!!!!!!!!!!!!!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;code&gt;+ (void)initialize&lt;/code&gt;&lt;br&gt;该方法特点如下 :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;该方法会在程序首次使用该类之前调用, 且只调用一次. 也就是说该方法是懒加载的, 如果某个类一直没使用, 就永远不会调用.&lt;/li&gt;
-&lt;li&gt;该方法一定会在”线程安全的环境”下执行. 意思就是只有执行该方法的那个线程可以操作类和类实例. 其他线程都要先阻塞, 等着该方法执行完.&lt;/li&gt;
-&lt;li&gt;该方法遵从继承规则, 子类如果没实现它, 则会调用超类的实现代码.&lt;br&gt;回到主题, 为什么initialize 与 load的代码要尽量精简呢?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;load方法会阻塞主线程;&lt;br&gt;initialize方法会阻塞当前线程, 如果该线程恰好是主线程, 你懂的…&lt;br&gt;开发者无法控制类的初始化时机, 也许将来苹果会修改类的初始化方式呢?&lt;br&gt;如果某类的该两方法引入了其他类, 而那些类又没初始化, 系统就会迫使其初始化, 而那些类初始化一不小心又刚刚好引入了某类, 则会出现”依赖环”&lt;br&gt;综上, 尽量不要重写load方法, 而initialize方法只应该用来&lt;br&gt;设置内部数据, 不应该调用其他方法, 哪怕是本类自己的方法.&lt;br&gt;如果单例类在首次使用之前需要做一些操作&lt;/p&gt;
-&lt;h3 id=&quot;第52条：别忘了NSTimer会保留其目标对象&quot;&gt;&lt;a href=&quot;#第52条：别忘了NSTimer会保留其目标对象&quot; class=&quot;headerlink&quot; title=&quot;第52条：别忘了NSTimer会保留其目标对象&quot;&gt;&lt;/a&gt;第52条：别忘了NSTimer会保留其目标对象&lt;/h3&gt;&lt;p&gt;这种情况跟block引用self那种情况差不多. 目标对象保留计时器, 计时器反过来又保留对象, 则会导致循环引用.&lt;/p&gt;
-&lt;p&gt;我们可以利用block或者”Strong-Weak Dance”来解决此问题.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;NSTimer对象会保留其目标,直到计时器本身失效为止,调用invalidate方法可令计时器失效,另外,一次性的计时器在触发完任务之后也会失效.&lt;/li&gt;
-&lt;li&gt;反复执行任务的计时器,很容易引入保留环,如果这种计时器的目标对象又保留了计时器本身,那肯定会导致保留环.这种环状保留关系,可能是直接发生的,也可能是通过对象图里的其它对象间接发生的.&lt;/li&gt;
-&lt;li&gt;可以扩充NSTimer的功能,用”块”来打破保留环.不过除非NSTimer将来在公共接口里提供此功能,否则必须创建分类,将相关实现代码加入其中.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;面试题&quot;&gt;&lt;a href=&quot;#面试题&quot; class=&quot;headerlink&quot; title=&quot;面试题&quot;&gt;&lt;/a&gt;面试题&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;load和initialize的区别 &lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;load在main函数之前调用，initialize在main函数之后调用，都为“+”类方法。&lt;/li&gt;
-&lt;li&gt;load加载编译期使用，子类有load，会自动调用父类的load。子类没有load方法。不会自动调用父类的load。 initialize运行时懒加载，子类有没有initialize，都会自动调用父类的initialize。主要是在给某个对象发送消息时调用，应该会调用objc_msgSendSuper()吧？（自认为）&lt;/li&gt;
-&lt;li&gt;load用于Method Swizzle.例如MJRefresh中UIScrollView+MJRefresh中，方法1和方法2交换，调用runtime中的方法method_exchangeImplementations方法。&lt;br&gt; initialize主要是变量初始化和通知的添加和移除。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;delegate和Block那个好？&lt;br&gt;Block更加简洁，可以访问此范围内的全部变量。Block无需保存获取器，也无需再回调方法里切换。在Block中来操作成功和失败的情况。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;delegate的缺点：如果类要分别使用多个获取器下载不同该数据，那么就得在delegate回调方法里根据传入的获取器参数来切换。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;内存泄露的场景&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;使用performSelector方法，编译器不知道将要调用的选择子是什么，不了解其方法签名以及返回值，在ARC内存管理中就不知道返回值是否应该释放。如果不释放的话，就会造成内存泄露&lt;/li&gt;
-&lt;li&gt;Block中&lt;/li&gt;
-&lt;li&gt;NSTimer的时候要特别注意内存泄漏的问题, 因为NSTimer会持有目标对象, 很容易造成循环引用的问题, 也许你会想到在这个目标对象的dealloc里面让NSTimer失效(调用 invalidation 并且置为nil), 但是这根本就没有用, 因为循环引用的原因, 根本就不会调用dealloc方法, 所以在里面销毁是没有用的, 需要在对象被销毁之前手动销毁计时器。&lt;/li&gt;
-&lt;li&gt;相互引用多个对象的循环引用会导致内存泄漏，因为循环中的对象其保留计数不会降为0，永远不会释放。&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;effective objective-c 2.0读书笔记.&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="读书笔记" scheme="http://peilinghui.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>深入学习Block</title>
-    <link href="http://peilinghui.com/2016/04/01/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0Block/"/>
-    <id>http://peilinghui.com/2016/04/01/深入学习Block/</id>
-    <published>2016-04-01T05:01:49.000Z</published>
-    <updated>2017-03-25T12:30:46.000Z</updated>
-    
-    <content type="html">&lt;p&gt;深入学习Block。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;Block&quot;&gt;&lt;a href=&quot;#Block&quot; class=&quot;headerlink&quot; title=&quot;Block&quot;&gt;&lt;/a&gt;Block&lt;/h1&gt;&lt;h2 id=&quot;Block的概要&quot;&gt;&lt;a href=&quot;#Block的概要&quot; class=&quot;headerlink&quot; title=&quot;Block的概要&quot;&gt;&lt;/a&gt;Block的概要&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Block功能：带有自动变量(局部变量)的匿名函数(不带名称的函数)。Blocks 是闭包在 OC 语言中的实现，并不是 iOS 独有的概念，在 C++、Java 等语言也有实现闭包，只是名称不同而已。在objc中，block实际上就算是对象。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Block语法：&lt;/p&gt;
-&lt;figure class=&quot;highlight clojure&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;^void&lt;/span&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;int&lt;/span&gt;&lt;/span&gt; event)&lt;/span&gt;&lt;span class=&quot;collection&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	print&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;string&quot;&gt;&quot;buttonId:%d event = %d\n&quot;&lt;/span&gt;,i,event)&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;特点：a.没有函数名  b.带有“^”号&lt;br&gt;&lt;code&gt;^  返回值类型  参数列表  表达式&lt;/code&gt;  &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;优势&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;可代替 Delegate 完成回调，而不需要像 Delegate 那样繁琐
-在某些方面，可代替 selector（如 NSNotificationCenter 在 addObserver 的时候，可以使用 block，而不用单独定义方法）
-延长对象的生命周期（Block 会自动持有对象）
-提高代码的复用性和可读性
-常用于：View 动画、GCD、网络异步请求
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;Block模式—block特性&quot;&gt;&lt;a href=&quot;#Block模式—block特性&quot; class=&quot;headerlink&quot; title=&quot;Block模式—block特性&quot;&gt;&lt;/a&gt;Block模式—&lt;strong&gt;block特性&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&quot;截获自动变量值&quot;&gt;&lt;a href=&quot;#截获自动变量值&quot; class=&quot;headerlink&quot; title=&quot;截获自动变量值&quot;&gt;&lt;/a&gt;截获自动变量值&lt;/h3&gt;&lt;p&gt;“带有自动变量值”在Block中表现为“截获自动变量值”&lt;/p&gt;
-&lt;p&gt;1&amp;gt; 对于 block 外的变量引用，block 默认是将其复制到其数据结构中来实现访问的. 也就是说block的自动变量截获只针对block内部使用的自动变量, 不使用则不截获, 因为截获的自动变量会存储于block的结构体内部, 会导致block体积变大.&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%884.08.14.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight dns&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;int age = 10&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;myBlock block = ^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    NSLog(@&quot;age = %d&quot;, age)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;age = 18&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;block()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;输出为&lt;br&gt;age = 10&lt;/p&gt;
-&lt;p&gt;2&amp;gt; 对于用 __block 修饰的外部变量引用，block 是复制其引用地址来实现访问的.&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%884.08.20.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight dns&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;__block int age = 10&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;myBlock block = ^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    NSLog(@&quot;age = %d&quot;, age)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;age = 18&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;block()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;输出为&lt;br&gt;age = 18&lt;/p&gt;
-&lt;p&gt;第一种情况block内部不允许修改变量的值, 第二种情况下可以. (有例外, 静态变量, 静态全局变量, 全局变量即使不使用&lt;strong&gt;block修饰符也可以在block内部修改其值)&lt;br&gt;附有&lt;/strong&gt;block说明符的自动变量可在Block中赋值，该变量成为__block变量。&lt;/p&gt;
-&lt;h3 id=&quot;截获对象&quot;&gt;&lt;a href=&quot;#截获对象&quot; class=&quot;headerlink&quot; title=&quot;截获对象&quot;&gt;&lt;/a&gt;截获对象&lt;/h3&gt;&lt;p&gt;对象不同于自动变量, 就算对象不加上&lt;strong&gt;block修饰符, 在block内部能够修改对象的属性.&lt;br&gt;block截获对象与截获自动变量有所不同.&lt;br&gt;堆块会持有对象, 而不会持有&lt;/strong&gt;block修饰的对象, 而栈块永远不会持有对象, 为什么呢?&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;堆块作用域不同于栈块, 堆块可以超出其作用域地方使用, 所以堆块结构体内部会保留对象的强指针, 保证堆块在生命周期结束之前都能访问对象. 而对于__block对象为什么不会持有呢? 原因很简单, 因为__block对象会跟随block被复制到堆中, block再去引用堆中的__对象(后面会讲这个过程)..
-栈块只能在当前作用域下使用, 所以其内部不会持有对象. 因为不存在在作用域之外访问对象的可能(栈离开当前作用域立马被销毁)
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;Block的实现&quot;&gt;&lt;a href=&quot;#Block的实现&quot; class=&quot;headerlink&quot; title=&quot;Block的实现&quot;&gt;&lt;/a&gt;Block的实现&lt;/h2&gt;&lt;h3 id=&quot;Block的实质&quot;&gt;&lt;a href=&quot;#Block的实质&quot; class=&quot;headerlink&quot; title=&quot;Block的实质&quot;&gt;&lt;/a&gt;Block的实质&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Blocks 的数据结构&lt;/strong&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8A%E5%8D%889.35.54.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;对应的结构体定义如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;struct&lt;/span&gt; Block_descriptor &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; reserved;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; size;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; (*&lt;span class=&quot;keyword&quot;&gt;copy&lt;/span&gt;)(&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; *dst, &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; *src);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; (*dispose)(&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; *);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;struct&lt;/span&gt; Block_layout &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; *isa;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; flags;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; reserved;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; (*invoke)(&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; *, ...);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;struct&lt;/span&gt; Block_descriptor *descriptor;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;/* Imported variables. */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;通过该图，我们可以知道，一个 Block 实例实际上由 6 部分构成：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;isa 指针: 所有对象都有该指针，用于实现对象相关的功能
-
-flags: 用于按 bit 位表示一些 block 的附加信息，本文后面介绍 block copy 的实现代码可以看到对该变量的使用；
-
-reserved: 保留变量；
-
-invoke: 函数指针，指向具体的 block 实现的函数调用地址；
-
-descriptor: 表示该 block 的附加描述信息，主要是 size 大小，以及 copy 和 dispose 函数的指针；
-
-variables: capture 过来的变量，block 能够访问它外部的局部变量，就是因为将这些变量（或变量的地址）复制到了结构体中；
-copy : 用于保留捕获的对象
-dispose : 用于释放捕获的对象
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Objective-C 中的 Stack 和 Heap&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;首先所有的 Objective-C 对象都是分配在 Heap(堆) 的。 在 OC 最典型的内存分配与初始化就是这样的：&lt;/p&gt;
-&lt;p&gt;NSObject *obj = [[NSObject alloc] init];&lt;/p&gt;
-&lt;p&gt;一个对象在 alloc 的时候，就在 Heap 分配了内存空间。&lt;/p&gt;
-&lt;p&gt;Stack 对象通常有速度的优势，而且不会发生内存泄露问题。那么为什么 OC 的对象都是分配在 Heap 的呢？ 原因在于：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Stack 对象的生命周期所导致的问题。例如一旦函数返回，则所在的 Stack Frame（栈帧）就会被销毁。那么此时返回的对象也会一并销毁。这个时候我们去 retain 这个对象是无效的。因为整个 Stack Frame 都已经被销毁了。简单而言，就是 Stack 对象的生命周期不适合 OC 的引用计数内存管理方法。
-
-Stack 对象不够灵活，不具备足够的扩展性。创建时长度已经是固定的,而stack对象的拥有者也就是所在的 Stack Frame。
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;Block-存储域&quot;&gt;&lt;a href=&quot;#Block-存储域&quot; class=&quot;headerlink&quot; title=&quot;Block 存储域&quot;&gt;&lt;/a&gt;Block 存储域&lt;/h3&gt;&lt;p&gt;block中的isa指向的是该block的Class。在block runtime中&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;全局块(_NSConcreteGlobalBlock)程序的数据区域(.data区)
-栈块(_NSConcreteStackBlock)
-堆块(_NSConcreteMallocBlock)
-
-全局块存在于全局内存中, 相当于单例.
-栈块存在于栈内存中, 超出其作用域则马上被销毁
-堆块存在于堆内存中, 是一个带引用计数的对象, 需要自行管理其内存
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;当struct第一次被创建时，它是存在于该函数的栈帧上的，其Class是固定的_NSConcreteStackBlock。其捕获的变量是会赋值到结构体的成员上，所以当block初始化完成后，捕获到的变量不能更改。&lt;/p&gt;
-&lt;p&gt;当函数返回时，函数的栈帧被销毁，这个block的内存也会被清除。所以在函数结束后仍然需要这个block时，就必须用Block_copy()方法将它拷贝到堆上。这个方法的核心动作很简单：申请内存，将栈数据复制过去，将Class改一下，最后向捕获到的对象发送retain，增加block的引用计数。详细代码可以直接点这里查看。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;全局块(_NSConcreteGlobalBlock)&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;block定义在全局变量的地方
-block没有截获任何自动变量
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;以上两个情况满足任意一个则该block为全局块, 全局块的生命周期贯穿整个程序, 相当于单例.全局的静态 Block，不会访问任何外部变量。&lt;br&gt;简单地讲，如果一个block钟没有引用外部变量并且没有被其他对象持有，就是NSConcreteGlobalBlock。NSConcreteGlobalBlock是全局的block，在编译期间就已经决定了，如同宏一样。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;栈块(_NSConcreteStackBlock)&lt;/strong&gt;&lt;br&gt;保存在栈中的 Block，当函数返回时会被销毁。（ARC 中系统实现了自动 copy, 将创建在栈上的 Block 自动拷贝到堆上，所以不存在此类型的 Block）NSConcreteStackBlock就是引用了外部变量的block，&lt;/p&gt;
-&lt;p&gt;NSConcreteGlobalBlock由于处在 data段，可以通过指针安全访问。StackBlock处在内存栈区，如果其变量作用域结束， 这个 block 就被废弃，block 上的&lt;strong&gt;block变量也同样会被废弃。为了解决这个问题，block 提供了 copy 的功能，将block和&lt;/strong&gt;block 变量从栈拷贝到堆。当 block 从栈拷贝到堆后，当栈上变量作用域结束时，仍然可以继续使用 block。堆上的 block 类型为 _NSConcreteMallocBlock，会将 _NSConcreteMallocBlock 写入 isa。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;堆块(_NSConcreteMallocBlock)&lt;/strong&gt;&lt;br&gt;栈块copy之后就变成堆块，一个block被copy时，将生成NSConcreteMallocBlock（block没有retain）&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8A%E5%8D%889.51.44.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;只要这个NSConcreteMallocBlock存在，内部对象的引用计数就会+1。&lt;/p&gt;
-&lt;p&gt;NSConcreteStackBlock处于内存的栈区,ARC中大部分情况下编译器通常会将创建在栈上的 block 自动拷贝到堆上。当block 作为方法或函数的参数传递时，编译器不会自动调用 copy 方法。但方法/函数在内部已经实现了一份拷贝了 block 参数的代码，或者如果编译器自动拷贝，那么调用者就不需再手动拷贝。&lt;/p&gt;
-&lt;h3 id=&quot;block变量的存储域&quot;&gt;&lt;a href=&quot;#block变量的存储域&quot; class=&quot;headerlink&quot; title=&quot;__block变量的存储域&quot;&gt;&lt;/a&gt;__block变量的存储域&lt;/h3&gt;&lt;p&gt;默认block捕获到的变量，都是赋值给block的结构体的，相当于const不可改。为了让block能访问并修改外部变量，需要加上__block修饰词。&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8A%E5%8D%8811.14.42.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;block的copy操作究竟做了什么呢?&lt;/p&gt;
-&lt;p&gt;由上图可知, 对一个栈块进行copy操作会连同block与&lt;strong&gt;block变量(不管有没有使用)在内一同copy到堆上, 并且block会持有&lt;/strong&gt;block变量(使用).&lt;br&gt;ps : 堆上的block及__block变量均为对象, 都有各自的引用计数&lt;/p&gt;
-&lt;p&gt;当然, 当block被销毁时, block持有的__block也会被释放&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%882.38.12.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;到这里我们能知道, 此思考方式与Objective-C的引用计数内存管理完全相同.&lt;/p&gt;
-&lt;p&gt;那么有人就会问了, 既然&lt;strong&gt;block变量也被复制到堆上去了, 那么访问该变量是访问栈上的还是堆上的呢?? &lt;/strong&gt;forwarding 终于要闪亮登场了.&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%882.38.19.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;通过&lt;strong&gt;forwarding, 无论实在block中, block外访问&lt;/strong&gt;block变量, 也不管该变量在栈上或堆上, 都能顺利地访问同一个__block变量. &lt;/p&gt;
-&lt;p&gt;当 block 从栈被拷贝到堆时，&lt;strong&gt;forwarding 指针变量也会指向堆区的结构体。但是为什么要这么做呢？为什么要让原本指向栈区的结构体的指针，去指向堆区的结构体呢？看起来匪夷所思，实则原因很简单，要从 &lt;/strong&gt;forwarding 产生的缘由说起。想想起初为什么要给 block 添加 copy 的功能，就是因为 block 获取了局部变量，当要在其他地方（超出局部变量作用范围）使用这个 block 的时候，由于访问局部变量异常，导致程序崩溃。为了解决这个问题，就给 block 添加了 copy 功能。在将 block 拷贝到堆上的同时，将 &lt;strong&gt;forwarding 指针指向堆上结构体。后面如果要想使用 &lt;/strong&gt;block 变量，只要通过 __forwarding 访问堆上变量，就不会出现程序崩溃了。。&lt;/p&gt;
-&lt;h3 id=&quot;block-的自动拷贝和手动拷贝&quot;&gt;&lt;a href=&quot;#block-的自动拷贝和手动拷贝&quot; class=&quot;headerlink&quot; title=&quot;block 的自动拷贝和手动拷贝&quot;&gt;&lt;/a&gt;block 的自动拷贝和手动拷贝&lt;/h3&gt;&lt;p&gt;那么Blocks提供的复制方法究竟是什么？&lt;/p&gt;
-&lt;p&gt;ARC有效的时候，大多数轻型下编译器会恰当的进行判断，自动生成将Block从栈上复制到堆上的代码。&lt;/p&gt;
-&lt;h4 id=&quot;block-的自动拷贝&quot;&gt;&lt;a href=&quot;#block-的自动拷贝&quot; class=&quot;headerlink&quot; title=&quot;block 的自动拷贝&quot;&gt;&lt;/a&gt;block 的自动拷贝&lt;/h4&gt;&lt;p&gt;ARC下, 以下几种情况下, 编译器会帮我们把栈上的block复制到堆中&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;block作为函数返回值返回时。编译器自动将 block 作为 _Block_copy 函数，效果等同于 block 直接调用 copy 方法；
-
-将block赋值给__strong修饰符id类型或block类型成员变量时。编译器自动将 block 作为 _Block_copy 函数，效果等同于 block 直接调用 copy 方法；
-在方法名中含有usingBlock的Cocoa框架方法或GCD的API中传递block时。这些方法会在内部对传递进来的 block 调用 copy 或 _Block_copy 进行拷贝;
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;block-的手动拷贝&quot;&gt;&lt;a href=&quot;#block-的手动拷贝&quot; class=&quot;headerlink&quot; title=&quot;block 的手动拷贝&quot;&gt;&lt;/a&gt;block 的手动拷贝&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;此外的情况需要手动对block调用copy方法&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;把block作为函数/方法的参数传入时才需要对block进行copy操作.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;我们对不同地方的block调用copy会产生什么效果呢?&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-17%20%E4%B8%8B%E5%8D%883.12.58.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Block-循环引用&quot;&gt;&lt;a href=&quot;#Block-循环引用&quot; class=&quot;headerlink&quot; title=&quot;Block 循环引用&quot;&gt;&lt;/a&gt;Block 循环引用&lt;/h3&gt;&lt;p&gt;如果在 Block 中使用附有 __strong 修饰符的对象类型自动变量，那么当 Block 从栈复制到堆时，该对象为 Block 所持有，于是便导致了循环引用的产生。&lt;br&gt;self 持有 Block，Block 持有 self，这正是循环引用。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;比较&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;下面对使用 block 变量避免循环引用的方法和使用 weak 修饰符及 __unsafe_unretained 修饰符避免循环引用的方法做个比较。  &lt;/p&gt;
-&lt;p&gt;使用 __block 变量的优点如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;通过 __block 变量可控制对象的持有期间
-在不能使用 __weak 修饰符的环境中不使用 __unsafe_unretained 修饰符即可（不必担心 悬垂指针 ）
-在执行 Block 时可动态地决定是否将 nil 或其他对象赋值在 __block 变量中。
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用 __block 变量的缺点如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;为避免循环引用必须执行 Block
-存在执行了 Block 语法，却不执行 Block 的路径时，无法避免循环引用。若由于 Block 引发了循环引用时，根据 Block 的用途选择使用 __block 变量、 __weak 修饰符或 __unsafe_unretained 修饰符来避免循环引用。
-MRC下用__block可以避免循环引用(原因见上面block特性之截获自动变量值)
-ARC下用__weak来避免循环引用
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这里需要提醒大家的是, 只有堆块(_NSConcreteMallocBlock)才可能会造成循环引用, 其他两种block不会&lt;/p&gt;
-&lt;h3 id=&quot;Block用weakSelf、strongSelf、-weakify、-strongify解决循环引用&quot;&gt;&lt;a href=&quot;#Block用weakSelf、strongSelf、-weakify、-strongify解决循环引用&quot; class=&quot;headerlink&quot; title=&quot;Block用weakSelf、strongSelf、@weakify、@strongify解决循环引用&quot;&gt;&lt;/a&gt;Block用weakSelf、strongSelf、@weakify、@strongify解决循环引用&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;weakSelf 是为了block不持有self，避免Retain Circle循环引用。在 Block 内如果需要访问 self 的方法、变量，建议使用 weakSelf。
-
-strongSelf的目的是因为一旦进入block执行，假设不允许self在这个执行过程中释放，就需要加入strongSelf。block执行完后这个strongSelf 会自动释放，没有不会存在循环引用问题。如果在 Block 内需要多次 访问 self，则需要使用 strongSelf。
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;AFN经典说起，以下是AFN其中的一段代码：&lt;/p&gt;
-&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;preprocessor&quot;&gt;#pragma mark - NSOperation&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)setCompletionBlock:(&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; (^)(&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;))block &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.lock&lt;/span&gt; lock];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (!block) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [&lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt; setCompletionBlock:&lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        __&lt;span class=&quot;keyword&quot;&gt;weak&lt;/span&gt; __&lt;span class=&quot;keyword&quot;&gt;typeof&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;)weakSelf = &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [&lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt; setCompletionBlock:^ &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            __&lt;span class=&quot;keyword&quot;&gt;strong&lt;/span&gt; __&lt;span class=&quot;keyword&quot;&gt;typeof&lt;/span&gt;(weakSelf)strongSelf = weakSelf;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            dispatch_group_t group = strongSelf&lt;span class=&quot;variable&quot;&gt;.completionGroup&lt;/span&gt; ?: url_request_operation_completion_group();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;built_in&quot;&gt;dispatch_queue_t&lt;/span&gt; queue = strongSelf&lt;span class=&quot;variable&quot;&gt;.completionQueue&lt;/span&gt; ?: dispatch_get_main_queue();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;preprocessor&quot;&gt;#pragma clang diagnostic pop&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            dispatch_group_async(group, queue, ^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                block();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            dispatch_group_notify(group, url_request_operation_completion_queue(), ^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                [strongSelf setCompletionBlock:&lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.lock&lt;/span&gt; unlock];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;如果block里面不加&lt;strong&gt;strong &lt;/strong&gt;typeof(weakSelf)strongSelf = weakSelf会如何呢？就会输出null。&lt;br&gt;&lt;strong&gt;weakSelf之后，无法控制什么时候会被释放，为了保证在block内不会被释放，需要添加__strong。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;在block里面使用的__strong修饰的weakSelf是为了在函数生命周期中防止self提前释放。strongSelf是一个自动变量当block执行完毕就会释放自动变量strongSelf不会对self进行一直进行强引用&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;@weakify(self) 和 @strongify(self) 就是比我们日常写的weakSelf、strongSelf多了一个@autoreleasepool{}而已.&lt;/p&gt;
-&lt;h2 id=&quot;要点总结&quot;&gt;&lt;a href=&quot;#要点总结&quot; class=&quot;headerlink&quot; title=&quot;要点总结&quot;&gt;&lt;/a&gt;要点总结&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;Block 执行的代码其实在编译的时候就已经准备好了
-本身 Block 就是一个普通的 OC 对象。正因为它是对象，Block 可以被作为参数传递，可以作为返回值从一个方法返回，可以用来给变量赋值
-__block 修饰符在 MRC 下不会进行引用计数加 1，而 ARC 下则会加 1
-对于 Block 外的变量引用，Block 默认是将其复制到其数据结构中来实现访问的
-对于用 __block 修饰的外部变量引用，Block 是复制其引用地址来实现访问的
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;面试题&quot;&gt;&lt;a href=&quot;#面试题&quot; class=&quot;headerlink&quot; title=&quot;面试题&quot;&gt;&lt;/a&gt;面试题&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;讲讲block；&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;block在ARC中和传统的MRC中的行为和用法有没有什么区别，需要注意些什么?&lt;br&gt;注意：1&amp;gt;block的内存管理 (block的实现是基于指针和函数指针)   &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果没有copy操作，block代码默认放在栈内存（弱引用）。&lt;/li&gt;
-&lt;li&gt;如果有copy操作，block升级放在堆内存（强引用）。&lt;br&gt;2&amp;gt;防止循环引用&lt;br&gt; 解决：非ARC（MRC）：&lt;strong&gt;__block&lt;/strong&gt;&lt;br&gt;ARC：&lt;strong&gt;__weak&lt;/strong&gt;或者&lt;strong&gt;__unsafe_unretained&lt;/strong&gt;&lt;blockquote&gt;
-&lt;p&gt;补充：&lt;strong&gt;__block&lt;/strong&gt; 和 &lt;strong&gt;__weak&lt;/strong&gt;修饰符的区别&lt;br&gt;&lt;strong&gt;__block&lt;/strong&gt; 不管是ARC还是MRC模式下都可以使用，可以修饰对象，还可以修饰基本数据类型。&lt;br&gt;&lt;strong&gt;__weak&lt;/strong&gt;只能在ARC模式下使用，也只能修饰对象（NSString），不能修饰基本数据类型（int）。&lt;br&gt;&lt;strong&gt;__block&lt;/strong&gt; 对象可以在block中被重新赋值，&lt;strong&gt;__weak&lt;/strong&gt;不可以。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;block和self的循环引用；到底是如何循环引用的；block的代码实现；为什么会造成循环引用；block是如何强引用self的；&lt;/p&gt;
-&lt;p&gt;一个对象中强引用了block，在block中又强引用了该对象，就会发射循环引用。&lt;br&gt;解决方法是将该对象使用&lt;strong&gt;weak或者&lt;/strong&gt;block修饰符修饰之后再在block中使用。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;id weak weakSelf = self; 或者 weak &lt;strong&gt;typeof(&amp;amp;*self)weakSelf = self该方法可以设置宏&lt;br&gt;id &lt;/strong&gt;block weakSelf = self;&lt;br&gt;或者将其中一方强制制空 xxx = nil。&lt;/p&gt;
-&lt;p&gt;检测代码中是否存在循环引用问题，可使用 Facebook 开源的一个检测工具 FBRetainCycleDetector 。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;block为什么要修饰为copy；&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;有哪几种类型的block；什么情况下block会从栈区复制到堆区；&lt;br&gt;三种。在开启 ARC 时，大部分情况下编译器通常会将创建在栈上的 block 自动拷贝到堆上，只有当block 作为方法或函数的参数传递时，编译器不会自动调用 copy 方法；&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;NSMutableArray在block中修改时，是否要修饰为__block;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;block和delegate你更倾向于用哪个？为什么？&lt;br&gt;Block.&lt;br&gt;block使代码更紧凑,便于阅读,delegate可以设置必选和可选的方法实现.&lt;br&gt;block可以访存局部变量. 不需要像以前的回调一样，把在操作后所有需要用到的数据封装成特定的数据结构, 你完全可以直接访问局部变量.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;block在MRC下如何解决循环引用&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;block循环引用了如何解决？如何解除循环引用；&lt;/li&gt;
-&lt;li&gt;Block在栈中还是堆中？全局变量是在栈还是在堆中？成员变量呢？block分配在哪里；&lt;/li&gt;
-&lt;li&gt;block的原理是什么，如何去找到这个block；（函数指针）&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;block在传递的时候，是否会改变存储位置？比如是否会从栈复制到堆；原来的block是否会被释放；&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Block的实现内部机制，&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Block中的循环引用；Block的复制；Block的存储位置；Block如何改变外面的变量；__block修饰符的内部机制！！！；&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Block的嵌套使用；&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;[※※]在block内如何修改block外部变量？外部的变量是怎么传到Block中去的；&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Block不允许修改外部变量的值，这里所说的外部变量的值，指的是栈中指针的内存地址。__block 所起到的作用就是只要观察到该变量被 block 所持有，就将“外部变量”在栈中的内存地址放到了堆中。进而在block内部也可以修改外部变量的值。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;[※※※]使用系统的某些block api（如UIView的block版本写动画时），是否也考虑引用循环问题？&lt;br&gt;UIView的block版本写动画时不需要考虑。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;系统的某些block api中，UIView的block版本写动画时不需要考虑，但也有一些api 需要考虑：&lt;/p&gt;
-&lt;p&gt;所谓“引用循环”是指双向的强引用，所以那些“单向的强引用”（block 强引用 self ）没有问题，&lt;br&gt;但如果你使用一些参数中可能含有 ivar 的系统 api ，如 GCD 、NSNotificationCenter就要小心一点：比如GCD 内部如果引用了 self，而且 GCD 的其他参数是 ivar，则要考虑到循环引用：&lt;/p&gt;
-&lt;p&gt;参考：&lt;br&gt;&lt;http: 28=&quot;&quot; 2013=&quot;&quot; blog.devtang.com=&quot;&quot; 07=&quot;&quot; a-look-inside-blocks=&quot;&quot;&gt;&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/abeb5848b57a#&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/abeb5848b57a#&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/e03292674e60#&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/e03292674e60#&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/e03292674e60#&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/e03292674e60#&lt;/a&gt;&lt;/http:&gt;&lt;/p&gt;
-&lt;p&gt;深入研究Block用weakSelf、strongSelf、@weakify、@strongify解决循环引用&lt;a href=&quot;https://halfrost.com/ios_block_retain_circle/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://halfrost.com/ios_block_retain_circle/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;block没那么难（一）：block的实现&lt;a href=&quot;https://www.zybuluo.com/MicroCai/note/51116&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.zybuluo.com/MicroCai/note/51116&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Block&lt;a href=&quot;http://www.samirchen.com/block-in-objc/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.samirchen.com/block-in-objc/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;　　
-　　
-　　
-　　
-　　&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;深入学习Block。&lt;br&gt;
     
     </summary>
     
