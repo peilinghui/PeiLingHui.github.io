@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS调试技巧 | 向着阳光奔跑</title>
+  <title>学习iOS中JS与OC相互调用的方式 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在iOS开发过程中，难免会遇到一些bug，那么遇到bug该怎么办？如何找bug呢？">
+  <meta name="description" content="Web App即是HTML5 APP框架开发模式，使用HTML5,CSS3以及JavaScript以及服务器端语言来完成开发，Web App具有跨平台的优势。那么就来学习一下iOS中JS与OC相互调用的方式。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS调试技巧">
-<meta property="og:url" content="http://peilinghui.com/2016/05/14/iOS调试技巧/index.html">
+<meta property="og:title" content="学习iOS中JS与OC相互调用的方式">
+<meta property="og:url" content="http://peilinghui.com/2017/05/05/学习iOS中JS与OC相互调用的方式/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="在iOS开发过程中，难免会遇到一些bug，那么遇到bug该怎么办？如何找bug呢？">
-<meta property="og:updated_time" content="2016-05-23T01:31:21.000Z">
+<meta property="og:description" content="Web App即是HTML5 APP框架开发模式，使用HTML5,CSS3以及JavaScript以及服务器端语言来完成开发，Web App具有跨平台的优势。那么就来学习一下iOS中JS与OC相互调用的方式。">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-08%20%E4%B8%8A%E5%8D%8811.49.52.png">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-08%20%E4%B8%8A%E5%8D%8811.55.32.png">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-08%20%E4%B8%8B%E5%8D%881.58.58.png">
+<meta property="og:updated_time" content="2017-05-08T15:42:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS调试技巧">
-<meta name="twitter:description" content="在iOS开发过程中，难免会遇到一些bug，那么遇到bug该怎么办？如何找bug呢？">
+<meta name="twitter:title" content="学习iOS中JS与OC相互调用的方式">
+<meta name="twitter:description" content="Web App即是HTML5 APP框架开发模式，使用HTML5,CSS3以及JavaScript以及服务器端语言来完成开发，Web App具有跨平台的优势。那么就来学习一下iOS中JS与OC相互调用的方式。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -248,11 +251,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-iOS调试技巧" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-学习iOS中JS与OC相互调用的方式" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/05/14/iOS调试技巧/" class="article-date">
-      <time datetime="2016-05-14T09:50:17.000Z" itemprop="datePublished">2016-05-14</time>
+      <a href="/2017/05/05/学习iOS中JS与OC相互调用的方式/" class="article-date">
+      <time datetime="2017-05-05T06:50:42.000Z" itemprop="datePublished">2017-05-05</time>
 </a>
     </div>
   
@@ -265,7 +268,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS调试技巧
+      学习iOS中JS与OC相互调用的方式
     </h1>
   
 
@@ -282,22 +285,68 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在iOS开发过程中，难免会遇到一些bug，那么遇到bug该怎么办？如何找bug呢？<br><a id="more"></a><br>对于bug,我们要合理的假设，找原因；对原因与bug之间的因果关系进行分析。</p>
-<h2 id="lldb的使用"><a href="#lldb的使用" class="headerlink" title="lldb的使用"></a>lldb的使用</h2><p>主要是打断点的时候使用lldb.</p>
-<h3 id="查看值"><a href="#查看值" class="headerlink" title="查看值"></a>查看值</h3><p>1&gt;非对象的值<br><code>int a = 10;</code> </p>
-<p>(lldb) p a<br>(原始命令：p = print = expression –)<br>输出：(int)$0 = 10<br>(lldb)p 10 + 10<br>输出：$1 = 20  </p>
-<p>2&gt;对象的值<br><code>NSString *string = @“Hello，world”;</code> </p>
-<p>(lldb) po string<br>(原始命令：po = expression -o – = e -o –string)<br>输出：Hello，world  </p>
-<p>注意：清空控制台：command+K  </p>
-<h3 id="修改变量的值"><a href="#修改变量的值" class="headerlink" title="修改变量的值"></a>修改变量的值</h3><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">a</span>==<span class="number">10</span>)&#123;</span><br><span class="line">	NSLog(@<span class="string">"第一个if被执行了"</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="literal">a</span>!=<span class="number">10</span>)&#123;</span><br><span class="line">	NSLog(@<span class="string">"第二个if被执行了"</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>(lldb) e(代表expression表达式) a=11<br>输出：(int) $0 = 11  </p>
-<h3 id="定义一个变量"><a href="#定义一个变量" class="headerlink" title="定义一个变量"></a>定义一个变量</h3><p>(lldb) e int $b = 20<br>(lldb) e int $b + $0<br>输出：(int) $1 = 31</p>
-<h3 id="调用一个函数"><a href="#调用一个函数" class="headerlink" title="调用一个函数"></a>调用一个函数</h3><p>代码中：<br><figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">[<span class="keyword">self</span> test]<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line">- <span class="list">(<span class="keyword">void</span>)</span>test&#123;</span><br><span class="line">	NSLog<span class="list">(<span class="keyword">@</span><span class="string">"test被调用了"</span>)</span><span class="comment">;</span></span><br><span class="line">	&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>(lldb) call [self init]<br>输出：test被调用了</p>
-<h3 id="函数提前返回，返回一个特定值"><a href="#函数提前返回，返回一个特定值" class="headerlink" title="函数提前返回，返回一个特定值"></a>函数提前返回，返回一个特定值</h3><p>代码实现：</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  <span class="built_in">NSInteger</span> returnValue = [<span class="keyword">self</span> testReturn];</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="built_in">NSInteger</span>)testReturn&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>(lldb) thread return 100<br>(lldb) p returnValue<br>输出：(NSInteger) $1 = 0<br>(NSInteger) $2 = 100</p>
-<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><p>1&gt;继续运行 (相当于控制台第一个按钮)<br>c = continue = process continue<br>2&gt;step over<br>n = next = thread step-over<br>3&gt;step in(跳入函数)<br>s = thread step-in<br>4&gt;step out(跳出函数)<br>finish = thread step-over</p>
+        <p>Web App即是HTML5 APP框架开发模式，使用HTML5,CSS3以及JavaScript以及服务器端语言来完成开发，Web App具有跨平台的优势。那么就来学习一下iOS中JS与OC相互调用的方式。</p>
+<a id="more"></a>
+<h1 id="目前JS与OC相互调用的方式"><a href="#目前JS与OC相互调用的方式" class="headerlink" title="目前JS与OC相互调用的方式"></a>目前JS与OC相互调用的方式</h1><p>目前主要的JS与OC相互调用方式主要有如下6种：</p>
+<ul>
+<li>在JS 中做一次URL跳转，然后在OC中拦截跳转。（这里分为UIWebView 和 WKWebView两种，UIWebView兼容iOS 6）</li>
+<li>利用WKWebView 的MessageHandler。</li>
+<li>利用系统库JavaScriptCore，来做相互调用。（iOS 7推出）</li>
+<li>利用第三方库WebViewJavascriptBridge。</li>
+<li>利用第三方cordova库，以前叫PhoneGap。（这是一个库平台的库）</li>
+<li>当下盛行的React Native。</li>
+</ul>
+<p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-08%20%E4%B8%8A%E5%8D%8811.49.52.png" alt=""></p>
+<h1 id="拦截URL"><a href="#拦截URL" class="headerlink" title="拦截URL"></a>拦截URL</h1><p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-08%20%E4%B8%8A%E5%8D%8811.55.32.png" alt=""></p>
+<h2 id="UIWebView"><a href="#UIWebView" class="headerlink" title="UIWebView"></a>UIWebView</h2><p>在以前我们只能通过UIWebView的UIWebViewDelegate协议来实现oc与js的通信交互就是发送消息，也即函数调用。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (nullable <span class="built_in">NSString</span> *)stringByEvaluatingJavaScriptFromString:(<span class="built_in">NSString</span> *)script;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">UIWebViewDelegate</span> &lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@optional</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)webView:(<span class="built_in">UIWebView</span> *)webView shouldStartLoadWithRequest:(<span class="built_in">NSURLRequest</span> *)request navigationType:(<span class="built_in">UIWebViewNavigationType</span>)navigationType;</span><br><span class="line">- (<span class="keyword">void</span>)webViewDidStartLoad:(<span class="built_in">UIWebView</span> *)webView;</span><br><span class="line">- (<span class="keyword">void</span>)webViewDidFinishLoad:(<span class="built_in">UIWebView</span> *)webView;</span><br><span class="line">- (<span class="keyword">void</span>)webView:(<span class="built_in">UIWebView</span> *)webView didFailLoadWithError:(<span class="built_in">NSError</span> *)error;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>oc–&gt;js stringByEvaluatingJavaScriptFromString,其参数是一NSString 字符串内容是js代码（这又可以是一个js函数、一句js代码或他们的组合），当js函数有返回值或一句js代码有值返回可通过stringByEvaluatingJavaScriptFromString的返回值获取</li>
+<li>js–&gt;oc 利用webView的重定向原理（即重新在js中指定document.location的值，此为一url），只要在这个url字符串中按自定义的规则指定好所需调用oc中的函数和参数，然后通过OC中的shouldStartLoadWithRequest函数去捕获处理请求。</li>
+</ul>
+<h2 id="WKWebView"><a href="#WKWebView" class="headerlink" title="WKWebView"></a>WKWebView</h2><p>由于UIWebView比较耗内存，性能上不太好，而苹果在iOS8中推出了WKWebView。同样的用WKWebView也可以拦截URL，做JS与OC交互。WKWebView与UIWebView拦截URL的处理方式基本一样。除了代理方法和WKWebView的使用不太一样。</p>
+<!--在framework的webKit中：-->
+<a href="!--![](http://7xr8q7.com1.z0.glb.clouddn.com/WKWebView.png)
+--">!--![](http://7xr8q7.com1.z0.glb.clouddn.com/WKWebView.png)
+--</a>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><pre><code>更多的支持HTML5的特性
+官方宣称的高达60fps的滚动刷新率以及内置手势
+将UIWebViewDelegate与UIWebView拆分成了14类与3个协议,以前很多不方便实现的功能得以实现。文档
+Safari相同的JavaScript引擎
+占用更少的内存
+</code></pre><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>WKWebView的创建有几点不同：</p>
+<ul>
+<li>初始化多了configuration参数，当然这个参数也可以不传，直接使用默认的设置。</li>
+<li>WKWebView的代理有两个navigationDelegate和UIDelegate。我们要拦截URL，就要通过navigationDelegate的一个代理方法来实现。如果在HTML中要使用alert等弹窗，就必须得实现UIDelegate的相应代理方法。</li>
+<li>在iOS9之前，WKWebView加载本地HTML会有一些问题。（不能加载本地HTML，或者部分CSS/本地图片加载不了等）</li>
+</ul>
+<h4 id="WKNavigationDelegate"><a href="#WKNavigationDelegate" class="headerlink" title="WKNavigationDelegate"></a>WKNavigationDelegate</h4><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(void)</span>webView:<span class="params">(<span class="variable">WKWebView</span> *)</span>webView decidePolicyForNavigationAction:<span class="params">(<span class="variable">WKNavigationAction</span> *)</span>navigationAction decisionHandler:<span class="params">(void (^)</span><span class="params">(<span class="variable">WKNavigationActionPolicy</span>)</span>)decisionHandler</span></span><br></pre></td></tr></table></figure>
+<p>实现这个代理方法，必须得调用decisionHandler这个block，否则会导致app 崩溃。block参数是个枚举类型，WKNavigationActionPolicyCancel代表取消加载，相当于UIWebView的代理方法return NO的情况；WKNavigationActionPolicyAllow代表允许加载，相当于UIWebView的代理方法中return YES的情况。</p>
+<p><strong>WKWebView中OC调用JS方法</strong></p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *js = <span class="string">@"callJsAlert()"</span>;</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.webView</span> evaluateJavaScript:js completionHandler:^(<span class="keyword">id</span> _Nullable response, <span class="built_in">NSError</span> * _Nullable error) &#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"response: %@ error: %@"</span>, response, error);</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"call js alert by native"</span>);</span><br><span class="line">   &#125;];</span><br></pre></td></tr></table></figure>
+<p>evaluateJavaScript:completionHandler:没有返回值，JS 执行成功还是失败会在completionHandler 中返回。所以使用这个API 就可以避免执行耗时的JS，或者alert 导致界面卡住的问题。</p>
+<h2 id="MessageHandler"><a href="#MessageHandler" class="headerlink" title="MessageHandler"></a>MessageHandler</h2><p>利用WKWebView的新特性MessageHandler来实现JS调用原生方法。<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-08%20%E4%B8%8B%E5%8D%881.58.58.png" alt=""></p>
+<h3 id="MessageHandler的好处"><a href="#MessageHandler的好处" class="headerlink" title="MessageHandler的好处"></a>MessageHandler的好处</h3><ul>
+<li>在JS中写起来简单，不用再用创建URL的方式那么麻烦了。</li>
+<li>JS传递参数更方便。使用拦截URL的方式传递参数，只能把参数拼接在后面，如果遇到要传递的参数中有特殊字符，如&amp;、=、?等，必须得转换，否则参数解析肯定会出错。</li>
+<li>使用MessageHandler就可以避免特殊字符引起的问题</li>
+</ul>
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p>WKWebView初始化时，有一个参数叫configuration，它是WKWebViewConfiguration类型的参数，而WKWebViewConfiguration有一个属性叫userContentController，它又是WKUserContentController类型的参数。WKUserContentController对象有一个方法- addScriptMessageHandler:name:，我把这个功能简称为MessageHandler。</p>
+<p><code>- addScriptMessageHandler:name:</code>有两个参数，第一个参数是userContentController的代理对象，第二个参数是JS里发送postMessage的对象。</p>
+<p>所以要使用MessageHandler功能，就必须要实现WKScriptMessageHandler协议。<br>在OC文件中：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];</span><br><span class="line"> <span class="comment">// 通过JS与webview内容交互</span></span><br><span class="line"> config.userContentController = [[WKUserContentController alloc] init];</span><br><span class="line"><span class="comment">// 注入JS对象名称AppModel，当JS通过AppModel来调用时，</span></span><br><span class="line"><span class="comment">// 我们可以在WKScriptMessageHandler代理中接收到</span></span><br><span class="line">[config.userContentController <span class="string">addScriptMessageHandler:</span>self <span class="string">name:</span>@<span class="string">"AppModel"</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//WKScriptMessageHandler协议</span></span><br><span class="line">- (<span class="typename">void</span>)<span class="string">userContentController:</span>(WKUserContentController *)userContentController</span><br><span class="line"><span class="label">      didReceiveScriptMessage:</span>(WKScriptMessage *)message &#123;</span><br><span class="line">    <span class="keyword">if</span> ([message.name <span class="string">isEqualToString:</span>@<span class="string">"AppModel"</span>]) &#123;</span><br><span class="line">        NSLog(@<span class="string">"%@"</span>, message.body);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现协议方法。<br>这里实现了两个协议&lt; WKUIDelegate,WKScriptMessageHandler &gt;，WKUIDelegate是因为需要在JS中弹出alert。WKScriptMessageHandler是用来处理JS调用OC方法的请求。</p>
+<p>在JS文件中：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// AppModel是我们所注入的对象</span></span><br><span class="line"><span class="tag">window</span><span class="class">.webkit</span><span class="class">.messageHandlers</span><span class="class">.AppModel</span><span class="class">.postMessage</span>(&#123;<span class="attribute">body</span>: response&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="JavaScriptCore"><a href="#JavaScriptCore" class="headerlink" title="JavaScriptCore"></a>JavaScriptCore</h2><p>JavaScriptCore自iOS7之后出现，用Objective-C把WebKit的JavaScript引擎封装了一下，提供了简单快捷的方式与JavaScript交互。</p>
+<p>特点： </p>
+<ul>
+<li>JS中调用OC方法更简单，参数的传递也更加简单 </li>
+<li>支持iOS7以上</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.jianshu.com/p/9513d101e582#" target="_blank" rel="external">WKWebView使用及注意点(keng)</a></p>
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><p><a href="https://imciel.com/2016/06/18/oc-js-communication/" target="_blank" rel="external">使用 JavaScriptCore 实现 JS和OC间的通信</a></p>
+<p><a href="http://www.brighttj.com/ios/ios-user-safari-debug-webview.html" target="_blank" rel="external">使用safari对webview进行调试</a></p>
 
       
     </div>
@@ -306,13 +355,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></p>
+        <p><span>本文标题:</span><a href="/2017/05/05/学习iOS中JS与OC相互调用的方式/">学习iOS中JS与OC相互调用的方式</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年05月14日 - 17时50分</p>
-        <p><span>最后更新:</span>2016年05月23日 - 09时31分</p>
+        <p><span>发布时间:</span>2017年05月05日 - 14时50分</p>
+        <p><span>最后更新:</span>2017年05月08日 - 23时42分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/05/14/iOS调试技巧/" title="iOS调试技巧">http://peilinghui.com/2016/05/14/iOS调试技巧/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/05/14/iOS调试技巧/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/05/学习iOS中JS与OC相互调用的方式/" title="学习iOS中JS与OC相互调用的方式">http://peilinghui.com/2017/05/05/学习iOS中JS与OC相互调用的方式/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/05/05/学习iOS中JS与OC相互调用的方式/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -325,16 +374,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/06/29/ReactiveCocoa学习笔记/">
-                    ReactiveCocoa学习笔记
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/04/14/iOS网络编程/">
-                    iOS网络编程
+                <a href="/2017/04/30/深入学习NSURLProtocol/">
+                    深入学习NSURLProtocol
                 </a>
             </div>
         
@@ -345,7 +388,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lldb的使用"><span class="toc-number">1.</span> <span class="toc-text">lldb的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看值"><span class="toc-number">1.1.</span> <span class="toc-text">查看值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改变量的值"><span class="toc-number">1.2.</span> <span class="toc-text">修改变量的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义一个变量"><span class="toc-number">1.3.</span> <span class="toc-text">定义一个变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用一个函数"><span class="toc-number">1.4.</span> <span class="toc-text">调用一个函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数提前返回，返回一个特定值"><span class="toc-number">1.5.</span> <span class="toc-text">函数提前返回，返回一个特定值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流程控制"><span class="toc-number">1.6.</span> <span class="toc-text">流程控制</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目前JS与OC相互调用的方式"><span class="toc-number">1.</span> <span class="toc-text">目前JS与OC相互调用的方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#拦截URL"><span class="toc-number">2.</span> <span class="toc-text">拦截URL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UIWebView"><span class="toc-number">2.1.</span> <span class="toc-text">UIWebView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WKWebView"><span class="toc-number">2.2.</span> <span class="toc-text">WKWebView</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点"><span class="toc-number">2.2.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-number">2.2.2.</span> <span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#WKNavigationDelegate"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">WKNavigationDelegate</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MessageHandler"><span class="toc-number">2.3.</span> <span class="toc-text">MessageHandler</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MessageHandler的好处"><span class="toc-number">2.3.1.</span> <span class="toc-text">MessageHandler的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现原理"><span class="toc-number">2.3.2.</span> <span class="toc-text">实现原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScriptCore"><span class="toc-number">2.4.</span> <span class="toc-text">JavaScriptCore</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩展"><span class="toc-number">4.</span> <span class="toc-text">扩展</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -407,7 +450,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/05/14/iOS调试技巧/" data-title="iOS调试技巧" data-url="http://peilinghui.com/2016/05/14/iOS调试技巧/"></div>
+    <div class="ds-thread" data-thread-key="2017/05/05/学习iOS中JS与OC相互调用的方式/" data-title="学习iOS中JS与OC相互调用的方式" data-url="http://peilinghui.com/2017/05/05/学习iOS中JS与OC相互调用的方式/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -431,15 +474,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/06/29/ReactiveCocoa学习笔记/" title="上一篇: ReactiveCocoa学习笔记">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/04/14/iOS网络编程/" title="下一篇: iOS网络编程">
+            <a href="/2017/04/30/深入学习NSURLProtocol/" title="下一篇: 深入学习NSURLProtocol">
                 <i class="fa fa-angle-right"></i>
             </a>
         
