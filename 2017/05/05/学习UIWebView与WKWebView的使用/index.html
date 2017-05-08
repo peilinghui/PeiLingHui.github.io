@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>研究AFNetworking框架 | 向着阳光奔跑</title>
+  <title>学习UIWebView与WKWebView的使用 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="研究AFNetworking框架。">
+  <meta name="description" content="学习UIWebView与WKWebView的使用.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="研究AFNetworking框架">
-<meta property="og:url" content="http://peilinghui.com/2016/03/05/研究AFNetworking框架/index.html">
+<meta property="og:title" content="学习UIWebView与WKWebView的使用">
+<meta property="og:url" content="http://peilinghui.com/2017/05/05/学习UIWebView与WKWebView的使用/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="研究AFNetworking框架。">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png">
-<meta property="og:updated_time" content="2017-03-23T07:17:16.000Z">
+<meta property="og:description" content="学习UIWebView与WKWebView的使用.">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/WKWebView.png">
+<meta property="og:updated_time" content="2017-05-06T13:49:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="研究AFNetworking框架">
-<meta name="twitter:description" content="研究AFNetworking框架。">
+<meta name="twitter:title" content="学习UIWebView与WKWebView的使用">
+<meta name="twitter:description" content="学习UIWebView与WKWebView的使用.">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -249,11 +249,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-研究AFNetworking框架" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-学习UIWebView与WKWebView的使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/03/05/研究AFNetworking框架/" class="article-date">
-      <time datetime="2016-03-05T06:08:53.000Z" itemprop="datePublished">2016-03-05</time>
+      <a href="/2017/05/05/学习UIWebView与WKWebView的使用/" class="article-date">
+      <time datetime="2017-05-05T06:50:42.000Z" itemprop="datePublished">2017-05-05</time>
 </a>
     </div>
   
@@ -266,7 +266,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      研究AFNetworking框架
+      学习UIWebView与WKWebView的使用
     </h1>
   
 
@@ -274,10 +274,6 @@
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-    </div>
-
 
         
         <div class="clearfix"></div>
@@ -287,58 +283,24 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>研究AFNetworking框架。<br><a id="more"></a></p>
-<h1 id="AFNetworking"><a href="#AFNetworking" class="headerlink" title="AFNetworking"></a>AFNetworking</h1><ol>
-<li>AFN 与 ASI 有什么区别?<br>AFN基于NSURL，ASI基于底层的CFNetwork框架，因此ASI的性能优于AFN.<br>AFN采取block的方式处理请求，ASI最初采取delegate的方式处理请求，后面也增加了block的方式。<br>AFN只封装了一些常用功能，满足基本需求，直接忽略了很多扩展功能，比如没有封装同步请求；<br>ASI提供的功能较多，预留了各种接口和工具供开发者自行扩展。<br>AFN直接解析服务器返回的JSON、XML等数据，而ASI比较原始，返回的是NSData二进制数据。<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png" alt=""></li>
-<li>讲解：<br>1&gt;<strong>AFHTTPRequestOperation</strong><br>HTTP或HTTPS协议请求的AFURLConnectionOperation的子类。它封装的可接受状态码和内容的类型，判定一个请求结果是成功或失败。<br>实际上对系统的HTTP网络请求增加了几个HTTP需要用到的参数。<br>2&gt;<strong>AFURLConnectionOperation</strong><br>可以说是AFN最基础的类。继承自NSOperation类，将网络请求依附到一个operation上。从而让我们能够有效的控制并观察一个网络请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态。<br>①：综述<br>AFURLConnectionOperation 将Operation和URLConnection结合到一起，利用operation可以监听到状态以及可以建立相互之间的依赖关系的特性，实现了对于 一个NSURLConnection对象的完美控制，并将请求的结果通过block友好的返回。<br>②：实现文件.m<br>我们总结下.m中这个类主要有哪些方法。<br>1： 首先我们可以看到它创建了一个单例线程。这个线程将会常驻内存，用来处理AFN发起的所有请求任务。当然，线程也跟随着一个runloop，AFN将这个 runloop的模式设置为NSDefaultRunLoopMode。NSDefaultRunLoopMode是无法检测到connection的状 态的。这说明了，AFN将不会在这该线程处理connection完成后的UI刷新等工作，而是会将数据抛给主线程，让主线程去完成UI的刷新。<br>2：我们可以看到该类通过接受请求的字符串，创建了URLRequest以及NSURLConnection对象。从而去进行请求。<br>3：实现文件多次使用到了锁，可以保证数据的安全。当然他也实现了几个数据的NSCoping协议。<br>4：请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态的控制。这里讲一下暂停和恢复。<br>暂 停实际上将网络请求取消掉了。但是由于实现了nscoping协议，已经下载到数据得以保存下来。下次进行相同请求的时候，我们会将已经下载到的数据的节 点一起发送给服务器，告诉服务器这些部门的数据我们不需要了，服务器根据我发送的返回节点给我返回相应的数据即可。从而实现了暂停和恢复功能，也就是断点 续传。<br>5：operation方法的重写。自行google，这里不赘述。<br>6：状态的各种控制方法的实现以及发送状态改变的通知  </li>
+        <p>学习UIWebView与WKWebView的使用.</p>
+<a id="more"></a>
+<h1 id="UIWebView"><a href="#UIWebView" class="headerlink" title="UIWebView"></a>UIWebView</h1><p>主要是调用协议：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">UIWebViewDelegate</span> &lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@optional</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)webView:(<span class="built_in">UIWebView</span> *)webView shouldStartLoadWithRequest:(<span class="built_in">NSURLRequest</span> *)request navigationType:(<span class="built_in">UIWebViewNavigationType</span>)navigationType;</span><br><span class="line">- (<span class="keyword">void</span>)webViewDidStartLoad:(<span class="built_in">UIWebView</span> *)webView;</span><br><span class="line">- (<span class="keyword">void</span>)webViewDidFinishLoad:(<span class="built_in">UIWebView</span> *)webView;</span><br><span class="line">- (<span class="keyword">void</span>)webView:(<span class="built_in">UIWebView</span> *)webView didFailLoadWithError:(<span class="built_in">NSError</span> *)error;</span><br></pre></td></tr></table></figure>
+<h1 id="WKWebView"><a href="#WKWebView" class="headerlink" title="WKWebView"></a>WKWebView</h1><p>在framework的webKit中：<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/WKWebView.png" alt=""></p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><pre><code>更多的支持HTML5的特性
+官方宣称的高达60fps的滚动刷新率以及内置手势
+将UIWebViewDelegate与UIWebView拆分成了14类与3个协议,以前很多不方便实现的功能得以实现。文档
+Safari相同的JavaScript引擎
+占用更少的内存
+</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>WKWebView有两个delegate,WKUIDelegate 和 WKNavigationDelegate。WKNavigationDelegate主要处理一些跳转、加载处理操作，WKUIDelegate主要处理JS脚本，确认框，警告框等。因此WKNavigationDelegate更加常用。</p>
+<h3 id="OC与JS交互"><a href="#OC与JS交互" class="headerlink" title="OC与JS交互"></a>OC与JS交互</h3><p>WKWebview提供了API实现js交互 不需要借助JavaScriptCore或者webJavaScriptBridge。使用WKUserContentController实现js native交互。简单的说就是先注册约定好的方法，然后再调用。<br>WKScriptMessageHandler: 此代理方法就是和JavaScript交互相关</p>
+<p>OC如何给JS注入对象及JS如何给iOS发送数据</p>
+<ol>
+<li>JS调用alert、confirm、prompt时，不采用JS原生提示，而是使用iOS原生来实现</li>
+<li>如何监听web内容加载进度、是否加载完成</li>
+<li>如何通过js来跳转到iOS指定的页面上<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><a href="http://www.jianshu.com/p/9513d101e582#" target="_blank" rel="external">WKWebView使用及注意点(keng)</a></li>
 </ol>
-<p>③：接口文件.h<br>接口文档中的属性方法，基本可以概括为以下几个方法<br>1：只读的数据，让管理者可以接收到。<br>2：设置runloop的modes。不再使用类库默认设置的defaultmodes。<br>3：状态的控制方法<br>4：安全策略的设置<br>总而言之，接口文件.h暴露的接口都是为了让manager可以去完全控制这个operation以及其中的网络请求。</p>
-<p>3&gt;<strong>AFHTTPRequestOperationManager</strong><br>这个类是AFN类库的核心类。它封装完成了一种通用的模式，可以帮助我们轻松友好的完成请求的创建、响应的系列化，网络状态的监控以及安全策略以及每一个请求operation的管理（operation的相互依赖或状态改变）。<br>①：综述<br>这个类可以说是整个类库的核心类了。据说AFN2.0之前的时候，所有的网络请求相关的设置都杂糅到一个client中，导致client特别的臃肿。2.0后，AFN将一些设置提取出来，线程了专门的类【AFSecurityPolicy、AFURLRequestSerialization、AFURLResponseSerialization】。现在看来，AFN整体的设计是非常完美的。耦合性变得非常低，一些1.0版本中存在的问题也得到了改善。  </p>
-<p>②：实现文件.m<br>实现文件较为简单，可以看到他创建了一个队列。并将各个operation加入到队列中。在队列中，各个请求就可以设置依赖关系，并发的数量等等。  </p>
-<p>③：接口文件.h<br>接口文件中，我们可以看到。这个类可以设置AFSecurityPolicy、AFURLRequestSerialization、AFURLResponseSerialization 等参数了。这就是综述所说的降低耦合性的方式。基本使用很简单，这里就不再赘述了。<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基础的URL，主机路径</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.baseURL</span> = url;</span><br><span class="line"><span class="comment">// 请求的解析器</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.requestSerializer</span> = [AFHTTPRequestSerializer serializer];</span><br><span class="line"><span class="comment">// 响应的解析器(默认直接解析JSON)</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.responseSerializer</span> = [AFJSONResponseSerializer serializer];</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<blockquote>
-<p>使用实例1：GET方法  </p>
-</blockquote>
-</blockquote>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获得请求管理者（管理请求，帮助发请求）</span></span><br><span class="line">    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];</span><br><span class="line">    <span class="comment">//发送get请求</span></span><br><span class="line">    <span class="built_in">NSMutableDictionary</span> *params = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line">    params[<span class="string">@"username"</span>]=<span class="string">@"123"</span>;</span><br><span class="line">    params[<span class="string">@"pwd"</span>]=<span class="string">@"123"</span>;</span><br><span class="line">    [manager GET:<span class="string">@"http://.....//login"</span> parameters:params success:^(AFHTTPRequestOperation *operation,<span class="keyword">id</span> responseObject)&#123;<span class="comment">//responseObject就是字典</span></span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"请求成功————"</span>,responseObject);</span><br><span class="line">    &#125;failure:^(AFHTTPRequestOperation *operation,<span class="built_in">NSError</span> *error)&#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"请求失败————"</span>,error);</span><br><span class="line">    &#125;];</span><br></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>使用实例2：POST方法</p>
-</blockquote>
-</blockquote>
-<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[manager POST:urlStr parameters:params success:^<span class="list">(<span class="keyword">AFHTTPRequestOperation</span> *operation, id responseObject)</span> <span class="collection">&#123;       </span><br><span class="line">        NSLog<span class="list">(@<span class="string">"%@  %@"</span>, responseObject, <span class="collection">[NSThread currentThread]</span>)</span><span class="comment">;        </span></span><br><span class="line">    &#125;</span> failure:^<span class="list">(<span class="keyword">AFHTTPRequestOperation</span> *operation, NSError *error)</span> <span class="collection">&#123;</span><br><span class="line">        NSLog<span class="list">(@<span class="string">"%@"</span>, error)</span><span class="comment">;        </span></span><br><span class="line">    &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>使用实例3：XML解析</p>
-</blockquote>
-</blockquote>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 假如想使用DOM进行解析XML，可以指定响应的类型是二进制。拿到二进制数据就可以进行DOM解析</span></span><br><span class="line">    manager.responseSerializer = [AFHTTPResponseSerializer serializer];</span><br></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>使用实例4：上传图片、文件</p>
-</blockquote>
-</blockquote>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// url</span></span><br><span class="line">NSString *urlStr = @<span class="string">"http://127.0.0.1/post/upload.php"</span>;    </span><br><span class="line"><span class="comment">//获得请求管理者（管理请求，帮助发请求）</span></span><br><span class="line">AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];</span><br><span class="line">NSMutableDictionary *params = [NSMutableDictionary dictionary];</span><br><span class="line">params[@<span class="string">"username"</span>]=@<span class="string">"zhangsan"</span>;    </span><br><span class="line">[manager <span class="string">POST:</span>urlStr <span class="string">parameters:</span>params <span class="string">constructingBodyWithBlock:</span>^(id&lt;AFMultipartFormData&gt; formData) &#123;</span><br><span class="line">    <span class="comment">// 要上传的图片的路径，一定要在这个Block中添加文件参数</span></span><br><span class="line">    NSURL *fileUrl = [[NSBundle mainBundle] <span class="string">URLForResource:</span>@<span class="string">"Snip20150123_3.png"</span> <span class="string">withExtension:</span>nil];</span><br><span class="line">    [formData <span class="string">appendPartWithFileURL:</span>fileUrl <span class="string">name:</span>@<span class="string">"userfile"</span> <span class="string">fileName:</span>@<span class="string">"123321.png"</span> <span class="string">mimeType:</span>@<span class="string">"image/png"</span> <span class="string">error:</span>NULL];</span><br><span class="line">&#125; <span class="string">success:</span>^(AFHTTPRequestOperation *operation, id responseObject) &#123;</span><br><span class="line">    NSLog(@<span class="string">"success"</span>);</span><br><span class="line">&#125; <span class="string">failure:</span>^(AFHTTPRequestOperation *operation, NSError *error) &#123;</span><br><span class="line">    NSLog(@<span class="string">"failure"</span>);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>使用实例5： 网络监控</p>
-</blockquote>
-</blockquote>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.获得网络监控的管理者</span></span><br><span class="line">    AFNetworkReachabilityManager *mgr = [AFNetworkReachabilityManager sharedManager];</span><br><span class="line">    <span class="comment">//2.设置网络状态改变后的处理</span></span><br><span class="line">    [mgr <span class="string">setReachabilityStatusChangeBlock:</span>^(AFNetworkReachabilityStatus status)&#123;</span><br><span class="line">        <span class="comment">//当网络状态改变了，就会调用这个Block</span></span><br><span class="line">        <span class="keyword">switch</span> (status) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusUnknown:</span><span class="comment">//未知网络                </span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusNotReachable:</span><span class="comment">//没有网络</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusReachableViaWWAN:</span><span class="comment">//手机自带网络</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusReachableViaWiFi:</span><span class="comment">//wifi</span></span><br><span class="line">                <span class="keyword">break</span>;               </span><br><span class="line"><span class="label">            default:</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="comment">//3. 开始监控</span></span><br><span class="line">    [mgr startMonitoring];</span><br></pre></td></tr></table></figure>
-<h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><p>17.ASIHttpRequest、AFNetWorking之间的区别?</p>
-<ul>
-<li><p>ASIHttpRequest功能强大，主要是在MRC下实现的，是对系统CFNetwork API进行了封装，支持HTTP协议的CFHTTP，配置比较复杂，并且ASIHttpRequest框架默认不会帮你监听网络改变，如果需要让ASIHttpRequest帮你监听网络状态改变，并且手动开始这个功能。</p>
-</li>
-<li><p>AFNetWorking构建于NSURLConnection、NSOperation以及其他熟悉的Foundation技术之上。拥有良好的架构，丰富的API及模块构建方式，使用起来非常轻松。它基于NSOperation封装的，AFURLConnectionOperation子类。</p>
-</li>
-<li><p>ASIHttpRequest是直接操作对象ASIHttpRequest是一个实现了NSCoding协议的NSOperation子类；AFNetWorking直接操作对象的AFHttpClient，是一个实现NSCoding和NSCopying协议的NSObject子类。</p>
-</li>
-<li><p>同步请求：ASIHttpRequest直接通过调用一个startSynchronous方法；AFNetWorking默认没有封装同步请求，如果开发者需要使用同步请求，则需要重写getPath:paraments:success:failures方法，对于AFHttpRequestOperation进行同步处理。</p>
-</li>
-<li><p>性能对比：AFNetworking请求优于ASIHttpRequest；</p>
-</li>
-</ul>
 
       
     </div>
@@ -347,13 +309,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></p>
+        <p><span>本文标题:</span><a href="/2017/05/05/学习UIWebView与WKWebView的使用/">学习UIWebView与WKWebView的使用</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年03月05日 - 14时08分</p>
-        <p><span>最后更新:</span>2017年03月23日 - 15时17分</p>
+        <p><span>发布时间:</span>2017年05月05日 - 14时50分</p>
+        <p><span>最后更新:</span>2017年05月06日 - 21时49分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/03/05/研究AFNetworking框架/" title="研究AFNetworking框架">http://peilinghui.com/2016/03/05/研究AFNetworking框架/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/05/研究AFNetworking框架/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/05/学习UIWebView与WKWebView的使用/" title="学习UIWebView与WKWebView的使用">http://peilinghui.com/2017/05/05/学习UIWebView与WKWebView的使用/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/05/05/学习UIWebView与WKWebView的使用/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -366,16 +328,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/03/06/研究SDWebImage框架/">
-                    研究SDWebImage框架
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/03/05/iOS中的数据存储/">
-                    iOS中的数据存储
+                <a href="/2017/04/30/深入学习NSURLProtocol/">
+                    深入学习NSURLProtocol
                 </a>
             </div>
         
@@ -386,7 +342,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#AFNetworking"><span class="toc-number">1.</span> <span class="toc-text">AFNetworking</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#面试题"><span class="toc-number">2.</span> <span class="toc-text">面试题</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UIWebView"><span class="toc-number">1.</span> <span class="toc-text">UIWebView</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WKWebView"><span class="toc-number">2.</span> <span class="toc-text">WKWebView</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#优点"><span class="toc-number">2.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">2.2.</span> <span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OC与JS交互"><span class="toc-number">2.2.1.</span> <span class="toc-text">OC与JS交互</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -448,7 +404,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/03/05/研究AFNetworking框架/" data-title="研究AFNetworking框架" data-url="http://peilinghui.com/2016/03/05/研究AFNetworking框架/"></div>
+    <div class="ds-thread" data-thread-key="2017/05/05/学习UIWebView与WKWebView的使用/" data-title="学习UIWebView与WKWebView的使用" data-url="http://peilinghui.com/2017/05/05/学习UIWebView与WKWebView的使用/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -472,15 +428,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/03/06/研究SDWebImage框架/" title="上一篇: 研究SDWebImage框架">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/03/05/iOS中的数据存储/" title="下一篇: iOS中的数据存储">
+            <a href="/2017/04/30/深入学习NSURLProtocol/" title="下一篇: 深入学习NSURLProtocol">
                 <i class="fa fa-angle-right"></i>
             </a>
         
