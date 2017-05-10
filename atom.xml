@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://peilinghui.com/"/>
-  <updated>2017-05-08T15:42:32.000Z</updated>
+  <updated>2017-05-10T11:33:29.000Z</updated>
   <id>http://peilinghui.com/</id>
   
   <author>
@@ -16,18 +16,77 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>iOS打包和发布流程</title>
+    <link href="http://peilinghui.com/2017/05/10/iOS%E6%89%93%E5%8C%85%E5%92%8C%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B/"/>
+    <id>http://peilinghui.com/2017/05/10/iOS打包和发布流程/</id>
+    <published>2017-05-10T08:56:16.000Z</published>
+    <updated>2017-05-10T11:33:29.000Z</updated>
+    
+    <content type="html">&lt;p&gt;学习iOS的打包和发布流程。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;证书&quot;&gt;&lt;a href=&quot;#证书&quot; class=&quot;headerlink&quot; title=&quot;证书&quot;&gt;&lt;/a&gt;证书&lt;/h1&gt;&lt;h2 id=&quot;两种证书&quot;&gt;&lt;a href=&quot;#两种证书&quot; class=&quot;headerlink&quot; title=&quot;两种证书&quot;&gt;&lt;/a&gt;两种证书&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;由 apple 官方颁发, 用以证明开发者身份的特殊文件, 在 iOS 开发中主要用于代码签名, 保障 iOS 生态的健康安全, 分为&lt;strong&gt;开发者证书&lt;/strong&gt;和&lt;strong&gt;发布者证书&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;什么时候需要证书：只有在本机模拟器调试时无需代码签名, 当 App 需要在真机运行和发布时需要使用相应证书进行签名&lt;/li&gt;
+&lt;li&gt;证书如何获得：首先需要拥有相应权限的开发者帐号, 通过在本地生成配对的密钥, 向 provisioning portal 提交公钥后换取, 后续证书在使用时会验证本地私钥。&lt;/li&gt;
+&lt;li&gt;如何对代码进行签名：在 xcode 中, 使用描述文件(provision profile 包含调试者证书, 授权设备清单, 应用ID), 在 Build Settings 中选择存于 Keychain Access 中的证书文件设置调试和发布任务时的代码签名。&lt;/li&gt;
+&lt;li&gt;我生成的私钥如何共享给团队成员：在 Keychain Access 中找到导入的证书, 右击导出为包含私钥的 Personal Information Exchange(.p12)文件(导出时可以创建密码), 团队成员再导入 p12 证书后就完整包含了证书和私钥&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;每种license 都有两种安装方式：dev 和 release&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;真机运行-dev&quot;&gt;&lt;a href=&quot;#真机运行-dev&quot; class=&quot;headerlink&quot; title=&quot;真机运行(dev)&quot;&gt;&lt;/a&gt;真机运行(dev)&lt;/h3&gt;&lt;p&gt;真机调试指 mac 连上 iphone, xcode 可以直接以这台 iphone 设备为 build target, 能在 iphone 里执行编译结果&lt;/p&gt;
+&lt;p&gt;分为拥有独立开发者帐号(也包括公司帐号或企业帐号成员)和共享开发者帐号两种情况。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;拥有独立开发者帐号：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;在 provisioning portal 新建应用, 配置授权设备等
+开发机上导入证书
+在 xcode 上登录开发者帐号, 不需要准备描述文件, xcode 会自动生成(如果是公司帐号可以自动生成 iOS Team Provisioning Profile)
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;共享开发者帐号&lt;br&gt;如果无法在 xcode 登录一个开发者帐号, 也可以通过他人对你手机和应用 id 的授权, 得到 .mobileprovision 描述文件再导入其含私钥的证书(p12) 即可, 具体步骤如下:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;获得手机的 udid (可以连上 mac, 在 itunes 中查看)
+告知对方 udid (用以设备授权) 和 应用 id
+得到对方生成的证书和描述文件后, 先导入 p12 证书, 再双击 mobileprovision 文件
+连接手机, 在 xcode 中选择 build target 为已连接的手机
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;发布方式&quot;&gt;&lt;a href=&quot;#发布方式&quot; class=&quot;headerlink&quot; title=&quot;发布方式&quot;&gt;&lt;/a&gt;发布方式&lt;/h1&gt;&lt;p&gt;四种发布方式：&lt;/p&gt;
+&lt;h2 id=&quot;苹果应用商店发布AppStore&quot;&gt;&lt;a href=&quot;#苹果应用商店发布AppStore&quot; class=&quot;headerlink&quot; title=&quot;苹果应用商店发布AppStore&quot;&gt;&lt;/a&gt;苹果应用商店发布AppStore&lt;/h2&gt;&lt;h2 id=&quot;苹果应用商店批量购买发布（Volume-Purchase-Program）&quot;&gt;&lt;a href=&quot;#苹果应用商店批量购买发布（Volume-Purchase-Program）&quot; class=&quot;headerlink&quot; title=&quot;苹果应用商店批量购买发布（Volume Purchase Program）&quot;&gt;&lt;/a&gt;苹果应用商店批量购买发布（Volume Purchase Program）&lt;/h2&gt;&lt;h2 id=&quot;Ad-Hoc应用发布方式&quot;&gt;&lt;a href=&quot;#Ad-Hoc应用发布方式&quot; class=&quot;headerlink&quot; title=&quot;Ad Hoc应用发布方式.&quot;&gt;&lt;/a&gt;Ad Hoc应用发布方式.&lt;/h2&gt;&lt;p&gt;Ad Hoc方式发布应用，应用的具体内容也不需要经过苹果的评审，但限制每个应用不能发布到超过100个设备上。如果应用需要小规模的测试或者企业规模很小可以采用这种方式发布企业应用.&lt;/p&gt;
+&lt;h2 id=&quot;In-House企业应用发布&quot;&gt;&lt;a href=&quot;#In-House企业应用发布&quot; class=&quot;headerlink&quot; title=&quot;In-House企业应用发布&quot;&gt;&lt;/a&gt;In-House企业应用发布&lt;/h2&gt;&lt;p&gt;In-House企业应用是不能提交到App Store,发布应用的具体内容也是不需要苹果官方审核.安装设备的数量目前也没有任何限制.所以权限最为开放，适合针对支持开放大批量对外用户测试使用.所以你看到很多第三方开放渠道下载IPA其实基于其他企业账号来支持的.&lt;/p&gt;
+&lt;h3 id=&quot;内网OTA&quot;&gt;&lt;a href=&quot;#内网OTA&quot; class=&quot;headerlink&quot; title=&quot;内网OTA&quot;&gt;&lt;/a&gt;内网OTA&lt;/h3&gt;&lt;p&gt;OTA即Over-the-Air，是Apple在 iOS4 中新加的一项技术，目的是让开发者能够脱离Appstore，实现从自己的服务器下载并安装iOS应用。简单地说，就是用户只需要在Safari中点开一条链接，就能直接在主界面中安装App。&lt;/p&gt;
+&lt;h4 id=&quot;实现步骤&quot;&gt;&lt;a href=&quot;#实现步骤&quot; class=&quot;headerlink&quot; title=&quot;实现步骤&quot;&gt;&lt;/a&gt;实现步骤&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;用Xcode打包release版本&lt;/li&gt;
+&lt;li&gt;搭建本地Web服务器&lt;/li&gt;
+&lt;li&gt;开启HTTPS&lt;/li&gt;
+&lt;li&gt;编写好对应的.plist文件&lt;/li&gt;
+&lt;li&gt;上传ipa、.plist、ca证书到Web服务器，配置好index.html&lt;/li&gt;
+&lt;li&gt;在手机上用Safari打开链接，完成下载&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;更多参考：&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/35ca63ec0d8e&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;一步一步实现无线安装iOS应用(内网OTA)&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://blog.csdn.net/close_marty/article/details/38559673&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;jenkins中集成OTA发布&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;更多参考：&quot;&gt;&lt;a href=&quot;#更多参考：&quot; class=&quot;headerlink&quot; title=&quot;更多参考：&quot;&gt;&lt;/a&gt;更多参考：&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://www.qcloud.com/community/article/673429&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS 程序从开发完到上 AppStore 那点事儿&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.cnblogs.com/mddblog/p/4718228.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;苹果企业账号打包发布APP流程详解&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学习iOS的打包和发布流程。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>学习iOS中JS与OC相互调用的方式</title>
     <link href="http://peilinghui.com/2017/05/05/%E5%AD%A6%E4%B9%A0iOS%E4%B8%ADJS%E4%B8%8EOC%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8%E7%9A%84%E6%96%B9%E5%BC%8F/"/>
     <id>http://peilinghui.com/2017/05/05/学习iOS中JS与OC相互调用的方式/</id>
     <published>2017-05-05T06:50:42.000Z</published>
-    <updated>2017-05-08T15:42:32.000Z</updated>
+    <updated>2017-05-10T03:17:22.000Z</updated>
     
     <content type="html">&lt;p&gt;Web App即是HTML5 APP框架开发模式，使用HTML5,CSS3以及JavaScript以及服务器端语言来完成开发，Web App具有跨平台的优势。那么就来学习一下iOS中JS与OC相互调用的方式。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h1 id=&quot;目前JS与OC相互调用的方式&quot;&gt;&lt;a href=&quot;#目前JS与OC相互调用的方式&quot; class=&quot;headerlink&quot; title=&quot;目前JS与OC相互调用的方式&quot;&gt;&lt;/a&gt;目前JS与OC相互调用的方式&lt;/h1&gt;&lt;p&gt;目前主要的JS与OC相互调用方式主要有如下6种：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;在JS 中做一次URL跳转，然后在OC中拦截跳转。（这里分为UIWebView 和 WKWebView两种，UIWebView兼容iOS 6）&lt;/li&gt;
-&lt;li&gt;利用WKWebView 的MessageHandler。&lt;/li&gt;
+&lt;li&gt;利用WKWebView 的MessageHandler。(有坑)&lt;/li&gt;
 &lt;li&gt;利用系统库JavaScriptCore，来做相互调用。（iOS 7推出）&lt;/li&gt;
 &lt;li&gt;利用第三方库WebViewJavascriptBridge。&lt;/li&gt;
 &lt;li&gt;利用第三方cordova库，以前叫PhoneGap。（这是一个库平台的库）&lt;/li&gt;
@@ -56,12 +115,14 @@ Safari相同的JavaScript引擎
 &lt;li&gt;初始化多了configuration参数，当然这个参数也可以不传，直接使用默认的设置。&lt;/li&gt;
 &lt;li&gt;WKWebView的代理有两个navigationDelegate和UIDelegate。我们要拦截URL，就要通过navigationDelegate的一个代理方法来实现。如果在HTML中要使用alert等弹窗，就必须得实现UIDelegate的相应代理方法。&lt;/li&gt;
 &lt;li&gt;在iOS9之前，WKWebView加载本地HTML会有一些问题。（不能加载本地HTML，或者部分CSS/本地图片加载不了等）&lt;/li&gt;
+&lt;li&gt;注意加载HTTP和HTTPS的时候要在文件设置App Transport Security Settings的Allow Arbitrary Loads设置为YES。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&quot;WKNavigationDelegate&quot;&gt;&lt;a href=&quot;#WKNavigationDelegate&quot; class=&quot;headerlink&quot; title=&quot;WKNavigationDelegate&quot;&gt;&lt;/a&gt;WKNavigationDelegate&lt;/h4&gt;&lt;figure class=&quot;highlight erlang&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;pp&quot;&gt;- &lt;span class=&quot;params&quot;&gt;(void)&lt;/span&gt;webView:&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;WKWebView&lt;/span&gt; *)&lt;/span&gt;webView decidePolicyForNavigationAction:&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;WKNavigationAction&lt;/span&gt; *)&lt;/span&gt;navigationAction decisionHandler:&lt;span class=&quot;params&quot;&gt;(void (^)&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;WKNavigationActionPolicy&lt;/span&gt;)&lt;/span&gt;)decisionHandler&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;实现这个代理方法，必须得调用decisionHandler这个block，否则会导致app 崩溃。block参数是个枚举类型，WKNavigationActionPolicyCancel代表取消加载，相当于UIWebView的代理方法return NO的情况；WKNavigationActionPolicyAllow代表允许加载，相当于UIWebView的代理方法中return YES的情况。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;WKWebView中OC调用JS方法&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;WKWebView中OC直接调用JS方法&lt;/strong&gt;&lt;/p&gt;
 &lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;NSString&lt;/span&gt; *js = &lt;span class=&quot;string&quot;&gt;@&quot;callJsAlert()&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.webView&lt;/span&gt; evaluateJavaScript:js completionHandler:^(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; _Nullable response, &lt;span class=&quot;built_in&quot;&gt;NSError&lt;/span&gt; * _Nullable error) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;response: %@ error: %@&quot;&lt;/span&gt;, response, error);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;call js alert by native&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;evaluateJavaScript:completionHandler:没有返回值，JS 执行成功还是失败会在completionHandler 中返回。所以使用这个API 就可以避免执行耗时的JS，或者alert 导致界面卡住的问题。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;evaluateJavaScript:completionHandler:&lt;/strong&gt;没有返回值，JS 执行成功还是失败会在completionHandler 中返回。所以使用这个API 就可以避免执行耗时的JS，或者alert 导致界面卡住的问题。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;WKWebView中JS调用OC原生方法&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&quot;MessageHandler&quot;&gt;&lt;a href=&quot;#MessageHandler&quot; class=&quot;headerlink&quot; title=&quot;MessageHandler&quot;&gt;&lt;/a&gt;MessageHandler&lt;/h2&gt;&lt;p&gt;利用WKWebView的新特性MessageHandler来实现JS调用原生方法。&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-08%20%E4%B8%8B%E5%8D%881.58.58.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;h3 id=&quot;MessageHandler的好处&quot;&gt;&lt;a href=&quot;#MessageHandler的好处&quot; class=&quot;headerlink&quot; title=&quot;MessageHandler的好处&quot;&gt;&lt;/a&gt;MessageHandler的好处&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;在JS中写起来简单，不用再用创建URL的方式那么麻烦了。&lt;/li&gt;
@@ -71,16 +132,45 @@ Safari相同的JavaScript引擎
 &lt;h3 id=&quot;实现原理&quot;&gt;&lt;a href=&quot;#实现原理&quot; class=&quot;headerlink&quot; title=&quot;实现原理&quot;&gt;&lt;/a&gt;实现原理&lt;/h3&gt;&lt;p&gt;WKWebView初始化时，有一个参数叫configuration，它是WKWebViewConfiguration类型的参数，而WKWebViewConfiguration有一个属性叫userContentController，它又是WKUserContentController类型的参数。WKUserContentController对象有一个方法- addScriptMessageHandler:name:，我把这个功能简称为MessageHandler。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;- addScriptMessageHandler:name:&lt;/code&gt;有两个参数，第一个参数是userContentController的代理对象，第二个参数是JS里发送postMessage的对象。&lt;/p&gt;
 &lt;p&gt;所以要使用MessageHandler功能，就必须要实现WKScriptMessageHandler协议。&lt;br&gt;在OC文件中：&lt;/p&gt;
-&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;span class=&quot;comment&quot;&gt;// 通过JS与webview内容交互&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; config.userContentController = [[WKUserContentController alloc] init];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 注入JS对象名称AppModel，当JS通过AppModel来调用时，&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 我们可以在WKScriptMessageHandler代理中接收到&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[config.userContentController &lt;span class=&quot;string&quot;&gt;addScriptMessageHandler:&lt;/span&gt;self &lt;span class=&quot;string&quot;&gt;name:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;AppModel&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//WKScriptMessageHandler协议&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;typename&quot;&gt;void&lt;/span&gt;)&lt;span class=&quot;string&quot;&gt;userContentController:&lt;/span&gt;(WKUserContentController *)userContentController&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;label&quot;&gt;      didReceiveScriptMessage:&lt;/span&gt;(WKScriptMessage *)message &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ([message.name &lt;span class=&quot;string&quot;&gt;isEqualToString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;AppModel&quot;&lt;/span&gt;]) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        NSLog(@&lt;span class=&quot;string&quot;&gt;&quot;%@&quot;&lt;/span&gt;, message.body);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;实现协议方法。&lt;br&gt;这里实现了两个协议&amp;lt; WKUIDelegate,WKScriptMessageHandler &amp;gt;，WKUIDelegate是因为需要在JS中弹出alert。WKScriptMessageHandler是用来处理JS调用OC方法的请求。&lt;/p&gt;
+&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;config.userContentController = [[WKUserContentController alloc] init];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 注入JS对象名称AppModel，当JS通过AppModel来调用时，我们可以在WKScriptMessageHandler代理中接收到&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[config.userContentController &lt;span class=&quot;string&quot;&gt;addScriptMessageHandler:&lt;/span&gt;self &lt;span class=&quot;string&quot;&gt;name:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;AppModel&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//WKScriptMessageHandler协议&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;typename&quot;&gt;void&lt;/span&gt;)&lt;span class=&quot;string&quot;&gt;userContentController:&lt;/span&gt;(WKUserContentController *)userContentController&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;label&quot;&gt;      didReceiveScriptMessage:&lt;/span&gt;(WKScriptMessage *)message &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ([message.name &lt;span class=&quot;string&quot;&gt;isEqualToString:&lt;/span&gt;@&lt;span class=&quot;string&quot;&gt;&quot;AppModel&quot;&lt;/span&gt;]) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        NSLog(@&lt;span class=&quot;string&quot;&gt;&quot;%@&quot;&lt;/span&gt;, message.body);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;实现协议方法。&lt;br&gt;这里实现了两个协议&amp;lt; WKUIDelegate,WKScriptMessageHandler &amp;gt;，WKUIDelegate是因为需要在JS中弹出alert。WKScriptMessageHandler是用来处理JS调用OC方法的请求。&lt;strong&gt;名字替换AppModel&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;在JS文件中：&lt;/p&gt;
-&lt;figure class=&quot;highlight less&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt; &lt;span class=&quot;comment&quot;&gt;// AppModel是我们所注入的对象&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;class&quot;&gt;.webkit&lt;/span&gt;&lt;span class=&quot;class&quot;&gt;.messageHandlers&lt;/span&gt;&lt;span class=&quot;class&quot;&gt;.AppModel&lt;/span&gt;&lt;span class=&quot;class&quot;&gt;.postMessage&lt;/span&gt;(&amp;#123;&lt;span class=&quot;attribute&quot;&gt;body&lt;/span&gt;: response&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight less&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// AppModel是我们所注入的对象&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;class&quot;&gt;.webkit&lt;/span&gt;&lt;span class=&quot;class&quot;&gt;.messageHandlers&lt;/span&gt;&lt;span class=&quot;class&quot;&gt;.AppModel&lt;/span&gt;&lt;span class=&quot;class&quot;&gt;.postMessage&lt;/span&gt;(&amp;#123;&lt;span class=&quot;attribute&quot;&gt;body&lt;/span&gt;: response&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;JavaScriptCore&quot;&gt;&lt;a href=&quot;#JavaScriptCore&quot; class=&quot;headerlink&quot; title=&quot;JavaScriptCore&quot;&gt;&lt;/a&gt;JavaScriptCore&lt;/h2&gt;&lt;p&gt;JavaScriptCore自iOS7之后出现，用Objective-C把WebKit的JavaScript引擎封装了一下，提供了简单快捷的方式与JavaScript交互。&lt;/p&gt;
 &lt;p&gt;特点： &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;JS中调用OC方法更简单，参数的传递也更加简单 &lt;/li&gt;
 &lt;li&gt;支持iOS7以上&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&quot;使用-1&quot;&gt;&lt;a href=&quot;#使用-1&quot; class=&quot;headerlink&quot; title=&quot;使用&quot;&gt;&lt;/a&gt;使用&lt;/h3&gt;&lt;p&gt;使用前需要先导入JavaScriptCore.framework&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JSVirtualMachine直译是JS虚拟机，也就是说JavaScript是在一个虚拟的环境中执行，而JSVirtualMachine为其执行提供底层资源。&lt;/li&gt;
+&lt;li&gt;JSContext是为JavaScript的执行提供运行环境，所有的JavaScript的执行都必须在JSContext环境中。JSContext也管理JSVirtualMachine中对象的生命周期。每一个JSValue对象都要强引用关联一个JSContext。当与某JSContext对象关联的所有JSValue释放后，JSContext也会被释放。&lt;/li&gt;
+&lt;li&gt;JSValue都是通过JSContext返回或者创建的，并没有构造方法。JSValue包含了每一个JavaScript类型的值，通过JSValue可以将Objective-C中的类型转换为JavaScript中的类型，也可以将JavaScript中的类型转换为Objective-C中的类型。&lt;/li&gt;
+&lt;li&gt;JSManagedValue主要用途是解决JSValue对象在Objective-C堆上的安全引用问题。把JSValue保存进Objective-C堆对象中是不正确的，这很容易引发循环引用，而导致JSContext不能释放。但是不常用。&lt;/li&gt;
+&lt;li&gt;JSExport是一个协议类，但是该协议并没有任何属性和方法。可以自定义一个协议类，继承自JSExport。无论在JSExport里声明的属性、实例方法还是类方法，继承的协议都会自动的提供给任何JavaScript代码。因此，只需要在自定义的协议类中，添加上属性和方法就可以了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;WKWebVIew中的坑&quot;&gt;&lt;a href=&quot;#WKWebVIew中的坑&quot; class=&quot;headerlink&quot; title=&quot;WKWebVIew中的坑&quot;&gt;&lt;/a&gt;WKWebVIew中的坑&lt;/h1&gt;&lt;h2 id=&quot;WKWebView导致ViewController不调用dealloc方法&quot;&gt;&lt;a href=&quot;#WKWebView导致ViewController不调用dealloc方法&quot; class=&quot;headerlink&quot; title=&quot;WKWebView导致ViewController不调用dealloc方法&quot;&gt;&lt;/a&gt;WKWebView导致ViewController不调用dealloc方法&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;webview不设置 delegate，可以正常dealloc&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;webview.UIDelegate和 navigationDelegate 设置为 self，可以正常&lt;br&gt;dealloc&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;webview.configuration.userContentController addScriptMessageHandler 为 self之后，无法正常dealloc，该方法引起ViewController内存泄漏。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;4.使用 ScriptMessageHandler 作为 webview.scriptMessageHandler，当前viewController 可以正常释放。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;5.当前 viewController dealloc 方法中，通过 removeScriptMessazgeHanlder 释放掉&lt;br&gt;scriptMessageHandler&lt;/p&gt;
+&lt;p&gt;解决方法：&lt;br&gt;(1)WeakScriptMessageDelegate&lt;br&gt;可以创建一个新的类WeakScriptMessageDelegate，也可以将@interface-@end写在ViewController.h中，@implementation-@end写在ViewController.m中。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;WeakScriptMessageDelegate&lt;/span&gt; : &lt;span class=&quot;title&quot;&gt;NSObject&lt;/span&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;WKScriptMessageHandler&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;@property&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;nonatomic&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;weak&lt;/span&gt;) &lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;&amp;lt;WKScriptMessageHandler&amp;gt; scriptDelegate;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (instancetype)initWithDelegate:(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;&amp;lt;WKScriptMessageHandler&amp;gt;)scriptDelegate;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;@end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;WeakScriptMessageDelegate&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (instancetype)initWithDelegate:(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;&amp;lt;WKScriptMessageHandler&amp;gt;)scriptDelegate &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt; = [&lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt; init];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        _scriptDelegate = scriptDelegate;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.scriptDelegate&lt;/span&gt; userContentController:userContentController didReceiveScriptMessage:message];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;@end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;(2)使用&lt;/p&gt;
+&lt;figure class=&quot;highlight pf&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;_webView = [[WKWebView alloc] initWithFrame:&lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt;.view.bounds configuration:configuration];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; _webView.UIDelegate = &lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; _webView.navigationDelegate = &lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;configuration.&lt;span class=&quot;keyword&quot;&gt;user&lt;/span&gt;ContentController = [WKUserContentController new];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;//无法正常dealloc[configuration.&lt;span class=&quot;keyword&quot;&gt;user&lt;/span&gt;ContentController addScriptMessageHandler:&lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt; name:@&lt;span class=&quot;string&quot;&gt;&quot;myHandler&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;//使用代理来实现可以调用dealloc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[configuration.&lt;span class=&quot;keyword&quot;&gt;user&lt;/span&gt;ContentController addScriptMessageHandler:[[WeakScriptMessageDelegate alloc] initWithDelegate:&lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt;] name:@&lt;span class=&quot;string&quot;&gt;&quot;myHandler&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; - (void)dealloc &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [&lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt;.&lt;span class=&quot;keyword&quot;&gt;user&lt;/span&gt;ContentController removeScriptMessageHandlerForName:@&lt;span class=&quot;string&quot;&gt;&quot;myHandler&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h1 id=&quot;参考&quot;&gt;&lt;a href=&quot;#参考&quot; class=&quot;headerlink&quot; title=&quot;参考&quot;&gt;&lt;/a&gt;参考&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/9513d101e582#&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;WKWebView使用及注意点(keng)&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;扩展&quot;&gt;&lt;a href=&quot;#扩展&quot; class=&quot;headerlink&quot; title=&quot;扩展&quot;&gt;&lt;/a&gt;扩展&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://imciel.com/2016/06/18/oc-js-communication/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;使用 JavaScriptCore 实现 JS和OC间的通信&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.brighttj.com/ios/ios-user-safari-debug-webview.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;使用safari对webview进行调试&lt;/a&gt;&lt;/p&gt;
@@ -2461,132 +2551,6 @@ RACReplaySubject *replaySubject = [RACReplaySubject subject];
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>iOS网络编程</title>
-    <link href="http://peilinghui.com/2016/04/14/iOS%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
-    <id>http://peilinghui.com/2016/04/14/iOS网络编程/</id>
-    <published>2016-04-14T14:07:11.000Z</published>
-    <updated>2016-07-16T00:56:39.000Z</updated>
-    
-    <content type="html">&lt;p&gt;iOS网络编程知识总结&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;iOS网络编程&quot;&gt;&lt;a href=&quot;#iOS网络编程&quot; class=&quot;headerlink&quot; title=&quot;iOS网络编程&quot;&gt;&lt;/a&gt;iOS网络编程&lt;/h1&gt;&lt;h2 id=&quot;检测网络状态&quot;&gt;&lt;a href=&quot;#检测网络状态&quot; class=&quot;headerlink&quot; title=&quot;检测网络状态&quot;&gt;&lt;/a&gt;检测网络状态&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;检查网络状态。&lt;br&gt;1&amp;gt;下载和添加Reachablity类.&lt;br&gt;2&amp;gt;为项目添加SystemConfiguration.framework框架。&lt;br&gt;若要手动禁用ARC源文件，输入框添加“-fno-objc-arc”.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;使用CFNetwork实现TCP协议的通信&quot;&gt;&lt;a href=&quot;#使用CFNetwork实现TCP协议的通信&quot; class=&quot;headerlink&quot; title=&quot;使用CFNetwork实现TCP协议的通信&quot;&gt;&lt;/a&gt;使用CFNetwork实现TCP协议的通信&lt;/h2&gt;&lt;p&gt;CFNetwork对基于TCP协议的网络通信提供了良好的封装，CFNetwork使用CFSocket来代表两端的通信端口，还可以通过CFStream读/写数据。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;IP地址是32位整数，分为A，B,C,D,E五类。用于唯一标识网络上的一个通信实体&lt;br&gt;A类：10.0.0.0~10.255.255.255&lt;br&gt;B类：172.16.0.0~172.31.255.255&lt;br&gt;C类：192.168.0.0~192.168.255.255&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;端口是16为整数，表示数据交给哪个通信程序处理，是应用程序和外界交流的出入口，包括一些数据结构和I/O。&lt;br&gt;公认端口：从0到1023，紧紧绑定一些特定的服务。&lt;br&gt;注册端口：从1024到49151，松散的绑定一些服务，适用于应用程序。&lt;br&gt;动态和/私有端口：从49152到65535.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;使用CFSocket实现TCP服务器端&lt;br&gt;步骤：&lt;br&gt;1&amp;gt;创建一个监听Socket Accept的CFSocket,并为kCFSocketAcceptCallBack事件绑定回调函数。&lt;br&gt;2&amp;gt;调用CFSocketSetAddress()函数，将服务器的CFSocket绑定到本地IP地址和端口。&lt;br&gt;3&amp;gt;将CFSocket作为source添加到指定线程的CFRunLoop上，并运行该线程的CFRunLoop，从而保证该CFSocket能持续不断的接受来自客户端的连接。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;使用CFSocket实现TCP客户端&lt;br&gt;步骤：&lt;br&gt;1&amp;gt;创建一个不监听任何事件或监听Connection的CFSocket。如果要监听Connection，则需要为kCFSocketConnectCallBack事件绑定回调函数。&lt;br&gt;2&amp;gt;调用CFSocketConnectionToAddress()函数，将客户端的CFSocket；连接到指定IP地址和端口的服务器上。&lt;br&gt;3&amp;gt;得到客户端CFSocket之后，既可直接使用CFSocketNativeHandle进行读/写，也可通过CFSocket获取CFReadStreamRef、CFWriteStreamRef后进行读、写。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;使用CocoaAsyncSocket实现TCP客户端&lt;br&gt;降低直接使用CFSocket编程的复杂度，另外有开发者提供了一套开源的CocoaAsyncSocket库。&lt;br&gt;CocoaAsyncSocket封装了CFNetwork底层的CFSocket和CFStream，并提供了异步操作，支持TCP和UDP。&lt;br&gt;特性：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;非阻塞方式的读和写，而且可设置超时时长。&lt;/li&gt;
-&lt;li&gt;自动的socket接受，如果调用它接受连接，它将为每个连接启动新的实例，当然也可以立即关闭这些连接。&lt;/li&gt;
-&lt;li&gt;委托支持，错误、连接、接收、完整的读取、完整的写入、进度以及断开连接，都可通过代理模式调用。&lt;/li&gt;
-&lt;li&gt;所有操作都封装在一个类中，开发者无需操作socket或流，该类封装了所有操作。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;使用NSURLConnection&quot;&gt;&lt;a href=&quot;#使用NSURLConnection&quot; class=&quot;headerlink&quot; title=&quot;使用NSURLConnection&quot;&gt;&lt;/a&gt;使用NSURLConnection&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;使用NSURLConnection从网络获取数据&lt;br&gt;方法:&lt;br&gt;&lt;code&gt;- (NSURLRequest *)originalRequest://获取该NSURLConnection最初的NSURLRequest对象的深拷贝&lt;/code&gt;&lt;br&gt;&lt;code&gt;- (NSURLRequest *)currentRequest://返回该该NSURLConnection当前使用的NSURLRequest对象。&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;1&amp;gt;同步请求获取网络数据：&lt;br&gt;&lt;code&gt;+ sendSynchronousRequest:returningResponse:error:&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;2&amp;gt;异步请求获取网络数据：&lt;br&gt;总指定一个NSURLConnectionDelegate对象，将该对象作为NSURLConnection的delegate，负责服务器响应到来的各种事件。&lt;br&gt;&lt;code&gt;+ connectionWithRequest:delegate://异步请求的方式获取数据&lt;/code&gt;&lt;br&gt;&lt;code&gt;- initWithRequest:delegate//实例方法，必须先调用alloc,再调用该方法。&lt;/code&gt;&lt;br&gt;&lt;code&gt;+ sendAsynchronousRequest:queue:CompletionHandler://表明将请求交给指定的NSOperationQueue处理&lt;/code&gt;&lt;br&gt;&lt;code&gt;- start://开始发送请求&lt;/code&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;使用使用NSURLConnection从网络获取数据的步骤：&lt;br&gt;1&amp;gt;创建NSURLRequest对象，该对象代表对远程服务器的请求。包括：请求的URL，缓存策略，超时时长等。&lt;br&gt;2&amp;gt;调用NSURLConnection的实例方法或类方法，以NSURLRequest对象为参数创建NSURLConnection即可发送请求。&lt;br&gt;3&amp;gt;以异步方式加载服务器响应，则需要为NSURLConnection对象指定delegate对象，因此还需要为delegate对象实现特定的方法。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;使用NSMutableURLRequest向服务器发送请求&lt;br&gt;NSURLRequest只能想服务器发送简单的请求，不能添加请求头和请求参数，使用NSMutableURLRequest可以。&lt;br&gt;&lt;code&gt;-addValue:forHTTPHeaderField:为使用NSMutableURLRequest添加请求头。&lt;/code&gt;&lt;br&gt;&lt;code&gt;-setAllHTTPHeaderField:通过一个NSDictionary一次性为NSMutableURLRequest设置多个请求头。&lt;/code&gt;&lt;br&gt;&lt;code&gt;-setHTTPBody:设置NSMutableURLRequest的请求参数&lt;/code&gt;&lt;br&gt;&lt;code&gt;-setHTTPBodyStream:以NSInputStream为参数设置NSMutableURLRequest的请求参数&lt;/code&gt;&lt;br&gt;&lt;code&gt;-setHTTPMethod:设置提交请求方式，要么是POST，要么是GET。&lt;/code&gt;&lt;br&gt;&lt;code&gt;-setHTTPShouldHandleCookies:设置该HTTP请求是否处理Cookie。&lt;/code&gt;&lt;br&gt;&lt;code&gt;-setValue：forHTTPHeaderField：为指定的请求头设置请求值。&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;XML解析&quot;&gt;&lt;a href=&quot;#XML解析&quot; class=&quot;headerlink&quot; title=&quot;XML解析&quot;&gt;&lt;/a&gt;XML解析&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;DOM与SAX&lt;br&gt;DOM：Document Object Model。文档对象模型、&lt;br&gt;SAX：Simple API for XML。&lt;br&gt;iOS SDK提供了NSXMLParser和libxml2两个类库，还有第三方库GDataXML，TBXML，TouchXML，KissXML等。&lt;br&gt;需要读取和修改XML文档，使用GDataXML，KissXML。&lt;br&gt;需要读取非常大的XML文档，使用libxml2或TBXML。&lt;/li&gt;
-&lt;li&gt;NSXMLParser解析XML文档&lt;br&gt;步骤：&lt;ul&gt;
-&lt;li&gt;创建NSXMLParser对象。&lt;/li&gt;
-&lt;li&gt;为NSXMLParser对象指定delegate对象，该delegate对象必须实现NSXMLParserDelegate协议，并根据需要实现协议中特定的方法。&lt;/li&gt;
-&lt;li&gt;调用NSXMLParser对象的parse方法开始解析。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;libxml2解析XML文档&lt;br&gt;使用C语言的库，准备步骤：&lt;ul&gt;
-&lt;li&gt;为项目添加libxml2.dylib库&lt;/li&gt;
-&lt;li&gt;添加头文件的搜索路径&lt;br&gt;步骤：    &lt;/li&gt;
-&lt;li&gt;创建XMLTextReaderPtr对象.如果以本地XML文档来创建XMLTextReaderPtr对象，则调用XMLTextReaderFilename()函数即可。如果以内存中XML文档来创建该对象，则调用XMLReaderForMemeory（）函数即可。&lt;/li&gt;
-&lt;li&gt;依次调用XMLTextReaderxxx()函数来读取XML文档的元素名，元素值，属性等各种内容。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;GDataXML解析XML文档&lt;br&gt;第三方开源库，对libxml2的宝座，底层依赖libxml2，既支持解析XML文档 ，也支持修改XML文档，支持XPath方式查询，提供了更好的面向对象的封装。&lt;br&gt;准备步骤：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;步骤：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;- 调用GDataXMLDocument的初始化方法根据XML文档或XML字符初始化GDataXMLDocument对象。（GDataXMLDocument对象就是XML文档转换得到的DOM树）
-- 调用GDataXMLDocument对象的rootElement方法即可获取该文档的根元素
-- 获取根元素后，就可以根据XML元素之间的父子关系来逐层遍历，访问该XML文档中的每一个元素，从而获取XML元素的内容。
-&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;
-&lt;li&gt;GDataXML生成XML文档  &lt;ul&gt;
-&lt;li&gt;调用GDataXMLNode的elementWithName：方法创建 GDataXMLelement对象，并以该对象作为XML文档的根元素。&lt;/li&gt;
-&lt;li&gt;调用GDataXMLNode的elementWithName：方法不断创建 GDataXMLelement对象（XML元素），并利用元素之间的父子关系组织这些XML元素。&lt;/li&gt;
-&lt;li&gt;调用GDataXMLDocument对象的XMLData方法获取XML文档对应的NSData对象，调用NSData的输出方法将XML文档输出到指定文件或其他存储介质。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;GDataXML修改XML文档  &lt;ul&gt;
-&lt;li&gt;调用GDataXMLDocument方法根据指定的XML文档或者XML字符串来生成对应的GDataXMLDocument对象–它代表了XML文档在内存中的形式。&lt;/li&gt;
-&lt;li&gt;获取GDataXMLDocument对象的根元素，然后利用元素之间父子关系添加子元素、删除子元素或修改元素的内容。&lt;/li&gt;
-&lt;li&gt;调用GDataXMLDocument对象的XMLdata的方法获取XML文档对应的NSData 对象，调用NSdata的输出方法将XML文档输出到指定文件或其他存储介质。&lt;/li&gt;
-&lt;li&gt;调用GDataXMLDocument对象的XMLdata的方法获取XML文档对的NSData对象，调用NSData的输出方法将XML文档输出到指定文件或其他存储介质&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;JSON解析&quot;&gt;&lt;a href=&quot;#JSON解析&quot; class=&quot;headerlink&quot; title=&quot;JSON解析&quot;&gt;&lt;/a&gt;JSON解析&lt;/h2&gt;&lt;p&gt;JSON具有跨平台，跨语言的优势。两种数据结构：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;- 由key-value对组成的数据结构。
-- 有序集合  
-&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;
-&lt;li&gt;使用JSON语法创建对象&lt;br&gt;直接创建一个JavaScript对象，&lt;/li&gt;
-&lt;li&gt;使用JSON语法创建数组&lt;br&gt;&lt;code&gt;var a = [&amp;#39;yeeku&amp;#39;,&amp;#39;nono&amp;#39;];&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;使用NSJSONSerialization处理JSON数据 (系统自带)&lt;br&gt;满足条件：&lt;br&gt;顶级对象只能是NSArray或NSDictionary。&lt;br&gt;集合中包含对象只能是NSString，NSNumber，NSArray，NSDictionary或NSNull对象。&lt;br&gt;所有NSDictionary的key只能是NSString。&lt;br&gt;NSNumber保证的数值不是NaN或Infinity。  &lt;/li&gt;
-&lt;li&gt;使用SBJson解析JSON数据&lt;br&gt;提供了两个工具类：SBJsonParser和SBJsonWriter.&lt;br&gt;SBJsonParser负责吧NSData或NSString形式的JSON数据转换为objective-c对象。&lt;br&gt;SBJSonWriter负责把objective-c对象转换为NSData或NSString形式的JSON数据。&lt;/li&gt;
-&lt;li&gt;第三方类库解析JSON， 使用JSONKit解析JSON数据&lt;br&gt;地址：&lt;a href=&quot;https://github.com/johnezang/JSONKit&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/johnezang/JSONKit&lt;/a&gt;&lt;br&gt;JSONKit速度快，JsonKit1.4不支持ARC，需要在支持ARC的项目中设置‘fno-objc-arc’选项来禁用ARC。&lt;br&gt;JSONKit采用分类方式为已有的类增加了新方法。用于将JSON数据恢复为objective-c对象。&lt;br&gt;研究一下第三方框架就可以发现:&lt;br&gt;JSONKit用分类为NSString和NSDate增加了如下方法，&lt;br&gt;把JSON数据转换为OC对象：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;)objectFromJSO&lt;span class=&quot;built_in&quot;&gt;NString&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;)objectFromJSO&lt;span class=&quot;built_in&quot;&gt;NStringWithParseOptions&lt;/span&gt;:(JKParseOptionFlags)parseOptionFlags;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;)objectFromJSO&lt;span class=&quot;built_in&quot;&gt;NStringWithParseOptions&lt;/span&gt;:(JKParseOptionFlags)parseOptionFlags error:(&lt;span class=&quot;built_in&quot;&gt;NSError&lt;/span&gt; **)error;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;)mutableObjectFromJSO&lt;span class=&quot;built_in&quot;&gt;NString&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;)mutableObjectFromJSO&lt;span class=&quot;built_in&quot;&gt;NStringWithParseOptions&lt;/span&gt;:(JKParseOptionFlags)parseOptionFlags;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;)mutableObjectFromJSO&lt;span class=&quot;built_in&quot;&gt;NStringWithParseOptions&lt;/span&gt;:(JKParseOptionFlags)parseOptionFlags error:(&lt;span class=&quot;built_in&quot;&gt;NSError&lt;/span&gt; **)error;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;JSONKit用分类为NSString、NSStringArray和NSDictionary增加了如下方法：将OC对象装潢为NSString和NSData形式的JSON数据。&lt;br&gt;&lt;figure class=&quot;highlight haml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;-&lt;span class=&quot;ruby&quot;&gt; (&lt;span class=&quot;constant&quot;&gt;NSData&lt;/span&gt; *)&lt;span class=&quot;constant&quot;&gt;JSONData&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;-&lt;span class=&quot;ruby&quot;&gt; (&lt;span class=&quot;constant&quot;&gt;NSString&lt;/span&gt; *)&lt;span class=&quot;constant&quot;&gt;JSONString&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h2 id=&quot;使用AFNetworking实现网络通信&quot;&gt;&lt;a href=&quot;#使用AFNetworking实现网络通信&quot; class=&quot;headerlink&quot; title=&quot;使用AFNetworking实现网络通信&quot;&gt;&lt;/a&gt;使用AFNetworking实现网络通信&lt;/h2&gt;&lt;p&gt;只是需要向web某个站点的某个简单页面提交请求并获取服务器响应，则使用NSURLConnection来完成。为了更好的处理web站点请求，包括处理Session,Cookie，可以用AFNetworking，用于发送HTTP请求，接受HTTP响应。但不会缓存服务器响应，不能执行HTML页面中嵌入的JavaScript代码，也不会对页面内容进行任何解析处理。AFNetworking还支持JSON、Plist属性文件和XML解析。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;提交GET请求与提交POST请求&lt;br&gt;步骤：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;创建AFHTTRequestOperationManager对象。&lt;/li&gt;
-&lt;li&gt;根据服务器响应内容不同，为HTTORequestOperationManager对象指定不同的解析器。（JSON或Plist数据）&lt;/li&gt;
-&lt;li&gt;如果需要发送GET请求，调用AFHTTRequestOperationManager对象的GET：parameters:success：failure：方法即可 。&lt;/li&gt;
-&lt;li&gt;如果要发送POST请求，调用AFHTTRequestOperationManager对象的POST：parameters:success：failure：方法即可 。&lt;/li&gt;
-&lt;li&gt;在success：参数指定的代码块中处理服务器响应成功的正确数据。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;处理JSON和Plist响应&lt;br&gt;可以直接将JSON和Plist转化为NSArray或NSDictionary对象。  AFHTTORequestOperationManager默认可以处理JSON或Plist对象。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;处理XML响应&lt;br&gt;为AFHTTORequestOperationManager显示使用&lt;br&gt;AF X MLParserResponseSerializer响应解析器，当使用AF X MLParserResponseSerializer解析器时，服务器返回的数据是一个NSXMLParser对象。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;上传文件&lt;br&gt;AFHTTRequestOperationManager对象的POST：    parameters:constructingBodyWithBlock:success：failure：方法提交POST请求即可，多了三个参数，一个是带AFMultipartFormData形参的代码块。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;使用ASIHTTPRequest框架实现网络编程&quot;&gt;&lt;a href=&quot;#使用ASIHTTPRequest框架实现网络编程&quot; class=&quot;headerlink&quot; title=&quot;使用ASIHTTPRequest框架实现网络编程&quot;&gt;&lt;/a&gt;使用ASIHTTPRequest框架实现网络编程&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;发送同步或异步的GET请求&lt;br&gt;准备步骤：&lt;br&gt;目前不支持ARC，应该需要在支持ARC的项目中设置‘fno-objc-arc’选项来禁用ARC。&lt;br&gt;步骤：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;使用代码块&lt;br&gt;ASIHTTPRequest发送异步请求，即可使用delegate为ASIHTTPRequest设置回调处理代码，也可用代码块来设置回调处理代码。&lt;br&gt;&lt;code&gt;-setCompletionBlock:设置发送请求、获取服务器响应完成时激发的代码块。&lt;/code&gt;&lt;br&gt;`-setFailedBlock:获取发送请求失败时激发的代码块。&lt;/li&gt;
-&lt;/ol&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;iOS网络编程知识总结&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="http://peilinghui.com/tags/iOS/"/>
     
   </entry>
   
