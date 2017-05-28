@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://peilinghui.com/2017/05/10/iOS打包和发布流程/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="学习iOS的打包和发布流程。">
-<meta property="og:updated_time" content="2017-05-10T11:33:29.000Z">
+<meta property="og:updated_time" content="2017-05-28T17:41:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS打包和发布流程">
 <meta name="twitter:description" content="学习iOS的打包和发布流程。">
@@ -284,36 +284,90 @@
           
         <p>学习iOS的打包和发布流程。</p>
 <a id="more"></a>
-<h1 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h1><h2 id="两种证书"><a href="#两种证书" class="headerlink" title="两种证书"></a>两种证书</h2><ul>
-<li>由 apple 官方颁发, 用以证明开发者身份的特殊文件, 在 iOS 开发中主要用于代码签名, 保障 iOS 生态的健康安全, 分为<strong>开发者证书</strong>和<strong>发布者证书</strong></li>
-<li>什么时候需要证书：只有在本机模拟器调试时无需代码签名, 当 App 需要在真机运行和发布时需要使用相应证书进行签名</li>
-<li>证书如何获得：首先需要拥有相应权限的开发者帐号, 通过在本地生成配对的密钥, 向 provisioning portal 提交公钥后换取, 后续证书在使用时会验证本地私钥。</li>
-<li>如何对代码进行签名：在 xcode 中, 使用描述文件(provision profile 包含调试者证书, 授权设备清单, 应用ID), 在 Build Settings 中选择存于 Keychain Access 中的证书文件设置调试和发布任务时的代码签名。</li>
-<li>我生成的私钥如何共享给团队成员：在 Keychain Access 中找到导入的证书, 右击导出为包含私钥的 Personal Information Exchange(.p12)文件(导出时可以创建密码), 团队成员再导入 p12 证书后就完整包含了证书和私钥</li>
-</ul>
+<h2 id="两种证书"><a href="#两种证书" class="headerlink" title="两种证书"></a>两种证书</h2><p>App证书分为两种：开发证书、发布证书。App发布证书分：AppStore(正常的发布到商店) 及 Adhoc（内部测试发布） 两种。</p>
+<h2 id="真机运行-dev"><a href="#真机运行-dev" class="headerlink" title="真机运行(dev)"></a>真机运行(dev)</h2><p>真机调试指 mac 连上 iphone, xcode 可以直接以这台 iphone 设备为 build target, 能在 iphone 里执行编译结果<br>为什么真机调试？</p>
 <blockquote>
-<p>每种license 都有两种安装方式：dev 和 release</p>
+<p>部分功能需要硬件支持，模拟器是不支持的，如：<br>传感器：磁力计、陀螺仪、距离传感器等<br>特定功能：拍照、打电话、发短信、蓝牙等</p>
+<p>真机的环境和模拟器的环境是不一样，模拟器是使用电脑的环境， CPU、Memory、Disk、Network 这些和真机环境都不一样，有些bug可能会在特定的环境才会出现，比如网络非常慢，内存特别小的时候，可能在模拟器上不会有bug，在真机上就有可能出现bug<br>使用真机开发比使用模拟器体验更好</p>
 </blockquote>
-<h3 id="真机运行-dev"><a href="#真机运行-dev" class="headerlink" title="真机运行(dev)"></a>真机运行(dev)</h3><p>真机调试指 mac 连上 iphone, xcode 可以直接以这台 iphone 设备为 build target, 能在 iphone 里执行编译结果</p>
-<p>分为拥有独立开发者帐号(也包括公司帐号或企业帐号成员)和共享开发者帐号两种情况。</p>
+<h4 id="Xcode7以前："><a href="#Xcode7以前：" class="headerlink" title="Xcode7以前："></a>Xcode7以前：</h4><p>真机调试的主要步骤：</p>
 <ul>
-<li><p>拥有独立开发者帐号：</p>
-<pre><code>在 provisioning portal 新建应用, 配置授权设备等
-开发机上导入证书
-在 xcode 上登录开发者帐号, 不需要准备描述文件, xcode 会自动生成(如果是公司帐号可以自动生成 iOS Team Provisioning Profile)
-</code></pre></li>
-<li><p>共享开发者帐号<br>如果无法在 xcode 登录一个开发者帐号, 也可以通过他人对你手机和应用 id 的授权, 得到 .mobileprovision 描述文件再导入其含私钥的证书(p12) 即可, 具体步骤如下:</p>
-<pre><code>获得手机的 udid (可以连上 mac, 在 itunes 中查看)
-告知对方 udid (用以设备授权) 和 应用 id
-得到对方生成的证书和描述文件后, 先导入 p12 证书, 再双击 mobileprovision 文件
-连接手机, 在 xcode 中选择 build target 为已连接的手机
-</code></pre></li>
+<li>登录开发者主页</li>
+<li>生成cer证书：cer是一个跟电脑相关联的证书文件，让电脑具备真机调试的功能</li>
+<li>添加App ID：调试哪些app？</li>
+<li>注册真机设备：哪台设备需要做真机调试？</li>
+<li>生成MobileProvision文件：结合2、3、4生成一个手机规定文件</li>
+<li>导入cer、MobileProvision文件</li>
 </ul>
-<h1 id="发布方式"><a href="#发布方式" class="headerlink" title="发布方式"></a>发布方式</h1><p>四种发布方式：</p>
-<h2 id="苹果应用商店发布AppStore"><a href="#苹果应用商店发布AppStore" class="headerlink" title="苹果应用商店发布AppStore"></a>苹果应用商店发布AppStore</h2><h2 id="苹果应用商店批量购买发布（Volume-Purchase-Program）"><a href="#苹果应用商店批量购买发布（Volume-Purchase-Program）" class="headerlink" title="苹果应用商店批量购买发布（Volume Purchase Program）"></a>苹果应用商店批量购买发布（Volume Purchase Program）</h2><h2 id="Ad-Hoc应用发布方式"><a href="#Ad-Hoc应用发布方式" class="headerlink" title="Ad Hoc应用发布方式."></a>Ad Hoc应用发布方式.</h2><p>Ad Hoc方式发布应用，应用的具体内容也不需要经过苹果的评审，但限制每个应用不能发布到超过100个设备上。如果应用需要小规模的测试或者企业规模很小可以采用这种方式发布企业应用.</p>
-<h2 id="In-House企业应用发布"><a href="#In-House企业应用发布" class="headerlink" title="In-House企业应用发布"></a>In-House企业应用发布</h2><p>In-House企业应用是不能提交到App Store,发布应用的具体内容也是不需要苹果官方审核.安装设备的数量目前也没有任何限制.所以权限最为开放，适合针对支持开放大批量对外用户测试使用.所以你看到很多第三方开放渠道下载IPA其实基于其他企业账号来支持的.</p>
-<h3 id="内网OTA"><a href="#内网OTA" class="headerlink" title="内网OTA"></a>内网OTA</h3><p>OTA即Over-the-Air，是Apple在 iOS4 中新加的一项技术，目的是让开发者能够脱离Appstore，实现从自己的服务器下载并安装iOS应用。简单地说，就是用户只需要在Safari中点开一条链接，就能直接在主界面中安装App。</p>
-<h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><ol>
+<p>最终会得到2个文件：</p>
+<ul>
+<li>Cer文件：让电脑具备真机调试的功能</li>
+<li>MobileProvision文件：哪台设备、哪些app、哪台电脑需要做真机调试？</li>
+</ul>
+<h4 id="Xcode7以后"><a href="#Xcode7以后" class="headerlink" title="Xcode7以后"></a>Xcode7以后</h4><p>Xcode–&gt;Preferences—&gt;Accounts—&gt; Add Apple ID 然后选择真机直接允许App，弹出来个框点击Fix Issue即可，这样就完成真机测试了。</p>
+<p>Xcode7.0真机测试Apple ID必须加入苹果开发者计划，而Xcode7.0之后直接使用普通的Apple ID即可真机测试。注意Xcode7.0之后并不是不需要.cer和.mobileprovision文件，而是苹果已经生产了这两个文件，并将.cer文件安装到钥匙串访问里，.mobileprovision已经复制到Library/MobileDevice/Provisioning Profiles文件夹中.</p>
+<p><a href="http://ios.jobbole.com/89870/" target="_blank" rel="external">iOS真机调试详解</a></p>
+<h2 id="测试打包"><a href="#测试打包" class="headerlink" title="测试打包"></a>测试打包</h2><ol>
+<li>登录apple的开发者主页:developer.apple.com</li>
+<li>选择Ad Hoc生成一个ios_distribution.cer: 让电脑具备打包程序的能力</li>
+<li>新建一个App ID : 方便打包哪个程序</li>
+<li>利用用户设备的UDID注册设备</li>
+<li><p>选择Ad Hoc利用ios_distribution.cer + 设备UDID + App ID –&gt; 描述文件</p>
+<pre><code>(描述文件的作用:
+1&gt; 能知道在哪台电脑上, 为哪台设备打包哪个程序
+2&gt; 哪台设备需要安装打包哪个程序    )
+</code></pre></li>
+<li><p>最终产生了3个文件</p>
+<pre><code>1&gt; CertificateSigningRequest.certSigningRequest(CSR证书)
+* 包含了电脑的信息
+* 发送给苹果服务器, 苹果服务器根据文件信息来生成一个电脑证书
+* 生成的证书就可以让对应的电脑具备某个特殊的能力
+2&gt; ios_distribution.cer
+* 打包证书
+* 安装这个证书后, 电脑就具备打包程序的能力
+3&gt; nj_iphone6_news.mobileprovision
+* 里面包含了3个信息:ios_distribution.cer + 设备UDID + App ID
+</code></pre></li>
+<li><p>安装证书和描述文件</p>
+<pre><code>1&gt; ios_distribution.cer
+2&gt; nj_iphone6_news.mobileprovision
+</code></pre></li>
+<li><p>项目Scheme右边的设备选择iOS Device</p>
+</li>
+<li>点击Xcode的菜单<br>Product –&gt; Archive –&gt; Distribute –&gt; ….Ad Hoc… –&gt; 选择对应的描述文件</li>
+<li>生成一个ipa文件,发给测试人员和客户</li>
+</ol>
+<p>更多：<a href="http://debugtalk.com/post/iOS-Android-Packing-with-Jenkins/index.html" target="_blank" rel="external">使用Jenkins搭建iOS/Android持续集成打包平台</a></p>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><p>四种发布方式：</p>
+<h3 id="苹果应用商店发布AppStore"><a href="#苹果应用商店发布AppStore" class="headerlink" title="苹果应用商店发布AppStore"></a>苹果应用商店发布AppStore</h3><ol>
+<li><p>developer.apple.com : 开发者主页, 配置证书\AppId\描述文件</p>
+<pre><code>1&gt;发布的证书, 说清楚哪台电脑可以发布程序
+2&gt;添加发布的描述文件，描述在哪台计算机上能够发布哪些应用程序
+</code></pre></li>
+<li><p>iTunesConnect网站(专门用来发布应用程序)<br><a href="https://itunesconnect.apple.com" target="_blank" rel="external">https://itunesconnect.apple.com</a></p>
+<pre><code>1&gt;    如果想挣钱，先设置在Agreements, Tax, and Banking设置个人储蓄卡信息
+做一次就行
+2&gt; 添加应用程序
+－ 名称，不能重复，可以使用 - 添加一些后缀信息
+－ 关键字，增加软件被搜中的几率，使用英文的都好分隔，不能超过255个字节
+－图片，图片文件名称中不能有中文
+－ Rating，设置应用程序的等级，默认都选择最低的，成人，赌博……
+－ App Review Information
+提供给苹果的审核人员，来辅助测试使用的。
+如果有测试帐号，必须提供！
+如果有测试数据，需要提供给苹果，例如快递查询！
+需要提供联系人的联系方式，电子邮件，电话需要添加国际区号，+86
+3&gt; 从Xcode6开始，上传完应用程序之后，程序默认会在prerelease中，需要等待5～50分钟不等。只有Prerelease中的状态变化后，才能够在Versions中添加Build，提示，这个过程中，不要重复在Xcode中上传。    
+4&gt; 所有准备就绪后，点Submit按钮提交应用程序，出现的三个选项，都选择No。
+卡通形象，第三方内容，商标！
+5&gt; 等待，2天～20天不等……
+</code></pre></li>
+</ol>
+<h3 id="苹果应用商店批量购买发布（Volume-Purchase-Program）"><a href="#苹果应用商店批量购买发布（Volume-Purchase-Program）" class="headerlink" title="苹果应用商店批量购买发布（Volume Purchase Program）"></a>苹果应用商店批量购买发布（Volume Purchase Program）</h3><h3 id="Ad-Hoc应用发布方式"><a href="#Ad-Hoc应用发布方式" class="headerlink" title="Ad Hoc应用发布方式."></a>Ad Hoc应用发布方式.</h3><p>Ad Hoc方式发布应用，应用的具体内容也不需要经过苹果的评审，但限制每个应用不能发布到超过100个设备上。如果应用需要小规模的测试或者企业规模很小可以采用这种方式发布企业应用.</p>
+<h3 id="In-House企业应用发布"><a href="#In-House企业应用发布" class="headerlink" title="In-House企业应用发布"></a>In-House企业应用发布</h3><p>In-House企业应用是不能提交到App Store,发布应用的具体内容也是不需要苹果官方审核.安装设备的数量目前也没有任何限制.所以权限最为开放，适合针对支持开放大批量对外用户测试使用.所以你看到很多第三方开放渠道下载IPA其实基于其他企业账号来支持的.</p>
+<h4 id="内网OTA"><a href="#内网OTA" class="headerlink" title="内网OTA"></a>内网OTA</h4><p>OTA即Over-the-Air，是Apple在 iOS4 中新加的一项技术，目的是让开发者能够脱离Appstore，实现从自己的服务器下载并安装iOS应用。简单地说，就是用户只需要在Safari中点开一条链接，就能直接在主界面中安装App。</p>
+<p> 实现步骤</p>
+<ol>
 <li>用Xcode打包release版本</li>
 <li>搭建本地Web服务器</li>
 <li>开启HTTPS</li>
@@ -322,6 +376,28 @@
 <li>在手机上用Safari打开链接，完成下载</li>
 </ol>
 <p>更多参考：<br><a href="http://www.jianshu.com/p/35ca63ec0d8e" target="_blank" rel="external">一步一步实现无线安装iOS应用(内网OTA)</a><br><a href="http://blog.csdn.net/close_marty/article/details/38559673" target="_blank" rel="external">jenkins中集成OTA发布</a></p>
+<h2 id="APNS远程通知"><a href="#APNS远程通知" class="headerlink" title="APNS远程通知"></a>APNS远程通知</h2><p>iOS中提供了2种推送通知:</p>
+<ul>
+<li><p>本地推送通知（Local Notification）:不需要联网就能发出的推送通知（不需要服务器的支持）定时提醒用户完成一些任务</p>
+</li>
+<li><p>远程推送通知（Remote Notification）：就是从远程服务器推送给客户端的通知（需要联网）远程推送服务，又称为APNs（Apple Push Notification Services）</p>
+</li>
+</ul>
+<ol>
+<li>创建支持远程推送功能的App ID</li>
+<li>申请开发者证书，并选中刚刚创建的App ID</li>
+<li>下载CER文件，并导入钥匙串管理</li>
+<li>申请发布证书，并选中刚刚创建的App ID</li>
+<li>下载CER文件，并导入钥匙串管理</li>
+<li>检查App ID，确认证书已经指定</li>
+</ol>
+<p>基本代码：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions&#123;</span><br><span class="line"><span class="preprocessor">#ifdef __IPHONE_8_0</span></span><br><span class="line">    <span class="comment">// 注册接收通知的类型</span></span><br><span class="line">    <span class="built_in">UIUserNotificationSettings</span> *settings = [<span class="built_in">UIUserNotificationSettings</span> settingsForTypes:<span class="built_in">UIUserNotificationTypeAlert</span> | <span class="built_in">UIUserNotificationTypeBadge</span> | <span class="built_in">UIUserNotificationTypeSound</span> categories:<span class="literal">nil</span>];</span><br><span class="line">    [application registerUserNotificationSettings:settings];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注册允许接收远程推送通知</span></span><br><span class="line">    [application registerForRemoteNotifications];</span><br><span class="line"><span class="preprocessor">#else</span></span><br><span class="line">    <span class="comment">// 如果是iOS7.0，使用以下方法注册</span></span><br><span class="line">    [application registerForRemoteNotificationTypes:<span class="built_in">UIUserNotificationTypeAlert</span> | <span class="built_in">UIUserNotificationTypeBadge</span> | <span class="built_in">UIUserNotificationTypeSound</span>];</span><br><span class="line"><span class="preprocessor">#endif</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>补充：</p>
+<ol>
+<li>PushMeBaby是一款用来测试ANPs的开源Mac项目：<a href="https://github.com/stefanhafeneger/PushMeBaby" target="_blank" rel="external">https://github.com/stefanhafeneger/PushMeBaby</a>它充当了服务器的作用，用法非常简单。它负责将内容提交给苹果的APNs服务器，苹果的APNs服务器再将内容推送给用户的设备。将推送的调试证书改为名apns.cer，添加到PushMeBaby项目中。</li>
+<li>JPush：<a href="https://www.jpush.cn" target="_blank" rel="external">https://www.jpush.cn</a><br>一套远程推送解决方案，支持android和iOS两个平台。<br>它能够快捷地为iOS App增加推送功能，减少集成APNs需要的工作量、开发复杂度。[集成iOS SDK]<br>(<a href="http://docs.jpush.cn/pages/viewpage.action?pageId=2621727" target="_blank" rel="external">http://docs.jpush.cn/pages/viewpage.action?pageId=2621727</a>)<br>JPush会自动记录和管理所有安装过此app的设备deviceToken<br>利用JPush，可以轻易地给所有设备发送远程推送通知.</li>
+</ol>
 <h1 id="更多参考："><a href="#更多参考：" class="headerlink" title="更多参考："></a>更多参考：</h1><p><a href="https://www.qcloud.com/community/article/673429" target="_blank" rel="external">iOS 程序从开发完到上 AppStore 那点事儿</a><br><a href="http://www.cnblogs.com/mddblog/p/4718228.html" target="_blank" rel="external">苹果企业账号打包发布APP流程详解</a></p>
 
       
@@ -334,7 +410,7 @@
         <p><span>本文标题:</span><a href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2017年05月10日 - 16时56分</p>
-        <p><span>最后更新:</span>2017年05月10日 - 19时33分</p>
+        <p><span>最后更新:</span>2017年05月29日 - 01时41分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/05/10/iOS打包和发布流程/" title="iOS打包和发布流程">http://peilinghui.com/2017/05/10/iOS打包和发布流程/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/05/10/iOS打包和发布流程/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -350,6 +426,12 @@
 
     <nav id="article-nav">
         
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/05/27/如何使用Mac本地服务器/">
+                    如何使用Mac本地服务器
+                </a>
+            </div>
+        
         
             <div id="article-nav-older" class="article-nav-title">
                 <a href="/2017/05/05/学习iOS中JS与OC相互调用的方式/">
@@ -364,7 +446,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#证书"><span class="toc-number">1.</span> <span class="toc-text">证书</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#两种证书"><span class="toc-number">1.1.</span> <span class="toc-text">两种证书</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#真机运行-dev"><span class="toc-number">1.1.1.</span> <span class="toc-text">真机运行(dev)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#发布方式"><span class="toc-number">2.</span> <span class="toc-text">发布方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#苹果应用商店发布AppStore"><span class="toc-number">2.1.</span> <span class="toc-text">苹果应用商店发布AppStore</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#苹果应用商店批量购买发布（Volume-Purchase-Program）"><span class="toc-number">2.2.</span> <span class="toc-text">苹果应用商店批量购买发布（Volume Purchase Program）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ad-Hoc应用发布方式"><span class="toc-number">2.3.</span> <span class="toc-text">Ad Hoc应用发布方式.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#In-House企业应用发布"><span class="toc-number">2.4.</span> <span class="toc-text">In-House企业应用发布</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内网OTA"><span class="toc-number">2.4.1.</span> <span class="toc-text">内网OTA</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实现步骤"><span class="toc-number">2.4.1.1.</span> <span class="toc-text">实现步骤</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更多参考："><span class="toc-number">3.</span> <span class="toc-text">更多参考：</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#两种证书"><span class="toc-number">1.</span> <span class="toc-text">两种证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#真机运行-dev"><span class="toc-number">2.</span> <span class="toc-text">真机运行(dev)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Xcode7以前："><span class="toc-number">2.0.1.</span> <span class="toc-text">Xcode7以前：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Xcode7以后"><span class="toc-number">2.0.2.</span> <span class="toc-text">Xcode7以后</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试打包"><span class="toc-number">3.</span> <span class="toc-text">测试打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#发布"><span class="toc-number">4.</span> <span class="toc-text">发布</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#苹果应用商店发布AppStore"><span class="toc-number">4.1.</span> <span class="toc-text">苹果应用商店发布AppStore</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#苹果应用商店批量购买发布（Volume-Purchase-Program）"><span class="toc-number">4.2.</span> <span class="toc-text">苹果应用商店批量购买发布（Volume Purchase Program）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ad-Hoc应用发布方式"><span class="toc-number">4.3.</span> <span class="toc-text">Ad Hoc应用发布方式.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#In-House企业应用发布"><span class="toc-number">4.4.</span> <span class="toc-text">In-House企业应用发布</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#内网OTA"><span class="toc-number">4.4.1.</span> <span class="toc-text">内网OTA</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#APNS远程通知"><span class="toc-number">5.</span> <span class="toc-text">APNS远程通知</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更多参考："><span class="toc-number"></span> <span class="toc-text">更多参考：</span></a>
 </div>
 <style>
     .left-col .switch-btn {
@@ -450,7 +532,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2017/05/27/如何使用Mac本地服务器/" title="上一篇: 如何使用Mac本地服务器">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -462,7 +546,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/学习iOS中JS与OC相互调用的方式/">学习iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/深入学习NSURLProtocol/">深入学习NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/学习React-Native/">学习React Native</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/二维码/">二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/深入学习KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/深入学习内存管理/">深入学习内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/关于NSString的引用计数问题/">关于NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式解析/">设计模式解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/关于深拷贝和浅拷贝/">关于深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/做一个搜索框的Demo/">做一个搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/如何使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/学习iOS中JS与OC相互调用的方式/">学习iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/深入学习NSURLProtocol/">深入学习NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/学习React-Native/">学习React Native</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/深入学习KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/深入学习内存管理/">深入学习内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/关于NSString的引用计数问题/">关于NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式解析/">设计模式解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/研究AFNetworking框架/">研究AFNetworking框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/关于深拷贝和浅拷贝/">关于深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");

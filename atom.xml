@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://peilinghui.com/"/>
-  <updated>2017-05-10T11:33:29.000Z</updated>
+  <updated>2017-05-27T15:21:13.000Z</updated>
   <id>http://peilinghui.com/</id>
   
   <author>
@@ -16,44 +16,162 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>做一个搜索框的Demo</title>
+    <link href="http://peilinghui.com/2017/05/27/%E5%81%9A%E4%B8%80%E4%B8%AA%E6%90%9C%E7%B4%A2%E6%A1%86%E7%9A%84Demo/"/>
+    <id>http://peilinghui.com/2017/05/27/做一个搜索框的Demo/</id>
+    <published>2017-05-27T15:11:25.000Z</published>
+    <updated>2017-05-27T15:21:13.000Z</updated>
+    
+    <content type="html">&lt;p&gt;打开手机，就会发现我们用的最多的就是TableView和搜索框了。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;打开手机，从通知中心的搜索，APP store的搜索，通讯录的搜索，设置页面的搜索，照片搜索，信息搜索，再到打开每一个APP，都有的搜索。看了下，实现的需求类似，基本上都是输入关键字从网络接口上来搜索，只要点击过的都会保存到历史记录中，然后显示到历史记录的tableview中，下次可以直接点击然后搜索。可以清空单个记录或者所有的历史记录。还有一些APP还有热门搜索的标签。&lt;br&gt;所以，鉴于此，决定做一个Demo出来。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;打开手机，就会发现我们用的最多的就是TableView和搜索框了。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>如何使用Mac本地服务器</title>
+    <link href="http://peilinghui.com/2017/05/27/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Mac%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://peilinghui.com/2017/05/27/如何使用Mac本地服务器/</id>
+    <published>2017-05-27T14:27:26.000Z</published>
+    <updated>2017-05-27T15:42:26.000Z</updated>
+    
+    <content type="html">&lt;p&gt;我们经常性的需要使用局域网搭建 Web 服务器测试环境，如部署局域网无线安装企业应用，模拟某个接口的返回JSON的时候，Mac OS X 自带了 Apache 和 PHP 环境，我们只需要简单的启动它就行了。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;启动-Apache&quot;&gt;&lt;a href=&quot;#启动-Apache&quot; class=&quot;headerlink&quot; title=&quot;启动 Apache&quot;&gt;&lt;/a&gt;启动 Apache&lt;/h1&gt;&lt;h4 id=&quot;查看Apache版本&quot;&gt;&lt;a href=&quot;#查看Apache版本&quot; class=&quot;headerlink&quot; title=&quot;查看Apache版本&quot;&gt;&lt;/a&gt;查看Apache版本&lt;/h4&gt;&lt;p&gt;打开终端，输入&lt;/p&gt;
+&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ httpd -v&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Server version: Apache/&lt;span class=&quot;number&quot;&gt;2.4&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;.25&lt;/span&gt; (Unix)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Server built:   Feb  &lt;span class=&quot;number&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;2017&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;19&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;34&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;08&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;启动Apache&quot;&gt;&lt;a href=&quot;#启动Apache&quot; class=&quot;headerlink&quot; title=&quot;启动Apache&quot;&gt;&lt;/a&gt;启动Apache&lt;/h4&gt;&lt;p&gt;在终端输入 sudo apachectl start 即可启动 Apache。&lt;br&gt;启动后，在浏览器中输入 &lt;a href=&quot;http://127.0.0.1&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://127.0.0.1&lt;/a&gt; 或 &lt;a href=&quot;http://localhost&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost&lt;/a&gt; 如果看到 It Works! 页面。那么 Apache 就启动成功了，站点的根目录为系统级根目录 /Library/WebServer/Documents。&lt;/p&gt;
+&lt;p&gt;启动后，你可以通过编辑 /etc/apache2/httpd.conf 文件来修改 Apache 配置&lt;/p&gt;
+&lt;h4 id=&quot;停止-Apache：sudo-apachectl-stop&quot;&gt;&lt;a href=&quot;#停止-Apache：sudo-apachectl-stop&quot; class=&quot;headerlink&quot; title=&quot;停止 Apache：sudo apachectl stop&quot;&gt;&lt;/a&gt;停止 Apache：sudo apachectl stop&lt;/h4&gt;&lt;h4 id=&quot;重启-Apache：sudo-apachectl-restart&quot;&gt;&lt;a href=&quot;#重启-Apache：sudo-apachectl-restart&quot; class=&quot;headerlink&quot; title=&quot;重启 Apache：sudo apachectl restart&quot;&gt;&lt;/a&gt;重启 Apache：sudo apachectl restart&lt;/h4&gt;&lt;h2 id=&quot;创建用户级根目录&quot;&gt;&lt;a href=&quot;#创建用户级根目录&quot; class=&quot;headerlink&quot; title=&quot;创建用户级根目录&quot;&gt;&lt;/a&gt;创建用户级根目录&lt;/h2&gt;&lt;p&gt;我们也可以创建用户级根目录，更方便管理和操作。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在用户目录下创建 Sites 目录，cd; mkdir Sites; touch Sites/.localized，旧的 Mac 系统中如果该目录已存在，则略过。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;cd /etc/apache2/users 检查目录下是否存在 username.conf 文件，username 为当前用户名，如果没有则创建一个 sudo touch username.conf，并修改文件权限 sudo chmod 644 username.conf。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;创建之后，打开 username.conf 文件，sudo vi  username.conf 将下面的配置信息写入文件，username 依然为当前用户名：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight apache&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;Directory &quot;/Users/username/Sites/&quot;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;&lt;span class=&quot;common&quot;&gt;Options&lt;/span&gt;&lt;/span&gt; Indexes MultiViews FollowSymLinks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;AllowOverride&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;All&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;&lt;span class=&quot;common&quot;&gt;Order&lt;/span&gt;&lt;/span&gt; allow,deny&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;&lt;span class=&quot;common&quot;&gt;Allow&lt;/span&gt;&lt;/span&gt; from &lt;span class=&quot;literal&quot;&gt;all&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;Require&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;all&lt;/span&gt; granted&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/Directory&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;编辑 /etc/apache2/httpd.conf 文件，找到下列代码，并将前面的注释符号 # 删除：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Include &lt;span class=&quot;regexp&quot;&gt;/private/&lt;/span&gt;etc&lt;span class=&quot;regexp&quot;&gt;/apache2/&lt;/span&gt;extra/httpd-userdir.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;LoadModule userdir_module libexec&lt;span class=&quot;regexp&quot;&gt;/apache2/&lt;/span&gt;mod_userdir.so&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;编辑 /etc/apache2/extra/httpd-userdir.conf 文件，找到下列代码，并将前面的注释符号 # 删除：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Include /private/etc/apache2/users/*.conf&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重启 Apache：sudo apachectl restart&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在浏览器中输入 &lt;a href=&quot;http://127.0.0.1/~username&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://127.0.0.1/~username&lt;/a&gt; 或 &lt;a href=&quot;http://localhost/~username，即可测试用户目录是否工作。&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost/~username，即可测试用户目录是否工作。&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我们经常性的需要使用局域网搭建 Web 服务器测试环境，如部署局域网无线安装企业应用，模拟某个接口的返回JSON的时候，Mac OS X 自带了 Apache 和 PHP 环境，我们只需要简单的启动它就行了。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>iOS打包和发布流程</title>
     <link href="http://peilinghui.com/2017/05/10/iOS%E6%89%93%E5%8C%85%E5%92%8C%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B/"/>
     <id>http://peilinghui.com/2017/05/10/iOS打包和发布流程/</id>
     <published>2017-05-10T08:56:16.000Z</published>
-    <updated>2017-05-10T11:33:29.000Z</updated>
+    <updated>2017-05-28T17:41:11.000Z</updated>
     
     <content type="html">&lt;p&gt;学习iOS的打包和发布流程。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;证书&quot;&gt;&lt;a href=&quot;#证书&quot; class=&quot;headerlink&quot; title=&quot;证书&quot;&gt;&lt;/a&gt;证书&lt;/h1&gt;&lt;h2 id=&quot;两种证书&quot;&gt;&lt;a href=&quot;#两种证书&quot; class=&quot;headerlink&quot; title=&quot;两种证书&quot;&gt;&lt;/a&gt;两种证书&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;由 apple 官方颁发, 用以证明开发者身份的特殊文件, 在 iOS 开发中主要用于代码签名, 保障 iOS 生态的健康安全, 分为&lt;strong&gt;开发者证书&lt;/strong&gt;和&lt;strong&gt;发布者证书&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;什么时候需要证书：只有在本机模拟器调试时无需代码签名, 当 App 需要在真机运行和发布时需要使用相应证书进行签名&lt;/li&gt;
-&lt;li&gt;证书如何获得：首先需要拥有相应权限的开发者帐号, 通过在本地生成配对的密钥, 向 provisioning portal 提交公钥后换取, 后续证书在使用时会验证本地私钥。&lt;/li&gt;
-&lt;li&gt;如何对代码进行签名：在 xcode 中, 使用描述文件(provision profile 包含调试者证书, 授权设备清单, 应用ID), 在 Build Settings 中选择存于 Keychain Access 中的证书文件设置调试和发布任务时的代码签名。&lt;/li&gt;
-&lt;li&gt;我生成的私钥如何共享给团队成员：在 Keychain Access 中找到导入的证书, 右击导出为包含私钥的 Personal Information Exchange(.p12)文件(导出时可以创建密码), 团队成员再导入 p12 证书后就完整包含了证书和私钥&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h2 id=&quot;两种证书&quot;&gt;&lt;a href=&quot;#两种证书&quot; class=&quot;headerlink&quot; title=&quot;两种证书&quot;&gt;&lt;/a&gt;两种证书&lt;/h2&gt;&lt;p&gt;App证书分为两种：开发证书、发布证书。App发布证书分：AppStore(正常的发布到商店) 及 Adhoc（内部测试发布） 两种。&lt;/p&gt;
+&lt;h2 id=&quot;真机运行-dev&quot;&gt;&lt;a href=&quot;#真机运行-dev&quot; class=&quot;headerlink&quot; title=&quot;真机运行(dev)&quot;&gt;&lt;/a&gt;真机运行(dev)&lt;/h2&gt;&lt;p&gt;真机调试指 mac 连上 iphone, xcode 可以直接以这台 iphone 设备为 build target, 能在 iphone 里执行编译结果&lt;br&gt;为什么真机调试？&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;每种license 都有两种安装方式：dev 和 release&lt;/p&gt;
+&lt;p&gt;部分功能需要硬件支持，模拟器是不支持的，如：&lt;br&gt;传感器：磁力计、陀螺仪、距离传感器等&lt;br&gt;特定功能：拍照、打电话、发短信、蓝牙等&lt;/p&gt;
+&lt;p&gt;真机的环境和模拟器的环境是不一样，模拟器是使用电脑的环境， CPU、Memory、Disk、Network 这些和真机环境都不一样，有些bug可能会在特定的环境才会出现，比如网络非常慢，内存特别小的时候，可能在模拟器上不会有bug，在真机上就有可能出现bug&lt;br&gt;使用真机开发比使用模拟器体验更好&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&quot;真机运行-dev&quot;&gt;&lt;a href=&quot;#真机运行-dev&quot; class=&quot;headerlink&quot; title=&quot;真机运行(dev)&quot;&gt;&lt;/a&gt;真机运行(dev)&lt;/h3&gt;&lt;p&gt;真机调试指 mac 连上 iphone, xcode 可以直接以这台 iphone 设备为 build target, 能在 iphone 里执行编译结果&lt;/p&gt;
-&lt;p&gt;分为拥有独立开发者帐号(也包括公司帐号或企业帐号成员)和共享开发者帐号两种情况。&lt;/p&gt;
+&lt;h4 id=&quot;Xcode7以前：&quot;&gt;&lt;a href=&quot;#Xcode7以前：&quot; class=&quot;headerlink&quot; title=&quot;Xcode7以前：&quot;&gt;&lt;/a&gt;Xcode7以前：&lt;/h4&gt;&lt;p&gt;真机调试的主要步骤：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;拥有独立开发者帐号：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;在 provisioning portal 新建应用, 配置授权设备等
-开发机上导入证书
-在 xcode 上登录开发者帐号, 不需要准备描述文件, xcode 会自动生成(如果是公司帐号可以自动生成 iOS Team Provisioning Profile)
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;共享开发者帐号&lt;br&gt;如果无法在 xcode 登录一个开发者帐号, 也可以通过他人对你手机和应用 id 的授权, 得到 .mobileprovision 描述文件再导入其含私钥的证书(p12) 即可, 具体步骤如下:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;获得手机的 udid (可以连上 mac, 在 itunes 中查看)
-告知对方 udid (用以设备授权) 和 应用 id
-得到对方生成的证书和描述文件后, 先导入 p12 证书, 再双击 mobileprovision 文件
-连接手机, 在 xcode 中选择 build target 为已连接的手机
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;登录开发者主页&lt;/li&gt;
+&lt;li&gt;生成cer证书：cer是一个跟电脑相关联的证书文件，让电脑具备真机调试的功能&lt;/li&gt;
+&lt;li&gt;添加App ID：调试哪些app？&lt;/li&gt;
+&lt;li&gt;注册真机设备：哪台设备需要做真机调试？&lt;/li&gt;
+&lt;li&gt;生成MobileProvision文件：结合2、3、4生成一个手机规定文件&lt;/li&gt;
+&lt;li&gt;导入cer、MobileProvision文件&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&quot;发布方式&quot;&gt;&lt;a href=&quot;#发布方式&quot; class=&quot;headerlink&quot; title=&quot;发布方式&quot;&gt;&lt;/a&gt;发布方式&lt;/h1&gt;&lt;p&gt;四种发布方式：&lt;/p&gt;
-&lt;h2 id=&quot;苹果应用商店发布AppStore&quot;&gt;&lt;a href=&quot;#苹果应用商店发布AppStore&quot; class=&quot;headerlink&quot; title=&quot;苹果应用商店发布AppStore&quot;&gt;&lt;/a&gt;苹果应用商店发布AppStore&lt;/h2&gt;&lt;h2 id=&quot;苹果应用商店批量购买发布（Volume-Purchase-Program）&quot;&gt;&lt;a href=&quot;#苹果应用商店批量购买发布（Volume-Purchase-Program）&quot; class=&quot;headerlink&quot; title=&quot;苹果应用商店批量购买发布（Volume Purchase Program）&quot;&gt;&lt;/a&gt;苹果应用商店批量购买发布（Volume Purchase Program）&lt;/h2&gt;&lt;h2 id=&quot;Ad-Hoc应用发布方式&quot;&gt;&lt;a href=&quot;#Ad-Hoc应用发布方式&quot; class=&quot;headerlink&quot; title=&quot;Ad Hoc应用发布方式.&quot;&gt;&lt;/a&gt;Ad Hoc应用发布方式.&lt;/h2&gt;&lt;p&gt;Ad Hoc方式发布应用，应用的具体内容也不需要经过苹果的评审，但限制每个应用不能发布到超过100个设备上。如果应用需要小规模的测试或者企业规模很小可以采用这种方式发布企业应用.&lt;/p&gt;
-&lt;h2 id=&quot;In-House企业应用发布&quot;&gt;&lt;a href=&quot;#In-House企业应用发布&quot; class=&quot;headerlink&quot; title=&quot;In-House企业应用发布&quot;&gt;&lt;/a&gt;In-House企业应用发布&lt;/h2&gt;&lt;p&gt;In-House企业应用是不能提交到App Store,发布应用的具体内容也是不需要苹果官方审核.安装设备的数量目前也没有任何限制.所以权限最为开放，适合针对支持开放大批量对外用户测试使用.所以你看到很多第三方开放渠道下载IPA其实基于其他企业账号来支持的.&lt;/p&gt;
-&lt;h3 id=&quot;内网OTA&quot;&gt;&lt;a href=&quot;#内网OTA&quot; class=&quot;headerlink&quot; title=&quot;内网OTA&quot;&gt;&lt;/a&gt;内网OTA&lt;/h3&gt;&lt;p&gt;OTA即Over-the-Air，是Apple在 iOS4 中新加的一项技术，目的是让开发者能够脱离Appstore，实现从自己的服务器下载并安装iOS应用。简单地说，就是用户只需要在Safari中点开一条链接，就能直接在主界面中安装App。&lt;/p&gt;
-&lt;h4 id=&quot;实现步骤&quot;&gt;&lt;a href=&quot;#实现步骤&quot; class=&quot;headerlink&quot; title=&quot;实现步骤&quot;&gt;&lt;/a&gt;实现步骤&lt;/h4&gt;&lt;ol&gt;
+&lt;p&gt;最终会得到2个文件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cer文件：让电脑具备真机调试的功能&lt;/li&gt;
+&lt;li&gt;MobileProvision文件：哪台设备、哪些app、哪台电脑需要做真机调试？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;Xcode7以后&quot;&gt;&lt;a href=&quot;#Xcode7以后&quot; class=&quot;headerlink&quot; title=&quot;Xcode7以后&quot;&gt;&lt;/a&gt;Xcode7以后&lt;/h4&gt;&lt;p&gt;Xcode–&amp;gt;Preferences—&amp;gt;Accounts—&amp;gt; Add Apple ID 然后选择真机直接允许App，弹出来个框点击Fix Issue即可，这样就完成真机测试了。&lt;/p&gt;
+&lt;p&gt;Xcode7.0真机测试Apple ID必须加入苹果开发者计划，而Xcode7.0之后直接使用普通的Apple ID即可真机测试。注意Xcode7.0之后并不是不需要.cer和.mobileprovision文件，而是苹果已经生产了这两个文件，并将.cer文件安装到钥匙串访问里，.mobileprovision已经复制到Library/MobileDevice/Provisioning Profiles文件夹中.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://ios.jobbole.com/89870/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS真机调试详解&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;测试打包&quot;&gt;&lt;a href=&quot;#测试打包&quot; class=&quot;headerlink&quot; title=&quot;测试打包&quot;&gt;&lt;/a&gt;测试打包&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;登录apple的开发者主页:developer.apple.com&lt;/li&gt;
+&lt;li&gt;选择Ad Hoc生成一个ios_distribution.cer: 让电脑具备打包程序的能力&lt;/li&gt;
+&lt;li&gt;新建一个App ID : 方便打包哪个程序&lt;/li&gt;
+&lt;li&gt;利用用户设备的UDID注册设备&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;选择Ad Hoc利用ios_distribution.cer + 设备UDID + App ID –&amp;gt; 描述文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(描述文件的作用:
+1&amp;gt; 能知道在哪台电脑上, 为哪台设备打包哪个程序
+2&amp;gt; 哪台设备需要安装打包哪个程序    )
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;最终产生了3个文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1&amp;gt; CertificateSigningRequest.certSigningRequest(CSR证书)
+* 包含了电脑的信息
+* 发送给苹果服务器, 苹果服务器根据文件信息来生成一个电脑证书
+* 生成的证书就可以让对应的电脑具备某个特殊的能力
+2&amp;gt; ios_distribution.cer
+* 打包证书
+* 安装这个证书后, 电脑就具备打包程序的能力
+3&amp;gt; nj_iphone6_news.mobileprovision
+* 里面包含了3个信息:ios_distribution.cer + 设备UDID + App ID
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装证书和描述文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1&amp;gt; ios_distribution.cer
+2&amp;gt; nj_iphone6_news.mobileprovision
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;项目Scheme右边的设备选择iOS Device&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;点击Xcode的菜单&lt;br&gt;Product –&amp;gt; Archive –&amp;gt; Distribute –&amp;gt; ….Ad Hoc… –&amp;gt; 选择对应的描述文件&lt;/li&gt;
+&lt;li&gt;生成一个ipa文件,发给测试人员和客户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;更多：&lt;a href=&quot;http://debugtalk.com/post/iOS-Android-Packing-with-Jenkins/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;使用Jenkins搭建iOS/Android持续集成打包平台&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;发布&quot;&gt;&lt;a href=&quot;#发布&quot; class=&quot;headerlink&quot; title=&quot;发布&quot;&gt;&lt;/a&gt;发布&lt;/h2&gt;&lt;p&gt;四种发布方式：&lt;/p&gt;
+&lt;h3 id=&quot;苹果应用商店发布AppStore&quot;&gt;&lt;a href=&quot;#苹果应用商店发布AppStore&quot; class=&quot;headerlink&quot; title=&quot;苹果应用商店发布AppStore&quot;&gt;&lt;/a&gt;苹果应用商店发布AppStore&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;developer.apple.com : 开发者主页, 配置证书\AppId\描述文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1&amp;gt;发布的证书, 说清楚哪台电脑可以发布程序
+2&amp;gt;添加发布的描述文件，描述在哪台计算机上能够发布哪些应用程序
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;iTunesConnect网站(专门用来发布应用程序)&lt;br&gt;&lt;a href=&quot;https://itunesconnect.apple.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://itunesconnect.apple.com&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1&amp;gt;    如果想挣钱，先设置在Agreements, Tax, and Banking设置个人储蓄卡信息
+做一次就行
+2&amp;gt; 添加应用程序
+－ 名称，不能重复，可以使用 - 添加一些后缀信息
+－ 关键字，增加软件被搜中的几率，使用英文的都好分隔，不能超过255个字节
+－图片，图片文件名称中不能有中文
+－ Rating，设置应用程序的等级，默认都选择最低的，成人，赌博……
+－ App Review Information
+提供给苹果的审核人员，来辅助测试使用的。
+如果有测试帐号，必须提供！
+如果有测试数据，需要提供给苹果，例如快递查询！
+需要提供联系人的联系方式，电子邮件，电话需要添加国际区号，+86
+3&amp;gt; 从Xcode6开始，上传完应用程序之后，程序默认会在prerelease中，需要等待5～50分钟不等。只有Prerelease中的状态变化后，才能够在Versions中添加Build，提示，这个过程中，不要重复在Xcode中上传。    
+4&amp;gt; 所有准备就绪后，点Submit按钮提交应用程序，出现的三个选项，都选择No。
+卡通形象，第三方内容，商标！
+5&amp;gt; 等待，2天～20天不等……
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;苹果应用商店批量购买发布（Volume-Purchase-Program）&quot;&gt;&lt;a href=&quot;#苹果应用商店批量购买发布（Volume-Purchase-Program）&quot; class=&quot;headerlink&quot; title=&quot;苹果应用商店批量购买发布（Volume Purchase Program）&quot;&gt;&lt;/a&gt;苹果应用商店批量购买发布（Volume Purchase Program）&lt;/h3&gt;&lt;h3 id=&quot;Ad-Hoc应用发布方式&quot;&gt;&lt;a href=&quot;#Ad-Hoc应用发布方式&quot; class=&quot;headerlink&quot; title=&quot;Ad Hoc应用发布方式.&quot;&gt;&lt;/a&gt;Ad Hoc应用发布方式.&lt;/h3&gt;&lt;p&gt;Ad Hoc方式发布应用，应用的具体内容也不需要经过苹果的评审，但限制每个应用不能发布到超过100个设备上。如果应用需要小规模的测试或者企业规模很小可以采用这种方式发布企业应用.&lt;/p&gt;
+&lt;h3 id=&quot;In-House企业应用发布&quot;&gt;&lt;a href=&quot;#In-House企业应用发布&quot; class=&quot;headerlink&quot; title=&quot;In-House企业应用发布&quot;&gt;&lt;/a&gt;In-House企业应用发布&lt;/h3&gt;&lt;p&gt;In-House企业应用是不能提交到App Store,发布应用的具体内容也是不需要苹果官方审核.安装设备的数量目前也没有任何限制.所以权限最为开放，适合针对支持开放大批量对外用户测试使用.所以你看到很多第三方开放渠道下载IPA其实基于其他企业账号来支持的.&lt;/p&gt;
+&lt;h4 id=&quot;内网OTA&quot;&gt;&lt;a href=&quot;#内网OTA&quot; class=&quot;headerlink&quot; title=&quot;内网OTA&quot;&gt;&lt;/a&gt;内网OTA&lt;/h4&gt;&lt;p&gt;OTA即Over-the-Air，是Apple在 iOS4 中新加的一项技术，目的是让开发者能够脱离Appstore，实现从自己的服务器下载并安装iOS应用。简单地说，就是用户只需要在Safari中点开一条链接，就能直接在主界面中安装App。&lt;/p&gt;
+&lt;p&gt; 实现步骤&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;用Xcode打包release版本&lt;/li&gt;
 &lt;li&gt;搭建本地Web服务器&lt;/li&gt;
 &lt;li&gt;开启HTTPS&lt;/li&gt;
@@ -62,6 +180,28 @@
 &lt;li&gt;在手机上用Safari打开链接，完成下载&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;更多参考：&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/35ca63ec0d8e&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;一步一步实现无线安装iOS应用(内网OTA)&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://blog.csdn.net/close_marty/article/details/38559673&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;jenkins中集成OTA发布&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;APNS远程通知&quot;&gt;&lt;a href=&quot;#APNS远程通知&quot; class=&quot;headerlink&quot; title=&quot;APNS远程通知&quot;&gt;&lt;/a&gt;APNS远程通知&lt;/h2&gt;&lt;p&gt;iOS中提供了2种推送通知:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;本地推送通知（Local Notification）:不需要联网就能发出的推送通知（不需要服务器的支持）定时提醒用户完成一些任务&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;远程推送通知（Remote Notification）：就是从远程服务器推送给客户端的通知（需要联网）远程推送服务，又称为APNs（Apple Push Notification Services）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;创建支持远程推送功能的App ID&lt;/li&gt;
+&lt;li&gt;申请开发者证书，并选中刚刚创建的App ID&lt;/li&gt;
+&lt;li&gt;下载CER文件，并导入钥匙串管理&lt;/li&gt;
+&lt;li&gt;申请发布证书，并选中刚刚创建的App ID&lt;/li&gt;
+&lt;li&gt;下载CER文件，并导入钥匙串管理&lt;/li&gt;
+&lt;li&gt;检查App ID，确认证书已经指定&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;基本代码：&lt;/p&gt;
+&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;built_in&quot;&gt;BOOL&lt;/span&gt;)application:(&lt;span class=&quot;built_in&quot;&gt;UIApplication&lt;/span&gt; *)application didFinishLaunchingWithOptions:(&lt;span class=&quot;built_in&quot;&gt;NSDictionary&lt;/span&gt; *)launchOptions&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;preprocessor&quot;&gt;#ifdef __IPHONE_8_0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 注册接收通知的类型&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;UIUserNotificationSettings&lt;/span&gt; *settings = [&lt;span class=&quot;built_in&quot;&gt;UIUserNotificationSettings&lt;/span&gt; settingsForTypes:&lt;span class=&quot;built_in&quot;&gt;UIUserNotificationTypeAlert&lt;/span&gt; | &lt;span class=&quot;built_in&quot;&gt;UIUserNotificationTypeBadge&lt;/span&gt; | &lt;span class=&quot;built_in&quot;&gt;UIUserNotificationTypeSound&lt;/span&gt; categories:&lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [application registerUserNotificationSettings:settings];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 注册允许接收远程推送通知&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [application registerForRemoteNotifications];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;preprocessor&quot;&gt;#else&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 如果是iOS7.0，使用以下方法注册&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [application registerForRemoteNotificationTypes:&lt;span class=&quot;built_in&quot;&gt;UIUserNotificationTypeAlert&lt;/span&gt; | &lt;span class=&quot;built_in&quot;&gt;UIUserNotificationTypeBadge&lt;/span&gt; | &lt;span class=&quot;built_in&quot;&gt;UIUserNotificationTypeSound&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;preprocessor&quot;&gt;#endif&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;补充：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;PushMeBaby是一款用来测试ANPs的开源Mac项目：&lt;a href=&quot;https://github.com/stefanhafeneger/PushMeBaby&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/stefanhafeneger/PushMeBaby&lt;/a&gt;它充当了服务器的作用，用法非常简单。它负责将内容提交给苹果的APNs服务器，苹果的APNs服务器再将内容推送给用户的设备。将推送的调试证书改为名apns.cer，添加到PushMeBaby项目中。&lt;/li&gt;
+&lt;li&gt;JPush：&lt;a href=&quot;https://www.jpush.cn&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.jpush.cn&lt;/a&gt;&lt;br&gt;一套远程推送解决方案，支持android和iOS两个平台。&lt;br&gt;它能够快捷地为iOS App增加推送功能，减少集成APNs需要的工作量、开发复杂度。[集成iOS SDK]&lt;br&gt;(&lt;a href=&quot;http://docs.jpush.cn/pages/viewpage.action?pageId=2621727&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://docs.jpush.cn/pages/viewpage.action?pageId=2621727&lt;/a&gt;)&lt;br&gt;JPush会自动记录和管理所有安装过此app的设备deviceToken&lt;br&gt;利用JPush，可以轻易地给所有设备发送远程推送通知.&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h1 id=&quot;更多参考：&quot;&gt;&lt;a href=&quot;#更多参考：&quot; class=&quot;headerlink&quot; title=&quot;更多参考：&quot;&gt;&lt;/a&gt;更多参考：&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://www.qcloud.com/community/article/673429&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS 程序从开发完到上 AppStore 那点事儿&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.cnblogs.com/mddblog/p/4718228.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;苹果企业账号打包发布APP流程详解&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -79,7 +219,7 @@
     <link href="http://peilinghui.com/2017/05/05/%E5%AD%A6%E4%B9%A0iOS%E4%B8%ADJS%E4%B8%8EOC%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8%E7%9A%84%E6%96%B9%E5%BC%8F/"/>
     <id>http://peilinghui.com/2017/05/05/学习iOS中JS与OC相互调用的方式/</id>
     <published>2017-05-05T06:50:42.000Z</published>
-    <updated>2017-05-10T12:08:22.000Z</updated>
+    <updated>2017-05-11T01:24:53.000Z</updated>
     
     <content type="html">&lt;p&gt;Web App即是HTML5 APP框架开发模式，使用HTML5,CSS3以及JavaScript以及服务器端语言来完成开发，Web App具有跨平台的优势。那么就来学习一下iOS中JS与OC相互调用的方式。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -101,10 +241,6 @@
 &lt;li&gt;js–&amp;gt;oc 利用webView的重定向原理（即重新在js中指定document.location的值，此为一url），只要在这个url字符串中按自定义的规则指定好所需调用oc中的函数和参数，然后通过OC中的shouldStartLoadWithRequest函数去捕获处理请求。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;WKWebView&quot;&gt;&lt;a href=&quot;#WKWebView&quot; class=&quot;headerlink&quot; title=&quot;WKWebView&quot;&gt;&lt;/a&gt;WKWebView&lt;/h2&gt;&lt;p&gt;由于UIWebView比较耗内存，性能上不太好，而苹果在iOS8中推出了WKWebView。同样的用WKWebView也可以拦截URL，做JS与OC交互。WKWebView与UIWebView拦截URL的处理方式基本一样。除了代理方法和WKWebView的使用不太一样。&lt;/p&gt;
-&lt;!--在framework的webKit中：--&gt;
-&lt;a href=&quot;!--![](http://7xr8q7.com1.z0.glb.clouddn.com/WKWebView.png)
---&quot;&gt;!--![](http://7xr8q7.com1.z0.glb.clouddn.com/WKWebView.png)
---&lt;/a&gt;
 &lt;h3 id=&quot;优点&quot;&gt;&lt;a href=&quot;#优点&quot; class=&quot;headerlink&quot; title=&quot;优点&quot;&gt;&lt;/a&gt;优点&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;更多的支持HTML5的特性
 官方宣称的高达60fps的滚动刷新率以及内置手势
 将UIWebViewDelegate与UIWebView拆分成了14类与3个协议,以前很多不方便实现的功能得以实现。文档
@@ -151,20 +287,11 @@ Safari相同的JavaScript引擎
 &lt;li&gt;JSExport是一个协议类，但是该协议并没有任何属性和方法。可以自定义一个协议类，继承自JSExport。无论在JSExport里声明的属性、实例方法还是类方法，继承的协议都会自动的提供给任何JavaScript代码。因此，只需要在自定义的协议类中，添加上属性和方法就可以了。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&quot;WKWebVIew中的坑&quot;&gt;&lt;a href=&quot;#WKWebVIew中的坑&quot; class=&quot;headerlink&quot; title=&quot;WKWebVIew中的坑&quot;&gt;&lt;/a&gt;WKWebVIew中的坑&lt;/h1&gt;&lt;h2 id=&quot;WKWebView导致ViewController不调用dealloc方法&quot;&gt;&lt;a href=&quot;#WKWebView导致ViewController不调用dealloc方法&quot; class=&quot;headerlink&quot; title=&quot;WKWebView导致ViewController不调用dealloc方法&quot;&gt;&lt;/a&gt;WKWebView导致ViewController不调用dealloc方法&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;ol&gt;
 &lt;li&gt;webview不设置 delegate，可以正常dealloc&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;ol&gt;
-&lt;li&gt;webview.UIDelegate和 navigationDelegate 设置为 self，可以正常&lt;br&gt;dealloc&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;webview.UIDelegate和 navigationDelegate 设置为 self，可以正常dealloc&lt;/li&gt;
 &lt;li&gt;webview.configuration.userContentController addScriptMessageHandler 为 self之后，无法正常dealloc，该方法引起ViewController内存泄漏。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;4.使用 ScriptMessageHandler 作为 webview.scriptMessageHandler，当前viewController 可以正常释放。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;5.当前 viewController dealloc 方法中，通过 removeScriptMessazgeHanlder 释放掉&lt;br&gt;scriptMessageHandler&lt;/p&gt;
+&lt;li&gt;使用 ScriptMessageHandler 作为webview.scriptMessageHandler，当前viewController 可以正常释放。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;当前 viewController dealloc 方法中，通过 removeScriptMessazgeHanlder 释放掉&lt;br&gt;scriptMessageHandler&lt;/p&gt;
 &lt;p&gt;解决方法：&lt;br&gt;(1)WeakScriptMessageDelegate&lt;br&gt;可以创建一个新的类WeakScriptMessageDelegate，也可以将@interface-@end写在ViewController.h中，@implementation-@end写在ViewController.m中。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -246,7 +373,7 @@ Safari相同的JavaScript引擎
     <link href="http://peilinghui.com/2017/04/25/%E5%AD%A6%E4%B9%A0React-Native/"/>
     <id>http://peilinghui.com/2017/04/25/学习React-Native/</id>
     <published>2017-04-25T09:51:37.000Z</published>
-    <updated>2017-04-27T06:20:52.000Z</updated>
+    <updated>2017-05-15T07:16:53.000Z</updated>
     
     <content type="html">&lt;p&gt;抽时间学习一下&lt;a href=&quot;https://github.com/facebook/react-native&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React Native&lt;/a&gt;.&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -290,7 +417,21 @@ Safari相同的JavaScript引擎
 &lt;/li&gt;
 &lt;li&gt;Props:properties属性，在初始化的时候传入并且可以显示不同的状态。&lt;br&gt;props不可变&lt;br&gt;states不可变&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1 id=&quot;React-Native的常用组件和API&quot;&gt;&lt;a href=&quot;#React-Native的常用组件和API&quot; class=&quot;headerlink&quot; title=&quot;React Native的常用组件和API&quot;&gt;&lt;/a&gt;React Native的常用组件和API&lt;/h1&gt;&lt;h2 id=&quot;flexbox布局&quot;&gt;&lt;a href=&quot;#flexbox布局&quot; class=&quot;headerlink&quot; title=&quot;flexbox布局&quot;&gt;&lt;/a&gt;flexbox布局&lt;/h2&gt;&lt;h1 id=&quot;学习资料&quot;&gt;&lt;a href=&quot;#学习资料&quot; class=&quot;headerlink&quot; title=&quot;学习资料&quot;&gt;&lt;/a&gt;学习资料&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/reactnativecn/react-native-guide&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React-Native学习指南&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.gitbook.com/book/unbug/react-native-training/details&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;gitbook&lt;/a&gt;—–&lt;br&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PLC_rYRxEnwQGLQqrHR0aho33U6DCeJamC&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;对应的视频&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/crazycodeboy/react-native-awesome&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React Native学习资源精选仓库&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.devio.org/tags/#React Native&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;博客&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;React-Native的常用组件和API&quot;&gt;&lt;a href=&quot;#React-Native的常用组件和API&quot; class=&quot;headerlink&quot; title=&quot;React Native的常用组件和API&quot;&gt;&lt;/a&gt;React Native的常用组件和API&lt;/h1&gt;&lt;h2 id=&quot;flexbox布局&quot;&gt;&lt;a href=&quot;#flexbox布局&quot; class=&quot;headerlink&quot; title=&quot;flexbox布局&quot;&gt;&lt;/a&gt;flexbox布局&lt;/h2&gt;&lt;p&gt;可以开发出动态宽高自适应的UI布局。&lt;br&gt;位置：position。取值为relative或者absolute。当设置为relative的时候，是表示当前组件距离上一个同级组件的距离。当设置为absolute的时候，是表示当前组件距离父组件的距离来描述位置top,bottom,left,right.与宽高相关的有：width，height，maxheight，maxwidth，minheight,minwidth。  &lt;/p&gt;
+&lt;h3 id=&quot;排列子组件&quot;&gt;&lt;a href=&quot;#排列子组件&quot; class=&quot;headerlink&quot; title=&quot;排列子组件&quot;&gt;&lt;/a&gt;排列子组件&lt;/h3&gt;&lt;p&gt;优点Lbuxuyao指定子组件的绝对位置，也不需要根据运行时屏幕大小动态计算子组件的大小，而是通过排列一个个长方形来进行布局。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;flexDirection&lt;/strong&gt;&lt;br&gt;决定了组件内部的子组件是如何排列的。row、row-reverse、column、column-reverse。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;flexWrap&lt;/strong&gt;&lt;br&gt;flexWrap取值为warp，并且alignItem键不能取值为”stretch”的时候才能实现子组件的自动换行排列。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;justifyContent&lt;/strong&gt;&lt;br&gt;定义在一个方向上如何排列子组件，flex-start、flex-end、center、space-between、space-around 。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;alignItems&lt;/strong&gt;&lt;br&gt;定义了view组件中所有子组件的对齐股则。flex-start（顶部对齐）、flex-end（底部对齐）、center（中部对齐）、stretch（拉长对齐）。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;边框border，空隙margin，填充Padding&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;View组件&quot;&gt;&lt;a href=&quot;#View组件&quot; class=&quot;headerlink&quot; title=&quot;View组件&quot;&gt;&lt;/a&gt;View组件&lt;/h2&gt;&lt;h2 id=&quot;Image组件&quot;&gt;&lt;a href=&quot;#Image组件&quot; class=&quot;headerlink&quot; title=&quot;Image组件&quot;&gt;&lt;/a&gt;Image组件&lt;/h2&gt;&lt;p&gt;用来在UI上显示图像。&lt;/p&gt;
+&lt;h1 id=&quot;React-Native代码与OC代码的互通&quot;&gt;&lt;a href=&quot;#React-Native代码与OC代码的互通&quot; class=&quot;headerlink&quot; title=&quot;React Native代码与OC代码的互通&quot;&gt;&lt;/a&gt;React Native代码与OC代码的互通&lt;/h1&gt;&lt;p&gt;为了实现消息互通，需要建立一个原生语言模块负责与React Native桥接，这个模块就是一个实现了RCTBridgeModule协议的类，&lt;/p&gt;
+&lt;p&gt;OC代码向React Native发送消息有两种方式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过回调接口。这种方式要求React Native代码先将接口传递给OC代码，然后OC代码才可以通过这个回调接口向React Native代码发送消息。&lt;/li&gt;
+&lt;li&gt;通过eventDispatcher向React Native模块发送事件。这样能够做到OC代码主动向React Native发送消息。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;学习资料&quot;&gt;&lt;a href=&quot;#学习资料&quot; class=&quot;headerlink&quot; title=&quot;学习资料&quot;&gt;&lt;/a&gt;学习资料&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/reactnativecn/react-native-guide&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React-Native学习指南&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.gitbook.com/book/unbug/react-native-training/details&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;gitbook&lt;/a&gt;—–&lt;br&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PLC_rYRxEnwQGLQqrHR0aho33U6DCeJamC&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;对应的视频&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/crazycodeboy/react-native-awesome&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React Native学习资源精选仓库&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.devio.org/tags/#React Native&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;博客&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -1076,50 +1217,6 @@ YYClassInfo 是对于Class进行了封装，进行封装增加描述
     <summary type="html">
     
       &lt;p&gt;在网络请求的传输和解析中，免不了用到字典转模型的内容。YYModel源码研究。&lt;br&gt;地址：&lt;a href=&quot;https://github.com/ibireme/YYModel&quot;&gt;https://github.com/ibireme/YYModel&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>二维码</title>
-    <link href="http://peilinghui.com/2016/12/20/%E4%BA%8C%E7%BB%B4%E7%A0%81/"/>
-    <id>http://peilinghui.com/2016/12/20/二维码/</id>
-    <published>2016-12-20T03:08:34.000Z</published>
-    <updated>2017-02-20T03:43:15.000Z</updated>
-    
-    <content type="html">&lt;p&gt;在项目中涉及到二维码的相关知识。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;二维码的生成&quot;&gt;&lt;a href=&quot;#二维码的生成&quot; class=&quot;headerlink&quot; title=&quot;二维码的生成&quot;&gt;&lt;/a&gt;二维码的生成&lt;/h1&gt;&lt;h2 id=&quot;从服务器获取data地址再生成二维码&quot;&gt;&lt;a href=&quot;#从服务器获取data地址再生成二维码&quot; class=&quot;headerlink&quot; title=&quot;从服务器获取data地址再生成二维码&quot;&gt;&lt;/a&gt;从服务器获取data地址再生成二维码&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;网络请求后处理data:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;figure class=&quot;highlight less&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;dispatch_async&lt;/span&gt;(&lt;span class=&quot;function&quot;&gt;dispatch_get_main_queue&lt;/span&gt;(), ^&amp;#123;          &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;span class=&quot;attr_selector&quot;&gt;[self.progressHud hide:YES]&lt;/span&gt;;         &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;span class=&quot;tag&quot;&gt;if&lt;/span&gt; ([response.responseObject &lt;span class=&quot;attribute&quot;&gt;objectForKey&lt;/span&gt;:@&lt;span class=&quot;string&quot;&gt;&quot;data&quot;&lt;/span&gt;]) &amp;#123;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;attr_selector&quot;&gt;[self createImgWith:[response.responseObject objectForKey:@&quot;data&quot;]&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ol&gt;
-&lt;li&gt;生成二维码&lt;/li&gt;
-&lt;/ol&gt;
-&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)createImgWith:(&lt;span class=&quot;built_in&quot;&gt;NSString&lt;/span&gt; *)str &amp;#123; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 1.实例化二维码滤镜&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CIFilter&lt;/span&gt; *filter = [&lt;span class=&quot;built_in&quot;&gt;CIFilter&lt;/span&gt; filterWithName:&lt;span class=&quot;string&quot;&gt;@&quot;CIQRCodeGenerator&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 2.恢复滤镜的默认属性&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [filter setDefaults];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 3.将字符串转换成NSData&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;NSString&lt;/span&gt; *info = str;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;NSData&lt;/span&gt; *infoData = [info dataUsingEncoding:&lt;span class=&quot;built_in&quot;&gt;NSUTF8StringEncoding&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;comment&quot;&gt;//4.通过KVO设置滤镜inputMessage数据&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [filter setValue:infoData forKey:&lt;span class=&quot;string&quot;&gt;@&quot;inputMessage&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 5.获得滤镜输出的图像&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CIImage&lt;/span&gt; *outputImage = [filter outputImage];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//6. 将CIImage转换成UIImage，并放大显示,方法如下&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.qrCode&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.image&lt;/span&gt; = [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt; createNonInterpolated&lt;span class=&quot;built_in&quot;&gt;UIIamgeFormCIImage&lt;/span&gt;:outputImage withSize:&lt;span class=&quot;number&quot;&gt;300&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//return [UIImage imageWithCIImage:outputImage scale:20.0 orientation:UIImageOrientationUp];&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; *  根据CIImage生成指定大小的UIImage 生成清晰的二维码&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; *&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; *  @param image CIImage&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; *  @param size  图片宽度&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;built_in&quot;&gt;UIImage&lt;/span&gt; *)createNonInterpolated&lt;span class=&quot;built_in&quot;&gt;UIIamgeFormCIImage&lt;/span&gt;:(&lt;span class=&quot;built_in&quot;&gt;CIImage&lt;/span&gt; *)image withSize:(&lt;span class=&quot;built_in&quot;&gt;CGFloat&lt;/span&gt;)size&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CGRect&lt;/span&gt; extent = &lt;span class=&quot;built_in&quot;&gt;CGRectIntegral&lt;/span&gt;(image&lt;span class=&quot;variable&quot;&gt;.extent&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CGFloat&lt;/span&gt; scale = MIN(size / &lt;span class=&quot;built_in&quot;&gt;CGRectGetWidth&lt;/span&gt;(extent), size / &lt;span class=&quot;built_in&quot;&gt;CGRectGetHeight&lt;/span&gt;(extent));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 1.创建bitmap&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    size_t width = &lt;span class=&quot;built_in&quot;&gt;CGRectGetWidth&lt;/span&gt;(extent) * scale;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    size_t height = &lt;span class=&quot;built_in&quot;&gt;CGRectGetHeight&lt;/span&gt;(extent) * scale;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CGColorSpaceRef&lt;/span&gt; cs = &lt;span class=&quot;built_in&quot;&gt;CGColorSpaceCreateDeviceCMYK&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CGContextRef&lt;/span&gt; bitmapRef = &lt;span class=&quot;built_in&quot;&gt;CGBitmapContextCreate&lt;/span&gt;(&lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt;, width, height, &lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, cs, (&lt;span class=&quot;built_in&quot;&gt;CGBitmapInfo&lt;/span&gt;)k&lt;span class=&quot;built_in&quot;&gt;CGImageAlphaNone&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CIContext&lt;/span&gt; *context = [&lt;span class=&quot;built_in&quot;&gt;CIContext&lt;/span&gt; contextWithOptions:&lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CGImageRef&lt;/span&gt; bitmapImage = [context create&lt;span class=&quot;built_in&quot;&gt;CGImage&lt;/span&gt;:image fromRect:extent];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CGContextSetInterpolationQuality&lt;/span&gt;(bitmapRef, k&lt;span class=&quot;built_in&quot;&gt;CGInterpolationNone&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CGContextScaleCTM&lt;/span&gt;(bitmapRef, scale, scale);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CGContextDrawImage&lt;/span&gt;(bitmapRef, extent, bitmapImage);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 2.保存bitmap&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CGImageRef&lt;/span&gt; scaledImage = &lt;span class=&quot;built_in&quot;&gt;CGBitmapContextCreateImage&lt;/span&gt;(bitmapRef);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CGContextRelease&lt;/span&gt;(bitmapRef);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CGImageRelease&lt;/span&gt;(bitmapImage);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; [&lt;span class=&quot;built_in&quot;&gt;UIImage&lt;/span&gt; imageWith&lt;span class=&quot;built_in&quot;&gt;CGImage&lt;/span&gt;:scaledImage];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h1 id=&quot;二维码的扫描&quot;&gt;&lt;a href=&quot;#二维码的扫描&quot; class=&quot;headerlink&quot; title=&quot;二维码的扫描&quot;&gt;&lt;/a&gt;二维码的扫描&lt;/h1&gt;&lt;p&gt;读取二维码需要导入AVFoundation框架&lt;br&gt;利用摄像头识别二维码中的内容（模拟器不行）&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;输入（摄像头）
-由会话将摄像头采集到的二维码图像转换成字符串数据
-输出（数据）
-由预览图层显示扫描场景
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;扫码主要用到的是AVFoundation用到的东西和相机基本相同，相机。遵守AVCaptureMetadataOutputObjectsDelegate.&lt;/p&gt;
-&lt;figure class=&quot;highlight less&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;@interface&lt;/span&gt; ScanQRViewController ()&amp;lt;AVCaptureMetadataOutputObjectsDelegate&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//捕获设备，通常是前置摄像头，后置摄像头，麦克风（音频输入）&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;@property&lt;/span&gt;(nonatomic)AVCaptureDevice *device;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//AVCaptureDeviceInput 代表输入设备，他使用AVCaptureDevice 来初始化&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;@property&lt;/span&gt;(nonatomic)AVCaptureDeviceInput *input;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//设置输出类型为Metadata，因为这种输出类型中可以设置扫描的类型，譬如二维码//当启动摄像头开始捕获输入时，如果输入中包含二维码，就会产生输出&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;@property&lt;/span&gt;(nonatomic)AVCaptureMetadataOutput *output;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//session：由他把输入输出结合在一起，并开始启动捕获设备（摄像头）关键用来操作扫描结果&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;@property&lt;/span&gt;(nonatomic)AVCaptureSession *session;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//图像预览层，实时显示捕获的图像&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;@property&lt;/span&gt;(nonatomic)AVCaptureVideoPreviewLayer *previewLayer;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;开始扫描：&lt;/p&gt;
-&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;-(&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)beginScan&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; 	&lt;span class=&quot;comment&quot;&gt;//iOS 判断应用是否有使用相机的权限&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;NSString&lt;/span&gt; *mediaType = &lt;span class=&quot;built_in&quot;&gt;AVMediaTypeVideo&lt;/span&gt;;&lt;span class=&quot;comment&quot;&gt;//读取媒体类型&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;AVAuthorizationStatus&lt;/span&gt; authStatus = [&lt;span class=&quot;built_in&quot;&gt;AVCaptureDevice&lt;/span&gt; authorizationStatusForMediaType:mediaType];&lt;span class=&quot;comment&quot;&gt;//读取设备授权状态&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(authStatus == &lt;span class=&quot;built_in&quot;&gt;AVAuthorizationStatusRestricted&lt;/span&gt; || authStatus == &lt;span class=&quot;built_in&quot;&gt;AVAuthorizationStatusDenied&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (TARGET_IPHONE_SIMULATOR) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;//生成会话，用来结合输入输出&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	 _session =[[&lt;span class=&quot;built_in&quot;&gt;AVCaptureSession&lt;/span&gt; alloc]init];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [_session setSessionPreset:&lt;span class=&quot;built_in&quot;&gt;AVCaptureSessionPresetHigh&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用AVMediaTypeVideo 默认使用后置摄像头进行初始化**实例化拍摄设备**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;AVCaptureDevice&lt;/span&gt; *device           = [&lt;span class=&quot;built_in&quot;&gt;AVCaptureDevice&lt;/span&gt; defaultDeviceWithMediaType:&lt;span class=&quot;built_in&quot;&gt;AVMediaTypeVideo&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//使用设备初始化输入(设置输入设备)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;AVCaptureDeviceInput&lt;/span&gt; *input       = [&lt;span class=&quot;built_in&quot;&gt;AVCaptureDeviceInput&lt;/span&gt; deviceInputWithDevice:device error:&lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [_session addInput:input];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//生成输出对象&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;AVCaptureMetadataOutput&lt;/span&gt; *output   = [[&lt;span class=&quot;built_in&quot;&gt;AVCaptureMetadataOutput&lt;/span&gt; alloc]init];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//设置代理，一旦扫描到指定类型的数据，就会通过代理输出 //在扫描的过程中，会分析扫描的内容，分析成功后就会调用代理方法在队列中输出&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [output setMetadataObjectsDelegate:&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt; queue:dispatch_get_main_queue()];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; [_session addOutput:output];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//指定当扫描到二维码的时候，产生输出 //AVMetadataObjectTypeQRCode 指定二维码 //指定识别类型一定要放到添加到session之后&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; [output setMetadataObjectTypes:@[&lt;span class=&quot;built_in&quot;&gt;AVMetadataObjectTypeQRCode&lt;/span&gt;, &lt;span class=&quot;built_in&quot;&gt;AVMetadataObjectTypeEAN13Code&lt;/span&gt;, &lt;span class=&quot;built_in&quot;&gt;AVMetadataObjectTypeEAN8Code&lt;/span&gt;,&lt;span class=&quot;built_in&quot;&gt;AVMetadataObjectTypeCode128Code&lt;/span&gt;]];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;comment&quot;&gt;//设置扫描信息的识别区域&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;CGRect&lt;/span&gt; scanCrop = [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt; getRectOfInterest:_scanWindowView&lt;span class=&quot;variable&quot;&gt;.frame&lt;/span&gt; ViewoHoleBounds:_cameraView&lt;span class=&quot;variable&quot;&gt;.bounds&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;x:%f y:%f width:%f height:%f&quot;&lt;/span&gt;,scanCrop&lt;span class=&quot;variable&quot;&gt;.origin&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.x&lt;/span&gt;,scanCrop&lt;span class=&quot;variable&quot;&gt;.origin&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.y&lt;/span&gt;,scanCrop&lt;span class=&quot;variable&quot;&gt;.size&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.width&lt;/span&gt;,scanCrop&lt;span class=&quot;variable&quot;&gt;.size&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.height&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    output&lt;span class=&quot;variable&quot;&gt;.rectOfInterest&lt;/span&gt;             = scanCrop;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//layer负责把图像渲染显示&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;AVCaptureVideoPreviewLayer&lt;/span&gt; *layer = [&lt;span class=&quot;built_in&quot;&gt;AVCaptureVideoPreviewLayer&lt;/span&gt; layerWithSession:_session];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    layer&lt;span class=&quot;variable&quot;&gt;.videoGravity&lt;/span&gt;                = &lt;span class=&quot;built_in&quot;&gt;AVLayerVideoGravityResizeAspectFill&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    layer&lt;span class=&quot;variable&quot;&gt;.frame&lt;/span&gt;                       = _cameraView&lt;span class=&quot;variable&quot;&gt;.frame&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [_cameraView&lt;span class=&quot;variable&quot;&gt;.layer&lt;/span&gt; insertSublayer:layer atIndex:&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//开始启动&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [_session startRunning];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;实现代理方法：&lt;/p&gt;
-&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;preprocessor&quot;&gt;#pragma mark - 得到扫描二维码结果&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;-(&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)captureOutput:(&lt;span class=&quot;built_in&quot;&gt;AVCaptureOutput&lt;/span&gt; *)captureOutput didOutputMetadataObjects:(&lt;span class=&quot;built_in&quot;&gt;NSArray&lt;/span&gt; *)metadataObjects fromConnection:(&lt;span class=&quot;built_in&quot;&gt;AVCaptureConnection&lt;/span&gt; *)connection&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (metadataObjects&lt;span class=&quot;variable&quot;&gt;.count&lt;/span&gt;&amp;gt;&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;) &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;       &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [_session stopRunning];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &lt;span class=&quot;comment&quot;&gt;//数组中包含的都是AVMetadataMachineReadableCodeObject 类型的对象，该对象中包含解码后的数据&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;AVMetadataMachineReadableCodeObject&lt;/span&gt; * metadataObject = [metadataObjects objectAtIndex : &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; ]; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);      &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        SystemSoundID completeSound;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;NSURL&lt;/span&gt; *audioPath = [[&lt;span class=&quot;built_in&quot;&gt;NSBundle&lt;/span&gt; mainBundle] URLForResource:&lt;span class=&quot;string&quot;&gt;@&quot;beep&quot;&lt;/span&gt; withExtension:&lt;span class=&quot;string&quot;&gt;@&quot;ogg&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        AudioServicesCreateSystemSoundID((__bridge &lt;span class=&quot;built_in&quot;&gt;CFURLRef&lt;/span&gt; _Nonnull)(audioPath), &amp;amp;completeSound);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        AudioServicesPlaySystemSound(completeSound);        &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt; sendRequestWithBarcode:metadataObject&lt;span class=&quot;variable&quot;&gt;.stringValue&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;扫码范围：&lt;/p&gt;
-&lt;figure class=&quot;highlight processing&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#pragma mark - 根据参数取得扫面范围reck&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (CGRect)getRectOfInterest:(CGRect)rectFrame ViewoHoleBounds:(CGRect)holeBounds &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    CGFloat x,y,&lt;span class=&quot;variable&quot;&gt;width&lt;/span&gt;,heigth;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    x = (rectFrame.origin.x)/(holeBounds.&lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;.&lt;span class=&quot;variable&quot;&gt;width&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    y = (rectFrame.origin.y)/(holeBounds.&lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;.&lt;span class=&quot;variable&quot;&gt;height&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;variable&quot;&gt;width&lt;/span&gt; = (rectFrame.&lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;.&lt;span class=&quot;variable&quot;&gt;width&lt;/span&gt;)/(holeBounds.&lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;.&lt;span class=&quot;variable&quot;&gt;width&lt;/span&gt;); &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    heigth = (rectFrame.&lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;.&lt;span class=&quot;variable&quot;&gt;height&lt;/span&gt;)/(holeBounds.&lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;.&lt;span class=&quot;variable&quot;&gt;height&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; CGRectMake(y, x, heigth, &lt;span class=&quot;variable&quot;&gt;width&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;扫描动画：&lt;/p&gt;
-&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;preprocessor&quot;&gt;#&lt;span class=&quot;keyword&quot;&gt;pragma&lt;/span&gt; mark - 扫描器开始进行动画&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)beginAnimated &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    UIImageView *lineImgView = [[UIImageView alloc]initWithFrame:CGRectMake(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;200&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;)];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    lineImgView.image        = [UIImage imageNamed:@&lt;span class=&quot;string&quot;&gt;&quot;barcodeline&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [_scanWindowView addSubview:lineImgView]; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [UIView animateWithDuration:&lt;span class=&quot;number&quot;&gt;2.0&lt;/span&gt; delay:&lt;span class=&quot;number&quot;&gt;00&lt;/span&gt; options:UIViewAnimationOptionRepeat animations:^&amp;#123;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        lineImgView.frame    = CGRectMake(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;200&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;200&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125; completion:^(BOOL finished) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;参考：&lt;br&gt;&lt;a href=&quot;https://my.oschina.net/u/2340880/blog/405847&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://my.oschina.net/u/2340880/blog/405847&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://strivingboy.github.io/blog/2014/11/08/scan-qrcode/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://strivingboy.github.io/blog/2014/11/08/scan-qrcode/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://c0ming.me/qr-code-scan/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://c0ming.me/qr-code-scan/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://yimouleng.com/2016/01/13/ios-QRCode/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://yimouleng.com/2016/01/13/ios-QRCode/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;类似支付宝二维码Demo：&lt;br&gt;&lt;a href=&quot;https://github.com/mokey1422/GBAliScan&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/mokey1422/GBAliScan&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;二维码的&quot;&gt;&lt;a href=&quot;#二维码的&quot; class=&quot;headerlink&quot; title=&quot;二维码的&quot;&gt;&lt;/a&gt;二维码的&lt;/h1&gt;</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在项目中涉及到二维码的相关知识。&lt;br&gt;
     
     </summary>
     
@@ -2518,40 +2615,6 @@ RACReplaySubject *replaySubject = [RACReplaySubject subject];
     
     
       <category term="RAC,学习笔记" scheme="http://peilinghui.com/tags/RAC-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>iOS调试技巧</title>
-    <link href="http://peilinghui.com/2016/05/14/iOS%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/"/>
-    <id>http://peilinghui.com/2016/05/14/iOS调试技巧/</id>
-    <published>2016-05-14T09:50:17.000Z</published>
-    <updated>2016-05-23T01:31:21.000Z</updated>
-    
-    <content type="html">&lt;p&gt;在iOS开发过程中，难免会遇到一些bug，那么遇到bug该怎么办？如何找bug呢？&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;对于bug,我们要合理的假设，找原因；对原因与bug之间的因果关系进行分析。&lt;/p&gt;
-&lt;h2 id=&quot;lldb的使用&quot;&gt;&lt;a href=&quot;#lldb的使用&quot; class=&quot;headerlink&quot; title=&quot;lldb的使用&quot;&gt;&lt;/a&gt;lldb的使用&lt;/h2&gt;&lt;p&gt;主要是打断点的时候使用lldb.&lt;/p&gt;
-&lt;h3 id=&quot;查看值&quot;&gt;&lt;a href=&quot;#查看值&quot; class=&quot;headerlink&quot; title=&quot;查看值&quot;&gt;&lt;/a&gt;查看值&lt;/h3&gt;&lt;p&gt;1&amp;gt;非对象的值&lt;br&gt;&lt;code&gt;int a = 10;&lt;/code&gt; &lt;/p&gt;
-&lt;p&gt;(lldb) p a&lt;br&gt;(原始命令：p = print = expression –)&lt;br&gt;输出：(int)$0 = 10&lt;br&gt;(lldb)p 10 + 10&lt;br&gt;输出：$1 = 20  &lt;/p&gt;
-&lt;p&gt;2&amp;gt;对象的值&lt;br&gt;&lt;code&gt;NSString *string = @“Hello，world”;&lt;/code&gt; &lt;/p&gt;
-&lt;p&gt;(lldb) po string&lt;br&gt;(原始命令：po = expression -o – = e -o –string)&lt;br&gt;输出：Hello，world  &lt;/p&gt;
-&lt;p&gt;注意：清空控制台：command+K  &lt;/p&gt;
-&lt;h3 id=&quot;修改变量的值&quot;&gt;&lt;a href=&quot;#修改变量的值&quot; class=&quot;headerlink&quot; title=&quot;修改变量的值&quot;&gt;&lt;/a&gt;修改变量的值&lt;/h3&gt;&lt;figure class=&quot;highlight autohotkey&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(&lt;span class=&quot;literal&quot;&gt;a&lt;/span&gt;==&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	NSLog(@&lt;span class=&quot;string&quot;&gt;&quot;第一个if被执行了&quot;&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(&lt;span class=&quot;literal&quot;&gt;a&lt;/span&gt;!=&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	NSLog(@&lt;span class=&quot;string&quot;&gt;&quot;第二个if被执行了&quot;&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;(lldb) e(代表expression表达式) a=11&lt;br&gt;输出：(int) $0 = 11  &lt;/p&gt;
-&lt;h3 id=&quot;定义一个变量&quot;&gt;&lt;a href=&quot;#定义一个变量&quot; class=&quot;headerlink&quot; title=&quot;定义一个变量&quot;&gt;&lt;/a&gt;定义一个变量&lt;/h3&gt;&lt;p&gt;(lldb) e int $b = 20&lt;br&gt;(lldb) e int $b + $0&lt;br&gt;输出：(int) $1 = 31&lt;/p&gt;
-&lt;h3 id=&quot;调用一个函数&quot;&gt;&lt;a href=&quot;#调用一个函数&quot; class=&quot;headerlink&quot; title=&quot;调用一个函数&quot;&gt;&lt;/a&gt;调用一个函数&lt;/h3&gt;&lt;p&gt;代码中：&lt;br&gt;&lt;figure class=&quot;highlight scheme&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;list&quot;&gt;[&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt; test]&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)&lt;/span&gt;test&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	NSLog&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&quot;test被调用了&quot;&lt;/span&gt;)&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;(lldb) call [self init]&lt;br&gt;输出：test被调用了&lt;/p&gt;
-&lt;h3 id=&quot;函数提前返回，返回一个特定值&quot;&gt;&lt;a href=&quot;#函数提前返回，返回一个特定值&quot; class=&quot;headerlink&quot; title=&quot;函数提前返回，返回一个特定值&quot;&gt;&lt;/a&gt;函数提前返回，返回一个特定值&lt;/h3&gt;&lt;p&gt;代码实现：&lt;/p&gt;
-&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;NSInteger&lt;/span&gt; returnValue = [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt; testReturn];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;built_in&quot;&gt;NSInteger&lt;/span&gt;)testReturn&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; a = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; b = &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; a+b;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;(lldb) thread return 100&lt;br&gt;(lldb) p returnValue&lt;br&gt;输出：(NSInteger) $1 = 0&lt;br&gt;(NSInteger) $2 = 100&lt;/p&gt;
-&lt;h3 id=&quot;流程控制&quot;&gt;&lt;a href=&quot;#流程控制&quot; class=&quot;headerlink&quot; title=&quot;流程控制&quot;&gt;&lt;/a&gt;流程控制&lt;/h3&gt;&lt;p&gt;1&amp;gt;继续运行 (相当于控制台第一个按钮)&lt;br&gt;c = continue = process continue&lt;br&gt;2&amp;gt;step over&lt;br&gt;n = next = thread step-over&lt;br&gt;3&amp;gt;step in(跳入函数)&lt;br&gt;s = thread step-in&lt;br&gt;4&amp;gt;step out(跳出函数)&lt;br&gt;finish = thread step-over&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在iOS开发过程中，难免会遇到一些bug，那么遇到bug该怎么办？如何找bug呢？&lt;br&gt;
-    
-    </summary>
-    
     
   </entry>
   

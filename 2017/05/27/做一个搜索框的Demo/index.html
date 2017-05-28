@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS中的加密实现 | 向着阳光奔跑</title>
+  <title>做一个搜索框的Demo | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在一个App登录的时候或者是一些个人信息输入的时候都需要有加密算法的实现来确保安全。">
+  <meta name="description" content="打开手机，就会发现我们用的最多的就是TableView和搜索框了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS中的加密实现">
-<meta property="og:url" content="http://peilinghui.com/2016/12/02/iOS中的加密实现/index.html">
+<meta property="og:title" content="做一个搜索框的Demo">
+<meta property="og:url" content="http://peilinghui.com/2017/05/27/做一个搜索框的Demo/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="在一个App登录的时候或者是一些个人信息输入的时候都需要有加密算法的实现来确保安全。">
-<meta property="og:updated_time" content="2017-04-14T15:00:42.000Z">
+<meta property="og:description" content="打开手机，就会发现我们用的最多的就是TableView和搜索框了。">
+<meta property="og:updated_time" content="2017-05-27T15:21:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中的加密实现">
-<meta name="twitter:description" content="在一个App登录的时候或者是一些个人信息输入的时候都需要有加密算法的实现来确保安全。">
+<meta name="twitter:title" content="做一个搜索框的Demo">
+<meta name="twitter:description" content="打开手机，就会发现我们用的最多的就是TableView和搜索框了。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -248,11 +248,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-iOS中的加密实现" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-做一个搜索框的Demo" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/12/02/iOS中的加密实现/" class="article-date">
-      <time datetime="2016-12-02T12:12:35.000Z" itemprop="datePublished">2016-12-02</time>
+      <a href="/2017/05/27/做一个搜索框的Demo/" class="article-date">
+      <time datetime="2017-05-27T15:11:25.000Z" itemprop="datePublished">2017-05-27</time>
 </a>
     </div>
   
@@ -265,7 +265,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS中的加密实现
+      做一个搜索框的Demo
     </h1>
   
 
@@ -282,26 +282,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在一个App登录的时候或者是一些个人信息输入的时候都需要有加密算法的实现来确保安全。</p>
-<a id="more"></a>  
-<p>加密算法通常分为对称性加密算法和非对称性加密算法.</p>
-<p>对称性加密算法:信息接收双方都需事先知道密匙和加解密算法且其密匙是相同.  </p>
-<p>非对称算法:发送双方A,B事先均生成一堆密匙，然后A将自己的公有密匙发送给B，B将自己的公有密匙发送给A，如果A要给B发送消 息，则先需要用B的公有密匙进行消息加密，然后发送给B端，此时B端再用自己的私有密匙进行消息解密.<br><strong>加密</strong></p>
-<p>加密分为两种，对称加密和非对称加密。<br>所谓的对称，就是指加密秘钥和解密秘钥相同，而非对称自然就是指两者不同。</p>
-<p>对称加密的优点在于速度快，但是假设秘钥由服务器保存，如何安全的让客户端得到秘钥是需要解决的问题。</p>
-<p>常见的一个非对称加密算法是 RSA 算法，利用公钥加密的数据能且只能通过私钥解密，通过私钥加密的数据能且只能通过公钥解密。<br>因此实际的网络传输中，通常使用对称加密与非对称加密结合的方式，服务端通过非对称加密将对称秘钥发给客户端。此后双方使用这个对称密钥进行通信。<br>因此实际的网络传输中，通常使用对称加密与非对称加密结合的方式，服务端通过非对称加密将对称秘钥发给客户端。此后双方使用这个对称密钥进行通信。</p>
-<h1 id="几种对称性加密算法：AES-DES-3DES"><a href="#几种对称性加密算法：AES-DES-3DES" class="headerlink" title="几种对称性加密算法：AES,DES,3DES"></a>几种对称性加密算法：AES,DES,3DES</h1><h1 id="几种非对称性加密算法：RSA-DSA-ECC"><a href="#几种非对称性加密算法：RSA-DSA-ECC" class="headerlink" title="几种非对称性加密算法：RSA,DSA,ECC"></a>几种非对称性加密算法：RSA,DSA,ECC</h1><h1 id="几种线性散列算法（签名算法）：MD5-SHA1-HMAC"><a href="#几种线性散列算法（签名算法）：MD5-SHA1-HMAC" class="headerlink" title="几种线性散列算法（签名算法）：MD5,SHA1,HMAC"></a>几种线性散列算法（签名算法）：MD5,SHA1,HMAC</h1><p>MD5加密后的密文都是32位字符：无论原先没有加密前的字符串有多长  加密后都是32位字符  另外我们认为MD5是不可逆的，但事实上网站  md5.com 记录了全球的状态码<br> 可以直接将密文进行解析：所以要对MD5进行加盐来解决</p>
-<p> 方式1、直接进行MD5加密<br> 方式2、加盐后进行MD5加密<br> 方式3、HMAC+MD5</p>
-<p>在iOS开发中，如果某个字符串需要进行MD5加密.</p>
-<ol>
-<li><p>包含头文件“CommonDigest.h”</p>
-<pre><code>#import&lt;CommonCrypto/CommonDigest.h&gt;
-</code></pre></li>
-<li><p>编写下述方法。函数参数为需要加密的字符串，返回值为加密后得到的结果，也是一个字符串。</p>
-<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="type">NSString</span> *)md5HexDigest:(<span class="type">NSString</span> *)url  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="keyword">const</span> <span class="type">char</span> *original_str = [url <span class="type">UTF8String</span>];  </span><br><span class="line">    unsigned <span class="type">char</span> <span class="literal">result</span>[<span class="type">CC_MD5_DIGEST_LENGTH</span>];  </span><br><span class="line">    <span class="type">CC_MD5</span>(original_str, strlen(original_str), <span class="literal">result</span>);  </span><br><span class="line">    <span class="type">NSMutableString</span> *hash = [<span class="type">NSMutableString</span> <span class="type">string</span>];  </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">16</span>; i++)  </span><br><span class="line">        [hash appendFormat:@<span class="string">"%02X"</span>, <span class="literal">result</span>[i]];  </span><br><span class="line">    <span class="keyword">return</span> [hash lowercaseString];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>面试题目：<br>1）如果原文为字串s， 则在发送前先将s转换为UTF-8编码，然后按位取反，再将数据以字节为单位反转顺序，得到新的字节数组。<br>2）取出新字节数组的每一字节，为其生成一个0到100的随机数，用该字节减于随机数，得到的结果作为一个32位整数的最后8位，而随机数按位取反后则作为该整数的9至16位，从而生成一个新的整数，以此类推，得到一个整形数组d。<br>3） 将该整形数组发送给接收方，对方解密后得到原文内容s</p>
+        <p>打开手机，就会发现我们用的最多的就是TableView和搜索框了。<br><a id="more"></a></p>
+<p>打开手机，从通知中心的搜索，APP store的搜索，通讯录的搜索，设置页面的搜索，照片搜索，信息搜索，再到打开每一个APP，都有的搜索。看了下，实现的需求类似，基本上都是输入关键字从网络接口上来搜索，只要点击过的都会保存到历史记录中，然后显示到历史记录的tableview中，下次可以直接点击然后搜索。可以清空单个记录或者所有的历史记录。还有一些APP还有热门搜索的标签。<br>所以，鉴于此，决定做一个Demo出来。</p>
 
       
     </div>
@@ -310,13 +292,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></p>
+        <p><span>本文标题:</span><a href="/2017/05/27/做一个搜索框的Demo/">做一个搜索框的Demo</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年12月02日 - 20时12分</p>
-        <p><span>最后更新:</span>2017年04月14日 - 23时00分</p>
+        <p><span>发布时间:</span>2017年05月27日 - 23时11分</p>
+        <p><span>最后更新:</span>2017年05月27日 - 23时21分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/12/02/iOS中的加密实现/" title="iOS中的加密实现">http://peilinghui.com/2016/12/02/iOS中的加密实现/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/12/02/iOS中的加密实现/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/27/做一个搜索框的Demo/" title="做一个搜索框的Demo">http://peilinghui.com/2017/05/27/做一个搜索框的Demo/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/05/27/做一个搜索框的Demo/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -329,16 +311,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/02/03/研究框架YYModel/">
-                    研究框架YYModel
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/10/05/深入学习GCD/">
-                    深入学习GCD
+                <a href="/2017/05/27/如何使用Mac本地服务器/">
+                    如何使用Mac本地服务器
                 </a>
             </div>
         
@@ -349,7 +325,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#几种对称性加密算法：AES-DES-3DES"><span class="toc-number">1.</span> <span class="toc-text">几种对称性加密算法：AES,DES,3DES</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#几种非对称性加密算法：RSA-DSA-ECC"><span class="toc-number">2.</span> <span class="toc-text">几种非对称性加密算法：RSA,DSA,ECC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#几种线性散列算法（签名算法）：MD5-SHA1-HMAC"><span class="toc-number">3.</span> <span class="toc-text">几种线性散列算法（签名算法）：MD5,SHA1,HMAC</span></a></li></ol>
+    
 </div>
 <style>
     .left-col .switch-btn {
@@ -411,7 +387,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/12/02/iOS中的加密实现/" data-title="iOS中的加密实现" data-url="http://peilinghui.com/2016/12/02/iOS中的加密实现/"></div>
+    <div class="ds-thread" data-thread-key="2017/05/27/做一个搜索框的Demo/" data-title="做一个搜索框的Demo" data-url="http://peilinghui.com/2017/05/27/做一个搜索框的Demo/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -435,15 +411,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/02/03/研究框架YYModel/" title="上一篇: 研究框架YYModel">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/10/05/深入学习GCD/" title="下一篇: 深入学习GCD">
+            <a href="/2017/05/27/如何使用Mac本地服务器/" title="下一篇: 如何使用Mac本地服务器">
                 <i class="fa fa-angle-right"></i>
             </a>
         
