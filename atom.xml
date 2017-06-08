@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://peilinghui.com/"/>
-  <updated>2017-06-07T10:34:38.000Z</updated>
+  <updated>2017-06-08T08:52:22.000Z</updated>
   <id>http://peilinghui.com/</id>
   
   <author>
@@ -20,15 +20,19 @@
     <link href="http://peilinghui.com/2017/05/27/%E5%81%9A%E4%B8%80%E4%B8%AA%E6%90%9C%E7%B4%A2%E6%A1%86%E7%9A%84Demo/"/>
     <id>http://peilinghui.com/2017/05/27/做一个搜索框的Demo/</id>
     <published>2017-05-27T15:11:25.000Z</published>
-    <updated>2017-06-07T10:34:38.000Z</updated>
+    <updated>2017-06-08T08:52:22.000Z</updated>
     
     <content type="html">&lt;p&gt;打开手机，就会发现我们用的最多的就是TableView和搜索框了。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;打开手机，从通知中心的搜索，APP store的搜索，通讯录的搜索，设置页面的搜索，照片搜索，信息搜索，再到打开每一个APP，都有的搜索。看了下，实现的需求类似，基本上都是输入关键字从网络接口上来搜索，只要点击过的都会保存到历史记录中，然后显示到历史记录的tableview中，下次可以直接点击然后搜索。可以清空单个记录或者所有的历史记录。还有一些APP还有热门搜索的标签。&lt;br&gt;所以，鉴于此，决定做一个Demo出来。&lt;/p&gt;
-&lt;h1 id=&quot;搜索框&quot;&gt;&lt;a href=&quot;#搜索框&quot; class=&quot;headerlink&quot; title=&quot;搜索框&quot;&gt;&lt;/a&gt;搜索框&lt;/h1&gt;&lt;p&gt;对于搜索框可以用系统自带的UISearchBar，UISearchController，或者是自定义搜索框–把UIView和UITextField代理结合起来，&lt;/p&gt;
+&lt;h1 id=&quot;搜索框&quot;&gt;&lt;a href=&quot;#搜索框&quot; class=&quot;headerlink&quot; title=&quot;搜索框&quot;&gt;&lt;/a&gt;搜索框&lt;/h1&gt;&lt;p&gt;对于搜索框可以用系统自带的UISearchBar，UISearchController，UISearchDisplayController，或者是自定义搜索框–把UIView和UITextField代理结合起来，&lt;/p&gt;
 &lt;h1 id=&quot;搜索功能&quot;&gt;&lt;a href=&quot;#搜索功能&quot; class=&quot;headerlink&quot; title=&quot;搜索功能&quot;&gt;&lt;/a&gt;搜索功能&lt;/h1&gt;&lt;p&gt;对于搜索功能的实现，&lt;br&gt;动态的：可以在输入一个字符，根据关键字去请求接口来返回数据加载在tableView上。&lt;br&gt;静态的：如果数据是本地的，或者是已经加载出来的数据中来搜索的话，可以用&lt;br&gt;NSPredicate来做过滤筛选出想要搜索的结果。&lt;/p&gt;
 &lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;NSPredicate&lt;/span&gt; *resultPredicate = [&lt;span class=&quot;built_in&quot;&gt;NSPredicate&lt;/span&gt; predicateWithFormat:&lt;span class=&quot;string&quot;&gt;@&quot;SELF contains[cd] %@&quot;&lt;/span&gt;, searchText];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.searchResults&lt;/span&gt; = [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.items&lt;/span&gt; filteredArrayUsingPredicate:resultPredicate];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h1 id=&quot;历史记录的存储&quot;&gt;&lt;a href=&quot;#历史记录的存储&quot; class=&quot;headerlink&quot; title=&quot;历史记录的存储&quot;&gt;&lt;/a&gt;历史记录的存储&lt;/h1&gt;&lt;p&gt;对于已经搜索过的历史记录可以选择的数据化存储有NSUserDefault，存在本地的Plist。还有就是Core Data的存储。&lt;/p&gt;
-&lt;h1 id=&quot;清除历史记录的单个cell与全部的记录&quot;&gt;&lt;a href=&quot;#清除历史记录的单个cell与全部的记录&quot; class=&quot;headerlink&quot; title=&quot;清除历史记录的单个cell与全部的记录&quot;&gt;&lt;/a&gt;清除历史记录的单个cell与全部的记录&lt;/h1&gt;</content>
+&lt;h1 id=&quot;tableView的数据源&quot;&gt;&lt;a href=&quot;#tableView的数据源&quot; class=&quot;headerlink&quot; title=&quot;tableView的数据源&quot;&gt;&lt;/a&gt;tableView的数据源&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;如果是从接口查询数据的话，必然有历史记录的table和查询结果table。这个需要用到两个tableView两个数据源。通过判断来加载不同的数据源。&lt;/li&gt;
+&lt;li&gt;如果是从已经有的数据源中搜索结果，不论是静态的还是先从历史记录中搜索，用到谓词匹配的时候，也可以设置两个数据源来刷新一个table，或者是两个table两个数据源&lt;/li&gt;
+&lt;/ol&gt;
+</content>
     
     <summary type="html">
     
