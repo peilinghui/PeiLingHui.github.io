@@ -3,24 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于NSString的引用计数问题 | 向着阳光奔跑</title>
+  <title>iOS中的第三方库 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="NSString的神奇的引用计数问题。">
+  <meta name="description" content="通过不断的学习也接触了不少的第三方库，就总结一下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于NSString的引用计数问题">
-<meta property="og:url" content="http://peilinghui.com/2016/04/10/关于NSString的引用计数问题/index.html">
+<meta property="og:title" content="iOS中的第三方库">
+<meta property="og:url" content="http://peilinghui.com/2016/03/05/iOS中的第三方框架/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="NSString的神奇的引用计数问题。">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.43.32.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.43.43.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.57.27.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.57.46.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.03.40.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.03.48.png">
-<meta property="og:updated_time" content="2017-04-10T12:29:27.000Z">
+<meta property="og:description" content="通过不断的学习也接触了不少的第三方库，就总结一下。">
+<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-20%20%E4%B8%8A%E5%8D%8810.45.38.png">
+<meta property="og:updated_time" content="2017-06-12T10:19:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于NSString的引用计数问题">
-<meta name="twitter:description" content="NSString的神奇的引用计数问题。">
+<meta name="twitter:title" content="iOS中的第三方库">
+<meta name="twitter:description" content="通过不断的学习也接触了不少的第三方库，就总结一下。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -254,11 +249,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-关于NSString的引用计数问题" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-iOS中的第三方框架" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/10/关于NSString的引用计数问题/" class="article-date">
-      <time datetime="2016-04-10T10:11:36.000Z" itemprop="datePublished">2016-04-10</time>
+      <a href="/2016/03/05/iOS中的第三方框架/" class="article-date">
+      <time datetime="2016-03-05T06:08:53.000Z" itemprop="datePublished">2016-03-05</time>
 </a>
     </div>
   
@@ -271,7 +266,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于NSString的引用计数问题
+      iOS中的第三方库
     </h1>
   
 
@@ -279,6 +274,10 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
 
         
         <div class="clearfix"></div>
@@ -288,29 +287,64 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>NSString的神奇的引用计数问题。</p>
-<a id="more"></a>
-<h3 id="NSString的retainCount的变化"><a href="#NSString的retainCount的变化" class="headerlink" title="NSString的retainCount的变化"></a>NSString的retainCount的变化</h3><h4 id="用NSString声明的字符串变量的retainCount变化由你初始化字符串时的方式决定"><a href="#用NSString声明的字符串变量的retainCount变化由你初始化字符串时的方式决定" class="headerlink" title="用NSString声明的字符串变量的retainCount变化由你初始化字符串时的方式决定"></a>用NSString声明的字符串变量的retainCount变化由你初始化字符串时的方式决定</h4><p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.43.32.png" alt=""><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.43.43.png" alt=""></p>
-<h4 id="NSCFConstantString（编译时）"><a href="#NSCFConstantString（编译时）" class="headerlink" title="__NSCFConstantString（编译时）"></a>__NSCFConstantString（编译时）</h4><p>用NSString <em>str = @”123”;定义的字符串是常量字符串<br>这些对象地址相同，是因为他们都是<em>*__NSCFConstantString</em></em>对象，也就是字符串常量对象，可以看到其isa都是__NSCFConstantString，该对象存储在栈上，创建之后由系统来管理内存释放，相同内容的NSCFConstantString对象地址相同。该对象引用计数很大，为固定值不会变化，表示无限运行的retainCount，对其进行retain或release也不会影响其引用计数。</p>
-<p>当创建一个NSCFConstantString对象时，会检测这个字符串内容是否已经存在，如果存在，则直接将地址赋值给变量；不存在的话，则创建新地址，再赋值。</p>
-<p>总的来说，对于NSCFConstantString对象，只要字符串内容不变，就不会分配新的内存地址，无论你是赋值、retain、copy。这种优化在大量使用NSString的情况下可以节省内存，提高性能。</p>
-<h4 id="NSCFString（运行时）"><a href="#NSCFString（运行时）" class="headerlink" title="__NSCFString（运行时）"></a>__NSCFString（运行时）</h4><p>使用stringWithFormat创建的NSString为变量，系统会进行引用计数。<br>在上面的输出结果中，我们看到另外还有两类isa分别是：<strong>__NSCFString</strong>和<strong>NSTaggedPointerString</strong>，先来看__NSCFString。</p>
-<p>在我的理解，__NSCFString对象是一种NSString子类，存储在堆上，不属于字符串常量对象。该对象创建之后和其他的Obj对象一样引用计数为1，对其执行retain和release将改变其retainCount。</p>
-<h4 id="NSTaggedPointerString"><a href="#NSTaggedPointerString" class="headerlink" title="__NSTaggedPointerString"></a>__NSTaggedPointerString</h4><p>这个对象是标签指针，苹果在 64 位环境下对NSString、NSNumber等对象做了一些优化。简单的说就是把指针指向的内容直接放在了指针变量的内存地址中，在 64 位环境下指针变量的大小达到了 8 位，能容纳长度较小的内容，于是使用了标签指针来优化数据的存储。从其引用计数可以看出，这种对象也是无垠的retainCount，这种对象存储在指针的内容中。</p>
-<p>对 NSString对象来说，当非字面量的数字，英文字母字符串的长度小于等于9的时候会自动成为NSTaggedPointerString类型，如果有中文或其他特殊符号（可能是非 ASCII 字符）存在的话则会直接成为__NSCFString类型。</p>
-<p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.57.27.png" alt=""><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%886.57.46.png" alt=""></p>
+        <p>通过不断的学习也接触了不少的第三方库，就总结一下。<br><a id="more"></a><br>源代码分析：<a href="https://github.com/Draveness/iOS-Source-Code-Analyze" target="_blank" rel="external">https://github.com/Draveness/iOS-Source-Code-Analyze</a></p>
+<p><strong>开源库</strong><br>公开源代码，能看到具体实现<br>比如SDWebImage、AFNetworking</p>
+<p><strong>闭源库</strong><br>不公开源代码，是经过编译后的二进制文件，看不到具体实现<br>主要分为：静态库、动态库  </p>
 <ol>
-<li>stringWithString取决于后面跟的string, 后面string的retainCount是多少那么用stringWithString创建的对象就为多少</li>
+<li>静态库和动态库的存在形式<br>静态库：.a 和 .framework<br>动态库：.dylib 和 .framework<br>系统的 .framework 是动态库…..<br>我们自己建立的 .framework 是静态库</li>
+<li>静态库和动态库在使用上的区别<br>静态库：链接时，静态库会被完整地复制到可执行文件中，被多次使用就有多份冗余拷贝（左图所示）<br>动态库：链接时不复制，程序运行时由系统动态加载到内存，供程序调用，系统只加载一次，多个程序共用，节省内存<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-02-20%20%E4%B8%8A%E5%8D%8810.45.38.png" alt=""></li>
 </ol>
-<h3 id="用NSMutableArray结合着NSMutableString来观察一下retainCount的变化。"><a href="#用NSMutableArray结合着NSMutableString来观察一下retainCount的变化。" class="headerlink" title="用NSMutableArray结合着NSMutableString来观察一下retainCount的变化。"></a>用NSMutableArray结合着NSMutableString来观察一下retainCount的变化。</h3><p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.03.40.png" alt=""><br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.03.48.png" alt=""></p>
-<p>操作系统的内存管理分成堆和栈。</p>
-<p>在堆中分配的内存，都适用引用计数模式；在栈中则不是。</p>
-<p>NSString 定义的对象是保存在栈中，所以它没有引用计数，不是通过引用计数对内存进行管理的。常量的引用计数会是一个很大的整数，测试的结果显示它是－1. 对该对象进行 retain 操作，不好改变它的retainCount 值。</p>
-<p>NSMutableNSString 定义的对象，需要先分配堆中的内存空间，再初始化才能使用。它是采用引用计数管理内存的。对该对象做 retainCount 操作则每次增加一个。</p>
-<p>其实，引用计数是对内存区域的空间管理方式，是应从内存块的视角去看的。任何对象都是指向内存块的指针，有多少个指针指向这个内存块，这个内存块就有多少个引用计算。</p>
-<p>参考：</p>
-<p><a href="http://stackoverflow.com/questions/10220683/what-is-the-different-between-nscfstring-and-nsconstantstring" target="_blank" rel="external">stackoverflow上关于NSCFString和NSConstantstring的区别</a></p>
-<p><a href="https://blog.cnbluebox.com/blog/2014/04/16/nsstringte-xing-fen-xi-xue-xi/" target="_blank" rel="external">NSString特性分析学习</a></p>
+<h1 id="页面布局"><a href="#页面布局" class="headerlink" title="页面布局"></a>页面布局</h1><h2 id="Masonry-重点"><a href="#Masonry-重点" class="headerlink" title="Masonry(重点)"></a>Masonry(重点)</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p> Masonry是一个轻量级的布局框架 拥有自己的描述语法 采用更优雅的链式语法封装自动布局 简洁明了 并具有高可读性 而且同时支持 iOS 和 Max OS X。  </p>
+<h3 id="框架下载地址："><a href="#框架下载地址：" class="headerlink" title="框架下载地址："></a>框架下载地址：</h3><p>  <a href="https://github.com/Masonry/Masonry" target="_blank" rel="external">https://github.com/Masonry/Masonry</a></p>
+<h3 id="Masonry介绍与使用实践-快速上手Autolayout"><a href="#Masonry介绍与使用实践-快速上手Autolayout" class="headerlink" title="Masonry介绍与使用实践(快速上手Autolayout)"></a>Masonry介绍与使用实践(快速上手Autolayout)</h3><p>  <a href="http://adad184.com/2014/09/28/use-masonry-to-quick-solve-autolayout/" target="_blank" rel="external">http://adad184.com/2014/09/28/use-masonry-to-quick-solve-autolayout/</a>   </p>
+<h3 id="案例讲解："><a href="#案例讲解：" class="headerlink" title="案例讲解："></a>案例讲解：</h3><p><a href="http://www.brighttj.com/ios/ios-masonry-demo.html#comment-353" target="_blank" rel="external">http://www.brighttj.com/ios/ios-masonry-demo.html#comment-353</a></p>
+<h3 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h3><p><a href="http://www.ios122.com/2015/09/masonry/" target="_blank" rel="external">http://www.ios122.com/2015/09/masonry/</a></p>
+<h3 id="常用方法："><a href="#常用方法：" class="headerlink" title="常用方法："></a>常用方法：</h3><pre><code>1.三个添加约束方法区别
+mas_makeConstraints 只负责新增约束 Autolayout不能同时存在两条针对于同一对象的约束 否则会报错
+mas_updateConstraints 针对上面的情况 会更新在block中出现的约束 不会导致出现两个相同约束的情况
+mas_remakeConstraints 则会清除之前的所有约束 仅保留最新的约束
+三种函数善加利用 就可以应对各种情况了
+
+2、两个赋值方法区别（equalTo 和 mas_equalTo）
+#define equalTo(...)  mas_equalTo(__VA_ARGS__)
+#define mas_equalTo(...) equalTo(MASBoxValue((__VA_ARGS__))) 
+mas_equalTo对其参数进行了一个自动装箱操作， 除了支持NSNumber数值类型之外还支持CGPoint CGSize UIEdgeInsets
+</code></pre><h2 id="MJRefresh"><a href="#MJRefresh" class="headerlink" title="MJRefresh"></a>MJRefresh</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p>下拉刷新和上拉刷新</p>
+<h3 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h3><p><a href="https://github.com/CoderMJLee/MJRefresh" target="_blank" rel="external">https://github.com/CoderMJLee/MJRefresh</a></p>
+<h2 id="SVPullToRefresh"><a href="#SVPullToRefresh" class="headerlink" title="SVPullToRefresh"></a>SVPullToRefresh</h2><h3 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h3><p>适用于UIScrollView，使用OC中的Runtime在UIScrollView中加了下面三个方法:<br>使用了 key-value observing（KVO）去追踪to track the scrollView’s contentOffset.<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="typename">void</span>)<span class="string">addPullToRefreshWithActionHandler:</span>(<span class="typename">void</span> (^)(<span class="typename">void</span>))actionHandler;</span><br><span class="line">- (<span class="typename">void</span>)<span class="string">addPullToRefreshWithActionHandler:</span>(<span class="typename">void</span> (^)(<span class="typename">void</span>))actionHandler <span class="string">position:</span>(SVPullToRefreshPosition)position;</span><br><span class="line">- (<span class="typename">void</span>)<span class="string">addInfiniteScrollingWithActionHandler:</span>(<span class="typename">void</span> (^)(<span class="typename">void</span>))actionHandler;</span><br></pre></td></tr></table></figure></p>
+<h3 id="代码地址-1"><a href="#代码地址-1" class="headerlink" title="代码地址"></a>代码地址</h3><p><a href="https://github.com/samvermette/SVPullToRefresh" target="_blank" rel="external">https://github.com/samvermette/SVPullToRefresh</a></p>
+<h2 id="MBProgressHUD"><a href="#MBProgressHUD" class="headerlink" title="MBProgressHUD"></a>MBProgressHUD</h2><ol>
+<li>动态提示框效果。应用显示一个过渡的作用，常用于打开一个联网页面加载过程，防止出现假死现象，如果网速慢则告诉用户已经在很努力很努力的加载中。网页加载、下载等耗时操作中给予用户以提示。</li>
+<li>github 地址：<a href="https://github.com/jdg/MBProgressHUD" target="_blank" rel="external">https://github.com/jdg/MBProgressHUD</a></li>
+<li>讲解：<a href="http://blog.csdn.net/lanmanck/article/details/38496113" target="_blank" rel="external">http://blog.csdn.net/lanmanck/article/details/38496113</a><br><a href="http://blog.csdn.net/duxinfeng2010/article/details/8510894" target="_blank" rel="external">http://blog.csdn.net/duxinfeng2010/article/details/8510894</a><br><a href="http://blog.csdn.net/chenyufeng1991/article/details/50273315" target="_blank" rel="external">http://blog.csdn.net/chenyufeng1991/article/details/50273315</a></li>
+</ol>
+<h2 id="侧滑的菜单"><a href="#侧滑的菜单" class="headerlink" title="侧滑的菜单"></a>侧滑的菜单</h2><p><a href="https://github.com/mutualmobile/MMDrawerController" target="_blank" rel="external">https://github.com/mutualmobile/MMDrawerController</a><br><a href="https://github.com/JPluto/DDMenuController" target="_blank" rel="external">https://github.com/JPluto/DDMenuController</a></p>
+<h3 id="RESideMenu"><a href="#RESideMenu" class="headerlink" title="RESideMenu"></a>RESideMenu</h3><h2 id="手势解锁"><a href="#手势解锁" class="headerlink" title="手势解锁"></a>手势解锁</h2><p><a href="https://github.com/iosdeveloperpanc/PCGestureUnlock" target="_blank" rel="external">https://github.com/iosdeveloperpanc/PCGestureUnlock</a><br><a href="https://github.com/kejinlu/KKGestureLockView" target="_blank" rel="external">https://github.com/kejinlu/KKGestureLockView</a></p>
+<h1 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h1><h2 id="FMDB"><a href="#FMDB" class="headerlink" title="FMDB"></a>FMDB</h2><ol>
+<li>什么是FMDB：<br>FMDB是iOS平台的SQLite数据库框架；<br>FMDB以OC的方式封装了SQLite的C语言API</li>
+<li>优点<ul>
+<li>使用起来更加面向对象，省去了很多麻烦、冗余的C语言代码</li>
+<li>对比苹果自带的Core Data框架，更加轻量级和灵活</li>
+<li>提供了多线程安全的数据库操作方法，有效地防止数据混乱</li>
+</ul>
+</li>
+<li>FMDB的github地址:  <a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">https://github.com/ccgus/fmdb</a></li>
+<li>核心类<br>FMDB有三个主要的类<br>（1）FMDatabase<br>一个FMDatabase对象就代表一个单独的SQLite数据库<br>用来执行SQL语句<br>（2）FMResultSet<br>使用FMDatabase执行查询后的结果集<br>（3）FMDatabaseQueue<br>用于在多线程中执行多个查询或更新，它是线程安全的</li>
+</ol>
+<h1 id="数据解析"><a href="#数据解析" class="headerlink" title="数据解析"></a>数据解析</h1><h2 id="JSONKit"><a href="#JSONKit" class="headerlink" title="JSONKit"></a>JSONKit</h2><ol>
+<li>JSONKit是用 Objective-C 实现的一个高性能的 JSON 解析和生成库。json正在逐步取代xml，成为网络数据的通用格式。</li>
+<li>讲解：<a href="http://www.cnblogs.com/jiangyuxuan/archive/2013/03/09/2950984.html" target="_blank" rel="external">http://www.cnblogs.com/jiangyuxuan/archive/2013/03/09/2950984.html</a></li>
+<li>下载地址：<a href="https://github.com/johnezang/JSONKit/" target="_blank" rel="external">https://github.com/johnezang/JSONKit/</a></li>
+</ol>
+<h2 id="MJExtension"><a href="#MJExtension" class="headerlink" title="MJExtension"></a>MJExtension</h2><ol>
+<li>MJExtension是JSON和Model(字典和模型)之间互相转换的超轻量级框架.</li>
+<li>MJExtension能完成的功能<br>字典（JSON） –&gt; 模型（Model）<br>模型（Model） –&gt; 字典（JSON）<br>字典数组（JSON Array） –&gt; 模型数组（Model Array）<br>模型数组（Model Array） –&gt; 字典数组（JSON Array）</li>
+<li>讲解：<a href="http://www.jianshu.com/p/93c242452b" target="_blank" rel="external">http://www.jianshu.com/p/93c242452b</a></li>
+<li>GitHub链接：<a href="https://github.com/CoderMJLee/MJExtension" target="_blank" rel="external">https://github.com/CoderMJLee/MJExtension</a></li>
+</ol>
+<h2 id="YYModel（最好用）"><a href="#YYModel（最好用）" class="headerlink" title="YYModel（最好用）"></a>YYModel（最好用）</h2><p>见博客内文章分析。</p>
+<h1 id="图片加载缓存"><a href="#图片加载缓存" class="headerlink" title="图片加载缓存"></a>图片加载缓存</h1><h2 id="SDWebImage"><a href="#SDWebImage" class="headerlink" title="SDWebImage"></a>SDWebImage</h2><p>SDWebImage用于异步下载网络上的图片，并支持对图片的缓存等。<br>多数情况下是使用UIImageView+WebCache为UIImageView异步加载图片：</p>
+<h1 id="更多请参考"><a href="#更多请参考" class="headerlink" title="更多请参考"></a>更多请参考</h1><p><a href="http://github.ibireme.com/github/list/ios/" target="_blank" rel="external">Github-iOS备忘</a><br><a href="https://github.com/Aufree/trip-to-iOS/blob/master/Top-100.md" target="_blank" rel="external">GitHub Top 100 简介</a><br><a href="https://github.com/Tim9Liu9/TimLiu-iOS" target="_blank" rel="external">github资料</a></p>
 
       
     </div>
@@ -319,13 +353,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/04/10/关于NSString的引用计数问题/">关于NSString的引用计数问题</a></p>
+        <p><span>本文标题:</span><a href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年04月10日 - 18时11分</p>
-        <p><span>最后更新:</span>2017年04月10日 - 20时29分</p>
+        <p><span>发布时间:</span>2016年03月05日 - 14时08分</p>
+        <p><span>最后更新:</span>2017年06月12日 - 18时19分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/04/10/关于NSString的引用计数问题/" title="关于NSString的引用计数问题">http://peilinghui.com/2016/04/10/关于NSString的引用计数问题/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/04/10/关于NSString的引用计数问题/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/03/05/iOS中的第三方框架/" title="iOS中的第三方库">http://peilinghui.com/2016/03/05/iOS中的第三方框架/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/03/05/iOS中的第三方框架/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -339,15 +373,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/04/14/iOS网络编程/">
-                    iOS网络编程
+                <a href="/2016/03/05/研究AFNetworking框架/">
+                    研究AFNetworking框架
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/04/03/effective objective-c 2.0读书笔记/">
-                    effective objective-c 2.0读书笔记
+                <a href="/2016/03/05/iOS中的数据存储/">
+                    iOS中的数据存储
                 </a>
             </div>
         
@@ -358,7 +392,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSString的retainCount的变化"><span class="toc-number">1.</span> <span class="toc-text">NSString的retainCount的变化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用NSString声明的字符串变量的retainCount变化由你初始化字符串时的方式决定"><span class="toc-number">1.1.</span> <span class="toc-text">用NSString声明的字符串变量的retainCount变化由你初始化字符串时的方式决定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NSCFConstantString（编译时）"><span class="toc-number">1.2.</span> <span class="toc-text">__NSCFConstantString（编译时）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NSCFString（运行时）"><span class="toc-number">1.3.</span> <span class="toc-text">__NSCFString（运行时）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NSTaggedPointerString"><span class="toc-number">1.4.</span> <span class="toc-text">__NSTaggedPointerString</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用NSMutableArray结合着NSMutableString来观察一下retainCount的变化。"><span class="toc-number">2.</span> <span class="toc-text">用NSMutableArray结合着NSMutableString来观察一下retainCount的变化。</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#页面布局"><span class="toc-number">1.</span> <span class="toc-text">页面布局</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Masonry-重点"><span class="toc-number">1.1.</span> <span class="toc-text">Masonry(重点)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-number">1.1.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#框架下载地址："><span class="toc-number">1.1.2.</span> <span class="toc-text">框架下载地址：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Masonry介绍与使用实践-快速上手Autolayout"><span class="toc-number">1.1.3.</span> <span class="toc-text">Masonry介绍与使用实践(快速上手Autolayout)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例讲解："><span class="toc-number">1.1.4.</span> <span class="toc-text">案例讲解：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用方法："><span class="toc-number">1.1.5.</span> <span class="toc-text">使用方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法："><span class="toc-number">1.1.6.</span> <span class="toc-text">常用方法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MJRefresh"><span class="toc-number">1.2.</span> <span class="toc-text">MJRefresh</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码地址"><span class="toc-number">1.2.2.</span> <span class="toc-text">代码地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SVPullToRefresh"><span class="toc-number">1.3.</span> <span class="toc-text">SVPullToRefresh</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码地址-1"><span class="toc-number">1.3.2.</span> <span class="toc-text">代码地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MBProgressHUD"><span class="toc-number">1.4.</span> <span class="toc-text">MBProgressHUD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#侧滑的菜单"><span class="toc-number">1.5.</span> <span class="toc-text">侧滑的菜单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RESideMenu"><span class="toc-number">1.5.1.</span> <span class="toc-text">RESideMenu</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#手势解锁"><span class="toc-number">1.6.</span> <span class="toc-text">手势解锁</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据存储"><span class="toc-number">2.</span> <span class="toc-text">数据存储</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#FMDB"><span class="toc-number">2.1.</span> <span class="toc-text">FMDB</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据解析"><span class="toc-number">3.</span> <span class="toc-text">数据解析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JSONKit"><span class="toc-number">3.1.</span> <span class="toc-text">JSONKit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MJExtension"><span class="toc-number">3.2.</span> <span class="toc-text">MJExtension</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#YYModel（最好用）"><span class="toc-number">3.3.</span> <span class="toc-text">YYModel（最好用）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#图片加载缓存"><span class="toc-number">4.</span> <span class="toc-text">图片加载缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SDWebImage"><span class="toc-number">4.1.</span> <span class="toc-text">SDWebImage</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更多请参考"><span class="toc-number">5.</span> <span class="toc-text">更多请参考</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -420,7 +454,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/04/10/关于NSString的引用计数问题/" data-title="关于NSString的引用计数问题" data-url="http://peilinghui.com/2016/04/10/关于NSString的引用计数问题/"></div>
+    <div class="ds-thread" data-thread-key="2016/03/05/iOS中的第三方框架/" data-title="iOS中的第三方库" data-url="http://peilinghui.com/2016/03/05/iOS中的第三方框架/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -444,7 +478,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/04/14/iOS网络编程/" title="上一篇: iOS网络编程">
+            <a href="/2016/03/05/研究AFNetworking框架/" title="上一篇: 研究AFNetworking框架">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -452,7 +486,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/04/03/effective objective-c 2.0读书笔记/" title="下一篇: effective objective-c 2.0读书笔记">
+            <a href="/2016/03/05/iOS中的数据存储/" title="下一篇: iOS中的数据存储">
                 <i class="fa fa-angle-right"></i>
             </a>
         
