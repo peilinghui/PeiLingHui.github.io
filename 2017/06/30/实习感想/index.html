@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS网络编程 | 向着阳光奔跑</title>
+  <title>实习感想 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iOS网络编程知识总结">
+  <meta name="description" content="这么久了才开始写一下实习的感想。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS网络编程">
-<meta property="og:url" content="http://peilinghui.com/2016/04/14/iOS网络编程/index.html">
+<meta property="og:title" content="实习感想">
+<meta property="og:url" content="http://peilinghui.com/2017/06/30/实习感想/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="iOS网络编程知识总结">
-<meta property="og:updated_time" content="2016-07-16T00:56:39.000Z">
+<meta property="og:description" content="这么久了才开始写一下实习的感想。">
+<meta property="og:updated_time" content="2017-06-29T07:09:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS网络编程">
-<meta name="twitter:description" content="iOS网络编程知识总结">
+<meta name="twitter:title" content="实习感想">
+<meta name="twitter:description" content="这么久了才开始写一下实习的感想。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -248,11 +248,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-iOS网络编程" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-实习感想" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/14/iOS网络编程/" class="article-date">
-      <time datetime="2016-04-14T14:07:11.000Z" itemprop="datePublished">2016-04-14</time>
+      <a href="/2017/06/30/实习感想/" class="article-date">
+      <time datetime="2017-06-30T06:33:52.000Z" itemprop="datePublished">2017-06-30</time>
 </a>
     </div>
   
@@ -265,7 +265,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS网络编程
+      实习感想
     </h1>
   
 
@@ -275,10 +275,6 @@
         
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-    </div>
-
         <div class="clearfix"></div>
       </div>
       
@@ -286,113 +282,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>iOS网络编程知识总结<br><a id="more"></a></p>
-<h1 id="iOS网络编程"><a href="#iOS网络编程" class="headerlink" title="iOS网络编程"></a>iOS网络编程</h1><h2 id="检测网络状态"><a href="#检测网络状态" class="headerlink" title="检测网络状态"></a>检测网络状态</h2><ol>
-<li>检查网络状态。<br>1&gt;下载和添加Reachablity类.<br>2&gt;为项目添加SystemConfiguration.framework框架。<br>若要手动禁用ARC源文件，输入框添加“-fno-objc-arc”.</li>
-</ol>
-<h2 id="使用CFNetwork实现TCP协议的通信"><a href="#使用CFNetwork实现TCP协议的通信" class="headerlink" title="使用CFNetwork实现TCP协议的通信"></a>使用CFNetwork实现TCP协议的通信</h2><p>CFNetwork对基于TCP协议的网络通信提供了良好的封装，CFNetwork使用CFSocket来代表两端的通信端口，还可以通过CFStream读/写数据。</p>
-<ol>
-<li><p>IP地址是32位整数，分为A，B,C,D,E五类。用于唯一标识网络上的一个通信实体<br>A类：10.0.0.0~10.255.255.255<br>B类：172.16.0.0~172.31.255.255<br>C类：192.168.0.0~192.168.255.255</p>
-</li>
-<li><p>端口是16为整数，表示数据交给哪个通信程序处理，是应用程序和外界交流的出入口，包括一些数据结构和I/O。<br>公认端口：从0到1023，紧紧绑定一些特定的服务。<br>注册端口：从1024到49151，松散的绑定一些服务，适用于应用程序。<br>动态和/私有端口：从49152到65535.</p>
-</li>
-<li><p>使用CFSocket实现TCP服务器端<br>步骤：<br>1&gt;创建一个监听Socket Accept的CFSocket,并为kCFSocketAcceptCallBack事件绑定回调函数。<br>2&gt;调用CFSocketSetAddress()函数，将服务器的CFSocket绑定到本地IP地址和端口。<br>3&gt;将CFSocket作为source添加到指定线程的CFRunLoop上，并运行该线程的CFRunLoop，从而保证该CFSocket能持续不断的接受来自客户端的连接。</p>
-</li>
-<li><p>使用CFSocket实现TCP客户端<br>步骤：<br>1&gt;创建一个不监听任何事件或监听Connection的CFSocket。如果要监听Connection，则需要为kCFSocketConnectCallBack事件绑定回调函数。<br>2&gt;调用CFSocketConnectionToAddress()函数，将客户端的CFSocket；连接到指定IP地址和端口的服务器上。<br>3&gt;得到客户端CFSocket之后，既可直接使用CFSocketNativeHandle进行读/写，也可通过CFSocket获取CFReadStreamRef、CFWriteStreamRef后进行读、写。</p>
-</li>
-<li><p>使用CocoaAsyncSocket实现TCP客户端<br>降低直接使用CFSocket编程的复杂度，另外有开发者提供了一套开源的CocoaAsyncSocket库。<br>CocoaAsyncSocket封装了CFNetwork底层的CFSocket和CFStream，并提供了异步操作，支持TCP和UDP。<br>特性：</p>
-<ul>
-<li>非阻塞方式的读和写，而且可设置超时时长。</li>
-<li>自动的socket接受，如果调用它接受连接，它将为每个连接启动新的实例，当然也可以立即关闭这些连接。</li>
-<li>委托支持，错误、连接、接收、完整的读取、完整的写入、进度以及断开连接，都可通过代理模式调用。</li>
-<li>所有操作都封装在一个类中，开发者无需操作socket或流，该类封装了所有操作。</li>
-</ul>
-</li>
-</ol>
-<h2 id="使用NSURLConnection"><a href="#使用NSURLConnection" class="headerlink" title="使用NSURLConnection"></a>使用NSURLConnection</h2><ol>
-<li>使用NSURLConnection从网络获取数据<br>方法:<br><code>- (NSURLRequest *)originalRequest://获取该NSURLConnection最初的NSURLRequest对象的深拷贝</code><br><code>- (NSURLRequest *)currentRequest://返回该该NSURLConnection当前使用的NSURLRequest对象。</code></li>
-</ol>
-<p>1&gt;同步请求获取网络数据：<br><code>+ sendSynchronousRequest:returningResponse:error:</code></p>
-<p>2&gt;异步请求获取网络数据：<br>总指定一个NSURLConnectionDelegate对象，将该对象作为NSURLConnection的delegate，负责服务器响应到来的各种事件。<br><code>+ connectionWithRequest:delegate://异步请求的方式获取数据</code><br><code>- initWithRequest:delegate//实例方法，必须先调用alloc,再调用该方法。</code><br><code>+ sendAsynchronousRequest:queue:CompletionHandler://表明将请求交给指定的NSOperationQueue处理</code><br><code>- start://开始发送请求</code></p>
-<ol>
-<li><p>使用使用NSURLConnection从网络获取数据的步骤：<br>1&gt;创建NSURLRequest对象，该对象代表对远程服务器的请求。包括：请求的URL，缓存策略，超时时长等。<br>2&gt;调用NSURLConnection的实例方法或类方法，以NSURLRequest对象为参数创建NSURLConnection即可发送请求。<br>3&gt;以异步方式加载服务器响应，则需要为NSURLConnection对象指定delegate对象，因此还需要为delegate对象实现特定的方法。</p>
-</li>
-<li><p>使用NSMutableURLRequest向服务器发送请求<br>NSURLRequest只能想服务器发送简单的请求，不能添加请求头和请求参数，使用NSMutableURLRequest可以。<br><code>-addValue:forHTTPHeaderField:为使用NSMutableURLRequest添加请求头。</code><br><code>-setAllHTTPHeaderField:通过一个NSDictionary一次性为NSMutableURLRequest设置多个请求头。</code><br><code>-setHTTPBody:设置NSMutableURLRequest的请求参数</code><br><code>-setHTTPBodyStream:以NSInputStream为参数设置NSMutableURLRequest的请求参数</code><br><code>-setHTTPMethod:设置提交请求方式，要么是POST，要么是GET。</code><br><code>-setHTTPShouldHandleCookies:设置该HTTP请求是否处理Cookie。</code><br><code>-setValue：forHTTPHeaderField：为指定的请求头设置请求值。</code></p>
-</li>
-</ol>
-<h2 id="XML解析"><a href="#XML解析" class="headerlink" title="XML解析"></a>XML解析</h2><ol>
-<li>DOM与SAX<br>DOM：Document Object Model。文档对象模型、<br>SAX：Simple API for XML。<br>iOS SDK提供了NSXMLParser和libxml2两个类库，还有第三方库GDataXML，TBXML，TouchXML，KissXML等。<br>需要读取和修改XML文档，使用GDataXML，KissXML。<br>需要读取非常大的XML文档，使用libxml2或TBXML。</li>
-<li>NSXMLParser解析XML文档<br>步骤：<ul>
-<li>创建NSXMLParser对象。</li>
-<li>为NSXMLParser对象指定delegate对象，该delegate对象必须实现NSXMLParserDelegate协议，并根据需要实现协议中特定的方法。</li>
-<li>调用NSXMLParser对象的parse方法开始解析。</li>
-</ul>
-</li>
-<li>libxml2解析XML文档<br>使用C语言的库，准备步骤：<ul>
-<li>为项目添加libxml2.dylib库</li>
-<li>添加头文件的搜索路径<br>步骤：    </li>
-<li>创建XMLTextReaderPtr对象.如果以本地XML文档来创建XMLTextReaderPtr对象，则调用XMLTextReaderFilename()函数即可。如果以内存中XML文档来创建该对象，则调用XMLReaderForMemeory（）函数即可。</li>
-<li>依次调用XMLTextReaderxxx()函数来读取XML文档的元素名，元素值，属性等各种内容。</li>
-</ul>
-</li>
-<li>GDataXML解析XML文档<br>第三方开源库，对libxml2的宝座，底层依赖libxml2，既支持解析XML文档 ，也支持修改XML文档，支持XPath方式查询，提供了更好的面向对象的封装。<br>准备步骤：</li>
-</ol>
-<p>步骤：</p>
-<pre><code>- 调用GDataXMLDocument的初始化方法根据XML文档或XML字符初始化GDataXMLDocument对象。（GDataXMLDocument对象就是XML文档转换得到的DOM树）
-- 调用GDataXMLDocument对象的rootElement方法即可获取该文档的根元素
-- 获取根元素后，就可以根据XML元素之间的父子关系来逐层遍历，访问该XML文档中的每一个元素，从而获取XML元素的内容。
-</code></pre><ol>
-<li>GDataXML生成XML文档  <ul>
-<li>调用GDataXMLNode的elementWithName：方法创建 GDataXMLelement对象，并以该对象作为XML文档的根元素。</li>
-<li>调用GDataXMLNode的elementWithName：方法不断创建 GDataXMLelement对象（XML元素），并利用元素之间的父子关系组织这些XML元素。</li>
-<li>调用GDataXMLDocument对象的XMLData方法获取XML文档对应的NSData对象，调用NSData的输出方法将XML文档输出到指定文件或其他存储介质。</li>
-</ul>
-</li>
-<li>GDataXML修改XML文档  <ul>
-<li>调用GDataXMLDocument方法根据指定的XML文档或者XML字符串来生成对应的GDataXMLDocument对象–它代表了XML文档在内存中的形式。</li>
-<li>获取GDataXMLDocument对象的根元素，然后利用元素之间父子关系添加子元素、删除子元素或修改元素的内容。</li>
-<li>调用GDataXMLDocument对象的XMLdata的方法获取XML文档对应的NSData 对象，调用NSdata的输出方法将XML文档输出到指定文件或其他存储介质。</li>
-<li>调用GDataXMLDocument对象的XMLdata的方法获取XML文档对的NSData对象，调用NSData的输出方法将XML文档输出到指定文件或其他存储介质</li>
-</ul>
-</li>
-</ol>
-<h2 id="JSON解析"><a href="#JSON解析" class="headerlink" title="JSON解析"></a>JSON解析</h2><p>JSON具有跨平台，跨语言的优势。两种数据结构：</p>
-<pre><code>- 由key-value对组成的数据结构。
-- 有序集合  
-</code></pre><ol>
-<li>使用JSON语法创建对象<br>直接创建一个JavaScript对象，</li>
-<li>使用JSON语法创建数组<br><code>var a = [&#39;yeeku&#39;,&#39;nono&#39;];</code></li>
-<li>使用NSJSONSerialization处理JSON数据 (系统自带)<br>满足条件：<br>顶级对象只能是NSArray或NSDictionary。<br>集合中包含对象只能是NSString，NSNumber，NSArray，NSDictionary或NSNull对象。<br>所有NSDictionary的key只能是NSString。<br>NSNumber保证的数值不是NaN或Infinity。  </li>
-<li>使用SBJson解析JSON数据<br>提供了两个工具类：SBJsonParser和SBJsonWriter.<br>SBJsonParser负责吧NSData或NSString形式的JSON数据转换为objective-c对象。<br>SBJSonWriter负责把objective-c对象转换为NSData或NSString形式的JSON数据。</li>
-<li>第三方类库解析JSON， 使用JSONKit解析JSON数据<br>地址：<a href="https://github.com/johnezang/JSONKit" target="_blank" rel="external">https://github.com/johnezang/JSONKit</a><br>JSONKit速度快，JsonKit1.4不支持ARC，需要在支持ARC的项目中设置‘fno-objc-arc’选项来禁用ARC。<br>JSONKit采用分类方式为已有的类增加了新方法。用于将JSON数据恢复为objective-c对象。<br>研究一下第三方框架就可以发现:<br>JSONKit用分类为NSString和NSDate增加了如下方法，<br>把JSON数据转换为OC对象：</li>
-</ol>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)objectFromJSO<span class="built_in">NString</span>;</span><br><span class="line">- (<span class="keyword">id</span>)objectFromJSO<span class="built_in">NStringWithParseOptions</span>:(JKParseOptionFlags)parseOptionFlags;</span><br><span class="line">- (<span class="keyword">id</span>)objectFromJSO<span class="built_in">NStringWithParseOptions</span>:(JKParseOptionFlags)parseOptionFlags error:(<span class="built_in">NSError</span> **)error;</span><br><span class="line">- (<span class="keyword">id</span>)mutableObjectFromJSO<span class="built_in">NString</span>;</span><br><span class="line">- (<span class="keyword">id</span>)mutableObjectFromJSO<span class="built_in">NStringWithParseOptions</span>:(JKParseOptionFlags)parseOptionFlags;</span><br><span class="line">- (<span class="keyword">id</span>)mutableObjectFromJSO<span class="built_in">NStringWithParseOptions</span>:(JKParseOptionFlags)parseOptionFlags error:(<span class="built_in">NSError</span> **)error;</span><br></pre></td></tr></table></figure>
-<p>JSONKit用分类为NSString、NSStringArray和NSDictionary增加了如下方法：将OC对象装潢为NSString和NSData形式的JSON数据。<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> (<span class="constant">NSData</span> *)<span class="constant">JSONData</span>;</span><br><span class="line"></span>-<span class="ruby"> (<span class="constant">NSString</span> *)<span class="constant">JSONString</span>;</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="使用AFNetworking实现网络通信"><a href="#使用AFNetworking实现网络通信" class="headerlink" title="使用AFNetworking实现网络通信"></a>使用AFNetworking实现网络通信</h2><p>只是需要向web某个站点的某个简单页面提交请求并获取服务器响应，则使用NSURLConnection来完成。为了更好的处理web站点请求，包括处理Session,Cookie，可以用AFNetworking，用于发送HTTP请求，接受HTTP响应。但不会缓存服务器响应，不能执行HTML页面中嵌入的JavaScript代码，也不会对页面内容进行任何解析处理。AFNetworking还支持JSON、Plist属性文件和XML解析。</p>
-<ol>
-<li><p>提交GET请求与提交POST请求<br>步骤：</p>
-<ul>
-<li>创建AFHTTRequestOperationManager对象。</li>
-<li>根据服务器响应内容不同，为HTTORequestOperationManager对象指定不同的解析器。（JSON或Plist数据）</li>
-<li>如果需要发送GET请求，调用AFHTTRequestOperationManager对象的GET：parameters:success：failure：方法即可 。</li>
-<li>如果要发送POST请求，调用AFHTTRequestOperationManager对象的POST：parameters:success：failure：方法即可 。</li>
-<li>在success：参数指定的代码块中处理服务器响应成功的正确数据。</li>
-</ul>
-</li>
-<li><p>处理JSON和Plist响应<br>可以直接将JSON和Plist转化为NSArray或NSDictionary对象。  AFHTTORequestOperationManager默认可以处理JSON或Plist对象。</p>
-</li>
-<li><p>处理XML响应<br>为AFHTTORequestOperationManager显示使用<br>AF X MLParserResponseSerializer响应解析器，当使用AF X MLParserResponseSerializer解析器时，服务器返回的数据是一个NSXMLParser对象。</p>
-</li>
-<li><p>上传文件<br>AFHTTRequestOperationManager对象的POST：    parameters:constructingBodyWithBlock:success：failure：方法提交POST请求即可，多了三个参数，一个是带AFMultipartFormData形参的代码块。</p>
-</li>
-</ol>
-<h2 id="使用ASIHTTPRequest框架实现网络编程"><a href="#使用ASIHTTPRequest框架实现网络编程" class="headerlink" title="使用ASIHTTPRequest框架实现网络编程"></a>使用ASIHTTPRequest框架实现网络编程</h2><ol>
-<li>发送同步或异步的GET请求<br>准备步骤：<br>目前不支持ARC，应该需要在支持ARC的项目中设置‘fno-objc-arc’选项来禁用ARC。<br>步骤：</li>
-</ol>
-<ol>
-<li>使用代码块<br>ASIHTTPRequest发送异步请求，即可使用delegate为ASIHTTPRequest设置回调处理代码，也可用代码块来设置回调处理代码。<br><code>-setCompletionBlock:设置发送请求、获取服务器响应完成时激发的代码块。</code><br>`-setFailedBlock:获取发送请求失败时激发的代码块。</li>
-</ol>
-
+        <p>这么久了才开始写一下实习的感想。</p>
+<a id="more"></a>
+<p>实习了差不多也快要一年了。在上家公司工作了9个月，在现在公司工作了两个月。</p>
+<h1 id="上家公司"><a href="#上家公司" class="headerlink" title="上家公司"></a>上家公司</h1><h2 id="所做工作"><a href="#所做工作" class="headerlink" title="所做工作"></a>所做工作</h2><h2 id="所在的团队"><a href="#所在的团队" class="headerlink" title="所在的团队"></a>所在的团队</h2><h2 id="佩服的人"><a href="#佩服的人" class="headerlink" title="佩服的人"></a>佩服的人</h2><h1 id="现在公司"><a href="#现在公司" class="headerlink" title="现在公司"></a>现在公司</h1><h2 id="所做的工作"><a href="#所做的工作" class="headerlink" title="所做的工作"></a>所做的工作</h2><h2 id="所相处的人"><a href="#所相处的人" class="headerlink" title="所相处的人"></a>所相处的人</h2><p>去了大概就是看代码看了差不多三个星期，然后开始开发第一个需求，我们组的架构师差不多也是刚去，然后就开始进行项目的重构，以前那个项目就是差不多打开，直接跑就行了，里面还有很多的xib的文件。于是我就开始了第一个需求的实现，那个时候刚刚学会用storyboard。还是什么都不会的状态，基本就是参考其他界面的代码开发出来的。但是，在多人开发的时候，和从以后的项目的开发角度来看，这种xib的模式很不适合后期的需求的扩展和开发。那个代码特别乱，感觉项目也挺大，业务也有点复杂，</p>
+<h2 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h2><h1 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h1><h1 id="如何总结提高"><a href="#如何总结提高" class="headerlink" title="如何总结提高"></a>如何总结提高</h1><h1 id="想做的东西"><a href="#想做的东西" class="headerlink" title="想做的东西"></a>想做的东西</h1>
       
     </div>
     
@@ -400,13 +294,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/04/14/iOS网络编程/">iOS网络编程</a></p>
+        <p><span>本文标题:</span><a href="/2017/06/30/实习感想/">实习感想</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年04月14日 - 22时07分</p>
-        <p><span>最后更新:</span>2016年07月16日 - 08时56分</p>
+        <p><span>发布时间:</span>2017年06月30日 - 14时33分</p>
+        <p><span>最后更新:</span>2017年06月29日 - 15时09分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/04/14/iOS网络编程/" title="iOS网络编程">http://peilinghui.com/2016/04/14/iOS网络编程/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/04/14/iOS网络编程/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/06/30/实习感想/" title="实习感想">http://peilinghui.com/2017/06/30/实习感想/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/06/30/实习感想/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -420,15 +314,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/05/14/iOS调试技巧/">
-                    iOS调试技巧
+                <a href="/2017/06/30/iOS中的图表Charts/">
+                    iOS中的图表Charts
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/04/10/关于NSString的引用计数问题/">
-                    关于NSString的引用计数问题
+                <a href="/2017/06/26/移动应用的设计模式/">
+                    移动应用的设计模式
                 </a>
             </div>
         
@@ -439,7 +333,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS网络编程"><span class="toc-number">1.</span> <span class="toc-text">iOS网络编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#检测网络状态"><span class="toc-number">1.1.</span> <span class="toc-text">检测网络状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用CFNetwork实现TCP协议的通信"><span class="toc-number">1.2.</span> <span class="toc-text">使用CFNetwork实现TCP协议的通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用NSURLConnection"><span class="toc-number">1.3.</span> <span class="toc-text">使用NSURLConnection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XML解析"><span class="toc-number">1.4.</span> <span class="toc-text">XML解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON解析"><span class="toc-number">1.5.</span> <span class="toc-text">JSON解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用AFNetworking实现网络通信"><span class="toc-number">1.6.</span> <span class="toc-text">使用AFNetworking实现网络通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用ASIHTTPRequest框架实现网络编程"><span class="toc-number">1.7.</span> <span class="toc-text">使用ASIHTTPRequest框架实现网络编程</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#上家公司"><span class="toc-number">1.</span> <span class="toc-text">上家公司</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#所做工作"><span class="toc-number">1.1.</span> <span class="toc-text">所做工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#所在的团队"><span class="toc-number">1.2.</span> <span class="toc-text">所在的团队</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#佩服的人"><span class="toc-number">1.3.</span> <span class="toc-text">佩服的人</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#现在公司"><span class="toc-number">2.</span> <span class="toc-text">现在公司</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#所做的工作"><span class="toc-number">2.1.</span> <span class="toc-text">所做的工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#所相处的人"><span class="toc-number">2.2.</span> <span class="toc-text">所相处的人</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相同点"><span class="toc-number">2.3.</span> <span class="toc-text">相同点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#不同点"><span class="toc-number">3.</span> <span class="toc-text">不同点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何总结提高"><span class="toc-number">4.</span> <span class="toc-text">如何总结提高</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#想做的东西"><span class="toc-number">5.</span> <span class="toc-text">想做的东西</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -501,7 +395,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/04/14/iOS网络编程/" data-title="iOS网络编程" data-url="http://peilinghui.com/2016/04/14/iOS网络编程/"></div>
+    <div class="ds-thread" data-thread-key="2017/06/30/实习感想/" data-title="实习感想" data-url="http://peilinghui.com/2017/06/30/实习感想/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -525,7 +419,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/05/14/iOS调试技巧/" title="上一篇: iOS调试技巧">
+            <a href="/2017/06/30/iOS中的图表Charts/" title="上一篇: iOS中的图表Charts">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -533,7 +427,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/04/10/关于NSString的引用计数问题/" title="下一篇: 关于NSString的引用计数问题">
+            <a href="/2017/06/26/移动应用的设计模式/" title="下一篇: 移动应用的设计模式">
                 <i class="fa fa-angle-right"></i>
             </a>
         
