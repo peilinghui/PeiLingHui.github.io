@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://peilinghui.com/2017/05/27/做一个搜索框的Demo/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="打开手机，就会发现我们用的最多的就是TableView和搜索框了。">
-<meta property="og:updated_time" content="2017-06-15T03:43:37.000Z">
+<meta property="og:updated_time" content="2017-07-03T23:49:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="做一个搜索框的Demo">
 <meta name="twitter:description" content="打开手机，就会发现我们用的最多的就是TableView和搜索框了。">
@@ -314,6 +314,8 @@
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event方法，然后执行view的- (<span class="built_in">BOOL</span>)endEditing:(<span class="built_in">BOOL</span>)force;方法。</span><br><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event&#123;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> endEditing:<span class="literal">YES</span>]; <span class="comment">//实现该方法是需要注意view需要是继承UIControl而来的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在背景view上面加手势，添加UIButton或者view，然后在对应的点击事件的监听方法中实现resignFirstResponder或者endEditing。</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UITapGestureRecognizer</span> *tapGestureRecognizer = [[<span class="built_in">UITapGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(keyboardHide:)];  </span><br><span class="line"><span class="comment">//设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。  </span></span><br><span class="line">tapGestureRecognizer<span class="variable">.cancelsTouchesInView</span> = <span class="literal">NO</span>;  </span><br><span class="line"><span class="comment">//将触摸事件添加到view上</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:tapGestureRecognizer];</span><br><span class="line">-(<span class="keyword">void</span>)keyboardHide:(<span class="built_in">UITapGestureRecognizer</span>*)tap&#123;  </span><br><span class="line">    [textFiled resignFirstResponder];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Demo地址：<a href="https://github.com/peilinghui/BokeDemo/tree/master/%E7%A4%BA%E4%BE%8B%E6%90%9C%E7%B4%A2%E6%A1%86%E7%9A%84Table" target="_blank" rel="external">https://github.com/peilinghui/BokeDemo/tree/master/%E7%A4%BA%E4%BE%8B%E6%90%9C%E7%B4%A2%E6%A1%86%E7%9A%84Table</a></p>
+
       
     </div>
     
@@ -324,7 +326,7 @@
         <p><span>本文标题:</span><a href="/2017/05/27/做一个搜索框的Demo/">做一个搜索框的Demo</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2017年05月27日 - 23时11分</p>
-        <p><span>最后更新:</span>2017年06月15日 - 11时43分</p>
+        <p><span>最后更新:</span>2017年07月04日 - 07时49分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/05/27/做一个搜索框的Demo/" title="做一个搜索框的Demo">http://peilinghui.com/2017/05/27/做一个搜索框的Demo/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/05/27/做一个搜索框的Demo/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
