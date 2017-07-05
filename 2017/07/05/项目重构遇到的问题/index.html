@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>移动应用的设计模式 | 向着阳光奔跑</title>
+  <title>项目重构遇到的问题 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在我们平时使用APP的时候，尤其是现在那些主流的APP，它们的设计模式。是如何迎合用户的需求和喜好。如果你自己做的一款产品你自己都不喜欢的话，如何让更多的用户去使用这个APP呢？">
+  <meta name="description" content="在项目重构的时候难免会遇到问题。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="移动应用的设计模式">
-<meta property="og:url" content="http://peilinghui.com/2017/06/26/移动应用的设计模式/index.html">
+<meta property="og:title" content="项目重构遇到的问题">
+<meta property="og:url" content="http://peilinghui.com/2017/07/05/项目重构遇到的问题/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="在我们平时使用APP的时候，尤其是现在那些主流的APP，它们的设计模式。是如何迎合用户的需求和喜好。如果你自己做的一款产品你自己都不喜欢的话，如何让更多的用户去使用这个APP呢？">
-<meta property="og:updated_time" content="2017-06-27T10:48:13.000Z">
+<meta property="og:description" content="在项目重构的时候难免会遇到问题。">
+<meta property="og:updated_time" content="2017-07-05T10:28:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="移动应用的设计模式">
-<meta name="twitter:description" content="在我们平时使用APP的时候，尤其是现在那些主流的APP，它们的设计模式。是如何迎合用户的需求和喜好。如果你自己做的一款产品你自己都不喜欢的话，如何让更多的用户去使用这个APP呢？">
+<meta name="twitter:title" content="项目重构遇到的问题">
+<meta name="twitter:description" content="在项目重构的时候难免会遇到问题。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -248,11 +248,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-移动应用的设计模式" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-项目重构遇到的问题" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/06/26/移动应用的设计模式/" class="article-date">
-      <time datetime="2017-06-26T10:55:14.000Z" itemprop="datePublished">2017-06-26</time>
+      <a href="/2017/07/05/项目重构遇到的问题/" class="article-date">
+      <time datetime="2017-07-05T07:12:10.000Z" itemprop="datePublished">2017-07-05</time>
 </a>
     </div>
   
@@ -265,7 +265,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      移动应用的设计模式
+      项目重构遇到的问题
     </h1>
   
 
@@ -282,20 +282,47 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在我们平时使用APP的时候，尤其是现在那些主流的APP，它们的设计模式。是如何迎合用户的需求和喜好。如果你自己做的一款产品你自己都不喜欢的话，如何让更多的用户去使用这个APP呢？</p>
+        <p>在项目重构的时候难免会遇到问题。</p>
 <a id="more"></a>
-<p>对于iPhone手机的系统的不断的更新，也是在不断的融合用户的喜好。从指纹解锁，唤起APP的模式。还有通知栏的设计，控制中心的设计，各个应用的排列和图标的显示，只有在意了每个细节才能造就一个更加完美的产品。<br>而对于一个开发人员来讲，不仅要关注现在市场的技术的革新，更重要的是不断的研究其他的主流的产品和主流产品的设计。不然你连自己都不知道自己的产品设计已经out了。</p>
-<h1 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h1><p>导航有主导航和次级导航。<br>对于iOS用户来讲，一个APP可能更偏好于使用左右滑动的模式。因为上下滑动的模式很容易和系统的控制中心、通知的手势冲突。</p>
-<h2 id="主导航"><a href="#主导航" class="headerlink" title="主导航"></a>主导航</h2><p>没错，在前几年比较流行的就是那种侧边抽屉的主导航，就是“突破画布”的思维来打破虚拟的边界，让这个屏幕尺寸有限的手机可以呈现更多的内容。<br>但是，facebook在千万级用户批量测试中，选项卡式完胜侧边抽屉式和其他类型的导航模式。这也是为什么现在打开很多主流的APP。你会发现很多的APP都使用的是选项式的导航，就是下面的tab的切换，最多只有5个tab。  </p>
-<p>微信：下面有4个tab。微信、通讯录、发现和我。使用用户偏好的左右滑动的手势来实现了聊天记录的标记与删除。而在上部使用简洁的搜索和一个＋的点击，来发起群聊，添加朋友，扫一扫和收付款，这就说明了在顶部的导航，应该放一些比较显目，提醒用户或是做一些常用的功能的入口。</p>
-<p>微博：下面有5个tab。微博、消息、弹框、发现和我。而微博的新版也为了迎合用户喜好的左右滑动，把常用的热门的功能放在外面（原来是在发现里面的）和全部微博平行的左右滑动的入口。左边还是照相机，推出了微博的新功能，微博故事–可以用来拍摄照片和视频，类似朋友圈的小视频，时间大于10秒，而且可以用户个性化的编辑，添加表情、文字、图片，而且类似直播的画面设计，粉丝可以关注然后评论。很赞！<br>右边是扫一扫和打车的入口。顶部是简洁的搜索。  </p>
-<p>京东：下面是5个tab，首页，分类，觅Me，购物车和我的。上面是搜索框。左边是扫一扫，右边是消息。<br>实话说，我比较喜欢京东的设计，尤其是分类tab中的两级的菜单的显示。左边是菜单的项，联动的是菜单下面的collectionView的显示。很容易找到自己所喜欢的类别。然后是觅Me的tab，上面是ScrollView的滑动，很符合用户的左右滑动的习惯，而且一点也不卡的显示了视频精选、直播、关注、清单、问答、视频够、社区、生活、亲子、风尚、美食，滑动特别的流畅，对于视频的缓存，图片和文字的排版，图片的缓存还有下拉图标的动画是一个快递员。真的很好的设计呐~</p>
-<p>淘宝：下面也是5个tab，首页、微淘、问大家、购物车和我的淘宝。上面也同样是扫一扫和搜索框，还有消息。我一直觉得淘宝的拍照购物很神奇，不过现在好像很多电商：比如京东，都实现了这种是一种类似算法匹配的搜索吧。虽然有的时候也不是很准啦。第一个tab还实现了点击一个图标的跳动，显示成了火箭🚀的标识。直接跳转到了猜你喜欢的一系列（这个应该是现在最流行的机器学习大数据来统计用户的喜好）来推荐你的习惯和购物习惯来定制的为你推荐产品，促进你的购物消费。</p>
-<p>支付宝：</p>
-<p>网易云音乐：</p>
-<p>简书：</p>
-<p>手机QQ：手机QQ及更不用说了，都好多年沉淀的技术了，好多的功能的隐藏。都没有注意到过，主要现在跟多的在玩微博，很少玩QQ了，QQ里面有个日迹的入口和微博故事很像。但是入口就没有微博辣么明显了。</p>
-<p>对于这种主流的导航可以写一些个Demo了。</p>
+<p>加入了新公司，也是接手了一个14年的项目，项目大概6万行代码。然后准备做一些业务并且重构，做了一个需求以后开始重构，然后发现每走一步都是坑啊。上家公司也是14年的代码，那个时候是我们那个老大架构师也是刚去的带我们重构(顺便说一句上家公司代码大概20万行)现在自己准备着手的时候感觉我上一个老大真的好厉害额。5年工作经验额。我等菜鸟还要慢慢踩坑，慢慢修炼呐~</p>
+<p>不得不说，这两个旧的项目有很多共同点呐，可能那个时候流行那么写，不过从上家公司走的时候那个代码都已经重构的很不错了额。关键是上家公司做iOS的人就接近10个了。实话说，我都觉得自己的用处不大了。然后现在就我和我老大两个做iOS的了。不管怎么说，加油💪把！努力提高自己才是关键。</p>
+<p>旧项目的问题：</p>
+<ol>
+<li>使用老式框架 ASI，并且没有做任何封装和抽取； </li>
+<li>字典转模型用的是Jastor.</li>
+<li>没有使用 Cocoa Pods，所有框架都是拖进去的。</li>
+<li>所有的网络请求只用了两个方法，一个同步一个异步。</li>
+<li>所有的VC都是用的代码写的，布局用的frame，这点还好一点，上家公司一大片storyboard，新加需求能把人逼疯的那种。</li>
+<li>一个VC的数据模型在一个类中。</li>
+<li>代码不规范，没有用固定的前缀，Deployment Target设置为6.0.当你把target设置为8.0的时候，警告暴增，很多的方法以及过期了。</li>
+<li>目录结构：项目中目录结构还算清晰，文件中的目录都没有，一大片.h和.m文件。</li>
+</ol>
+<p>有了上家公司的经验，我有个初步的计划和构想：</p>
+<ol>
+<li>把第三方的库可以把一些替换成Pod管理。</li>
+<li>对于网络层以前用的ASI，如果有新的需求就要用AFN，然后对于AFN进行一些封装，写的网络请求的方法要有successBlock和failureBlock。对于数据转模型用yymodel。</li>
+<li>可以写if debug运行环境的配置代码，来切换测试，预发和正式环境。或者我发现用SwitchHost直接切换环境开发的人比较方便，对于测试的人，就得用Charles或者是fiddler的抓包工具设置代理连到自己的电脑来切换到不同的环境测试。</li>
+<li>打包现在是用Xcode的手工打包可以引入Jenkins来实现自动化打包的模式。这就需要搭建Jenkins服务器和配置到gitlab上面。</li>
+<li>Jenkins也可以结合OCLint实现代码的review。</li>
+<li>使用 fir 和 fastlane 实现 iOS 持续集成。实现iOS应用发布流程的自动化</li>
+<li>对于推送可以使用极光推送还有一些统计崩溃率的第三方工具，还有设置埋点来统计APP的功能。</li>
+<li>对于一些登录还有一些公共组件可以抽取成私有的Pod，然后打tag，以便可以共用。</li>
+<li>对于业务方面就是要把数据和业务分离，对于重复出现的tableview可以写基类，然后再进行扩展。</li>
+<li>对于页面的布局要用masonary框架。</li>
+<li>对于一些第三方的框架和组件旧的逐步替换成新的第三方(一直有人维护和更新)的框架。</li>
+<li>当然最最重要的就是把代码进行完善，然后实现业务需求的继续扩张。</li>
+</ol>
+<p>当然，上面都是我暂时的目标和想法，还有待去实践和一步步的改造。需要足够的耐心和坚持。</p>
+<p>在这期间遇到的一些问题：</p>
+<h1 id="错误1：clang-error-Linker-command-failed-with-exit-code-1"><a href="#错误1：clang-error-Linker-command-failed-with-exit-code-1" class="headerlink" title="错误1：clang error: Linker command failed with exit code 1"></a>错误1：clang error: Linker command failed with exit code 1</h1><h2 id="解决方法：-m文件被重复编译"><a href="#解决方法：-m文件被重复编译" class="headerlink" title="解决方法：.m文件被重复编译"></a>解决方法：.m文件被重复编译</h2><p>好好检查代码，看是不是在.m文件中的引入写成了引入.m文件。<br>看看是不是有新添加的文件跟之前文件同名<br>2，错误信息中出现了某个类的名字，去原文件中看看#import了哪些第三方库，把这些库挨个注释排除，找到出错的那个库，然后按照官方提供的步骤重新添加一遍。</p>
+<h2 id="解决方法：使用Pod管理的时候"><a href="#解决方法：使用Pod管理的时候" class="headerlink" title="解决方法：使用Pod管理的时候"></a>解决方法：使用Pod管理的时候</h2><p>在把引入的第三方库改为Cocoapods管理的时候，遇到Linker command failed。<br>链接文件没有找到CocoaPods中的文件，</p>
+<h3 id="解决方法1："><a href="#解决方法1：" class="headerlink" title="解决方法1："></a>解决方法1：</h3><p>找到 Build settings-&gt;Linking-&gt;Other Linker Flags<br>将此属性修改成-all_load 或者 -ObjC ，这个视情况而定。总之可以多试几次。</p>
+<h3 id="解决方法2："><a href="#解决方法2：" class="headerlink" title="解决方法2："></a>解决方法2：</h3><ol>
+<li>Go to project path and remove Pods folder and Podfile.lock file.</li>
+<li>Reinstall pods again using “pod install” command.</li>
+<li>Open xcworkspace and clean it before running.</li>
+</ol>
+<h3 id="解决方法3："><a href="#解决方法3：" class="headerlink" title="解决方法3："></a>解决方法3：</h3><p>如果添加的是第三方静态库（.a文件）<br>这种情况就可能是这个静态库路径混乱导致的链接错误。解决方法：Build settings-&gt;Search Path-&gt;Library Search Paths 添加静态库的相应路径。</p>
 
       
     </div>
@@ -304,13 +331,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></p>
+        <p><span>本文标题:</span><a href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2017年06月26日 - 18时55分</p>
-        <p><span>最后更新:</span>2017年06月27日 - 18时48分</p>
+        <p><span>发布时间:</span>2017年07月05日 - 15时12分</p>
+        <p><span>最后更新:</span>2017年07月05日 - 18时28分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/06/26/移动应用的设计模式/" title="移动应用的设计模式">http://peilinghui.com/2017/06/26/移动应用的设计模式/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/06/26/移动应用的设计模式/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/07/05/项目重构遇到的问题/" title="项目重构遇到的问题">http://peilinghui.com/2017/07/05/项目重构遇到的问题/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/07/05/项目重构遇到的问题/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -323,16 +350,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/06/30/iOS中的图表Charts/">
-                    iOS中的图表Charts
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/06/14/Jenkins搭建来实现自动化打包/">
-                    Jenkins搭建来实现自动化打包
+                <a href="/2017/06/30/iOS中的图表Charts/">
+                    iOS中的图表Charts
                 </a>
             </div>
         
@@ -343,7 +364,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#导航"><span class="toc-number">1.</span> <span class="toc-text">导航</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#主导航"><span class="toc-number">1.1.</span> <span class="toc-text">主导航</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#错误1：clang-error-Linker-command-failed-with-exit-code-1"><span class="toc-number">1.</span> <span class="toc-text">错误1：clang error: Linker command failed with exit code 1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方法：-m文件被重复编译"><span class="toc-number">1.1.</span> <span class="toc-text">解决方法：.m文件被重复编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方法：使用Pod管理的时候"><span class="toc-number">1.2.</span> <span class="toc-text">解决方法：使用Pod管理的时候</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法1："><span class="toc-number">1.2.1.</span> <span class="toc-text">解决方法1：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法2："><span class="toc-number">1.2.2.</span> <span class="toc-text">解决方法2：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法3："><span class="toc-number">1.2.3.</span> <span class="toc-text">解决方法3：</span></a></li></ol></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -405,7 +426,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2017/06/26/移动应用的设计模式/" data-title="移动应用的设计模式" data-url="http://peilinghui.com/2017/06/26/移动应用的设计模式/"></div>
+    <div class="ds-thread" data-thread-key="2017/07/05/项目重构遇到的问题/" data-title="项目重构遇到的问题" data-url="http://peilinghui.com/2017/07/05/项目重构遇到的问题/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -429,15 +450,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/06/30/iOS中的图表Charts/" title="上一篇: iOS中的图表Charts">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/06/14/Jenkins搭建来实现自动化打包/" title="下一篇: Jenkins搭建来实现自动化打包">
+            <a href="/2017/06/30/iOS中的图表Charts/" title="下一篇: iOS中的图表Charts">
                 <i class="fa fa-angle-right"></i>
             </a>
         
