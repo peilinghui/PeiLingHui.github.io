@@ -3,18 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS调试技巧 | 向着阳光奔跑</title>
+  <title>iOS网络层的封装 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在iOS开发过程中，难免会遇到一些bug，那么遇到bug该怎么办？如何找bug呢？">
+  <meta name="description" content="对于项目的重构，很重要的就是对网络层的重构，其实也就是对AFN的二次封装。对于AFN的介绍在前一篇：研究AFNetworking框架">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS调试技巧">
-<meta property="og:url" content="http://peilinghui.com/2016/05/14/iOS调试技巧/index.html">
+<meta property="og:title" content="iOS网络层的封装">
+<meta property="og:url" content="http://peilinghui.com/2017/07/10/iOS网络层的封装/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="在iOS开发过程中，难免会遇到一些bug，那么遇到bug该怎么办？如何找bug呢？">
-<meta property="og:updated_time" content="2016-05-23T01:31:21.000Z">
+<meta property="og:description" content="对于项目的重构，很重要的就是对网络层的重构，其实也就是对AFN的二次封装。对于AFN的介绍在前一篇：研究AFNetworking框架">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1436896-f274db501af46b86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-07-12T10:34:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS调试技巧">
-<meta name="twitter:description" content="在iOS开发过程中，难免会遇到一些bug，那么遇到bug该怎么办？如何找bug呢？">
+<meta name="twitter:title" content="iOS网络层的封装">
+<meta name="twitter:description" content="对于项目的重构，很重要的就是对网络层的重构，其实也就是对AFN的二次封装。对于AFN的介绍在前一篇：研究AFNetworking框架">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -248,11 +249,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-iOS调试技巧" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-iOS网络层的封装" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/05/14/iOS调试技巧/" class="article-date">
-      <time datetime="2016-05-14T09:50:17.000Z" itemprop="datePublished">2016-05-14</time>
+      <a href="/2017/07/10/iOS网络层的封装/" class="article-date">
+      <time datetime="2017-07-10T13:26:39.000Z" itemprop="datePublished">2017-07-10</time>
 </a>
     </div>
   
@@ -265,7 +266,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS调试技巧
+      iOS网络层的封装
     </h1>
   
 
@@ -282,22 +283,40 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在iOS开发过程中，难免会遇到一些bug，那么遇到bug该怎么办？如何找bug呢？<br><a id="more"></a><br>对于bug,我们要合理的假设，找原因；对原因与bug之间的因果关系进行分析。</p>
-<h2 id="lldb的使用"><a href="#lldb的使用" class="headerlink" title="lldb的使用"></a>lldb的使用</h2><p>主要是打断点的时候使用lldb.</p>
-<h3 id="查看值"><a href="#查看值" class="headerlink" title="查看值"></a>查看值</h3><p>1&gt;非对象的值<br><code>int a = 10;</code> </p>
-<p>(lldb) p a<br>(原始命令：p = print = expression –)<br>输出：(int)$0 = 10<br>(lldb)p 10 + 10<br>输出：$1 = 20  </p>
-<p>2&gt;对象的值<br><code>NSString *string = @“Hello，world”;</code> </p>
-<p>(lldb) po string<br>(原始命令：po = expression -o – = e -o –string)<br>输出：Hello，world  </p>
-<p>注意：清空控制台：command+K  </p>
-<h3 id="修改变量的值"><a href="#修改变量的值" class="headerlink" title="修改变量的值"></a>修改变量的值</h3><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">a</span>==<span class="number">10</span>)&#123;</span><br><span class="line">	NSLog(@<span class="string">"第一个if被执行了"</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="literal">a</span>!=<span class="number">10</span>)&#123;</span><br><span class="line">	NSLog(@<span class="string">"第二个if被执行了"</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>(lldb) e(代表expression表达式) a=11<br>输出：(int) $0 = 11  </p>
-<h3 id="定义一个变量"><a href="#定义一个变量" class="headerlink" title="定义一个变量"></a>定义一个变量</h3><p>(lldb) e int $b = 20<br>(lldb) e int $b + $0<br>输出：(int) $1 = 31</p>
-<h3 id="调用一个函数"><a href="#调用一个函数" class="headerlink" title="调用一个函数"></a>调用一个函数</h3><p>代码中：<br><figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">[<span class="keyword">self</span> test]<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line">- <span class="list">(<span class="keyword">void</span>)</span>test&#123;</span><br><span class="line">	NSLog<span class="list">(<span class="keyword">@</span><span class="string">"test被调用了"</span>)</span><span class="comment">;</span></span><br><span class="line">	&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>(lldb) call [self init]<br>输出：test被调用了</p>
-<h3 id="函数提前返回，返回一个特定值"><a href="#函数提前返回，返回一个特定值" class="headerlink" title="函数提前返回，返回一个特定值"></a>函数提前返回，返回一个特定值</h3><p>代码实现：</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  <span class="built_in">NSInteger</span> returnValue = [<span class="keyword">self</span> testReturn];</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="built_in">NSInteger</span>)testReturn&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>(lldb) thread return 100<br>(lldb) p returnValue<br>输出：(NSInteger) $1 = 0<br>(NSInteger) $2 = 100</p>
-<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><p>1&gt;继续运行 (相当于控制台第一个按钮)<br>c = continue = process continue<br>2&gt;step over<br>n = next = thread step-over<br>3&gt;step in(跳入函数)<br>s = thread step-in<br>4&gt;step out(跳出函数)<br>finish = thread step-over</p>
+        <p>对于项目的重构，很重要的就是对网络层的重构，其实也就是对AFN的二次封装。对于AFN的介绍在前一篇：<a href="">研究AFNetworking框架</a></p>
+<a id="more"></a>
+<p>AFN2.0是基于NSURLConnection封装的。而AFN3.0是基于NSURLSession封装的。(NSURLSession是iOS7推出的是为了取代NSURLConnection的)。</p>
+<h1 id="关于AFN3-0"><a href="#关于AFN3-0" class="headerlink" title="关于AFN3.0"></a>关于AFN3.0</h1><h2 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h2><p>请求报文 = 请求方法 + URI + 协议版本 + (请求首部) + (内容实体)</p>
+<p>GET /index.htm HTTP/1.1<br>HOST: DeltaX.me<br>GET表示访问服务器的类型, 也就是Method<br>/index.htm指明请求的资源对象, 也叫URI<br>HTTP/1.1为HTTP的版本号<br>这段请求的意思是访问HTTP服务器上的/index.htm资源</p>
+<p>请求报文 = 协议版本 + 状态码 + 原因短语 + (响应首部字段) + 实体主体</p>
+<p>HTTP/1.1 200 OK<br>Date: Sat,  22:07:00 GMT<br>Content-Length: 500<br>Content-Type: text/html</p>
+<p><html>…..</html></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1436896-f274db501af46b86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2016-11-07 下午4.44.02.png"></p>
+<h3 id="如何使用-NSURLSession-发出-HTTP-请求"><a href="#如何使用-NSURLSession-发出-HTTP-请求" class="headerlink" title="如何使用 NSURLSession 发出 HTTP 请求"></a>如何使用 NSURLSession 发出 HTTP 请求</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.得到session对象</span></span><br><span class="line"><span class="built_in">NSURLSession</span> *session = [<span class="built_in">NSURLSession</span> sharedSession];</span><br><span class="line"><span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://。。。/Server/login"</span>];</span><br><span class="line"><span class="comment">// 创建一个请求</span></span><br><span class="line"> <span class="built_in">NSMutableURLRequest</span> *request = [<span class="built_in">NSMutableURLRequest</span> requestWithURL:url];</span><br><span class="line">request<span class="variable">.HTTPMethod</span> = <span class="string">@"POST"</span>;</span><br><span class="line"><span class="comment">// 设置请求体</span></span><br><span class="line">request<span class="variable">.HTTPBody</span> = [<span class="string">@"username=123&amp;pwd=123"</span> dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line"><span class="built_in">NSURLSessionDataTask</span> *task = [session dataTaskWithRequest:request completionHandler:^(<span class="built_in">NSData</span> *data, <span class="built_in">NSURLResponse</span> *response, <span class="built_in">NSError</span> *error) &#123;</span><br><span class="line">     <span class="comment">//系统的解析方法</span></span><br><span class="line">     <span class="built_in">NSDictionary</span> *dict = [<span class="built_in">NSJSONSerialization</span> JSONObjectWithData:data options:<span class="built_in">NSJSONReadingMutableLeaves</span> error:<span class="literal">nil</span>];</span><br><span class="line">      <span class="built_in">NSLog</span>(<span class="string">@"----%@"</span>, dict);</span><br><span class="line">    &#125;];</span><br><span class="line"><span class="comment">// 3.开始任务</span></span><br><span class="line">[task resume];</span><br></pre></td></tr></table></figure>
+<h3 id="如何使用-AFNetworking-发出-HTTP-请求"><a href="#如何使用-AFNetworking-发出-HTTP-请求" class="headerlink" title="如何使用 AFNetworking 发出 HTTP 请求"></a>如何使用 AFNetworking 发出 HTTP 请求</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];</span><br><span class="line">manager<span class="variable">.responseSerializer</span> = [AFHTTPResponseSerializer serializer];</span><br><span class="line">[manager POST:<span class="string">@"http://baidu.com/verification/user/loginNew.htm?token=&amp;random=27289&amp;version=1.19.0"</span> parameters:dict progress:^(<span class="built_in">NSProgress</span> * _Nonnull downloadProgress) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"请求成功"</span>);</span><br><span class="line">&#125;success:^(<span class="built_in">NSURLSessionDataTask</span> * _Nonnull task, <span class="keyword">id</span>  _Nullable responseObject) &#123;</span><br><span class="line">          <span class="comment">//请求返回的数据(二进制数据)</span></span><br><span class="line">          <span class="built_in">NSLog</span>(<span class="string">@"responseObject(二进制) = %@"</span>,responseObject);</span><br><span class="line">          <span class="comment">//转化二进制数据</span></span><br><span class="line">          <span class="built_in">NSLog</span>(<span class="string">@"responseObject = %@"</span>, [[<span class="built_in">NSString</span> alloc] initWithData:responseObject encoding:<span class="built_in">NSUTF8StringEncoding</span>]);</span><br><span class="line">         [<span class="keyword">self</span> oaLoginSuccess];</span><br><span class="line">&#125;failure:^(<span class="built_in">NSURLSessionDataTask</span> * _Nullable task, <span class="built_in">NSError</span> * _Nonnull   error) &#123;</span><br><span class="line">           <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,error);  <span class="comment">//这里打印错误信息</span></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：在 iOS9 中，苹果默认全局 HTTPs，如果你要发送不安全的 HTTP 请求，需要在 info.plist 中加入如下键值对才能发出不安全的 HTTP 请求.<br>还有一件事情是要注意的是，AFNetworking 默认接收 json 格式的响应（因为这是在 iOS 平台上的框架，一般不需要 text/html），如果想要返回 html，需要设置 acceptableContentTypes</p>
+</blockquote>
+<h3 id="AFN中的相应类"><a href="#AFN中的相应类" class="headerlink" title="AFN中的相应类"></a>AFN中的相应类</h3><h5 id="AFURLSessionManager-核心类"><a href="#AFURLSessionManager-核心类" class="headerlink" title="AFURLSessionManager(核心类)"></a>AFURLSessionManager(核心类)</h5><p>AFURLSessionManager 是 AFHTTPSessionManager 的父类<br>AFURLSessionManager 负责生成 NSURLSession 的实例，管理 AFSecurityPolicy 和 AFNetworkReachabilityManager，来保证请求的安全和查看网络连接情况，它有一个 AFJSONResponseSerializer 的实例来序列化 HTTP 响应</p>
+<h5 id="AFHTTPSessionManager"><a href="#AFHTTPSessionManager" class="headerlink" title="AFHTTPSessionManager"></a>AFHTTPSessionManager</h5><p>其中 AFHTTPSessionManager 有着自己的 AFHTTPRequestSerializer 和 AFJSONResponseSerializer 来管理请求和响应的序列化，同时依赖父类提供的接口保证安全、监控网络状态，实现发出 HTTP 请求这一核心功能</p>
+<h5 id="AFURLRequestSerialization"><a href="#AFURLRequestSerialization" class="headerlink" title="AFURLRequestSerialization"></a>AFURLRequestSerialization</h5><p>主要用于 AFHTTPSessionManager 中，因为它主要用于修改 HTTP 头部，提供了一些语义明确的接口设置 HTTP 头部字段。HTTP 头部字段 Accept-Language User-Agent</p>
+<h5 id="AFURLResponseSerialization"><a href="#AFURLResponseSerialization" class="headerlink" title="AFURLResponseSerialization"></a>AFURLResponseSerialization</h5><p>处理响应的模块，将请求返回的数据解析成对应的格式。这个模块使用在 AFURLSessionManager 也就是核心类中</p>
+<h3 id="为什么要对AFN进行二次封装呢？"><a href="#为什么要对AFN进行二次封装呢？" class="headerlink" title="为什么要对AFN进行二次封装呢？"></a>为什么要对AFN进行二次封装呢？</h3><p>上面这种写法可维护性差：主要是因为：</p>
+<ol>
+<li>地址是写死的字符串，对于一个应用来说，网络请求的地址通常是统一而且具有规律的。如果大量的请求都用这种写法，那么想要统一进行修改的话就变得很困难。</li>
+<li>没有统一的请求和响应过滤机制。通常客户端开发当中需要对于请求和响应进行一些处理，例如在请求中加入验证字段（如 Token），以验证请求的合法性。</li>
+<li>对 AFNetworking 产生了强依赖，如果要进行网络库的替换，成本会非常高。  </li>
+</ol>
+<p>随着应用复杂程度的增加，上面这种在控制层直接对网络请求层进行交互的方式，会产生越来越多的问题。因此有必要通过单独的一层把控制层（业务层）和网络请求层隔离开来，这一层我们暂时把它叫做“网络封装层”。</p>
+<h2 id="如何封装"><a href="#如何封装" class="headerlink" title="如何封装"></a>如何封装</h2><p>封装主要是把业务层和网络层分开，此次的封装分为三层：</p>
+<blockquote>
+<p>第一层：首先，从应用层ViewController获取参数，这个参数传到第二层的业务Service，在回调中利用网络请求返回的responseModel来显示在页面上。<br>第二层：设置一个BaseService，然后+LoginService。BaseService中主要是配置公有的参数。在每个业务层的Service中设置每一个的接口定义。业务层主要是暴露接口的定义，而BaseService中定义了BaseRequestModel来实现发起请求到第三层Client。<br>第三层：这层就是CLient，由ASI或者AFN充当，发起网络请求。这一层最好是个单例，</p>
+</blockquote>
+<p>BaseRequestModel中定义了：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">PLHRequestModel</span> : <span class="title">NSObject</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//网络请求参数</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, nonnull, <span class="keyword">copy</span>) <span class="built_in">NSString</span> * serverRoot; <span class="comment">//网络请求的根地址</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, nonnull, <span class="keyword">copy</span>) <span class="built_in">NSString</span> * actionPath;<span class="comment">//发起响应的二级地址</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="keyword">float</span> timeout;  <span class="comment">//时间</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) PLHHTTPRequestType requestType;  <span class="comment">//网络请求方式</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, nonnull, <span class="keyword">copy</span>) <span class="built_in">NSString</span> * serviceName;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, nullable, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *apiVersion;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, nullable, <span class="keyword">copy</span>) <span class="built_in">NSDictionary</span> *parameters; <span class="comment">// 请求参数</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) PLHHTTPServiceType serviceType;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<h3 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h3><p>单例的，定义了AFURLSessionManager *sessionManager;生成并且发出网络请求。或者直接继承自AFURLSessionManager</p>
+<h4 id="PLHHTTPRequestSerializer"><a href="#PLHHTTPRequestSerializer" class="headerlink" title="PLHHTTPRequestSerializer"></a>PLHHTTPRequestSerializer</h4><p>单例的，生成AFHTTPRequestSerializer，或者直接继承自AFHTTPRequestSerializer。为的是生成NSURLRequest</p>
+<h4 id="PLHRequestModel"><a href="#PLHRequestModel" class="headerlink" title="PLHRequestModel"></a>PLHRequestModel</h4><h4 id="PLHResponseModel"><a href="#PLHResponseModel" class="headerlink" title="PLHResponseModel"></a>PLHResponseModel</h4><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://draveness.me/afnetworking1.html" target="_blank" rel="external">AFNetworking 概述</a></p>
 
       
     </div>
@@ -306,13 +325,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></p>
+        <p><span>本文标题:</span><a href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2016年05月14日 - 17时50分</p>
-        <p><span>最后更新:</span>2016年05月23日 - 09时31分</p>
+        <p><span>发布时间:</span>2017年07月10日 - 21时26分</p>
+        <p><span>最后更新:</span>2017年07月12日 - 18时34分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/05/14/iOS调试技巧/" title="iOS调试技巧">http://peilinghui.com/2016/05/14/iOS调试技巧/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2016/05/14/iOS调试技巧/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/07/10/iOS网络层的封装/" title="iOS网络层的封装">http://peilinghui.com/2017/07/10/iOS网络层的封装/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/07/10/iOS网络层的封装/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -325,16 +344,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/06/29/ReactiveCocoa学习笔记/">
-                    ReactiveCocoa学习笔记
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/04/14/iOS网络编程/">
-                    iOS网络编程
+                <a href="/2017/07/05/项目重构遇到的问题/">
+                    项目重构遇到的问题
                 </a>
             </div>
         
@@ -345,7 +358,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lldb的使用"><span class="toc-number">1.</span> <span class="toc-text">lldb的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看值"><span class="toc-number">1.1.</span> <span class="toc-text">查看值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改变量的值"><span class="toc-number">1.2.</span> <span class="toc-text">修改变量的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义一个变量"><span class="toc-number">1.3.</span> <span class="toc-text">定义一个变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用一个函数"><span class="toc-number">1.4.</span> <span class="toc-text">调用一个函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数提前返回，返回一个特定值"><span class="toc-number">1.5.</span> <span class="toc-text">函数提前返回，返回一个特定值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流程控制"><span class="toc-number">1.6.</span> <span class="toc-text">流程控制</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#关于AFN3-0"><span class="toc-number">1.</span> <span class="toc-text">关于AFN3.0</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP协议"><span class="toc-number">1.1.</span> <span class="toc-text">HTTP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何使用-NSURLSession-发出-HTTP-请求"><span class="toc-number">1.1.1.</span> <span class="toc-text">如何使用 NSURLSession 发出 HTTP 请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何使用-AFNetworking-发出-HTTP-请求"><span class="toc-number">1.1.2.</span> <span class="toc-text">如何使用 AFNetworking 发出 HTTP 请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AFN中的相应类"><span class="toc-number">1.1.3.</span> <span class="toc-text">AFN中的相应类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#AFURLSessionManager-核心类"><span class="toc-number">1.1.3.0.1.</span> <span class="toc-text">AFURLSessionManager(核心类)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#AFHTTPSessionManager"><span class="toc-number">1.1.3.0.2.</span> <span class="toc-text">AFHTTPSessionManager</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#AFURLRequestSerialization"><span class="toc-number">1.1.3.0.3.</span> <span class="toc-text">AFURLRequestSerialization</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#AFURLResponseSerialization"><span class="toc-number">1.1.3.0.4.</span> <span class="toc-text">AFURLResponseSerialization</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么要对AFN进行二次封装呢？"><span class="toc-number">1.1.4.</span> <span class="toc-text">为什么要对AFN进行二次封装呢？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何封装"><span class="toc-number">1.2.</span> <span class="toc-text">如何封装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Client"><span class="toc-number">1.2.1.</span> <span class="toc-text">Client</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PLHHTTPRequestSerializer"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">PLHHTTPRequestSerializer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PLHRequestModel"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">PLHRequestModel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PLHResponseModel"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">PLHResponseModel</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">1.3.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -407,7 +420,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/05/14/iOS调试技巧/" data-title="iOS调试技巧" data-url="http://peilinghui.com/2016/05/14/iOS调试技巧/"></div>
+    <div class="ds-thread" data-thread-key="2017/07/10/iOS网络层的封装/" data-title="iOS网络层的封装" data-url="http://peilinghui.com/2017/07/10/iOS网络层的封装/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -431,15 +444,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/06/29/ReactiveCocoa学习笔记/" title="上一篇: ReactiveCocoa学习笔记">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/04/14/iOS网络编程/" title="下一篇: iOS网络编程">
+            <a href="/2017/07/05/项目重构遇到的问题/" title="下一篇: 项目重构遇到的问题">
                 <i class="fa fa-angle-right"></i>
             </a>
         
