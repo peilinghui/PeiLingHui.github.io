@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>学习React Native | 向着阳光奔跑</title>
+  <title>学习React Native入门 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="抽时间学习一下React Native.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习React Native">
-<meta property="og:url" content="http://peilinghui.com/2017/04/25/学习React-Native/index.html">
+<meta property="og:title" content="学习React Native入门">
+<meta property="og:url" content="http://peilinghui.com/2017/03/02/学习React-Native入门/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="抽时间学习一下React Native.">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-25%20%E4%B8%8B%E5%8D%887.11.44.png">
-<meta property="og:updated_time" content="2017-07-18T06:08:50.000Z">
+<meta property="og:updated_time" content="2017-07-21T09:08:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习React Native">
+<meta name="twitter:title" content="学习React Native入门">
 <meta name="twitter:description" content="抽时间学习一下React Native.">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
@@ -249,11 +249,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-学习React-Native" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-学习React-Native入门" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/04/25/学习React-Native/" class="article-date">
-      <time datetime="2017-04-25T09:51:37.000Z" itemprop="datePublished">2017-04-25</time>
+      <a href="/2017/03/02/学习React-Native入门/" class="article-date">
+      <time datetime="2017-03-02T09:51:37.000Z" itemprop="datePublished">2017-03-02</time>
 </a>
     </div>
   
@@ -266,7 +266,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      学习React Native
+      学习React Native入门
     </h1>
   
 
@@ -312,10 +312,10 @@
 <li><p>运行时</p>
 <ul>
 <li>componentWillReceiveProps</li>
-<li><p>shouldComponentUpdate // return true|false</p>
+<li><p>shouldComponentUpdate</p>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shouldComponentUpdate(nextProps, nextState) &#123;</span><br><span class="line"><span class="command">return</span> nextProps.<span class="property">id</span> !== this.props.<span class="property">id</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>componentWillUpdate //not called for the initial render</p>
+<li><p>componentWillUpdate</p>
 </li>
 <li>render</li>
 <li>componentDidUpdate</li>
@@ -328,7 +328,7 @@
 <li>Props:properties属性，在初始化的时候传入并且可以显示不同的状态。<br>props不可变<br>states不可变</li>
 </ol>
 <p>可以在浏览器中debug</p>
-<h2 id="Styles"><a href="#Styles" class="headerlink" title="Styles"></a>Styles</h2><h1 id="React-Native的常用组件和API"><a href="#React-Native的常用组件和API" class="headerlink" title="React Native的常用组件和API"></a>React Native的常用组件和API</h1><h2 id="flexbox布局"><a href="#flexbox布局" class="headerlink" title="flexbox布局"></a>flexbox布局</h2><p>可以开发出动态宽高自适应的UI布局。<br>位置：position。取值为relative或者absolute。当设置为relative的时候，是表示当前组件距离上一个同级组件的距离。当设置为absolute的时候，是表示当前组件距离父组件的距离来描述位置top,bottom,left,right.与宽高相关的有：width，height，maxheight，maxwidth，minheight,minwidth。  </p>
+<h2 id="Styles"><a href="#Styles" class="headerlink" title="Styles"></a>Styles</h2><h2 id="flexbox布局"><a href="#flexbox布局" class="headerlink" title="flexbox布局"></a>flexbox布局</h2><p>可以开发出动态宽高自适应的UI布局。<br>位置：position。取值为relative或者absolute。当设置为relative的时候，是表示当前组件距离上一个同级组件的距离。当设置为absolute的时候，是表示当前组件距离父组件的距离来描述位置top,bottom,left,right.与宽高相关的有：width，height，maxheight，maxwidth，minheight,minwidth。  </p>
 <h3 id="排列子组件"><a href="#排列子组件" class="headerlink" title="排列子组件"></a>排列子组件</h3><p>优点Lbuxuyao指定子组件的绝对位置，也不需要根据运行时屏幕大小动态计算子组件的大小，而是通过排列一个个长方形来进行布局。</p>
 <p><strong>flexDirection</strong><br>决定了组件内部的子组件是如何排列的。row、row-reverse、column、column-reverse。</p>
 <p><strong>flexWrap</strong><br>flexWrap取值为warp，并且alignItem键不能取值为”stretch”的时候才能实现子组件的自动换行排列。</p>
@@ -336,14 +336,7 @@
 <p><strong>alignItems</strong><br>定义了view组件中所有子组件的对齐股则。flex-start（顶部对齐）、flex-end（底部对齐）、center（中部对齐）、stretch（拉长对齐）。  </p>
 <p><strong>边框border，空隙margin，填充Padding</strong></p>
 <h3 id="Absolute-amp-Relative"><a href="#Absolute-amp-Relative" class="headerlink" title="Absolute &amp; Relative"></a>Absolute &amp; Relative</h3><h3 id="Size-amp-Dimensions-amp-onLayout"><a href="#Size-amp-Dimensions-amp-onLayout" class="headerlink" title="Size &amp; Dimensions &amp; onLayout"></a>Size &amp; Dimensions &amp; onLayout</h3><h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>MVC的问题：</p>
-<h3 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h3><h2 id="View组件"><a href="#View组件" class="headerlink" title="View组件"></a>View组件</h2><h2 id="Image组件"><a href="#Image组件" class="headerlink" title="Image组件"></a>Image组件</h2><p>用来在UI上显示图像。</p>
-<h1 id="React-Native代码与OC代码的互通"><a href="#React-Native代码与OC代码的互通" class="headerlink" title="React Native代码与OC代码的互通"></a>React Native代码与OC代码的互通</h1><p>为了实现消息互通，需要建立一个原生语言模块负责与React Native桥接，这个模块就是一个实现了RCTBridgeModule协议的类，</p>
-<p>OC代码向React Native发送消息有两种方式：</p>
-<ul>
-<li>通过回调接口。这种方式要求React Native代码先将接口传递给OC代码，然后OC代码才可以通过这个回调接口向React Native代码发送消息。</li>
-<li>通过eventDispatcher向React Native模块发送事件。这样能够做到OC代码主动向React Native发送消息。</li>
-</ul>
-<h1 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h1><p><a href="https://github.com/reactnativecn/react-native-guide" target="_blank" rel="external">React-Native学习指南</a><br><a href="https://www.gitbook.com/book/unbug/react-native-training/details" target="_blank" rel="external">gitbook</a>—–<br><a href="https://www.youtube.com/playlist?list=PLC_rYRxEnwQGLQqrHR0aho33U6DCeJamC" target="_blank" rel="external">对应的视频</a><br><a href="https://github.com/crazycodeboy/react-native-awesome" target="_blank" rel="external">React Native学习资源精选仓库</a><br><a href="http://www.devio.org/tags/#React Native" target="_blank" rel="external">博客</a></p>
+<h3 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h3><h1 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h1><p><a href="https://github.com/reactnativecn/react-native-guide" target="_blank" rel="external">React-Native学习指南</a><br><a href="https://www.gitbook.com/book/unbug/react-native-training/details" target="_blank" rel="external">gitbook</a>—–<br><a href="https://www.youtube.com/playlist?list=PLC_rYRxEnwQGLQqrHR0aho33U6DCeJamC" target="_blank" rel="external">对应的视频</a><br><a href="https://github.com/crazycodeboy/react-native-awesome" target="_blank" rel="external">React Native学习资源精选仓库</a><br><a href="http://www.devio.org/tags/#React Native" target="_blank" rel="external">博客</a></p>
 
       
     </div>
@@ -352,13 +345,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/04/25/学习React-Native/">学习React Native</a></p>
+        <p><span>本文标题:</span><a href="/2017/03/02/学习React-Native入门/">学习React Native入门</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2017年04月25日 - 17时51分</p>
-        <p><span>最后更新:</span>2017年07月18日 - 14时08分</p>
+        <p><span>发布时间:</span>2017年03月02日 - 17时51分</p>
+        <p><span>最后更新:</span>2017年07月21日 - 17时08分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/04/25/学习React-Native/" title="学习React Native">http://peilinghui.com/2017/04/25/学习React-Native/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/04/25/学习React-Native/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/03/02/学习React-Native入门/" title="学习React Native入门">http://peilinghui.com/2017/03/02/学习React-Native入门/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/03/02/学习React-Native入门/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -372,15 +365,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/04/30/深入学习NSURLProtocol/">
-                    深入学习NSURLProtocol
+                <a href="/2017/03/10/学习React-Native的API和组件/">
+                    学习React-Native的API和组件
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/04/21/UIView的Frame和bounds区别/">
-                    UIView的Frame和bounds区别
+                <a href="/2017/02/16/自动化测试/">
+                    自动化测试
                 </a>
             </div>
         
@@ -391,7 +384,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#React-Native-简介"><span class="toc-number">1.</span> <span class="toc-text">React Native 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境搭建"><span class="toc-number">1.1.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#debug的方式"><span class="toc-number">1.2.</span> <span class="toc-text">debug的方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#React-Native组件"><span class="toc-number">2.</span> <span class="toc-text">React Native组件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Render-amp-JSX"><span class="toc-number">2.1.</span> <span class="toc-text">Render&JSX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件生命周期"><span class="toc-number">2.2.</span> <span class="toc-text">组件生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Props-amp-States"><span class="toc-number">2.3.</span> <span class="toc-text">Props & States</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Styles"><span class="toc-number">2.4.</span> <span class="toc-text">Styles</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#React-Native的常用组件和API"><span class="toc-number">3.</span> <span class="toc-text">React Native的常用组件和API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#flexbox布局"><span class="toc-number">3.1.</span> <span class="toc-text">flexbox布局</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#排列子组件"><span class="toc-number">3.1.1.</span> <span class="toc-text">排列子组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Absolute-amp-Relative"><span class="toc-number">3.1.2.</span> <span class="toc-text">Absolute & Relative</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Size-amp-Dimensions-amp-onLayout"><span class="toc-number">3.1.3.</span> <span class="toc-text">Size & Dimensions & onLayout</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Architecture"><span class="toc-number">3.2.</span> <span class="toc-text">Architecture</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux"><span class="toc-number">3.2.1.</span> <span class="toc-text">Redux</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#View组件"><span class="toc-number">3.3.</span> <span class="toc-text">View组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Image组件"><span class="toc-number">3.4.</span> <span class="toc-text">Image组件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#React-Native代码与OC代码的互通"><span class="toc-number">4.</span> <span class="toc-text">React Native代码与OC代码的互通</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#学习资料"><span class="toc-number">5.</span> <span class="toc-text">学习资料</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#React-Native-简介"><span class="toc-number">1.</span> <span class="toc-text">React Native 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境搭建"><span class="toc-number">1.1.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#debug的方式"><span class="toc-number">1.2.</span> <span class="toc-text">debug的方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#React-Native组件"><span class="toc-number">2.</span> <span class="toc-text">React Native组件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Render-amp-JSX"><span class="toc-number">2.1.</span> <span class="toc-text">Render&JSX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件生命周期"><span class="toc-number">2.2.</span> <span class="toc-text">组件生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Props-amp-States"><span class="toc-number">2.3.</span> <span class="toc-text">Props & States</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Styles"><span class="toc-number">2.4.</span> <span class="toc-text">Styles</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flexbox布局"><span class="toc-number">2.5.</span> <span class="toc-text">flexbox布局</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#排列子组件"><span class="toc-number">2.5.1.</span> <span class="toc-text">排列子组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Absolute-amp-Relative"><span class="toc-number">2.5.2.</span> <span class="toc-text">Absolute & Relative</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Size-amp-Dimensions-amp-onLayout"><span class="toc-number">2.5.3.</span> <span class="toc-text">Size & Dimensions & onLayout</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Architecture"><span class="toc-number">2.6.</span> <span class="toc-text">Architecture</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux"><span class="toc-number">2.6.1.</span> <span class="toc-text">Redux</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#学习资料"><span class="toc-number">3.</span> <span class="toc-text">学习资料</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -453,7 +446,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2017/04/25/学习React-Native/" data-title="学习React Native" data-url="http://peilinghui.com/2017/04/25/学习React-Native/"></div>
+    <div class="ds-thread" data-thread-key="2017/03/02/学习React-Native入门/" data-title="学习React Native入门" data-url="http://peilinghui.com/2017/03/02/学习React-Native入门/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -477,7 +470,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/04/30/深入学习NSURLProtocol/" title="上一篇: 深入学习NSURLProtocol">
+            <a href="/2017/03/10/学习React-Native的API和组件/" title="上一篇: 学习React-Native的API和组件">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -485,13 +478,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/04/21/UIView的Frame和bounds区别/" title="下一篇: UIView的Frame和bounds区别">
+            <a href="/2017/02/16/自动化测试/" title="下一篇: 自动化测试">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/做一个搜索框的Demo/">做一个搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/如何使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/学习iOS中JS与OC相互调用的方式/">学习iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/深入学习NSURLProtocol/">深入学习NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/学习React-Native/">学习React Native</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/深入学习KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/深入学习内存管理/">深入学习内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/关于NSString的引用计数问题/">关于NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式解析/">设计模式解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/关于深拷贝和浅拷贝/">关于深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/做一个搜索框的Demo/">做一个搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/如何使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/学习iOS中JS与OC相互调用的方式/">学习iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/深入学习NSURLProtocol/">深入学习NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/学习React-Native的API和组件/">学习React-Native的API和组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/学习React-Native入门/">学习React Native入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/研究框架YYModel/">研究框架YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/深入学习GCD/">深入学习GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/深入学习KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/深入学习RunLoop/">深入学习RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/深入学习Runtime/">深入学习Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转 </a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/深入学习内存管理/">深入学习内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/关于NSString的引用计数问题/">关于NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/深入学习Block/">深入学习Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式解析/">设计模式解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/研究SDWebImage框架/">研究SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/关于深拷贝和浅拷贝/">关于深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
