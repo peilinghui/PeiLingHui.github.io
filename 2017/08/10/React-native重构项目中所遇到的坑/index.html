@@ -3,20 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>深入学习NSURLProtocol | 向着阳光奔跑</title>
+  <title>React-native重构项目中所遇到的坑 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="研究一下NSURLProtocol.h。">
+  <meta name="description" content="在上一篇中写道了在开发RN的时候所需用的常用开源组件。这一篇就写一下开发历程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入学习NSURLProtocol">
-<meta property="og:url" content="http://peilinghui.com/2017/04/30/深入学习NSURLProtocol/index.html">
+<meta property="og:title" content="React-native重构项目中所遇到的坑">
+<meta property="og:url" content="http://peilinghui.com/2017/08/10/React-native重构项目中所遇到的坑/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="研究一下NSURLProtocol.h。">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-30%20%E4%B8%8B%E5%8D%882.12.33.png">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-30%20%E4%B8%8B%E5%8D%882.13.34.png">
-<meta property="og:updated_time" content="2017-04-30T09:18:27.000Z">
+<meta property="og:description" content="在上一篇中写道了在开发RN的时候所需用的常用开源组件。这一篇就写一下开发历程。">
+<meta property="og:updated_time" content="2017-08-11T07:33:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入学习NSURLProtocol">
-<meta name="twitter:description" content="研究一下NSURLProtocol.h。">
+<meta name="twitter:title" content="React-native重构项目中所遇到的坑">
+<meta name="twitter:description" content="在上一篇中写道了在开发RN的时候所需用的常用开源组件。这一篇就写一下开发历程。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -250,11 +248,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-深入学习NSURLProtocol" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-React-native重构项目中所遇到的坑" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/04/30/深入学习NSURLProtocol/" class="article-date">
-      <time datetime="2017-04-30T04:59:56.000Z" itemprop="datePublished">2017-04-30</time>
+      <a href="/2017/08/10/React-native重构项目中所遇到的坑/" class="article-date">
+      <time datetime="2017-08-10T04:46:45.000Z" itemprop="datePublished">2017-08-10</time>
 </a>
     </div>
   
@@ -267,7 +265,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      深入学习NSURLProtocol
+      React-native重构项目中所遇到的坑
     </h1>
   
 
@@ -284,43 +282,29 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>研究一下NSURLProtocol.h。<br><a id="more"></a></p>
-<h1 id="NSURLProtocol是什么？"><a href="#NSURLProtocol是什么？" class="headerlink" title="NSURLProtocol是什么？"></a>NSURLProtocol是什么？</h1><p>NSURLProtocol是URL Loading System的重要组成部分。<br>首先虽然名叫NSURLProtocol，但它却不是协议。它是一个抽象类。我们要使用它的时候需要创建它的一个子类。<br>NSURLProtocol在iOS系统中大概处于这样一个位置。<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-30%20%E4%B8%8B%E5%8D%882.12.33.png" alt=""><br>如果开发者自定义的一个NSURLProtocol并且注册到app中，那么在这个自定义的NSURLProtocol中我们可以拦截UIWebView，基于系统的NSURLConnection或者NSURLSession进行封装的网络请求，然后做到自定义的response返回。非常强大。</p>
-<h1 id="NSURLProtocol能拦截哪些网络请求"><a href="#NSURLProtocol能拦截哪些网络请求" class="headerlink" title="NSURLProtocol能拦截哪些网络请求"></a>NSURLProtocol能拦截哪些网络请求</h1><p>URL Loading System</p>
-<p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-30%20%E4%B8%8B%E5%8D%882.13.34.png" alt=""><br>所以，可以拦截的网络请求包括NSURLSession，NSURLConnection以及UIWebVIew。<br>基于CFNetwork的网络请求，以及WKWebView的请求是无法拦截的。</p>
-<p>现在主流的iOS网络库，例如AFNetworking，Alamofire等网络库都是基于NSURLSession或NSURLConnection的，所以这些网络库的网络请求都可以被NSURLProtocol所拦截 。<br>还有一些年代比较久远的网络库，例如ASIHTTPRequest，MKNetwokit等网路库都是基于CFNetwork的，所以这些网络库的网络请求无法被NSURLProtocol拦截。</p>
-<h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><p>NSURLProtocol是一个抽象类。我们要使用它的时候需要创建它的一个子类。<br><code>@interface PLHHTTPProtocol : NSURLProtocol</code><br>使用NSURLProtocol的主要可以分为5个步骤：<br>注册—&gt;拦截—&gt;转发—&gt;回调—&gt;结束</p>
-<h2 id="注册："><a href="#注册：" class="headerlink" title="注册："></a>注册：</h2><p>在系统加载的时候，把自定义的PLHHTTPProtocol注册到URL加载系统中，这样 所有的URL请求都有机会进入我们自定义的PLHHTTPProtocol进行拦截处理。</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">-</span> (BOOL)<span class="tag">application</span>:(UIApplication *)<span class="tag">application</span> <span class="tag">didFinishLaunchingWithOptions</span>:(NSDictionary *)<span class="tag">launchOptions</span> &#123;</span><br><span class="line">    <span class="attr_selector">[NSURLProtocol registerClass:[PLHHTTPURLProtocol class]</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对于基于NSURLSession的网络请求，需要通过配置NSURLSessionConfiguration对象的protocolClasses属性。</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];</span><br><span class="line">sessionConfiguration.protocolClasses = @<span class="string">[[NSClassFromString(@"CustomURLProtocol") class]]</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="拦截："><a href="#拦截：" class="headerlink" title="拦截："></a>拦截：</h2><p>在拦截到网络请求后，NSURLProtocol会依次执行下列方法：</p>
-<p><code>+ (BOOL)canInitWithRequest:(NSURLRequest *)request</code></p>
-<p>该方法会拿到request的对象，我们可以通过该方法的返回值来筛选request是否需要被NSURLProtocol做拦截处理。<br>如果返回YES则进入该自定义加载器进行处理，如果返回NO则不进入该自定义选择器，使用系统默认行为进行处理。</p>
-<p>重新设置NSURLRequest的信息:<br><code>+ (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request</code><br>比如请求重定向或者添加头部信息等等。如果没有特殊需求，直接返回request就可以了。但是因为这个方法在会在一次请求中被调用多次（暂时我也不知道什么原因为什么需要回调多洗），所以request重定向和添加头部信息也可以在开始加载中startLoading方法中重新设置。</p>
-<h2 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h2><p>在拦截到网络请求，并且对网络请求进行定制处理以后。我们需要将网络请求重新发送出去。</p>
-<p><code>- (id)initWithRequest:(NSURLRequest *)request cachedResponse:(NSCachedURLResponse *)cachedResponse client:(id&lt;NSURLProtocolClient&gt;)client</code></p>
-<p>该方法会创建一个NSURLProtocol实例，这里每一个网络请求都会创建一个新的实例。被拦截的请求开始执行的地方.</p>
-<p><code>- (void)startLoading</code></p>
-<p>接下来就是转发的核心方法startLoading。在该方法中，我们把处理过的request重新发送出去。至于发送的形式，可以是基于NSURLConnection，NSURLSession甚至CFNetwork。</p>
-<h2 id="回调"><a href="#回调" class="headerlink" title="回调"></a>回调</h2><p>既是面向切面的编程，就不能影响到原来网络请求的逻辑。所以上一步将网络请求转发出去以后，当收到网络请求的返回，还需要再将返回值返回给原来发送网络请求的地方。<br>主要需要需要调用到</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">self.client </span>URLProtocol:<span class="keyword">self </span>didFailWithError:error]<span class="comment">;</span></span><br><span class="line">[<span class="keyword">self.client </span>URLProtocolDidFinishLoading:<span class="keyword">self];</span><br><span class="line"></span>[<span class="keyword">self.client </span>URLProtocol:<span class="keyword">self </span>didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageNotAllowed]<span class="comment">;</span></span><br><span class="line">[<span class="keyword">self.client </span>URLProtocol:<span class="keyword">self </span>didLoadData:<span class="preprocessor">data</span>]<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>这四个方法来回调给原来发送网络请求的地方。<br>这里假设我们在转发过程中是使用NSURLSession发送的网络请求，那么在NSURLSession的回调方法中，我们做相应的处理即可。并且我们也可以对这些返回，进行定制化处理。</p>
-<h2 id="结束："><a href="#结束：" class="headerlink" title="结束："></a>结束：</h2><p>在一个网络请求完全结束以后，NSURLProtocol回调用到.结束加载URL请求<br><code>- (void)stopLoading</code></p>
-<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>既然NSURLProtocol功能非常强大，那么在具体开发中，会有哪些应用呢？</p>
-<ul>
-<li>自定义请求和响应</li>
-<li>网络的缓存处理（H5离线包 和 网络图片缓存）</li>
-<li>重定向网络请求</li>
-<li>为测试提供数据Mocking功能，在没有网络的情况下使用本地数据返回。</li>
-<li>过滤掉一些非法请求</li>
-<li>快速进行测试环境的切换</li>
-<li>拦截图片加载请求，转为从本地文件加载</li>
-<li>可以拦截UIWebView，基于系统的NSURLConnection或者NSURLSession进行封装的网络请求。目前WKWebView无法被NSURLProtocol拦截。</li>
-<li>当有多个自定义NSURLProtocol注册到系统中的话，会按照他们注册的反向顺序依次调用URL加载流程。当其中有一个NSURLProtocol拦截到请求的话，后续的NSURLProtocol就无法拦截到该请求。</li>
-</ul>
-<p>DEMO地址：<a href="https://github.com/peilinghui/BokeDemo/tree/master/PLHHTTPDNSDemo" target="_blank" rel="external">https://github.com/peilinghui/BokeDemo/tree/master/PLHHTTPDNSDemo</a>      </p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.jianshu.com/p/02781c0bbca9" target="_blank" rel="external">NSURLProtocol全攻略</a><br><a href="http://www.jianshu.com/p/55f5ac1ab817" target="_blank" rel="external">WKWebView 不支持 NSURLProtocol 吗</a></p>
+        <p>在上一篇中写道了在开发RN的时候所需用的常用开源组件。这一篇就写一下开发历程。</p>
+<a id="more"></a>
+<p>整个项目的逻辑大概就是： </p>
+<ol>
+<li>新建项目，导入项目的图片资源，APP的图标，启动图，ios的启动图在Xcode中直接设置Launch Image和icon，对于安卓的启动图要写代码实现才行。对于项目的图片资源，可以两套系统共用一套图片那就可以放在一个文件夹下，引入的时候用相对路径导入；也可以放在Xcode或者是Android Studio中进行uri:+图片名称导入。</li>
+<li>用上一篇的第三方组件和一些基本组件大概完成了一些页面，完成了登录，手势解锁页，还有主页面的框架和主页面中一些子页面的大体显示。接下来遇到的问题大概有两个：</li>
+</ol>
+<p>第一：如何跳转，把这个页面都串起来，就像一些珠子如何才能串成一串：导航的使用：Navigator已经废弃，就要使用react-naviagtion来导航。</p>
+<p>第二：如何进行数据处理：</p>
+<ol>
+<li>是如何从服务器获取数据.</li>
+<li>是如何把从服务器获取的数据进行持久化存储。</li>
+<li>如何在页面间进行参数的传递<br>对于数据的处理也是难点。<br>首先对于网络请求要用fetch，</li>
+</ol>
+<p>遇到的相关问题：</p>
+<ol>
+<li>获取设备ID：用第三方库，补充：JS中如何把字符串中的?替换为&amp;:<br><code>var str_replaced = str.replace(/\?/g,&quot;&amp;&quot;);//加g就是替换所有的？号</code></li>
+<li>密码加密RSA加密:<br><a href="https://github.com/z-hao-wang/react-native-rsa" target="_blank" rel="external">react-native-rsa</a></li>
+</ol>
+<p><a href="https://github.com/rzcoder/node-rsa" target="_blank" rel="external">node-rsa</a></p>
+<ol>
+<li>设置假数据显示一般来说都是容易的，</li>
+</ol>
 
       
     </div>
@@ -329,13 +313,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/04/30/深入学习NSURLProtocol/">深入学习NSURLProtocol</a></p>
+        <p><span>本文标题:</span><a href="/2017/08/10/React-native重构项目中所遇到的坑/">React-native重构项目中所遇到的坑</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2017年04月30日 - 12时59分</p>
-        <p><span>最后更新:</span>2017年04月30日 - 17时18分</p>
+        <p><span>发布时间:</span>2017年08月10日 - 12时46分</p>
+        <p><span>最后更新:</span>2017年08月11日 - 15时33分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/04/30/深入学习NSURLProtocol/" title="深入学习NSURLProtocol">http://peilinghui.com/2017/04/30/深入学习NSURLProtocol/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/04/30/深入学习NSURLProtocol/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/10/React-native重构项目中所遇到的坑/" title="React-native重构项目中所遇到的坑">http://peilinghui.com/2017/08/10/React-native重构项目中所遇到的坑/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/08/10/React-native重构项目中所遇到的坑/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -348,16 +332,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/05/05/学习iOS中JS与OC相互调用的方式/">
-                    学习iOS中JS与OC相互调用的方式
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/04/21/UIView的Frame和bounds区别/">
-                    UIView的Frame和bounds区别
+                <a href="/2017/07/27/ReactNative的常用组件/">
+                    ReactNative的常用组件
                 </a>
             </div>
         
@@ -368,7 +346,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NSURLProtocol是什么？"><span class="toc-number">1.</span> <span class="toc-text">NSURLProtocol是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NSURLProtocol能拦截哪些网络请求"><span class="toc-number">2.</span> <span class="toc-text">NSURLProtocol能拦截哪些网络请求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何使用"><span class="toc-number">3.</span> <span class="toc-text">如何使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#注册："><span class="toc-number">3.1.</span> <span class="toc-text">注册：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拦截："><span class="toc-number">3.2.</span> <span class="toc-text">拦截：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转发"><span class="toc-number">3.3.</span> <span class="toc-text">转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回调"><span class="toc-number">3.4.</span> <span class="toc-text">回调</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束："><span class="toc-number">3.5.</span> <span class="toc-text">结束：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用"><span class="toc-number">4.</span> <span class="toc-text">应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+    
 </div>
 <style>
     .left-col .switch-btn {
@@ -430,7 +408,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2017/04/30/深入学习NSURLProtocol/" data-title="深入学习NSURLProtocol" data-url="http://peilinghui.com/2017/04/30/深入学习NSURLProtocol/"></div>
+    <div class="ds-thread" data-thread-key="2017/08/10/React-native重构项目中所遇到的坑/" data-title="React-native重构项目中所遇到的坑" data-url="http://peilinghui.com/2017/08/10/React-native重构项目中所遇到的坑/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -454,15 +432,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/05/05/学习iOS中JS与OC相互调用的方式/" title="上一篇: 学习iOS中JS与OC相互调用的方式">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/04/21/UIView的Frame和bounds区别/" title="下一篇: UIView的Frame和bounds区别">
+            <a href="/2017/07/27/ReactNative的常用组件/" title="下一篇: ReactNative的常用组件">
                 <i class="fa fa-angle-right"></i>
             </a>
         
