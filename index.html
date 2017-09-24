@@ -311,70 +311,6 @@
 
 
   
-    <article id="post-如何自己实现一个React-Native的Component" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/09/21/如何自己实现一个React-Native的Component/" class="article-date">
-      <time datetime="2017-09-21T02:54:56.000Z" itemprop="datePublished">2017-09-21</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/21/如何自己实现一个React-Native的Component/">如何自己实现一个React-Native的Component</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <a id="more"></a>
-<p>我们所用的第三方的React-Native的框架也是别人写好的然后封装出来让我们使用的。如果这个框架的实现和我们的需求很像，但是又不能满足我们的需求时就需要修改源码。当然我们也可以在开发中自己写框架让别人来使用。</p>
-<p>我在使用react-native-scrollable-tab-view的时候。要做一个和react-native-side-menu的联动效果。显然，这两个框架都是独立的，这个时候就需要修改源码了。<br>先： react-native init Demo6<br>再： npm install react-native-scrollable-tab-view –save<br>再：npm install react-native-side-menu –save</p>
-<h1 id="react-native-scrollable-tab-view"><a href="#react-native-scrollable-tab-view" class="headerlink" title="react-native-scrollable-tab-view"></a>react-native-scrollable-tab-view</h1><p>先看一下react-native-scrollable-tab-view。</p>
-<h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><p>这个中的index.js文件中主要是对外暴露一些属性，来可以设置它的样式。<br>const SceneComponent = require(‘./SceneComponent’);<br>const DefaultTabBar = require(‘./DefaultTabBar’);<br>const ScrollableTabBar = require(‘./ScrollableTabBar’);</p>
-<p>切换tab事件是在onChangeTab，</p>
-<p>this.updateSceneKeys({<br>      page: pageNumber,<br>      callback: this._onChangeTab.bind(this, currentPage, pageNumber),<br>    });</p>
-<pre><code> updateSceneKeys({ page, children = this.props.children, callback = () =&gt; {}, }) {
-let newKeys = this.newSceneKeys({ previousKeys: this.state.sceneKeys, currentPage: page, children, });
-this.setState({currentPage: page, sceneKeys: newKeys, }, callback);
-</code></pre><p>  },</p>
-<p>   _onChangeTab(prevPage, currentPage) {<br>    this.props.onChangeTab({<br>      i: currentPage,<br>      ref: this._children()[currentPage],<br>      from: prevPage,<br>    });<br>  },</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-  
     <article id="post-ReactNative的常用组件" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -814,6 +750,63 @@ this.setState({currentPage: page, sceneKeys: newKeys, }, callback);
       
         <p class="article-more-link">
           <a  href="/2017/05/27/做一个搜索框的Demo/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-如何使用Mac本地服务器" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/05/27/如何使用Mac本地服务器/" class="article-date">
+      <time datetime="2017-05-27T14:27:26.000Z" itemprop="datePublished">2017-05-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/27/如何使用Mac本地服务器/">如何使用Mac本地服务器</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>我们经常性的需要使用局域网搭建 Web 服务器测试环境，如部署局域网无线安装企业应用，模拟某个接口的返回JSON的时候，Mac OS X 自带了 Apache 和 PHP 环境，我们只需要简单的启动它就行了。<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a  href="/2017/05/27/如何使用Mac本地服务器/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
