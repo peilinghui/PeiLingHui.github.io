@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>学习React知识 | 向着阳光奔跑</title>
+  <title>11月总结 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="React是JavaScript的库，把用户页面抽象成组件。在学习React-native前，先了解一下React。">
+  <meta name="description" content="日子过得真快！从上海回杭州了，还是回杭州比较好一点。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习React知识">
-<meta property="og:url" content="http://peilinghui.com/2017/02/22/学习React知识/index.html">
+<meta property="og:title" content="11月总结">
+<meta property="og:url" content="http://peilinghui.com/2017/11/30/11月总结/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="React是JavaScript的库，把用户页面抽象成组件。在学习React-native前，先了解一下React。">
-<meta property="og:updated_time" content="2017-07-24T08:43:48.000Z">
+<meta property="og:description" content="日子过得真快！从上海回杭州了，还是回杭州比较好一点。">
+<meta property="og:updated_time" content="2017-11-30T14:04:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习React知识">
-<meta name="twitter:description" content="React是JavaScript的库，把用户页面抽象成组件。在学习React-native前，先了解一下React。">
+<meta name="twitter:title" content="11月总结">
+<meta name="twitter:description" content="日子过得真快！从上海回杭州了，还是回杭州比较好一点。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -248,11 +248,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-学习React知识" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-11月总结" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/02/22/学习React知识/" class="article-date">
-      <time datetime="2017-02-22T06:26:54.000Z" itemprop="datePublished">2017-02-22</time>
+      <a href="/2017/11/30/11月总结/" class="article-date">
+      <time datetime="2017-11-30T13:56:24.000Z" itemprop="datePublished">2017-11-30</time>
 </a>
     </div>
   
@@ -265,7 +265,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      学习React知识
+      11月总结
     </h1>
   
 
@@ -282,60 +282,31 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>React是JavaScript的库，把用户页面抽象成组件。在学习React-native前，先了解一下React。</p>
+        <p>日子过得真快！从上海回杭州了，还是回杭州比较好一点。</p>
 <a id="more"></a>
-<p><a href="https://facebook.github.io/react/" target="_blank" rel="external">官网</a><br><a href="https://github.com/facebook/react" target="_blank" rel="external">github地址</a></p>
-<h1 id="了解React"><a href="#了解React" class="headerlink" title="了解React"></a>了解React</h1><ol>
-<li>Virtual DOM提升了React的性能。React可以映射为对应的原生控件，所以React-Native就可以实现一次编程，多次使用。</li>
-<li>函数式编程的思想</li>
-</ol>
-<h2 id="JSX的语法编写"><a href="#JSX的语法编写" class="headerlink" title="JSX的语法编写"></a>JSX的语法编写</h2><ol>
-<li>XML语法：</li>
-</ol>
-<ul>
-<li>定义标签时，只允许被一个标签包裹</li>
-<li>标签一定要闭合.</li>
-</ul>
+<p>换了份工作，继续做ReactNative。10月17号入职的。<br>从入职以来也做了不少的面板。</p>
+<h3 id="电扇面板"><a href="#电扇面板" class="headerlink" title="电扇面板"></a>电扇面板</h3><p>1.在这个项目中遇到的难点就是电扇的转动–一个动画，通过设置转速不同来改变旋转动画的快慢。转速和转向的设置，就是Animated的使用。</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const rec = () =&gt; &#123;</span><br><span class="line">      this.<span class="keyword">state</span>.anim.<span class="built_in">set</span>Value(<span class="number">0</span>);</span><br><span class="line">      Animated.parallel([</span><br><span class="line">        Animated.timing(this.<span class="keyword">state</span>.anim, &#123;</span><br><span class="line">          <span class="keyword">to</span>Value: <span class="number">1</span>,</span><br><span class="line">          easing: Easing.linear,</span><br><span class="line">          duration,</span><br><span class="line">        &#125;),</span><br><span class="line">      ]).start(o =&gt; &#123;</span><br><span class="line">        if (o.finished) &#123;</span><br><span class="line">          rec();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">    rec();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <ol>
-<li>元素的类型和属性</li>
+<li>初次使用Redux，了解了一些基础控件的使用，比如slider,picker，showMaskView，SwitchButtonX，还有重命名的一个控件。</li>
 </ol>
-<ul>
-<li>DOM元素的属性是标准规范属性，除了Class和for，转换为className和htmlFor.</li>
-<li>小写首字母对应的是DOM元素，大写首字母对应的是组件元素。<br>JSX特有的属性表达：</li>
-<li>Boolean属性：省略表示bool值设为了true，要传false必须用属性表达式，如：disable、require、checked、readonly</li>
-</ul>
-<h1 id="Flux架构"><a href="#Flux架构" class="headerlink" title="Flux架构"></a>Flux架构</h1><p>不是MVC的架构，Flux三大部分组成：1. dispatcher、store、view。dispatcher负责分发事件，store负责保存数据、view负责订阅store中的数据，并使用这些数据渲染相应的页面。</p>
-<p><strong>与MVC的主要区别：</strong><br>没有职责明确的Controller，存在一个Controller-view的角色，将view和store进行绑定，并没有Controller需要承担的复杂的逻辑。</p>
-<ol>
-<li><strong>dispatcher与action</strong><br>dispatcher的实现就是下面两个API:</li>
-</ol>
-<blockquote>
-<p>.register(callback)方法用来注册一个监听器。<br>.dispatch(action)用来分发一个action。</p>
-</blockquote>
-<p>action是一个普通的JavaScript对象，一般包含type、payload字段，用于描述一个事件以及需要改变的相关数据。</p>
-<ol>
-<li><p><strong>store</strong><br>负责保存数据，并且修改数据的逻辑，调用dispatcher的register(callback)方法将自己注册为一个监听器。<br>当.dispatch(action)用来分发一个action时，store注册的监听器就会被调用，同时得到这个action作为参数。store之暴露getter不暴露setter，只能读取不能修改。</p>
-</li>
-<li><p><strong>Controller-view</strong><br>最顶层view，主要进行store与React组件(view层)之间的数据的绑定，定义数据更新以及传递的方式。会调用store保留的getter获取存储其中的数据并设置为自己的state，在render时以props的形式传给自己的子组件。</p>
-</li>
-<li><p><strong>view</strong><br>React组件扮演。结合Angular、Vue来发挥Flux的能力。<br>一条特殊的约定：<strong>Flux的view不能直接修改数据，如果页面操作需要修改数据，则必须使用dispatcher分发一个action。</strong></p>
-</li>
-</ol>
-<ol>
-<li><strong>actionCreator</strong><br>用来创造action的。为什么需要？因为在分发action的时候代码是冗余的。</li>
-</ol>
-<h1 id="Redux架构"><a href="#Redux架构" class="headerlink" title="Redux架构"></a>Redux架构</h1><h2 id="Redux简介"><a href="#Redux简介" class="headerlink" title="Redux简介"></a>Redux简介</h2><p>Redux的核心代码是一个库，类似Flux的架构思想，</p>
-<h3 id="三大原则"><a href="#三大原则" class="headerlink" title="三大原则"></a>三大原则</h3><ol>
-<li><p>单一数据源<br>一个应用永远只有唯一的一个数据源，整个应用状态都保存在一个对象中。</p>
-</li>
-<li><p>状态是只读的</p>
-</li>
-</ol>
-<p>Flux中store没有setter只有getter，而Redux中没有store，只有reducer，根据当前触发的action对当前应用state进行迭代。</p>
-<ol>
-<li>状态修改均由纯函数完成</li>
-</ol>
-<p>Redux与Flux最大的不同。<br>在Flux中，我们在actionCreator里调用APPDispatcher.dispatch方法来触发action，直接修改了store中数据.</p>
+<h3 id="yuerbao-env"><a href="#yuerbao-env" class="headerlink" title="yuerbao(env)"></a>yuerbao(env)</h3><p>这个项目中我主要是在以前的项目基础上新加一个页面，新写的页面比较简单。主要问题就在于改后的面板，出现了闪退和数据没有显示的问题。。。解决方法：把bind绑定this函数，还有就是数据没有获取到。原来的代码没看懂。</p>
+<h3 id="yuerbaoWaterPump"><a href="#yuerbaoWaterPump" class="headerlink" title="yuerbaoWaterPump"></a>yuerbaoWaterPump</h3><p>这个项目的主要难点就是一个可触摸滑动的进度环。还有对应的标识点 和一个旋转的动画。<br>自己写的就是基于组件库中的Newpicker写的时间的picker和几个picker。</p>
+<p>可触摸滑动的进度环：主要是用SVG来绘图，Gesture的手势的响应，触摸的位置的坐标切换到相当于圆心点的坐标。<br>通过滑动的初始角度和结束角度来再次绘图SVG。同时改变标识点的位置。</p>
+<p>标识点：用SVG中的circle来绘制，通过手势滑动的位置，来改变小圆点的位置。</p>
+<p>旋转的动画：遇到的问题：在关机或者是退出后再进去动画不能连续或者是出现了多个动画的重叠。解决方法：开始动画的时候把状态设置为true，停止动画设置为false，</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.animating = <span class="literal">true</span>;</span><br><span class="line">    rotateAnim.setValue(<span class="number">0</span>);</span><br><span class="line">    Animated.timing(rotateAnim, &#123;</span><br><span class="line">      <span class="attribute">toValue</span>: <span class="number">1</span>,</span><br><span class="line">      duration,</span><br><span class="line">      <span class="attribute">easing</span>: Easing.linear,</span><br><span class="line">    &#125;).start(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.animating) &#123;</span><br><span class="line">        <span class="keyword">this</span>.startAnimation();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="lowPro"><a href="#lowPro" class="headerlink" title="lowPro"></a>lowPro</h3><p>感觉好像是纯体力活，没什么复杂页面和逻辑交互，就是历史记录的处理也是用的以前的一套。</p>
+<h3 id="cooker"><a href="#cooker" class="headerlink" title="cooker"></a>cooker</h3><p>这个项目中的逻辑比较复杂，就是各种状态的不同的页面。</p>
+<p>难点就是在每种模式运行的时候要倒计时。同时刻度要变化。倒计时和刻度的变化要同步，同时后端每隔30秒传回数据来修正时间。用setTimeout好于用serInterval。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> 倒计时</span><br><span class="line"><span class="function">  <span class="title">countdownHandle</span> = <span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    const handle = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      let &#123; time &#125; = <span class="keyword">this</span>.state;</span><br><span class="line">      time -= <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">this</span>.setState(&#123; time &#125;);</span><br><span class="line">      <span class="keyword">this</span>.countdownHandle();</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.state.time &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.timerId = setTimeout(handle, <span class="number">1000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+<p>倒计时和刻度的变化要同步:fixDegreeAndBindToInstance更新角度，mapValueToDeltaDeg。通过最后的角度/总的格子数。来算出每一个的角度</p>
+<h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><p>这个项目中复杂的地方就是多个开关要区分不同的ID。</p>
+<p>业务逻辑方面理解不到位，在点击配对开关后要置灰。并且根据返回的配对结果来显示不同的成功和失败的页面。配对以后的开关才能进行清除操作。才能进行点击。</p>
+<h2 id="技术总结以及学习巩固的方向："><a href="#技术总结以及学习巩固的方向：" class="headerlink" title="技术总结以及学习巩固的方向："></a>技术总结以及学习巩固的方向：</h2><p>1.熟悉JS的语法：this的绑定。何时才能取到this（static方法如：defaultProps和PropTypes取不到）<br>2.研究ReactNative的源码，搞清楚RN的生命周期。<br>3.如何使用react-native-SVG来绘图，以及如何使用Animated来做动画。<br>4.如何使用Redux来管理整个项目：当后台实时的改变数据以后，前端页面也能够实时的变化，了解数据的流向，Redux就是一种思想，在新数据获取到后再RN的生命周期中何时setState。Redux中的action、reducer、store、type和router来实现mapStateToProps，做到实时的与服务器交互数据。（因为setState是异步的，可能不能保证数据的同步）</p>
+<p>5.对于Gesture和一些动画的角度设置还有具体的分析还有待提高</p>
+<p>6.代码的规范方面要注意：代码规范符合eslint，国际化的问题和不同屏幕的适配。</p>
+<h2 id="生活方面"><a href="#生活方面" class="headerlink" title="生活方面"></a>生活方面</h2><p>多运动，办了健身卡，希望可以尽快学会游泳，要时常健身，打球，业余时间还想学习一下机器学习、人工智能方面的算法的东西来写论文，有空还想学习一下如何理财的知识，以后可以用的上。</p>
 
       
     </div>
@@ -344,13 +315,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/02/22/学习React知识/">学习React知识</a></p>
+        <p><span>本文标题:</span><a href="/2017/11/30/11月总结/">11月总结</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2017年02月22日 - 14时26分</p>
-        <p><span>最后更新:</span>2017年07月24日 - 16时43分</p>
+        <p><span>发布时间:</span>2017年11月30日 - 21时56分</p>
+        <p><span>最后更新:</span>2017年11月30日 - 22时04分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/02/22/学习React知识/" title="学习React知识">http://peilinghui.com/2017/02/22/学习React知识/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/02/22/学习React知识/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/11/30/11月总结/" title="11月总结">http://peilinghui.com/2017/11/30/11月总结/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/11/30/11月总结/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -363,16 +334,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/03/02/学习React-Native入门/">
-                    学习React Native入门
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/02/16/自动化测试/">
-                    自动化测试
+                <a href="/2017/09/24/开发一个React-Native的APP/">
+                    开发一个React-Native的APP
                 </a>
             </div>
         
@@ -383,7 +348,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#了解React"><span class="toc-number">1.</span> <span class="toc-text">了解React</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JSX的语法编写"><span class="toc-number">1.1.</span> <span class="toc-text">JSX的语法编写</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Flux架构"><span class="toc-number">2.</span> <span class="toc-text">Flux架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redux架构"><span class="toc-number">3.</span> <span class="toc-text">Redux架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Redux简介"><span class="toc-number">3.1.</span> <span class="toc-text">Redux简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#三大原则"><span class="toc-number">3.1.1.</span> <span class="toc-text">三大原则</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#电扇面板"><span class="toc-number">1.</span> <span class="toc-text">电扇面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yuerbao-env"><span class="toc-number">2.</span> <span class="toc-text">yuerbao(env)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yuerbaoWaterPump"><span class="toc-number">3.</span> <span class="toc-text">yuerbaoWaterPump</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lowPro"><span class="toc-number">4.</span> <span class="toc-text">lowPro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cooker"><span class="toc-number">5.</span> <span class="toc-text">cooker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#switch"><span class="toc-number">6.</span> <span class="toc-text">switch</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#技术总结以及学习巩固的方向："><span class="toc-number"></span> <span class="toc-text">技术总结以及学习巩固的方向：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生活方面"><span class="toc-number"></span> <span class="toc-text">生活方面</span></a>
 </div>
 <style>
     .left-col .switch-btn {
@@ -445,7 +410,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2017/02/22/学习React知识/" data-title="学习React知识" data-url="http://peilinghui.com/2017/02/22/学习React知识/"></div>
+    <div class="ds-thread" data-thread-key="2017/11/30/11月总结/" data-title="11月总结" data-url="http://peilinghui.com/2017/11/30/11月总结/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -469,15 +434,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/03/02/学习React-Native入门/" title="上一篇: 学习React Native入门">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/02/16/自动化测试/" title="下一篇: 自动化测试">
+            <a href="/2017/09/24/开发一个React-Native的APP/" title="下一篇: 开发一个React-Native的APP">
                 <i class="fa fa-angle-right"></i>
             </a>
         
