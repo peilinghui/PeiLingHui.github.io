@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://peilinghui.com/"/>
-  <updated>2018-01-05T15:24:23.000Z</updated>
+  <updated>2018-01-07T11:51:26.000Z</updated>
   <id>http://peilinghui.com/</id>
   
   <author>
@@ -20,15 +20,16 @@
     <link href="http://peilinghui.com/2018/01/05/2017%E5%B9%B4%E6%80%BB%E7%BB%93/"/>
     <id>http://peilinghui.com/2018/01/05/2017年总结/</id>
     <published>2018-01-05T13:23:18.000Z</published>
-    <updated>2018-01-05T15:24:23.000Z</updated>
+    <updated>2018-01-07T11:51:26.000Z</updated>
     
     <content type="html">&lt;p&gt;终于有时间写一下年终总结和新年展望了。我们总是忙着走路，却忘了当初出发的目的。勿忘初心，方得始终。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;2017年过的可真快，还依稀记得16年写下的宏伟大志，但是随着被现实一点点的打磨，似乎都忘了我们最初的梦想。&lt;/p&gt;
-&lt;h1 id=&quot;工作&quot;&gt;&lt;a href=&quot;#工作&quot; class=&quot;headerlink&quot; title=&quot;工作&quot;&gt;&lt;/a&gt;工作&lt;/h1&gt;&lt;p&gt;先说一下工作，我从2017年的春节前辞职了上家公司，还是裸辞，年后到了学校就想一定要找BAT的实习，然后刚来学校不久就有了阿里内推的机会，然后我就投了，结果没过几天就打来电话了，那是二月上旬，然后顿时很受打击，感觉自己16年的大半年的工作里没有干过什么有价值的东西，然后开始了复习的计划，把剑指offer看了一遍，把题刷了一点，然后开始复习iOS的基础，就把effective-objectiveC和Objective-c的高级编程那本书，还看了图解HTTP，编程珠玑没看完，还有王道的那本程序员求职宝典，然后觉得C++可能也是要看一下，于是买了C++primerPlus(看了前面的一点)和effectiveC++（没看），复习了大概一个月，就开始投简历了，然后是腾讯电话面试，是QQ空间的面试官，那是3月中下旬了，腾讯面试官很认真，问了我很多iOS基础的东西都有答上来，但是C++的东西，完全都没答上来，无非是一些简单的常用的多态，继承还有虚函数，以前考研的时候有复习过，但是基本忘的差不多了，于是就面试官开始给我讲了问题，最后说了可以好好复习一下以后还有机会，第二天的中午面试官还发短信说我有个问题说错了给我指出来了，顿时感觉面试官好认真，相比之下，阿里面试官就感觉没辣么认真和你讲了。然后投了网易，网易笔试，美团也投了，然后也笔试了，然后投了华为，面试了一下，可是我觉得自己做iOS，去华为干嘛。然后投了唯品会，电话面试了一次过了，让去上海再面试一下，当时候只要有机会就开始投各大公司了，投了百度，链家，还有蜻蜓，然后去上海面试了唯品会，然后就去了北京，去了传说中的中关村，见了很多研究生的同学，两个在百度，一个在美团，然后面试了美团和百度和链家还有蜻蜓，总结：自己代码敲得不够，练手练得太少了，功夫下的不够深，基础不够扎实，iOS竞争太强了，去面试百度，面试官直接说才看我的简历，不知道到今天面试了多少个人了。最后只招一个。尴尬。然后回家了一趟，然后又回杭州面试了网易，但是我投的测试。。感觉自己投错了。。面试官问为什么想从开发转测试。。我顿时语塞。然后唯品会通知了就4月下旬就去上海入职了。然后就开始了从4月底到9月底在唯品会工作。工作上开始从iOS原生开发转向了RN开发。9月底离职。10月初回杭州了，差不多校招都接近尾声了。就开始投了几家公司校招和社招一起投，阿里电面了一次，挖财面试了一下，还有机会面APPLE来着，全英文面试，有点虚就没面上，面试酷家乐没去额，然后上海美团大众点评还打了两次电话让我去上海面试，但是我那个时候已经入职了杭州的一家公司了就是现在的公司涂鸦，也是继续开发React-Native，并且是做智能家居的，感觉很有趣。前景也看好。&lt;/p&gt;
+&lt;h1 id=&quot;工作&quot;&gt;&lt;a href=&quot;#工作&quot; class=&quot;headerlink&quot; title=&quot;工作&quot;&gt;&lt;/a&gt;工作&lt;/h1&gt;&lt;p&gt;先说一下工作，我从2017年的春节前辞职了上家公司，还是裸辞，年后到了学校就想一定要找BAT的实习，然后刚来学校不久就有了阿里内推的机会，然后我就投了，结果没过几天就打来电话了，那是二月上旬，然后顿时很受打击，感觉自己16年的大半年的工作里没有干过什么有价值的东西，然后开始了复习的计划，把剑指offer看了一遍，把题刷了一点，然后开始复习iOS的基础，就把effective-objectiveC和Objective-c的高级编程那本书，还看了图解HTTP，编程珠玑没看完，还有王道的那本程序员求职宝典，然后觉得C++可能也是要看一下，于是买了C++primerPlus(看了前面的一点)和effectiveC++（没看），复习了大概一个月，就开始投简历了，然后是腾讯电话面试，是QQ空间的面试官，那是3月中下旬了，腾讯面试官很认真，问了我很多iOS基础的东西都有答上来，但是C++的东西，完全都没答上来，无非是一些简单的常用的多态，继承还有虚函数，以前考研的时候有复习过，但是基本忘的差不多了，于是就面试官开始给我讲了问题，最后说了可以好好复习一下以后还有机会，第二天的中午面试官还发短信说我有个问题说错了给我指出来了，顿时感觉面试官好认真，相比之下，阿里面试官就感觉没辣么认真和你讲了。然后投了网易，网易笔试，美团也投了，然后也笔试了，然后投了华为，面试了一下，可是我觉得自己做iOS，去华为干嘛。然后投了唯品会，电话面试了一次过了，让去上海再面试一下，当时候只要有机会就开始投各大公司了，投了百度，链家，还有蜻蜓，然后去上海面试了唯品会，然后就去了北京，去了传说中的中关村，见了很多研究生的同学，两个在百度，一个在美团，然后面试了美团和百度和链家还有蜻蜓，总结：自己代码敲得不够，练手练得太少了，功夫下的不够深，基础不够扎实，iOS竞争太强了，去面试百度，面试官直接说才看我的简历，不知道到今天面试了多少个人了。最后只招一个。尴尬。然后回了趟天津，本科天津读书，回天津见了大学的好朋友，然后回本科学校看了看，遇到了很多很多本科读研的同学，聊了聊吃吃饭逛逛街，刚好清明节就回家了一趟，然后又回杭州面试了网易，但是我投的测试。。感觉自己投错了。。面试官问为什么想从开发转测试。。我顿时语塞。然后唯品会通知了就4月下旬就去上海入职了。然后就开始了从4月底到9月底在唯品会工作。工作上开始从iOS原生开发转向了RN开发。9月底离职。10月初回杭州了，差不多校招都接近尾声了。就开始投了几家公司校招和社招一起投，阿里电面了一次，挖财面试了一下，还有机会面APPLE来着，全英文面试，有点虚就没面上，面试酷家乐没去额，然后上海美团大众点评还打了两次电话让我去上海面试，但是我那个时候已经入职了杭州的一家公司了就是现在的公司涂鸦，也是继续开发React-Native，并且是做智能家居的，感觉很有趣。前景也看好。&lt;/p&gt;
 &lt;h2 id=&quot;感触：&quot;&gt;&lt;a href=&quot;#感触：&quot; class=&quot;headerlink&quot; title=&quot;感触：&quot;&gt;&lt;/a&gt;感触：&lt;/h2&gt;&lt;p&gt;找工作就是持久战，心理和身体的坚持，感觉自己好像干了很多，但是回想又没有学到什么，尤其在第一家公司的时候，感觉自己做了一年iOS都没有完整的自己写过一个APP，真是惭愧。然后求职过程中开始总结以前工作的东西，发现自己只是在一味的加班，做代码的搬运工，其实并没有树立自己的品牌，就像现在的自媒体都在树立的自己的品牌。一直的加班让人感到疲惫，而你如果不自己再抽时间学习的话就会被淘汰，正如iOS当初年初的时候多少人说找不到工作一样。然后到了上海开始做原生也是在别人代码上再开发的，然后也是感谢领导，没有安卓，就让我开始重构那个供应商的一个APP，于是就开始边学RN边写，大概花了两个月左右，终于从0到1做出了一个自己完整做的APP，也算实现了自己的一个小目标了，也对RN有所了解了。在新公司也可以继续学习RN这块，然后有空的话开始扩展前端的领域。&lt;/p&gt;
 &lt;h1 id=&quot;学习&quot;&gt;&lt;a href=&quot;#学习&quot; class=&quot;headerlink&quot; title=&quot;学习&quot;&gt;&lt;/a&gt;学习&lt;/h1&gt;&lt;p&gt;除了面试的几本书，还有就是JavaScript高级程序设计（看完了，但是好多东西还没理解清楚），React-Native入门与实践，Linux私房菜基础学习。还有一些杂书，将来的你一定会感谢现在拼命的自己，还有leanIn还有优秀的人都敢于对自己下狠手，天才在左，疯子在右(没看完),无非是一些打鸡血的书，偶尔喝喝鸡汤。还考了一次六级。还写了开题报告。写了论文。也感觉到毕业快临近了。&lt;br&gt;鼓励我学习的动力就是软院的厉害的小伙伴，都是拿到大SPoffer，各种奖学金，还认识了好多比我年纪小还比我厉害好多的人，认识这些牛人的方式就是通过他们的个人博客，有个女生才大三，PAT刷分超高，代码什么都很强，算了，直接上博客：&lt;a href=&quot;https://www.liuchuo.net&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.liuchuo.net&lt;/a&gt;,还有一些94，95，96年的都很厉害额。感觉就是比你小还比你厉害，比你厉害的人还比你努力，就是这种。。感觉大家都不仅会iOS还一直在往各个方向发展，比如学习Docker还有swift还有一些weex还有一个直接转JAVA了。&lt;/p&gt;
 &lt;h1 id=&quot;生活&quot;&gt;&lt;a href=&quot;#生活&quot; class=&quot;headerlink&quot; title=&quot;生活&quot;&gt;&lt;/a&gt;生活&lt;/h1&gt;&lt;p&gt;生活上感觉在学校的时候就是和同学舍友很多，大家一起，不会无聊，很好玩，一起学习，一起鼓励，挺好的。&lt;br&gt;在上海的时候就是合租，三室一厅的，舍友都很好，然后有一段时间自己看到自律的文章，然后就开始早上6点半起，晚上11点半睡觉，坚持了一个半月，还学会了自己做饭，那段时间还在网上买了RN的视频和书，感觉效率很高呐，基本就是早起做饭偶尔跑步，然后洗澡，上班，然后下班也早，回家做饭，然后学习，看视频，写代码，那段时间还听怀念的，然后周末还双休，基本上周日还可以和一些教会的朋友聚一起，在上海认识了很多的朋友，感觉那段时间还挺好的。&lt;br&gt;之后回学校了就起晚了，睡得也迟了很多。都在12点以后睡了。早上8点多起。但是办了健身卡，坚持游泳了一个月，也差不多学会游泳了，就是50米的泳道要停一次，哈哈，也是因为一次在忽然感觉胸口很疼，就去办了健身卡在公司旁边，争取每周能去一次，偶尔还和公司的同事一起打球。至于恋爱方面额。。。我就不说了。。哈哈哈&lt;/p&gt;
+&lt;p&gt;自己都快忘了这一年去过哪里了。还好朋友圈帮你记得那些小事。去年还去过深圳和香港还有厦门鼓浪屿玩过。今年去了北京面试见了很多同学去故宫玩了下还，然后去上海工作逛了好多地方。去了ChinaJoy。大部分都是动漫游戏还有一些高科技。还有公司两次团建，一次去了苏州，一次去了南通。住的都是豪华酒店。还部门团建了几次。在上海还逛了各种的商场，不得不说上海真的是魔都呐，几步就是一个商场。各种活动都有，去听了一次简单生活音乐节。反正只要你感兴趣的，上海都能满足你。就是花费有点大。攒不下钱。后来回杭州听了一次杰伦演唱会。也算满足了我一个小目标。毕竟去唯品会就是因为自己在上面经常剁手好多。并且特别喜欢杰伦。&lt;br&gt;总的来说这一年的生活还是丰富多彩而且还是充实的。&lt;br&gt;在8月份的时候我又洗礼了一次。心里的洗礼就算是再次受洗了。就是一名基督徒。希望以后的生活神都能继续带领帮助我，赐我智慧。  &lt;/p&gt;
 &lt;h1 id=&quot;新的一年的规划&quot;&gt;&lt;a href=&quot;#新的一年的规划&quot; class=&quot;headerlink&quot; title=&quot;新的一年的规划&quot;&gt;&lt;/a&gt;新的一年的规划&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;新的一年就快要毕业了，把论文再改一下，毕业。&lt;/li&gt;
 &lt;li&gt;学习上能够开始更加深入的学习JavaScript因为感觉自己JavaScript基础还是不行额。。&lt;/li&gt;
@@ -38,6 +39,10 @@
 &lt;li&gt;有时间还是要研究一下一些源码，争取能写出来写东西，可以有东西开源在GitHUB上。这是很大的目标。。感觉写iOS框架的那些人一定是读了很多的书，看过很多的源码和写过很多的源码。&lt;/li&gt;
 &lt;li&gt;提高学习效率，提高工作效率，节省下来时间可以出去旅游，健身，游泳，或者是谈恋爱。哈哈哈哈。加油！&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;还有一些值得我去的学习的同学的博客：&lt;/p&gt;
+&lt;p&gt;小苾：&lt;a href=&quot;http://bealin.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://bealin.github.io/&lt;/a&gt;&lt;br&gt;峰神: &lt;a href=&quot;http://blog.csdn.net/chenyufeng1991&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/chenyufeng1991&lt;/a&gt;&lt;br&gt;松神： &lt;a href=&quot;http://lysongzi.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://lysongzi.com/&lt;/a&gt;&lt;br&gt;李克西：&lt;a href=&quot;http://www.krselee.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.krselee.com/&lt;/a&gt;&lt;br&gt;bestswifter：&lt;a href=&quot;https://bestswifter.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://bestswifter.com/&lt;/a&gt;&lt;br&gt;冬瓜：&lt;a href=&quot;http://www.desgard.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.desgard.com/&lt;/a&gt;&lt;br&gt;方春：&lt;a href=&quot;https://www.jonyfang.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.jonyfang.com/&lt;/a&gt;&lt;br&gt;冰霜：&lt;a href=&quot;https://www.halfrost.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.halfrost.com/&lt;/a&gt;&lt;br&gt;Joy___: &lt;a href=&quot;https://www.jianshu.com/u/9c51a213b02e&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.jianshu.com/u/9c51a213b02e&lt;/a&gt;&lt;br&gt;Jim ：&lt;a href=&quot;http://kuailejim.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://kuailejim.com/&lt;/a&gt;&lt;br&gt;draveness: &lt;a href=&quot;https://draveness.me&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://draveness.me&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;还有最近比较火的区块链，可以去看看李笑来的一些书和公众号：&lt;a href=&quot;http://zhibimo.com/read/xiaolai/reborn-every-7-years/Preface.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://zhibimo.com/read/xiaolai/reborn-every-7-years/Preface.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;最后一句：读万卷书不如行万里路，行万里路不如阅人无数，阅人无数不如跟着成功人的脚步。希望我也能更紧成功人的脚步，早日脱贫脱单。哈哈哈。&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -104,49 +109,6 @@
     <summary type="html">
     
       &lt;p&gt;使用Redux也有一段时间了。总结一下。&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>11月总结</title>
-    <link href="http://peilinghui.com/2017/11/30/11%E6%9C%88%E6%80%BB%E7%BB%93/"/>
-    <id>http://peilinghui.com/2017/11/30/11月总结/</id>
-    <published>2017-11-30T13:56:24.000Z</published>
-    <updated>2017-11-30T14:04:50.000Z</updated>
-    
-    <content type="html">&lt;p&gt;日子过得真快！从上海回杭州了，还是回杭州比较好一点。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;换了份工作，继续做ReactNative。10月17号入职的。&lt;br&gt;从入职以来也做了不少的面板。&lt;/p&gt;
-&lt;h3 id=&quot;电扇面板&quot;&gt;&lt;a href=&quot;#电扇面板&quot; class=&quot;headerlink&quot; title=&quot;电扇面板&quot;&gt;&lt;/a&gt;电扇面板&lt;/h3&gt;&lt;p&gt;1.在这个项目中遇到的难点就是电扇的转动–一个动画，通过设置转速不同来改变旋转动画的快慢。转速和转向的设置，就是Animated的使用。&lt;/p&gt;
-&lt;figure class=&quot;highlight pf&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;const rec = () =&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      this.&lt;span class=&quot;keyword&quot;&gt;state&lt;/span&gt;.anim.&lt;span class=&quot;built_in&quot;&gt;set&lt;/span&gt;Value(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      Animated.parallel([&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Animated.timing(this.&lt;span class=&quot;keyword&quot;&gt;state&lt;/span&gt;.anim, &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &lt;span class=&quot;keyword&quot;&gt;to&lt;/span&gt;Value: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          easing: Easing.linear,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          duration,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;),&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      ]).start(o =&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        if (o.finished) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          rec();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    rec();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ol&gt;
-&lt;li&gt;初次使用Redux，了解了一些基础控件的使用，比如slider,picker，showMaskView，SwitchButtonX，还有重命名的一个控件。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;yuerbao-env&quot;&gt;&lt;a href=&quot;#yuerbao-env&quot; class=&quot;headerlink&quot; title=&quot;yuerbao(env)&quot;&gt;&lt;/a&gt;yuerbao(env)&lt;/h3&gt;&lt;p&gt;这个项目中我主要是在以前的项目基础上新加一个页面，新写的页面比较简单。主要问题就在于改后的面板，出现了闪退和数据没有显示的问题。。。解决方法：把bind绑定this函数，还有就是数据没有获取到。原来的代码没看懂。&lt;/p&gt;
-&lt;h3 id=&quot;yuerbaoWaterPump&quot;&gt;&lt;a href=&quot;#yuerbaoWaterPump&quot; class=&quot;headerlink&quot; title=&quot;yuerbaoWaterPump&quot;&gt;&lt;/a&gt;yuerbaoWaterPump&lt;/h3&gt;&lt;p&gt;这个项目的主要难点就是一个可触摸滑动的进度环。还有对应的标识点 和一个旋转的动画。&lt;br&gt;自己写的就是基于组件库中的Newpicker写的时间的picker和几个picker。&lt;/p&gt;
-&lt;p&gt;可触摸滑动的进度环：主要是用SVG来绘图，Gesture的手势的响应，触摸的位置的坐标切换到相当于圆心点的坐标。&lt;br&gt;通过滑动的初始角度和结束角度来再次绘图SVG。同时改变标识点的位置。&lt;/p&gt;
-&lt;p&gt;标识点：用SVG中的circle来绘制，通过手势滑动的位置，来改变小圆点的位置。&lt;/p&gt;
-&lt;p&gt;旋转的动画：遇到的问题：在关机或者是退出后再进去动画不能连续或者是出现了多个动画的重叠。解决方法：开始动画的时候把状态设置为true，停止动画设置为false，&lt;/p&gt;
-&lt;figure class=&quot;highlight coffeescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.animating = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    rotateAnim.setValue(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Animated.timing(rotateAnim, &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;attribute&quot;&gt;toValue&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      duration,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;attribute&quot;&gt;easing&lt;/span&gt;: Easing.linear,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;).start(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; =&amp;gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.animating) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.startAnimation();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;lowPro&quot;&gt;&lt;a href=&quot;#lowPro&quot; class=&quot;headerlink&quot; title=&quot;lowPro&quot;&gt;&lt;/a&gt;lowPro&lt;/h3&gt;&lt;p&gt;感觉好像是纯体力活，没什么复杂页面和逻辑交互，就是历史记录的处理也是用的以前的一套。&lt;/p&gt;
-&lt;h3 id=&quot;cooker&quot;&gt;&lt;a href=&quot;#cooker&quot; class=&quot;headerlink&quot; title=&quot;cooker&quot;&gt;&lt;/a&gt;cooker&lt;/h3&gt;&lt;p&gt;这个项目中的逻辑比较复杂，就是各种状态的不同的页面。&lt;/p&gt;
-&lt;p&gt;难点就是在每种模式运行的时候要倒计时。同时刻度要变化。倒计时和刻度的变化要同步，同时后端每隔30秒传回数据来修正时间。用setTimeout好于用serInterval。&lt;/p&gt;
-&lt;figure class=&quot;highlight coffeescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; 倒计时&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;  &lt;span class=&quot;title&quot;&gt;countdownHandle&lt;/span&gt; = &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; =&amp;gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    const handle = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; =&amp;gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      let &amp;#123; time &amp;#125; = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.state;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      time -= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.setState(&amp;#123; time &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.countdownHandle();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.state.time &amp;gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.timerId = setTimeout(handle, &lt;span class=&quot;number&quot;&gt;1000&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;倒计时和刻度的变化要同步:fixDegreeAndBindToInstance更新角度，mapValueToDeltaDeg。通过最后的角度/总的格子数。来算出每一个的角度&lt;/p&gt;
-&lt;h3 id=&quot;switch&quot;&gt;&lt;a href=&quot;#switch&quot; class=&quot;headerlink&quot; title=&quot;switch&quot;&gt;&lt;/a&gt;switch&lt;/h3&gt;&lt;p&gt;这个项目中复杂的地方就是多个开关要区分不同的ID。&lt;/p&gt;
-&lt;p&gt;业务逻辑方面理解不到位，在点击配对开关后要置灰。并且根据返回的配对结果来显示不同的成功和失败的页面。配对以后的开关才能进行清除操作。才能进行点击。&lt;/p&gt;
-&lt;h2 id=&quot;技术总结以及学习巩固的方向：&quot;&gt;&lt;a href=&quot;#技术总结以及学习巩固的方向：&quot; class=&quot;headerlink&quot; title=&quot;技术总结以及学习巩固的方向：&quot;&gt;&lt;/a&gt;技术总结以及学习巩固的方向：&lt;/h2&gt;&lt;p&gt;1.熟悉JS的语法：this的绑定。何时才能取到this（static方法如：defaultProps和PropTypes取不到）&lt;br&gt;2.研究ReactNative的源码，搞清楚RN的生命周期。&lt;br&gt;3.如何使用react-native-SVG来绘图，以及如何使用Animated来做动画。&lt;br&gt;4.如何使用Redux来管理整个项目：当后台实时的改变数据以后，前端页面也能够实时的变化，了解数据的流向，Redux就是一种思想，在新数据获取到后再RN的生命周期中何时setState。Redux中的action、reducer、store、type和router来实现mapStateToProps，做到实时的与服务器交互数据。（因为setState是异步的，可能不能保证数据的同步）&lt;/p&gt;
-&lt;p&gt;5.对于Gesture和一些动画的角度设置还有具体的分析还有待提高&lt;/p&gt;
-&lt;p&gt;6.代码的规范方面要注意：代码规范符合eslint，国际化的问题和不同屏幕的适配。&lt;/p&gt;
-&lt;h2 id=&quot;生活方面&quot;&gt;&lt;a href=&quot;#生活方面&quot; class=&quot;headerlink&quot; title=&quot;生活方面&quot;&gt;&lt;/a&gt;生活方面&lt;/h2&gt;&lt;p&gt;多运动，办了健身卡，希望可以尽快学会游泳，要时常健身，打球，业余时间还想学习一下机器学习、人工智能方面的算法的东西来写论文，有空还想学习一下如何理财的知识，以后可以用的上。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;日子过得真快！从上海回杭州了，还是回杭州比较好一点。&lt;/p&gt;
     
     </summary>
     
@@ -1408,6 +1370,78 @@ Safari相同的JavaScript引擎
     <summary type="html">
     
       &lt;p&gt;抽时间学习一下&lt;a href=&quot;https://github.com/facebook/react-native&quot;&gt;React Native&lt;/a&gt;.&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>学习React知识</title>
+    <link href="http://peilinghui.com/2017/02/22/%E5%AD%A6%E4%B9%A0React%E7%9F%A5%E8%AF%86/"/>
+    <id>http://peilinghui.com/2017/02/22/学习React知识/</id>
+    <published>2017-02-22T06:26:54.000Z</published>
+    <updated>2017-07-24T08:43:48.000Z</updated>
+    
+    <content type="html">&lt;p&gt;React是JavaScript的库，把用户页面抽象成组件。在学习React-native前，先了解一下React。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;&lt;a href=&quot;https://facebook.github.io/react/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/facebook/react&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;github地址&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;了解React&quot;&gt;&lt;a href=&quot;#了解React&quot; class=&quot;headerlink&quot; title=&quot;了解React&quot;&gt;&lt;/a&gt;了解React&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;Virtual DOM提升了React的性能。React可以映射为对应的原生控件，所以React-Native就可以实现一次编程，多次使用。&lt;/li&gt;
+&lt;li&gt;函数式编程的思想&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;JSX的语法编写&quot;&gt;&lt;a href=&quot;#JSX的语法编写&quot; class=&quot;headerlink&quot; title=&quot;JSX的语法编写&quot;&gt;&lt;/a&gt;JSX的语法编写&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;XML语法：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;定义标签时，只允许被一个标签包裹&lt;/li&gt;
+&lt;li&gt;标签一定要闭合.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;元素的类型和属性&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;DOM元素的属性是标准规范属性，除了Class和for，转换为className和htmlFor.&lt;/li&gt;
+&lt;li&gt;小写首字母对应的是DOM元素，大写首字母对应的是组件元素。&lt;br&gt;JSX特有的属性表达：&lt;/li&gt;
+&lt;li&gt;Boolean属性：省略表示bool值设为了true，要传false必须用属性表达式，如：disable、require、checked、readonly&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;Flux架构&quot;&gt;&lt;a href=&quot;#Flux架构&quot; class=&quot;headerlink&quot; title=&quot;Flux架构&quot;&gt;&lt;/a&gt;Flux架构&lt;/h1&gt;&lt;p&gt;不是MVC的架构，Flux三大部分组成：1. dispatcher、store、view。dispatcher负责分发事件，store负责保存数据、view负责订阅store中的数据，并使用这些数据渲染相应的页面。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;与MVC的主要区别：&lt;/strong&gt;&lt;br&gt;没有职责明确的Controller，存在一个Controller-view的角色，将view和store进行绑定，并没有Controller需要承担的复杂的逻辑。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;dispatcher与action&lt;/strong&gt;&lt;br&gt;dispatcher的实现就是下面两个API:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;.register(callback)方法用来注册一个监听器。&lt;br&gt;.dispatch(action)用来分发一个action。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;action是一个普通的JavaScript对象，一般包含type、payload字段，用于描述一个事件以及需要改变的相关数据。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;store&lt;/strong&gt;&lt;br&gt;负责保存数据，并且修改数据的逻辑，调用dispatcher的register(callback)方法将自己注册为一个监听器。&lt;br&gt;当.dispatch(action)用来分发一个action时，store注册的监听器就会被调用，同时得到这个action作为参数。store之暴露getter不暴露setter，只能读取不能修改。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Controller-view&lt;/strong&gt;&lt;br&gt;最顶层view，主要进行store与React组件(view层)之间的数据的绑定，定义数据更新以及传递的方式。会调用store保留的getter获取存储其中的数据并设置为自己的state，在render时以props的形式传给自己的子组件。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;view&lt;/strong&gt;&lt;br&gt;React组件扮演。结合Angular、Vue来发挥Flux的能力。&lt;br&gt;一条特殊的约定：&lt;strong&gt;Flux的view不能直接修改数据，如果页面操作需要修改数据，则必须使用dispatcher分发一个action。&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;actionCreator&lt;/strong&gt;&lt;br&gt;用来创造action的。为什么需要？因为在分发action的时候代码是冗余的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;Redux架构&quot;&gt;&lt;a href=&quot;#Redux架构&quot; class=&quot;headerlink&quot; title=&quot;Redux架构&quot;&gt;&lt;/a&gt;Redux架构&lt;/h1&gt;&lt;h2 id=&quot;Redux简介&quot;&gt;&lt;a href=&quot;#Redux简介&quot; class=&quot;headerlink&quot; title=&quot;Redux简介&quot;&gt;&lt;/a&gt;Redux简介&lt;/h2&gt;&lt;p&gt;Redux的核心代码是一个库，类似Flux的架构思想，&lt;/p&gt;
+&lt;h3 id=&quot;三大原则&quot;&gt;&lt;a href=&quot;#三大原则&quot; class=&quot;headerlink&quot; title=&quot;三大原则&quot;&gt;&lt;/a&gt;三大原则&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;单一数据源&lt;br&gt;一个应用永远只有唯一的一个数据源，整个应用状态都保存在一个对象中。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;状态是只读的&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Flux中store没有setter只有getter，而Redux中没有store，只有reducer，根据当前触发的action对当前应用state进行迭代。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;状态修改均由纯函数完成&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Redux与Flux最大的不同。&lt;br&gt;在Flux中，我们在actionCreator里调用APPDispatcher.dispatch方法来触发action，直接修改了store中数据.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;React是JavaScript的库，把用户页面抽象成组件。在学习React-native前，先了解一下React。&lt;/p&gt;
     
     </summary>
     
