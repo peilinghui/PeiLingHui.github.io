@@ -125,11 +125,11 @@
   </entry>
   
   <entry>
-    <title>开发一个React-Native的APP</title>
-    <link href="http://peilinghui.com/2017/09/24/%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AAReact-Native%E7%9A%84APP/"/>
-    <id>http://peilinghui.com/2017/09/24/开发一个React-Native的APP/</id>
+    <title>React-Native的APP</title>
+    <link href="http://peilinghui.com/2017/09/24/React-Native%E7%9A%84APP/"/>
+    <id>http://peilinghui.com/2017/09/24/React-Native的APP/</id>
     <published>2017-09-24T13:34:53.000Z</published>
-    <updated>2017-09-24T14:01:24.000Z</updated>
+    <updated>2018-07-18T01:43:49.648Z</updated>
     
     <content type="html">&lt;p&gt;从7月底到9月底两个月的时间开发了一个React-Native的APP。不得不说，用RN的开发效率还是很快的。就来总结一下历程。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -609,11 +609,11 @@
   </entry>
   
   <entry>
-    <title>研究AFNetworking框架</title>
+    <title>AFNetworking3.0</title>
     <link href="http://peilinghui.com/2017/06/05/AFNetworking3.0/"/>
     <id>http://peilinghui.com/2017/06/05/AFNetworking3.0/</id>
     <published>2017-06-05T06:08:53.000Z</published>
-    <updated>2017-07-11T04:49:04.000Z</updated>
+    <updated>2018-07-18T01:34:43.130Z</updated>
     
     <content type="html">&lt;p&gt;研究AFNetworking框架。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;AFNetworking3-0&quot;&gt;&lt;a href=&quot;#AFNetworking3-0&quot; class=&quot;headerlink&quot; title=&quot;AFNetworking3.0&quot;&gt;&lt;/a&gt;AFNetworking3.0&lt;/h1&gt;&lt;h1 id=&quot;NSURLSession&quot;&gt;&lt;a href=&quot;#NSURLSession&quot; class=&quot;headerlink&quot; title=&quot;NSURLSession&quot;&gt;&lt;/a&gt;NSURLSession&lt;/h1&gt;&lt;h2 id=&quot;AFNHTTPSessionManager&quot;&gt;&lt;a href=&quot;#AFNHTTPSessionManager&quot; class=&quot;headerlink&quot; title=&quot;AFNHTTPSessionManager&quot;&gt;&lt;/a&gt;AFNHTTPSessionManager&lt;/h2&gt;&lt;p&gt;&lt;code&gt;AFHTTPSessionManager&lt;/code&gt; is a subclass of &lt;code&gt;AFURLSessionManager&lt;/code&gt; with convenience methods for making HTTP requests. When a &lt;code&gt;baseURL&lt;/code&gt; is provided, requests made with the &lt;code&gt;GET&lt;/code&gt; / &lt;code&gt;POST&lt;/code&gt; / et al. convenience methods can be made with relative paths.&lt;/p&gt;
@@ -779,17 +779,15 @@ completionHandler:(nullable void (^)(NSURLResponse *response, NSURL * _Nullable 
     
     </summary>
     
-      <category term="iOS" scheme="http://peilinghui.com/categories/iOS/"/>
-    
     
   </entry>
   
   <entry>
-    <title>做一个搜索框的Demo</title>
-    <link href="http://peilinghui.com/2017/05/27/%E5%81%9A%E4%B8%80%E4%B8%AA%E6%90%9C%E7%B4%A2%E6%A1%86%E7%9A%84Demo/"/>
-    <id>http://peilinghui.com/2017/05/27/做一个搜索框的Demo/</id>
+    <title>搜索框的Demo</title>
+    <link href="http://peilinghui.com/2017/05/27/%E6%90%9C%E7%B4%A2%E6%A1%86%E7%9A%84Demo/"/>
+    <id>http://peilinghui.com/2017/05/27/搜索框的Demo/</id>
     <published>2017-05-27T15:11:25.000Z</published>
-    <updated>2017-07-03T23:49:02.000Z</updated>
+    <updated>2018-07-18T01:43:18.746Z</updated>
     
     <content type="html">&lt;p&gt;打开手机，就会发现我们用的最多的就是TableView和搜索框了。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -837,8 +835,8 @@ completionHandler:(nullable void (^)(NSURLResponse *response, NSURL * _Nullable 
   
   <entry>
     <title>如何使用Mac本地服务器</title>
-    <link href="http://peilinghui.com/2017/05/27/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Mac%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    <id>http://peilinghui.com/2017/05/27/如何使用Mac本地服务器/</id>
+    <link href="http://peilinghui.com/2017/05/27/%E4%BD%BF%E7%94%A8Mac%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://peilinghui.com/2017/05/27/使用Mac本地服务器/</id>
     <published>2017-05-27T14:27:26.000Z</published>
     <updated>2017-05-27T15:42:26.000Z</updated>
     
@@ -1015,11 +1013,11 @@ completionHandler:(nullable void (^)(NSURLResponse *response, NSURL * _Nullable 
   </entry>
   
   <entry>
-    <title>学习iOS中JS与OC相互调用的方式</title>
-    <link href="http://peilinghui.com/2017/05/05/%E5%AD%A6%E4%B9%A0iOS%E4%B8%ADJS%E4%B8%8EOC%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8%E7%9A%84%E6%96%B9%E5%BC%8F/"/>
-    <id>http://peilinghui.com/2017/05/05/学习iOS中JS与OC相互调用的方式/</id>
+    <title>iOS中JS与OC相互调用的方式</title>
+    <link href="http://peilinghui.com/2017/05/05/iOS%E4%B8%ADJS%E4%B8%8EOC%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8%E7%9A%84%E6%96%B9%E5%BC%8F/"/>
+    <id>http://peilinghui.com/2017/05/05/iOS中JS与OC相互调用的方式/</id>
     <published>2017-05-05T06:50:42.000Z</published>
-    <updated>2017-05-11T01:24:53.000Z</updated>
+    <updated>2018-07-18T01:42:15.113Z</updated>
     
     <content type="html">&lt;p&gt;Web App即是HTML5 APP框架开发模式，使用HTML5,CSS3以及JavaScript以及服务器端语言来完成开发，Web App具有跨平台的优势。那么就来学习一下iOS中JS与OC相互调用的方式。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -1114,11 +1112,11 @@ Safari相同的JavaScript引擎
   </entry>
   
   <entry>
-    <title>深入学习NSURLProtocol</title>
-    <link href="http://peilinghui.com/2017/04/30/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0NSURLProtocol/"/>
-    <id>http://peilinghui.com/2017/04/30/深入学习NSURLProtocol/</id>
+    <title>NSURLProtocol</title>
+    <link href="http://peilinghui.com/2017/04/30/NSURLProtocol/"/>
+    <id>http://peilinghui.com/2017/04/30/NSURLProtocol/</id>
     <published>2017-04-30T04:59:56.000Z</published>
-    <updated>2017-04-30T09:18:27.000Z</updated>
+    <updated>2018-07-18T01:41:52.609Z</updated>
     
     <content type="html">&lt;p&gt;研究一下NSURLProtocol.h。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;NSURLProtocol是什么？&quot;&gt;&lt;a href=&quot;#NSURLProtocol是什么？&quot; class=&quot;headerlink&quot; title=&quot;NSURLProtocol是什么？&quot;&gt;&lt;/a&gt;NSURLProtocol是什么？&lt;/h1&gt;&lt;p&gt;NSURLProtocol是URL Loading System的重要组成部分。&lt;br&gt;首先虽然名叫NSURLProtocol，但它却不是协议。它是一个抽象类。我们要使用它的时候需要创建它的一个子类。&lt;br&gt;NSURLProtocol在iOS系统中大概处于这样一个位置。&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-30%20%E4%B8%8B%E5%8D%882.12.33.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;如果开发者自定义的一个NSURLProtocol并且注册到app中，那么在这个自定义的NSURLProtocol中我们可以拦截UIWebView，基于系统的NSURLConnection或者NSURLSession进行封装的网络请求，然后做到自定义的response返回。非常强大。&lt;/p&gt;
@@ -1237,11 +1235,11 @@ Safari相同的JavaScript引擎
   </entry>
   
   <entry>
-    <title>学习React-Native的与原生的交互</title>
-    <link href="http://peilinghui.com/2017/03/21/%E5%AD%A6%E4%B9%A0React-Native%E7%9A%84%E4%B8%8E%E5%8E%9F%E7%94%9F%E7%9A%84%E4%BA%A4%E4%BA%92/"/>
-    <id>http://peilinghui.com/2017/03/21/学习React-Native的与原生的交互/</id>
+    <title>React-Native的与原生的交互</title>
+    <link href="http://peilinghui.com/2017/03/21/React-Native%E7%9A%84%E4%B8%8E%E5%8E%9F%E7%94%9F%E7%9A%84%E4%BA%A4%E4%BA%92/"/>
+    <id>http://peilinghui.com/2017/03/21/React-Native的与原生的交互/</id>
     <published>2017-03-21T09:12:44.000Z</published>
-    <updated>2017-07-21T10:34:57.000Z</updated>
+    <updated>2018-07-18T01:41:41.577Z</updated>
     
     <content type="html">&lt;p&gt;在用RN开发的时候，遇到一些情况也需要来扩展原生的组件，就需要与OC来交互。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -1282,11 +1280,11 @@ Safari相同的JavaScript引擎
   </entry>
   
   <entry>
-    <title>学习React-Native的API和组件</title>
-    <link href="http://peilinghui.com/2017/03/10/%E5%AD%A6%E4%B9%A0React-Native%E7%9A%84API%E5%92%8C%E7%BB%84%E4%BB%B6/"/>
-    <id>http://peilinghui.com/2017/03/10/学习React-Native的API和组件/</id>
+    <title>React-Native的API和组件</title>
+    <link href="http://peilinghui.com/2017/03/10/React-Native%E7%9A%84API%E5%92%8C%E7%BB%84%E4%BB%B6/"/>
+    <id>http://peilinghui.com/2017/03/10/React-Native的API和组件/</id>
     <published>2017-03-10T09:09:04.000Z</published>
-    <updated>2017-07-21T09:02:25.000Z</updated>
+    <updated>2018-07-18T01:41:34.673Z</updated>
     
     <content type="html">&lt;p&gt;在学习了React-Native的搭建以后，然后就在网上找了一些Demo来学习，并且开始练习。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -1445,11 +1443,11 @@ Safari相同的JavaScript引擎
   </entry>
   
   <entry>
-    <title>学习React Native入门</title>
-    <link href="http://peilinghui.com/2017/03/02/%E5%AD%A6%E4%B9%A0React-Native%E5%85%A5%E9%97%A8/"/>
-    <id>http://peilinghui.com/2017/03/02/学习React-Native入门/</id>
+    <title>React Native入门</title>
+    <link href="http://peilinghui.com/2017/03/02/React-Native%E5%85%A5%E9%97%A8/"/>
+    <id>http://peilinghui.com/2017/03/02/React-Native入门/</id>
     <published>2017-03-02T09:51:37.000Z</published>
-    <updated>2017-07-24T08:27:32.000Z</updated>
+    <updated>2018-07-18T01:41:27.217Z</updated>
     
     <content type="html">&lt;p&gt;抽时间学习一下&lt;a href=&quot;https://github.com/facebook/react-native&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React Native&lt;/a&gt;.&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;

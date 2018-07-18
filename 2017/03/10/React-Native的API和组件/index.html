@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>React-Native的API和组件 | 向着阳光奔跑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在学习了React-Native的搭建以后，然后就在网上找了一些Demo来学习，并且开始练习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React-Native的API和组件">
+<meta property="og:url" content="http://peilinghui.com/2017/03/10/React-Native的API和组件/index.html">
+<meta property="og:site_name" content="向着阳光奔跑">
+<meta property="og:description" content="在学习了React-Native的搭建以后，然后就在网上找了一些Demo来学习，并且开始练习。">
+<meta property="og:updated_time" content="2018-07-18T01:41:34.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React-Native的API和组件">
+<meta name="twitter:description" content="在学习了React-Native的搭建以后，然后就在网上找了一些Demo来学习，并且开始练习。">
+  
+    <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/images/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向阳</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">没有到不了的远方</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/peilinghuibest@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/575544059" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/peilinghui" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://lysongzi.com/">小松子</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/CHENYUFENG1991/article/category/5655903/4">iOS大神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://cspilgrimzww.github.io/">蔚蔚</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changhuiyuan.com/">惠源</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hxdavid.com/">PAT大神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wut0719.github.io/">桐神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pangjiuzala.github.io/">兴爷</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://han.pm/">交换生</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://frankhu.me">frank</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://judyzhangxin.com/">UI设计师</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://sunus.me/">阿里学长</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imhuchao.com/">胡超-凤凰网</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.xuanzhangjiong.xyz/">囧囧囧-网易安卓</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">没有到不了的远方，向往远方。。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向阳</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/images/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向阳</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">没有到不了的远方</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/peilinghuibest@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/575544059" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/peilinghui" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-React-Native的API和组件" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/10/React-Native的API和组件/" class="article-date">
+      <time datetime="2017-03-10T09:09:04.000Z" itemprop="datePublished">2017-03-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React-Native的API和组件
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在学习了React-Native的搭建以后，然后就在网上找了一些Demo来学习，并且开始练习。</p>
+<a id="more"></a>
+<p>官网：<a href="https://reactnative.cn/docs/0.46/getting-started.html" target="_blank" rel="external">https://reactnative.cn/docs/0.46/getting-started.html</a><br>几个Demo链接：<br><a href="https://github.com/peilinghui/react-native-Gank" target="_blank" rel="external">GankIO</a></p>
+<p>运行的步骤：</p>
+<ol>
+<li>git clone <a href="https://github.com/wangdicoder/react-native-Gank" target="_blank" rel="external">https://github.com/wangdicoder/react-native-Gank</a></li>
+<li>cd react-native-Gank</li>
+<li>npm install</li>
+<li>react-native link (this step is for add the icon component)</li>
+<li>react-native run-android / run-ios</li>
+</ol>
+<h1 id="常用组件"><a href="#常用组件" class="headerlink" title="常用组件"></a>常用组件</h1><h3 id="View组件"><a href="#View组件" class="headerlink" title="View组件"></a>View组件</h3><p>类似于div的组件就是View容器组件，视图布局都是用它，支持flexbox的布局。</p>
+<h3 id="Text组件"><a href="#Text组件" class="headerlink" title="Text组件"></a>Text组件</h3><p>一个用于显示文本的React组件，并且它也支持嵌套、样式，以及触摸处理。有onPress事件，可以给text组件绑定触摸点击事件。</p>
+<h3 id="TextInput组件"><a href="#TextInput组件" class="headerlink" title="TextInput组件"></a>TextInput组件</h3><p>TextInput是一个允许用户在应用中通过键盘输入文本的基本组件。本组件的属性提供了多种特性的配置，譬如自动完成、自动大小写、占位文字，以及多种不同的键盘类型（如纯数字键盘）等等。</p>
+<h3 id="Touchable组件"><a href="#Touchable组件" class="headerlink" title="Touchable组件"></a>Touchable组件</h3><h4 id="TouchableHighlight"><a href="#TouchableHighlight" class="headerlink" title="TouchableHighlight"></a>TouchableHighlight</h4><p>高亮触摸，用户点击的时候会产生高亮的效果。</p>
+<h4 id="TouchableOpacity"><a href="#TouchableOpacity" class="headerlink" title="TouchableOpacity"></a>TouchableOpacity</h4><p>透明触摸，用户点击时，点击的组件会出现透明过度的效果。<br>activeOpacity number<br>指定封装的视图在被触摸操作激活时以多少不透明度显示（通常在0到1之间）。</p>
+<h4 id="TouchableWithoutFeedback"><a href="#TouchableWithoutFeedback" class="headerlink" title="TouchableWithoutFeedback"></a>TouchableWithoutFeedback</h4><p>一般不要使用。</p>
+<h3 id="NavigatorIOS组件"><a href="#NavigatorIOS组件" class="headerlink" title="NavigatorIOS组件"></a>NavigatorIOS组件</h3><p>对UIKit Navigation的封装，实质就是调用了这个。属性：</p>
+<ol>
+<li>barTintColor：导航条的背景颜色</li>
+<li>initialRoute:初始化路由</li>
+<li>itemWrapperStyle:设置每个页面的背景颜色</li>
+<li>navigationHidden:是否隐藏阴影</li>
+<li>tintColor:导航条上的按钮的颜色的设置</li>
+<li>titleTextColor：导航栏上字体的颜色</li>
+<li>translucent：导航条是否是半透明的</li>
+<li>push到新的页面</li>
+<li>pop返回</li>
+<li>replace替换当前路由</li>
+<li>replacePrevious(route)替换前一个页面的视图并且回退过去</li>
+<li>resetTo(reset)取代最顶层的路由并且回退过去</li>
+<li>popToTop：回到最上层的视图</li>
+</ol>
+<p>例子：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">export <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">React</span>.<span class="title">Component</span>&#123;</span></span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="keyword">return</span>(</span><br><span class="line">            &lt;<span class="type">Provider</span> store=&#123;store&#125;&gt;</span><br><span class="line">                &lt;<span class="type">Navigator</span></span><br><span class="line">                    initialRoute=&#123;&#123;component: <span class="type">MainPage</span>&#125;&#125;</span><br><span class="line">                    renderScene=&#123;(route, navigator) =&gt;</span><br><span class="line">                        &lt;route.component &#123;...route.args&#125; navigator=&#123;navigator&#125; /&gt;</span><br><span class="line">                    &#125;</span><br><span class="line">                /&gt;</span><br><span class="line">            &lt;/<span class="type">Provider</span>&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    componentDidMount()&#123;</span><br><span class="line">        <span class="type">SplashScreen</span>.hide();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="TabBarIOS组件"><a href="#TabBarIOS组件" class="headerlink" title="TabBarIOS组件"></a>TabBarIOS组件</h3><p>有TabBarIOS和TabBarIOS.item两种，后者是前者的附属组件。<br>TabBarIOS属性：</p>
+<ol>
+<li>barTintColor：标签栏的背景颜色。</li>
+<li>tintColor:当前被选中的标签图标的颜色。</li>
+<li>unselectedItemTintColor string<br>当前没有被选中的标签图标的颜色。仅在iOS 10及以上版本有效.</li>
+<li>translucent bool 一个布尔值，决定标签栏是否需要半透明化。</li>
+</ol>
+<p>TabBarIOS.Item属性：</p>
+<ol>
+<li>badge：在图标右上角显示一个红色的气泡。</li>
+<li>icon 给当前标签指定一个自定义的图标。如果定义了systemIcon属性， 这个属性会被忽略。</li>
+<li>onPress 当此标签被选中时调用。你应该修改组件的状态来使得selected={true}。</li>
+<li>selected 这个属性决定了子视图是否可见。</li>
+<li>selectedIcon 当标签被选中的时候显示的自定义图标。如果定义了systemIcon属性，这个属性会被忽略。如果定义了icon而没定义这个属性，在选中的时候图标会染上蓝色。</li>
+<li>systemIcon enum(‘bookmarks’, ‘contacts’, ‘downloads’, ‘favorites’, ‘featured’, ‘history’, ‘more’, ‘most-recent’, ‘most-viewed’, ‘recents’, ‘search’, ‘top-rated’) 一些预定义的系统图标。注意如果你使用了此属性，标题和自定义图标都会被覆盖为系统定义的值。</li>
+<li>title在图标下面显示的标题文字。如果定义了systemIcon属性，这个属性会被忽略。</li>
+</ol>
+<h3 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h3><p>一个用于显示多种不同类型图片的React组件，包括网络图片、静态资源、临时的本地图片、以及本地磁盘上的图片（如相册）等。详细用法参阅图片文档。<br>resizeMode enum(‘cover’, ‘contain’, ‘stretch’, ‘repeat’, ‘center’)<br>决定当组件尺寸和图片尺寸不成比例的时候如何调整图片的大小。</p>
+<h3 id="FlatList"><a href="#FlatList" class="headerlink" title="FlatList"></a>FlatList</h3><p>高性能的简单列表组件，支持下面这些常用的功能：</p>
+<ul>
+<li>完全跨平台。</li>
+<li>支持水平布局模式。</li>
+<li>行组件显示或隐藏时可配置回调事件。</li>
+<li>支持单独的头部组件。</li>
+<li>支持单独的尾部组件。</li>
+<li>支持自定义行间分隔线。</li>
+<li>支持下拉刷新。</li>
+<li>支持上拉加载。</li>
+<li>支持跳转到指定行（ScrollToIndex）。<br>如果需要分组/类/区（section），请使用<sectionlist>。<h3 id="WebView"><a href="#WebView" class="headerlink" title="WebView"></a>WebView</h3>创建一个原生的WebView，可以用于访问一个网页。<br>属性：</sectionlist></li>
+</ul>
+<ol>
+<li>onError 加载失败时调用。</li>
+<li>onLoad 加载成功时调用。</li>
+<li>onLoadEnd 加载结束时（无论成功或失败）调用。</li>
+<li>onLoadStart 加载开始时调用。</li>
+<li>onMessage 在webview内部的网页中调用window.postMessage方法时可以触发此属性对应的函数，从而实现网页和RN之间的数据交换。 设置此属性的同时会在webview中注入一个postMessage的全局函数并覆盖可能已经存在的同名实现。<br>网页端的window.postMessage只发送一个参数data，此参数封装在RN端的event对象中，即event.nativeEvent.data。data 只能是一个字符串。</li>
+<li>injectedJavaScript 设置在网页加载之前注入的一段JS代码。</li>
+</ol>
+<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h3 id="AppRegistry"><a href="#AppRegistry" class="headerlink" title="AppRegistry"></a>AppRegistry</h3><p>其中iOS代码的入口在index.ios.js中，<br>在index.ios.js中注册入口：</p>
+<p><code>AppRegistry.registerComponent(&#39;GankIO&#39;, () =&gt; App);</code>当注册完应用程序组件后，Native的系统就会加载jsbundle文件并且触发AppRegistry.runApplication运行程序。AppRegistry有以下的方法：</p>
+<ol>
+<li>registerConfig:静态方法，注册配置</li>
+<li>registerComponent注册入口组件</li>
+<li>registerRunnable：注册函数监听</li>
+<li>getAppKey:获取registerRunnable注册的监听键</li>
+<li>runApplication运行程序</li>
+</ol>
+<h3 id="AlertIOS"><a href="#AlertIOS" class="headerlink" title="AlertIOS"></a>AlertIOS</h3><p>启动一个提示对话框，包含对应的标题和信息。</p>
+<p>你还可以指定一系列的按钮，点击对应的按钮会调用对应的onPress回调并且关闭提示框。默认情况下，对话框会仅有一个’确定’按钮。</p>
+<h3 id="PixelRatio"><a href="#PixelRatio" class="headerlink" title="PixelRatio"></a>PixelRatio</h3><p>告知开发者像素的密度。<br>根据像素密度获取指定大小的图片。<br>像素网格对齐。</p>
+<h3 id="AppState"><a href="#AppState" class="headerlink" title="AppState"></a>AppState</h3><p>AppState能告诉你应用当前是在前台还是在后台，并且能在状态变化的时候通知你。</p>
+<p>AppState通常在处理推送通知的时候用来决定内容和对应的行为。<br>active - 应用正在前台运行<br>background - 应用正在后台运行。用户既可能在别的应用中，也可能在桌面。<br>inactive - 此状态表示应用正在前后台的切换过程中，或是处在系统的多任务视图，又或是处在来电状态中。</p>
+<h3 id="CameraRoll"><a href="#CameraRoll" class="headerlink" title="CameraRoll"></a>CameraRoll</h3><p>CameraRoll模块提供了访问本地相册的功能。在iOS上使用这个模块之前，你需要先链接RCTCameraRoll库。<br>从iOS10开始，访问相册需要用户授权。你需要在Info.plist中添加一条名为NSCameraUsageDescription的键，然后在其值中填写向用户请求权限的具体描述。编辑完成后这个键在Xcode中实际会显示为Privacy - Camera Usage Description。</p>
+<ol>
+<li>static saveImageWithTag(tag)<br>保存一个图片到相册。</li>
+<li>static saveToCameraRoll</li>
+<li>getPhotos(params: object)<br>返回一个带有图片标识符对象的Promise。</li>
+</ol>
+<h3 id="Geolocation"><a href="#Geolocation" class="headerlink" title="Geolocation"></a>Geolocation</h3><p>你需要在Info.plist中增加NSLocationWhenInUseUsageDescription字段来启用定位功能。如果你使用react-native init创建项目，定位会被默认启用。<br>属性：</p>
+<ol>
+<li>getCurrentPosition(geo_success: Function, geo_error?: Function, geo_options?: GeoOptions) 获取当前位置，<br>成功时会调用geo_success回调，参数中包含最新的位置信息。</li>
+<li><p>watchPosition(success: Function, error?: Function, options?: GeoOptions) 持续监听位置，每当位置变化之后都调用success回调。支持的选项：timeout (ms), maximumAge (ms), enableHighAccuracy (bool)</p>
+</li>
+<li><p>static clearWatch(watchID: number) 依据ID清除检测</p>
+</li>
+<li>stopObserving()停止检测</li>
+</ol>
+<h3 id="AsyncStorage"><a href="#AsyncStorage" class="headerlink" title="AsyncStorage"></a>AsyncStorage</h3><p>AsyncStorage是一个简单的、异步的、持久化的Key-Value存储系统，它对于App来说是全局性的。它用来代替LocalStorage。</p>
+<p>每个方法都有一个回调函数，回调函数的第一个参数都是错误对象，如果发生错误就会展示错误对象，否则为null。所有方法执行后，都会返回一个Promise对象。<br>方法：</p>
+<ol>
+<li><p>static getItem(key: string, callback?: ?(error: ?Error, result: ?string) =&gt; void)<br>根据键来获取值，获取的结果会在回调函数，第一个</p>
+</li>
+<li><p>static setItem(key: string, value: string, callback?: ?(error: ?Error) =&gt; void) 设置键值对</p>
+</li>
+<li>static removeItem(key: string, callback?: ?(error: ?Error) =&gt; void)<br>根据键值移除对象</li>
+<li>static mergeItem(key: string, value: string, callback?: ?(error: ?Error) =&gt; void) 合并现有值和输入值。</li>
+<li>static clear(callback?: ?(error: ?Error) =&gt; void) qing</li>
+<li>static getAllKeys(callback?: ?(error: ?Error, keys: ?Array<string>) =&gt; void)<br>获取所有的键。</string></li>
+<li>static flushGetRequests() 清除所有进行中的查询操作。</li>
+<li><p>static multiGet(keys: Array<string>, callback?: ?(errors: ?Array<error>, result: ?Array<array<string>&gt;) =&gt; void)<br>获取多项<br>multiGet([‘k1’, ‘k2’], cb) -&gt; cb([[‘k1’, ‘val1’], [‘k2’, ‘val2’]])</array<string></error></string></p>
+</li>
+<li><p>static multiSet(keyValuePairs: Array<array<string>&gt;, callback?: ?(errors: ?Array<error>) =&gt; void)<br>设置多项。</error></array<string></p>
+</li>
+<li><p>multiSet和multiMerge都接受一个与multiGet输出值一致的key-value数组的数组。返回一个Promise对象。</p>
+</li>
+</ol>
+<p>multiSet([[‘k1’, ‘val1’], [‘k2’, ‘val2’]], cb);</p>
+<ol>
+<li>static multiRemove(keys: Array<string>, callback?: ?(errors: ?Array<error>) =&gt; void) </error></string></li>
+</ol>
+<p>删除所有键在keys数组中的数据。返回一个Promise对象。</p>
+<ol>
+<li>static multiMerge(keyValuePairs: Array<array<string>&gt;, callback?: ?(errors: ?Array<error>) =&gt; void) 多个键值对合并。</error></array<string></li>
+</ol>
+<p>还没有被所有原生实现都支持。</p>
+<h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><h4 id="setTimeout"><a href="#setTimeout" class="headerlink" title="setTimeout"></a>setTimeout</h4><p>用于设定一个定时任务</p>
+<h4 id="setInterval"><a href="#setInterval" class="headerlink" title="setInterval"></a>setInterval</h4><p>主要用于设定循环</p>
+<h4 id="setImmediate"><a href="#setImmediate" class="headerlink" title="setImmediate"></a>setImmediate</h4><p>用于设置立即执行的任务</p>
+<h2 id="网络数据请求"><a href="#网络数据请求" class="headerlink" title="网络数据请求"></a>网络数据请求</h2><h3 id="XMLHttpRequest-即俗称的ajax"><a href="#XMLHttpRequest-即俗称的ajax" class="headerlink" title="XMLHttpRequest(即俗称的ajax)"></a>XMLHttpRequest(即俗称的ajax)</h3><p>与web的一样，                                                                        </p>
+<h3 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h3><pre><code>fetch(&apos;https://mywebsite.com/endpoint/&apos;, {
+  method: &apos;POST&apos;,
+  headers: {
+    &apos;Accept&apos;: &apos;application/json&apos;,
+    &apos;Content-Type&apos;: &apos;application/json&apos;,
+  },
+  body: JSON.stringify({
+    firstParam: &apos;yourValue&apos;,
+    secondParam: &apos;yourOtherValue&apos;,
+  })
+})
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/03/10/React-Native的API和组件/">React-Native的API和组件</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
+        <p><span>发布时间:</span>2017年03月10日 - 17时09分</p>
+        <p><span>最后更新:</span>2018年07月18日 - 09时41分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/03/10/React-Native的API和组件/" title="React-Native的API和组件">http://peilinghui.com/2017/03/10/React-Native的API和组件/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/03/10/React-Native的API和组件/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/03/21/React-Native的与原生的交互/">
+                    React-Native的与原生的交互
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/03/02/React-Native入门/">
+                    React Native入门
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常用组件"><span class="toc-number">1.</span> <span class="toc-text">常用组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#View组件"><span class="toc-number">1.0.1.</span> <span class="toc-text">View组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Text组件"><span class="toc-number">1.0.2.</span> <span class="toc-text">Text组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TextInput组件"><span class="toc-number">1.0.3.</span> <span class="toc-text">TextInput组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Touchable组件"><span class="toc-number">1.0.4.</span> <span class="toc-text">Touchable组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TouchableHighlight"><span class="toc-number">1.0.4.1.</span> <span class="toc-text">TouchableHighlight</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TouchableOpacity"><span class="toc-number">1.0.4.2.</span> <span class="toc-text">TouchableOpacity</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TouchableWithoutFeedback"><span class="toc-number">1.0.4.3.</span> <span class="toc-text">TouchableWithoutFeedback</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NavigatorIOS组件"><span class="toc-number">1.0.5.</span> <span class="toc-text">NavigatorIOS组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TabBarIOS组件"><span class="toc-number">1.0.6.</span> <span class="toc-text">TabBarIOS组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Image"><span class="toc-number">1.0.7.</span> <span class="toc-text">Image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FlatList"><span class="toc-number">1.0.8.</span> <span class="toc-text">FlatList</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebView"><span class="toc-number">1.0.9.</span> <span class="toc-text">WebView</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#API"><span class="toc-number">2.</span> <span class="toc-text">API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AppRegistry"><span class="toc-number">2.0.1.</span> <span class="toc-text">AppRegistry</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AlertIOS"><span class="toc-number">2.0.2.</span> <span class="toc-text">AlertIOS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PixelRatio"><span class="toc-number">2.0.3.</span> <span class="toc-text">PixelRatio</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AppState"><span class="toc-number">2.0.4.</span> <span class="toc-text">AppState</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CameraRoll"><span class="toc-number">2.0.5.</span> <span class="toc-text">CameraRoll</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Geolocation"><span class="toc-number">2.0.6.</span> <span class="toc-text">Geolocation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AsyncStorage"><span class="toc-number">2.0.7.</span> <span class="toc-text">AsyncStorage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定时器"><span class="toc-number">2.0.8.</span> <span class="toc-text">定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#setTimeout"><span class="toc-number">2.0.8.1.</span> <span class="toc-text">setTimeout</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#setInterval"><span class="toc-number">2.0.8.2.</span> <span class="toc-text">setInterval</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#setImmediate"><span class="toc-number">2.0.8.3.</span> <span class="toc-text">setImmediate</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络数据请求"><span class="toc-number">2.1.</span> <span class="toc-text">网络数据请求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XMLHttpRequest-即俗称的ajax"><span class="toc-number">2.1.1.</span> <span class="toc-text">XMLHttpRequest(即俗称的ajax)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fetch"><span class="toc-number">2.1.2.</span> <span class="toc-text">Fetch</span></a></li></ol></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2017/03/10/React-Native的API和组件/" data-title="React-Native的API和组件" data-url="http://peilinghui.com/2017/03/10/React-Native的API和组件/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"peilinghui"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/03/21/React-Native的与原生的交互/" title="上一篇: React-Native的与原生的交互">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/03/02/React-Native入门/" title="下一篇: React Native入门">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/01/05/2017年总结/">2017年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/ReactNative中使用Redux/">ReactNative中使用Redux</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/React-Native的APP/">React-Native的APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ReactNative的常用组件/">ReactNative的常用组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/05/AFNetworking3.0/">AFNetworking3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/搜索框的Demo/">搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/iOS中JS与OC相互调用的方式/">iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/NSURLProtocol/">NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/React-Native的与原生的交互/">React-Native的与原生的交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/React-Native的API和组件/">React-Native的API和组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/React-Native入门/">React Native入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/React知识/">React知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/YYModel/">YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/iOS的开发设计模式/">iOS的开发设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/GCD/">GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop/">RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime/">Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/ARC内存管理/">ARC内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/NSString的引用计数问题/">NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Block/">Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/31/面试总结/">面试总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/SDWebImage框架/">SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/AFNetworking2.0/">AFNetworking2.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/深拷贝和浅拷贝/">深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 向阳
+            </div>
+            <div class="footer-right">
+	     欢迎光临小站
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
