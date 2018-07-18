@@ -254,10 +254,10 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-设计模式" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Block" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/01/设计模式/" class="article-date">
+      <a href="/2016/04/01/Block/" class="article-date">
       <time datetime="2016-04-01T05:01:49.000Z" itemprop="datePublished">2016-04-01</time>
 </a>
     </div>
@@ -271,7 +271,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/01/设计模式/">设计模式</a>
+      <a class="article-title" href="/2016/04/01/Block/">Block</a>
     </h1>
   
 
@@ -281,7 +281,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>设计模式<br>
+              <p>深入学习Block。<br>
           
       
     </div>
@@ -293,102 +293,8 @@
       
       
         <p class="article-more-link">
-          <a  href="/2016/04/01/设计模式/#more">more >></a>
+          <a  href="/2016/04/01/Block/#more">more >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-面试总结" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/31/面试总结/" class="article-date">
-      <time datetime="2016-03-31T13:53:35.000Z" itemprop="datePublished">2016-03-31</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/31/面试总结/">面试总结</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="阿里巴巴一面"><a href="#阿里巴巴一面" class="headerlink" title="阿里巴巴一面"></a>阿里巴巴一面</h1><h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><ol>
-<li>时间复杂度<br>时间复杂度是一个函数，算法中所有语句分频度之和记作 T(n),算法的时间复杂度记作T(n)=O(f(n))，算法的时间复杂度依赖于问题的规模和输入数据的性质。</li>
-<li>各种排序的时间复杂度<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.jpg" alt=""></li>
-<li>二叉树的概念和特点</li>
-<li>图的遍历：深度优先搜索和广度优先搜索</li>
-<li>平衡二叉树的生成</li>
-<li>哈弗曼树</li>
-</ol>
-<h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><ol>
-<li><p>Socket的底层实现？是同步还是异步？如何实现底层通信？和TCP的三次握手是如何实现的。<br>TCP 开放握手也称为3次握手，这通常包括 3 条消息：一条从客户端到服务端的连接请求，一条从服务端到客户端的确认消息，以及另一条从客户端到服务端的确认消息。<br>（对客户端而言，一旦它收到了服务端发来的确认消息，就立即认为连接已经建立。通常这个过程发生的很快，但连接请求消息或服务端的回复消息都有可能在传输过程中丢失，因此 TCP 协议实现将以递增的时间间隔重复发送几次握手消息。如果 TCP 客户端在一段时间后还没有收到服务端的回复消息，则发生超时并放弃连接。如果服务端并没有接收连接，则服务端的 TCP 将发送一条拒绝消息而不是确认消息。）<br>（服务端首先创建一个 ServerSocket 实例，并将其与已知端口相关联（在此为 Q），套接字实现为新的 ServerSocket 实例创建一个底层数据结构，并就 Q 赋给本地端口，并将特定的通配符（<em>）赋给本地 IP 地址）<br><em>*参考</em></em>：<a href="http://wiki.jikexueyuan.com/project/java-socket/socket-tcp-bean.html" target="_blank" rel="external">http://wiki.jikexueyuan.com/project/java-socket/socket-tcp-bean.html</a><br><a href="http://wiki.jikexueyuan.com/project/java-socket/socket-advanced.html" target="_blank" rel="external">http://wiki.jikexueyuan.com/project/java-socket/socket-advanced.html</a></p>
-</li>
-<li><p>socket中的IO</p>
-</li>
-</ol>
-<h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><ol>
-<li>段与页的区别<br>页是信息的物理单位，分页是为实现离散分配方式，以消减内存的外零头，提高内存的利用率；或者说，分页仅仅是由于系统管理的需要，而不是用户的需要。段是信息的逻辑单位，它含有一组其意义相对完整的信息。分段的目的是为了能更好的满足用户的需要。</li>
-<li>寄存器的分类<br>寄存器分为通用寄存器和专用寄存器<br>通用寄存器：存放关键变量和中间结果<br>专用寄存器：程序计数器（PC），栈指针寄存器，程序状态字</li>
-<li>解释ESP，XP。和EDP</li>
-<li>如何用C语言判断机器是32位还是64位？<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"stdio.h"</span>   </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> * argv[])</span>  </span><br><span class="line"></span>&#123;  </span><br><span class="line">    <span class="keyword">void</span>* number =  <span class="number">0</span>;  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,<span class="keyword">sizeof</span>(&amp;number));  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>输出8就是64位的，4就是32位的。根据逻辑地址判断。</p>
-<ol>
-<li>定义一个类class A，判断sizeof是？sizeof(a *)是？<br>空类大小：<br> <code>class A
- {
- };</code>//sizeof(A)为1<br>非空类大小：<br> `class A<br> {<pre><code>int a;
-char *p;
-</code></pre> };<code>32位，sizeof（A）为8，int为4，char也为4字节；  
-补充：需要注意32位平台，sizeof(long)为4Byte，sizeof(long long)为8Byte；sizeof(void)为1，但是会报warning.</code>sizeof(void *)= 4 ; //所有的指针都是4Byte宽度.`<br><a href="http://lambda.hk/c++/2015/03/30/C-Plus-Plus-Sizeof-Class/" target="_blank" rel="external">http://lambda.hk/c++/2015/03/30/C-Plus-Plus-Sizeof-Class/</a></li>
-<li>给一个数字转换成二进制以后，判断二进制里面有几个1？<br><a href="http://www.cnblogs.com/graphics/archive/2010/06/21/1752421.html" target="_blank" rel="external">http://www.cnblogs.com/graphics/archive/2010/06/21/1752421.html</a><br>这原来是编程之美，或者是剑指offer中的一道题<br><a href="http://blog.csdn.net/sjf0115/article/details/8597157" target="_blank" rel="external">http://blog.csdn.net/sjf0115/article/details/8597157</a></li>
-<li>结构体对齐？</li>
-</ol>
-<h2 id="ARC底层实现机制"><a href="#ARC底层实现机制" class="headerlink" title="ARC底层实现机制"></a>ARC底层实现机制</h2><p><a href="https://onevcat.com/2012/06/arc-hand-by-hand/" target="_blank" rel="external">https://onevcat.com/2012/06/arc-hand-by-hand/</a></p>
-<h1 id="网易笔试"><a href="#网易笔试" class="headerlink" title="网易笔试"></a>网易笔试</h1><h1 id="网易面试"><a href="#网易面试" class="headerlink" title="网易面试"></a>网易面试</h1><p>诶，感觉自己真的是不长心额，面试第一道题就是笔试我没答上来最后一道题，然后就悲剧了。<br>然后当时候自己简历写的也不好，然后给他展示了一个音乐APP，他问我除了音乐播放，还有什么方式可以在后台运行？</p>
-<pre><code>播放音频-----应用程序可以在后台持续的播音或者录音。
-接收位置更新-----随着设备位置的变化应用程序要持续获得地理位置更新。
-执行有限长度的任务----在有限的时间内，无论任何情况下应用程序都可以执行任何代码。
-正在下载杂志-----杂志类应用特例，应用程序能够在后台下载
-提供voip（voice-over-ip）服务---应用程序能够在后台执行任意的代码，当然苹果会限制它的用途，你的应用必须提供voip服务。
-</code></pre><p>参考：<a href="http://blog.csdn.net/dongtaochen2039/article/details/41577011" target="_blank" rel="external">http://blog.csdn.net/dongtaochen2039/article/details/41577011</a></p>
-<h1 id="腾讯笔试"><a href="#腾讯笔试" class="headerlink" title="腾讯笔试"></a>腾讯笔试</h1><p>15个选择题，3个编程题，1个小时<br>选择题：<br>1.快排<br>2.建立索引<br>3.C++代码：<br><figure class="highlight"><figcaption><span><iostream></iostream></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &#60;cstdio&#62;&#10;using namespace std;&#10;struct A&#123;&#10;    //vitual&#26159;&#22810;&#24577;&#65292;&#20250;&#25191;&#34892;&#10;    void foo()&#123;printf(&#34;foo&#34;);&#125;&#10;    virtual void bar()&#123;printf(&#34;bar&#34;);&#125;&#10;    A()&#123;bar();&#125;;&#10;&#125;;&#10;struct B:A&#123;&#10;    void foo()&#123;printf(&#34;b_foo&#34;);&#125;&#10;    void bar()&#123;printf(&#34;b_bar&#34;);&#125;;&#10;&#125;;&#10;int main()&#123;&#10;    A *p=new B;&#10;    p-&#62;foo();&#10;    p-&#62;bar();&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>输出结果：<br>bar<br>foo<br>b_bar<br>解析：先调用A的构造函数bar,再调用B的构造函数（没有),因为有virtual所以是多态，调用</p>
-<h1 id="网新笔试"><a href="#网新笔试" class="headerlink" title="网新笔试"></a>网新笔试</h1>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
       
       <div class="clearfix"></div>
     </div>
@@ -633,63 +539,6 @@ char *p;
 
 
   
-    <article id="post-iOS中的第三方框架" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/05/iOS中的第三方框架/" class="article-date">
-      <time datetime="2016-03-05T06:08:53.000Z" itemprop="datePublished">2016-03-05</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>通过不断的学习也接触了不少的第三方库，就总结一下。<br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-        <p class="article-more-link">
-          <a  href="/2016/03/05/iOS中的第三方框架/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-  
     <article id="post-AFNetworking2.0" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -734,6 +583,63 @@ char *p;
       
         <p class="article-more-link">
           <a  href="/2016/03/05/AFNetworking2.0/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-iOS中的第三方框架" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/05/iOS中的第三方框架/" class="article-date">
+      <time datetime="2016-03-05T06:08:53.000Z" itemprop="datePublished">2016-03-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>通过不断的学习也接触了不少的第三方库，就总结一下。<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/05/iOS中的第三方框架/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -848,6 +754,63 @@ char *p;
       
         <p class="article-more-link">
           <a  href="/2016/03/04/iOS中的多线程网络/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-CocosPods" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/04/CocosPods/" class="article-date">
+      <time datetime="2016-03-04T08:54:28.000Z" itemprop="datePublished">2016-03-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/04/CocosPods/">CocosPods</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>也在项目中用过一些第三方框架，第三方库，然后就知道了CocoaPods.</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/04/CocosPods/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
