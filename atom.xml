@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://peilinghui.com/"/>
-  <updated>2017-12-13T14:33:32.000Z</updated>
+  <updated>2018-09-28T07:15:11.081Z</updated>
   <id>http://peilinghui.com/</id>
   
   <author>
@@ -14,6 +14,294 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在APP中IM使用融云</title>
+    <link href="http://peilinghui.com/2018/09/21/%E5%9C%A8APP%E4%B8%ADIM%E4%BD%BF%E7%94%A8%E8%9E%8D%E4%BA%91/"/>
+    <id>http://peilinghui.com/2018/09/21/在APP中IM使用融云/</id>
+    <published>2018-09-21T04:43:28.000Z</published>
+    <updated>2018-09-28T07:15:11.081Z</updated>
+    
+    <content type="html">&lt;p&gt;在项目APP中接入IM的功能，有环信和融云的两种选择，在纠结以后，选择了融云进行开发。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;首先可以参照官网：&lt;a href=&quot;https://www.rongcloud.cn/docs/ios.html#prepare&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.rongcloud.cn/docs/ios.html#prepare&lt;/a&gt;来进行基本的融云包的导入和集成到工程中。&lt;br&gt;通过在控制台中API的调用&lt;a href=&quot;https://developer.rongcloud.cn/apitool/A0dLuQBjI8MJKehwuu0=&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developer.rongcloud.cn/apitool/A0dLuQBjI8MJKehwuu0=&lt;/a&gt;来模拟接口调用的过程。&lt;br&gt;集成融云，就是能用好他所提供的API，就能完成大部分的工作，用好IMKit和IMLib。IMKit主要就是页面，可以在它的基础上进行我们自己页面的自定义，IMLib就是通讯的API，通过使用它暴露的方法来实现及时通讯，单聊，群聊，以及自定义消息的发送。&lt;/p&gt;
+&lt;h1 id=&quot;导入融云，连接融云&quot;&gt;&lt;a href=&quot;#导入融云，连接融云&quot; class=&quot;headerlink&quot; title=&quot;导入融云，连接融云&quot;&gt;&lt;/a&gt;导入融云，连接融云&lt;/h1&gt;&lt;p&gt;在APPDelegate中注册自定义的消息类型和做消息推送相关的内容。&lt;br&gt;最好是在登录APP的时候，让服务端返回userId和rongcloudToken，获取到Token以后，登录融云的服务器。可以写一个单例的工具类，来处理融云的登录，断开连接，和&lt;rcimuserinfodatasource, rcimreceivemessagedelegate,rcimconnectionstatusdelegate=&quot;&quot;&gt;用户数据源的一些方法的实现。&lt;/rcimuserinfodatasource,&gt;&lt;/p&gt;
+&lt;h1 id=&quot;用户信息和群组信息的数据源&quot;&gt;&lt;a href=&quot;#用户信息和群组信息的数据源&quot; class=&quot;headerlink&quot; title=&quot;用户信息和群组信息的数据源&quot;&gt;&lt;/a&gt;用户信息和群组信息的数据源&lt;/h1&gt;&lt;p&gt;因为融云已经做好了基本的聊天通讯的功能，我们要做的就是处理用户昵称，头像和群组的一些信息的处理，设置&lt;/p&gt;
+&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//设置用户信息源&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  [R&lt;span class=&quot;built_in&quot;&gt;CIM&lt;/span&gt; sharedR&lt;span class=&quot;built_in&quot;&gt;CIM&lt;/span&gt;]&lt;span class=&quot;variable&quot;&gt;.userInfoDataSource&lt;/span&gt; = [JRIMDataSource shareInstance];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;//群组信息源&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  [R&lt;span class=&quot;built_in&quot;&gt;CIM&lt;/span&gt; sharedR&lt;span class=&quot;built_in&quot;&gt;CIM&lt;/span&gt;]&lt;span class=&quot;variable&quot;&gt;.groupInfoDataSource&lt;/span&gt; = [JRIMDataSource shareInstance];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;//群成员数据源&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  [R&lt;span class=&quot;built_in&quot;&gt;CIM&lt;/span&gt; sharedR&lt;span class=&quot;built_in&quot;&gt;CIM&lt;/span&gt;]&lt;span class=&quot;variable&quot;&gt;.groupMemberDataSource&lt;/span&gt; = [JRIMDataSource shareInstance];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;用户信息需要通过实现RCIMUserInfoDataSource的方法&quot;&gt;&lt;a href=&quot;#用户信息需要通过实现RCIMUserInfoDataSource的方法&quot; class=&quot;headerlink&quot; title=&quot;用户信息需要通过实现RCIMUserInfoDataSource的方法&quot;&gt;&lt;/a&gt;用户信息需要通过实现RCIMUserInfoDataSource的方法&lt;/h3&gt;&lt;figure class=&quot;highlight erlang&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;pp&quot;&gt;- &lt;span class=&quot;params&quot;&gt;(void)&lt;/span&gt;getUserInfoWithUserId:&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;NSString&lt;/span&gt; *)&lt;/span&gt;userId completion:&lt;span class=&quot;params&quot;&gt;(void (^)&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;RCUserInfo&lt;/span&gt; *user&lt;span class=&quot;variable&quot;&gt;Info&lt;/span&gt;)&lt;/span&gt;)completion;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;我们需要在这个方法里面调用自己的接口来获取用户的相关信息，就是头像和昵称，然后把获取到的数据放到RCUserInfo对象的userId，name，和portraitUri中，也把这个数据存到FMDB数据库中。这样在聊天列表展示聊天cell的时候，可以通过&lt;br&gt;&lt;code&gt;RCUserInfo *user = [[RCIM sharedRCIM] getUserInfoCache:model.targetId];&lt;/code&gt;这个方法，如果User存在的话，直接赋值，如果不存在的话，再次调用getUserInfoWithUserId这个来获取用户的信息，获取到以后刷新用户信息，并存到数据库中。&lt;/p&gt;
+&lt;figure class=&quot;highlight less&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr_selector&quot;&gt;[[RCIM sharedRCIM]&lt;/span&gt; &lt;span class=&quot;tag&quot;&gt;refreshUserInfoCache&lt;/span&gt;&lt;span class=&quot;pseudo&quot;&gt;:user&lt;/span&gt; &lt;span class=&quot;tag&quot;&gt;withUserId&lt;/span&gt;&lt;span class=&quot;pseudo&quot;&gt;:user&lt;/span&gt;&lt;span class=&quot;class&quot;&gt;.userId&lt;/span&gt;]; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr_selector&quot;&gt;[[JRDataBaseManager  shareInstance]&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;insertUserToDB&lt;/span&gt;&lt;span class=&quot;pseudo&quot;&gt;:userInfo&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;群组信息实现RCIMGroupInfoDataSource方法&quot;&gt;&lt;a href=&quot;#群组信息实现RCIMGroupInfoDataSource方法&quot; class=&quot;headerlink&quot; title=&quot;群组信息实现RCIMGroupInfoDataSource方法&quot;&gt;&lt;/a&gt;群组信息实现RCIMGroupInfoDataSource方法&lt;/h3&gt;&lt;figure class=&quot;highlight erlang&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;pp&quot;&gt;- &lt;span class=&quot;params&quot;&gt;(void)&lt;/span&gt;getGroupInfoWithGroupId:&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;NSString&lt;/span&gt; *)&lt;/span&gt;groupId completion:&lt;span class=&quot;params&quot;&gt;(void (^)&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;RCGroup&lt;/span&gt; *group&lt;span class=&quot;variable&quot;&gt;Info&lt;/span&gt;)&lt;/span&gt;)completion;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;融云自带的群组的信息类是RCGroup，只包含groupId，groupName和portraitUri，我们如果需要更多的信息存储，只需要继承自RCGroup,&lt;br&gt;如果我们需要在群组名称中携带很多信息的话，只需要把相关的信息放到一个字典中然后后转化成json字符串赋值给groupName&lt;/p&gt;
+&lt;h3 id=&quot;群组成员实现&quot;&gt;&lt;a href=&quot;#群组成员实现&quot; class=&quot;headerlink&quot; title=&quot;群组成员实现&quot;&gt;&lt;/a&gt;群组成员实现&lt;/h3&gt;&lt;p&gt;我们可以写个单例来实现这三个方法。在方法实现中通过调用自己的接口获取到相关的数据，然后调用融云的接口refreshGroupInfoCache存储起来。&lt;/p&gt;
+&lt;h1 id=&quot;消息列表&quot;&gt;&lt;a href=&quot;#消息列表&quot; class=&quot;headerlink&quot; title=&quot;消息列表&quot;&gt;&lt;/a&gt;消息列表&lt;/h1&gt;&lt;p&gt;消息列表需要继承自RCConversationListViewController，只要继承了这个，然后通过其暴露的属性和方法来设置基本列表的样式，当有消息的时候就能展示出来融云自带的聊天cell。如果我们要自定义的消息列表的cell。主要实现的方法：&lt;/p&gt;
+&lt;h3 id=&quot;重写方法：插入自定义会话model&quot;&gt;&lt;a href=&quot;#重写方法：插入自定义会话model&quot; class=&quot;headerlink&quot; title=&quot;重写方法：插入自定义会话model&quot;&gt;&lt;/a&gt;重写方法：插入自定义会话model&lt;/h3&gt;&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;-(&lt;span class=&quot;built_in&quot;&gt;NSMutableArray&lt;/span&gt; *)willReloadTableData:(&lt;span class=&quot;built_in&quot;&gt;NSMutableArray&lt;/span&gt; *)dataSource&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; [dataSource enumerateObjectsUsingBlock:^(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;  _Nonnull obj, &lt;span class=&quot;built_in&quot;&gt;NSUInteger&lt;/span&gt; idx, &lt;span class=&quot;built_in&quot;&gt;BOOL&lt;/span&gt; * _Nonnull stop) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        RCConversationModel *model = (RCConversationModel *)obj;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//筛选请求添加好友的系统消息，用于生成自定义会话类型的cell&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (model&lt;span class=&quot;variable&quot;&gt;.conversationType&lt;/span&gt; == ConversationType_GROUP) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            model&lt;span class=&quot;variable&quot;&gt;.conversationModelType&lt;/span&gt; = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (model&lt;span class=&quot;variable&quot;&gt;.conversationType&lt;/span&gt; == ConversationType_PRIVATE) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            model&lt;span class=&quot;variable&quot;&gt;.conversationModelType&lt;/span&gt; = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; dataSource;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;注：在该方法内筛选数据源dataSource中具体的会话类型及消息的model，将model 类型必须修改为 model.conversationModelType=RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION&lt;/p&gt;
+&lt;p&gt;如果需要插入类似微博消息列表中的点赞、评论，关注和系统消息的自定义cell，需要在这个方法中自定义Model，并且拼接到DataSource中。&lt;/p&gt;
+&lt;p&gt;代码如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight gams&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (_isShowServiceSystem == &lt;span class=&quot;keyword&quot;&gt;NO&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        RCConversationModel *&lt;span class=&quot;keyword&quot;&gt;model&lt;/span&gt; = [[RCConversationModel alloc] init];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;model&lt;/span&gt;.targetId = JR_Service_System_ID;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;model&lt;/span&gt;.conversationType = ConversationType_SYSTEM;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;model&lt;/span&gt;.conversationModelType = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [dataSource addObject:&lt;span class=&quot;keyword&quot;&gt;model&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;重写返回-cell-高度的方法&quot;&gt;&lt;a href=&quot;#重写返回-cell-高度的方法&quot; class=&quot;headerlink&quot; title=&quot;重写返回 cell 高度的方法&quot;&gt;&lt;/a&gt;重写返回 cell 高度的方法&lt;/h3&gt;&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;built_in&quot;&gt;CGFloat&lt;/span&gt;)rcConversationListTableView:(&lt;span class=&quot;built_in&quot;&gt;UITableView&lt;/span&gt; *)tableView heightForRowAtIndexPath:(&lt;span class=&quot;built_in&quot;&gt;NSIndexPath&lt;/span&gt; *)indexPath &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;58.0&lt;/span&gt;f;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;自定义会话Cell显示时的回调&quot;&gt;&lt;a href=&quot;#自定义会话Cell显示时的回调&quot; class=&quot;headerlink&quot; title=&quot;自定义会话Cell显示时的回调&quot;&gt;&lt;/a&gt;自定义会话Cell显示时的回调&lt;/h3&gt;&lt;figure class=&quot;highlight erlang&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;pp&quot;&gt;-&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;RCConversationBaseCell&lt;/span&gt; *)&lt;/span&gt;rcConversationListTableView:&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;UITableView&lt;/span&gt; *)&lt;/span&gt;tableView cellForRowAtIndexPath:&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;NSIndexPath&lt;/span&gt; *)&lt;/span&gt;indexPath&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;或者是即将显示cell的时候把用户信息和群组信息放到cell里面&lt;/p&gt;
+&lt;figure class=&quot;highlight erlang&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;pp&quot;&gt;- &lt;span class=&quot;params&quot;&gt;(void)&lt;/span&gt;willDisplayConversationTableCell:&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;RCConversationBaseCell&lt;/span&gt; *)&lt;/span&gt;cell atIndexPath:&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;NSIndexPath&lt;/span&gt; *)&lt;/span&gt;indexPath&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果使用的都是自定义的cell的话，要设置在model.conversationModelType == RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION)先区分数据模型是自定义的，再区分是单聊还是群聊conversationType。对于每一种会话类型，自定义我们需要的cell的样式，然后通过取出对应index的Model。&lt;br&gt;  &lt;code&gt;RCConversationModel *model = self.conversationListDataSource[indexPath.row];&lt;/code&gt;&lt;br&gt;来把Model中的头像、昵称、最近消息、时间、未读数、一些信息放到cell对应的位置。&lt;/p&gt;
+&lt;h3 id=&quot;点击事件-–点击cell的回调&quot;&gt;&lt;a href=&quot;#点击事件-–点击cell的回调&quot; class=&quot;headerlink&quot; title=&quot;点击事件 –点击cell的回调&quot;&gt;&lt;/a&gt;点击事件 –点击cell的回调&lt;/h3&gt;&lt;figure class=&quot;highlight erlang&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;pp&quot;&gt;- &lt;span class=&quot;params&quot;&gt;(void)&lt;/span&gt;onSelectedTableRow:&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;RCConversationModelType&lt;/span&gt;)&lt;/span&gt;conversationModelType&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         conversationModel:&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;RCConversationModel&lt;/span&gt; *)&lt;/span&gt;model&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;               atIndexPath:&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;NSIndexPath&lt;/span&gt; *)&lt;/span&gt;indexPath&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h1 id=&quot;消息会话&quot;&gt;&lt;a href=&quot;#消息会话&quot; class=&quot;headerlink&quot; title=&quot;消息会话&quot;&gt;&lt;/a&gt;消息会话&lt;/h1&gt;&lt;h1 id=&quot;消息会话展示&quot;&gt;&lt;a href=&quot;#消息会话展示&quot; class=&quot;headerlink&quot; title=&quot;消息会话展示&quot;&gt;&lt;/a&gt;消息会话展示&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;单聊不显示对方名称&lt;/li&gt;
+&lt;li&gt;普通群聊显示对方名称&lt;/li&gt;
+&lt;li&gt;星球群聊显示身份的名称&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;实现方法：&lt;/p&gt;
+&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)willDisplayMessageCell:(RCMessageBaseCell *)cell atIndexPath:(&lt;span class=&quot;built_in&quot;&gt;NSIndexPath&lt;/span&gt; *)indexPath &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    RCMessageModel *model = [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.conversationDataRepository&lt;/span&gt; objectAtIndex:indexPath&lt;span class=&quot;variable&quot;&gt;.row&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.conversationType&lt;/span&gt; == ConversationType_PRIVATE) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        model&lt;span class=&quot;variable&quot;&gt;.isDisplayNickname&lt;/span&gt; = &lt;span class=&quot;literal&quot;&gt;NO&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.conversationType&lt;/span&gt; == ConversationType_GROUP) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        model&lt;span class=&quot;variable&quot;&gt;.isDisplayNickname&lt;/span&gt; = &lt;span class=&quot;literal&quot;&gt;YES&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [cell setDataModel:model];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;重要的方法:&lt;br&gt;&lt;figure class=&quot;highlight erlang&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;pp&quot;&gt;- &lt;span class=&quot;params&quot;&gt;(void)&lt;/span&gt;sendMessage:&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;RCMessageContent&lt;/span&gt; *)&lt;/span&gt;messageContent pushContent:&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;NSString&lt;/span&gt; *)&lt;/span&gt;pushContent;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;在发送自定义消息和通知的时候使用，当我在发送一个邀请好友进入聊天室的自定义cell的时候，使用&lt;/p&gt;
+&lt;figure class=&quot;highlight pf&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;JRInviteMessage *inviteMsg = [JRInviteMessage messageWithGroupId:&lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt;.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Id&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                             WithGroupHeader:NSStringObject(&lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt;.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Model.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Img).length==&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;?  &lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt;.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Model.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;ImgAll :&lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt;.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Model.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Img&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                               WithGroupName:[&lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt;.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Model.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Name containsString:@&lt;span class=&quot;string&quot;&gt;&quot;、&quot;&lt;/span&gt;] ? &lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt;.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Model.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;NameAll : &lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt;.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Model.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Name&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                                            WithGroupProflie:NSStringObject(&lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt;.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Model.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Introduct).length==&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;?  @&lt;span class=&quot;string&quot;&gt;&quot;暂无简介&quot;&lt;/span&gt; :&lt;span class=&quot;literal&quot;&gt;self&lt;/span&gt;.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Model.&lt;span class=&quot;keyword&quot;&gt;group&lt;/span&gt;Introduct];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[[RCIM sharedRCIM]sendMessage:ConversationType_PRIVATE&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                 targetId:selectArray[j]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                  content:inviteMsg&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                              pushContent:nil&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                 pushData:nil&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                  success:^(long messageId) &amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                    error:^(RCErrorCode nErrorCode, long messageId)&amp;#123;&amp;#125;]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;对于文字，图片和自定义的消息的cell都可以重写，文字继承自RCTextMessageCell，语音继承自RCVoiceMessageCell，图片继承自RCImageMessageCell，其他自定义邀请好友进入群聊的cell继承自RCMessageCell或者是它的父类RCMessageBaseCell，在方法中实现&lt;br&gt;&lt;code&gt;- (void)setDataModel:(RCMessageModel *)model&lt;/code&gt;来设置自己想要的属性的样式&lt;/p&gt;
+&lt;h3 id=&quot;自定义Cell的点击&quot;&gt;&lt;a href=&quot;#自定义Cell的点击&quot; class=&quot;headerlink&quot; title=&quot;自定义Cell的点击&quot;&gt;&lt;/a&gt;自定义Cell的点击&lt;/h3&gt;&lt;h1 id=&quot;推送&quot;&gt;&lt;a href=&quot;#推送&quot; class=&quot;headerlink&quot; title=&quot;推送&quot;&gt;&lt;/a&gt;推送&lt;/h1&gt;&lt;h1 id=&quot;遇到的问题&quot;&gt;&lt;a href=&quot;#遇到的问题&quot; class=&quot;headerlink&quot; title=&quot;遇到的问题&quot;&gt;&lt;/a&gt;遇到的问题&lt;/h1&gt;&lt;p&gt;1.修改聊天气泡以及一些图标&lt;br&gt;直接把要替换的图片替换RongCloud.bundle文件中的图片即可。&lt;/p&gt;
+&lt;p&gt;2.当融云SDK和BlocksKit被引入到同一工程，通过融云的聊天UI界面去选择照片、拍摄照片并发送时，无法正常选择和发送。&lt;br&gt;问题的本质：&lt;/p&gt;
+&lt;p&gt;UIImagePickerController代理中的方法冲突了，导致融云SDK中选择并发送照片的功能失效。&lt;/p&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;p&gt;BlocksKit是开源方法，直接编辑UIImagePickerController+BlocksKit.m文件，注释红框部分，问题便可解决。&lt;img src=&quot;http://rongcloud-web.qiniudn.com/39ef2374b74fb20691d28a5b6b9824d1&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;3.//点击消息发送失败红点的回调&lt;br&gt;&lt;figure class=&quot;highlight scss&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;- (void)didTapmessageFailedStatusViewForResend&lt;span class=&quot;value&quot;&gt;:(RCMessageModel *)model&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     RCMessageContent *resendContent = (RCMessageContent *)model.content;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;AlertShowMoreButtons&lt;/span&gt;(&lt;span class=&quot;at_rule&quot;&gt;@[@&lt;span class=&quot;string&quot;&gt;&quot;重新发送&quot;&lt;/span&gt;], ^(NSString *title,&lt;span class=&quot;preprocessor&quot;&gt; NSInteger&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt; moreButtonIndex&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        if (&lt;span class=&quot;function&quot;&gt;BoolEqualToString&lt;/span&gt;(&lt;span class=&quot;tag&quot;&gt;title&lt;/span&gt;, &lt;span class=&quot;at_rule&quot;&gt;@&lt;span class=&quot;string&quot;&gt;&quot;重新发送&quot;&lt;/span&gt;)) &amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;attr_selector&quot;&gt;[self resendMessage:resendContent]&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h1 id=&quot;解决的方法&quot;&gt;&lt;a href=&quot;#解决的方法&quot; class=&quot;headerlink&quot; title=&quot;解决的方法&quot;&gt;&lt;/a&gt;解决的方法&lt;/h1&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在项目APP中接入IM的功能，有环信和融云的两种选择，在纠结以后，选择了融云进行开发。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>独立开发一个APP</title>
+    <link href="http://peilinghui.com/2018/08/04/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AAAPP/"/>
+    <id>http://peilinghui.com/2018/08/04/独立开发一个APP/</id>
+    <published>2018-08-04T07:22:24.000Z</published>
+    <updated>2018-09-29T03:21:39.199Z</updated>
+    
+    <content type="html">&lt;p&gt;独立开发一个社群APP，类似微博，知识星球，简书这一类的。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;首先是整个项目的框架的搭建。&lt;/p&gt;
+&lt;h1 id=&quot;中间层的路由跳转方案&quot;&gt;&lt;a href=&quot;#中间层的路由跳转方案&quot; class=&quot;headerlink&quot; title=&quot;中间层的路由跳转方案&quot;&gt;&lt;/a&gt;中间层的路由跳转方案&lt;/h1&gt;&lt;p&gt;抽象出一个中间层来对纷乱的引用关系进行统一的跳转。模块只和中间层耦合，模块间解耦；中间层使用runtime的形式调用模块的业务组件，不依赖具体的模块代码.两种主流方案:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;以&lt;a href=&quot;https://github.com/joeldev/JLRoutes&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;JLRoutes&lt;/a&gt;为代表的URLRoute方案:以URL为key，以待执行的block为value，保存在一个全局map中，在内存中常驻;&lt;/li&gt;
+&lt;li&gt;Mediator中间人方案:把所有的调用都集合在一起，使用一个中间人管理。所有调用方都通过中间人调取另外一个模块;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;创建Target-Action。Target对象暴露整个模块对外提供的所有服务，此外，因为Mediator和Target是通过Runtime交互的，Target暴露的方法中接收的参数是一个字典，但在方法实现中负责将传过来的字典还原成各个参数，并调用该模块具体的类和方法。&lt;/li&gt;
+&lt;li&gt;创建 CTMediator 的Category. 受限于runtime只能以字典形式传一系列参数，Mediator分类的职责就在于对外提供参数友好型的一系列方法，但在方法实现中包装成字典形式。这里涉及到key的定义必须和Target中还原时的key定义一致，因此划分给相同的开发维护。&lt;br&gt;&lt;a href=&quot;https://github.com/yehot/YT_TargetAction&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;使用方法&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/xuzhenhao/ZHMediator&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;结合URLRoute和Mediator的跳转方案&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;整体导航条Navigation&quot;&gt;&lt;a href=&quot;#整体导航条Navigation&quot; class=&quot;headerlink&quot; title=&quot;整体导航条Navigation&quot;&gt;&lt;/a&gt;整体导航条Navigation&lt;/h1&gt;&lt;p&gt;写自定义的navigationController，主要用于处理问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;手势返回的支持和不支持。&lt;/li&gt;
+&lt;li&gt;导航栏的显示和隐藏。&lt;/li&gt;
+&lt;li&gt;底部tabBar的显示和隐藏。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在一些页面对于statusBar的处理，设置statusBar的背景颜色和样式&lt;/p&gt;
+&lt;h1 id=&quot;网络层&quot;&gt;&lt;a href=&quot;#网络层&quot; class=&quot;headerlink&quot; title=&quot;网络层&quot;&gt;&lt;/a&gt;网络层&lt;/h1&gt;&lt;p&gt;在AFN上面封装，包装AFNManager，创建一个单例的HTTPClient继承自AFHTTPSessionManager，在单例中设置securityPolicy、requestSerializer、responseSerializer、和请求头，以及Content-type相关的参数，包装GET、post请求&lt;br&gt;没有判断网络的情况，是WIFI还是4G还是3G，还是无网络的状态&lt;/p&gt;
+&lt;h1 id=&quot;tableView自适应&quot;&gt;&lt;a href=&quot;#tableView自适应&quot; class=&quot;headerlink&quot; title=&quot;tableView自适应&quot;&gt;&lt;/a&gt;tableView自适应&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/peilinghui/SDAutoLayout&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SDAutoLayout&lt;/a&gt;&lt;br&gt;不仅可以实现tableview和cell高度自适应，还可以实现普通view的自动布局，比用masonry代码更少，&lt;/p&gt;
+&lt;h1 id=&quot;整体的方法&quot;&gt;&lt;a href=&quot;#整体的方法&quot; class=&quot;headerlink&quot; title=&quot;整体的方法&quot;&gt;&lt;/a&gt;整体的方法&lt;/h1&gt;&lt;p&gt;页面布局：masonry自动布局&lt;br&gt;页面的网络解析：YYModel&lt;br&gt;页面的网络请求：&lt;/p&gt;
+&lt;p&gt;各个模块需要注意的问题：&lt;/p&gt;
+&lt;h1 id=&quot;登录模块&quot;&gt;&lt;a href=&quot;#登录模块&quot; class=&quot;headerlink&quot; title=&quot;登录模块&quot;&gt;&lt;/a&gt;登录模块&lt;/h1&gt;&lt;p&gt;第一次登录和再次登录&lt;/p&gt;
+&lt;h1 id=&quot;图片处理&quot;&gt;&lt;a href=&quot;#图片处理&quot; class=&quot;headerlink&quot; title=&quot;图片处理&quot;&gt;&lt;/a&gt;图片处理&lt;/h1&gt;&lt;p&gt;图片压缩&lt;/p&gt;
+&lt;h1 id=&quot;弹框处理&quot;&gt;&lt;a href=&quot;#弹框处理&quot; class=&quot;headerlink&quot; title=&quot;弹框处理&quot;&gt;&lt;/a&gt;弹框处理&lt;/h1&gt;&lt;h1 id=&quot;时间处理&quot;&gt;&lt;a href=&quot;#时间处理&quot; class=&quot;headerlink&quot; title=&quot;时间处理&quot;&gt;&lt;/a&gt;时间处理&lt;/h1&gt;&lt;h1 id=&quot;下拉刷新和上拉加载更多&quot;&gt;&lt;a href=&quot;#下拉刷新和上拉加载更多&quot; class=&quot;headerlink&quot; title=&quot;下拉刷新和上拉加载更多&quot;&gt;&lt;/a&gt;下拉刷新和上拉加载更多&lt;/h1&gt;&lt;h1 id=&quot;第三方登录和第三方分享&quot;&gt;&lt;a href=&quot;#第三方登录和第三方分享&quot; class=&quot;headerlink&quot; title=&quot;第三方登录和第三方分享&quot;&gt;&lt;/a&gt;第三方登录和第三方分享&lt;/h1&gt;&lt;p&gt;第三方分享：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;申请微信APPKey和申请友盟APPkey&lt;/li&gt;
+&lt;li&gt;cocospod:    pod ‘UMengUShare/Social/WeChat’&lt;/li&gt;
+&lt;li&gt;在APPdelegate中设置APPkey&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight nimrod&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;type&quot;&gt;void&lt;/span&gt;)setAppkey&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    //友盟&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [&lt;span class=&quot;type&quot;&gt;WXApi&lt;/span&gt; registerApp:&lt;span class=&quot;type&quot;&gt;WXAPPID&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    //设置友盟appkey&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [[&lt;span class=&quot;type&quot;&gt;UMSocialManager&lt;/span&gt; defaultManager] setUmSocialAppkey:&lt;span class=&quot;type&quot;&gt;UMKey&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    //分享到微信&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [[&lt;span class=&quot;type&quot;&gt;UMSocialManager&lt;/span&gt; defaultManager] setPlaform:&lt;span class=&quot;type&quot;&gt;UMSocialPlatformType_WechatSession&lt;/span&gt; appKey:&lt;span class=&quot;type&quot;&gt;APPKEY&lt;/span&gt; appSecret:&lt;span class=&quot;type&quot;&gt;APPSECRET&lt;/span&gt; redirectURL:@&lt;span class=&quot;string&quot;&gt;&quot;www.com&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;type&quot;&gt;BOOL&lt;/span&gt;)application:(&lt;span class=&quot;type&quot;&gt;UIApplication&lt;/span&gt; *)application openURL:(&lt;span class=&quot;type&quot;&gt;NSURL&lt;/span&gt; *)url sourceApplication:(&lt;span class=&quot;type&quot;&gt;NSString&lt;/span&gt; *)sourceApplication annotation:(id)annotation&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;type&quot;&gt;BOOL&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;result&lt;/span&gt; = [&lt;span class=&quot;type&quot;&gt;UMSocialSnsService&lt;/span&gt; handleOpenURL:url];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;result&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;设置Plis跳转的URL。URL Schemes列为白名单&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;key&lt;/span&gt;&amp;gt;&lt;/span&gt;LSApplicationQueriesSchemes&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;key&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;array&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;string&lt;/span&gt;&amp;gt;&lt;/span&gt;weixin&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;string&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;array&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;创建分享信息&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt; &lt;span class=&quot;comment&quot;&gt;//创建分享消息对象&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;NSString&lt;/span&gt; *title = &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.shareTitle&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;NSString&lt;/span&gt; *url = &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.originUrl&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;NSString&lt;/span&gt; *text = &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.shareText&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;NSString&lt;/span&gt; *imgUrl = &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.shareImage&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:title descr:text thumImage:imgUrl];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[shareObject setWebpageUrl:url];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;messageObject&lt;span class=&quot;variable&quot;&gt;.shareObject&lt;/span&gt; = shareObject;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_WechatSession&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           messageObject:messageObject&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		currentViewController:&lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		completion:^(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; data, &lt;span class=&quot;built_in&quot;&gt;NSError&lt;/span&gt; *error) &amp;#123;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (error) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;UMSocialLogInfo(&lt;span class=&quot;string&quot;&gt;@&quot;************Share fail with error %@*********&quot;&lt;/span&gt;,error);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&amp;#123;         &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ([data isKindOfClass:[UMSocialShareResponse class]]) &amp;#123;          &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  UMSocialShareResponse *resp = data; UMSocialLogInfo(&lt;span class=&quot;string&quot;&gt;@&quot;response message is %@&quot;&lt;/span&gt;,resp&lt;span class=&quot;variable&quot;&gt;.message&lt;/span&gt;);   UMSocialLogInfo(&lt;span class=&quot;string&quot;&gt;@&quot;response originalResponse data is %@&quot;&lt;/span&gt;,resp&lt;span class=&quot;variable&quot;&gt;.originalResponse&lt;/span&gt;);&amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&amp;#123; UMSocialLogInfo(&lt;span class=&quot;string&quot;&gt;@&quot;response data is %@&quot;&lt;/span&gt;,data); &amp;#125;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h1 id=&quot;系统问题&quot;&gt;&lt;a href=&quot;#系统问题&quot; class=&quot;headerlink&quot; title=&quot;系统问题&quot;&gt;&lt;/a&gt;系统问题&lt;/h1&gt;&lt;p&gt;启动图&lt;/p&gt;
+&lt;p&gt;横屏&lt;/p&gt;
+&lt;p&gt;推送&lt;/p&gt;
+&lt;p&gt;3Dtouch&lt;/p&gt;
+&lt;p&gt;屏幕适配&lt;/p&gt;
+&lt;h1 id=&quot;打包问题&quot;&gt;&lt;a href=&quot;#打包问题&quot; class=&quot;headerlink&quot; title=&quot;打包问题&quot;&gt;&lt;/a&gt;打包问题&lt;/h1&gt;&lt;p&gt;1。手动打包&lt;/p&gt;
+&lt;p&gt;2。自动化打包&lt;/p&gt;
+&lt;h1 id=&quot;优化&quot;&gt;&lt;a href=&quot;#优化&quot; class=&quot;headerlink&quot; title=&quot;优化&quot;&gt;&lt;/a&gt;优化&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;tableView的流畅：没有网络请求结束的时候先加载占位图，然后&lt;br&gt;&lt;a href=&quot;https://www.jianshu.com/p/d1e6ae279dd2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;UITableView的优化策略&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://didee.cn/2018/01/29/iOS-ASDK/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS 开发一定要尝试的 Texture(ASDK)&lt;/a&gt;&lt;br&gt;UITableView的回调顺序是先多次调用tableView:heightForRowAtIndexPath:以确定 contentSize及Cell的位置,然后才会调用tableView:cellForRowAtIndexPath:,从而来显示在 当前屏幕的Cell。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;UITableView的滚动优化主要在于以下两个方面：&lt;/p&gt;
+&lt;p&gt;减少cellForRowAtIndexPath代理中的计算量（cell的内容计算）&lt;br&gt;减少heightForRowAtIndexPath代理中的计算量（cell的高度计算）&lt;/p&gt;
+&lt;h3 id=&quot;减少cellForRowAtIndexPath代理中的计算量&quot;&gt;&lt;a href=&quot;#减少cellForRowAtIndexPath代理中的计算量&quot; class=&quot;headerlink&quot; title=&quot;减少cellForRowAtIndexPath代理中的计算量&quot;&gt;&lt;/a&gt;减少cellForRowAtIndexPath代理中的计算量&lt;/h3&gt;&lt;p&gt;首先要提前计算每个cell中需要的一些基本数据，代理调用的时候直接取出；&lt;br&gt;图片要异步加载，加载完成后再根据cell内部UIImageView的引用设置图片；&lt;br&gt;图片数量多时，图片的尺寸要跟据需要提前经过transform矩阵变换压缩好（直接设置图片的contentMode让其自行压缩仍然会影响滚动效率），必要的时候要准备好预览图和高清图，需要时再加载高清图。&lt;br&gt;图片的‘懒加载’方法，即延迟加载，当滚动速度很快时避免频繁请求服务器数据。&lt;br&gt;尽量手动Drawing视图提升流畅性，而不是直接子类化UITableViewCell，然后覆盖drawRect方法，因为cell中不是只有一个contentview。绘制cell不建议使用UIView，建议使用CALayer。原因要参考UIView和CALayer的区别和联系。&lt;/p&gt;
+&lt;h3 id=&quot;减少heightForRowAtIndexPath代理中的计算量&quot;&gt;&lt;a href=&quot;#减少heightForRowAtIndexPath代理中的计算量&quot; class=&quot;headerlink&quot; title=&quot;减少heightForRowAtIndexPath代理中的计算量&quot;&gt;&lt;/a&gt;减少heightForRowAtIndexPath代理中的计算量&lt;/h3&gt;&lt;p&gt;由于每次TableView进行update更新都会对每一个cell调用heightForRowAtIndexPath代理取得最新的height，会大大增加计算时间。如果表格的所有cell高度都是固定的，那么去掉heightForRowAtIndexPath代理，直接设置TableView的rowHeight属性为固定的高度；&lt;br&gt;如果高度不固定，应尽量将cell的高度数据计算好并储存起来，代理调用的时候直接取，即将height的计算时间复杂度降到O(1)。例如：在异步请求服务器数据时，提前将cell高度计算好并作为dataSource的一个数据存到数据库供随时取用。&lt;/p&gt;
+&lt;h1 id=&quot;数据刷新&quot;&gt;&lt;a href=&quot;#数据刷新&quot; class=&quot;headerlink&quot; title=&quot;数据刷新&quot;&gt;&lt;/a&gt;数据刷新&lt;/h1&gt;&lt;h2 id=&quot;tableView的数据刷新&quot;&gt;&lt;a href=&quot;#tableView的数据刷新&quot; class=&quot;headerlink&quot; title=&quot;tableView的数据刷新&quot;&gt;&lt;/a&gt;tableView的数据刷新&lt;/h2&gt;&lt;p&gt;那就在每个元素的model里面加上一个高度字段，显示的时候如果高度非0，直接拿过来使用，如果是0就自适应计算一下&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://casatwy.com/iOS-Modulization.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS应用架构谈 组件化方案&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;把模块拆分成Pod&quot;&gt;&lt;a href=&quot;#把模块拆分成Pod&quot; class=&quot;headerlink&quot; title=&quot;把模块拆分成Pod&quot;&gt;&lt;/a&gt;把模块拆分成Pod&lt;/h1&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;独立开发一个社群APP，类似微博，知识星球，简书这一类的。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>iOS底层实现</title>
+    <link href="http://peilinghui.com/2018/06/25/iOS%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/"/>
+    <id>http://peilinghui.com/2018/06/25/iOS底层实现/</id>
+    <published>2018-06-25T07:07:36.000Z</published>
+    <updated>2018-07-25T08:17:21.085Z</updated>
+    
+    <content type="html">&lt;p&gt;源于一个面试题。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/WechatIMG95.jpeg&quot; alt=&quot;&quot;&gt;&lt;br&gt;我们知道在Runtime中的swizzling:通过selector来找IMP，可以利用Runtime来实现交换原方法和目标方法的IMP，以完全代替原方法的实现，或为原实现前后相当于加一段额外的代码。&lt;/p&gt;
+&lt;p&gt;就是在分类的load方法中，通过class_getClassMethodclass_getInstanceMethod获取类方法和实例方法，然后method_exchangeImplementations(),交换方法实现，或者是其他class_addMethods、class_addIvar、class_addProtocol、class_addProperty来动态的添加方法或者成员变量。还有class_copyIvarList、class_copyMethodList获得某个类所有的成员变量和所有方法。&lt;/p&gt;
+&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;preprocessor&quot;&gt;#import&lt;span class=&quot;title&quot;&gt;&amp;lt;objc/runtime.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ClassA&lt;/span&gt;: &lt;span class=&quot;title&quot;&gt;NSObject&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)methodA;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+ (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)methodB;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;@end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ClassA&lt;/span&gt; (&lt;span class=&quot;title&quot;&gt;Swizzle&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+ (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)load &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Method originalMethod = class_getInstanceMethod(&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;@selector&lt;/span&gt;(methodA));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Method swizzledMethod = class_getInstanceMethod(&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;@selector&lt;/span&gt;(swizzled_methodA));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;method_exchangeImplementations(originalMethod, swizzledMethod);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)swizzled_methodA &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt; swizzled_methodA];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;@end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;AOP的库Aspects 支持多次hook同一个方法，支持从hook返回的id&lt;aspecttoken&gt;对象删除对应的hook，IMP即函数指针。&lt;br&gt;Aspects 的大致原理：替换原方法的IMP为 消息转发函数指针 _objc_msgForward或_objc_msgForward_stret，把原方法IMP添加并对应到SEL aspects_originalSelector，将forwardInvocation:的IMP替换为参数对齐的C函数&lt;strong&gt;ASPECTS_ARE_BEING_CALLED&lt;/strong&gt;(NSObject &lt;em&gt;self, SEL selector, NSInvocation &lt;/em&gt;invocation)的指针。在&lt;strong&gt;ASPECTS_ARE_BEING_CALLED&lt;/strong&gt;函数中，替换invocation的selector为aspects_originalSelector，相当于要发送调用原始方法实现的消息。对于插入位置在前面，替换，后面的多个block，构建新的blockInvocation，从invocation中提取参数，最后通过invokeWithTarget:block来完成依次调用。&lt;/aspecttoken&gt;&lt;/p&gt;
+&lt;h1 id=&quot;libffi-简介&quot;&gt;&lt;a href=&quot;#libffi-简介&quot; class=&quot;headerlink&quot; title=&quot;libffi 简介&quot;&gt;&lt;/a&gt;libffi 简介&lt;/h1&gt;&lt;p&gt;    libffi 可以认为是实现了C语言上的runtime，简单来说，libffi 可根据 参数类型(ffi_type)，参数个数 生成一个 模板(ffi_cif)；可以输入 模板、函数指针 和 参数地址 来直接完成 函数调用(ffi_call)； 模板 也可以生成一个所谓的 闭包(ffi_closure)，并得到指针，当执行到这个地址时，会执行到自定义的void function(ffi_cif &lt;em&gt;cif, void &lt;/em&gt;ret, void &lt;strong&gt;args, void &lt;em&gt;userdata)函数，在这里，我们可以获得所有参数的地址(包括返回值)，以及自定义数据userdata。当然，在这个函数里我们可以做一些额外的操作。&lt;br&gt;    &lt;br&gt;    &lt;br&gt;如何hook ObjC方法和实现AOP，思路：我们可以将ffi_closure关联的指针替换原方法的IMP，当对象收到该方法的消息时objc_msgSend(id self, SEL sel, …)，将最终执行自定义函数void ffi_function(ffi_cif &lt;/em&gt;cif, void *ret, void &lt;/strong&gt;args, void *userdata)。而实现这一切的主要工作是：设计可行的结构，存储类的多个hook信息；根据包含不同参数的方法和切面block，生成包含匹配ffi_type的cif；替换类某个方法的实现为ffi_closure关联的imp，记录hook；在ffi_function里，根据获得的参数，动态调用原始imp和block。&lt;/p&gt;
+&lt;h2 id=&quot;动态调用C函数&quot;&gt;&lt;a href=&quot;#动态调用C函数&quot; class=&quot;headerlink&quot; title=&quot;动态调用C函数&quot;&gt;&lt;/a&gt;动态调用C函数&lt;/h2&gt;&lt;p&gt;使用libffi提供接口动态调用流程如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;准备好参数数据及其对应ffi_type数组、返回值内存指针、函数指针&lt;/li&gt;
+&lt;li&gt;创建与函数特征相匹配的函数原型：ffi_cif对象&lt;/li&gt;
+&lt;li&gt;使用“ffi_call”来完成函数调用&lt;br&gt;使用ffi，只要有函数原型cif对象，函数实现指针，返回值内存指针和函数参数数组，我们就可以实现在运行时动态调用任意C函数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;所以如果想实现其他语言(譬如JS)，执行过程中动态调用C函数，只需在调用过程中加一层转换，将参数及返回值类型转换成libffi对应类型，并封装成函数原型cif对象，准备好参数数据，找到对应函数指针，然后调用即可。&lt;/p&gt;
+&lt;h2 id=&quot;动态定义C函数&quot;&gt;&lt;a href=&quot;#动态定义C函数&quot; class=&quot;headerlink&quot; title=&quot;动态定义C函数&quot;&gt;&lt;/a&gt;动态定义C函数&lt;/h2&gt;&lt;p&gt;libffi还有一个特别强大的函数，通过它我们可以将任意参数和返回值类型的函数指针，绑定到一个函数实体上。那么这样我们就可以很方便的实现动态定义一个C函数了！同时这个函数在编写解释器或提供任意函数的包装器(通用block)时非常有用，此函数是：&lt;/p&gt;
+&lt;figure class=&quot;highlight actionscript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ffi_status ffi_prep_closure_loc (ffi_closure *closure,  &lt;span class=&quot;comment&quot;&gt;//闭包，一个ffi_closure对象&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       ffi_cif *cif,  &lt;span class=&quot;comment&quot;&gt;//函数原型&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; (*fun) (ffi_cif *cif, &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; *ret, &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; **args, &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;*user_data), &lt;span class=&quot;comment&quot;&gt;//函数实体&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; *user_data, &lt;span class=&quot;comment&quot;&gt;//函数上下文，函数实体实参&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; *codeloc)   &lt;span class=&quot;comment&quot;&gt;//函数指针，指向函数实体&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;通过一个简单的例子，看下如何将一个函数指针绑定到一个函数实体上：&lt;/p&gt;
+&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;46&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;47&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;48&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;preprocessor&quot;&gt;#&lt;span class=&quot;keyword&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;preprocessor&quot;&gt;#&lt;span class=&quot;keyword&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&amp;lt;ffi.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/* Acts like puts with the file given at time of enclosure. */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 函数实体&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;puts_binding&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(ffi_cif *cif, &lt;span class=&quot;keyword&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; *ret, &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;* args[],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                  FILE *stream)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    *ret = &lt;span class=&quot;built_in&quot;&gt;fputs&lt;/span&gt;(*(&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; **)args[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;], stream);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ffi_cif cif;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ffi_type *args[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ffi_closure *closure;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; (*bound_puts)(&lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; *);  &lt;span class=&quot;comment&quot;&gt;//声明一个函数指针&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; rc;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;/* Allocate closure and bound_puts */&lt;/span&gt;  &lt;span class=&quot;comment&quot;&gt;//创建closure&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    closure = ffi_closure_alloc(&lt;span class=&quot;keyword&quot;&gt;sizeof&lt;/span&gt;(ffi_closure), &amp;amp;bound_puts);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (closure)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;/* Initialize the argument info vectors */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        args[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;] = &amp;amp;ffi_type_pointer;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;/* Initialize the cif */&lt;/span&gt;  &lt;span class=&quot;comment&quot;&gt;//生成函数原型&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (ffi_prep_cif(&amp;amp;cif, FFI_DEFAULT_ABI, &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                         &amp;amp;ffi_type_uint, args) == FFI_OK)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;/* Initialize the closure, setting stream to stdout */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;// 通过 ffi_closure 把 函数原型_cifPtr / 函数实体JPBlockInterpreter / 上下文对象self / 函数指针blockImp 关联起来&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (ffi_prep_closure_loc(closure, &amp;amp;cif, puts_binding,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                                     &lt;span class=&quot;built_in&quot;&gt;stdout&lt;/span&gt;, bound_puts) == FFI_OK)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                rc = bound_puts(&lt;span class=&quot;string&quot;&gt;&quot;Hello World!&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;comment&quot;&gt;/* rc now holds the result of the call to fputs */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;/* Deallocate both closure, and bound_puts */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ffi_closure_free(closure);   &lt;span class=&quot;comment&quot;&gt;//释放闭包&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;上述步骤大致分为：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;准备一个函数实体&lt;/li&gt;
+&lt;li&gt;声明一个函数指针&lt;/li&gt;
+&lt;li&gt;根据函数参数个数/参数及返回值类型生成一个函数原型&lt;/li&gt;
+&lt;li&gt;创建一个ffi_closure对象，并用其将函数原型、函数实体、函数上下文、函数指针关联起来&lt;/li&gt;
+&lt;li&gt;释放closure&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过以上这5步，我们就可以在执行过程中将一个函数指针，绑定到一个函数实体上，从而轻而易举的实现动态定义一个C函数。&lt;/p&gt;
+&lt;h1 id=&quot;参考资料&quot;&gt;&lt;a href=&quot;#参考资料&quot; class=&quot;headerlink&quot; title=&quot;参考资料&quot;&gt;&lt;/a&gt;参考资料&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;http://www.assuner.com/%E5%BC%80%E6%BA%90/2018/01/16/Stinger.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hook方法的新姿势–(使用libffi实现AOP )&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.cnbang.net/tech/3219/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何动态调用 C 函数&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.cnbang.net/tech/3332/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何动态创建 block – JPBlock 扩展原理详解&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;源于一个面试题。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Effective JavaScript</title>
+    <link href="http://peilinghui.com/2018/04/19/Effective-JavaScript/"/>
+    <id>http://peilinghui.com/2018/04/19/Effective-JavaScript/</id>
+    <published>2018-04-19T00:08:23.000Z</published>
+    <updated>2018-07-19T15:05:44.674Z</updated>
+    
+    <content type="html">&lt;p&gt;Effective JavaScript&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;Accustoming-Yourself-to-JavaScript让自己习惯JS&quot;&gt;&lt;a href=&quot;#Accustoming-Yourself-to-JavaScript让自己习惯JS&quot; class=&quot;headerlink&quot; title=&quot;Accustoming Yourself to JavaScript让自己习惯JS&quot;&gt;&lt;/a&gt;Accustoming Yourself to JavaScript让自己习惯JS&lt;/h1&gt;&lt;h2 id=&quot;1-知道你正在使用的JavaScript模式&quot;&gt;&lt;a href=&quot;#1-知道你正在使用的JavaScript模式&quot; class=&quot;headerlink&quot; title=&quot;1.知道你正在使用的JavaScript模式&quot;&gt;&lt;/a&gt;1.知道你正在使用的JavaScript模式&lt;/h2&gt;&lt;p&gt;是否使用严格模式？只可选择其一或者将其自身包裹在立即调用的函数表达式（IIFE）中连接多个文件。&lt;br&gt;获得最大兼容性： 在严格模式下，并且显式地将代码内容包裹在严格函数中。&lt;/p&gt;
+&lt;h2 id=&quot;2-注意JavaScript的浮点数&quot;&gt;&lt;a href=&quot;#2-注意JavaScript的浮点数&quot; class=&quot;headerlink&quot; title=&quot;2.注意JavaScript的浮点数&quot;&gt;&lt;/a&gt;2.注意JavaScript的浮点数&lt;/h2&gt;&lt;p&gt;avaScript的数字都是双精度的浮点数。&lt;br&gt;JavaScript中的整数只是双精度浮点数的一个子集,而不是一个单独的数据类型。&lt;br&gt;位运算符把数字当做32位的有符号整数来处理。&lt;br&gt;注意JavaScript中浮点数的精度陷阱。&lt;/p&gt;
+&lt;h2 id=&quot;3-当心隐式的强制转换&quot;&gt;&lt;a href=&quot;#3-当心隐式的强制转换&quot; class=&quot;headerlink&quot; title=&quot;3.当心隐式的强制转换&quot;&gt;&lt;/a&gt;3.当心隐式的强制转换&lt;/h2&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Effective JavaScript&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>React技术栈</title>
+    <link href="http://peilinghui.com/2018/02/22/React%E7%9F%A5%E8%AF%86/"/>
+    <id>http://peilinghui.com/2018/02/22/React知识/</id>
+    <published>2018-02-22T06:26:54.000Z</published>
+    <updated>2018-07-19T15:15:21.074Z</updated>
+    
+    <content type="html">&lt;p&gt;主要是对阅读深入React技术栈的总结和实践。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;&lt;a href=&quot;https://facebook.github.io/react/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/facebook/react&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;github地址&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;React&quot;&gt;&lt;a href=&quot;#React&quot; class=&quot;headerlink&quot; title=&quot;React&quot;&gt;&lt;/a&gt;React&lt;/h1&gt;&lt;h2 id=&quot;事件系统&quot;&gt;&lt;a href=&quot;#事件系统&quot; class=&quot;headerlink&quot; title=&quot;事件系统&quot;&gt;&lt;/a&gt;事件系统&lt;/h2&gt;&lt;p&gt;React基于Viral DOM实现了一个Synthetic（合成事件）层，使用stopPropagation()和preventDefault()来中断它。&lt;br&gt;所有事件都自动绑定到最外层，如果要访问原生事件对象，可以使用nativeEvent属性。&lt;/p&gt;
+&lt;p&gt;一、 合成事件的实现机制&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;事件委派：把所有事件绑定到结构最外层，使用同一的事件监听器–映射所有组件内部的事件监听和处理函数。&lt;/li&gt;
+&lt;li&gt;自动绑定：手动绑定this为当前组件的方法：&lt;ul&gt;
+&lt;li&gt;bind方法：使用::this.handleClick等同于this.handleClick.bind(this)&lt;/li&gt;
+&lt;li&gt;构造器内绑定声明，在constructor中完成&lt;/li&gt;
+&lt;li&gt;箭头函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;二、 使用原生事件&lt;br&gt;在ComponentDidMount中&lt;br&gt;this.refs.button.addEventListener(‘click’,e=&amp;gt;{&lt;br&gt;    hanldeCliick(e);&lt;br&gt;});&lt;br&gt;在ComponentWillUnMount中移除&lt;br&gt;this.refs.button.removeEventListener(‘click’);&lt;/p&gt;
+&lt;p&gt;三、 合成事件和原生事件混用&lt;br&gt;比如在web页面添加移动设备扫描二维码的功能。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;不要把合成事件和原生事件混用&lt;/li&gt;
+&lt;li&gt;通过e.target判断来避免&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;四、 对比React合成事件和JS的原生事件&lt;/p&gt;
+&lt;h2 id=&quot;组件间通信&quot;&gt;&lt;a href=&quot;#组件间通信&quot; class=&quot;headerlink&quot; title=&quot;组件间通信&quot;&gt;&lt;/a&gt;组件间通信&lt;/h2&gt;&lt;p&gt;一、 父组件向子组件通信&lt;br&gt;通过props&lt;/p&gt;
+&lt;p&gt;二、 子组件向父组件通信&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;利用回调函数：this.props的function的回调&lt;/li&gt;
+&lt;li&gt;利用自定义事件机制&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;三、 跨级组件通信&lt;br&gt;子组件跨级访问信息，使用context实现跨级父子组件间的通信。&lt;br&gt;在父组件中定义了ChildContext，在子组件中使用this.context从而调用。&lt;br&gt;一般只有在全局比如：界面主题、用户信息才会使用。总体原则：使用它，可以写成高阶组件。&lt;/p&gt;
+&lt;p&gt;四、 没有嵌套关系的组件通信&lt;br&gt;通过一个单例的EventEmitter，然后把这个实例输出到各组件中使用。&lt;/p&gt;
+&lt;p&gt;import {EventEmitter} from ‘event’;&lt;br&gt;export default new EventEmitter();&lt;/p&gt;
+&lt;p&gt;import emitter from ‘./events’;&lt;/p&gt;
+&lt;p&gt;在APP的类中的ComponentDidMount中emmit&lt;/p&gt;
+&lt;h2 id=&quot;组件间抽象&quot;&gt;&lt;a href=&quot;#组件间抽象&quot; class=&quot;headerlink&quot; title=&quot;组件间抽象&quot;&gt;&lt;/a&gt;组件间抽象&lt;/h2&gt;&lt;p&gt;mixin和高阶组件&lt;br&gt;mixin:创造一种类似多重继承的效果，组合。&lt;/p&gt;
+&lt;h1 id=&quot;Flux架构&quot;&gt;&lt;a href=&quot;#Flux架构&quot; class=&quot;headerlink&quot; title=&quot;Flux架构&quot;&gt;&lt;/a&gt;Flux架构&lt;/h1&gt;&lt;p&gt;不是MVC的架构，Flux三大部分组成：1. dispatcher、store、view。dispatcher负责分发事件，store负责保存数据、view负责订阅store中的数据，并使用这些数据渲染相应的页面。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;与MVC的主要区别：&lt;/strong&gt;&lt;br&gt;没有职责明确的Controller，存在一个Controller-view的角色，将view和store进行绑定，并没有Controller需要承担的复杂的逻辑。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;dispatcher与action&lt;/strong&gt;&lt;br&gt;dispatcher的实现就是下面两个API:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;.register(callback)方法用来注册一个监听器。&lt;br&gt;.dispatch(action)用来分发一个action。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;action是一个普通的JavaScript对象，一般包含type、payload字段，用于描述一个事件以及需要改变的相关数据。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;store&lt;/strong&gt;&lt;br&gt;负责保存数据，并且修改数据的逻辑，调用dispatcher的register(callback)方法将自己注册为一个监听器。&lt;br&gt;当.dispatch(action)用来分发一个action时，store注册的监听器就会被调用，同时得到这个action作为参数。store之暴露getter不暴露setter，只能读取不能修改。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Controller-view&lt;/strong&gt;&lt;br&gt;最顶层view，主要进行store与React组件(view层)之间的数据的绑定，定义数据更新以及传递的方式。会调用store保留的getter获取存储其中的数据并设置为自己的state，在render时以props的形式传给自己的子组件。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;view&lt;/strong&gt;&lt;br&gt;React组件扮演。结合Angular、Vue来发挥Flux的能力。&lt;br&gt;一条特殊的约定：&lt;strong&gt;Flux的view不能直接修改数据，如果页面操作需要修改数据，则必须使用dispatcher分发一个action。&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;actionCreator&lt;/strong&gt;&lt;br&gt;用来创造action的。为什么需要？因为在分发action的时候代码是冗余的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;Redux架构&quot;&gt;&lt;a href=&quot;#Redux架构&quot; class=&quot;headerlink&quot; title=&quot;Redux架构&quot;&gt;&lt;/a&gt;Redux架构&lt;/h1&gt;&lt;h2 id=&quot;Redux简介&quot;&gt;&lt;a href=&quot;#Redux简介&quot; class=&quot;headerlink&quot; title=&quot;Redux简介&quot;&gt;&lt;/a&gt;Redux简介&lt;/h2&gt;&lt;p&gt;Redux的核心代码是一个库，类似Flux的架构思想，&lt;/p&gt;
+&lt;h3 id=&quot;三大原则&quot;&gt;&lt;a href=&quot;#三大原则&quot; class=&quot;headerlink&quot; title=&quot;三大原则&quot;&gt;&lt;/a&gt;三大原则&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;单一数据源&lt;br&gt;一个应用永远只有唯一的一个数据源，整个应用状态都保存在一个对象中。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;状态是只读的&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Flux中store没有setter只有getter，而Redux中没有store，只有reducer，根据当前触发的action对当前应用state进行迭代。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;状态修改均由纯函数完成&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Redux与Flux最大的不同。&lt;br&gt;在Flux中，我们在actionCreator里调用APPDispatcher.dispatch方法来触发action，直接修改了store中数据.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;主要是对阅读深入React技术栈的总结和实践。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>ReactNative中使用Redux</title>
@@ -255,7 +543,7 @@
     <link href="http://peilinghui.com/2017/07/14/iOS%E5%BA%94%E7%94%A8APP%E6%9E%B6%E6%9E%84/"/>
     <id>http://peilinghui.com/2017/07/14/iOS应用APP架构/</id>
     <published>2017-07-14T02:54:01.000Z</published>
-    <updated>2017-07-14T07:31:47.000Z</updated>
+    <updated>2018-07-25T08:09:54.373Z</updated>
     
     <content type="html">&lt;p&gt;对于网络层的改造其实就相当于iOS应用的APP的架构了，然后就去查了相关的资料。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -263,6 +551,9 @@
 &lt;p&gt;&lt;a href=&quot;http://www.infoq.com/cn/articles/ios-app-arch-part-01?utm_source=infoq&amp;amp;utm_campaign=user_page&amp;amp;utm_medium=link&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS应用架构谈（一）：架构设计的方法论&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.infoq.com/cn/articles/ios-app-arch-2-1?utm_source=infoq&amp;amp;utm_campaign=user_page&amp;amp;utm_medium=link&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS应用架构谈（二）：View层的组织和调用方案（上）&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.infoq.com/cn/articles/ios-app-arch-3-1&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS应用架构谈（三）：网络层设计方案(上)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://casatwy.com/iOS-Modulization.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS应用架构谈 组件化方案&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.cnbluebox.com/blog/2015/11/28/module-and-decoupling/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;模块化与解耦&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.cnbluebox.com/blog/2015/05/07/architecture-ios-1/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;IOS应用架构思考一（网络层)&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -1112,471 +1403,6 @@ Safari相同的JavaScript引擎
     <summary type="html">
     
       &lt;p&gt;研究一下NSURLProtocol.h。&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>UIView的Frame和bounds区别</title>
-    <link href="http://peilinghui.com/2017/04/21/UIView%E7%9A%84Frame%E5%92%8Cbounds%E5%8C%BA%E5%88%AB/"/>
-    <id>http://peilinghui.com/2017/04/21/UIView的Frame和bounds区别/</id>
-    <published>2017-04-21T10:48:21.000Z</published>
-    <updated>2017-04-22T06:19:05.000Z</updated>
-    
-    <content type="html">&lt;p&gt;UIView的相关重点。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/UIview.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;frame和bounds简介&quot;&gt;&lt;a href=&quot;#frame和bounds简介&quot; class=&quot;headerlink&quot; title=&quot;frame和bounds简介&quot;&gt;&lt;/a&gt;frame和bounds简介&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/frame%E5%92%8Cbounds.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;frame: 该view在父view坐标系统中的位置和大小。（参照点是，父亲的坐标系统）&lt;br&gt;bounds：该view在本地坐标系统中的位置和大小。（参照点是，本地坐标系统，就相当于ViewB自己的坐标系统，以0,0点为起点）&lt;br&gt;center：该view的中心点在父view坐标系统中的位置和大小。（参照点是，父亲的坐标系统）&lt;/p&gt;
-&lt;h1 id=&quot;实际例子&quot;&gt;&lt;a href=&quot;#实际例子&quot; class=&quot;headerlink&quot; title=&quot;实际例子&quot;&gt;&lt;/a&gt;实际例子&lt;/h1&gt;&lt;p&gt;Demo：&lt;a href=&quot;https://github.com/peilinghui/BokeDemo/tree/master/FrameAndBoundsDemo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/peilinghui/BokeDemo/tree/master/FrameAndBoundsDemo&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;旋转一个自定义View&quot;&gt;&lt;a href=&quot;#旋转一个自定义View&quot; class=&quot;headerlink&quot; title=&quot;旋转一个自定义View&quot;&gt;&lt;/a&gt;旋转一个自定义View&lt;/h3&gt;&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;preprocessor&quot;&gt;#pragma mark --   例子1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//旋转一个自定义view后，frame改变了，而bounds没有改变&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;span class=&quot;built_in&quot;&gt;UIView&lt;/span&gt; *View1 = [[&lt;span class=&quot;built_in&quot;&gt;UIView&lt;/span&gt; alloc]initWithFrame:&lt;span class=&quot;built_in&quot;&gt;CGRectMake&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;)];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;View1&lt;span class=&quot;variable&quot;&gt;.backgroundColor&lt;/span&gt; = [&lt;span class=&quot;built_in&quot;&gt;UIColor&lt;/span&gt; redColor];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.view&lt;/span&gt; addSubview:View1];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;自定义子view的self.view.frame = %@&quot;&lt;/span&gt;,&lt;span class=&quot;built_in&quot;&gt;NSStringFromCGRect&lt;/span&gt;(View1&lt;span class=&quot;variable&quot;&gt;.frame&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//自定义子view的self.view.frame = &amp;#123;&amp;#123;100, 100&amp;#125;, &amp;#123;50, 50&amp;#125;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;自定义子view的self.view.bounds=%@&quot;&lt;/span&gt;,&lt;span class=&quot;built_in&quot;&gt;NSStringFromCGRect&lt;/span&gt;(View1&lt;span class=&quot;variable&quot;&gt;.bounds&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//自定义子view的self.view.bounds=&amp;#123;&amp;#123;0, 0&amp;#125;, &amp;#123;50, 50&amp;#125;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[&lt;span class=&quot;built_in&quot;&gt;UIView&lt;/span&gt; transitionWithView:View1 duration:&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt; options:&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; animations:^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    View1&lt;span class=&quot;variable&quot;&gt;.transform&lt;/span&gt; = &lt;span class=&quot;built_in&quot;&gt;CGAffineTransformMakeRotation&lt;/span&gt;(M_PI_4);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;completion:^(&lt;span class=&quot;built_in&quot;&gt;BOOL&lt;/span&gt; finished)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (finished)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;旋转后子view的self.view.frame = %@&quot;&lt;/span&gt;,&lt;span class=&quot;built_in&quot;&gt;NSStringFromCGRect&lt;/span&gt;(View1&lt;span class=&quot;variable&quot;&gt;.frame&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;span class=&quot;comment&quot;&gt;//旋转后子view的self.view.frame = &amp;#123;&amp;#123;89.644660940672622, 89.644660940672622&amp;#125;, &amp;#123;70.710678118654755, 70.710678118654755&amp;#125;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;旋转后子view的self.view.bounds=%@&quot;&lt;/span&gt;,&lt;span class=&quot;built_in&quot;&gt;NSStringFromCGRect&lt;/span&gt;(View1&lt;span class=&quot;variable&quot;&gt;.bounds&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;comment&quot;&gt;//旋转后子view的self.view.bounds=&amp;#123;&amp;#123;0, 0&amp;#125;, &amp;#123;50, 50&amp;#125;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%888.09.35.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%888.09.00.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;在旋转动画后，frame发生改变，bounds依然没变。下面的结论：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;frame的位置是根据父容器来计算的，正方形在动画开始前的x=100,y=100是相对于self.view的坐标系统而言的，从而确定当前视图在父视图中的位置。&lt;/li&gt;
-&lt;li&gt;bounds的x,y是根据自己的坐标系统而言的。没错，每个view都有自己的坐标系。以自己左上角点为坐标原点。所以bounds的x,y默认为(0,0),除非调用setBounds方法；&lt;/li&gt;
-&lt;li&gt;frame的size不一定等于bounds的size，在旋转后它们的size就不一样了。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;把frame理解为占用区域，把bounds理解为边界。View在旋转过程中，其实自己的坐标系统并没有发生改变，bounds中的origin只能通过setBounds方法修改。&lt;/p&gt;
-&lt;h3 id=&quot;把一个子View放到父View中，改变父View的bounds&quot;&gt;&lt;a href=&quot;#把一个子View放到父View中，改变父View的bounds&quot; class=&quot;headerlink&quot; title=&quot;把一个子View放到父View中，改变父View的bounds&quot;&gt;&lt;/a&gt;把一个子View放到父View中，改变父View的bounds&lt;/h3&gt;&lt;figure class=&quot;highlight crystal&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;constant&quot;&gt;UIView&lt;/span&gt; *fatherView = [[&lt;span class=&quot;constant&quot;&gt;UIView&lt;/span&gt; alloc]&lt;span class=&quot;symbol&quot;&gt;initWithFrame:&lt;/span&gt;&lt;span class=&quot;constant&quot;&gt;CGRectMake&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;200&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;200&lt;/span&gt;)];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;fatherView.backgroundColor = [&lt;span class=&quot;constant&quot;&gt;UIColor&lt;/span&gt; yellowColor];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.view &lt;span class=&quot;symbol&quot;&gt;addSubview:&lt;/span&gt;fatherView];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;constant&quot;&gt;UIView&lt;/span&gt; *sunView = [[&lt;span class=&quot;constant&quot;&gt;UIView&lt;/span&gt; alloc]&lt;span class=&quot;symbol&quot;&gt;initWithFrame:&lt;/span&gt;&lt;span class=&quot;constant&quot;&gt;CGRectMake&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;)];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sunView.backgroundColor = [&lt;span class=&quot;constant&quot;&gt;UIColor&lt;/span&gt; redColor];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[fatherView &lt;span class=&quot;symbol&quot;&gt;addSubview:&lt;/span&gt;sunView];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;constant&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;string&quot;&gt;&quot;父view的frame = %@,bounds=%@,中心点=：%@&quot;&lt;/span&gt;,&lt;span class=&quot;constant&quot;&gt;NSStringFromCGRect&lt;/span&gt;(fatherView.frame),&lt;span class=&quot;constant&quot;&gt;NSStringFromCGRect&lt;/span&gt;(fatherView.bounds),&lt;span class=&quot;constant&quot;&gt;NSStringFromCGPoint&lt;/span&gt;(fatherView.center));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;父view的frame = &lt;span class=&quot;expansion&quot;&gt;&amp;#123;&amp;#123;&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;&amp;#125;, &amp;#123;&lt;span class=&quot;number&quot;&gt;200&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;200&lt;/span&gt;&amp;#125;&amp;#125;&lt;/span&gt;,bounds=&lt;span class=&quot;expansion&quot;&gt;&amp;#123;&amp;#123;&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&amp;#125;, &amp;#123;&lt;span class=&quot;number&quot;&gt;200&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;200&lt;/span&gt;&amp;#125;&amp;#125;&lt;/span&gt;,中心点=：&amp;#123;&lt;span class=&quot;number&quot;&gt;200&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;200&lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;constant&quot;&gt;NSLog&lt;/span&gt;(@&lt;span class=&quot;string&quot;&gt;&quot;子view的frame = %@,bounds=%@,中心点=：%@&quot;&lt;/span&gt;,&lt;span class=&quot;constant&quot;&gt;NSStringFromCGRect&lt;/span&gt;(sunView.frame),&lt;span class=&quot;constant&quot;&gt;NSStringFromCGRect&lt;/span&gt;(sunView.bounds),&lt;span class=&quot;constant&quot;&gt;NSStringFromCGPoint&lt;/span&gt;(sunView.center));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;子view的frame = &lt;span class=&quot;expansion&quot;&gt;&amp;#123;&amp;#123;&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&amp;#125;, &amp;#123;&lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;&amp;#125;&amp;#125;&lt;/span&gt;,bounds=&lt;span class=&quot;expansion&quot;&gt;&amp;#123;&amp;#123;&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&amp;#125;, &amp;#123;&lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;&amp;#125;&amp;#125;&lt;/span&gt;,中心点=：&amp;#123;&lt;span class=&quot;number&quot;&gt;25&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;25&lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;/&lt;span class=&quot;regexp&quot;&gt;/1. 改变父View的bounds的位置,父view的bounds改变了&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[UIView animateWithDuration:4 animations:^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [fatherView setBounds:CGRectMake(30, 30, 200, 200)];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;completion:^(BOOL finished)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    NSLog(@&quot;改变父坐标bounds的位置后父view的frame = %@,bounds=%@,中心点=：%@&quot;,NSStringFromCGRect(fatherView.frame),NSStringFromCGRect(fatherView.bounds),NSStringFromCGPoint(fatherView.center));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    /&lt;/span&gt;&lt;span class=&quot;regexp&quot;&gt;/ 改变父坐标bounds的位置后父view的frame = &amp;#123;&amp;#123;100, 100&amp;#125;, &amp;#123;200, 200&amp;#125;&amp;#125;,bounds=&amp;#123;&amp;#123;30, 30&amp;#125;, &amp;#123;200, 200&amp;#125;&amp;#125;,中心点=：&amp;#123;200, 200&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; 	NSLog(@&quot;改变父坐标bounds的位置后子view的frame = %@,bounds=%@,中心点=：%@&quot;,NSStringFromCGRect(sunView.frame),NSStringFromCGRect(sunView.bounds),NSStringFromCGPoint(sunView.center));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;regexp&quot;&gt;/改变父坐标bounds的位置后子view的frame = &amp;#123;&amp;#123;0, 0&amp;#125;, &amp;#123;50, 50&amp;#125;&amp;#125;,bounds=&amp;#123;&amp;#123;0, 0&amp;#125;, &amp;#123;50, 50&amp;#125;&amp;#125;,中心点=：&amp;#123;25, 25&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;];&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%888.22.30.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%888.21.21.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%888.24.15.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;setBounds 强制将自己坐标系的左上角点改为（30，30）。那么真正的原点(0,0)自然向右上角偏移(30,30);&lt;br&gt;若是setBounds设为（-30，-30） ，则子view向右下角移动，偏移(30,30)。&lt;br&gt;注意：setBounds中的(x,y)只改变自己的坐标系统。子view的bounds和frame并不会改变。&lt;br&gt;总结：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;setBounds中的(x,y)只改变自己的坐标系统，子View的bounds和frame并不会改变；&lt;/li&gt;
-&lt;li&gt;setBounds是修改自己坐标系的原点位置，进而影响到子View的显示位置；&lt;/li&gt;
-&lt;li&gt;bounds改变位置时，改变的是子视图的位置，自身没有影响，其实就是改变了自身的坐标系原点，默认原点在左上角。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;改变父View的bounds的大小&quot;&gt;&lt;a href=&quot;#改变父View的bounds的大小&quot; class=&quot;headerlink&quot; title=&quot;改变父View的bounds的大小&quot;&gt;&lt;/a&gt;改变父View的bounds的大小&lt;/h3&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[fatherView setBounds:CGRectMake(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;)];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%888.34.11.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%888.34.22.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;使用setBounds方法减小了父View的bounds.size ,可以看到把frame也改变了。总结：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;更改bounds的大小，bounds的大小代表当前视图的长和宽，修改长宽后，中心点继续保持不变，长宽进行改变，通过bounds修改长宽就像是以中心点为基准点对长宽两边同时进行缩放。&lt;/li&gt;
-&lt;li&gt;center是根据父容器的相对位置来计算的，无论是修改父容器的bounds还是自身的bounds，都不会改变center。况且使用bounds来缩放view，都是根据center中心点来缩放的，所以center不会改变。&lt;/li&gt;
-&lt;li&gt;setBounds也可以修改view的大小，进而修改frame。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;改子视图的bounds的位置&quot;&gt;&lt;a href=&quot;#改子视图的bounds的位置&quot; class=&quot;headerlink&quot; title=&quot;改子视图的bounds的位置&quot;&gt;&lt;/a&gt;改子视图的bounds的位置&lt;/h3&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[sunView setBounds:CGRectMake(-&lt;span class=&quot;number&quot;&gt;30&lt;/span&gt;, -&lt;span class=&quot;number&quot;&gt;30&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;)];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;图像没有变化，与把一个子View放到父View中那个图一样的。&lt;/p&gt;
-&lt;h3 id=&quot;修改子视图的bounds的大小&quot;&gt;&lt;a href=&quot;#修改子视图的bounds的大小&quot; class=&quot;headerlink&quot; title=&quot;修改子视图的bounds的大小&quot;&gt;&lt;/a&gt;修改子视图的bounds的大小&lt;/h3&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[sunView setBounds:CGRectMake(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;80&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;80&lt;/span&gt;)];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%888.48.46.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%888.53.04.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;修改子视图的bounds的大小，只是把子视图以中心点为中心扩大了，改变了子视图的frame的位置和bounds，父view不受影响。&lt;/p&gt;
-&lt;h3 id=&quot;改变父view的frame的位置&quot;&gt;&lt;a href=&quot;#改变父view的frame的位置&quot; class=&quot;headerlink&quot; title=&quot;改变父view的frame的位置&quot;&gt;&lt;/a&gt;改变父view的frame的位置&lt;/h3&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[fatherView setFrame:CGRectMake(&lt;span class=&quot;number&quot;&gt;30&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;30&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;200&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;200&lt;/span&gt;)];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%889.01.36.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%889.01.43.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;从效果图上可以看到，我们改变了父View的位置和大小（坐标系原点仍然是(0,0),但是实际位置已经改变了，坐标系改变），子View的位置也改变了。但是子View的frame和bounds并没有改变。因为子View.origin是相对于父View的而言的，这并没有改变。&lt;/p&gt;
-&lt;h3 id=&quot;改变父view的frame的大小&quot;&gt;&lt;a href=&quot;#改变父view的frame的大小&quot; class=&quot;headerlink&quot; title=&quot;改变父view的frame的大小&quot;&gt;&lt;/a&gt;改变父view的frame的大小&lt;/h3&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[fatherView setFrame:CGRectMake(&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;)];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%888.34.11.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%889.12.26.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[fatherView setFrame:CGRectMake(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;)];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%889.13.02.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://7xr8q7.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-21%20%E4%B8%8B%E5%8D%889.13.26.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;setFrame改变大小和setBounds改变大小是完全不一样的，setFrame改变长宽是从左上角原点进行缩放的，固定的是原点。而setBounds则固定的是center。&lt;/p&gt;
-&lt;p&gt;一句话说：使用frame改变view大小，center改变，因为缩放参考点为左上角。使用bounds改变view大小，center不变，因为缩放参考点为center。&lt;br&gt;frame是参考父view的坐标系来设置自己左上角的位置。&lt;br&gt;设置bounds可以修改自己坐标系的原点位置，进而影响到其“子view”的显示位置。&lt;/p&gt;
-&lt;p&gt;总结：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果想修改view的位置而不影响其他，修改自身frame的位置；想修改view的大小，修改frame的大小或者bounds的大小（考虑相对位置的改变）。&lt;/li&gt;
-&lt;li&gt;如果想修改view的所有子view的位置，修改view的bounds的位置（父容器坐标系）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;bounds使用场景&quot;&gt;&lt;a href=&quot;#bounds使用场景&quot; class=&quot;headerlink&quot; title=&quot;bounds使用场景&quot;&gt;&lt;/a&gt;bounds使用场景&lt;/h1&gt;&lt;p&gt;其实bounds我们一直在使用，就是我们使用scrollview的时候。&lt;br&gt;为什么我们滚动scrollview可以看到超出显示屏的内容。就是因为scrollview在不断改变自己的bounds，从而改变scrollview上的子view的frame，让他们的frame始终在最顶级view（window）的frame内部，这样我们就可以始终看到内容了。&lt;/p&gt;
-&lt;p&gt;向上滚动scrollview，我们就不断增加scrollview的bounds的y值，也就是不断把scrollview的本地坐标系原点向下偏移（相对于scrollview的父view的坐标系，y值越大，越向下偏移）。那么此时scrollview的子控件的frame设置的(0,0)就是不断向上偏移&lt;/p&gt;
-&lt;p&gt;假设某一时刻scrollview的坐标系原点为(0,100)，那么scrollview的(0,0)位置就是相对于坐标系原点向上偏移100的距离，设置scrollview的子控件的frame为(0,0)，就是设置子控件左上角在scrollview中的(0,0)位置，那么子控件就会向上偏移100，你也就看到scrollview的内容（子控件）向上滚动的效果。&lt;/p&gt;
-&lt;p&gt;我们可以不断增加fatherView的bounds的y值，来看看是不是可以达到同样的效果：fatherView不动，Sunview在不断向上滚动&lt;br&gt;理解 Scroll Views:&lt;a href=&quot;https://objccn.io/issue-3-2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://objccn.io/issue-3-2/&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;UIView的相关重点。&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>React-Native的与原生的交互</title>
-    <link href="http://peilinghui.com/2017/03/21/React-Native%E7%9A%84%E4%B8%8E%E5%8E%9F%E7%94%9F%E7%9A%84%E4%BA%A4%E4%BA%92/"/>
-    <id>http://peilinghui.com/2017/03/21/React-Native的与原生的交互/</id>
-    <published>2017-03-21T09:12:44.000Z</published>
-    <updated>2018-07-18T01:41:41.577Z</updated>
-    
-    <content type="html">&lt;p&gt;在用RN开发的时候，遇到一些情况也需要来扩展原生的组件，就需要与OC来交互。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;通讯的机制与流程&quot;&gt;&lt;a href=&quot;#通讯的机制与流程&quot; class=&quot;headerlink&quot; title=&quot;通讯的机制与流程&quot;&gt;&lt;/a&gt;通讯的机制与流程&lt;/h1&gt;&lt;h1 id=&quot;自定义Native-API组件&quot;&gt;&lt;a href=&quot;#自定义Native-API组件&quot; class=&quot;headerlink&quot; title=&quot;自定义Native API组件&quot;&gt;&lt;/a&gt;自定义Native API组件&lt;/h1&gt;&lt;h2 id=&quot;模块和方法的定义&quot;&gt;&lt;a href=&quot;#模块和方法的定义&quot; class=&quot;headerlink&quot; title=&quot;模块和方法的定义&quot;&gt;&lt;/a&gt;模块和方法的定义&lt;/h2&gt;&lt;p&gt;模块类就是一个实现了RCTBridgeModule协议的类。&lt;/p&gt;
-&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// CalendarManager.h&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;preprocessor&quot;&gt;#import &lt;span class=&quot;title&quot;&gt;&amp;lt;React/RCTBridgeModule.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;preprocessor&quot;&gt;#import &lt;span class=&quot;title&quot;&gt;&amp;lt;React/RCTLog.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;CalendarManager&lt;/span&gt; : &lt;span class=&quot;title&quot;&gt;NSObject&lt;/span&gt; &amp;lt;&lt;span class=&quot;title&quot;&gt;RCTBridgeModule&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;@end&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;为了实现RCTBridgeModule协议，你的类需要包含RCT_EXPORT_MODULE()宏.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;RCT_EXPORT_MODULE();//向系统注册模块&lt;br&gt;RCT_REMAP_METHOD();//暴露模块方法&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;JavaScript和OC之间要通信，完成数据类型的转化，标准的JSON的类型都是支持的。&lt;br&gt;RCT_EXPORT_METHOD 支持所有标准JSON类型，包括：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;string (NSString)&lt;/li&gt;
-&lt;li&gt;number (NSInteger, float, double, CGFloat, NSNumber)&lt;/li&gt;
-&lt;li&gt;boolean (BOOL, NSNumber)&lt;/li&gt;
-&lt;li&gt;array (NSArray) 包含本列表中任意类型&lt;/li&gt;
-&lt;li&gt;object (NSDictionary) 包含string类型的键和本列表中任意类型的值&lt;/li&gt;
-&lt;li&gt;function (RCTResponseSenderBlock)&lt;br&gt;还支持一些常用类型：NSDate、UIColor、UIfont、NSURL、NSURLRequest、UIColorArray、CGPoint。。。。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;回调函数&quot;&gt;&lt;a href=&quot;#回调函数&quot; class=&quot;headerlink&quot; title=&quot;回调函数&quot;&gt;&lt;/a&gt;回调函数&lt;/h2&gt;&lt;p&gt;原生模块还支持一种特殊的参数——回调函数。它提供了一个函数来把返回值传回给JavaScript。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;(^RCTResponseSenderBlock)(NSArray &lt;em&gt;)接收多个参数的回调函数&lt;br&gt;(^RCTRespomseErrorBlock)(NSError &lt;/em&gt;)接受错误参数的回调函数&lt;br&gt;(^RCTPromiseResolveBlock)(id result):处理Promise Resolve&lt;br&gt;(^RCTPromiseRejectBlock)(NSError *):处理Promise Reject&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&quot;React-Native代码与OC代码的互通&quot;&gt;&lt;a href=&quot;#React-Native代码与OC代码的互通&quot; class=&quot;headerlink&quot; title=&quot;React Native代码与OC代码的互通&quot;&gt;&lt;/a&gt;React Native代码与OC代码的互通&lt;/h1&gt;&lt;p&gt;为了实现消息互通，需要建立一个原生语言模块负责与React Native桥接&lt;/p&gt;
-&lt;p&gt;OC代码向React Native发送消息有两种方式：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;通过回调接口。这种方式要求React Native代码先将接口传递给OC代码，然后OC代码才可以通过这个回调接口向React Native代码发送消息。&lt;/li&gt;
-&lt;li&gt;通过eventDispatcher向React Native模块发送事件。这样能够做到OC代码主动向React Native发送消息。&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在用RN开发的时候，遇到一些情况也需要来扩展原生的组件，就需要与OC来交互。&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>React-Native的API和组件</title>
-    <link href="http://peilinghui.com/2017/03/10/React-Native%E7%9A%84API%E5%92%8C%E7%BB%84%E4%BB%B6/"/>
-    <id>http://peilinghui.com/2017/03/10/React-Native的API和组件/</id>
-    <published>2017-03-10T09:09:04.000Z</published>
-    <updated>2018-07-18T01:41:34.673Z</updated>
-    
-    <content type="html">&lt;p&gt;在学习了React-Native的搭建以后，然后就在网上找了一些Demo来学习，并且开始练习。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;官网：&lt;a href=&quot;https://reactnative.cn/docs/0.46/getting-started.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://reactnative.cn/docs/0.46/getting-started.html&lt;/a&gt;&lt;br&gt;几个Demo链接：&lt;br&gt;&lt;a href=&quot;https://github.com/peilinghui/react-native-Gank&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GankIO&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;运行的步骤：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;git clone &lt;a href=&quot;https://github.com/wangdicoder/react-native-Gank&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/wangdicoder/react-native-Gank&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;cd react-native-Gank&lt;/li&gt;
-&lt;li&gt;npm install&lt;/li&gt;
-&lt;li&gt;react-native link (this step is for add the icon component)&lt;/li&gt;
-&lt;li&gt;react-native run-android / run-ios&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&quot;常用组件&quot;&gt;&lt;a href=&quot;#常用组件&quot; class=&quot;headerlink&quot; title=&quot;常用组件&quot;&gt;&lt;/a&gt;常用组件&lt;/h1&gt;&lt;h3 id=&quot;View组件&quot;&gt;&lt;a href=&quot;#View组件&quot; class=&quot;headerlink&quot; title=&quot;View组件&quot;&gt;&lt;/a&gt;View组件&lt;/h3&gt;&lt;p&gt;类似于div的组件就是View容器组件，视图布局都是用它，支持flexbox的布局。&lt;/p&gt;
-&lt;h3 id=&quot;Text组件&quot;&gt;&lt;a href=&quot;#Text组件&quot; class=&quot;headerlink&quot; title=&quot;Text组件&quot;&gt;&lt;/a&gt;Text组件&lt;/h3&gt;&lt;p&gt;一个用于显示文本的React组件，并且它也支持嵌套、样式，以及触摸处理。有onPress事件，可以给text组件绑定触摸点击事件。&lt;/p&gt;
-&lt;h3 id=&quot;TextInput组件&quot;&gt;&lt;a href=&quot;#TextInput组件&quot; class=&quot;headerlink&quot; title=&quot;TextInput组件&quot;&gt;&lt;/a&gt;TextInput组件&lt;/h3&gt;&lt;p&gt;TextInput是一个允许用户在应用中通过键盘输入文本的基本组件。本组件的属性提供了多种特性的配置，譬如自动完成、自动大小写、占位文字，以及多种不同的键盘类型（如纯数字键盘）等等。&lt;/p&gt;
-&lt;h3 id=&quot;Touchable组件&quot;&gt;&lt;a href=&quot;#Touchable组件&quot; class=&quot;headerlink&quot; title=&quot;Touchable组件&quot;&gt;&lt;/a&gt;Touchable组件&lt;/h3&gt;&lt;h4 id=&quot;TouchableHighlight&quot;&gt;&lt;a href=&quot;#TouchableHighlight&quot; class=&quot;headerlink&quot; title=&quot;TouchableHighlight&quot;&gt;&lt;/a&gt;TouchableHighlight&lt;/h4&gt;&lt;p&gt;高亮触摸，用户点击的时候会产生高亮的效果。&lt;/p&gt;
-&lt;h4 id=&quot;TouchableOpacity&quot;&gt;&lt;a href=&quot;#TouchableOpacity&quot; class=&quot;headerlink&quot; title=&quot;TouchableOpacity&quot;&gt;&lt;/a&gt;TouchableOpacity&lt;/h4&gt;&lt;p&gt;透明触摸，用户点击时，点击的组件会出现透明过度的效果。&lt;br&gt;activeOpacity number&lt;br&gt;指定封装的视图在被触摸操作激活时以多少不透明度显示（通常在0到1之间）。&lt;/p&gt;
-&lt;h4 id=&quot;TouchableWithoutFeedback&quot;&gt;&lt;a href=&quot;#TouchableWithoutFeedback&quot; class=&quot;headerlink&quot; title=&quot;TouchableWithoutFeedback&quot;&gt;&lt;/a&gt;TouchableWithoutFeedback&lt;/h4&gt;&lt;p&gt;一般不要使用。&lt;/p&gt;
-&lt;h3 id=&quot;NavigatorIOS组件&quot;&gt;&lt;a href=&quot;#NavigatorIOS组件&quot; class=&quot;headerlink&quot; title=&quot;NavigatorIOS组件&quot;&gt;&lt;/a&gt;NavigatorIOS组件&lt;/h3&gt;&lt;p&gt;对UIKit Navigation的封装，实质就是调用了这个。属性：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;barTintColor：导航条的背景颜色&lt;/li&gt;
-&lt;li&gt;initialRoute:初始化路由&lt;/li&gt;
-&lt;li&gt;itemWrapperStyle:设置每个页面的背景颜色&lt;/li&gt;
-&lt;li&gt;navigationHidden:是否隐藏阴影&lt;/li&gt;
-&lt;li&gt;tintColor:导航条上的按钮的颜色的设置&lt;/li&gt;
-&lt;li&gt;titleTextColor：导航栏上字体的颜色&lt;/li&gt;
-&lt;li&gt;translucent：导航条是否是半透明的&lt;/li&gt;
-&lt;li&gt;push到新的页面&lt;/li&gt;
-&lt;li&gt;pop返回&lt;/li&gt;
-&lt;li&gt;replace替换当前路由&lt;/li&gt;
-&lt;li&gt;replacePrevious(route)替换前一个页面的视图并且回退过去&lt;/li&gt;
-&lt;li&gt;resetTo(reset)取代最顶层的路由并且回退过去&lt;/li&gt;
-&lt;li&gt;popToTop：回到最上层的视图&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;例子：&lt;/p&gt;
-&lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;export &lt;span class=&quot;keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;App&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;React&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;Component&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    render()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt;(&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;lt;&lt;span class=&quot;type&quot;&gt;Provider&lt;/span&gt; store=&amp;#123;store&amp;#125;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;lt;&lt;span class=&quot;type&quot;&gt;Navigator&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    initialRoute=&amp;#123;&amp;#123;component: &lt;span class=&quot;type&quot;&gt;MainPage&lt;/span&gt;&amp;#125;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    renderScene=&amp;#123;(route, navigator) =&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;lt;route.component &amp;#123;...route.args&amp;#125; navigator=&amp;#123;navigator&amp;#125; /&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                /&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;lt;/&lt;span class=&quot;type&quot;&gt;Provider&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        );&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    componentDidMount()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;type&quot;&gt;SplashScreen&lt;/span&gt;.hide();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;TabBarIOS组件&quot;&gt;&lt;a href=&quot;#TabBarIOS组件&quot; class=&quot;headerlink&quot; title=&quot;TabBarIOS组件&quot;&gt;&lt;/a&gt;TabBarIOS组件&lt;/h3&gt;&lt;p&gt;有TabBarIOS和TabBarIOS.item两种，后者是前者的附属组件。&lt;br&gt;TabBarIOS属性：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;barTintColor：标签栏的背景颜色。&lt;/li&gt;
-&lt;li&gt;tintColor:当前被选中的标签图标的颜色。&lt;/li&gt;
-&lt;li&gt;unselectedItemTintColor string&lt;br&gt;当前没有被选中的标签图标的颜色。仅在iOS 10及以上版本有效.&lt;/li&gt;
-&lt;li&gt;translucent bool 一个布尔值，决定标签栏是否需要半透明化。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;TabBarIOS.Item属性：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;badge：在图标右上角显示一个红色的气泡。&lt;/li&gt;
-&lt;li&gt;icon 给当前标签指定一个自定义的图标。如果定义了systemIcon属性， 这个属性会被忽略。&lt;/li&gt;
-&lt;li&gt;onPress 当此标签被选中时调用。你应该修改组件的状态来使得selected={true}。&lt;/li&gt;
-&lt;li&gt;selected 这个属性决定了子视图是否可见。&lt;/li&gt;
-&lt;li&gt;selectedIcon 当标签被选中的时候显示的自定义图标。如果定义了systemIcon属性，这个属性会被忽略。如果定义了icon而没定义这个属性，在选中的时候图标会染上蓝色。&lt;/li&gt;
-&lt;li&gt;systemIcon enum(‘bookmarks’, ‘contacts’, ‘downloads’, ‘favorites’, ‘featured’, ‘history’, ‘more’, ‘most-recent’, ‘most-viewed’, ‘recents’, ‘search’, ‘top-rated’) 一些预定义的系统图标。注意如果你使用了此属性，标题和自定义图标都会被覆盖为系统定义的值。&lt;/li&gt;
-&lt;li&gt;title在图标下面显示的标题文字。如果定义了systemIcon属性，这个属性会被忽略。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;Image&quot;&gt;&lt;a href=&quot;#Image&quot; class=&quot;headerlink&quot; title=&quot;Image&quot;&gt;&lt;/a&gt;Image&lt;/h3&gt;&lt;p&gt;一个用于显示多种不同类型图片的React组件，包括网络图片、静态资源、临时的本地图片、以及本地磁盘上的图片（如相册）等。详细用法参阅图片文档。&lt;br&gt;resizeMode enum(‘cover’, ‘contain’, ‘stretch’, ‘repeat’, ‘center’)&lt;br&gt;决定当组件尺寸和图片尺寸不成比例的时候如何调整图片的大小。&lt;/p&gt;
-&lt;h3 id=&quot;FlatList&quot;&gt;&lt;a href=&quot;#FlatList&quot; class=&quot;headerlink&quot; title=&quot;FlatList&quot;&gt;&lt;/a&gt;FlatList&lt;/h3&gt;&lt;p&gt;高性能的简单列表组件，支持下面这些常用的功能：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;完全跨平台。&lt;/li&gt;
-&lt;li&gt;支持水平布局模式。&lt;/li&gt;
-&lt;li&gt;行组件显示或隐藏时可配置回调事件。&lt;/li&gt;
-&lt;li&gt;支持单独的头部组件。&lt;/li&gt;
-&lt;li&gt;支持单独的尾部组件。&lt;/li&gt;
-&lt;li&gt;支持自定义行间分隔线。&lt;/li&gt;
-&lt;li&gt;支持下拉刷新。&lt;/li&gt;
-&lt;li&gt;支持上拉加载。&lt;/li&gt;
-&lt;li&gt;支持跳转到指定行（ScrollToIndex）。&lt;br&gt;如果需要分组/类/区（section），请使用&lt;sectionlist&gt;。&lt;h3 id=&quot;WebView&quot;&gt;&lt;a href=&quot;#WebView&quot; class=&quot;headerlink&quot; title=&quot;WebView&quot;&gt;&lt;/a&gt;WebView&lt;/h3&gt;创建一个原生的WebView，可以用于访问一个网页。&lt;br&gt;属性：&lt;/sectionlist&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;onError 加载失败时调用。&lt;/li&gt;
-&lt;li&gt;onLoad 加载成功时调用。&lt;/li&gt;
-&lt;li&gt;onLoadEnd 加载结束时（无论成功或失败）调用。&lt;/li&gt;
-&lt;li&gt;onLoadStart 加载开始时调用。&lt;/li&gt;
-&lt;li&gt;onMessage 在webview内部的网页中调用window.postMessage方法时可以触发此属性对应的函数，从而实现网页和RN之间的数据交换。 设置此属性的同时会在webview中注入一个postMessage的全局函数并覆盖可能已经存在的同名实现。&lt;br&gt;网页端的window.postMessage只发送一个参数data，此参数封装在RN端的event对象中，即event.nativeEvent.data。data 只能是一个字符串。&lt;/li&gt;
-&lt;li&gt;injectedJavaScript 设置在网页加载之前注入的一段JS代码。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&quot;API&quot;&gt;&lt;a href=&quot;#API&quot; class=&quot;headerlink&quot; title=&quot;API&quot;&gt;&lt;/a&gt;API&lt;/h1&gt;&lt;h3 id=&quot;AppRegistry&quot;&gt;&lt;a href=&quot;#AppRegistry&quot; class=&quot;headerlink&quot; title=&quot;AppRegistry&quot;&gt;&lt;/a&gt;AppRegistry&lt;/h3&gt;&lt;p&gt;其中iOS代码的入口在index.ios.js中，&lt;br&gt;在index.ios.js中注册入口：&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;AppRegistry.registerComponent(&amp;#39;GankIO&amp;#39;, () =&amp;gt; App);&lt;/code&gt;当注册完应用程序组件后，Native的系统就会加载jsbundle文件并且触发AppRegistry.runApplication运行程序。AppRegistry有以下的方法：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;registerConfig:静态方法，注册配置&lt;/li&gt;
-&lt;li&gt;registerComponent注册入口组件&lt;/li&gt;
-&lt;li&gt;registerRunnable：注册函数监听&lt;/li&gt;
-&lt;li&gt;getAppKey:获取registerRunnable注册的监听键&lt;/li&gt;
-&lt;li&gt;runApplication运行程序&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;AlertIOS&quot;&gt;&lt;a href=&quot;#AlertIOS&quot; class=&quot;headerlink&quot; title=&quot;AlertIOS&quot;&gt;&lt;/a&gt;AlertIOS&lt;/h3&gt;&lt;p&gt;启动一个提示对话框，包含对应的标题和信息。&lt;/p&gt;
-&lt;p&gt;你还可以指定一系列的按钮，点击对应的按钮会调用对应的onPress回调并且关闭提示框。默认情况下，对话框会仅有一个’确定’按钮。&lt;/p&gt;
-&lt;h3 id=&quot;PixelRatio&quot;&gt;&lt;a href=&quot;#PixelRatio&quot; class=&quot;headerlink&quot; title=&quot;PixelRatio&quot;&gt;&lt;/a&gt;PixelRatio&lt;/h3&gt;&lt;p&gt;告知开发者像素的密度。&lt;br&gt;根据像素密度获取指定大小的图片。&lt;br&gt;像素网格对齐。&lt;/p&gt;
-&lt;h3 id=&quot;AppState&quot;&gt;&lt;a href=&quot;#AppState&quot; class=&quot;headerlink&quot; title=&quot;AppState&quot;&gt;&lt;/a&gt;AppState&lt;/h3&gt;&lt;p&gt;AppState能告诉你应用当前是在前台还是在后台，并且能在状态变化的时候通知你。&lt;/p&gt;
-&lt;p&gt;AppState通常在处理推送通知的时候用来决定内容和对应的行为。&lt;br&gt;active - 应用正在前台运行&lt;br&gt;background - 应用正在后台运行。用户既可能在别的应用中，也可能在桌面。&lt;br&gt;inactive - 此状态表示应用正在前后台的切换过程中，或是处在系统的多任务视图，又或是处在来电状态中。&lt;/p&gt;
-&lt;h3 id=&quot;CameraRoll&quot;&gt;&lt;a href=&quot;#CameraRoll&quot; class=&quot;headerlink&quot; title=&quot;CameraRoll&quot;&gt;&lt;/a&gt;CameraRoll&lt;/h3&gt;&lt;p&gt;CameraRoll模块提供了访问本地相册的功能。在iOS上使用这个模块之前，你需要先链接RCTCameraRoll库。&lt;br&gt;从iOS10开始，访问相册需要用户授权。你需要在Info.plist中添加一条名为NSCameraUsageDescription的键，然后在其值中填写向用户请求权限的具体描述。编辑完成后这个键在Xcode中实际会显示为Privacy - Camera Usage Description。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;static saveImageWithTag(tag)&lt;br&gt;保存一个图片到相册。&lt;/li&gt;
-&lt;li&gt;static saveToCameraRoll&lt;/li&gt;
-&lt;li&gt;getPhotos(params: object)&lt;br&gt;返回一个带有图片标识符对象的Promise。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;Geolocation&quot;&gt;&lt;a href=&quot;#Geolocation&quot; class=&quot;headerlink&quot; title=&quot;Geolocation&quot;&gt;&lt;/a&gt;Geolocation&lt;/h3&gt;&lt;p&gt;你需要在Info.plist中增加NSLocationWhenInUseUsageDescription字段来启用定位功能。如果你使用react-native init创建项目，定位会被默认启用。&lt;br&gt;属性：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;getCurrentPosition(geo_success: Function, geo_error?: Function, geo_options?: GeoOptions) 获取当前位置，&lt;br&gt;成功时会调用geo_success回调，参数中包含最新的位置信息。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;watchPosition(success: Function, error?: Function, options?: GeoOptions) 持续监听位置，每当位置变化之后都调用success回调。支持的选项：timeout (ms), maximumAge (ms), enableHighAccuracy (bool)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;static clearWatch(watchID: number) 依据ID清除检测&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;stopObserving()停止检测&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;AsyncStorage&quot;&gt;&lt;a href=&quot;#AsyncStorage&quot; class=&quot;headerlink&quot; title=&quot;AsyncStorage&quot;&gt;&lt;/a&gt;AsyncStorage&lt;/h3&gt;&lt;p&gt;AsyncStorage是一个简单的、异步的、持久化的Key-Value存储系统，它对于App来说是全局性的。它用来代替LocalStorage。&lt;/p&gt;
-&lt;p&gt;每个方法都有一个回调函数，回调函数的第一个参数都是错误对象，如果发生错误就会展示错误对象，否则为null。所有方法执行后，都会返回一个Promise对象。&lt;br&gt;方法：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;static getItem(key: string, callback?: ?(error: ?Error, result: ?string) =&amp;gt; void)&lt;br&gt;根据键来获取值，获取的结果会在回调函数，第一个&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;static setItem(key: string, value: string, callback?: ?(error: ?Error) =&amp;gt; void) 设置键值对&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;static removeItem(key: string, callback?: ?(error: ?Error) =&amp;gt; void)&lt;br&gt;根据键值移除对象&lt;/li&gt;
-&lt;li&gt;static mergeItem(key: string, value: string, callback?: ?(error: ?Error) =&amp;gt; void) 合并现有值和输入值。&lt;/li&gt;
-&lt;li&gt;static clear(callback?: ?(error: ?Error) =&amp;gt; void) qing&lt;/li&gt;
-&lt;li&gt;static getAllKeys(callback?: ?(error: ?Error, keys: ?Array&lt;string&gt;) =&amp;gt; void)&lt;br&gt;获取所有的键。&lt;/string&gt;&lt;/li&gt;
-&lt;li&gt;static flushGetRequests() 清除所有进行中的查询操作。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;static multiGet(keys: Array&lt;string&gt;, callback?: ?(errors: ?Array&lt;error&gt;, result: ?Array&lt;array&lt;string&gt;&amp;gt;) =&amp;gt; void)&lt;br&gt;获取多项&lt;br&gt;multiGet([‘k1’, ‘k2’], cb) -&amp;gt; cb([[‘k1’, ‘val1’], [‘k2’, ‘val2’]])&lt;/array&lt;string&gt;&lt;/error&gt;&lt;/string&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;static multiSet(keyValuePairs: Array&lt;array&lt;string&gt;&amp;gt;, callback?: ?(errors: ?Array&lt;error&gt;) =&amp;gt; void)&lt;br&gt;设置多项。&lt;/error&gt;&lt;/array&lt;string&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;multiSet和multiMerge都接受一个与multiGet输出值一致的key-value数组的数组。返回一个Promise对象。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;multiSet([[‘k1’, ‘val1’], [‘k2’, ‘val2’]], cb);&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;static multiRemove(keys: Array&lt;string&gt;, callback?: ?(errors: ?Array&lt;error&gt;) =&amp;gt; void) &lt;/error&gt;&lt;/string&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;删除所有键在keys数组中的数据。返回一个Promise对象。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;static multiMerge(keyValuePairs: Array&lt;array&lt;string&gt;&amp;gt;, callback?: ?(errors: ?Array&lt;error&gt;) =&amp;gt; void) 多个键值对合并。&lt;/error&gt;&lt;/array&lt;string&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;还没有被所有原生实现都支持。&lt;/p&gt;
-&lt;h3 id=&quot;定时器&quot;&gt;&lt;a href=&quot;#定时器&quot; class=&quot;headerlink&quot; title=&quot;定时器&quot;&gt;&lt;/a&gt;定时器&lt;/h3&gt;&lt;h4 id=&quot;setTimeout&quot;&gt;&lt;a href=&quot;#setTimeout&quot; class=&quot;headerlink&quot; title=&quot;setTimeout&quot;&gt;&lt;/a&gt;setTimeout&lt;/h4&gt;&lt;p&gt;用于设定一个定时任务&lt;/p&gt;
-&lt;h4 id=&quot;setInterval&quot;&gt;&lt;a href=&quot;#setInterval&quot; class=&quot;headerlink&quot; title=&quot;setInterval&quot;&gt;&lt;/a&gt;setInterval&lt;/h4&gt;&lt;p&gt;主要用于设定循环&lt;/p&gt;
-&lt;h4 id=&quot;setImmediate&quot;&gt;&lt;a href=&quot;#setImmediate&quot; class=&quot;headerlink&quot; title=&quot;setImmediate&quot;&gt;&lt;/a&gt;setImmediate&lt;/h4&gt;&lt;p&gt;用于设置立即执行的任务&lt;/p&gt;
-&lt;h2 id=&quot;网络数据请求&quot;&gt;&lt;a href=&quot;#网络数据请求&quot; class=&quot;headerlink&quot; title=&quot;网络数据请求&quot;&gt;&lt;/a&gt;网络数据请求&lt;/h2&gt;&lt;h3 id=&quot;XMLHttpRequest-即俗称的ajax&quot;&gt;&lt;a href=&quot;#XMLHttpRequest-即俗称的ajax&quot; class=&quot;headerlink&quot; title=&quot;XMLHttpRequest(即俗称的ajax)&quot;&gt;&lt;/a&gt;XMLHttpRequest(即俗称的ajax)&lt;/h3&gt;&lt;p&gt;与web的一样，                                                                        &lt;/p&gt;
-&lt;h3 id=&quot;Fetch&quot;&gt;&lt;a href=&quot;#Fetch&quot; class=&quot;headerlink&quot; title=&quot;Fetch&quot;&gt;&lt;/a&gt;Fetch&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;fetch(&amp;apos;https://mywebsite.com/endpoint/&amp;apos;, {
-  method: &amp;apos;POST&amp;apos;,
-  headers: {
-    &amp;apos;Accept&amp;apos;: &amp;apos;application/json&amp;apos;,
-    &amp;apos;Content-Type&amp;apos;: &amp;apos;application/json&amp;apos;,
-  },
-  body: JSON.stringify({
-    firstParam: &amp;apos;yourValue&amp;apos;,
-    secondParam: &amp;apos;yourOtherValue&amp;apos;,
-  })
-})
-&lt;/code&gt;&lt;/pre&gt;</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在学习了React-Native的搭建以后，然后就在网上找了一些Demo来学习，并且开始练习。&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>React Native入门</title>
-    <link href="http://peilinghui.com/2017/03/02/React-Native%E5%85%A5%E9%97%A8/"/>
-    <id>http://peilinghui.com/2017/03/02/React-Native入门/</id>
-    <published>2017-03-02T09:51:37.000Z</published>
-    <updated>2018-07-18T01:41:27.217Z</updated>
-    
-    <content type="html">&lt;p&gt;抽时间学习一下&lt;a href=&quot;https://github.com/facebook/react-native&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React Native&lt;/a&gt;.&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;React-Native-简介&quot;&gt;&lt;a href=&quot;#React-Native-简介&quot; class=&quot;headerlink&quot; title=&quot;React Native 简介&quot;&gt;&lt;/a&gt;React Native 简介&lt;/h1&gt;&lt;h2 id=&quot;环境搭建&quot;&gt;&lt;a href=&quot;#环境搭建&quot; class=&quot;headerlink&quot; title=&quot;环境搭建&quot;&gt;&lt;/a&gt;环境搭建&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;安装Node.js&lt;br&gt;下载node.js：&lt;a href=&quot;https://nodejs.org/en/download/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://nodejs.org/en/download/&lt;/a&gt;&lt;br&gt;或者安装brew来安装node.js.&lt;br&gt;&lt;code&gt;node -v&lt;/code&gt;最新的版本&lt;/li&gt;
-&lt;li&gt;安装React Native&lt;br&gt;先通过HomeBrew安装watchman和flow&lt;br&gt;&lt;code&gt;brew install watchman&lt;/code&gt;&lt;br&gt;&lt;code&gt;brew install flow&lt;/code&gt;&lt;br&gt;再通过npm安装react-native-cli的工具&lt;br&gt;&lt;code&gt;sudo npm install -g react-native-cli&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;使用NVM来管理node.js版本&lt;br&gt;&lt;code&gt;git clone https://github.com/creationix/nvm&lt;/code&gt;或者&lt;code&gt;git clone https://github.com/cnpm/nvm&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;创建项目   &lt;/li&gt;
-&lt;li&gt;安装命令行工具：sudo npm install -g react-native-cli&lt;/li&gt;
-&lt;li&gt;创建项目Hello：用react-native init命令&lt;code&gt;react-native init Hello&lt;/code&gt;，打开Xcode文件后运行，自动启动终端和模拟器。然后模拟器就出现了字，显示成功。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;在安卓上运行的环境配置&quot;&gt;&lt;a href=&quot;#在安卓上运行的环境配置&quot; class=&quot;headerlink&quot; title=&quot;在安卓上运行的环境配置&quot;&gt;&lt;/a&gt;在安卓上运行的环境配置&lt;/h2&gt;&lt;h4 id=&quot;基础软件安装&quot;&gt;&lt;a href=&quot;#基础软件安装&quot; class=&quot;headerlink&quot; title=&quot;基础软件安装&quot;&gt;&lt;/a&gt;基础软件安装&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;安装JDK jdk-8u101-macosx-x64.dmg&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;查看版本，命令行中运行javac -version&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;安装Android Studio&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;勾选Performance和Android Virtual Device&lt;/li&gt;
-&lt;li&gt;安装相关SDK Platforms，记得勾选Show Package Details&lt;/li&gt;
-&lt;li&gt;安装SDK Tools 必须是这个版本 Android SDK Build-Tools 23.0.1，记得勾选Show Package Details。&lt;/li&gt;
-&lt;li&gt;ANDROID_HOME环境变量设置。（见下面 环境变量配置）方法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;安装 免费VirtualBox虚拟机&lt;/li&gt;
-&lt;li&gt;安装模拟器Genymotion&lt;ul&gt;
-&lt;li&gt;注册帐号&lt;/li&gt;
-&lt;li&gt;下载Genymotion&lt;/li&gt;
-&lt;li&gt;安装Genymotion&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;坑： brew install android-sdk不支持了。&lt;br&gt;应该先用brew tap caskroom/cask&lt;br&gt;再用brew cask install android-sdk还有brew cask install android-platform-tools&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&quot;环境变量配置&quot;&gt;&lt;a href=&quot;#环境变量配置&quot; class=&quot;headerlink&quot; title=&quot;环境变量配置&quot;&gt;&lt;/a&gt;环境变量配置&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;把Android SDK的tools和platform-tools目录添加到PATH变量中，以便在终端中运行一些Android工具，例如android avd或是adb logcat等。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;在~/.bash_profile中添加(如果你安装的 ZSH 则在 ~/.zshrc中添加)：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;export&lt;/span&gt; ANDROID_SDK_ROOT=/Users/peilinghui/Library/Android/sdk &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;PATH=&lt;span class=&quot;string&quot;&gt;&quot;/usr/local/share/android-sdk/platform-tools:&lt;span class=&quot;variable&quot;&gt;$&amp;#123;PATH&amp;#125;&lt;/span&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;改完需要运行source ~/.bash_profile （注意：你的SDK的具体路径可能不同）&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;必须在Android studio中配置SDK的环境地址，然后下载component的相关东西。&lt;/li&gt;
-&lt;li&gt;在genymotion中的setting-ADB-设置SDK的地址为你配置的地址。一定要重启genymotion！！！一定要重启！一定要重启！！重要的事情说三次，因为没重启一直不成功。。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;在执行react-native run-android一直不成功的时候，一直说是&lt;/p&gt;
-&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;* What went &lt;span class=&quot;string&quot;&gt;wrong:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Execution failed &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; task &lt;span class=&quot;string&quot;&gt;&#39;:app:installDebug&#39;&lt;/span&gt;.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;com.android.builder.testing.api.&lt;span class=&quot;string&quot;&gt;DeviceException:&lt;/span&gt; Could not create ADB Bridge. ADB &lt;span class=&quot;string&quot;&gt;location:&lt;/span&gt; &lt;span class=&quot;regexp&quot;&gt;/Applications/&lt;/span&gt;ADT&lt;span class=&quot;regexp&quot;&gt;/sdk/&lt;/span&gt;platform-tools/adb&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;的报错，然后按上面3就解决了，然后或者在Android文件夹下app/build/outputs/apk,drag the app-debug.apk to the genymotion.now it works。&lt;/p&gt;
-&lt;p&gt;GET IT！&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;测试服务端&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;这时候可以用浏览器访问&lt;br&gt;&lt;a href=&quot;http://localhost:8081/index.android.bundle?platform=android&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:8081/index.android.bundle?platform=android&lt;/a&gt;&lt;br&gt;如果可以访问表示服务器端已经可以了。&lt;/p&gt;
-&lt;h2 id=&quot;debug的方式&quot;&gt;&lt;a href=&quot;#debug的方式&quot; class=&quot;headerlink&quot; title=&quot;debug的方式&quot;&gt;&lt;/a&gt;debug的方式&lt;/h2&gt;&lt;p&gt;在模拟器上点击commend+D，出现下面的界面。开始调试。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;reload：刷新页面，只有修改了JS文件的时候刷新有效。&lt;/li&gt;
-&lt;li&gt;Debug Remote JS主要是在chrome上，开发者工具(Commod)&lt;br&gt;APPdelegate中改bug，打开注释，进行debug。或者使用工具nuclide。&lt;/li&gt;
-&lt;li&gt;Enable Live Reload：自动刷新，&lt;h1 id=&quot;React-Native组件&quot;&gt;&lt;a href=&quot;#React-Native组件&quot; class=&quot;headerlink&quot; title=&quot;React Native组件&quot;&gt;&lt;/a&gt;React Native组件&lt;/h1&gt;&lt;a href=&quot;https://facebook.github.io/react/docs/hello-world.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React JS&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://facebook.github.io/react-native/docs/getting-started.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React Native&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://nuclide.io/docs/quick-start/getting-started/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;nuclide插件&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;Render-amp-JSX&quot;&gt;&lt;a href=&quot;#Render-amp-JSX&quot; class=&quot;headerlink&quot; title=&quot;Render&amp;amp;JSX&quot;&gt;&lt;/a&gt;Render&amp;amp;JSX&lt;/h2&gt;&lt;figure class=&quot;highlight dust&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;xml&quot;&gt;render() &lt;/span&gt;&lt;span class=&quot;expression&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;variable&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;variable&quot;&gt;txt&lt;/span&gt; = &#39;&lt;span class=&quot;variable&quot;&gt;Hello&lt;/span&gt;&#39;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;variable&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;variable&quot;&gt;say&lt;/span&gt;(&lt;span class=&quot;variable&quot;&gt;name&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;variable&quot;&gt;return&lt;/span&gt; &#39;&lt;span class=&quot;variable&quot;&gt;I&lt;/span&gt; &lt;span class=&quot;variable&quot;&gt;am&lt;/span&gt; &#39;+&lt;span class=&quot;variable&quot;&gt;name&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  return (&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;View&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;Text&lt;/span&gt;&amp;gt;&lt;/span&gt;This is a title!&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;Text&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;Text&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;expression&quot;&gt;&amp;#123;&lt;span class=&quot;variable&quot;&gt;txt&lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;Text&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;View&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;Image&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;source&lt;/span&gt;=&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;expression&quot;&gt;&amp;#123;&lt;span class=&quot;variable&quot;&gt;require&lt;/span&gt;(&#39;&lt;span class=&quot;variable&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;end-block&quot;&gt;/img&lt;/span&gt;&lt;span class=&quot;end-block&quot;&gt;/bg.png&lt;/span&gt;&#39;)&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;Image&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;source&lt;/span&gt;=&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;expression&quot;&gt;&amp;#123;&lt;span class=&quot;variable&quot;&gt;require&lt;/span&gt;(&#39;&lt;span class=&quot;variable&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;end-block&quot;&gt;/img&lt;/span&gt;&lt;span class=&quot;end-block&quot;&gt;/icon.png&lt;/span&gt;&#39;)&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;Text&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;expression&quot;&gt;&amp;#123;&lt;span class=&quot;variable&quot;&gt;say&lt;/span&gt;(&#39;&lt;span class=&quot;variable&quot;&gt;React&lt;/span&gt;&#39;)&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;Text&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;View&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;View&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  );&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;组件生命周期&quot;&gt;&lt;a href=&quot;#组件生命周期&quot; class=&quot;headerlink&quot; title=&quot;组件生命周期&quot;&gt;&lt;/a&gt;组件生命周期&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;初始化&lt;ul&gt;
-&lt;li&gt;getDefaultProps&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;getInitialState&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;componentWillMount&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;render&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;componentDidMount&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;运行时&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;componentWillReceiveProps&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;shouldComponentUpdate&lt;/p&gt;
-&lt;figure class=&quot;highlight applescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;shouldComponentUpdate(nextProps, nextState) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;command&quot;&gt;return&lt;/span&gt; nextProps.&lt;span class=&quot;property&quot;&gt;id&lt;/span&gt; !== this.props.&lt;span class=&quot;property&quot;&gt;id&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;componentWillUpdate&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;render&lt;/li&gt;
-&lt;li&gt;componentDidUpdate&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;销毁&lt;ul&gt;
-&lt;li&gt;componentWillUnmount&lt;br&gt;更多：&lt;a href=&quot;https://race604.com/react-native-component-lifecycle/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://race604.com/react-native-component-lifecycle/&lt;/a&gt;&lt;h2 id=&quot;Props-amp-States&quot;&gt;&lt;a href=&quot;#Props-amp-States&quot; class=&quot;headerlink&quot; title=&quot;Props &amp;amp; States&quot;&gt;&lt;/a&gt;Props &amp;amp; States&lt;/h2&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Props:properties属性，在初始化的时候传入并且可以显示不同的状态。&lt;br&gt;props不可变&lt;br&gt;states不可变&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;可以在浏览器中debug&lt;/p&gt;
-&lt;h2 id=&quot;Styles&quot;&gt;&lt;a href=&quot;#Styles&quot; class=&quot;headerlink&quot; title=&quot;Styles&quot;&gt;&lt;/a&gt;Styles&lt;/h2&gt;&lt;h2 id=&quot;flexbox布局&quot;&gt;&lt;a href=&quot;#flexbox布局&quot; class=&quot;headerlink&quot; title=&quot;flexbox布局&quot;&gt;&lt;/a&gt;flexbox布局&lt;/h2&gt;&lt;p&gt;可以开发出动态宽高自适应的UI布局。&lt;br&gt;位置：position。取值为relative或者absolute。当设置为relative的时候，是表示当前组件距离上一个同级组件的距离。当设置为absolute的时候，是表示当前组件距离父组件的距离来描述位置top,bottom,left,right.与宽高相关的有：width，height，maxheight，maxwidth，minheight,minwidth。  &lt;/p&gt;
-&lt;h3 id=&quot;排列子组件&quot;&gt;&lt;a href=&quot;#排列子组件&quot; class=&quot;headerlink&quot; title=&quot;排列子组件&quot;&gt;&lt;/a&gt;排列子组件&lt;/h3&gt;&lt;p&gt;优点Lbuxuyao指定子组件的绝对位置，也不需要根据运行时屏幕大小动态计算子组件的大小，而是通过排列一个个长方形来进行布局。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;flexDirection&lt;/strong&gt;&lt;br&gt;决定了组件内部的子组件是如何排列的。row、row-reverse、column、column-reverse。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;flexWrap&lt;/strong&gt;&lt;br&gt;flexWrap取值为warp，并且alignItem键不能取值为”stretch”的时候才能实现子组件的自动换行排列。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;justifyContent&lt;/strong&gt;&lt;br&gt;定义在一个方向上如何排列子组件，flex-start、flex-end、center、space-between、space-around 。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;alignItems&lt;/strong&gt;&lt;br&gt;定义了view组件中所有子组件的对齐股则。flex-start（顶部对齐）、flex-end（底部对齐）、center（中部对齐）、stretch（拉长对齐）。  &lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;边框border，空隙margin，填充Padding&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Absolute-amp-Relative&quot;&gt;&lt;a href=&quot;#Absolute-amp-Relative&quot; class=&quot;headerlink&quot; title=&quot;Absolute &amp;amp; Relative&quot;&gt;&lt;/a&gt;Absolute &amp;amp; Relative&lt;/h3&gt;&lt;h3 id=&quot;Size-amp-Dimensions-amp-onLayout&quot;&gt;&lt;a href=&quot;#Size-amp-Dimensions-amp-onLayout&quot; class=&quot;headerlink&quot; title=&quot;Size &amp;amp; Dimensions &amp;amp; onLayout&quot;&gt;&lt;/a&gt;Size &amp;amp; Dimensions &amp;amp; onLayout&lt;/h3&gt;&lt;h2 id=&quot;Architecture&quot;&gt;&lt;a href=&quot;#Architecture&quot; class=&quot;headerlink&quot; title=&quot;Architecture&quot;&gt;&lt;/a&gt;Architecture&lt;/h2&gt;&lt;p&gt;MVC的问题：&lt;/p&gt;
-&lt;h3 id=&quot;Redux&quot;&gt;&lt;a href=&quot;#Redux&quot; class=&quot;headerlink&quot; title=&quot;Redux&quot;&gt;&lt;/a&gt;Redux&lt;/h3&gt;&lt;h1 id=&quot;学习资料&quot;&gt;&lt;a href=&quot;#学习资料&quot; class=&quot;headerlink&quot; title=&quot;学习资料&quot;&gt;&lt;/a&gt;学习资料&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/reactnativecn/react-native-guide&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React-Native学习指南&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.gitbook.com/book/unbug/react-native-training/details&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;gitbook&lt;/a&gt;—–&lt;br&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PLC_rYRxEnwQGLQqrHR0aho33U6DCeJamC&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;对应的视频&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/crazycodeboy/react-native-awesome&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;React Native学习资源精选仓库&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.devio.org/tags/#React Native&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;博客&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;抽时间学习一下&lt;a href=&quot;https://github.com/facebook/react-native&quot;&gt;React Native&lt;/a&gt;.&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>React知识</title>
-    <link href="http://peilinghui.com/2017/02/22/React%E7%9F%A5%E8%AF%86/"/>
-    <id>http://peilinghui.com/2017/02/22/React知识/</id>
-    <published>2017-02-22T06:26:54.000Z</published>
-    <updated>2018-07-18T01:41:17.121Z</updated>
-    
-    <content type="html">&lt;p&gt;React是JavaScript的库，把用户页面抽象成组件。在学习React-native前，先了解一下React。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;&lt;a href=&quot;https://facebook.github.io/react/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/facebook/react&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;github地址&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;了解React&quot;&gt;&lt;a href=&quot;#了解React&quot; class=&quot;headerlink&quot; title=&quot;了解React&quot;&gt;&lt;/a&gt;了解React&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;Virtual DOM提升了React的性能。React可以映射为对应的原生控件，所以React-Native就可以实现一次编程，多次使用。&lt;/li&gt;
-&lt;li&gt;函数式编程的思想&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;JSX的语法编写&quot;&gt;&lt;a href=&quot;#JSX的语法编写&quot; class=&quot;headerlink&quot; title=&quot;JSX的语法编写&quot;&gt;&lt;/a&gt;JSX的语法编写&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;XML语法：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;定义标签时，只允许被一个标签包裹&lt;/li&gt;
-&lt;li&gt;标签一定要闭合.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;元素的类型和属性&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;DOM元素的属性是标准规范属性，除了Class和for，转换为className和htmlFor.&lt;/li&gt;
-&lt;li&gt;小写首字母对应的是DOM元素，大写首字母对应的是组件元素。&lt;br&gt;JSX特有的属性表达：&lt;/li&gt;
-&lt;li&gt;Boolean属性：省略表示bool值设为了true，要传false必须用属性表达式，如：disable、require、checked、readonly&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;Flux架构&quot;&gt;&lt;a href=&quot;#Flux架构&quot; class=&quot;headerlink&quot; title=&quot;Flux架构&quot;&gt;&lt;/a&gt;Flux架构&lt;/h1&gt;&lt;p&gt;不是MVC的架构，Flux三大部分组成：1. dispatcher、store、view。dispatcher负责分发事件，store负责保存数据、view负责订阅store中的数据，并使用这些数据渲染相应的页面。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;与MVC的主要区别：&lt;/strong&gt;&lt;br&gt;没有职责明确的Controller，存在一个Controller-view的角色，将view和store进行绑定，并没有Controller需要承担的复杂的逻辑。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;dispatcher与action&lt;/strong&gt;&lt;br&gt;dispatcher的实现就是下面两个API:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;.register(callback)方法用来注册一个监听器。&lt;br&gt;.dispatch(action)用来分发一个action。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;action是一个普通的JavaScript对象，一般包含type、payload字段，用于描述一个事件以及需要改变的相关数据。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;store&lt;/strong&gt;&lt;br&gt;负责保存数据，并且修改数据的逻辑，调用dispatcher的register(callback)方法将自己注册为一个监听器。&lt;br&gt;当.dispatch(action)用来分发一个action时，store注册的监听器就会被调用，同时得到这个action作为参数。store之暴露getter不暴露setter，只能读取不能修改。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Controller-view&lt;/strong&gt;&lt;br&gt;最顶层view，主要进行store与React组件(view层)之间的数据的绑定，定义数据更新以及传递的方式。会调用store保留的getter获取存储其中的数据并设置为自己的state，在render时以props的形式传给自己的子组件。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;view&lt;/strong&gt;&lt;br&gt;React组件扮演。结合Angular、Vue来发挥Flux的能力。&lt;br&gt;一条特殊的约定：&lt;strong&gt;Flux的view不能直接修改数据，如果页面操作需要修改数据，则必须使用dispatcher分发一个action。&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;actionCreator&lt;/strong&gt;&lt;br&gt;用来创造action的。为什么需要？因为在分发action的时候代码是冗余的。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&quot;Redux架构&quot;&gt;&lt;a href=&quot;#Redux架构&quot; class=&quot;headerlink&quot; title=&quot;Redux架构&quot;&gt;&lt;/a&gt;Redux架构&lt;/h1&gt;&lt;h2 id=&quot;Redux简介&quot;&gt;&lt;a href=&quot;#Redux简介&quot; class=&quot;headerlink&quot; title=&quot;Redux简介&quot;&gt;&lt;/a&gt;Redux简介&lt;/h2&gt;&lt;p&gt;Redux的核心代码是一个库，类似Flux的架构思想，&lt;/p&gt;
-&lt;h3 id=&quot;三大原则&quot;&gt;&lt;a href=&quot;#三大原则&quot; class=&quot;headerlink&quot; title=&quot;三大原则&quot;&gt;&lt;/a&gt;三大原则&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;单一数据源&lt;br&gt;一个应用永远只有唯一的一个数据源，整个应用状态都保存在一个对象中。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;状态是只读的&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Flux中store没有setter只有getter，而Redux中没有store，只有reducer，根据当前触发的action对当前应用state进行迭代。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;状态修改均由纯函数完成&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Redux与Flux最大的不同。&lt;br&gt;在Flux中，我们在actionCreator里调用APPDispatcher.dispatch方法来触发action，直接修改了store中数据.&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;React是JavaScript的库，把用户页面抽象成组件。在学习React-native前，先了解一下React。&lt;/p&gt;
     
     </summary>
     

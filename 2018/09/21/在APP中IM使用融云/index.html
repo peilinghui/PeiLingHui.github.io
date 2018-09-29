@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在APP中IM使用融云 | 向着阳光奔跑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在项目APP中接入IM的功能，有环信和融云的两种选择，在纠结以后，选择了融云进行开发。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在APP中IM使用融云">
+<meta property="og:url" content="http://peilinghui.com/2018/09/21/在APP中IM使用融云/index.html">
+<meta property="og:site_name" content="向着阳光奔跑">
+<meta property="og:description" content="在项目APP中接入IM的功能，有环信和融云的两种选择，在纠结以后，选择了融云进行开发。">
+<meta property="og:image" content="http://rongcloud-web.qiniudn.com/39ef2374b74fb20691d28a5b6b9824d1">
+<meta property="og:updated_time" content="2018-09-28T07:15:11.081Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在APP中IM使用融云">
+<meta name="twitter:description" content="在项目APP中接入IM的功能，有环信和融云的两种选择，在纠结以后，选择了融云进行开发。">
+  
+    <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/images/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向阳</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">没有到不了的远方</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/peilinghuibest@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/575544059" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/peilinghui" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://lysongzi.com/">小松子</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/CHENYUFENG1991/article/category/5655903/4">iOS大神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://cspilgrimzww.github.io/">蔚蔚</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changhuiyuan.com/">惠源</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hxdavid.com/">PAT大神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wut0719.github.io/">桐神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pangjiuzala.github.io/">兴爷</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://han.pm/">交换生</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://frankhu.me">frank</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://judyzhangxin.com/">UI设计师</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://sunus.me/">阿里学长</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imhuchao.com/">胡超-凤凰网</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.xuanzhangjiong.xyz/">囧囧囧-网易安卓</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">没有到不了的远方，向往远方。。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向阳</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/images/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向阳</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">没有到不了的远方</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/peilinghuibest@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/575544059" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/peilinghui" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-在APP中IM使用融云" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/09/21/在APP中IM使用融云/" class="article-date">
+      <time datetime="2018-09-21T04:43:28.000Z" itemprop="datePublished">2018-09-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在APP中IM使用融云
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在项目APP中接入IM的功能，有环信和融云的两种选择，在纠结以后，选择了融云进行开发。<br><a id="more"></a></p>
+<p>首先可以参照官网：<a href="https://www.rongcloud.cn/docs/ios.html#prepare" target="_blank" rel="external">https://www.rongcloud.cn/docs/ios.html#prepare</a>来进行基本的融云包的导入和集成到工程中。<br>通过在控制台中API的调用<a href="https://developer.rongcloud.cn/apitool/A0dLuQBjI8MJKehwuu0=" target="_blank" rel="external">https://developer.rongcloud.cn/apitool/A0dLuQBjI8MJKehwuu0=</a>来模拟接口调用的过程。<br>集成融云，就是能用好他所提供的API，就能完成大部分的工作，用好IMKit和IMLib。IMKit主要就是页面，可以在它的基础上进行我们自己页面的自定义，IMLib就是通讯的API，通过使用它暴露的方法来实现及时通讯，单聊，群聊，以及自定义消息的发送。</p>
+<h1 id="导入融云，连接融云"><a href="#导入融云，连接融云" class="headerlink" title="导入融云，连接融云"></a>导入融云，连接融云</h1><p>在APPDelegate中注册自定义的消息类型和做消息推送相关的内容。<br>最好是在登录APP的时候，让服务端返回userId和rongcloudToken，获取到Token以后，登录融云的服务器。可以写一个单例的工具类，来处理融云的登录，断开连接，和<rcimuserinfodatasource, rcimreceivemessagedelegate,rcimconnectionstatusdelegate="">用户数据源的一些方法的实现。</rcimuserinfodatasource,></p>
+<h1 id="用户信息和群组信息的数据源"><a href="#用户信息和群组信息的数据源" class="headerlink" title="用户信息和群组信息的数据源"></a>用户信息和群组信息的数据源</h1><p>因为融云已经做好了基本的聊天通讯的功能，我们要做的就是处理用户昵称，头像和群组的一些信息的处理，设置</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置用户信息源</span></span><br><span class="line">  [R<span class="built_in">CIM</span> sharedR<span class="built_in">CIM</span>]<span class="variable">.userInfoDataSource</span> = [JRIMDataSource shareInstance];</span><br><span class="line">  <span class="comment">//群组信息源</span></span><br><span class="line">  [R<span class="built_in">CIM</span> sharedR<span class="built_in">CIM</span>]<span class="variable">.groupInfoDataSource</span> = [JRIMDataSource shareInstance];</span><br><span class="line">  <span class="comment">//群成员数据源</span></span><br><span class="line">  [R<span class="built_in">CIM</span> sharedR<span class="built_in">CIM</span>]<span class="variable">.groupMemberDataSource</span> = [JRIMDataSource shareInstance];</span><br></pre></td></tr></table></figure>
+<h3 id="用户信息需要通过实现RCIMUserInfoDataSource的方法"><a href="#用户信息需要通过实现RCIMUserInfoDataSource的方法" class="headerlink" title="用户信息需要通过实现RCIMUserInfoDataSource的方法"></a>用户信息需要通过实现RCIMUserInfoDataSource的方法</h3><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(void)</span>getUserInfoWithUserId:<span class="params">(<span class="variable">NSString</span> *)</span>userId completion:<span class="params">(void (^)</span><span class="params">(<span class="variable">RCUserInfo</span> *user<span class="variable">Info</span>)</span>)completion;</span></span><br></pre></td></tr></table></figure>
+<p>我们需要在这个方法里面调用自己的接口来获取用户的相关信息，就是头像和昵称，然后把获取到的数据放到RCUserInfo对象的userId，name，和portraitUri中，也把这个数据存到FMDB数据库中。这样在聊天列表展示聊天cell的时候，可以通过<br><code>RCUserInfo *user = [[RCIM sharedRCIM] getUserInfoCache:model.targetId];</code>这个方法，如果User存在的话，直接赋值，如果不存在的话，再次调用getUserInfoWithUserId这个来获取用户的信息，获取到以后刷新用户信息，并存到数据库中。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr_selector">[[RCIM sharedRCIM]</span> <span class="tag">refreshUserInfoCache</span><span class="pseudo">:user</span> <span class="tag">withUserId</span><span class="pseudo">:user</span><span class="class">.userId</span>]; </span><br><span class="line"><span class="attr_selector">[[JRDataBaseManager  shareInstance]</span><span class="tag">insertUserToDB</span><span class="pseudo">:userInfo</span>];</span><br></pre></td></tr></table></figure>
+<h3 id="群组信息实现RCIMGroupInfoDataSource方法"><a href="#群组信息实现RCIMGroupInfoDataSource方法" class="headerlink" title="群组信息实现RCIMGroupInfoDataSource方法"></a>群组信息实现RCIMGroupInfoDataSource方法</h3><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(void)</span>getGroupInfoWithGroupId:<span class="params">(<span class="variable">NSString</span> *)</span>groupId completion:<span class="params">(void (^)</span><span class="params">(<span class="variable">RCGroup</span> *group<span class="variable">Info</span>)</span>)completion;</span></span><br></pre></td></tr></table></figure>
+<p>融云自带的群组的信息类是RCGroup，只包含groupId，groupName和portraitUri，我们如果需要更多的信息存储，只需要继承自RCGroup,<br>如果我们需要在群组名称中携带很多信息的话，只需要把相关的信息放到一个字典中然后后转化成json字符串赋值给groupName</p>
+<h3 id="群组成员实现"><a href="#群组成员实现" class="headerlink" title="群组成员实现"></a>群组成员实现</h3><p>我们可以写个单例来实现这三个方法。在方法实现中通过调用自己的接口获取到相关的数据，然后调用融云的接口refreshGroupInfoCache存储起来。</p>
+<h1 id="消息列表"><a href="#消息列表" class="headerlink" title="消息列表"></a>消息列表</h1><p>消息列表需要继承自RCConversationListViewController，只要继承了这个，然后通过其暴露的属性和方法来设置基本列表的样式，当有消息的时候就能展示出来融云自带的聊天cell。如果我们要自定义的消息列表的cell。主要实现的方法：</p>
+<h3 id="重写方法：插入自定义会话model"><a href="#重写方法：插入自定义会话model" class="headerlink" title="重写方法：插入自定义会话model"></a>重写方法：插入自定义会话model</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="built_in">NSMutableArray</span> *)willReloadTableData:(<span class="built_in">NSMutableArray</span> *)dataSource&#123;</span><br><span class="line"> [dataSource enumerateObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">        RCConversationModel *model = (RCConversationModel *)obj;</span><br><span class="line">        <span class="comment">//筛选请求添加好友的系统消息，用于生成自定义会话类型的cell</span></span><br><span class="line">       <span class="keyword">if</span> (model<span class="variable">.conversationType</span> == ConversationType_GROUP) &#123;</span><br><span class="line">            model<span class="variable">.conversationModelType</span> = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (model<span class="variable">.conversationType</span> == ConversationType_PRIVATE) &#123;</span><br><span class="line">            model<span class="variable">.conversationModelType</span> = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">     <span class="keyword">return</span> dataSource;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：在该方法内筛选数据源dataSource中具体的会话类型及消息的model，将model 类型必须修改为 model.conversationModelType=RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION</p>
+<p>如果需要插入类似微博消息列表中的点赞、评论，关注和系统消息的自定义cell，需要在这个方法中自定义Model，并且拼接到DataSource中。</p>
+<p>代码如下：</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (_isShowServiceSystem == <span class="keyword">NO</span>) &#123;</span><br><span class="line">        RCConversationModel *<span class="keyword">model</span> = [[RCConversationModel alloc] init];</span><br><span class="line">        <span class="keyword">model</span>.targetId = JR_Service_System_ID;</span><br><span class="line">        <span class="keyword">model</span>.conversationType = ConversationType_SYSTEM;</span><br><span class="line">        <span class="keyword">model</span>.conversationModelType = RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION;</span><br><span class="line">        [dataSource addObject:<span class="keyword">model</span>];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="重写返回-cell-高度的方法"><a href="#重写返回-cell-高度的方法" class="headerlink" title="重写返回 cell 高度的方法"></a>重写返回 cell 高度的方法</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">CGFloat</span>)rcConversationListTableView:(<span class="built_in">UITableView</span> *)tableView heightForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">58.0</span>f;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="自定义会话Cell显示时的回调"><a href="#自定义会话Cell显示时的回调" class="headerlink" title="自定义会话Cell显示时的回调"></a>自定义会话Cell显示时的回调</h3><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">-<span class="params">(<span class="variable">RCConversationBaseCell</span> *)</span>rcConversationListTableView:<span class="params">(<span class="variable">UITableView</span> *)</span>tableView cellForRowAtIndexPath:<span class="params">(<span class="variable">NSIndexPath</span> *)</span>indexPath</span></span><br></pre></td></tr></table></figure>
+<p>或者是即将显示cell的时候把用户信息和群组信息放到cell里面</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(void)</span>willDisplayConversationTableCell:<span class="params">(<span class="variable">RCConversationBaseCell</span> *)</span>cell atIndexPath:<span class="params">(<span class="variable">NSIndexPath</span> *)</span>indexPath</span></span><br></pre></td></tr></table></figure>
+<p>如果使用的都是自定义的cell的话，要设置在model.conversationModelType == RC_CONVERSATION_MODEL_TYPE_CUSTOMIZATION)先区分数据模型是自定义的，再区分是单聊还是群聊conversationType。对于每一种会话类型，自定义我们需要的cell的样式，然后通过取出对应index的Model。<br>  <code>RCConversationModel *model = self.conversationListDataSource[indexPath.row];</code><br>来把Model中的头像、昵称、最近消息、时间、未读数、一些信息放到cell对应的位置。</p>
+<h3 id="点击事件-–点击cell的回调"><a href="#点击事件-–点击cell的回调" class="headerlink" title="点击事件 –点击cell的回调"></a>点击事件 –点击cell的回调</h3><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(void)</span>onSelectedTableRow:<span class="params">(<span class="variable">RCConversationModelType</span>)</span>conversationModelType</span><br><span class="line">         conversationModel:<span class="params">(<span class="variable">RCConversationModel</span> *)</span>model</span><br><span class="line">               atIndexPath:<span class="params">(<span class="variable">NSIndexPath</span> *)</span>indexPath</span></span><br></pre></td></tr></table></figure>
+<h1 id="消息会话"><a href="#消息会话" class="headerlink" title="消息会话"></a>消息会话</h1><h1 id="消息会话展示"><a href="#消息会话展示" class="headerlink" title="消息会话展示"></a>消息会话展示</h1><ol>
+<li>单聊不显示对方名称</li>
+<li>普通群聊显示对方名称</li>
+<li>星球群聊显示身份的名称</li>
+</ol>
+<p>实现方法：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)willDisplayMessageCell:(RCMessageBaseCell *)cell atIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath &#123;</span><br><span class="line">    RCMessageModel *model = [<span class="keyword">self</span><span class="variable">.conversationDataRepository</span> objectAtIndex:indexPath<span class="variable">.row</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.conversationType</span> == ConversationType_PRIVATE) &#123;</span><br><span class="line">        model<span class="variable">.isDisplayNickname</span> = <span class="literal">NO</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.conversationType</span> == ConversationType_GROUP) &#123;</span><br><span class="line">        model<span class="variable">.isDisplayNickname</span> = <span class="literal">YES</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [cell setDataModel:model];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重要的方法:<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(void)</span>sendMessage:<span class="params">(<span class="variable">RCMessageContent</span> *)</span>messageContent pushContent:<span class="params">(<span class="variable">NSString</span> *)</span>pushContent;</span></span><br></pre></td></tr></table></figure></p>
+<p>在发送自定义消息和通知的时候使用，当我在发送一个邀请好友进入聊天室的自定义cell的时候，使用</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">JRInviteMessage *inviteMsg = [JRInviteMessage messageWithGroupId:<span class="literal">self</span>.<span class="keyword">group</span>Id</span><br><span class="line">                                                             WithGroupHeader:NSStringObject(<span class="literal">self</span>.<span class="keyword">group</span>Model.<span class="keyword">group</span>Img).length==<span class="number">0</span>?  <span class="literal">self</span>.<span class="keyword">group</span>Model.<span class="keyword">group</span>ImgAll :<span class="literal">self</span>.<span class="keyword">group</span>Model.<span class="keyword">group</span>Img</span><br><span class="line">                                                               WithGroupName:[<span class="literal">self</span>.<span class="keyword">group</span>Model.<span class="keyword">group</span>Name containsString:@<span class="string">"、"</span>] ? <span class="literal">self</span>.<span class="keyword">group</span>Model.<span class="keyword">group</span>NameAll : <span class="literal">self</span>.<span class="keyword">group</span>Model.<span class="keyword">group</span>Name</span><br><span class="line">                                                            WithGroupProflie:NSStringObject(<span class="literal">self</span>.<span class="keyword">group</span>Model.<span class="keyword">group</span>Introduct).length==<span class="number">0</span>?  @<span class="string">"暂无简介"</span> :<span class="literal">self</span>.<span class="keyword">group</span>Model.<span class="keyword">group</span>Introduct];</span><br><span class="line">           </span><br><span class="line">[[RCIM sharedRCIM]sendMessage:ConversationType_PRIVATE</span><br><span class="line">                                 targetId:selectArray[j]</span><br><span class="line">                                  content:inviteMsg</span><br><span class="line">                              pushContent:nil</span><br><span class="line">                                 pushData:nil</span><br><span class="line">                                  success:^(long messageId) &#123;&#125;</span><br><span class="line">                                    error:^(RCErrorCode nErrorCode, long messageId)&#123;&#125;]</span><br></pre></td></tr></table></figure>
+<p>对于文字，图片和自定义的消息的cell都可以重写，文字继承自RCTextMessageCell，语音继承自RCVoiceMessageCell，图片继承自RCImageMessageCell，其他自定义邀请好友进入群聊的cell继承自RCMessageCell或者是它的父类RCMessageBaseCell，在方法中实现<br><code>- (void)setDataModel:(RCMessageModel *)model</code>来设置自己想要的属性的样式</p>
+<h3 id="自定义Cell的点击"><a href="#自定义Cell的点击" class="headerlink" title="自定义Cell的点击"></a>自定义Cell的点击</h3><h1 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h1><h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p>1.修改聊天气泡以及一些图标<br>直接把要替换的图片替换RongCloud.bundle文件中的图片即可。</p>
+<p>2.当融云SDK和BlocksKit被引入到同一工程，通过融云的聊天UI界面去选择照片、拍摄照片并发送时，无法正常选择和发送。<br>问题的本质：</p>
+<p>UIImagePickerController代理中的方法冲突了，导致融云SDK中选择并发送照片的功能失效。</p>
+<p>解决方法：</p>
+<p>BlocksKit是开源方法，直接编辑UIImagePickerController+BlocksKit.m文件，注释红框部分，问题便可解决。<img src="http://rongcloud-web.qiniudn.com/39ef2374b74fb20691d28a5b6b9824d1" alt=""></p>
+<p>3.//点击消息发送失败红点的回调<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (void)didTapmessageFailedStatusViewForResend<span class="value">:(RCMessageModel *)model&#123;</span><br><span class="line">     RCMessageContent *resendContent = (RCMessageContent *)model.content;</span></span><br><span class="line">    <span class="function">AlertShowMoreButtons</span>(<span class="at_rule">@[@<span class="string">"重新发送"</span>], ^(NSString *title,<span class="preprocessor"> NSInteger</span><span class="preprocessor"> moreButtonIndex</span>) &#123;</span></span><br><span class="line">        if (<span class="function">BoolEqualToString</span>(<span class="tag">title</span>, <span class="at_rule">@<span class="string">"重新发送"</span>)) &#123;</span></span><br><span class="line">            <span class="attr_selector">[self resendMessage:resendContent]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="解决的方法"><a href="#解决的方法" class="headerlink" title="解决的方法"></a>解决的方法</h1>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/09/21/在APP中IM使用融云/">在APP中IM使用融云</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
+        <p><span>发布时间:</span>2018年09月21日 - 12时43分</p>
+        <p><span>最后更新:</span>2018年09月28日 - 15时15分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/21/在APP中IM使用融云/" title="在APP中IM使用融云">http://peilinghui.com/2018/09/21/在APP中IM使用融云/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2018/09/21/在APP中IM使用融云/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/08/04/独立开发一个APP/">
+                    独立开发一个APP
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#导入融云，连接融云"><span class="toc-number">1.</span> <span class="toc-text">导入融云，连接融云</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户信息和群组信息的数据源"><span class="toc-number">2.</span> <span class="toc-text">用户信息和群组信息的数据源</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用户信息需要通过实现RCIMUserInfoDataSource的方法"><span class="toc-number">2.0.1.</span> <span class="toc-text">用户信息需要通过实现RCIMUserInfoDataSource的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#群组信息实现RCIMGroupInfoDataSource方法"><span class="toc-number">2.0.2.</span> <span class="toc-text">群组信息实现RCIMGroupInfoDataSource方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#群组成员实现"><span class="toc-number">2.0.3.</span> <span class="toc-text">群组成员实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#消息列表"><span class="toc-number">3.</span> <span class="toc-text">消息列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重写方法：插入自定义会话model"><span class="toc-number">3.0.1.</span> <span class="toc-text">重写方法：插入自定义会话model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重写返回-cell-高度的方法"><span class="toc-number">3.0.2.</span> <span class="toc-text">重写返回 cell 高度的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义会话Cell显示时的回调"><span class="toc-number">3.0.3.</span> <span class="toc-text">自定义会话Cell显示时的回调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#点击事件-–点击cell的回调"><span class="toc-number">3.0.4.</span> <span class="toc-text">点击事件 –点击cell的回调</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#消息会话"><span class="toc-number">4.</span> <span class="toc-text">消息会话</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#消息会话展示"><span class="toc-number">5.</span> <span class="toc-text">消息会话展示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义Cell的点击"><span class="toc-number">5.0.1.</span> <span class="toc-text">自定义Cell的点击</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#推送"><span class="toc-number">6.</span> <span class="toc-text">推送</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#遇到的问题"><span class="toc-number">7.</span> <span class="toc-text">遇到的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解决的方法"><span class="toc-number">8.</span> <span class="toc-text">解决的方法</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2018/09/21/在APP中IM使用融云/" data-title="在APP中IM使用融云" data-url="http://peilinghui.com/2018/09/21/在APP中IM使用融云/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"peilinghui"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/08/04/独立开发一个APP/" title="下一篇: 独立开发一个APP">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/在APP中IM使用融云/">在APP中IM使用融云</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/独立开发一个APP/">独立开发一个APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/25/iOS底层实现/">iOS底层实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/Effective-JavaScript/">Effective JavaScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/22/React知识/">React技术栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/ReactNative中使用Redux/">ReactNative中使用Redux</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/React-Native的APP/">React-Native的APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ReactNative的常用组件/">ReactNative的常用组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/05/AFNetworking3.0/">AFNetworking3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/搜索框的Demo/">搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/iOS中JS与OC相互调用的方式/">iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/NSURLProtocol/">NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/React-Native的与原生的交互/">React-Native的与原生的交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/React-Native的API和组件/">React-Native的API和组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/React-Native入门/">React Native入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/YYModel/">YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/GCD/">GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop/">RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime/">Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/ARC内存管理/">ARC内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/NSString的引用计数问题/">NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Block/">Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/SDWebImage框架/">SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/AFNetworking2.0/">AFNetworking2.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/深拷贝和浅拷贝/">深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 向阳
+            </div>
+            <div class="footer-right">
+	     欢迎光临小站
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
