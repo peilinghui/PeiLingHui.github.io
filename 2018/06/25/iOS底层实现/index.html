@@ -11,8 +11,8 @@
 <meta property="og:url" content="http://peilinghui.com/2018/06/25/iOS底层实现/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="源于一个面试题。">
-<meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/WechatIMG95.jpeg">
-<meta property="og:updated_time" content="2018-07-25T08:17:21.085Z">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/51530583ly1fsatleo2zmj213u10caiu.jpg">
+<meta property="og:updated_time" content="2018-10-14T06:49:21.813Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS底层实现">
 <meta name="twitter:description" content="源于一个面试题。">
@@ -285,7 +285,7 @@
           
         <p>源于一个面试题。</p>
 <a id="more"></a>
-<p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/WechatIMG95.jpeg" alt=""><br>我们知道在Runtime中的swizzling:通过selector来找IMP，可以利用Runtime来实现交换原方法和目标方法的IMP，以完全代替原方法的实现，或为原实现前后相当于加一段额外的代码。</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/51530583ly1fsatleo2zmj213u10caiu.jpg" alt=""><br>我们知道在Runtime中的swizzling:通过selector来找IMP，可以利用Runtime来实现交换原方法和目标方法的IMP，以完全代替原方法的实现，或为原实现前后相当于加一段额外的代码。</p>
 <p>就是在分类的load方法中，通过class_getClassMethodclass_getInstanceMethod获取类方法和实例方法，然后method_exchangeImplementations(),交换方法实现，或者是其他class_addMethods、class_addIvar、class_addProtocol、class_addProperty来动态的添加方法或者成员变量。还有class_copyIvarList、class_copyMethodList获得某个类所有的成员变量和所有方法。</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import<span class="title">&lt;objc/runtime.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ClassA</span>: <span class="title">NSObject</span></span></span><br><span class="line">- (<span class="keyword">void</span>)methodA;</span><br><span class="line">+ (<span class="keyword">void</span>)methodB;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ClassA</span> (<span class="title">Swizzle</span>)</span></span><br><span class="line"></span><br><span class="line">+ (<span class="keyword">void</span>)load &#123;</span><br><span class="line">Method originalMethod = class_getInstanceMethod(<span class="keyword">self</span>, <span class="keyword">@selector</span>(methodA));</span><br><span class="line">Method swizzledMethod = class_getInstanceMethod(<span class="keyword">self</span>, <span class="keyword">@selector</span>(swizzled_methodA));</span><br><span class="line">method_exchangeImplementations(originalMethod, swizzledMethod);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)swizzled_methodA &#123;</span><br><span class="line">...</span><br><span class="line">[<span class="keyword">self</span> swizzled_methodA];</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <p>AOP的库Aspects 支持多次hook同一个方法，支持从hook返回的id<aspecttoken>对象删除对应的hook，IMP即函数指针。<br>Aspects 的大致原理：替换原方法的IMP为 消息转发函数指针 _objc_msgForward或_objc_msgForward_stret，把原方法IMP添加并对应到SEL aspects_originalSelector，将forwardInvocation:的IMP替换为参数对齐的C函数<strong>ASPECTS_ARE_BEING_CALLED</strong>(NSObject <em>self, SEL selector, NSInvocation </em>invocation)的指针。在<strong>ASPECTS_ARE_BEING_CALLED</strong>函数中，替换invocation的selector为aspects_originalSelector，相当于要发送调用原始方法实现的消息。对于插入位置在前面，替换，后面的多个block，构建新的blockInvocation，从invocation中提取参数，最后通过invokeWithTarget:block来完成依次调用。</aspecttoken></p>
@@ -324,7 +324,7 @@
         <p><span>本文标题:</span><a href="/2018/06/25/iOS底层实现/">iOS底层实现</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2018年06月25日 - 15时07分</p>
-        <p><span>最后更新:</span>2018年07月25日 - 16时17分</p>
+        <p><span>最后更新:</span>2018年10月14日 - 14时49分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/06/25/iOS底层实现/" title="iOS底层实现">http://peilinghui.com/2018/06/25/iOS底层实现/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2018/06/25/iOS底层实现/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
