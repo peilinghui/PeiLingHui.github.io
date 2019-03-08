@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
   <title>effective objective-c 2.0读书笔记 | 向着阳光奔跑</title>
@@ -11,6 +11,7 @@
 <meta property="og:url" content="http://peilinghui.com/2016/04/03/effective objective-c 2.0读书笔记/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="effective objective-c 2.0读书笔记.">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-07-18T01:35:15.540Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="effective objective-c 2.0读书笔记">
@@ -22,18 +23,18 @@
     <link rel="icon" href="/favicon.png">
   
   
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
   
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
   
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
   
-  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
   <script>
       var yiliaConfig = {
           fancybox: true,
@@ -54,7 +55,7 @@
   
 
   
-</head>
+</head></html>
 <body>
   <div id="container">
     <div class="left-col">
@@ -258,7 +259,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -283,8 +284,7 @@
       
           
         <p>effective objective-c 2.0读书笔记.<br><a id="more"></a></p>
-<h1 id="effective-objective-c-2-0"><a href="#effective-objective-c-2-0" class="headerlink" title="effective objective-c 2.0"></a>effective objective-c 2.0</h1><p>作者网站：<a href="http://www.galloway.me.uk/" target="_blank" rel="external">http://www.galloway.me.uk/</a><br>英文原版：<a href="https://www.gitbook.com/book/xiaoxueying/effective-objective-c-2-0/details" target="_blank" rel="external">https://www.gitbook.com/book/xiaoxueying/effective-objective-c-2-0/details</a></p>
-<p>就把重点的几个摘录出来了。</p>
+<h1 id="effective-objective-c-2-0"><a href="#effective-objective-c-2-0" class="headerlink" title="effective objective-c 2.0"></a>effective objective-c 2.0</h1><p>作者网站：<a href="http://www.galloway.me.uk/" target="_blank" rel="noopener">http://www.galloway.me.uk/</a><br>英文原版：<a href="https://www.gitbook.com/book/xiaoxueying/effective-objective-c-2-0/details" target="_blank" rel="noopener">https://www.gitbook.com/book/xiaoxueying/effective-objective-c-2-0/details</a><br>  [1]: <a href="http://7xr8q7.com1.z0.glb.clouddn.com/%E4%B9%A6%E5%8D%95.JPG" target="_blank" rel="noopener">http://7xr8q7.com1.z0.glb.clouddn.com/%E4%B9%A6%E5%8D%95.JPG</a><br>就把重点的几个摘录出来了。</p>
 <h2 id="熟悉Objective-c"><a href="#熟悉Objective-c" class="headerlink" title="熟悉Objective-c"></a>熟悉Objective-c</h2><h3 id="Objective-C是一门动态语言-该语言使用的是”消息结构”而非”函数调用”"><a href="#Objective-C是一门动态语言-该语言使用的是”消息结构”而非”函数调用”" class="headerlink" title="Objective-C是一门动态语言, 该语言使用的是”消息结构”而非”函数调用”."></a>Objective-C是一门动态语言, 该语言使用的是”消息结构”而非”函数调用”.</h3><pre><code>消息结构 : 运行时所执行的代码由运行时环境决定
 函数调用 : 运行时所执行的代码由编译期决定.
 </code></pre><p> <code>[person run];</code><br>给person对象发送一条run消息 : 不到程序运行的时候你都不知道他究竟会执行什么代码. 而且, person这个对象究竟是Person类的对象, 还是其他类的对象, 也要到运行时才能确定, 这个过程叫动态绑定.</p>
@@ -317,11 +317,11 @@ OC的单例模式用到宏
 </code></pre><p>为什么多用类型常量?</p>
 <pre><code>在实现文件中使用static const定义只在该文件内可见的常量, 其他文件无法使用(无需给常量名称加前缀)
 在头文件中使用extern来声明全局常量, 并在实现文件中定义其值, 可以供整个程序使用(需要给常量名称加前缀)
-</code></pre><h3 id="第5条：用枚举表示状态、选项、状态码"><a href="#第5条：用枚举表示状态、选项、状态码" class="headerlink" title="第5条：用枚举表示状态、选项、状态码"></a>第5条：用枚举表示状态、选项、状态码</h3><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typedef <span class="class"><span class="keyword">enum</span></span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="constant">KIND_CASH</span>=<span class="number">0</span>,      <span class="regexp">//</span>现金</span><br><span class="line">    <span class="constant">KIND_CARD</span>=<span class="number">1</span>,      <span class="regexp">//</span>银行卡</span><br><span class="line">    <span class="constant">KIND_CREDIT_ACCOUNT</span>=<span class="number">2</span>,   <span class="regexp">//</span>挂账</span><br><span class="line">&#125;<span class="constant">KindPay_Kind</span>;</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="第5条：用枚举表示状态、选项、状态码"><a href="#第5条：用枚举表示状态、选项、状态码" class="headerlink" title="第5条：用枚举表示状态、选项、状态码"></a>第5条：用枚举表示状态、选项、状态码</h3><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typedef <span class="class"><span class="keyword">enum</span></span></span><br><span class="line">&#123;</span><br><span class="line">    KIND_CASH=<span class="number">0</span>,      <span class="regexp">//</span>现金</span><br><span class="line">    KIND_CARD=<span class="number">1</span>,      <span class="regexp">//</span>银行卡</span><br><span class="line">    KIND_CREDIT_ACCOUNT=<span class="number">2</span>,   <span class="regexp">//</span>挂账</span><br><span class="line">&#125;KindPay_Kind;</span><br></pre></td></tr></table></figure>
 <p>如果枚举类型的多个选项不需要组合使用, 则用NS_ENUM</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, <span class="built_in">UIViewAnimationTransition</span>) &#123;</span><br><span class="line">      <span class="built_in">UIViewAnimationTransitionNone</span>,</span><br><span class="line">      <span class="built_in">UIViewAnimationTransitionFlipFromLeft</span>,</span><br><span class="line">      <span class="built_in">UIViewAnimationTransitionFlipFromRight</span>,</span><br><span class="line">      <span class="built_in">UIViewAnimationTransitionCurlUp</span>,</span><br><span class="line">      <span class="built_in">UIViewAnimationTransitionCurlDown</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">typedef <span class="type">NS_ENUM</span>(<span class="type">NSInteger</span>, <span class="type">UIViewAnimationTransition</span>) &#123;</span><br><span class="line">      <span class="type">UIViewAnimationTransitionNone</span>,</span><br><span class="line">      <span class="type">UIViewAnimationTransitionFlipFromLeft</span>,</span><br><span class="line">      <span class="type">UIViewAnimationTransitionFlipFromRight</span>,</span><br><span class="line">      <span class="type">UIViewAnimationTransitionCurlUp</span>,</span><br><span class="line">      <span class="type">UIViewAnimationTransitionCurlDown</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>如果枚举类型的多个选项可能组合使用, 则用NS_OPTIONS</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">NS_OPTIONS</span><span class="params">(NSUInteger, UIViewAutoresizing)</span> </span>&#123;</span><br><span class="line">        UIViewAutoresizingNone                 = <span class="number">0</span>,</span><br><span class="line">        UIViewAutoresizingFlexibleLeftMargin   = <span class="number">1</span> &lt;&lt; <span class="number">0</span>,</span><br><span class="line">        UIViewAutoresizingFlexibleWidth        = <span class="number">1</span> &lt;&lt; <span class="number">1</span>,</span><br><span class="line">        UIViewAutoresizingFlexibleRightMargin  = <span class="number">1</span> &lt;&lt; <span class="number">2</span>,</span><br><span class="line">        UIViewAutoresizingFlexibleTopMargin    = <span class="number">1</span> &lt;&lt; <span class="number">3</span>,</span><br><span class="line">        UIViewAutoresizingFlexibleHeight       = <span class="number">1</span> &lt;&lt; <span class="number">4</span>,</span><br><span class="line">        UIViewAutoresizingFlexibleBottomMargin = <span class="number">1</span> &lt;&lt; <span class="number">5</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_OPTIONS(NSUInteger, UIViewAutoresizing) &#123;</span><br><span class="line">        UIViewAutoresizingNone                 = <span class="number">0</span>,</span><br><span class="line">        UIViewAutoresizingFlexibleLeftMargin   = <span class="number">1</span> &lt;&lt; <span class="number">0</span>,</span><br><span class="line">        UIViewAutoresizingFlexibleWidth        = <span class="number">1</span> &lt;&lt; <span class="number">1</span>,</span><br><span class="line">        UIViewAutoresizingFlexibleRightMargin  = <span class="number">1</span> &lt;&lt; <span class="number">2</span>,</span><br><span class="line">        UIViewAutoresizingFlexibleTopMargin    = <span class="number">1</span> &lt;&lt; <span class="number">3</span>,</span><br><span class="line">        UIViewAutoresizingFlexibleHeight       = <span class="number">1</span> &lt;&lt; <span class="number">4</span>,</span><br><span class="line">        UIViewAutoresizingFlexibleBottomMargin = <span class="number">1</span> &lt;&lt; <span class="number">5</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>以上代码为苹果源码.<strong>使用NS_ENUM和NS_OPTIONS来替代C语言的enum的好处</strong></p>
 <pre><code>可以自定义枚举的底层数据类型
 在C中使用C的语法, 在OC中使用OC的语法, 保持语法的统一
@@ -373,7 +373,7 @@ OC的单例模式用到宏
 <h2 id="接口与API设计"><a href="#接口与API设计" class="headerlink" title="接口与API设计"></a>接口与API设计</h2><h3 id="第15条：用前缀避免命名空间的冲突"><a href="#第15条：用前缀避免命名空间的冲突" class="headerlink" title="第15条：用前缀避免命名空间的冲突"></a>第15条：用前缀避免命名空间的冲突</h3><pre><code>选择与你公司、应用程序或者二者皆有关联之名称作为类名的前缀，并在所有代码中均使用这一前缀。
 若自己所开发的程序库中用到了第三方库，则应为其中的名称加上前缀。
 Apple宣称保留使用所有两字母前缀的权利，所以自己所选用的前缀最好是三字母的。
-</code></pre><h3 id="第16条：提供“全能初始化方法”"><a href="#第16条：提供“全能初始化方法”" class="headerlink" title="第16条：提供“全能初始化方法”"></a>第16条：提供“全能初始化方法”</h3><h3 id="第17条：实现description方法"><a href="#第17条：实现description方法" class="headerlink" title="第17条：实现description方法"></a>第17条：实现description方法</h3><p>调试程序时，LLDB调试，在封装的JSONHelper中看到了这样的方法：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对象转换为json对象.</span></span><br><span class="line">+(NSString *) <span class="string">transJson:</span>(Jastor *) obj&#123;</span><br><span class="line">    NSMutableDictionary *returnDic = [[NSMutableDictionary alloc] init];</span><br><span class="line">    NSArray *array =[JastorRuntimeHelper <span class="string">propertyNames:</span>[obj <span class="class"><span class="keyword">class</span>]];</span><br><span class="line">    <span class="title">for</span> (<span class="title">NSString</span> *<span class="title">key</span> <span class="title">in</span> <span class="title">array</span>) &#123;</span></span><br><span class="line">        <span class="keyword">if</span>([key <span class="string">isEqualToString:</span>@<span class="string">"description"</span>] || [key <span class="string">isEqualToString:</span>@<span class="string">"debugDescription"</span>] || [key <span class="string">isEqualToString:</span>@<span class="string">"superclass"</span>])&#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        [returnDic <span class="string">setValue:</span>[obj <span class="string">valueForKey:</span>key] <span class="string">forKey:</span>key];</span><br><span class="line">    &#125;</span><br><span class="line">    NSString *returnString = [returnDic JSONString];</span><br><span class="line">    <span class="keyword">return</span> returnString;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</code></pre><h3 id="第16条：提供“全能初始化方法”"><a href="#第16条：提供“全能初始化方法”" class="headerlink" title="第16条：提供“全能初始化方法”"></a>第16条：提供“全能初始化方法”</h3><h3 id="第17条：实现description方法"><a href="#第17条：实现description方法" class="headerlink" title="第17条：实现description方法"></a>第17条：实现description方法</h3><p>调试程序时，LLDB调试，在封装的JSONHelper中看到了这样的方法：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对象转换为json对象.</span></span><br><span class="line">+(NSString *) <span class="string">transJson:</span>(Jastor *) obj&#123;</span><br><span class="line">    NSMutableDictionary *returnDic = [[NSMutableDictionary alloc] init];</span><br><span class="line">    NSArray *array =[JastorRuntimeHelper <span class="string">propertyNames:</span>[obj <span class="class"><span class="keyword">class</span>]];</span></span><br><span class="line"><span class="class">    <span class="title">for</span> (<span class="title">NSString</span> *<span class="title">key</span> <span class="title">in</span> <span class="title">array</span>) &#123;</span></span><br><span class="line">        <span class="keyword">if</span>([key <span class="string">isEqualToString:</span>@<span class="string">"description"</span>] || [key <span class="string">isEqualToString:</span>@<span class="string">"debugDescription"</span>] || [key <span class="string">isEqualToString:</span>@<span class="string">"superclass"</span>])&#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        [returnDic <span class="string">setValue:</span>[obj <span class="string">valueForKey:</span>key] <span class="string">forKey:</span>key];</span><br><span class="line">    &#125;</span><br><span class="line">    NSString *returnString = [returnDic JSONString];</span><br><span class="line">    <span class="keyword">return</span> returnString;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>其中description在Foundation框架的NSString.h中<br><code>@property (readonly, copy) NSString *description;</code><br>在objc的NSObject.h中<br>`+ (NSString *)description;</p>
 <ul>
 <li>(NSString *)debugDescription;`<br>在Foundation框架的NSproxy.h中</li>
@@ -515,7 +515,7 @@ Apple宣称保留使用所有两字母前缀的权利，所以自己所选用的
 </ul>
 </li>
 </ol>
-<ol>
+<ol start="2">
 <li><p>ARC 在编译期会把能够互相抵消的retain、release、autorelease操作约简。</p>
 <ul>
 <li>比如在同一个对象上执行多次保留与释放操作，ARC有时可以成对地移除这两个操作。</li>
@@ -660,7 +660,7 @@ void CFRelease(CFTypeRef cf);
 </ul>
 <h3 id="第40条：用block引用其所属对象时不要出现循环引用"><a href="#第40条：用block引用其所属对象时不要出现循环引用" class="headerlink" title="第40条：用block引用其所属对象时不要出现循环引用"></a>第40条：用block引用其所属对象时不要出现循环引用</h3><p>我们知道, 使用__weak确实可以避免循环引用. 但是还有点小瑕疵, 假如block是在子线程中执行, 而对象本身在主线程中被销毁了, 那么block内部的弱引用就会置空(nil). 而这在KVO中会导致崩溃.</p>
 <p><strong>Strong-Weak Dance</strong>就是针对以上问题的. 使用方法很简单, 只需要加一行代码</p>
-<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) wself = self;</span><br><span class="line">self.completionHandler = ^(<span class="type">NSInteger</span> <span class="literal">result</span>) &#123;</span><br><span class="line">    __strong typeof(wself) sself = wself;</span><br><span class="line">    [sself removeObserver: sself forKeyPath:@<span class="string">"dog"</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">__<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>) wself = <span class="keyword">self</span>;</span><br><span class="line"><span class="keyword">self</span>.completionHandler = ^(<span class="built_in">NSInteger</span> result) &#123;</span><br><span class="line">    __<span class="keyword">strong</span> <span class="keyword">typeof</span>(wself) sself = wself;</span><br><span class="line">    [sself removeObserver: sself forKeyPath:<span class="string">@"dog"</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>这样一来, block中sself所指向的对象在block执行完毕之前都不会被释放掉, 因为在ARC下, 只要对象被强引用着, 就不会被释放.</p>
 <h3 id="第41条：多用派发队列dispatch-sync和async，少用同步锁"><a href="#第41条：多用派发队列dispatch-sync和async，少用同步锁" class="headerlink" title="第41条：多用派发队列dispatch_sync和async，少用同步锁"></a>第41条：多用派发队列dispatch_sync和async，少用同步锁</h3><ul>
 <li>派发队列可用来表述同步语义(synchronization semantic),这种做法要比使用@synchronized块或NSLock对象更简单.</li>
@@ -686,7 +686,7 @@ void CFRelease(CFTypeRef cf);
 <li>创建group</li>
 </ol>
 <p><code>dispatch_group_t group = dispatch_group_create();</code></p>
-<ol>
+<ol start="2">
 <li>将任务编组，两种方式：</li>
 </ol>
 <ul>
@@ -696,16 +696,16 @@ void CFRelease(CFTypeRef cf);
 <ul>
 <li>设置标志位，只要在标志位中间的queue都属于group，但必须要一一对应。</li>
 </ul>
-<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_group_enter(dispatch_group_t <span class="keyword">group</span>);</span><br><span class="line"><span class="comment">// 中间的线程都属于group	</span></span><br><span class="line">dispatch_group_leave(dispatch_group_t <span class="keyword">group</span>);</span><br></pre></td></tr></table></figure>
-<ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_group_enter(<span class="keyword">dispatch_group_t</span> group);</span><br><span class="line"><span class="comment">// 中间的线程都属于group	</span></span><br><span class="line">dispatch_group_leave(<span class="keyword">dispatch_group_t</span> group);</span><br></pre></td></tr></table></figure>
+<ol start="3">
 <li>等待group执行完毕，等待时间为timeout，线程阻塞时间也由timeout决定，直至线程全部执行完毕</li>
 </ol>
 <p><code>dispatch_group_wait(dispatch_group_t group, dispatch_time_t timeout);</code></p>
-<ol>
+<ol start="4">
 <li>group执行完毕回调方法，在特定的线程queue上执行block方法</li>
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_group_notify(<span class="keyword">dispatch_group_t</span> group,</span><br><span class="line">              		  <span class="keyword">dispatch_queue_t</span> <span class="built_in">queue</span>,</span><br><span class="line">              		  <span class="keyword">dispatch_block_t</span> block);</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="7">
 <li><p>dispatch group 在并发队列中比较有用，在串行队列中，意义不大。</p>
 </li>
 <li><p>在并发队列中，执行任务所用的并发线程的数量，取决于各种因素，而GCD主要是根据系统资源状况来判定这些因素的，即GCD通过判定这些因素，来具体创建多少线程来执行任务.</p>
@@ -732,7 +732,7 @@ void CFRelease(CFTypeRef cf);
 <p>dispatch_once最常用于单例模式，整个类中只有一个共用的单例实例，每次调用时不会创建新的实例。</p>
 </blockquote>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dispatch_once(<span class="keyword">dispatch_once_t</span> *predicate,</span><br><span class="line">			  <span class="keyword">dispatch_block_t</span> block)</span><br></pre></td></tr></table></figure>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+ (FDNetwork *)shareManager &#123;</span><br><span class="line">    <span class="keyword">static</span> FDNetwork *manager = <span class="literal">nil</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">        manager = [[FDNetwork alloc] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> manager;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+ (FDNetwork *)<span class="keyword">shareManager </span>&#123;</span><br><span class="line">    static FDNetwork *manager = nil<span class="comment">;</span></span><br><span class="line">    static <span class="keyword">dispatch_once_t </span>onceToken<span class="comment">;</span></span><br><span class="line">    <span class="keyword">dispatch_once(&amp;onceToken, </span>^&#123;</span><br><span class="line">        manager = [[FDNetwork alloc] init]<span class="comment">;</span></span><br><span class="line">    &#125;)<span class="comment">;</span></span><br><span class="line">    return manager<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用dispatch_once</p>
 <ol>
 <li><p>简化代码并且彻底保证线层安全，而且高效</p>
@@ -749,9 +749,9 @@ void CFRelease(CFTypeRef cf);
 <li>许多系统框架都可以直接使用.其中最重要的是Foundation与CoreFoundation,这两个框架提供了构建应用程序所需的许多核心功能.</li>
 <li>很多常见任务都能用框架来做,例如音频与视频处理,网络通信,数据管理等</li>
 </ul>
-<h3 id="第48条：多用块枚举，少用for循环"><a href="#第48条：多用块枚举，少用for循环" class="headerlink" title="第48条：多用块枚举，少用for循环"></a>第48条：多用块枚举，少用for循环</h3><h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDictionary</span> *adictionary = <span class="comment">/* ... */</span>;</span><br><span class="line"><span class="built_in">NSArray</span> *array = [adictionary allkeys];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array<span class="variable">.count</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">id</span> key = keys[i];</span><br><span class="line">    <span class="keyword">id</span> value = adictionary[key];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="第48条：多用块枚举，少用for循环"><a href="#第48条：多用块枚举，少用for循环" class="headerlink" title="第48条：多用块枚举，少用for循环"></a>第48条：多用块枚举，少用for循环</h3><h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSDictionary *adictionary = /* ... */;</span><br><span class="line">NSArray *<span class="keyword">array</span> = [adictionary allkeys];</span><br><span class="line"><span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="keyword">array</span><span class="built_in">.count</span>; i++) &#123;</span><br><span class="line">   <span class="built_in"> id</span><span class="built_in"> key</span> = keys[i];</span><br><span class="line">   <span class="built_in"> id</span> <span class="keyword">value</span> = adictionary<span class="built_in">[key</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="NSEnumerator遍历法"><a href="#NSEnumerator遍历法" class="headerlink" title="NSEnumerator遍历法"></a>NSEnumerator遍历法</h4><p> NSEnumerator是抽象基类，这种方法已经过时了</p>
-<h4 id="快速遍历"><a href="#快速遍历" class="headerlink" title="快速遍历"></a>快速遍历</h4><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">NSArray </span>*array = <span class="regexp">/* ... */</span></span><br><span class="line"><span class="keyword">for</span> (id obj <span class="keyword">in</span> array) &#123;</span><br><span class="line">    <span class="regexp">//</span> <span class="keyword">do</span> something with <span class="string">'obj'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="快速遍历"><a href="#快速遍历" class="headerlink" title="快速遍历"></a>快速遍历</h4><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NSArray *<span class="keyword">array</span> = /* ... */</span><br><span class="line"><span class="keyword">for</span> (id obj <span class="keyword">in</span> <span class="keyword">array</span>) &#123;</span><br><span class="line">    // <span class="keyword">do</span> something <span class="keyword">with</span> <span class="symbol">'obj</span>'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="基于块的遍历方式"><a href="#基于块的遍历方式" class="headerlink" title="基于块的遍历方式"></a>基于块的遍历方式</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSArray</span>, <span class="built_in">NSDictionary</span>, <span class="built_in">NSSet</span>都有基于block的遍历方式, 例如数组的 :</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSArray</span> *array = <span class="comment">/* ... */</span></span><br><span class="line">[array enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">    <span class="comment">// do something with 'obj'</span></span><br><span class="line">    <span class="keyword">if</span> (shouldStop) &#123;</span><br><span class="line">        *stop = <span class="literal">YES</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br><span class="line">不仅能简单遍历, 还能控制什么时候退出遍历. 还有更高级的块遍历方法能够指定选项, 例如反向遍历, 并行快速遍历等等.</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数组的方法</span></span><br><span class="line">- (<span class="keyword">void</span>)enumerateObjectsWithOptions:(<span class="built_in">NSEnumerationOptions</span>)opts usingBlock:(<span class="keyword">void</span> (^)(ObjectType obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop))block;</span><br><span class="line"><span class="comment">// 字典的方法</span></span><br><span class="line">- (<span class="keyword">void</span>)enumerateKeysAndObjectsWithOptions:(<span class="built_in">NSEnumerationOptions</span>)opts usingBlock:(<span class="keyword">void</span> (^)(KeyType key, ObjectType obj, <span class="built_in">BOOL</span> *stop))block;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>遍历collection有四种方式.最基本的办法是for循环,其次是NSEnumerator遍历法及快速遍历法,最新,最先进的方式则是”块枚举法”.</li>
@@ -809,11 +809,11 @@ void CFRelease(CFTypeRef cf);
 <li>load加载编译期使用，子类有load，会自动调用父类的load。子类没有load方法。不会自动调用父类的load。 initialize运行时懒加载，子类有没有initialize，都会自动调用父类的initialize。主要是在给某个对象发送消息时调用，应该会调用objc_msgSendSuper()吧？（自认为）</li>
 <li>load用于Method Swizzle.例如MJRefresh中UIScrollView+MJRefresh中，方法1和方法2交换，调用runtime中的方法method_exchangeImplementations方法。<br> initialize主要是变量初始化和通知的添加和移除。</li>
 </ul>
-<ol>
+<ol start="2">
 <li>delegate和Block那个好？<br>Block更加简洁，可以访问此范围内的全部变量。Block无需保存获取器，也无需再回调方法里切换。在Block中来操作成功和失败的情况。</li>
 </ol>
 <p>delegate的缺点：如果类要分别使用多个获取器下载不同该数据，那么就得在delegate回调方法里根据传入的获取器参数来切换。</p>
-<ol>
+<ol start="3">
 <li>内存泄露的场景</li>
 </ol>
 <ul>
@@ -841,7 +841,7 @@ void CFRelease(CFTypeRef cf);
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
         </p>
     </div>
 
@@ -857,8 +857,8 @@ void CFRelease(CFTypeRef cf);
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/04/01/Block/">
-                    Block
+                <a href="/2016/04/01/设计模式/">
+                    设计模式
                 </a>
             </div>
         
@@ -880,7 +880,7 @@ void CFRelease(CFTypeRef cf);
     }
 </style>
 
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
 <script>
     var valueHide = "隐藏目录";
     var valueShow = "显示目录";
@@ -963,13 +963,13 @@ void CFRelease(CFTypeRef cf);
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/04/01/Block/" title="下一篇: Block">
+            <a href="/2016/04/01/设计模式/" title="下一篇: 设计模式">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/02/02/Mac获取ipa方法/">Mac获取ipa方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/学习iOS逆向/">学习iOS逆向</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/26/最近感悟/">最近感悟</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/2018年总结/">2018年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/03/升级Xcode10遇到的问题/">升级Xcode10遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/RN与iOS的混合开发/">RN与iOS的混合开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/在APP中IM使用融云/">在APP中IM使用融云</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/独立开发一个APP/">独立开发一个APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/25/iOS底层实现/">iOS底层实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/Effective-JavaScript/">Effective JavaScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/22/React知识/">React技术栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/05/2017年总结/">2017年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/ReactNative中使用Redux/">ReactNative中使用Redux</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/React-Native的APP/">React-Native的APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ReactNative的常用组件/">ReactNative的常用组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/05/AFNetworking3.0/">AFNetworking3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/搜索框的Demo/">搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/iOS中JS与OC相互调用的方式/">iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/NSURLProtocol/">NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/React-Native的与原生的交互/">React-Native的与原生的交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/React-Native的API和组件/">React-Native的API和组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/React-Native入门/">React Native入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/YYModel/">YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/GCD/">GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop/">RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime/">Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/ARC内存管理/">ARC内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/NSString的引用计数问题/">NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Block/">Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/SDWebImage框架/">SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/AFNetworking2.0/">AFNetworking2.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/深拷贝和浅拷贝/">深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/07/关于RN的热更新/">关于RN的热更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/02/Mac获取ipa方法/">Mac获取ipa方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/学习iOS逆向/">学习iOS逆向</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/26/最近感悟/">最近感悟</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/2018年总结/">2018年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/03/升级Xcode10遇到的问题/">升级Xcode10遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/RN与iOS的混合开发/">RN与iOS的混合开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/在APP中IM使用融云/">在APP中IM使用融云</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/独立开发一个APP/">独立开发一个APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/25/iOS底层实现/">iOS底层实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/Effective-JavaScript/">Effective JavaScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/22/React知识/">React技术栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/05/2017年总结/">2017年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/ReactNative中使用Redux/">ReactNative中使用Redux</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/React-Native的APP/">React-Native的APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ReactNative的常用组件/">ReactNative的常用组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/05/AFNetworking3.0/">AFNetworking3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/搜索框的Demo/">搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/iOS中JS与OC相互调用的方式/">iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/NSURLProtocol/">NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/React-Native的与原生的交互/">React-Native的与原生的交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/React-Native的API和组件/">React-Native的API和组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/React-Native入门/">React Native入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/YYModel/">YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/GCD/">GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop/">RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime/">Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/ARC内存管理/">ARC内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/NSString的引用计数问题/">NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Block/">Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/SDWebImage框架/">SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/AFNetworking2.0/">AFNetworking2.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/深拷贝和浅拷贝/">深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
@@ -1010,17 +1010,19 @@ void CFRelease(CFTypeRef cf);
         
             <div class="visit">
                 
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >本站到访数: 
-                            <span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+		<span id="busuanzi_container_site_pv">
+   		 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+		</span>
+                <span id="busuanzi_value_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+                        
+                    
                 
                 
                     <span>, </span>
                 
                 
-                    <span id="busuanzi_container_page_pv" style='display:none'>
+                    <span id="busuanzi_container_page_pv" style="display:none">
                         <span id="page-visit">本页阅读量: 
                             <span id="busuanzi_value_page_pv"></span>
                         </span>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
   <title>git学习笔记 | 向着阳光奔跑</title>
@@ -11,11 +11,13 @@
 <meta property="og:url" content="http://peilinghui.com/2016/02/25/git学习/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="mac自带git。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/git.jpg">
 <meta property="og:updated_time" content="2018-10-18T01:11:24.040Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git学习笔记">
 <meta name="twitter:description" content="mac自带git。">
+<meta name="twitter:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/git.jpg">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -23,18 +25,18 @@
     <link rel="icon" href="/favicon.png">
   
   
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
   
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
   
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
   
-  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
   <script>
       var yiliaConfig = {
           fancybox: true,
@@ -55,7 +57,7 @@
   
 
   
-</head>
+</head></html>
 <body>
   <div id="container">
     <div class="left-col">
@@ -259,7 +261,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -286,14 +288,14 @@
         <p>mac自带git。</p>
 <a id="more"></a> 
 <h1 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h1><h2 id="git的配置，邮箱地址和用户名"><a href="#git的配置，邮箱地址和用户名" class="headerlink" title="git的配置，邮箱地址和用户名"></a>git的配置，邮箱地址和用户名</h2><ol>
-<li><p><strong>配置邮箱</strong><br>$ git config –global user.email “799745776@qq.com”  </p>
+<li><p><strong>配置邮箱</strong><br>$ git config –global user.email “<a href="mailto:799745776@qq.com" target="_blank" rel="noopener">799745776@qq.com</a>“  </p>
 </li>
 <li><p><strong>配置用户名</strong><br>$ git config –global user.name “plh”</p>
 </li>
 <li><p><strong>查看当前的配置</strong><br>$ cat .git/config</p>
 </li>
 </ol>
-<h2 id="git命令"><a href="#git命令" class="headerlink" title="git命令"></a>git命令</h2><h3 id="下载代码"><a href="#下载代码" class="headerlink" title="下载代码"></a>下载代码</h3><p>$ git clone git@github.com:…….</p>
+<h2 id="git命令"><a href="#git命令" class="headerlink" title="git命令"></a>git命令</h2><h3 id="下载代码"><a href="#下载代码" class="headerlink" title="下载代码"></a>下载代码</h3><p>$ git clone <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:…….</p>
 <h3 id="添加文件到Git仓库"><a href="#添加文件到Git仓库" class="headerlink" title="添加文件到Git仓库"></a>添加文件到Git仓库</h3><p>先打开指定的文件夹。用cd.</p>
 <ol>
 <li><p><strong>放在暂缓区的命令</strong><br>$ git add Read.md<br>$ git add .</p>
@@ -351,12 +353,12 @@
 <h2 id="添加和配置SSH公钥"><a href="#添加和配置SSH公钥" class="headerlink" title="添加和配置SSH公钥"></a>添加和配置SSH公钥</h2><p>SSH（Secure Shell）是一种安全协议，在你的电脑与GitLab服务器进行通信时，我们使用SSH密钥（SSH Keys）认证的方式来保证通信安全。你可以在网络上搜索到关于SSH密钥的更多介绍；下面我们重点讲解如何创建 SSH密钥，并将密钥中的公钥添加到GitLab，以便我们通过SSH协议来访问Git仓库。</p>
 <h3 id="创建SSH-Key"><a href="#创建SSH-Key" class="headerlink" title="创建SSH Key"></a>创建SSH Key</h3><h4 id="1-进入SSH目录"><a href="#1-进入SSH目录" class="headerlink" title="1.进入SSH目录"></a>1.进入SSH目录</h4><p>cd ~/.ssh</p>
 <p>（1）如果还没有 ~/.ssh 目录，可以手工创建一个(mkdir ~/.ssh)，之后再通过cd ~/.ssh进入SSH目录</p>
-<p>（2）可以通过ls -l命令查看SSH目录下的文件，来确认你是否已经生成过SSH密钥；如果SSH目录为空，我们开始第二步，生成 SSH 密钥；如果存在id_rsa.pub这个文件，说明你之前生成过SSH密钥，后面有介绍如何添加多个sshkey<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>ssh-keygen -t rsa -<span class="constant">C </span><span class="string">"youremail@example.com"</span></span><br></pre></td></tr></table></figure></p>
+<p>（2）可以通过ls -l命令查看SSH目录下的文件，来确认你是否已经生成过SSH密钥；如果SSH目录为空，我们开始第二步，生成 SSH 密钥；如果存在id_rsa.pub这个文件，说明你之前生成过SSH密钥，后面有介绍如何添加多个sshkey<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></span><br></pre></td></tr></table></figure></p>
 <p>生成的文件在/Users/user/.ssh。</p>
-<h4 id="2-生成SSH密钥"><a href="#2-生成SSH密钥" class="headerlink" title="2.生成SSH密钥"></a>2.生成SSH密钥</h4><p>我们通过下面的命令生成密钥，请将命令中的YOUR_EMAIL@YOUREMAIL.COM替换为你自己的Email地址。</p>
-<p>ssh-keygen -t rsa -C “YOUR_EMAIL@YOUREMAIL.COM”</p>
+<h4 id="2-生成SSH密钥"><a href="#2-生成SSH密钥" class="headerlink" title="2.生成SSH密钥"></a>2.生成SSH密钥</h4><p>我们通过下面的命令生成密钥，请将命令中的<a href="mailto:YOUR_EMAIL@YOUREMAIL.COM" target="_blank" rel="noopener">YOUR_EMAIL@YOUREMAIL.COM</a>替换为你自己的Email地址。</p>
+<p>ssh-keygen -t rsa -C “<a href="mailto:YOUR_EMAIL@YOUREMAIL.COM" target="_blank" rel="noopener">YOUR_EMAIL@YOUREMAIL.COM</a>“</p>
 <p>在SSH生成过程中会出现以下信息，按屏幕的提示操作即可；</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"YOUR_EMAIL@YOUREMAIL.COM"</span></span><br><span class="line">Generating <span class="keyword">public</span>/<span class="keyword">private</span> rsa key pair.</span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):</span><br><span class="line">Enter same passphrase <span class="string">again:</span></span><br><span class="line">Your identification has been saved <span class="keyword">in</span> <span class="regexp">/Users/</span>USERNAME<span class="regexp">/.ssh/</span>id_rsa.</span><br><span class="line">Your <span class="keyword">public</span> key has been saved <span class="keyword">in</span> <span class="regexp">/Users/</span>USERNAME<span class="regexp">/.ssh/</span>id_rsa.pub.</span><br><span class="line">The key fingerprint <span class="string">is:</span></span><br><span class="line"><span class="number">15</span>:<span class="number">81</span>:<span class="string">d2:</span><span class="number">7</span><span class="string">a:</span><span class="string">c6:</span><span class="number">6</span><span class="string">c:</span><span class="number">0</span><span class="string">f:</span><span class="string">ec:</span><span class="string">b0:</span><span class="string">b6:</span><span class="string">d4:</span><span class="number">18</span>:<span class="string">b8:</span><span class="string">d1:</span><span class="number">41</span>:<span class="number">48</span> YOUR_EMAIL<span class="annotation">@YOUREMAIL</span>.COM</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"YOUR_EMAIL@YOUREMAIL.COM"</span></span><br><span class="line">Generating <span class="keyword">public</span>/<span class="keyword">private</span> rsa key pair.</span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):</span><br><span class="line">Enter same passphrase <span class="string">again:</span></span><br><span class="line">Your identification has been saved <span class="keyword">in</span> <span class="regexp">/Users/</span>USERNAME<span class="regexp">/.ssh/</span>id_rsa.</span><br><span class="line">Your <span class="keyword">public</span> key has been saved <span class="keyword">in</span> <span class="regexp">/Users/</span>USERNAME<span class="regexp">/.ssh/</span>id_rsa.pub.</span><br><span class="line">The key fingerprint <span class="string">is:</span></span><br><span class="line"><span class="number">15</span>:<span class="number">81</span>:<span class="string">d2:</span><span class="number">7</span><span class="string">a:</span><span class="string">c6:</span><span class="number">6</span><span class="string">c:</span><span class="number">0</span><span class="string">f:</span><span class="string">ec:</span><span class="string">b0:</span><span class="string">b6:</span><span class="string">d4:</span><span class="number">18</span>:<span class="string">b8:</span><span class="string">d1:</span><span class="number">41</span>:<span class="number">48</span> YOUR_EMAIL<span class="meta">@YOUREMAIL</span>.COM</span><br></pre></td></tr></table></figure>
 <p>说明：</p>
 <p>（1）一般情况下，在命令行中输入密码、口令一类的信息时是没有信息回显的。在我们这一步的操作中，输入passphrase口令时，命令行界面上不会随着键盘敲入密码而有什么反馈。</p>
 <p>（2）当提示Enter passphrase (empty for no passphrase) : 时，可以直接按两次回车键输入一个空的 passphrase；也可以选择输入一个 passphrase 口令，如果此时你输入了一个passphrase，请牢记，之后每次提交时都需要输入这个口令来确认。</p>
@@ -367,9 +369,9 @@
 <p>Windows: clip &lt; ~/.ssh/id_rsa.pub</p>
 <p>Mac: pbcopy &lt; ~/.ssh/id_rsa.pub</p>
 <p>GNU/Linux (requires xclip): xclip -sel clip &lt; ~/.ssh/id_rsa.pub</p>
-<h4 id="4-添加SSH公钥到gitlab"><a href="#4-添加SSH公钥到gitlab" class="headerlink" title="4.添加SSH公钥到gitlab"></a>4.添加SSH公钥到gitlab</h4><p>（1）打开<a href="https://gitlab.com/profileProfile配置页面，选择SSH" target="_blank" rel="external">https://gitlab.com/profileProfile配置页面，选择SSH</a> Keys.<br>（2）添加SSH公钥</p>
+<h4 id="4-添加SSH公钥到gitlab"><a href="#4-添加SSH公钥到gitlab" class="headerlink" title="4.添加SSH公钥到gitlab"></a>4.添加SSH公钥到gitlab</h4><p>（1）打开<a href="https://gitlab.com/profileProfile配置页面，选择SSH" target="_blank" rel="noopener">https://gitlab.com/profileProfile配置页面，选择SSH</a> Keys.<br>（2）添加SSH公钥</p>
 <p>按照要求填写Title和Key，其中Title是Key的描述信息（如My_work_computer等），Key是上面复制的SSH公钥的内容，直接粘贴到输入框中保存即可。</p>
-<h4 id="5-测试SSH连接"><a href="#5-测试SSH连接" class="headerlink" title="5.测试SSH连接"></a>5.测试SSH连接</h4><p>ssh -T git@gitlab.com</p>
+<h4 id="5-测试SSH连接"><a href="#5-测试SSH连接" class="headerlink" title="5.测试SSH连接"></a>5.测试SSH连接</h4><p>ssh -T <a href="mailto:git@gitlab.com" target="_blank" rel="noopener">git@gitlab.com</a></p>
 <p>如果连接成功的话，会出现以下信息。</p>
 <p>Welcome to GitLab, USERNAME!</p>
 <h3 id="远程同步"><a href="#远程同步" class="headerlink" title="远程同步"></a>远程同步</h3><ol>
@@ -398,7 +400,7 @@
 <p>git log ：查看文件的修改日志<br>查看某个文件的修改日志：git log 文件名<br>查看当前路径所有文件的修改日志：git log<br>用一行的方式查看简单的日志信息：git log ––pretty=oneline<br>查看最近的N次修改：git log –N（N是一个整数）</p>
 <p>git diff ：查看文件最新改动的地方<br>查看某个文件的最新改动的地方：git diff 文件名<br>查看当前路径所有文件最新改动的地方：git diff</p>
 <h2 id="搭建GitHub远程仓库-–-配置SSH-Key"><a href="#搭建GitHub远程仓库-–-配置SSH-Key" class="headerlink" title="搭建GitHub远程仓库 – 配置SSH Key"></a>搭建GitHub远程仓库 – 配置SSH Key</h2><ol>
-<li>注册一个GitHub帐号：<a href="https://github.com" target="_blank" rel="external">https://github.com</a></li>
+<li>注册一个GitHub帐号：<a href="https://github.com" target="_blank" rel="noopener">https://github.com</a></li>
 <li>打开“Account Settings”</li>
 <li>点击“SSH keys”</li>
 <li><p>配置Mac的SSH Key的公钥（用于限制提交）<br>在Mac上生成SSH Key（在终端输入下面指令）<br>cd ~/.ssh<br>ssh-keygen -t rsa -C “你的邮箱地址”<br>然后一直敲回车</p>
@@ -416,12 +418,12 @@
 <h4 id="查看远程分支"><a href="#查看远程分支" class="headerlink" title="查看远程分支"></a>查看远程分支</h4><p>$ git branch -r</p>
 <h3 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h3><p>$ git branch -r -d origin/bugfix1.0</p>
 <h3 id="gitignore"><a href="#gitignore" class="headerlink" title=".gitignore"></a>.gitignore</h3><p>.gitignore可以指定哪些文件不纳入版本库的管理</p>
-<p>参考网址：<a href="https://github.com/github/gitignore" target="_blank" rel="external">https://github.com/github/gitignore</a></p>
-<p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/git.jpg" alt=""></p>
+<p>参考网址：<a href="https://github.com/github/gitignore" target="_blank" rel="noopener">https://github.com/github/gitignore</a></p>
+<p><img src="http://7xr8q7.com1.z0.glb.clouddn.com/git.jpg" alt></p>
 <h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><blockquote>
 <p>说明GIT合并的两种方法以及区别。</p>
-<p> 答：Git代码合并有两种：Git Merge 和 Git ReBase。Git Merge：这种合并方式是将两个分支的历史合并到一起，现在的分支不会被更改，它会比对双方不同的文件缓存下来，生成一个commit，去push。</p>
 </blockquote>
+<p> 答：Git代码合并有两种：Git Merge 和 Git ReBase。Git Merge：这种合并方式是将两个分支的历史合并到一起，现在的分支不会被更改，它会比对双方不同的文件缓存下来，生成一个commit，去push。</p>
 <p>Git ReBase：这种合并方法通常被称为“衍合”。他是提交修改历史，比对双方的commit，然后找出不同的去缓存，然后去push，修改commit历史。</p>
 
       
@@ -442,7 +444,7 @@
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
         </p>
     </div>
 
@@ -475,7 +477,7 @@
     }
 </style>
 
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
 <script>
     var valueHide = "隐藏目录";
     var valueShow = "显示目录";
@@ -562,7 +564,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/02/02/Mac获取ipa方法/">Mac获取ipa方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/学习iOS逆向/">学习iOS逆向</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/26/最近感悟/">最近感悟</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/2018年总结/">2018年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/03/升级Xcode10遇到的问题/">升级Xcode10遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/RN与iOS的混合开发/">RN与iOS的混合开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/在APP中IM使用融云/">在APP中IM使用融云</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/独立开发一个APP/">独立开发一个APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/25/iOS底层实现/">iOS底层实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/Effective-JavaScript/">Effective JavaScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/22/React知识/">React技术栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/05/2017年总结/">2017年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/ReactNative中使用Redux/">ReactNative中使用Redux</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/React-Native的APP/">React-Native的APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ReactNative的常用组件/">ReactNative的常用组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/05/AFNetworking3.0/">AFNetworking3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/搜索框的Demo/">搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/iOS中JS与OC相互调用的方式/">iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/NSURLProtocol/">NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/React-Native的与原生的交互/">React-Native的与原生的交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/React-Native的API和组件/">React-Native的API和组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/React-Native入门/">React Native入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/YYModel/">YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/GCD/">GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop/">RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime/">Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/ARC内存管理/">ARC内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/NSString的引用计数问题/">NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Block/">Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/SDWebImage框架/">SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/AFNetworking2.0/">AFNetworking2.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/深拷贝和浅拷贝/">深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/07/关于RN的热更新/">关于RN的热更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/02/Mac获取ipa方法/">Mac获取ipa方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/学习iOS逆向/">学习iOS逆向</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/26/最近感悟/">最近感悟</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/2018年总结/">2018年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/03/升级Xcode10遇到的问题/">升级Xcode10遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/RN与iOS的混合开发/">RN与iOS的混合开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/在APP中IM使用融云/">在APP中IM使用融云</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/独立开发一个APP/">独立开发一个APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/25/iOS底层实现/">iOS底层实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/Effective-JavaScript/">Effective JavaScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/22/React知识/">React技术栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/05/2017年总结/">2017年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/ReactNative中使用Redux/">ReactNative中使用Redux</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/React-Native的APP/">React-Native的APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ReactNative的常用组件/">ReactNative的常用组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/05/AFNetworking3.0/">AFNetworking3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/搜索框的Demo/">搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/iOS中JS与OC相互调用的方式/">iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/NSURLProtocol/">NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/React-Native的与原生的交互/">React-Native的与原生的交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/React-Native的API和组件/">React-Native的API和组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/React-Native入门/">React Native入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/YYModel/">YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/GCD/">GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop/">RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime/">Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/ARC内存管理/">ARC内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/NSString的引用计数问题/">NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Block/">Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/SDWebImage框架/">SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/AFNetworking2.0/">AFNetworking2.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/深拷贝和浅拷贝/">深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
@@ -603,17 +605,19 @@
         
             <div class="visit">
                 
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >本站到访数: 
-                            <span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+		<span id="busuanzi_container_site_pv">
+   		 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+		</span>
+                <span id="busuanzi_value_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+                        
+                    
                 
                 
                     <span>, </span>
                 
                 
-                    <span id="busuanzi_container_page_pv" style='display:none'>
+                    <span id="busuanzi_container_page_pv" style="display:none">
                         <span id="page-visit">本页阅读量: 
                             <span id="busuanzi_value_page_pv"></span>
                         </span>

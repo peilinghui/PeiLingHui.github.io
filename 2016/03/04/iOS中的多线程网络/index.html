@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
   <title>iOS中的多线程网络 | 向着阳光奔跑</title>
@@ -11,6 +11,7 @@
 <meta property="og:url" content="http://peilinghui.com/2016/03/04/iOS中的多线程网络/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="不论是什么开发，多线程网络始终是学习的重点。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%87%AA%E5%AE%9A%E4%B9%89NSOperation%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87.png">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/runloop.png">
@@ -18,6 +19,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS中的多线程网络">
 <meta name="twitter:description" content="不论是什么开发，多线程网络始终是学习的重点。">
+<meta name="twitter:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF.png">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -25,18 +27,18 @@
     <link rel="icon" href="/favicon.png">
   
   
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
   
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
   
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
   
-  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
   <script>
       var yiliaConfig = {
           fancybox: true,
@@ -57,7 +59,7 @@
   
 
   
-</head>
+</head></html>
 <body>
   <div id="container">
     <div class="left-col">
@@ -261,7 +263,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -298,19 +300,19 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
 
 //创建并启动多线程
 [NSThread detachNewThreadSelector:@selector(run) toTarget:self withObject:nil];
-</code></pre><ol>
+</code></pre><ol start="2">
 <li><p>线程的状态<br>线程的状态会在运行、就绪状态之间切换。<br>启用线程使用了start方法后，该线程进入就绪状态，系统会为其创建方法调用栈和程序计数器。<strong>当系统调度线程后，线程才会进入运行状态。</strong><br>注意：若想要子线程的start方法后子线程立即开始执行，可以调用[NSThread sleepForTimeInterval:0.01];<br>从而让子线程立即获得执行。</p>
 </li>
 <li><p>终止子线程<br>1&gt;线程执行体方法执行完成，线程正常结束。<br>2&gt;线程执行过程中出现了错误<br>3&gt;直接调用NSThread类的exit方法来中止当前正在执行的线程。</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">if</span> ([NSThread currentThread].isCancelled) &#123;</span><br><span class="line">        <span class="comment">//中止当前正在执行的线程</span></span><br><span class="line">        <span class="attr_selector">[NSThread exit]</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([NSThread currentThread].isCancelled) &#123;</span><br><span class="line">        <span class="regexp">//</span>中止当前正在执行的线程</span><br><span class="line">        [NSThread <span class="keyword">exit</span>];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<ol>
+<ol start="4">
 <li>线程睡眠<br>NSThread的两种类方法：<br>//让当前正在执行的线程暂停到aDate代表的时间，并进入阻塞状态<br><code>+ (void)sleepUntilDate:(NSDate *)aDate:</code><br>//让当前正在执行的线程暂停ti秒，并进入阻塞状态<br><code>+ (void)sleepForTimeInterval:(NSTimeInterval)ti:</code></li>
 </ol>
-<p>例子：<br>使用线程下载网络图片：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建多线程对象</span></span><br><span class="line">NSThread *thread = [[NSThread alloc]<span class="string">initWithTarget:</span>self <span class="string">selector:</span><span class="annotation">@selector</span>(<span class="string">downloadImageFromURL:</span>) <span class="string">object:</span>nil];</span><br><span class="line"><span class="comment">//启动多线程</span></span><br><span class="line">[thread start];</span><br><span class="line"><span class="string">downloadImageFromURL:</span>方法作为线程执行体，当线程启动调用该方法。</span><br><span class="line"><span class="comment">//在主线程中执行updateUI：方法 来更新iv控件显示的图片</span></span><br><span class="line">[self <span class="string">performSelectorOnMainThread:</span><span class="annotation">@selector</span>(<span class="string">updateUI:</span>) <span class="string">withObject:</span>image <span class="string">waitUntilDone:</span>YES];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>例子：<br>使用线程下载网络图片：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建多线程对象</span></span><br><span class="line">NSThread *thread = [[NSThread alloc]<span class="string">initWithTarget:</span>self <span class="string">selector:</span><span class="meta">@selector</span>(<span class="string">downloadImageFromURL:</span>) <span class="string">object:</span>nil];</span><br><span class="line"><span class="comment">//启动多线程</span></span><br><span class="line">[thread start];</span><br><span class="line"><span class="string">downloadImageFromURL:</span>方法作为线程执行体，当线程启动调用该方法。</span><br><span class="line"><span class="comment">//在主线程中执行updateUI：方法 来更新iv控件显示的图片</span></span><br><span class="line">[self <span class="string">performSelectorOnMainThread:</span><span class="meta">@selector</span>(<span class="string">updateUI:</span>) <span class="string">withObject:</span>image <span class="string">waitUntilDone:</span>YES];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>iOS规定只能在UI线程中修改UI控件的属性</strong></p>
-<ol>
+<ol start="5">
 <li>改变优先级<br>NSThread中的实例方法和类方法：<br>+threadPriority<br>-threadPriority<br>+setThreadPriority：(double)priority:<br>-setThreadPriority：(double)priority:</li>
 </ol>
 <h3 id="线程同步与线程通信"><a href="#线程同步与线程通信" class="headerlink" title="线程同步与线程通信"></a>线程同步与线程通信</h3><ol>
@@ -330,13 +332,13 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
 </ul>
 </li>
 </ol>
-<ol>
+<ol start="3">
 <li><p>同步锁（NSLock）<br>Foundation提供NSLock，通过显式定义同步锁对象来实现同步。<br>NSlock是控制多个线程对共享资源进行访问的工具，通常锁提供了对共享资源的独占访问。在实现线程安全的控制中，使用NSlock对象可以显示地加锁，释放锁。</p>
 </li>
 <li><p>使用NSCondition控制线程通信<br>NSCondition实现了NSLocking协议，因此也可以调用lock，unlock来实现线程同步。也可以让那些已经锁定NSCondition对象却无法继续执行的线程释放NSCondition对象，NSCondition对象也可以唤醒其他处于等待状态的线程。<br>方法：-wait，知道其他线程调用NSCondition的signal方法或broadcast方法来唤醒该线程。<br>-（BOOL）waitUntilDate：(NSDate *)limiteout,</p>
 </li>
 </ol>
-<p>参考：<a href="http://blog.csdn.net/totogo2010/article/details/8010231" target="_blank" rel="external">http://blog.csdn.net/totogo2010/article/details/8010231</a></p>
+<p>参考：<a href="http://blog.csdn.net/totogo2010/article/details/8010231" target="_blank" rel="noopener">http://blog.csdn.net/totogo2010/article/details/8010231</a></p>
 <h1 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h1><ol>
 <li>Grand Central Dispatch “牛逼的中枢调度器”</li>
 </ol>
@@ -346,7 +348,7 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
 <li>会自动管理线程的生命周期（创建线程，调度任务，销毁线程）</li>
 <li>程序员只需要告诉GCD该做什么，而不需要写代码</li>
 </ul>
-<ol>
+<ol start="2">
 <li><p>使用2个步骤：</p>
 <ul>
 <li>定制任务（执行什么操作）</li>
@@ -358,7 +360,7 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
 <li><p>同步：dispatch_sync(dispatch_queue_t, dispatch_block_t block);<br>异步：dispatch_async(dispatch_queue_t, dispatch_block_t block);<br>同步和异步的区别：<br>同步：在当前线程中执行,不具备开启新线程的能力<br>异步：在另一条新线程中执行，具备开启新线程的能力</p>
 </li>
 <li><p>使用GCD下载图片</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,[<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">        <span class="comment">//耗时操作</span></span><br><span class="line">        <span class="comment">//1.url,确定一个网络上的资源文件路径</span></span><br><span class="line">        <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://p18.qhimg.com/t0144d6a0802f22be4f.jpg"</span>];</span><br><span class="line">        <span class="comment">//2.通过URL下载对应的网络资源，网络资源传输的都是二进制</span></span><br><span class="line">        <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithContentsOfFile:url];</span><br><span class="line">        <span class="comment">//3.把二进制转成图片</span></span><br><span class="line">        <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageWithData:data];</span><br><span class="line">        <span class="comment">//4.更新UI，在主线程-&gt;直接把主线程添加到主队列，就会在主队列执行</span></span><br><span class="line">        <span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">            <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.image</span> = image;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,[<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">        <span class="comment">//耗时操作</span></span><br><span class="line">        <span class="comment">//1.url,确定一个网络上的资源文件路径</span></span><br><span class="line">        <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://p18.qhimg.com/t0144d6a0802f22be4f.jpg"</span>];</span><br><span class="line">        <span class="comment">//2.通过URL下载对应的网络资源，网络资源传输的都是二进制</span></span><br><span class="line">        <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithContentsOfFile:url];</span><br><span class="line">        <span class="comment">//3.把二进制转成图片</span></span><br><span class="line">        <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageWithData:data];</span><br><span class="line">        <span class="comment">//4.更新UI，在主线程-&gt;直接把主线程添加到主队列，就会在主队列执行</span></span><br><span class="line">        <span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">            <span class="keyword">self</span>.iconView.image = image;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>多次执行的任务<br>控制的代码块执行了5次。<br>` dispatch_apply(5, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(size_t time){</p>
 <pre><code>NSLog(@&quot;==执行【%lu次】==%@&quot;,time,[NSThread currentThread]);
@@ -379,7 +381,7 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
 <li>进入后台时保存状态  <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用NSUserDefault读取系统已经保存的积分</span></span><br><span class="line">   NSNumber* scoreNumber;</span><br><span class="line">   <span class="keyword">if</span> ((scoreNumber = [[NSUserDefaults standardUserDefaults]<span class="string">setInteger:</span>score <span class="string">forKey:</span>@<span class="string">"score"</span>])) &#123;</span><br><span class="line">       score = scoreNumber.integerValue;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<ol>
+<ol start="3">
 <li>请求更多后台时间<br>为了请求更多后台时间，应该使用如下步骤：<ul>
 <li>调用UIApplication对象的beginBackgroundTaskWithExpirationHandler:方法请求获取更多的后台执行时间。</li>
 <li>调用dispatch_async()方法将指定代码块提交给后台执行</li>
@@ -395,14 +397,14 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
 <li>使用NSblockOperation下载图片<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建NSBlock</span></span><br><span class="line">    <span class="built_in">NSBlockOperation</span> *operation = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</span><br><span class="line">        <span class="comment">//从网络获取数据</span></span><br><span class="line">        <span class="built_in">NSData</span> *data = [[<span class="built_in">NSData</span> alloc]initWithContentsOfURL:[<span class="built_in">NSURL</span> URLWithString:url]];</span><br><span class="line">       <span class="comment">//将网络数据初始化为UIImage对象</span></span><br><span class="line">       <span class="built_in">UIImage</span> *image = [[<span class="built_in">UIImage</span> alloc]initWithData:data];</span><br><span class="line">         <span class="keyword">if</span>(image!= <span class="literal">nil</span>)&#123;</span><br><span class="line">            <span class="comment">//在主线程中updateUI：方法</span></span><br><span class="line">             [<span class="keyword">self</span> performSelectorOnMainThread:<span class="keyword">@selector</span>(updateUI:)withObject:image waitUntilDone:<span class="literal">YES</span>];</span><br><span class="line">         &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">NSLog</span>(<span class="string">@"下载图片出现错误"</span>);           </span><br><span class="line">        &#125;];</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<ol>
+<ol start="2">
 <li>定义NSOperation子类<br>创建NSOperation的子类需要重写一个方法：-（void）main，该方法将作为NSOpQueue完成任务。</li>
 </ol>
 <h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><ol>
 <li>什么是多线程<br>进程：是指在系统中正在运行的一个应用程序。1个进程要想执行任务，必须得有线程。（一个进程至少要有一个线程）特征：独立性，动态性，并发性。<br>线程：是进程的基本执行单元，一个进程（程序）的所有任务都在线程中执行。当一个程序运行时，内部可能包含了多个顺序执行流，每个顺序执行流就是一个线程的。<br>多线程：在一个进程中可以开启多个线程，每条线程可以并发（同时）执行不同的任务。<br>多线程编程的优点：  <ul>
 <li>进程间不能共享内存，但线程之间共享内存非常容易</li>
 <li>系统创建进程需要为该进程重新分配系统资源，但创建线程则代价小得多，因此使用多线程来实现多任务并发比多进程的效率高。</li>
-<li>iOS提供了多种多线程实现方式，从而简化了iOS的多线程编程。<br>参考：<a href="http://1108038.blog.51cto.com/1098038/420330" target="_blank" rel="external">http://1108038.blog.51cto.com/1098038/420330</a><br>进程间通信—&gt;管道(pipe)、信号(signal)、消息队列、共享内存、信号量、套接字；<br>线程间通信—&gt;信号量、消息、事件event</li>
+<li>iOS提供了多种多线程实现方式，从而简化了iOS的多线程编程。<br>参考：<a href="http://1108038.blog.51cto.com/1098038/420330" target="_blank" rel="noopener">http://1108038.blog.51cto.com/1098038/420330</a><br>进程间通信—&gt;管道(pipe)、信号(signal)、消息队列、共享内存、信号量、套接字；<br>线程间通信—&gt;信号量、消息、事件event</li>
 </ul>
 </li>
 <li>iOS中如何实现多线程<ul>
@@ -412,9 +414,9 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
 <li>NSOperation（基于GCD，比GCD多了一些简单实用的功能，<strong>OC</strong>）自动管理，经常使用.</li>
 </ul>
 </li>
-<li>线程间通讯的方法<br>控制器在子线程发送请求给服务器<br>服务器在主线程刷新UI界面到控制器<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF.png" alt=""><br>还可以使用GCD，主线程和子线程的通信。<br> <code>dispath_async(dispatch_get_main_queue(),^{
+<li>线程间通讯的方法<br>控制器在子线程发送请求给服务器<br>服务器在主线程刷新UI界面到控制器<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF.png" alt><br>还可以使用GCD，主线程和子线程的通信。<br> <code>dispath_async(dispatch_get_main_queue(),^{
  });</code> </li>
-<li><p>网络图片处理问题中怎么解决一个相同的网络地址重复请求的问题？<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%87%AA%E5%AE%9A%E4%B9%89NSOperation%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87.png" alt=""><br>利用字典（图片地址为key，下载操作为value）</p>
+<li><p>网络图片处理问题中怎么解决一个相同的网络地址重复请求的问题？<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/%E8%87%AA%E5%AE%9A%E4%B9%89NSOperation%E4%B8%8B%E8%BD%BD%E5%9B%BE%E7%89%87.png" alt><br>利用字典（图片地址为key，下载操作为value）</p>
 </li>
 <li><p>多线程安全的几种解决办法及多线程安全怎么控制？<br>线程安全的概念: 就是在多个线程同时执行的时候，能够保证资源信息的准确性.</p>
 <ul>
@@ -438,7 +440,7 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
 <li>Socket的实现原理以及Socket是如何实现通信的？<br>Socket：称之为套接字，是一种用于网络传输的“工具”。<br>socket的实现原理：是基于TCP/UDP的（TCP：传输控制协议，是一种面向连接的，安全的，基于IP传输层的协议，三次握手。例如：XMPP等网络聊天）（UDP：传输控制协议，不是面向连接的，不安全的，基于IP传输层的协议，特点：快，只管发，不管收到没有。例如：游戏,QQ视频，红蜘蛛）</li>
 <li><p>http协议的实现<br>HTTP：是一种超文本协议，定义了网络传输的格式（短连接）<br>如果利用HTTP做聊天，每次都要重新创建连接，因为HTTP是短连接，一次回话后就断开了，如果利用HTTP做聊天，如果聊天特别频繁，会不断的创建连接，消耗资源，性能不好，服务端不会主动给客户端发送请求。      </p>
 </li>
-<li><p>runloop定时源和输入源?<br>1&gt;你创建的程序不需要显示的创建run loop；每个线程，包括程序的主线程（main thread）都有与之相应的run loop对象, 主线程会自行创建并运行run loop<br>2&gt;Run loop处理的输入事件有两种不同的来源：输入源（input source）（异步）（处理其他线程回到主线程的消息）和定时源（timer source）（同步）（定时检查界面上有没有点击事件，检查主线程的事件）<br>3&gt;输入源传递异步消息，通常来自于其他线程或者程序。定时源则传递同步消息，在特定时间或者一定的时间间隔发生<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/runloop.png" alt=""></p>
+<li><p>runloop定时源和输入源?<br>1&gt;你创建的程序不需要显示的创建run loop；每个线程，包括程序的主线程（main thread）都有与之相应的run loop对象, 主线程会自行创建并运行run loop<br>2&gt;Run loop处理的输入事件有两种不同的来源：输入源（input source）（异步）（处理其他线程回到主线程的消息）和定时源（timer source）（同步）（定时检查界面上有没有点击事件，检查主线程的事件）<br>3&gt;输入源传递异步消息，通常来自于其他线程或者程序。定时源则传递同步消息，在特定时间或者一定的时间间隔发生<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/runloop.png" alt></p>
 </li>
 <li>NSRunLoop的实现机制,及在多线程中如何使用<br>NSRunLoop是IOS消息机制的处理模式.<blockquote>
 <p>1.NSRunLoop的主要作用：控制NSRunLoop里面线程的执行和休眠，在有事情做的时候使当前NSRunLoop控制的线程工作，没有事情做让当前NSRunLoop的控制的线程休眠。<br>2.NSRunLoop 就是一直在循环检测，从线程start到线程end，检测inputsource(如点击，双击等操作)异步事件，检测timesource同步事件，检测到输入源会执行处理函数，首先会产生通知，corefunction向线程添加runloop observers来监听事件，意在监听事件发生时来做处理。<br>3.runloopmode是一个集合，包括监听：事件源，定时器，以及需通知的runloop observers</p>
@@ -470,7 +472,7 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
         </p>
     </div>
 
@@ -509,7 +511,7 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
     }
 </style>
 
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
 <script>
     var valueHide = "隐藏目录";
     var valueShow = "显示目录";
@@ -598,7 +600,7 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/02/02/Mac获取ipa方法/">Mac获取ipa方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/学习iOS逆向/">学习iOS逆向</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/26/最近感悟/">最近感悟</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/2018年总结/">2018年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/03/升级Xcode10遇到的问题/">升级Xcode10遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/RN与iOS的混合开发/">RN与iOS的混合开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/在APP中IM使用融云/">在APP中IM使用融云</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/独立开发一个APP/">独立开发一个APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/25/iOS底层实现/">iOS底层实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/Effective-JavaScript/">Effective JavaScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/22/React知识/">React技术栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/05/2017年总结/">2017年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/ReactNative中使用Redux/">ReactNative中使用Redux</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/React-Native的APP/">React-Native的APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ReactNative的常用组件/">ReactNative的常用组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/05/AFNetworking3.0/">AFNetworking3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/搜索框的Demo/">搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/iOS中JS与OC相互调用的方式/">iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/NSURLProtocol/">NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/React-Native的与原生的交互/">React-Native的与原生的交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/React-Native的API和组件/">React-Native的API和组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/React-Native入门/">React Native入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/YYModel/">YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/GCD/">GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop/">RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime/">Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/ARC内存管理/">ARC内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/NSString的引用计数问题/">NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Block/">Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/SDWebImage框架/">SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/AFNetworking2.0/">AFNetworking2.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/深拷贝和浅拷贝/">深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/07/关于RN的热更新/">关于RN的热更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/02/Mac获取ipa方法/">Mac获取ipa方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/学习iOS逆向/">学习iOS逆向</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/26/最近感悟/">最近感悟</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/2018年总结/">2018年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/03/升级Xcode10遇到的问题/">升级Xcode10遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/RN与iOS的混合开发/">RN与iOS的混合开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/在APP中IM使用融云/">在APP中IM使用融云</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/独立开发一个APP/">独立开发一个APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/25/iOS底层实现/">iOS底层实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/Effective-JavaScript/">Effective JavaScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/22/React知识/">React技术栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/05/2017年总结/">2017年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/ReactNative中使用Redux/">ReactNative中使用Redux</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/React-Native的APP/">React-Native的APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ReactNative的常用组件/">ReactNative的常用组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/05/AFNetworking3.0/">AFNetworking3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/搜索框的Demo/">搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/iOS中JS与OC相互调用的方式/">iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/NSURLProtocol/">NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/React-Native的与原生的交互/">React-Native的与原生的交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/React-Native的API和组件/">React-Native的API和组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/React-Native入门/">React Native入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/YYModel/">YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/GCD/">GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop/">RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime/">Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/ARC内存管理/">ARC内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/NSString的引用计数问题/">NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Block/">Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/SDWebImage框架/">SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/AFNetworking2.0/">AFNetworking2.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/深拷贝和浅拷贝/">深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
@@ -639,17 +641,19 @@ NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(run) 
         
             <div class="visit">
                 
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >本站到访数: 
-                            <span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+		<span id="busuanzi_container_site_pv">
+   		 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+		</span>
+                <span id="busuanzi_value_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+                        
+                    
                 
                 
                     <span>, </span>
                 
                 
-                    <span id="busuanzi_container_page_pv" style='display:none'>
+                    <span id="busuanzi_container_page_pv" style="display:none">
                         <span id="page-visit">本页阅读量: 
                             <span id="busuanzi_value_page_pv"></span>
                         </span>

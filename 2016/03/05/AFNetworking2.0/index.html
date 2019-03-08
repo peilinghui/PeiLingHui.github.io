@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
   <title>AFNetworking2.0 | 向着阳光奔跑</title>
@@ -11,11 +11,13 @@
 <meta property="og:url" content="http://peilinghui.com/2016/03/05/AFNetworking2.0/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="研究AFNetworking框架。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png">
 <meta property="og:updated_time" content="2018-07-18T01:43:09.801Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AFNetworking2.0">
 <meta name="twitter:description" content="研究AFNetworking框架。">
+<meta name="twitter:image" content="http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -23,18 +25,18 @@
     <link rel="icon" href="/favicon.png">
   
   
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
   
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
   
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
   
-  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
   <script>
       var yiliaConfig = {
           fancybox: true,
@@ -55,7 +57,7 @@
   
 
   
-</head>
+</head></html>
 <body>
   <div id="container">
     <div class="left-col">
@@ -259,7 +261,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -289,13 +291,13 @@
           
         <p>研究AFNetworking框架。<br><a id="more"></a></p>
 <h1 id="AFNetworking"><a href="#AFNetworking" class="headerlink" title="AFNetworking"></a>AFNetworking</h1><ol>
-<li>AFN 与 ASI 有什么区别?<br>AFN基于NSURL，ASI基于底层的CFNetwork框架，因此ASI的性能优于AFN.<br>AFN采取block的方式处理请求，ASI最初采取delegate的方式处理请求，后面也增加了block的方式。<br>AFN只封装了一些常用功能，满足基本需求，直接忽略了很多扩展功能，比如没有封装同步请求；<br>ASI提供的功能较多，预留了各种接口和工具供开发者自行扩展。<br>AFN直接解析服务器返回的JSON、XML等数据，而ASI比较原始，返回的是NSData二进制数据。<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png" alt=""></li>
+<li>AFN 与 ASI 有什么区别?<br>AFN基于NSURL，ASI基于底层的CFNetwork框架，因此ASI的性能优于AFN.<br>AFN采取block的方式处理请求，ASI最初采取delegate的方式处理请求，后面也增加了block的方式。<br>AFN只封装了一些常用功能，满足基本需求，直接忽略了很多扩展功能，比如没有封装同步请求；<br>ASI提供的功能较多，预留了各种接口和工具供开发者自行扩展。<br>AFN直接解析服务器返回的JSON、XML等数据，而ASI比较原始，返回的是NSData二进制数据。<br><img src="http://7xr8q7.com1.z0.glb.clouddn.com/AFNeting.png" alt></li>
 <li>讲解：<br>1&gt;<strong>AFHTTPRequestOperation</strong><br>HTTP或HTTPS协议请求的AFURLConnectionOperation的子类。它封装的可接受状态码和内容的类型，判定一个请求结果是成功或失败。<br>实际上对系统的HTTP网络请求增加了几个HTTP需要用到的参数。<br>2&gt;<strong>AFURLConnectionOperation</strong><br>可以说是AFN最基础的类。继承自NSOperation类，将网络请求依附到一个operation上。从而让我们能够有效的控制并观察一个网络请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态。<br>①：综述<br>AFURLConnectionOperation 将Operation和URLConnection结合到一起，利用operation可以监听到状态以及可以建立相互之间的依赖关系的特性，实现了对于 一个NSURLConnection对象的完美控制，并将请求的结果通过block友好的返回。<br>②：实现文件.m<br>我们总结下.m中这个类主要有哪些方法。<br>1： 首先我们可以看到它创建了一个单例线程。这个线程将会常驻内存，用来处理AFN发起的所有请求任务。当然，线程也跟随着一个runloop，AFN将这个 runloop的模式设置为NSDefaultRunLoopMode。NSDefaultRunLoopMode是无法检测到connection的状 态的。这说明了，AFN将不会在这该线程处理connection完成后的UI刷新等工作，而是会将数据抛给主线程，让主线程去完成UI的刷新。<br>2：我们可以看到该类通过接受请求的字符串，创建了URLRequest以及NSURLConnection对象。从而去进行请求。<br>3：实现文件多次使用到了锁，可以保证数据的安全。当然他也实现了几个数据的NSCoping协议。<br>4：请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态的控制。这里讲一下暂停和恢复。<br>暂 停实际上将网络请求取消掉了。但是由于实现了nscoping协议，已经下载到数据得以保存下来。下次进行相同请求的时候，我们会将已经下载到的数据的节 点一起发送给服务器，告诉服务器这些部门的数据我们不需要了，服务器根据我发送的返回节点给我返回相应的数据即可。从而实现了暂停和恢复功能，也就是断点 续传。<br>5：operation方法的重写。自行google，这里不赘述。<br>6：状态的各种控制方法的实现以及发送状态改变的通知  </li>
 </ol>
 <p>③：接口文件.h<br>接口文档中的属性方法，基本可以概括为以下几个方法<br>1：只读的数据，让管理者可以接收到。<br>2：设置runloop的modes。不再使用类库默认设置的defaultmodes。<br>3：状态的控制方法<br>4：安全策略的设置<br>总而言之，接口文件.h暴露的接口都是为了让manager可以去完全控制这个operation以及其中的网络请求。</p>
 <p>3&gt;<strong>AFHTTPRequestOperationManager</strong><br>这个类是AFN类库的核心类。它封装完成了一种通用的模式，可以帮助我们轻松友好的完成请求的创建、响应的系列化，网络状态的监控以及安全策略以及每一个请求operation的管理（operation的相互依赖或状态改变）。<br>①：综述<br>这个类可以说是整个类库的核心类了。据说AFN2.0之前的时候，所有的网络请求相关的设置都杂糅到一个client中，导致client特别的臃肿。2.0后，AFN将一些设置提取出来，线程了专门的类【AFSecurityPolicy、AFURLRequestSerialization、AFURLResponseSerialization】。现在看来，AFN整体的设计是非常完美的。耦合性变得非常低，一些1.0版本中存在的问题也得到了改善。  </p>
 <p>②：实现文件.m<br>实现文件较为简单，可以看到他创建了一个队列。并将各个operation加入到队列中。在队列中，各个请求就可以设置依赖关系，并发的数量等等。  </p>
-<p>③：接口文件.h<br>接口文件中，我们可以看到。这个类可以设置AFSecurityPolicy、AFURLRequestSerialization、AFURLResponseSerialization 等参数了。这就是综述所说的降低耦合性的方式。基本使用很简单，这里就不再赘述了。<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基础的URL，主机路径</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.baseURL</span> = url;</span><br><span class="line"><span class="comment">// 请求的解析器</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.requestSerializer</span> = [AFHTTPRequestSerializer serializer];</span><br><span class="line"><span class="comment">// 响应的解析器(默认直接解析JSON)</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.responseSerializer</span> = [AFJSONResponseSerializer serializer];</span><br></pre></td></tr></table></figure></p>
+<p>③：接口文件.h<br>接口文件中，我们可以看到。这个类可以设置AFSecurityPolicy、AFURLRequestSerialization、AFURLResponseSerialization 等参数了。这就是综述所说的降低耦合性的方式。基本使用很简单，这里就不再赘述了。<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基础的URL，主机路径</span></span><br><span class="line">    <span class="keyword">self</span>.baseURL = url;</span><br><span class="line"><span class="comment">// 请求的解析器</span></span><br><span class="line">    <span class="keyword">self</span>.requestSerializer = [AFHTTPRequestSerializer serializer];</span><br><span class="line"><span class="comment">// 响应的解析器(默认直接解析JSON)</span></span><br><span class="line">    <span class="keyword">self</span>.responseSerializer = [AFJSONResponseSerializer serializer];</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <blockquote>
 <p>使用实例1：GET方法  </p>
@@ -307,7 +309,7 @@
 <p>使用实例2：POST方法</p>
 </blockquote>
 </blockquote>
-<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[manager POST:urlStr parameters:params success:^<span class="list">(<span class="keyword">AFHTTPRequestOperation</span> *operation, id responseObject)</span> <span class="collection">&#123;       </span><br><span class="line">        NSLog<span class="list">(@<span class="string">"%@  %@"</span>, responseObject, <span class="collection">[NSThread currentThread]</span>)</span><span class="comment">;        </span></span><br><span class="line">    &#125;</span> failure:^<span class="list">(<span class="keyword">AFHTTPRequestOperation</span> *operation, NSError *error)</span> <span class="collection">&#123;</span><br><span class="line">        NSLog<span class="list">(@<span class="string">"%@"</span>, error)</span><span class="comment">;        </span></span><br><span class="line">    &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="name">manager</span> POST:urlStr parameters:params success:^(<span class="name">AFHTTPRequestOperation</span> *operation, id responseObject) &#123;       </span><br><span class="line">        NSLog(<span class="name">@</span><span class="string">"%@  %@"</span>, responseObject, [<span class="name">NSThread</span> currentThread])<span class="comment">;        </span></span><br><span class="line">    &#125; failure:^(<span class="name">AFHTTPRequestOperation</span> *operation, NSError *error) &#123;</span><br><span class="line">        NSLog(<span class="name">@</span><span class="string">"%@"</span>, error)<span class="comment">;        </span></span><br><span class="line">    &#125;]<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <blockquote>
 <p>使用实例3：XML解析</p>
@@ -325,7 +327,7 @@
 <p>使用实例5： 网络监控</p>
 </blockquote>
 </blockquote>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.获得网络监控的管理者</span></span><br><span class="line">    AFNetworkReachabilityManager *mgr = [AFNetworkReachabilityManager sharedManager];</span><br><span class="line">    <span class="comment">//2.设置网络状态改变后的处理</span></span><br><span class="line">    [mgr <span class="string">setReachabilityStatusChangeBlock:</span>^(AFNetworkReachabilityStatus status)&#123;</span><br><span class="line">        <span class="comment">//当网络状态改变了，就会调用这个Block</span></span><br><span class="line">        <span class="keyword">switch</span> (status) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusUnknown:</span><span class="comment">//未知网络                </span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusNotReachable:</span><span class="comment">//没有网络</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusReachableViaWWAN:</span><span class="comment">//手机自带网络</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusReachableViaWiFi:</span><span class="comment">//wifi</span></span><br><span class="line">                <span class="keyword">break</span>;               </span><br><span class="line"><span class="label">            default:</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="comment">//3. 开始监控</span></span><br><span class="line">    [mgr startMonitoring];</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.获得网络监控的管理者</span></span><br><span class="line">    AFNetworkReachabilityManager *mgr = [AFNetworkReachabilityManager sharedManager];</span><br><span class="line">    <span class="comment">//2.设置网络状态改变后的处理</span></span><br><span class="line">    [mgr <span class="string">setReachabilityStatusChangeBlock:</span>^(AFNetworkReachabilityStatus status)&#123;</span><br><span class="line">        <span class="comment">//当网络状态改变了，就会调用这个Block</span></span><br><span class="line">        <span class="keyword">switch</span> (status) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusUnknown:</span><span class="comment">//未知网络                </span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusNotReachable:</span><span class="comment">//没有网络</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusReachableViaWWAN:</span><span class="comment">//手机自带网络</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">AFNetworkReachabilityStatusReachableViaWiFi:</span><span class="comment">//wifi</span></span><br><span class="line">                <span class="keyword">break</span>;               </span><br><span class="line"><span class="symbol">            default:</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="comment">//3. 开始监控</span></span><br><span class="line">    [mgr startMonitoring];</span><br></pre></td></tr></table></figure>
 <h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><p>17.ASIHttpRequest、AFNetWorking之间的区别?</p>
 <ol>
 <li>ASIHttpRequest功能强大，主要是在MRC下实现的，是对系统CFNetwork API进行了封装，支持HTTP协议的CFHTTP，配置比较复杂，并且ASIHttpRequest框架默认不会帮你监听网络改变，如果需要让ASIHttpRequest帮你监听网络状态改变，并且手动开始这个功能。</li>
@@ -353,7 +355,7 @@
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
         </p>
     </div>
 
@@ -362,15 +364,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/03/06/SDWebImage框架/">
-                    SDWebImage框架
+                <a href="/2016/03/05/iOS中的第三方框架/">
+                    iOS中的第三方库
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/03/05/iOS中的第三方框架/">
-                    iOS中的第三方库
+                <a href="/2016/03/05/iOS中的数据存储/">
+                    iOS中的数据存储
                 </a>
             </div>
         
@@ -392,7 +394,7 @@
     }
 </style>
 
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
 <script>
     var valueHide = "隐藏目录";
     var valueShow = "显示目录";
@@ -467,7 +469,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/03/06/SDWebImage框架/" title="上一篇: SDWebImage框架">
+            <a href="/2016/03/05/iOS中的第三方框架/" title="上一篇: iOS中的第三方库">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -475,13 +477,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/03/05/iOS中的第三方框架/" title="下一篇: iOS中的第三方库">
+            <a href="/2016/03/05/iOS中的数据存储/" title="下一篇: iOS中的数据存储">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/02/02/Mac获取ipa方法/">Mac获取ipa方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/学习iOS逆向/">学习iOS逆向</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/26/最近感悟/">最近感悟</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/2018年总结/">2018年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/03/升级Xcode10遇到的问题/">升级Xcode10遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/RN与iOS的混合开发/">RN与iOS的混合开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/在APP中IM使用融云/">在APP中IM使用融云</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/独立开发一个APP/">独立开发一个APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/25/iOS底层实现/">iOS底层实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/Effective-JavaScript/">Effective JavaScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/22/React知识/">React技术栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/05/2017年总结/">2017年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/ReactNative中使用Redux/">ReactNative中使用Redux</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/React-Native的APP/">React-Native的APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ReactNative的常用组件/">ReactNative的常用组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/05/AFNetworking3.0/">AFNetworking3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/搜索框的Demo/">搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/iOS中JS与OC相互调用的方式/">iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/NSURLProtocol/">NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/React-Native的与原生的交互/">React-Native的与原生的交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/React-Native的API和组件/">React-Native的API和组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/React-Native入门/">React Native入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/YYModel/">YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/GCD/">GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop/">RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime/">Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/ARC内存管理/">ARC内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/NSString的引用计数问题/">NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Block/">Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/SDWebImage框架/">SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/AFNetworking2.0/">AFNetworking2.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/深拷贝和浅拷贝/">深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/07/关于RN的热更新/">关于RN的热更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/02/Mac获取ipa方法/">Mac获取ipa方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/学习iOS逆向/">学习iOS逆向</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/26/最近感悟/">最近感悟</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/2018年总结/">2018年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/03/升级Xcode10遇到的问题/">升级Xcode10遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/RN与iOS的混合开发/">RN与iOS的混合开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/在APP中IM使用融云/">在APP中IM使用融云</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/独立开发一个APP/">独立开发一个APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/25/iOS底层实现/">iOS底层实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/Effective-JavaScript/">Effective JavaScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/22/React知识/">React技术栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/05/2017年总结/">2017年总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/ReactNative中使用Redux/">ReactNative中使用Redux</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/React-Native的APP/">React-Native的APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ReactNative的常用组件/">ReactNative的常用组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/05/AFNetworking3.0/">AFNetworking3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/搜索框的Demo/">搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/iOS中JS与OC相互调用的方式/">iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/NSURLProtocol/">NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/React-Native的与原生的交互/">React-Native的与原生的交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/React-Native的API和组件/">React-Native的API和组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/React-Native入门/">React Native入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/YYModel/">YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/GCD/">GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop/">RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime/">Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/ARC内存管理/">ARC内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/NSString的引用计数问题/">NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Block/">Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/SDWebImage框架/">SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/AFNetworking2.0/">AFNetworking2.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/深拷贝和浅拷贝/">深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
@@ -522,17 +524,19 @@
         
             <div class="visit">
                 
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >本站到访数: 
-                            <span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+		<span id="busuanzi_container_site_pv">
+   		 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+		</span>
+                <span id="busuanzi_value_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+                        
+                    
                 
                 
                     <span>, </span>
                 
                 
-                    <span id="busuanzi_container_page_pv" style='display:none'>
+                    <span id="busuanzi_container_page_pv" style="display:none">
                         <span id="page-visit">本页阅读量: 
                             <span id="busuanzi_value_page_pv"></span>
                         </span>
