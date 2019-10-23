@@ -3,19 +3,19 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>iOS中的图表Charts | 向着阳光奔跑</title>
+  <title>webpack学习 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iOS中的图表，包括：折线图，柱状图，饼图。">
+  <meta name="description" content="webpack是现代前端开发中最火的模块打包工具。官网：https://www.webpackjs.com/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS中的图表Charts">
-<meta property="og:url" content="http://peilinghui.com/2017/06/30/iOS中的图表Charts/index.html">
+<meta property="og:title" content="webpack学习">
+<meta property="og:url" content="http://peilinghui.com/2019/10/15/webpack学习/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="iOS中的图表，包括：折线图，柱状图，饼图。">
+<meta property="og:description" content="webpack是现代前端开发中最火的模块打包工具。官网：https://www.webpackjs.com/">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-06T03:28:17.000Z">
+<meta property="og:updated_time" content="2019-10-16T07:54:35.565Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中的图表Charts">
-<meta name="twitter:description" content="iOS中的图表，包括：折线图，柱状图，饼图。">
+<meta name="twitter:title" content="webpack学习">
+<meta name="twitter:description" content="webpack是现代前端开发中最火的模块打包工具。官网：https://www.webpackjs.com/">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -249,11 +249,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-iOS中的图表Charts" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-webpack学习" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/06/30/iOS中的图表Charts/" class="article-date">
-      <time datetime="2017-06-30T12:17:16.000Z" itemprop="datePublished">2017-06-30</time>
+      <a href="/2019/10/15/webpack学习/" class="article-date">
+      <time datetime="2019-10-15T01:45:13.000Z" itemprop="datePublished">2019-10-15</time>
 </a>
     </div>
   
@@ -266,7 +266,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS中的图表Charts
+      webpack学习
     </h1>
   
 
@@ -283,57 +283,106 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>iOS中的图表，包括：折线图，柱状图，饼图。</p>
+        <p>webpack是现代前端开发中最火的模块打包工具。<br>官网：<a href="https://www.webpackjs.com/" target="_blank" rel="noopener">https://www.webpackjs.com/</a></p>
 <a id="more"></a>
-<p>对于数据的展示，最常见的就是柱状图，折线图了。在的上家公司用的柱状图都是自己写的，自己封装的。现在公司接手的项目原来是用core-plot<a href="https://github.com/core-plot" target="_blank" rel="noopener">https://github.com/core-plot</a>的第三方库。现在打算尝试一下新的第三方库：<strong>Charts</strong><a href="https://github.com/danielgindi/Charts" target="_blank" rel="noopener">https://github.com/danielgindi/Charts</a>界面更加的好看了。</p>
-<h1 id="charts的前期准备"><a href="#charts的前期准备" class="headerlink" title="charts的前期准备"></a>charts的前期准备</h1><p>可以看它那个READMe.md,就写了使用，一种共识直接拖进项目，由于是用swift写的，OC也可以使用，因此要设置桥接文件，才可以。一种是使用cocoapods，还有一种是使用Carthage安装。</p>
-<p>我用的是cocoapods的方式：</p>
-<h2 id="先cocoads安装："><a href="#先cocoads安装：" class="headerlink" title="先cocoads安装："></a>先cocoads安装：</h2><p>$sudo gem install -n /usr/local/bin cocoapods</p>
-<p>$pod setup</p>
-<h2 id="集成Charts："><a href="#集成Charts：" class="headerlink" title="集成Charts："></a>集成Charts：</h2><p>新建一个项目TestChatDemos</p>
-<p>cd 把工程直接拖过来</p>
-<h2 id="创建podfile文件"><a href="#创建podfile文件" class="headerlink" title="创建podfile文件"></a>创建podfile文件</h2><p>touch podfile</p>
-<p>open -a xcode podfile </p>
-<p>在podfile文件中输入</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">platform <span class="symbol">:iOS</span>, <span class="string">'8.1'</span></span><br><span class="line">use_frameworks!</span><br><span class="line"></span><br><span class="line">target <span class="string">'TestCharsDemo'</span> <span class="keyword">do</span></span><br><span class="line"></span><br><span class="line">pod <span class="string">'Charts'</span></span><br><span class="line">pod <span class="string">'Charts/Realm'</span></span><br><span class="line">post_install <span class="keyword">do</span> <span class="params">|installer|</span></span><br><span class="line">    installer.pods_project.targets.each <span class="keyword">do</span> <span class="params">|target|</span></span><br><span class="line">       target.build_configurations.each <span class="keyword">do</span> <span class="params">|config|</span></span><br><span class="line">           config.build_settings[<span class="string">'SWIFT_VERSION'</span>] = <span class="string">'3.0'</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>pod search Charts</p>
-<p>pod install</p>
-<h2 id="设置桥接文件"><a href="#设置桥接文件" class="headerlink" title="设置桥接文件"></a>设置桥接文件</h2><p>建立与Swift的桥接文件，建立一个以swift文件，提示是否建立桥接，点击creat bridging header</p>
-<p>将pods——testChatDemos。frameworkios添加到 general-&gt;embedded binaries</p>
-<p>在桥接文件中写上要引用的swift头文件 @import Charts；</p>
-<p>用到时导入 #import “testChartDemos-bridging-header.h”的头文件，然后就可以使用Charts里的东西了</p>
-<p>使用ChartsDemos里的东西的时候，要配置product module name 为（TestCharsDemo）系统会自动生成</p>
-<p>“TestCharsDemo-Swift.h”导入<br>“Chart-swift.h”的文件导入</p>
-<p>这样基本就可以运行程序看到ChartsDemo里的案例了。</p>
-<h1 id="使用Charts"><a href="#使用Charts" class="headerlink" title="使用Charts"></a>使用Charts</h1><p>接下来就可以参照GitHUB官网上的Demo来写你需要的图形了。</p>
-<p>使用这个库无非就是几个问题：<br>写界面，放入数据。</p>
-<ol>
-<li>看你的需求是需要那种图，各个图的样式的属性。</li>
-<li>x轴，y轴的数据是从哪里获得的。</li>
-<li>x轴和y轴的数据是否可以动态变化。</li>
-<li>该如何把从服务器传过来的数组对应到图中。</li>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>WebPack可以看做是模块打包机：它做的事情是，分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其转换和打包为合适的格式供浏览器使用。</p>
+<h3 id="WebPack和Grunt以及Gulp相比有什么特性"><a href="#WebPack和Grunt以及Gulp相比有什么特性" class="headerlink" title="WebPack和Grunt以及Gulp相比有什么特性"></a>WebPack和Grunt以及Gulp相比有什么特性</h3><p>其实Webpack和另外两个并没有太多的可比性，Gulp/Grunt是一种能够优化前端的开发流程的工具，而WebPack是一种模块化的解决方案，不过Webpack的优点使得Webpack在很多场景下可以替代Gulp/Grunt类的工具。</p>
+<p>Grunt和Gulp的工作方式是：在一个配置文件中，指明对某些文件进行类似编译，组合，压缩等任务的具体步骤，工具之后可以自动替你完成这些任务。<br>Webpack的工作方式是：把你的项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个（或多个）浏览器可识别的JavaScript文件。</p>
+<h2 id="webpack源码"><a href="#webpack源码" class="headerlink" title="webpack源码"></a>webpack源码</h2><ol>
+<li>把所有模块的代码放入到函数中，用一个数组保存起来</li>
+<li>根据require时传入的数组索引，能知道需要哪一段代码</li>
+<li>从数组中，根据索引取出包含我们代码的函数</li>
+<li>执行该函数，传入一个对象Module.exports</li>
+<li>我们的代码，按照约定，正好是用module.exports=’xxx’进行赋值</li>
+<li>调用函数结束后，module.exports从原来的空对象，就有值了</li>
+<li>最终return module.exports作为require函数的返回值</li>
 </ol>
-<h2 id="LineChart折线图"><a href="#LineChart折线图" class="headerlink" title="LineChart折线图"></a>LineChart折线图</h2><h3 id="Line-Chart单折线"><a href="#Line-Chart单折线" class="headerlink" title="Line Chart单折线"></a>Line Chart单折线</h3><p>1.首先是需要LineChartView。<br>然后是ChartLimitLine-x轴的限制线。<br>ChartLimitLine-Y轴的限制线<br>ChartYAxis设置Y轴，有左边的Y轴leftAxis和右边的Y轴rightAxis。<br>BalloonMarker</p>
-<p>设置x轴和Y轴的数据的方法.</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NSMutableArray *values = [[NSMutableArray alloc] init];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">double</span> val = arc4random_uniform(range) + <span class="number">3</span>;</span><br><span class="line">        [values <span class="string">addObject:</span>[[ChartDataEntry alloc] <span class="string">initWithX:</span>i <span class="string">y:</span>val <span class="string">icon:</span> [UIImage <span class="string">imageNamed:</span>@<span class="string">"icon"</span>]]];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>对于0到Count的x轴的值，随机的产生y值，并放入数组values中，其中values是&lt;__NSArrayM 0x600000057670&gt;(<br>ChartDataEntry, x: 0.0, y 53.0,<br>ChartDataEntry, x: 1.0, y 91.0,<br>ChartDataEntry, x: 2.0, y 44.0）这样的。</p>
-<p>然后是LineChartDataSet，每一个set对应一条折线。把上面的values放入这个set中当做这条线的各个坐标点。设置它的属性。<br>把每一个set都放入dataSets中，作为LineChartData的数据源，也就是chartView的data源了。</p>
-<h3 id="Line-Chart-Dual-YAxis-双折线"><a href="#Line-Chart-Dual-YAxis-双折线" class="headerlink" title="Line Chart(Dual YAxis)双折线"></a>Line Chart(Dual YAxis)双折线</h3><p>ChartLegend设置图例，就是每条线Dataset的说明。<br>对于其他同上面，其中上面的values变成了三个yVals.放入三个LineChartDataSet中，设置每一个set的属性。</p>
-<h3 id="Multiple-Lines-Chart多种折线图"><a href="#Multiple-Lines-Chart多种折线图" class="headerlink" title="Multiple Lines Chart多种折线图"></a>Multiple Lines Chart多种折线图</h3><p>设置ChartLegend，没有设置x轴和y轴。其他同上。</p>
-<h3 id="Colored-Line-Chart彩色的折线图"><a href="#Colored-Line-Chart彩色的折线图" class="headerlink" title="Colored Line Chart彩色的折线图"></a>Colored Line Chart彩色的折线图</h3><p>设置了_chartViews的Count为4，然后对于每一个_chartViews固定了range就是高度为100.其他同上。</p>
-<h3 id="TimeLine-Chart时间线的折线图"><a href="#TimeLine-Chart时间线的折线图" class="headerlink" title="TimeLine Chart时间线的折线图"></a>TimeLine Chart时间线的折线图</h3><p>LineChartTimeViewController</p>
-<h3 id="Filled-Line-Chart-填充的折线图"><a href="#Filled-Line-Chart-填充的折线图" class="headerlink" title="Filled Line Chart 填充的折线图"></a>Filled Line Chart 填充的折线图</h3><h2 id="BarChart柱状条形图"><a href="#BarChart柱状条形图" class="headerlink" title="BarChart柱状条形图"></a>BarChart柱状条形图</h2><h3 id="Bar-Chart竖的条形图"><a href="#Bar-Chart竖的条形图" class="headerlink" title="Bar Chart竖的条形图"></a>Bar Chart竖的条形图</h3><p>和折线图也差不多。设置x轴ChartXAxis，设置y轴ChartYAxis的leftAxis和rightAxis，图例ChartLegend.</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">NSMutableArray *yVals = [[NSMutableArray alloc] init];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt; start + count + <span class="number">1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">double</span> mult = (range + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">double</span> val = (<span class="keyword">double</span>) (arc4random_uniform(mult));</span><br><span class="line">        <span class="keyword">if</span> (arc4random_uniform(<span class="number">100</span>) &lt; <span class="number">25</span>) &#123;</span><br><span class="line">            [yVals <span class="string">addObject:</span>[[BarChartDataEntry alloc] <span class="string">initWithX:</span>i <span class="string">y:</span>val <span class="string">icon:</span> [UIImage <span class="string">imageNamed:</span>@<span class="string">"icon"</span>]]];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            [yVals <span class="string">addObject:</span>[[BarChartDataEntry alloc] <span class="string">initWithX:</span>i <span class="string">y:</span>val]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>po yVals</p>
-<p>&lt;__NSArrayM 0x60800004d4d0&gt;(<br>ChartDataEntry, x: 1.0, y 18.0,<br>ChartDataEntry, x: 2.0, y 36.0,<br>ChartDataEntry, x: 3.0, y 17.0<br>)</p>
-<p>每一个BarChartDataSet是一个柱状图，然后放到datasets中他们会作为BarChartData的数据源。也是_chartView的data</p>
-<h3 id="Horizontal-Bar-Chart横的条形图"><a href="#Horizontal-Bar-Chart横的条形图" class="headerlink" title="Horizontal Bar Chart横的条形图"></a>Horizontal Bar Chart横的条形图</h3><p>就是左边的Y轴是数据的X轴，下面的一条x轴是数据的Y轴。yVals是&lt;__NSArrayM 0x6100000591a0&gt;(<br>ChartDataEntry, x: 0.0, y 3.0,<br>ChartDataEntry, x: 10.0, y 20.0,<br>ChartDataEntry, x: 20.0, y 50.0,<br>ChartDataEntry, x: 30.0, y 7.0,<br>ChartDataEntry, x: 40.0, y 33.0,<br>ChartDataEntry, x: 50.0, y 19.0,<br>ChartDataEntry, x: 60.0, y 26.0）</p>
-<h3 id="Multiple-Bars-Chart多种条形图"><a href="#Multiple-Bars-Chart多种条形图" class="headerlink" title="Multiple Bars Chart多种条形图"></a>Multiple Bars Chart多种条形图</h3><h3 id="Stack-Bar-Chart堆积的柱状条形图"><a href="#Stack-Bar-Chart堆积的柱状条形图" class="headerlink" title="Stack Bar Chart堆积的柱状条形图"></a>Stack Bar Chart堆积的柱状条形图</h3><h3 id="Stack-Bar-Chart-Negative堆积的反向柱状条形图"><a href="#Stack-Bar-Chart-Negative堆积的反向柱状条形图" class="headerlink" title="Stack Bar Chart Negative堆积的反向柱状条形图"></a>Stack Bar Chart Negative堆积的反向柱状条形图</h3><h3 id="Another-Bar-Chart干净的条形图"><a href="#Another-Bar-Chart干净的条形图" class="headerlink" title="Another Bar Chart干净的条形图"></a>Another Bar Chart干净的条形图</h3><h3 id="Sinus-Bar-Chart正弦柱状图"><a href="#Sinus-Bar-Chart正弦柱状图" class="headerlink" title="Sinus Bar Chart正弦柱状图"></a>Sinus Bar Chart正弦柱状图</h3><h3 id="BarChart-positive-negative正反向的柱状图"><a href="#BarChart-positive-negative正反向的柱状图" class="headerlink" title="BarChart positive/negative正反向的柱状图"></a>BarChart positive/negative正反向的柱状图</h3><h2 id="PieChart饼图"><a href="#PieChart饼图" class="headerlink" title="PieChart饼图"></a>PieChart饼图</h2><p>PieChartView.不再是X轴和Y轴，而是表示一共把饼图分几块和一共的百分比。</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSMutableArray *values = [[NSMutableArray alloc] init];</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">&#123;</span><br><span class="line">    [values <span class="string">addObject:</span>[[PieChartDataEntry alloc] <span class="string">initWithValue:</span>(arc4random_uniform(mult) + mult / <span class="number">5</span>) <span class="string">label:</span>parties[i % parties.count] <span class="string">icon:</span> [UIImage <span class="string">imageNamed:</span>@<span class="string">"icon"</span>]]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>把values放入PieChartDataSet中，其中values是下面的：</p>
-<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Pie entries <span class="keyword">do</span> <span class="keyword">not</span> have x <span class="built_in">values</span></span><br><span class="line">Pie entries <span class="keyword">do</span> <span class="keyword">not</span> have x <span class="built_in">values</span></span><br><span class="line">Pie entries <span class="keyword">do</span> <span class="keyword">not</span> have x <span class="built_in">values</span></span><br><span class="line">Pie entries <span class="keyword">do</span> <span class="keyword">not</span> have x <span class="built_in">values</span></span><br><span class="line">Pie entries <span class="keyword">do</span> <span class="keyword">not</span> have x <span class="built_in">values</span></span><br><span class="line">Pie entries <span class="keyword">do</span> <span class="keyword">not</span> have x <span class="built_in">values</span></span><br><span class="line">&lt;__NSArrayM <span class="number">0x610000042910</span>&gt;(</span><br><span class="line">ChartDataEntry, x: <span class="number">0.0</span>, y <span class="number">96.03017578125</span>,</span><br><span class="line">ChartDataEntry, x: <span class="number">0.0</span>, y <span class="number">118.03017578125</span>,</span><br><span class="line">ChartDataEntry, x: <span class="number">0.0</span>, y <span class="number">27.03017578125</span>,</span><br><span class="line">ChartDataEntry, x: <span class="number">0.0</span>, y <span class="number">115.03017578125</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h3 id="Pie-Chart饼图、"><a href="#Pie-Chart饼图、" class="headerlink" title="Pie Chart饼图、"></a>Pie Chart饼图、</h3><h3 id="Pie-Chart-With-Value-lines带有值的饼图"><a href="#Pie-Chart-With-Value-lines带有值的饼图" class="headerlink" title="Pie Chart With Value lines带有值的饼图"></a>Pie Chart With Value lines带有值的饼图</h3><h3 id="Half-Pie-Chart一半的饼图"><a href="#Half-Pie-Chart一半的饼图" class="headerlink" title="Half Pie Chart一半的饼图"></a>Half Pie Chart一半的饼图</h3><h2 id="Scatter-Chart离散图"><a href="#Scatter-Chart离散图" class="headerlink" title="Scatter Chart离散图"></a>Scatter Chart离散图</h2><h2 id="Bubble-Chart气泡图"><a href="#Bubble-Chart气泡图" class="headerlink" title="Bubble Chart气泡图"></a>Bubble Chart气泡图</h2><h2 id="Combine-Chart结合的图"><a href="#Combine-Chart结合的图" class="headerlink" title="Combine Chart结合的图"></a>Combine Chart结合的图</h2><h2 id="Radar-Chart雷达分散图"><a href="#Radar-Chart雷达分散图" class="headerlink" title="Radar Chart雷达分散图"></a>Radar Chart雷达分散图</h2><h2 id="Candle-Stick-Chart蜡烛状的图"><a href="#Candle-Stick-Chart蜡烛状的图" class="headerlink" title="Candle Stick Chart蜡烛状的图"></a>Candle Stick Chart蜡烛状的图</h2><p>Demo地址：<a href="https://github.com/peilinghui/BokeDemo/tree/master/PLHDemo" target="_blank" rel="noopener">https://github.com/peilinghui/BokeDemo/tree/master/PLHDemo</a></p>
-<h1 id="其他图表框架"><a href="#其他图表框架" class="headerlink" title="其他图表框架"></a>其他图表框架</h1><p>PNChart<a href="https://github.com/peilinghui/PNChart" target="_blank" rel="noopener">https://github.com/peilinghui/PNChart</a></p>
+<h2 id="webpack-config-js文件配置："><a href="#webpack-config-js文件配置：" class="headerlink" title="webpack.config.js文件配置："></a>webpack.config.js文件配置：</h2><ol>
+<li>Entry：指定webpack开始构建的入口模块，从该模块开始构建并计算出直接或间接依赖的模块或者库</li>
+<li>Output：告诉webpack如何命名输出的文件以及输出的目录</li>
+<li><p>Module模块（对象）（loaders:[]）存在一些loader{test:正则，loader：’style-loader!css-loader’}<br>webpack中，loader的配置主要在module.rules中进行，这是一个数组，每一个rule做了两件事</p>
+<p> 识别文件类型，来确定具体处理该数据的loader(Rule.test属性)<br> 使用相关的loader对文件进行相关的操作转换(Rule.use属性）   </p>
+<blockquote>
+<p>常用的loader：</p>
+</blockquote>
+<pre><code>　　转换编译：script-loader, babel-loader,ts-loader,coffee-loader
+
+　　处理样式：style-loader,css-loader,less-loader,sass-loader,postcss-loader
+
+　　处理文件：raw--loader,url-loader,file-loader
+
+　　处理数据：csv-loader,xml-loader
+
+　　处理模板语言：html-loader,pug-loader,jade-loader,markdown-loader
+
+　　清理和测试：mocha-loader,eslint-loader
+
+　　此外还有许多loader，可以到loader文档里查询
+处理CSS：require(./xxx.css)
+</code></pre></li>
+</ol>
+<p>处理less:loader：’style-loader!css-loader!less-loader’</p>
+<p>Loaders：由于webpack只能处理javascript，所以我们需要对一些非js文件处理成webpack能够处理的模块，比如sass文件</p>
+<p>处理ES6：babel-loader+babel-preset-env(se2015/2016/2017)</p>
+<p>处理文件+base64：<br>url-loader可以将文件生成为base64编码。到build.js中<br>文件在base64加密后会比原来大三分之一<br>应用场景是比较小的图片 4kb以内的图片</p>
+<p>Plugins： Loaders将各类型的文件处理成webpack能够处理的模块， plugins有着很强的能力。插件的范围包括，从打包优化和压缩，一直到重新定义环境中的变量。但也是最复杂的一个。比如对js文件进行压缩优化的 UglifyJsPlugin插件。一种插件就是一种函数，通过传入不同的参数，可以实现不同的功能，webpack让人觉得难学的地方之一是哟啊自己封装plugins，对于我们大多数人来说，需要掌握的plugins并不是那么多，用的时候再查就可以</p>
+<p>Chunk：coding split的产物，我们可以对一些代码打包成一个单独的chunk，比如某些公共模块，去重，更好的利用缓存。或者按需加载某些功能模块，优化加载时间。在webpack3及以前我们都利用 CommonsChunkPlugin将一些公共代码分割成一个chunk，实现单独加载。在webpack4 中 CommonsChunkPlugin被废弃，使用 SplitChunksPlugin</p>
+<p>5、一些辅助开发的相关属性</p>
+<p>　　devtool:打包后的代码和原始代码存在较大的差异，此选项控制是否生成以及如何生成sourcemap</p>
+<p>　　devserver：通过配置devserver选项，可以开启一个本地服务器</p>
+<p>　　watch：启用watch模式后，webpack将持续监听热河已经解析文件的更改，开发是开启会很方便</p>
+<p>　　watchoption：用来定制watch模式的选项</p>
+<p>　　performance：打包后命令行如何展示性能提示，如果超过某个大小是警告还是报错
+　　</p>
+<h3 id="字符串内使用的内置变量"><a href="#字符串内使用的内置变量" class="headerlink" title="字符串内使用的内置变量"></a>字符串内使用的内置变量</h3><p>name:[name].[ext]<br>name是获取原文件名，ext是获取原文件名的后缀<br>output:{path:’绝对路径’//设置产出的资源目录 filename:’build.js’}</p>
+<h3 id="使用webpack构建本地服务器webpack-dev-server"><a href="#使用webpack构建本地服务器webpack-dev-server" class="headerlink" title="使用webpack构建本地服务器webpack-dev-server"></a>使用webpack构建本地服务器webpack-dev-server</h3><p>让你的浏览器监听你的代码的修改，并自动刷新显示修改后的结果，其实Webpack提供一个可选的本地开发服务器，这个本地服务器基于node.js构建，可以实现你想要的这些功能，不过它是一个单独的组件，在webpack中进行配置之前需要单独安装它作为项目依赖</p>
+<ol>
+<li><p>安装webpack-dev-server</p>
+<p>   npm i webpack-dev-server</p>
+</li>
+<li><p>安装cross-env</p>
+<p> npm i cross-env </p>
+</li>
+<li><p>安装HTML支持文件</p>
+<p> npm i html-webpack-plugin<br> 下载，引入，在plugin里面配置，给其Options设置template(参照物)</p>
+</li>
+<li><p>配置pack.json文件</p>
+<p> “scripts”: {</p>
+<pre><code>    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+ &quot;build&quot;: &quot;cross-env NODE_ENV=production webpack --config webpack.config.js&quot;,
+&quot;dev&quot;: &quot;cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js&quot;
+</code></pre><p>   },</p>
+</li>
+</ol>
+<p>命令：</p>
+<ul>
+<li>open 自动打开浏览器</li>
+<li>hot 热替换，不再刷新的情况下替换</li>
+<li>inline 自动刷新</li>
+<li>port 9999 指定端口</li>
+<li>process 显示编译进度</li>
+</ul>
+<h4 id="包的分类管理和分类恢复"><a href="#包的分类管理和分类恢复" class="headerlink" title="包的分类管理和分类恢复"></a>包的分类管理和分类恢复</h4><ol>
+<li><p>安装包的时候，做一个分类的管理</p>
+<pre><code>- 开发依赖devDependencies（打包相关webpack） npm i 包名 -D   
+- 生产依赖dependencies（不包含webpack打包依赖） npm i 包名 -S 
+</code></pre></li>
+<li><p>恢复依赖</p>
+<ul>
+<li>开发恢复依赖： npm i</li>
+<li>生产恢复： npm i –production</li>
+</ul>
+</li>
+</ol>
+<p>webpack.config.js<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">        entry: <span class="string">'./src/index.js'</span>,</span><br><span class="line">        output:&#123;</span><br><span class="line">            filename:<span class="string">'bundle.js'</span>,</span><br><span class="line">            path:path.resolve(__dirname,<span class="string">'dist'</span>)</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">module</span>:&#123;</span><br><span class="line">            rules:[<span class="comment">// 配置模块loaders，解析规则</span></span><br><span class="line">                &#123;</span><br><span class="line">                    test:<span class="regexp">/\.css$/</span>,</span><br><span class="line">                    use:[</span><br><span class="line">                        <span class="string">'style-loader'</span>,</span><br><span class="line">                        <span class="string">'css-loader'</span></span><br><span class="line">                    ]</span><br><span class="line">                &#125;,&#123;</span><br><span class="line">                    test:<span class="regexp">/\.(png|svg|jpg|gif)$/</span>,</span><br><span class="line">                    use:[</span><br><span class="line">                        <span class="string">'file-loader'</span></span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        devtool:<span class="string">"source-map"</span>,<span class="comment">// enum</span></span><br><span class="line"><span class="comment">// 为浏览器开发者工具添加元数据增强调试</span></span><br><span class="line">		plugins:[</span><br><span class="line"> 	<span class="comment">// 附加插件列表 ,插件的执行顺序与元素的索引有关</span></span><br><span class="line">],</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>注：“__dirname”是node.js中的一个全局变量，它指向当前执行脚本所在的目录。</p>
+<h2 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a>Babel</h2><p>Babel其实是一个编译JavaScript的平台，它可以编译代码帮你达到以下目的：</p>
+<pre><code>让你能使用最新的JavaScript代码（ES6，ES7...），而不用管新标准是否被当前使用的浏览器完全支持；
+让你能使用基于JavaScript进行了拓展的语言，比如React的JSX；
+</code></pre><h3 id="Babel的安装与配置"><a href="#Babel的安装与配置" class="headerlink" title="Babel的安装与配置"></a>Babel的安装与配置</h3><p>Babel其实是几个模块化的包，其核心功能位于称为babel-core的npm包中，webpack可以把其不同的包整合在一起使用，对于每一个你需要的功能或拓展，你都需要安装单独的包（用得最多的是解析Es6的babel-env-preset包和解析JSX的babel-preset-react包）。</p>
+<pre><code>// npm一次性安装多个依赖模块，模块之间用空格隔开
+npm install --save-dev babel-core babel-loader babel-preset-env babel-preset-react
+</code></pre><h4 id="Babel的配置"><a href="#Babel的配置" class="headerlink" title="Babel的配置"></a>Babel的配置</h4><p>Babel其实可以完全在 webpack.config.js 中进行配置，但是考虑到babel具有非常多的配置选项，在单一的webpack.config.js文件中进行配置往往使得这个文件显得太复杂，因此一些开发者支持把babel的配置选项放在一个单独的名为 “.babelrc” 的配置文件中。我们现在的babel的配置并不算复杂，不过之后我们会再加一些东西，因此现在我们就提取出相关部分，分两个配置文件进行配置（webpack会自动调用.babelrc里的babel配置选项），如下：</p>
 
       
     </div>
@@ -342,13 +391,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></p>
+        <p><span>本文标题:</span><a href="/2019/10/15/webpack学习/">webpack学习</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2017年06月30日 - 20时17分</p>
-        <p><span>最后更新:</span>2017年07月06日 - 11时28分</p>
+        <p><span>发布时间:</span>2019年10月15日 - 09时45分</p>
+        <p><span>最后更新:</span>2019年10月16日 - 15时54分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/06/30/iOS中的图表Charts/" title="iOS中的图表Charts">http://peilinghui.com/2017/06/30/iOS中的图表Charts/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/06/30/iOS中的图表Charts/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/10/15/webpack学习/" title="webpack学习">http://peilinghui.com/2019/10/15/webpack学习/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2019/10/15/webpack学习/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -362,15 +411,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/07/05/项目重构遇到的问题/">
-                    项目重构遇到的问题
+                <a href="/2019/10/22/Flutter学习/">
+                    Flutter学习
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/06/26/移动应用的设计模式/">
-                    移动应用的设计模式
+                <a href="/2019/09/24/React面试题/">
+                    React面试题
                 </a>
             </div>
         
@@ -381,7 +430,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#charts的前期准备"><span class="toc-number">1.</span> <span class="toc-text">charts的前期准备</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#先cocoads安装："><span class="toc-number">1.1.</span> <span class="toc-text">先cocoads安装：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集成Charts："><span class="toc-number">1.2.</span> <span class="toc-text">集成Charts：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建podfile文件"><span class="toc-number">1.3.</span> <span class="toc-text">创建podfile文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置桥接文件"><span class="toc-number">1.4.</span> <span class="toc-text">设置桥接文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用Charts"><span class="toc-number">2.</span> <span class="toc-text">使用Charts</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#LineChart折线图"><span class="toc-number">2.1.</span> <span class="toc-text">LineChart折线图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Line-Chart单折线"><span class="toc-number">2.1.1.</span> <span class="toc-text">Line Chart单折线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Line-Chart-Dual-YAxis-双折线"><span class="toc-number">2.1.2.</span> <span class="toc-text">Line Chart(Dual YAxis)双折线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiple-Lines-Chart多种折线图"><span class="toc-number">2.1.3.</span> <span class="toc-text">Multiple Lines Chart多种折线图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Colored-Line-Chart彩色的折线图"><span class="toc-number">2.1.4.</span> <span class="toc-text">Colored Line Chart彩色的折线图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TimeLine-Chart时间线的折线图"><span class="toc-number">2.1.5.</span> <span class="toc-text">TimeLine Chart时间线的折线图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Filled-Line-Chart-填充的折线图"><span class="toc-number">2.1.6.</span> <span class="toc-text">Filled Line Chart 填充的折线图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BarChart柱状条形图"><span class="toc-number">2.2.</span> <span class="toc-text">BarChart柱状条形图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bar-Chart竖的条形图"><span class="toc-number">2.2.1.</span> <span class="toc-text">Bar Chart竖的条形图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Horizontal-Bar-Chart横的条形图"><span class="toc-number">2.2.2.</span> <span class="toc-text">Horizontal Bar Chart横的条形图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiple-Bars-Chart多种条形图"><span class="toc-number">2.2.3.</span> <span class="toc-text">Multiple Bars Chart多种条形图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stack-Bar-Chart堆积的柱状条形图"><span class="toc-number">2.2.4.</span> <span class="toc-text">Stack Bar Chart堆积的柱状条形图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stack-Bar-Chart-Negative堆积的反向柱状条形图"><span class="toc-number">2.2.5.</span> <span class="toc-text">Stack Bar Chart Negative堆积的反向柱状条形图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Another-Bar-Chart干净的条形图"><span class="toc-number">2.2.6.</span> <span class="toc-text">Another Bar Chart干净的条形图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sinus-Bar-Chart正弦柱状图"><span class="toc-number">2.2.7.</span> <span class="toc-text">Sinus Bar Chart正弦柱状图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BarChart-positive-negative正反向的柱状图"><span class="toc-number">2.2.8.</span> <span class="toc-text">BarChart positive/negative正反向的柱状图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PieChart饼图"><span class="toc-number">2.3.</span> <span class="toc-text">PieChart饼图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pie-Chart饼图、"><span class="toc-number">2.3.1.</span> <span class="toc-text">Pie Chart饼图、</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pie-Chart-With-Value-lines带有值的饼图"><span class="toc-number">2.3.2.</span> <span class="toc-text">Pie Chart With Value lines带有值的饼图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Half-Pie-Chart一半的饼图"><span class="toc-number">2.3.3.</span> <span class="toc-text">Half Pie Chart一半的饼图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scatter-Chart离散图"><span class="toc-number">2.4.</span> <span class="toc-text">Scatter Chart离散图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bubble-Chart气泡图"><span class="toc-number">2.5.</span> <span class="toc-text">Bubble Chart气泡图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Combine-Chart结合的图"><span class="toc-number">2.6.</span> <span class="toc-text">Combine Chart结合的图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Radar-Chart雷达分散图"><span class="toc-number">2.7.</span> <span class="toc-text">Radar Chart雷达分散图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Candle-Stick-Chart蜡烛状的图"><span class="toc-number">2.8.</span> <span class="toc-text">Candle Stick Chart蜡烛状的图</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他图表框架"><span class="toc-number">3.</span> <span class="toc-text">其他图表框架</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#WebPack和Grunt以及Gulp相比有什么特性"><span class="toc-number">1.1.</span> <span class="toc-text">WebPack和Grunt以及Gulp相比有什么特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack源码"><span class="toc-number">2.</span> <span class="toc-text">webpack源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack-config-js文件配置："><span class="toc-number">3.</span> <span class="toc-text">webpack.config.js文件配置：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串内使用的内置变量"><span class="toc-number">3.1.</span> <span class="toc-text">字符串内使用的内置变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用webpack构建本地服务器webpack-dev-server"><span class="toc-number">3.2.</span> <span class="toc-text">使用webpack构建本地服务器webpack-dev-server</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#包的分类管理和分类恢复"><span class="toc-number">3.2.1.</span> <span class="toc-text">包的分类管理和分类恢复</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Babel"><span class="toc-number">4.</span> <span class="toc-text">Babel</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Babel的安装与配置"><span class="toc-number">4.1.</span> <span class="toc-text">Babel的安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Babel的配置"><span class="toc-number">4.1.1.</span> <span class="toc-text">Babel的配置</span></a></li></ol></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -443,7 +492,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2017/06/30/iOS中的图表Charts/" data-title="iOS中的图表Charts" data-url="http://peilinghui.com/2017/06/30/iOS中的图表Charts/"></div>
+    <div class="ds-thread" data-thread-key="2019/10/15/webpack学习/" data-title="webpack学习" data-url="http://peilinghui.com/2019/10/15/webpack学习/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -467,7 +516,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/07/05/项目重构遇到的问题/" title="上一篇: 项目重构遇到的问题">
+            <a href="/2019/10/22/Flutter学习/" title="上一篇: Flutter学习">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -475,7 +524,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/06/26/移动应用的设计模式/" title="下一篇: 移动应用的设计模式">
+            <a href="/2019/09/24/React面试题/" title="下一篇: React面试题">
                 <i class="fa fa-angle-right"></i>
             </a>
         

@@ -3,19 +3,19 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>搜索框的Demo | 向着阳光奔跑</title>
+  <title>Flutter学习 | 向着阳光奔跑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="打开手机，就会发现我们用的最多的就是TableView和搜索框了。">
+  <meta name="description" content="简单学习一下flutter。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搜索框的Demo">
-<meta property="og:url" content="http://peilinghui.com/2017/05/27/搜索框的Demo/index.html">
+<meta property="og:title" content="Flutter学习">
+<meta property="og:url" content="http://peilinghui.com/2019/10/22/Flutter学习/index.html">
 <meta property="og:site_name" content="向着阳光奔跑">
-<meta property="og:description" content="打开手机，就会发现我们用的最多的就是TableView和搜索框了。">
+<meta property="og:description" content="简单学习一下flutter。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-18T01:43:18.746Z">
+<meta property="og:updated_time" content="2019-10-22T12:04:55.864Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="搜索框的Demo">
-<meta name="twitter:description" content="打开手机，就会发现我们用的最多的就是TableView和搜索框了。">
+<meta name="twitter:title" content="Flutter学习">
+<meta name="twitter:description" content="简单学习一下flutter。">
   
     <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
   
@@ -249,11 +249,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-搜索框的Demo" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Flutter学习" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/05/27/搜索框的Demo/" class="article-date">
-      <time datetime="2017-05-27T15:11:25.000Z" itemprop="datePublished">2017-05-27</time>
+      <a href="/2019/10/22/Flutter学习/" class="article-date">
+      <time datetime="2019-10-22T11:48:43.000Z" itemprop="datePublished">2019-10-22</time>
 </a>
     </div>
   
@@ -266,7 +266,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      搜索框的Demo
+      Flutter学习
     </h1>
   
 
@@ -283,39 +283,19 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>打开手机，就会发现我们用的最多的就是TableView和搜索框了。</p>
+        <p>简单学习一下flutter。</p>
 <a id="more"></a>
-<p>打开手机，从通知中心的搜索，APP store的搜索，通讯录的搜索，设置页面的搜索，照片搜索，信息搜索，再到打开每一个APP，都有的搜索。看了下，实现的需求类似，基本上都是输入关键字从网络接口上来搜索，只要点击过的都会保存到历史记录中，然后显示到历史记录的tableview中，下次可以直接点击然后搜索。可以清空单个记录或者所有的历史记录。还有一些APP还有热门搜索的标签。<br>所以，鉴于此，决定做一个Demo出来。</p>
-<h1 id="搜索框"><a href="#搜索框" class="headerlink" title="搜索框"></a>搜索框</h1><p>对于搜索框可以用系统自带的UISearchBar，UISearchController，UISearchDisplayController，或者是自定义搜索框–把UIView和UITextField代理结合起来，</p>
-<h1 id="搜索功能"><a href="#搜索功能" class="headerlink" title="搜索功能"></a>搜索功能</h1><p>对于搜索功能的实现，<br>动态的：可以在输入一个字符，根据关键字去请求接口来返回数据加载在tableView上。<br>静态的：如果数据是本地的，或者是已经加载出来的数据中来搜索的话，可以用<br>NSPredicate来做过滤筛选出想要搜索的结果。</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSPredicate</span> *resultPredicate = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"SELF contains[cd] %@"</span>, searchText];</span><br><span class="line"><span class="keyword">self</span>.searchResults = [<span class="keyword">self</span>.items filteredArrayUsingPredicate:resultPredicate];</span><br></pre></td></tr></table></figure>
-<h1 id="历史记录的存储"><a href="#历史记录的存储" class="headerlink" title="历史记录的存储"></a>历史记录的存储</h1><p>对于已经搜索过的历史记录可以选择的数据化存储有NSUserDefault，存在本地的Plist。还有就是Core Data的存储。<br>在APPdelegate中打印NSLog(@”%@”, NSHomeDirectory());记录本地存储的地址。<br>一般是/Users/peilinghui/Library/Developer/CoreSimulator/Devices/44CFA0DF-507C-4C90-A9E2-215F6706FB36/data/Containers/Data/Application/AA25A5E2-6E19-47F4-AB43-D4C73B1C3DE5。每次登陆都不一样额。</p>
-<p>[[NSUserDefaults standardUserDefaults] objectForKey:obj];</p>
-<p>对于多用户的历史记录的存储要拼接用户名</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> *paths = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>);</span><br><span class="line"><span class="built_in">NSString</span> *docDir = [paths objectAtIndex:<span class="number">0</span>];</span><br><span class="line"><span class="comment">// NSString *historyScheduleListPath = [docDir stringByAppendingPathComponent:@"historySchedule.plist"];</span></span><br><span class="line"><span class="built_in">NSString</span> *historyScheduleListPath = [docDir stringByAppendingPathComponent:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"history--%@.plist"</span>,UserDefaultsObjectForKey(LOGINUSERNAME)]];</span><br></pre></td></tr></table></figure>
-<h1 id="tableView的数据源"><a href="#tableView的数据源" class="headerlink" title="tableView的数据源"></a>tableView的数据源</h1><ol>
-<li>如果是从接口查询数据的话，必然有历史记录的table和查询结果table。这个需要用到两个tableView两个数据源。通过判断来加载不同的数据源。</li>
-<li>如果是从已经有的数据源中搜索结果，不论是静态的还是先从历史记录中搜索，用到谓词匹配的时候，也可以设置两个数据源来刷新一个table，或者是两个table两个数据源.</li>
-</ol>
-<h1 id="键盘的收起"><a href="#键盘的收起" class="headerlink" title="键盘的收起"></a>键盘的收起</h1><ol>
-<li>当数据加载到tableview上，然后滚动时，要收起键盘：</li>
-</ol>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#pragma mark - <span class="meta-string">&lt; UIScrollViewDelegate &gt;</span></span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewWillBeginDragging:(<span class="built_in">UIScrollView</span> *)scrollView &#123;</span><br><span class="line">   [<span class="keyword">self</span>.searchBar setShowsCancelButton:<span class="literal">NO</span> animated:<span class="literal">YES</span>];</span><br><span class="line">   [<span class="keyword">self</span>.searchBar endEditing:<span class="literal">YES</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>点击searchBar的确定搜索和取消按钮的时候，要收起键盘：</li>
-</ol>
-<p><code>[searchBar resignFirstResponder];</code></p>
-<ol start="3">
-<li><p>当进入后台的时候要收起键盘：不用view实现endEditing的方法<br><code>[[[UIApplication sharedApplication] keyWindow] endEditing:YES];</code><br>或者<br><code>[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];</code></p>
-</li>
-<li><p>点击背景View的时候收起键盘：</p>
-</li>
-</ol>
-<p>点击背景收起键盘可以实现view的</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event方法，然后执行view的- (<span class="built_in">BOOL</span>)endEditing:(<span class="built_in">BOOL</span>)force;方法。</span><br><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event&#123;</span><br><span class="line">    [<span class="keyword">self</span>.view endEditing:<span class="literal">YES</span>]; <span class="comment">//实现该方法是需要注意view需要是继承UIControl而来的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在背景view上面加手势，添加UIButton或者view，然后在对应的点击事件的监听方法中实现resignFirstResponder或者endEditing。</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UITapGestureRecognizer</span> *tapGestureRecognizer = [[<span class="built_in">UITapGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(keyboardHide:)];  </span><br><span class="line"><span class="comment">//设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。  </span></span><br><span class="line">tapGestureRecognizer.cancelsTouchesInView = <span class="literal">NO</span>;  </span><br><span class="line"><span class="comment">//将触摸事件添加到view上</span></span><br><span class="line">[<span class="keyword">self</span>.view addGestureRecognizer:tapGestureRecognizer];</span><br><span class="line">-(<span class="keyword">void</span>)keyboardHide:(<span class="built_in">UITapGestureRecognizer</span>*)tap&#123;  </span><br><span class="line">    [textFiled resignFirstResponder];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Demo地址：<a href="https://github.com/peilinghui/BokeDemo/tree/master/%E7%A4%BA%E4%BE%8B%E6%90%9C%E7%B4%A2%E6%A1%86%E7%9A%84Table" target="_blank" rel="noopener">https://github.com/peilinghui/BokeDemo/tree/master/%E7%A4%BA%E4%BE%8B%E6%90%9C%E7%B4%A2%E6%A1%86%E7%9A%84Table</a></p>
+<h1 id="Dart语言基础"><a href="#Dart语言基础" class="headerlink" title="Dart语言基础"></a>Dart语言基础</h1><p>Dart不单独安装，随框架安装，可通过DartPad在线编写和运行代码。</p>
+<p>基础概念：</p>
+<ul>
+<li>一切变量都是对象，包括数字、函数和null</li>
+<li>对象是类的实例，所有类都继承于object</li>
+<li>强类型但支持类型推断</li>
+<li>如果不想指定具体类型可以使用dynamic</li>
+<li>支持泛型，比如List<int>或List<dynamic></dynamic></int></li>
+<li>支持顶层函数、类方法、实例变量和嵌套函数</li>
+<li>支持顶层变量、类变量、实例变量和局部变量</li>
+</ul>
 
       
     </div>
@@ -324,13 +304,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/05/27/搜索框的Demo/">搜索框的Demo</a></p>
+        <p><span>本文标题:</span><a href="/2019/10/22/Flutter学习/">Flutter学习</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
-        <p><span>发布时间:</span>2017年05月27日 - 23时11分</p>
-        <p><span>最后更新:</span>2018年07月18日 - 09时43分</p>
+        <p><span>发布时间:</span>2019年10月22日 - 19时48分</p>
+        <p><span>最后更新:</span>2019年10月22日 - 20时04分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/05/27/搜索框的Demo/" title="搜索框的Demo">http://peilinghui.com/2017/05/27/搜索框的Demo/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2017/05/27/搜索框的Demo/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/10/22/Flutter学习/" title="Flutter学习">http://peilinghui.com/2019/10/22/Flutter学习/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2019/10/22/Flutter学习/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -343,16 +323,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/06/05/AFNetworking3.0/">
-                    AFNetworking3.0
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/05/27/使用Mac本地服务器/">
-                    如何使用Mac本地服务器
+                <a href="/2019/10/15/webpack学习/">
+                    webpack学习
                 </a>
             </div>
         
@@ -363,7 +337,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#搜索框"><span class="toc-number">1.</span> <span class="toc-text">搜索框</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#搜索功能"><span class="toc-number">2.</span> <span class="toc-text">搜索功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#历史记录的存储"><span class="toc-number">3.</span> <span class="toc-text">历史记录的存储</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tableView的数据源"><span class="toc-number">4.</span> <span class="toc-text">tableView的数据源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#键盘的收起"><span class="toc-number">5.</span> <span class="toc-text">键盘的收起</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Dart语言基础"><span class="toc-number">1.</span> <span class="toc-text">Dart语言基础</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -425,7 +399,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2017/05/27/搜索框的Demo/" data-title="搜索框的Demo" data-url="http://peilinghui.com/2017/05/27/搜索框的Demo/"></div>
+    <div class="ds-thread" data-thread-key="2019/10/22/Flutter学习/" data-title="Flutter学习" data-url="http://peilinghui.com/2019/10/22/Flutter学习/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -449,15 +423,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/06/05/AFNetworking3.0/" title="上一篇: AFNetworking3.0">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/05/27/使用Mac本地服务器/" title="下一篇: 如何使用Mac本地服务器">
+            <a href="/2019/10/15/webpack学习/" title="下一篇: webpack学习">
                 <i class="fa fa-angle-right"></i>
             </a>
         
