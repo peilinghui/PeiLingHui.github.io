@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>ReactNative错误异常收集和处理 | 向着阳光奔跑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ReactNative">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactNative错误异常收集和处理">
+<meta property="og:url" content="http://peilinghui.com/2019/11/05/ReactNative错误异常收集和处理/index.html">
+<meta property="og:site_name" content="向着阳光奔跑">
+<meta property="og:description" content="ReactNative">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-25T12:32:00.216Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ReactNative错误异常收集和处理">
+<meta name="twitter:description" content="ReactNative">
+  
+    <link rel="alternative" href="/atom.xml" title="向着阳光奔跑" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/images/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向阳</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">没有到不了的远方</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/peilinghuibest@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/575544059" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/peilinghui" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://lysongzi.com/">小松子</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/CHENYUFENG1991/article/category/5655903/4">iOS大神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://cspilgrimzww.github.io/">蔚蔚</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changhuiyuan.com/">惠源</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hxdavid.com/">PAT大神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wut0719.github.io/">桐神</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pangjiuzala.github.io/">兴爷</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://han.pm/">交换生</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://frankhu.me">frank</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://judyzhangxin.com/">UI设计师</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://sunus.me/">阿里学长</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://imhuchao.com/">胡超-凤凰网</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.xuanzhangjiong.xyz/">囧囧囧-网易安卓</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">没有到不了的远方，向往远方。。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向阳</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/images/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向阳</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">没有到不了的远方</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/peilinghuibest@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/575544059" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/peilinghui" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-ReactNative错误异常收集和处理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/11/05/ReactNative错误异常收集和处理/" class="article-date">
+      <time datetime="2019-11-05T06:07:43.000Z" itemprop="datePublished">2019-11-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ReactNative错误异常收集和处理
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>ReactNative</p>
+<a id="more"></a>
+<p>在生产环境下，因RN页面异常导致整个APP白屏,闪退，或者是卡顿，用户体验并不好，所以应该对异常进行捕获并处理，提高用户体验。</p>
+<p>需求：</p>
+<blockquote>
+<p>对于闪退，白屏，卡死等APP异常表象，在日志中必须能够详细输出：报错时间，错误位置（所在代码文件和出错行），错误描述，相关堆栈，如果是rn框架和组件报错，应能通过堆栈看到具体调用顺序，相关出错的一系列文件及代码行</p>
+</blockquote>
+<p>解决方法：</p>
+<h1 id="1-React-Error-Boundaries-异常边界组件"><a href="#1-React-Error-Boundaries-异常边界组件" class="headerlink" title="1. React Error Boundaries (异常边界组件)"></a>1. React Error Boundaries (异常边界组件)</h1><p>React官方文档：<a href="https://react.docschina.org/docs/error-boundaries.html" target="_blank" rel="noopener">https://react.docschina.org/docs/error-boundaries.html</a><br>React 16 引入了一个新的概念 —— 错误边界。</p>
+<p>错误边界是一种 React 组件，这种组件可以捕获并打印发生在其子组件树任何位置的 JavaScript 错误，并且，它会渲染出备用 UI，而不是渲染那些崩溃了的子组件树。错误边界在渲染期间、生命周期方法和整个组件树的构造函数中捕获错误。</p>
+<blockquote>
+<p>注意：</p>
+</blockquote>
+<pre><code>错误边界无法捕获以下场景中产生的错误：
+事件处理（了解更多）
+异步代码（例如 setTimeout 或 requestAnimationFrame 回调函数）
+服务端渲染
+它自身抛出来的错误（并非它的子组件）
+</code></pre><p>如果一个 class 组件中定义了 static getDerivedStateFromError() 或 componentDidCatch() 这两个生命周期方法中的任意一个（或两个）时，那么它就变成一个错误边界。当抛出错误后，请使用 static getDerivedStateFromError() 渲染备用 UI ，使用 componentDidCatch() 打印错误信息。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ErrorBoundary</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123; hasError: <span class="literal">false</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  static getDerivedStateFromError(error) &#123;</span><br><span class="line">    <span class="comment">// 更新 state 使下一次渲染能够显示降级后的 UI</span></span><br><span class="line">    <span class="keyword">return</span> &#123; hasError: <span class="literal">true</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidCatch(error, errorInfo) &#123;</span><br><span class="line">    <span class="comment">// 你同样可以将错误日志上报给服务器</span></span><br><span class="line">    logErrorToMyService(error, errorInfo);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.state.hasError) &#123;</span><br><span class="line">      <span class="comment">// 你可以自定义降级后的 UI 并渲染</span></span><br><span class="line">      <span class="keyword">return</span> &lt;h1&gt;<span class="type">Something</span> went wrong.&lt;/h1&gt;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.props.children; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可行性：我们的React版本&gt;16。所以可以使用。<br>总结：主要是捕获render过程中的一些错误，就是写componentDidCatch方法，然后捕获生命周期中的异常，</p>
+<h1 id="2-React-Native自带的-ErrorUtils-模块"><a href="#2-React-Native自带的-ErrorUtils-模块" class="headerlink" title="2. React Native自带的 ErrorUtils 模块"></a>2. React Native自带的 ErrorUtils 模块</h1><p>使用 React Native ErrorUtils 模块对错误边界无法捕获的场景中对这些异常进行捕获并处理。<br>React Native ErrorUtils 是负责对RN页面中异常进行管理的模块，功能很类似Web页面中的 window.onerror</p>
+<p>首先我们看看怎么利用 React Native ErrorUtils 进行异步捕获和处理，存在javascriptCore，所以官方提供了方法：global.ErrorUtils.setGlobalHandler来监听全局的错误，直接上代码：</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">global</span>.ErrorUtils.setGlobalHandler(<span class="keyword">error</span> =&gt; &#123;</span><br><span class="line">  console.<span class="keyword">log</span>(<span class="string">'ErrorUtils发现了语法错误，避免了崩溃，具体报错信息：'</span>);</span><br><span class="line">  console.<span class="keyword">log</span>(<span class="keyword">error</span>.name, <span class="keyword">error</span>.message, [&#123; <span class="keyword">text</span>: <span class="string">'OK'</span> &#125;]);</span><br><span class="line">&#125;, true);</span><br></pre></td></tr></table></figure>
+<p>错误边界的工作方式类似于 JavaScript 的 catch {}，不同的地方在于错误边界只针对 React 组件。只有 class 组件才可以成为错误边界组件。大多数情况下, 你只需要声明一次错误边界组件, 并在整个应用中使用它。</p>
+<p>注意错误边界仅可以捕获其子组件的错误，它无法捕获其自身的错误。如果一个错误边界无法渲染错误信息，则错误会冒泡至最近的上层错误边界，这也类似于 JavaScript 中 catch {} 的工作机制。</p>
+<p>项目中已经集成了。</p>
+<h1 id="3-逻辑崩溃处理react-native-exception-handler也可以统一处理报错，另外它也可以处理Native端的报错。"><a href="#3-逻辑崩溃处理react-native-exception-handler也可以统一处理报错，另外它也可以处理Native端的报错。" class="headerlink" title="3. 逻辑崩溃处理react-native-exception-handler也可以统一处理报错，另外它也可以处理Native端的报错。"></a>3. 逻辑崩溃处理react-native-exception-handler也可以统一处理报错，另外它也可以处理Native端的报错。</h1><p><a href="https://github.com/master-atul/react-native-exception-handler" target="_blank" rel="noopener">https://github.com/master-atul/react-native-exception-handler</a></p>
+<p>使用：</p>
+<h1 id="4-redux-logger-使用"><a href="#4-redux-logger-使用" class="headerlink" title="4. redux-logger 使用"></a>4. redux-logger 使用</h1><p>安装<br><code>npm install redux-logger --save-dev</code></p>
+<pre><code>redux-logger 仅且在开发模式下使用，所以只需增加参数--save-dev.
+
+--save-dev 开发模式下使用的插件
+--save 生成环境下使用的插件
+</code></pre><p>-g 将插件安装成全局插件，该电脑的所有项目都可以使用。无-g参数时，仅且该项目可以使用改插件。<br>使用<br>API定义：createLogger(options?:Object)=&gt;LoggerMiddleware;<br>JS新语法说明：<br>options?:Object 是类型定义，表明options参数的类型是Object类型。<br>“？”号表示非必须参数。<br>options包含的属性：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">     <span class="comment">//日志等级，可以是以下字符串，也可以是返回以下字符串的function.</span></span><br><span class="line">     level = <span class="string">'log'</span>: <span class="string">'log'</span> | <span class="string">'console'</span> | <span class="string">'warn'</span> | <span class="string">'error'</span> | <span class="string">'info'</span>, <span class="comment">// console's level</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//执行持续时间 </span></span><br><span class="line">     duration = <span class="literal">false</span>: <span class="built_in">Boolean</span>, <span class="comment">// Print the duration of each action?</span></span><br><span class="line"></span><br><span class="line">     <span class="comment">//执行时间</span></span><br><span class="line">    timestamp = <span class="literal">true</span>: <span class="built_in">Boolean</span>, <span class="comment">// Print the timestamp with each action?</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">//日志颜色</span></span><br><span class="line">    colors: ColorsObject, <span class="comment">// Object with color getters. See the ColorsObject interface.</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">//自定义一个日志输出函数，相当于再次封装console类</span></span><br><span class="line">    logger = <span class="built_in">console</span>: LoggerObject, <span class="comment">// Implementation of the `console` API.</span></span><br><span class="line"></span><br><span class="line">    logErrors = <span class="literal">true</span>: <span class="built_in">Boolean</span>, <span class="comment">// Should the logger catch, log, and re-throw errors?</span></span><br><span class="line">  </span><br><span class="line">    collapsed, <span class="comment">// Takes a boolean or optionally a function that receives `getState` function for accessing current store state and `action` object as parameters. Returns `true` if the log group should be collapsed, `false` otherwise.</span></span><br><span class="line">  </span><br><span class="line">    predicate, <span class="comment">// If specified this function will be called before each action is processed with this middleware.</span></span><br><span class="line">  </span><br><span class="line">    stateTransformer, <span class="comment">// Transform state before print. Eg. convert Immutable object to plain JSON.</span></span><br><span class="line">  </span><br><span class="line">    actionTransformer, <span class="comment">// Transform state before print. Eg. convert Immutable object to plain JSON.</span></span><br><span class="line">  </span><br><span class="line">    errorTransformer <span class="comment">// Transform state before print. Eg. convert Immutable object to plain JSON.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意事项<br>logger 中间件必须放在所有中间件的最后，不然会出现部分action无法打印日志的情况。 使用如下：</p>
+<p>var logger = createLogger({ predicate: (getState, action) =&gt; isDebuggingInChrome, collapsed: true, duration: true, });</p>
+<p>var createF8Store = applyMiddleware(thunk, promise, array, analytics, logger)(createStore);</p>
+<p>相关资料：</p>
+<p>React Native 异常处理 ：<a href="https://github.com/HuJiaoHJ/blog/issues/13" target="_blank" rel="noopener">https://github.com/HuJiaoHJ/blog/issues/13</a></p>
+<p>RN-逻辑崩溃处理：react-native-exception-handler：<a href="https://www.jianshu.com/p/c46e06b4b73e" target="_blank" rel="noopener">https://www.jianshu.com/p/c46e06b4b73e</a></p>
+<p>总结：<br>以上可以一起使用，通过异常边界组件监控每个组件的生命周期，通过ErrorUtils 模块来监控事件处理等其他全局异常，并把报错发送给原生端处理。并有错误的显示页面，类似404 的那种，防止APP直接crash，或者白屏。</p>
+<h1 id="5-打印出错的行号和文件"><a href="#5-打印出错的行号和文件" class="headerlink" title="5.打印出错的行号和文件"></a>5.打印出错的行号和文件</h1><p>我们知道在开发者模式下的时候，会出现红屏，那个红屏会闪一下，然后出现报错信息和报错的行号和方法。<br>可以在RN源码看到：<br>文件夹位置<br>/node_modules/react-native/Libraries/Core/InitializeCore.js中可以看到：</p>
+<p>打印错误日记的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Set up console</span></span><br><span class="line"><span class="keyword">const</span> ExceptionsManager = <span class="built_in">require</span>(<span class="string">'ExceptionsManager'</span>);</span><br><span class="line">ExceptionsManager.installConsoleErrorReporter();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Set up error handler</span></span><br><span class="line"><span class="keyword">if</span> (!global.__fbDisableExceptionsManager) &#123;</span><br><span class="line">  <span class="keyword">const</span> handleError = <span class="function">(<span class="params">e, isFatal</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      ExceptionsManager.handleException(e, isFatal);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ee) &#123;</span><br><span class="line">      <span class="comment">/* eslint-disable no-console */</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Failed to print error: '</span>, ee.message);</span><br><span class="line">      <span class="comment">/* eslint-enable no-console */</span></span><br><span class="line">      <span class="keyword">throw</span> e;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> ErrorUtils = <span class="built_in">require</span>(<span class="string">'ErrorUtils'</span>);</span><br><span class="line">  ErrorUtils.setGlobalHandler(handleError);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在ExceptionsManager.js中：这这个方法中可以看到，在开发者模式下，它会解析那个错误栈，然后追溯那个错误栈，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reportException</span>(<span class="params">e: ExtendedError, isFatal: bool</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;ExceptionsManager&#125; = <span class="built_in">require</span>(<span class="string">'NativeModules'</span>);</span><br><span class="line">  <span class="keyword">if</span> (ExceptionsManager) &#123;</span><br><span class="line">    <span class="keyword">const</span> parseErrorStack = <span class="built_in">require</span>(<span class="string">'parseErrorStack'</span>);</span><br><span class="line">    <span class="keyword">const</span> stack = parseErrorStack(e);</span><br><span class="line">    <span class="keyword">const</span> currentExceptionID = ++exceptionID;</span><br><span class="line">    <span class="keyword">if</span> (isFatal) &#123;</span><br><span class="line">      ExceptionsManager.reportFatalException(e.message, stack, currentExceptionID);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      ExceptionsManager.reportSoftException(e.message, stack, currentExceptionID);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (__DEV__) &#123;</span><br><span class="line">      <span class="keyword">const</span> symbolicateStackTrace = <span class="built_in">require</span>(<span class="string">'symbolicateStackTrace'</span>);</span><br><span class="line">      symbolicateStackTrace(stack).then(</span><br><span class="line">        (prettyStack) =&gt; &#123;</span><br><span class="line">          <span class="keyword">if</span> (prettyStack) &#123;</span><br><span class="line">            ExceptionsManager.updateExceptionMessage(e.message, prettyStack, currentExceptionID);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'The stack is null'</span>);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ).catch(</span><br><span class="line">        (error) =&gt; <span class="built_in">console</span>.warn(<span class="string">'Unable to symbolicate stack trace: '</span> + error.message)</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以借鉴这个源码的方案来写一下这个打印出行号和文件名还有方法的一个方法，写在index.js或者是index.android.js或者是index.ios.js</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">ErrorUtils.setGlobalHandler(<span class="function"><span class="params">(e)</span> =&gt;</span> &#123;　</span><br><span class="line">    const parseErrorStack = <span class="built_in">require</span>(<span class="string">'parseErrorStack'</span>);</span><br><span class="line">    const stack = parseErrorStack(e);</span><br><span class="line">    const symbolicateStackTrace = <span class="built_in">require</span>(<span class="string">'symbolicateStackTrace'</span>);</span><br><span class="line">    symbolicateStackTrace(stack).<span class="keyword">then</span>(</span><br><span class="line">        (prettyStack) =&gt; &#123;</span><br><span class="line">          <span class="keyword">if</span> (prettyStack) &#123;</span><br><span class="line">            const errorString = <span class="string">'\nfile:'</span>+prettyStack[<span class="number">0</span>].file + <span class="string">'\nmethodName:'</span>+prettyStack[<span class="number">0</span>].methodName+<span class="string">'\nlineNumber:'</span>+prettyStack[<span class="number">0</span>].lineNumber+<span class="string">'\nerrorInfo:'</span>+e.toString();</span><br><span class="line">            WebSDK.recordJsLog(&#123;</span><br><span class="line">             	jsLog: errorString,</span><br><span class="line">				        logMode:<span class="string">'ERROR'</span>&#125;)</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> Error(<span class="string">'The stack is null'</span>);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ).<span class="keyword">catch</span>(</span><br><span class="line">        (error) =&gt; <span class="built_in">console</span>.warn(<span class="string">'Unable to symbolicate stack trace: '</span> + error.message)</span><br><span class="line">    );  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在捕获了异常以后，就可以把这个错误信息报给原生，或者服务端。</p>
+<p>参考：</p>
+<p>关于App异常监控那点事：<a href="https://www.jianshu.com/p/9aba5572ddcb" target="_blank" rel="noopener">https://www.jianshu.com/p/9aba5572ddcb</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/11/05/ReactNative错误异常收集和处理/">ReactNative错误异常收集和处理</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
+        <p><span>发布时间:</span>2019年11月05日 - 14时07分</p>
+        <p><span>最后更新:</span>2019年11月25日 - 20时32分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/11/05/ReactNative错误异常收集和处理/" title="ReactNative错误异常收集和处理">http://peilinghui.com/2019/11/05/ReactNative错误异常收集和处理/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2019/11/05/ReactNative错误异常收集和处理/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/11/21/适配iOS13/">
+                    适配iOS13
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/10/28/bundle的拆包/">
+                    bundle的拆包
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-React-Error-Boundaries-异常边界组件"><span class="toc-number">1.</span> <span class="toc-text">1. React Error Boundaries (异常边界组件)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-React-Native自带的-ErrorUtils-模块"><span class="toc-number">2.</span> <span class="toc-text">2. React Native自带的 ErrorUtils 模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-逻辑崩溃处理react-native-exception-handler也可以统一处理报错，另外它也可以处理Native端的报错。"><span class="toc-number">3.</span> <span class="toc-text">3. 逻辑崩溃处理react-native-exception-handler也可以统一处理报错，另外它也可以处理Native端的报错。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-redux-logger-使用"><span class="toc-number">4.</span> <span class="toc-text">4. redux-logger 使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-打印出错的行号和文件"><span class="toc-number">5.</span> <span class="toc-text">5.打印出错的行号和文件</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2019/11/05/ReactNative错误异常收集和处理/" data-title="ReactNative错误异常收集和处理" data-url="http://peilinghui.com/2019/11/05/ReactNative错误异常收集和处理/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"peilinghui"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/11/21/适配iOS13/" title="上一篇: 适配iOS13">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/10/28/bundle的拆包/" title="下一篇: bundle的拆包">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/21/适配iOS13/">适配iOS13</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/ReactNative错误异常收集和处理/">ReactNative错误异常收集和处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/bundle的拆包/">bundle的拆包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/Flutter学习/">Flutter学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/15/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/React面试题/">React面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Axios源码分析/">Axios源码分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/JavaScript面试题/">JavaScript面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/React新特性Hooks/">React新特性Hooks</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/RN第三方组件/">RN第三方组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/Redux中间件与异步/">Redux中间件与异步</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/19/TypeScript/">TypeScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/学习Node.js/">Node.js</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/22/RN性能优化总结/">RN性能优化总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/11/学习Dva/">学习Dva</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/07/关于RN的热更新/">关于RN的热更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/02/Mac获取ipa方法/">Mac获取ipa方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/学习iOS逆向/">学习iOS逆向</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/03/升级Xcode10遇到的问题/">升级Xcode10遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/RN与iOS的混合开发/">RN与iOS的混合开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/在APP中IM使用融云/">在APP中IM使用融云</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/独立开发一个APP/">独立开发一个APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/25/iOS底层实现/">iOS底层实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/Effective-JavaScript/">Effective JavaScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/22/React知识/">React技术栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/ReactNative中使用Redux/">ReactNative中使用Redux</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/React-Native的APP/">React-Native的APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ReactNative的常用组件/">ReactNative的常用组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/05/AFNetworking3.0/">AFNetworking3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/搜索框的Demo/">搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/iOS中JS与OC相互调用的方式/">iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/NSURLProtocol/">NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/React-Native的与原生的交互/">React-Native的与原生的交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/React-Native的API和组件/">React-Native的API和组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/React-Native入门/">React Native入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/YYModel/">YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/GCD/">GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop/">RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime/">Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/ARC内存管理/">ARC内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/NSString的引用计数问题/">NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/Effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Block/">Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/SDWebImage框架/">SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/AFNetworking2.0/">AFNetworking2.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/深拷贝和浅拷贝/">深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2019 向阳
+            </div>
+            <div class="footer-right">
+	     欢迎光临小站
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+		<span id="busuanzi_container_site_pv">
+   		 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+		</span>
+                <span id="busuanzi_value_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+                        
+                    
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
