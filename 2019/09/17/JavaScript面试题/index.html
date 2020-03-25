@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="向着阳光奔跑">
 <meta property="og:description" content="相关面试题">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-09T12:09:33.522Z">
+<meta property="og:updated_time" content="2020-03-06T10:04:36.616Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript面试题">
 <meta name="twitter:description" content="相关面试题">
@@ -286,8 +286,16 @@
         <p>相关面试题</p>
 <a id="more"></a>
 <h2 id="作用域和闭包"><a href="#作用域和闭包" class="headerlink" title="作用域和闭包"></a>作用域和闭包</h2><h3 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h3><p>JavaScript 中有两个机制可以“欺骗”词法作用域:eval(..) 和 with。前者可以对一段包含一个或多个声明的“代码”字符串进行演算，并借此来修改已经存在的词法作用域(在 运行时)。后者本质上是通过将一个对象的引用当作作用域来处理，将对象的属性当作作 用域中的标识符来处理，从而创建了一个新的词法作用域(同样是在运行时)。<br>这两个机制的副作用是引擎无法在编译时对作用域查找进行优化，因为引擎只能谨慎地认 为这样的优化是无效的。使用这其中任何一个机制都将导致代码运行变慢。不要使用它们。</p>
-<h3 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h3><p>原型：在JavaScript中原型是一个prototype对象，用于表示类型之间的关系。</p>
+<h3 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h3><p>原型：在JavaScript中原型是一个prototype对象，用于表示类型之间的关系。 </p>
+<ul>
+<li>函数都带有一个prototype 属性，这是属性是指向构造函数的原型对象，这个对象包含所有实例共享的属性和方法。</li>
+<li>原型对象都有一个constructor 属性，这个属性指向所关联的构造函数。</li>
+<li>每个对象都有一个<strong>proto</strong> 属性[非标准的方法]，这个属性指向构造函数的原型 prototype</li>
+</ul>
 <p>原型链：JavaScript万物都是对象，对象和对象之间也有关系，并不是孤立存在的。对象之间的继承关系，在JavaScript中是通过prototype对象指向父类对象，直到指向Object对象为止，这样就形成了一个原型指向的链条，专业术语称之为原型链。</p>
+<ul>
+<li>当访问实例对象的某个属性时，会先在这个对象本身的属性上查找，如果没有找到，则会 通过 <strong>proto</strong> 属性去原型上查找，如果还没有 找到则会在构造函数的原型的<strong> proto</strong>中查 找， 这样一层层向上查找就会形成一个作用域链，称为原型链</li>
+</ul>
 <h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (var <span class="built_in">i</span>=<span class="number">1</span>; <span class="built_in">i</span>&lt;=<span class="number">5</span>; <span class="built_in">i</span>++) &#123; setTimeout( <span class="function"><span class="keyword">function</span> <span class="title">timer</span><span class="params">()</span> &#123;</span></span><br><span class="line">             console.<span class="built_in">log</span>( <span class="built_in">i</span> );</span><br><span class="line">         &#125;, <span class="built_in">i</span>*<span class="number">1000</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出：666666</p>
 <p>改变：</p>
@@ -331,7 +339,82 @@
 <li>函数库lodash提供_.cloneDeep用来做 Deep Copy</li>
 <li>手写递归方法<br>递归方法实现深度克隆原理：遍历对象、数组直到里边都是基本数据类型，然后再去复制，就是深度拷贝</li>
 </ul>
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ol>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="堆栈内存以及闭包作用域"><a href="#堆栈内存以及闭包作用域" class="headerlink" title="堆栈内存以及闭包作用域"></a>堆栈内存以及闭包作用域</h2><ol>
+<li>JS的八种数据类型？</li>
+</ol>
+<p>基本数据类型: number 数字； boolean 布尔值；string 字符串；<br>null 空对象； undefined 未定义的值(很多浏览器的初始值是undefined)；Symbol() 产生一个唯一的值,和谁都不重复；</p>
+<p>引用数据类型:</p>
+<p>基本数据类型与引用数据类型的区别：<br>基本数据类型是操作值,引用数据类型操作的是堆内存空间地址</p>
+<ol start="2">
+<li>JS堆栈内存的运行机制？</li>
+<li>变量提升机制？</li>
+<li><p>作用域和作用域链？</p>
+<pre><code>JS中的作用域分为两种：
+  全局作用域和函数作用域。
+  函数作用域中定义的变量，只能在函数中调用，外界无法访问。
+  没有块级作用域导致了if或for这样的逻辑语句中定义的变量可以被外界访问，
+  因此ES6中新增了let和const命令来进行块级作用域的声明。
+</code></pre><p>作用域链  变量的查找机制<br>// 上级作用域  函数在哪里定义的，那么该函数执行形成的作用的上级作用域就是谁</p>
+</li>
+</ol>
+<ol start="5">
+<li>闭包的两大作用：保存和保护</li>
+</ol>
+<ul>
+<li>闭包就是在函数里面声明函数，本质上说就是在函数内部和函数外部搭建起一座桥梁，使得子函数可以访问父函数中所有的局部变量</li>
+<li>是保护变量不受外界污染，使其一直存在内存中</li>
+</ul>
+<ol start="6">
+<li>JS编译机制</li>
+<li>JS高级编程技巧</li>
+</ol>
+<h2 id="面向对象和this的处理"><a href="#面向对象和this的处理" class="headerlink" title="面向对象和this的处理"></a>面向对象和this的处理</h2><ol>
+<li>单例设计模式</li>
+<li>类和实例</li>
+<li>原型和原型链</li>
+<li>new运算符的实现机制</li>
+<li>call/apply/bind</li>
+<li>constructor构造模式</li>
+<li>JS中this的五种情况的梳理</li>
+<li>JS中四大数据类型的检测方案</li>
+<li>JS中四大继承检测包含深浅拷贝</li>
+</ol>
+<h2 id="DOM和BOM以及事件的处理机制"><a href="#DOM和BOM以及事件的处理机制" class="headerlink" title="DOM和BOM以及事件的处理机制"></a>DOM和BOM以及事件的处理机制</h2><ol>
+<li>DOM/BOM的核心操作</li>
+<li>事件对象</li>
+<li>拖拽及拖拽插件封装</li>
+<li>发布订阅设计模式</li>
+<li>深度解析JQ源码</li>
+<li>事件传播机制和事件代理</li>
+<li>DOM2级事件的核心运行机制</li>
+<li>移动端TOuch/Gesture事件及封装处理</li>
+<li>浏览器底层渲染机制和DOM的回流重绘</li>
+<li>DIALOG模态框组件的封装</li>
+</ol>
+<h2 id="ES6-ES7的核心知识"><a href="#ES6-ES7的核心知识" class="headerlink" title="ES6/ES7的核心知识"></a>ES6/ES7的核心知识</h2><ol>
+<li>let/const以及var的区别</li>
+<li>箭头函数</li>
+<li>解构赋值和拓展运算符</li>
+<li>Set/Map数据结构</li>
+<li>Promise设计模式</li>
+<li>async和await以及实现原理</li>
+<li>Generator生成器函数</li>
+<li>Promise A+规范</li>
+<li>JS底层运行机制：单线程和同步异步编程</li>
+<li>事件循环机制</li>
+<li>Interator迭代器和For of循环</li>
+</ol>
+<h2 id="Ajax-HTTP前后端数据交互"><a href="#Ajax-HTTP前后端数据交互" class="headerlink" title="Ajax/HTTP前后端数据交互"></a>Ajax/HTTP前后端数据交互</h2><ol>
+<li>AJAX核心四步操作</li>
+<li>GET/POST 核心机制与区别</li>
+<li>TCP三次握手和四次挥手</li>
+<li>axios库和源码解析</li>
+<li>fetch基础和实践应用</li>
+<li>前端开发中的9中跨域方案</li>
+<li>HTTP网络状态码和实践中的处理方案</li>
+<li>前端性能优化汇总</li>
+</ol>
+<ol>
 <li>ES6模块化如何使用，开发环境如何打包？<br>模块化的基本语法：export语法，import语法<br>开发环境配置：babel编译ES6语法  <code>npm init</code><br><code>npm install --save-dev babel-core babel-preset-es2015 babel-preset-latest</code></li>
 </ol>
 <p>创建.babelrc文件<br><code>npm install --global babel-cli</code><br><code>babel --version</code><br>JS众多模块化标准：<br>AMD成为标准，require.js（也有CMD）<br>前端打包工具，nodejs模块化可以被使用<br>模块化可以使用webpack和rollup</p>
@@ -341,8 +424,30 @@
 <li><p>Promise的基本使用和原理</p>
 </li>
 <li>ES6的常用功能？</li>
-<li></li>
+<li><p>ES6新特性</p>
+<pre><code>Let和const关键字：
+var、let、const的区别
+1. let和const声明变量不存在变量提升，如果要使用这个变量，我们需要在变量定义之后使用;
+2. let和const不能重复声明变量，如果重复声明会报错;
+3. 用let 和 const 在全局声明变量不会给window增加属性;
+4. let和const出现在代码块中，会把代码块(字面量声明对象除外)变成块级作用域,并且出现暂时 性死区
+
+变量的解构赋值
+
+class(创建类) 
+import/export(基于ES6的模块规范创建导入/导出模块(文件/组件)) 
+new set(数组去重)
+Symbol(唯一的值)  var a = Symbol(&apos;qqq&apos;)
+...ary(展开运算符、剩余运算符)
+${} 模板字符串 
+解构赋值  let {a} = obj; let [b] = ary
+for of 循环 
+()=&gt;{} 箭头函数
+</code></pre></li>
 </ol>
+<p>数组新增方法：flat、find、findIndex</p>
+<p>对象新增方法： Object.assign()  Object.values()  Object.keys()  Object.create()…</p>
+<p>数组去重：<br>1、双for循环去重<br>2、利用对象的属性名不能重复去重<br>3、利用es6的Set不能重复去重</p>
 
       
     </div>
@@ -354,7 +459,7 @@
         <p><span>本文标题:</span><a href="/2019/09/17/JavaScript面试题/">JavaScript面试题</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 向阳 的个人博客">向阳</a></p>
         <p><span>发布时间:</span>2019年09月17日 - 14时53分</p>
-        <p><span>最后更新:</span>2020年01月09日 - 20时09分</p>
+        <p><span>最后更新:</span>2020年03月06日 - 18时04分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/09/17/JavaScript面试题/" title="JavaScript面试题">http://peilinghui.com/2019/09/17/JavaScript面试题/</a>
             <span class="copy-path" data-clipboard-text="原文: http://peilinghui.com/2019/09/17/JavaScript面试题/　　作者: 向阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -390,7 +495,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域和闭包"><span class="toc-number">1.</span> <span class="toc-text">作用域和闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#词法作用域"><span class="toc-number">1.1.</span> <span class="toc-text">词法作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型和原型链"><span class="toc-number">1.2.</span> <span class="toc-text">原型和原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-number">1.3.</span> <span class="toc-text">闭包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this和对象原型"><span class="toc-number">2.</span> <span class="toc-text">this和对象原型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6"><span class="toc-number">3.</span> <span class="toc-text">ES6</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#问题"><span class="toc-number"></span> <span class="toc-text">问题</span></a>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域和闭包"><span class="toc-number">1.</span> <span class="toc-text">作用域和闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#词法作用域"><span class="toc-number">1.1.</span> <span class="toc-text">词法作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型和原型链"><span class="toc-number">1.2.</span> <span class="toc-text">原型和原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-number">1.3.</span> <span class="toc-text">闭包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this和对象原型"><span class="toc-number">2.</span> <span class="toc-text">this和对象原型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6"><span class="toc-number">3.</span> <span class="toc-text">ES6</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#问题"><span class="toc-number"></span> <span class="toc-text">问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#堆栈内存以及闭包作用域"><span class="toc-number">1.</span> <span class="toc-text">堆栈内存以及闭包作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象和this的处理"><span class="toc-number">2.</span> <span class="toc-text">面向对象和this的处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM和BOM以及事件的处理机制"><span class="toc-number">3.</span> <span class="toc-text">DOM和BOM以及事件的处理机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6-ES7的核心知识"><span class="toc-number">4.</span> <span class="toc-text">ES6/ES7的核心知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ajax-HTTP前后端数据交互"><span class="toc-number">5.</span> <span class="toc-text">Ajax/HTTP前后端数据交互</span></a></li></ol>
 </li></div>
 <style>
     .left-col .switch-btn {
@@ -490,7 +595,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/React-Native转web方案：react-native-web/">React Native转web方案：react-native-web</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/21/适配iOS13/">适配iOS13</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/ReactNative错误异常收集和处理/">ReactNative错误异常收集和处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/bundle的拆包/">bundle的拆包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/Flutter学习/">Flutter学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/15/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/React面试题/">React面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Axios源码分析/">Axios源码分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/JavaScript面试题/">JavaScript面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/React新特性Hooks/">React新特性Hooks</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/RN第三方组件/">RN第三方组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/Redux中间件与异步/">Redux中间件与异步</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/19/TypeScript/">TypeScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/学习Node.js/">Node.js</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/22/RN性能优化总结/">RN性能优化总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/11/学习Dva/">学习Dva</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/07/关于RN的热更新/">关于RN的热更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/02/Mac获取ipa方法/">Mac获取ipa方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/学习iOS逆向/">学习iOS逆向</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/03/升级Xcode10遇到的问题/">升级Xcode10遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/RN与iOS的混合开发/">RN与iOS的混合开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/在APP中IM使用融云/">在APP中IM使用融云</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/独立开发一个APP/">独立开发一个APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/25/iOS底层实现/">iOS底层实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/Effective-JavaScript/">Effective JavaScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/22/React知识/">React技术栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/ReactNative中使用Redux/">ReactNative中使用Redux</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/React-Native的APP/">React-Native的APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ReactNative的常用组件/">ReactNative的常用组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/05/AFNetworking3.0/">AFNetworking3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/搜索框的Demo/">搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/iOS中JS与OC相互调用的方式/">iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/NSURLProtocol/">NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/React-Native的与原生的交互/">React-Native的与原生的交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/React-Native的API和组件/">React-Native的API和组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/React-Native入门/">React Native入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/YYModel/">YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/GCD/">GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop/">RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime/">Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/ARC内存管理/">ARC内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/NSString的引用计数问题/">NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/Effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Block/">Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/SDWebImage框架/">SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/AFNetworking2.0/">AFNetworking2.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/深拷贝和浅拷贝/">深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/面试最常考的算法题/">面试最常考的算法题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/ReactNative面试题/">ReactNative面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/10/React-Native转web方案：react-native-web/">React Native转web方案：react-native-web</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/21/适配iOS13/">适配iOS13</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/ReactNative错误异常收集和处理/">ReactNative错误异常收集和处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/bundle的拆包/">bundle的拆包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/Flutter学习/">Flutter学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/15/webpack学习/">webpack学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/React面试题/">React面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Axios源码分析/">Axios源码分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/17/JavaScript面试题/">JavaScript面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/React新特性Hooks/">React新特性Hooks</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/RN第三方组件/">RN第三方组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/Redux中间件与异步/">Redux中间件与异步</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/19/TypeScript/">TypeScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/18/学习Node.js/">Node.js</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/22/RN性能优化总结/">RN性能优化总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/11/学习Dva/">学习Dva</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/07/关于RN的热更新/">关于RN的热更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/02/Mac获取ipa方法/">Mac获取ipa方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/01/学习iOS逆向/">学习iOS逆向</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/03/升级Xcode10遇到的问题/">升级Xcode10遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/RN与iOS的混合开发/">RN与iOS的混合开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/在APP中IM使用融云/">在APP中IM使用融云</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/独立开发一个APP/">独立开发一个APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/25/iOS底层实现/">iOS底层实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/Effective-JavaScript/">Effective JavaScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/22/React知识/">React技术栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/ReactNative中使用Redux/">ReactNative中使用Redux</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/React-Native的APP/">React-Native的APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ReactNative的常用组件/">ReactNative的常用组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/iOS应用APP架构/">iOS应用APP架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/10/iOS网络层的封装/">iOS网络层的封装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/项目重构遇到的问题/">项目重构遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/30/iOS中的图表Charts/">iOS中的图表Charts</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/移动应用的设计模式/">移动应用的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Jenkins搭建来实现自动化打包/">Jenkins搭建来实现自动化打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/05/AFNetworking3.0/">AFNetworking3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/搜索框的Demo/">搜索框的Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/使用Mac本地服务器/">如何使用Mac本地服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/iOS打包和发布流程/">iOS打包和发布流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/05/iOS中JS与OC相互调用的方式/">iOS中JS与OC相互调用的方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/30/NSURLProtocol/">NSURLProtocol</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/UIView的Frame和bounds区别/">UIView的Frame和bounds区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/React-Native的与原生的交互/">React-Native的与原生的交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/React-Native的API和组件/">React-Native的API和组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/React-Native入门/">React Native入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/自动化测试/">自动化测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/JavaScript高级程序设计读书笔记/">JavaScript高级程序设计读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/03/YYModel/">YYModel</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/20/Quartz2D的使用/">Quartz2D的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/02/iOS中的加密实现/">iOS中的加密实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/GCD/">GCD</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/KVC和KVO/">深入学习KVC和KVO</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/RunLoop/">RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/消息处理之performSelector/">消息处理之performSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Runtime/">Runtime</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/TableView的一些事/">TableView的一些事</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/iOS中页面传值和页面跳转/">iOS中页面传值和页面跳转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/ARC内存管理/">ARC内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/ReactiveCocoa学习笔记/">ReactiveCocoa学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/iOS调试技巧/">iOS调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/14/iOS网络编程/">iOS网络编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/NSString的引用计数问题/">NSString的引用计数问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/03/Effective objective-c 2.0读书笔记/">effective objective-c 2.0读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/Block/">Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/设计模式/">设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Linux系统的学习/">Linux系统的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/14/ViewController的生命周期/">ViewController的生命周期</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/06/SDWebImage框架/">SDWebImage框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/AFNetworking2.0/">AFNetworking2.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的第三方框架/">iOS中的第三方库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/05/iOS中的数据存储/">iOS中的数据存储</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/iOS中的多线程网络/">iOS中的多线程网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/CocosPods/">CocosPods</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/深拷贝和浅拷贝/">深拷贝和浅拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机网络基础知识与安全/">计算机网络基础知识与安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/计算机基础知识/">计算机基础知识总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/经典排序算法总结与实现/">经典排序算法总结与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/git学习/">git学习笔记</a></li></ul>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
